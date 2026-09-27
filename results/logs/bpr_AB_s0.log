@@ -1,17 +1,6 @@
-command line args [--config configs/baselines/bpr.yaml --train-on AB --seed 0] will not be used in RecBole
-28 Sep 02:19    INFO  [Training]: train_batch_size = [4096] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
-28 Sep 02:19    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
-02:19:03 INFO __main__: BPR on AB | device=cpu | RecBole n_users=368659 n_items=111481
-28 Sep 02:21    INFO  epoch 0 training [time: 165.70s, train loss: 373.0378]
-28 Sep 02:25    INFO  epoch 1 training [time: 200.33s, train loss: 313.3940]
-28 Sep 02:26    INFO  epoch 1 evaluating [time: 64.34s, valid_score: 0.020200]
-28 Sep 02:26    INFO  valid result: 
-recall@10 : 0.0034    recall@100 : 0.0202    ndcg@10 : 0.0016    ndcg@100 : 0.0049
-28 Sep 02:26    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_02-19-03.pth
-28 Sep 02:38    INFO  epoch 2 training [time: 725.34s, train loss: 220.8938]
-28 Sep 02:55    INFO  epoch 3 training [time: 1018.17s, train loss: 183.0461]
-28 Sep 02:56    INFO  epoch 3 evaluating [time: 54.05s, valid_score: 0.023700]
-28 Sep 02:56    INFO  valid result: 
-recall@10 : 0.0048    recall@100 : 0.0237    ndcg@10 : 0.0023    ndcg@100 : 0.0059
-28 Sep 02:56    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_02-19-03.pth
-28 Sep 03:13    INFO  epoch 4 training [time: 1036.79s, train loss: 163.5408]
+command line args [--config configs/baselines/bpr.yaml --train-on AB --seed 0 --device cpu] will not be used in RecBole
+28 Sep 03:20    INFO  [Training]: train_batch_size = [4096] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
+28 Sep 03:20    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+03:20:24 INFO __main__: BPR on AB | device=cpu | RecBole n_users=368659 n_items=111481
+28 Sep 03:21    INFO  epoch 0 training [time: 42.90s, train loss: 373.0378]
+28 Sep 03:26    INFO  epoch 1 training [time: 293.02s, train loss: 313.3940]
