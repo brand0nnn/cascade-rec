@@ -1,0 +1,14 @@
+model: BPR              # Rendle et al. (2009)
+train_on: AB
+early_stop_val_subset: 20000   # fixed random Val subset for RecBole early stopping
+recbole:
+  embedding_size: 64
+  train_neg_sample_args: {distribution: uniform, sample_num: 1}
+  learner: adam
+  learning_rate: 0.001
+  train_batch_size: 4096
+  eval_batch_size: 1024       # users per full-sort eval batch
+  epochs: 300
+  eval_step: 2
+  stopping_step: 5            # patience in evaluations (= 10 epochs)
+  weight_decay: 0.0

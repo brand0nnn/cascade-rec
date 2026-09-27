@@ -1,0 +1,156 @@
+{
+  "toy": false,
+  "split": {
+    "t_ab": 1595800947930,
+    "t1": 1628643414042,
+    "t2": 1658002729837,
+    "period_b_fraction": 0.15,
+    "dates": {
+      "t_ab": "2020-07-26 22:02:27 UTC",
+      "t1": "2021-08-11 00:56:54 UTC",
+      "t2": "2022-07-16 20:18:49 UTC",
+      "min_ts": "2003-05-07 18:52:41 UTC",
+      "max_ts": "2023-09-06 00:18:04 UTC"
+    },
+    "interactions_per_period": {
+      "A": 1877548,
+      "B": 331332,
+      "val": 239437,
+      "test": 304468
+    }
+  },
+  "preprocess": {
+    "toy": false,
+    "raw_rows": 2752785,
+    "after_exact_dedup": 2752785,
+    "after_user_item_dedup": 2752785,
+    "n_users": 380999,
+    "n_items": 111480,
+    "n_interactions": 2752785,
+    "items_without_metadata": 0
+  },
+  "overall": {
+    "n_users": 380999,
+    "n_items": 111480,
+    "n_interactions": 2752785,
+    "density": 6.481141410147705e-05
+  },
+  "per_period": {
+    "A": {
+      "active_users": 351170,
+      "active_items": 82237,
+      "interactions": 1877548,
+      "density_active": 6.501392443715437e-05,
+      "skipped_empty_history": 351192,
+      "instances": 1526356
+    },
+    "B": {
+      "active_users": 162686,
+      "active_items": 39374,
+      "interactions": 331332,
+      "density_active": 5.172537690109299e-05,
+      "skipped_empty_history": 16218,
+      "instances": 315114
+    },
+    "val": {
+      "active_users": 125946,
+      "active_items": 33661,
+      "interactions": 239437,
+      "density_active": 5.647807288973751e-05,
+      "skipped_empty_history": 6533,
+      "instances": 232904
+    },
+    "test": {
+      "active_users": 112081,
+      "active_items": 33230,
+      "interactions": 304468,
+      "density_active": 8.174841030221675e-05,
+      "skipped_empty_history": 7078,
+      "instances": 297390
+    }
+  },
+  "items_first_seen_in_period": {
+    "A": 82237,
+    "B": 12372,
+    "val": 8475,
+    "test": 8396
+  },
+  "user_sequence_length": {
+    "mean": 7.225176444032662,
+    "median": 6.0,
+    "p90": 11.0,
+    "max": 294
+  },
+  "history_length_at_instance": {
+    "B": {
+      "mean": 5.340997226400604,
+      "median": 4.0,
+      "p90": 10.0,
+      "max": 274,
+      "buckets": {
+        "1-2": 0.21271349416401683,
+        "3-5": 0.4890388875137252,
+        "6-10": 0.21539506337389008,
+        "11+": 0.08285255494836789
+      }
+    },
+    "val": {
+      "mean": 6.1537328684779995,
+      "median": 5.0,
+      "p90": 11.0,
+      "max": 291,
+      "buckets": {
+        "1-2": 0.13548930031257514,
+        "3-5": 0.4992700855288016,
+        "6-10": 0.2567366812077079,
+        "11+": 0.1085039329509154
+      }
+    },
+    "test": {
+      "mean": 8.090984901980564,
+      "median": 5.0,
+      "p90": 16.0,
+      "max": 293,
+      "buckets": {
+        "1-2": 0.10160395440330879,
+        "3-5": 0.4214196845892599,
+        "6-10": 0.2812703856888261,
+        "11+": 0.1957059753186052
+      }
+    }
+  },
+  "interactions_per_item": {
+    "mean": 24.693083961248654,
+    "median": 10.0,
+    "p90": 46.0,
+    "max": 6188
+  },
+  "item_segments": {
+    "tail": 82467,
+    "head": 20617,
+    "cold": 8396
+  },
+  "target_segment_share": {
+    "val": {
+      "cold": 0.0,
+      "tail": 0.40447995740734377,
+      "head": 0.5955200425926562
+    },
+    "test": {
+      "cold": 0.44384814553280205,
+      "tail": 0.2727058744409698,
+      "head": 0.2834459800262282
+    }
+  },
+  "metadata_coverage": {
+    "has_meta": 1.0,
+    "title": 0.9999551489056333,
+    "categories": 0.8953085755292429,
+    "store": 0.9923035522066739,
+    "parseable_price": 0.3847147470398278,
+    "n_distinct_leaf_cat": 139,
+    "n_distinct_top_cat": 1,
+    "n_distinct_store": 17722
+  },
+  "git_hash": "unknown"
+}

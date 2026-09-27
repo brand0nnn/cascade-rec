@@ -1,0 +1,19 @@
+# Data pipeline config (CLAUDE.md §4). Changing split fields invalidates every downstream result.
+category: Cell_Phones_and_Accessories
+sources:
+  interactions:
+    url: https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/benchmark/5core/rating_only/Cell_Phones_and_Accessories.csv.gz
+    file: Cell_Phones_and_Accessories.csv.gz
+  metadata:
+    url: https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/raw/meta_categories/meta_Cell_Phones_and_Accessories.jsonl.gz
+    file: meta_Cell_Phones_and_Accessories.jsonl.gz
+raw_dir: data/raw
+processed_dir: data/processed
+split:
+  t1: 1628643414042          # start of validation (official benchmark cut-off)
+  t2: 1658002729837          # start of test (official benchmark cut-off)
+  period_b_fraction: 0.15    # T_AB = (1 - fraction) quantile of train-period timestamps
+max_hist_len: 50
+toy:
+  user_fraction: 0.02
+  seed: 12345

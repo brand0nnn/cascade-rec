@@ -1,0 +1,5 @@
+model: Pop
+train_on: AB            # main setting; also run with --train-on A
+deterministic: true     # identical across seeds; run seed 0 only
+recbole:
+  epochs: 1

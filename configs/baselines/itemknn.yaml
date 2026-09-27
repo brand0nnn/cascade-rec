@@ -1,0 +1,7 @@
+model: ItemKNN          # Sarwar et al. (2001); cosine on the binary user-item matrix
+train_on: AB
+deterministic: true
+recbole:
+  k: 100                # neighbours kept per item
+  shrink: 0.0
+  epochs: 1

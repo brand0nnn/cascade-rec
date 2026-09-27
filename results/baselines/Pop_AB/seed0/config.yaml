@@ -1,0 +1,49 @@
+model: Pop
+train_on: AB
+deterministic: true
+recbole:
+  data_path: /Users/brandonkang/nus/cp4285/project/data/processed/recbole
+  dataset: general_AB_v20000
+  benchmark_filename:
+  - train
+  - valid
+  - test
+  field_separator: "\t"
+  seq_separator: ' '
+  USER_ID_FIELD: user_id
+  ITEM_ID_FIELD: item_id
+  TIME_FIELD: timestamp
+  load_col:
+    inter:
+    - user_id
+    - item_id
+    - timestamp
+    item:
+    - item_id
+  eval_args:
+    split:
+      RS:
+      - 0.8
+      - 0.1
+      - 0.1
+    order: TO
+    group_by: user
+    mode: full
+  metrics:
+  - Recall
+  - NDCG
+  topk:
+  - 10
+  - 100
+  valid_metric: Recall@100
+  reproducibility: true
+  show_progress: false
+  save_dataset: false
+  save_dataloaders: false
+  log_wandb: false
+  epochs: 1
+  seed: 0
+  checkpoint_dir: /Users/brandonkang/nus/cp4285/project/results/baselines/Pop_AB/seed0/checkpoint
+  use_gpu: false
+seed: 0
+toy: false
