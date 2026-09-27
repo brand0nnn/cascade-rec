@@ -24,6 +24,10 @@ from recbole.model.general_recommender.itemknn import ComputeSimilarity
 from recbole.model.sequential_recommender.sasrec import SASRec
 from recbole.utils import InputType, ModelType
 
+# RecBole's sine.py calls torch.autograd.set_detect_anomaly(True) at import time, which silently puts every
+# model in autograd anomaly mode (several times slower). Undo it after importing RecBole models.
+torch.autograd.set_detect_anomaly(False)
+
 from cascade.data.instances import ProcessedData
 from cascade.eval.harness import InstanceBatch
 from cascade.utils.logging import get_logger

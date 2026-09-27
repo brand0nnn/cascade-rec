@@ -60,6 +60,12 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
   export every training instance (prefix → next item) as a row: the same set of training pairs, less compute-efficient.
 - Training rows for SASRec use histories that may include events from earlier periods (A-only training: A instances).
 - **Deterministic baselines** (Pop, ItemKNN) are run for seed 0 only; their std over seeds is 0 by construction.
-- **Device:** RecBole fails on Apple MPS (float64 ops), so local runs use CPU. SASRec on CPU is ≈0.2–0.3 s per
-  batch of 512 (≈15–18 min/epoch on full data); use `--device cuda` on Colab / SoC cluster when available.
+- **RecBole anomaly-mode bug:** `recbole/model/sequential_recommender/sine.py` calls
+  `torch.autograd.set_detect_anomaly(True)` at import time, which silently enables autograd anomaly detection for
+  every model once RecBole's model package is imported (≈2–5× slower training). We switch it off after import.
+  Found after the first full launch was far slower than profiled; those runs were killed and restarted.
+- **Device:** SASRec trains on Apple MPS (≈0.023 s per batch of 512 vs ≈0.19 s on 3 CPU threads). BPR, Pop and
+  ItemKNN run on CPU (RecBole's Pop hits float64 on MPS; BPR is faster on CPU). MPS vs CPU results differ slightly
+  (floating-point nondeterminism), so all seeds of one model are run on the same device. Use `--device cuda` on a
+  GPU machine.
 - **Environment:** Python 3.11, torch 2.5, numpy < 2, pandas < 3 (RecBole 1.2.1 is not compatible with newer).

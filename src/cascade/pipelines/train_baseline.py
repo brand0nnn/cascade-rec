@@ -60,6 +60,7 @@ def main(config_path: str, seed: int, train_on: str | None, toy: bool, device: s
     fh.setFormatter(logging.Formatter("%(asctime)s %(message)s", "%H:%M:%S"))
     logging.getLogger().addHandler(fh)
     init_seed(seed, True)
+    torch.autograd.set_detect_anomaly(False)  # see note in recbole_baselines.py
     dataset = create_dataset(config)
     train_data, valid_data, _ = data_preparation(config, dataset)  # 3rd loader is the valid copy; never used
     model = model_cls(config, train_data._dataset).to(config["device"])

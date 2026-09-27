@@ -1,0 +1,5 @@
+02:19:04 INFO cascade.models.recbole_baselines: exported sequential_AB_v20000: train=1841470 valid=20000
+command line args [--config configs/baselines/sasrec.yaml --train-on AB --seed 1] will not be used in RecBole
+28 Sep 02:20    INFO  [Training]: train_batch_size = [512] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
+28 Sep 02:20    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+02:20:02 INFO __main__: SASRec on AB | device=cpu | RecBole n_users=360130 n_items=111481
