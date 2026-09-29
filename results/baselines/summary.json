@@ -6,6 +6,7 @@
         1,
         2
       ],
+      "n_instances": 215883,
       "recall@10": {
         "mean": 0.005650577510086598,
         "std": 0.00028916097440433196
@@ -23,13 +24,33 @@
         "tail": 0.00020400142984809515,
         "head": 0.04540623026262016
       },
-      "n_unscorable": 17021,
-      "n_instances": 215883
+      "n_unscorable": 17021
+    },
+    "BPR_AB_skipped_as_miss": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_instances": 232904,
+      "recall@10": {
+        "mean": 0.005423357222639941,
+        "std": 0.00027753327093416036
+      },
+      "ndcg@10": {
+        "mean": 0.0026143930359461376,
+        "std": 7.90443923453098e-05
+      },
+      "recall@100": {
+        "mean": 0.02719621295567118,
+        "std": 0.00026756574994844725
+      }
     },
     "ItemKNN_AB": {
       "seeds": [
         0
       ],
+      "n_instances": 232904,
       "recall@10": {
         "mean": 0.00238794096063494,
         "std": 0.0
@@ -47,13 +68,13 @@
         "tail": 0.007796465208133963,
         "head": 0.012007822001311126
       },
-      "n_unscorable": 0,
-      "n_instances": 232904
+      "n_unscorable": 0
     },
     "Pop_AB": {
       "seeds": [
         0
       ],
+      "n_instances": 232904,
       "recall@10": {
         "mean": 0.0041701708535653295,
         "std": 0.0
@@ -71,8 +92,7 @@
         "tail": 0.0,
         "head": 0.04170770324272414
       },
-      "n_unscorable": 0,
-      "n_instances": 232904
+      "n_unscorable": 0
     },
     "SASRec_AB": {
       "seeds": [
@@ -80,6 +100,7 @@
         1,
         2
       ],
+      "n_instances": 232904,
       "recall@10": {
         "mean": 0.009544765424093259,
         "std": 0.0006744234433318288
@@ -97,13 +118,13 @@
         "tail": 0.00018837742611110632,
         "head": 0.07061993748241868
       },
-      "n_unscorable": 0,
-      "n_instances": 232904
+      "n_unscorable": 0
     },
     "ItemKNN_A": {
       "seeds": [
         0
       ],
+      "n_instances": 232904,
       "recall@10": {
         "mean": 0.0011835333042838035,
         "std": 0.0
@@ -121,13 +142,13 @@
         "tail": 0.0020681423798672273,
         "head": 0.0075438252623852755
       },
-      "n_unscorable": 0,
-      "n_instances": 232904
+      "n_unscorable": 0
     },
     "Pop_A": {
       "seeds": [
         0
       ],
+      "n_instances": 232904,
       "recall@10": {
         "mean": 0.004155358794482438,
         "std": 0.0
@@ -145,13 +166,13 @@
         "tail": 0.0,
         "head": 0.029602855369291657
       },
-      "n_unscorable": 0,
-      "n_instances": 232904
+      "n_unscorable": 0
     },
     "SASRec_A": {
       "seeds": [
         0
       ],
+      "n_instances": 232904,
       "recall@10": {
         "mean": 0.005961729363232324,
         "std": 0.0
@@ -169,8 +190,7 @@
         "tail": 0.0,
         "head": 0.042393503708706586
       },
-      "n_unscorable": 0,
-      "n_instances": 232904
+      "n_unscorable": 0
     }
   },
   "test": {
@@ -180,6 +200,7 @@
         1,
         2
       ],
+      "n_instances": 222953,
       "recall@10": {
         "mean": 0.0030333080848861274,
         "std": 0.00022910768384674614
@@ -197,13 +218,33 @@
         "tail": 0.0001333189735293625,
         "head": 0.04254303784033781
       },
-      "n_unscorable": 74437,
-      "n_instances": 222953
+      "n_unscorable": 74437
+    },
+    "BPR_AB_skipped_as_miss": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_instances": 297390,
+      "recall@10": {
+        "mean": 0.0027093575689549083,
+        "std": 0.0002046394958787089
+      },
+      "ndcg@10": {
+        "mean": 0.001317232034926714,
+        "std": 5.9701375729648617e-05
+      },
+      "recall@100": {
+        "mean": 0.01535065904442723,
+        "std": 0.00032483284357529886
+      }
     },
     "ItemKNN_AB": {
       "seeds": [
         0
       ],
+      "n_instances": 297390,
       "recall@10": {
         "mean": 0.001356952477012969,
         "std": 0.0
@@ -221,13 +262,13 @@
         "tail": 0.004153234862475849,
         "head": 0.010023100922297171
       },
-      "n_unscorable": 0,
-      "n_instances": 297390
+      "n_unscorable": 0
     },
     "Pop_AB": {
       "seeds": [
         0
       ],
+      "n_instances": 297390,
       "recall@10": {
         "mean": 0.00215522854390957,
         "std": 0.0
@@ -245,8 +286,7 @@
         "tail": 0.0,
         "head": 0.04247402465932832
       },
-      "n_unscorable": 0,
-      "n_instances": 297390
+      "n_unscorable": 0
     },
     "SASRec_AB": {
       "seeds": [
@@ -254,6 +294,7 @@
         1,
         2
       ],
+      "n_instances": 297390,
       "recall@10": {
         "mean": 0.005289921159049499,
         "std": 0.0006255468277426212
@@ -271,13 +312,13 @@
         "tail": 8.233553825113735e-05,
         "head": 0.06312440503798818
       },
-      "n_unscorable": 0,
-      "n_instances": 297390
+      "n_unscorable": 0
     },
     "ItemKNN_A": {
       "seeds": [
         0
       ],
+      "n_instances": 297390,
       "recall@10": {
         "mean": 0.0007852770171826908,
         "std": 0.0
@@ -295,13 +336,13 @@
         "tail": 0.001564415267294642,
         "head": 0.006301611431963331
       },
-      "n_unscorable": 0,
-      "n_instances": 297390
+      "n_unscorable": 0
     },
     "Pop_A": {
       "seeds": [
         0
       ],
+      "n_instances": 297390,
       "recall@10": {
         "mean": 0.002136640796357948,
         "std": 0.0
@@ -319,13 +360,13 @@
         "tail": 0.0,
         "head": 0.027771390827113912
       },
-      "n_unscorable": 0,
-      "n_instances": 297390
+      "n_unscorable": 0
     },
     "SASRec_A": {
       "seeds": [
         0
       ],
+      "n_instances": 297390,
       "recall@10": {
         "mean": 0.002849127382165988,
         "std": 0.0
@@ -343,8 +384,7 @@
         "tail": 2.6287657068750986e-05,
         "head": 0.03631302518723606
       },
-      "n_unscorable": 0,
-      "n_instances": 297390
+      "n_unscorable": 0
     }
   }
 }

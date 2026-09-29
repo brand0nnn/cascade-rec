@@ -32,23 +32,36 @@ def main(toy: bool) -> None:
     summary, lines = {}, []
     for split in ("val", "test"):
         lines += [f"\n### {split.capitalize()} (per-user macro; mean ± std over seeds)\n",
-                  "| Model | train | seeds | " + " | ".join(METRICS) + f" | {SEGMENT_METRIC} cold | tail | head | coverage@10 | top-1% share |",
-                  "|---|---|---|" + "---|" * (len(METRICS) + 5)]
+                  "| Model | train | seeds | cases | " + " | ".join(METRICS) + f" | {SEGMENT_METRIC} cold | tail | head | coverage@10 | top-1% share |",
+                  "|---|---|---|---|" + "---|" * (len(METRICS) + 5)]
         for name, rs in sorted(runs.items(), key=lambda kv: (kv[0].split("_")[-1] != "AB", kv[0])):
             model, train_on = name.rsplit("_", 1)
-            row = {m: [r[split][m]["macro"] for r in rs] for m in METRICS}
-            segs = {s: [r[split]["segments"][f"item_{s}"][SEGMENT_METRIC]["macro"] for r in rs] for s in ("cold", "tail", "head")}
-            cov = [r[split]["coverage@10"] for r in rs]
-            pop = [r[split]["pop_concentration@10"] for r in rs]
-            summary.setdefault(split, {})[name] = {"seeds": [r["seed"] for r in rs], **{m: {"mean": float(np.mean(v)), "std": float(np.std(v))} for m, v in row.items()},
-                                                   "segments_" + SEGMENT_METRIC: {s: (float(np.nanmean(v)) if not np.isnan(v).all() else None) for s, v in segs.items()},
-                                                   "n_unscorable": rs[0][split]["n_unscorable"], "n_instances": rs[0][split]["n_instances"]}
-            lines.append(f"| {model} | {train_on} | {len(rs)} | " + " | ".join(_fmt(row[m]) for m in METRICS)
-                         + " | " + " | ".join(_fmt(segs[s]) if not np.isnan(segs[s]).all() else "–" for s in ("cold", "tail", "head"))
-                         + f" | {_fmt(cov)} | {_fmt(pop)} |")
+            variants = [(model, name, [r[split] for r in rs])]
+            # models that skip some cases (BPR: users unseen in training) also get a row on the full case set
+            if rs[0][split]["n_unscorable"] > 0:
+                variants.append((f"{model} (skipped = miss)", f"{name}_skipped_as_miss", [r[split]["with_unscorable_as_miss"] for r in rs]))
+            for label, key, blocks in variants:
+                row = {m: [b[m]["macro"] for b in blocks] for m in METRICS}
+                has_extra = "segments" in blocks[0]
+                entry = {"seeds": [r["seed"] for r in rs], "n_instances": blocks[0]["n_instances"],
+                         **{m: {"mean": float(np.mean(v)), "std": float(np.std(v))} for m, v in row.items()}}
+                cells = ["–"] * 5
+                if has_extra:
+                    segs = {g: [b["segments"][f"item_{g}"][SEGMENT_METRIC]["macro"] for b in blocks] for g in ("cold", "tail", "head")}
+                    cov = [b["coverage@10"] for b in blocks]
+                    pop = [b["pop_concentration@10"] for b in blocks]
+                    entry["segments_" + SEGMENT_METRIC] = {g: (float(np.nanmean(v)) if not np.isnan(v).all() else None) for g, v in segs.items()}
+                    entry["n_unscorable"] = blocks[0]["n_unscorable"]
+                    cells = [_fmt(segs[g]) if not np.isnan(segs[g]).all() else "–" for g in ("cold", "tail", "head")] + [_fmt(cov), _fmt(pop)]
+                summary.setdefault(split, {})[key] = entry
+                lines.append(f"| {label} | {train_on} | {len(rs)} | {blocks[0]['n_instances']:,} | " + " | ".join(_fmt(row[m]) for m in METRICS)
+                             + " | " + " | ".join(cells) + " |")
     suffix = "_toy" if toy else ""
     (root / f"summary{suffix}.json").write_text(json.dumps(summary, indent=2))
-    md = "## Baselines (full ranking, filtered catalogue, our harness)\n" + "\n".join(lines) + "\n"
+    md = ("## Baselines (full ranking, filtered catalogue, our harness)\n\n"
+          "`cases` = number of evaluated instances. BPR cannot score users with no training interactions; its first row "
+          "skips those cases (CLAUDE.md §6), its `(skipped = miss)` row counts them as misses and is the one comparable "
+          "to the other models.\n" + "\n".join(lines) + "\n")
     (root / f"summary{suffix}.md").write_text(md)
     print(md)
 
