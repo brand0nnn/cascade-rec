@@ -1,0 +1,4 @@
+11:49:05 [Training]: train_batch_size = [4096] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
+11:49:05 [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+11:49:44 epoch 0 training [time: 36.82s, train loss: 317.5303]
+11:50:20 epoch 1 training [time: 35.59s, train loss: 276.0398]

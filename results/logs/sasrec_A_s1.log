@@ -1,0 +1,1008 @@
+command line args [--config configs/baselines/sasrec.yaml --train-on A --seed 1 --device mps] will not be used in RecBole
+28 Sep 11:46    INFO  [Training]: train_batch_size = [512] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
+28 Sep 11:46    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+11:46:21 INFO __main__: SASRec on A | device=mps | RecBole n_users=335864 n_items=111481
+28 Sep 11:48    INFO  epoch 0 training [time: 103.19s, train loss: 2994.4715]
+28 Sep 11:48    INFO  epoch 0 evaluating [time: 9.45s, valid_score: 0.020900]
+28 Sep 11:48    INFO  valid result: 
+recall@10 : 0.006    recall@100 : 0.0209    ndcg@10 : 0.0031    ndcg@100 : 0.006
+28 Sep 11:48    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/SASRec_A/seed1/checkpoint/SASRecBCE-Sep-28-2026_11-46-22.pth
+28 Sep 11:50    INFO  epoch 1 training [time: 109.80s, train loss: 2458.6996]
+28 Sep 11:50    INFO  epoch 1 evaluating [time: 8.60s, valid_score: 0.022300]
+28 Sep 11:50    INFO  valid result: 
+recall@10 : 0.0058    recall@100 : 0.0223    ndcg@10 : 0.003    ndcg@100 : 0.0062
+28 Sep 11:50    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/SASRec_A/seed1/checkpoint/SASRecBCE-Sep-28-2026_11-46-22.pth
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x306189a70>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fa5cb0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fbcf20>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305faeed0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x304b6e640>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fbadd0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fb6fa0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fa5cd0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fa5cd0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fb6c20>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305de3130>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061ac6f0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305faf640>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061ac6f0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061c6960>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305deebf0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3062d1fd0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305deebf0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x304a80240>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x306197b30>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fbadd0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fbadd0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x304b75060>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fb0990>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fb6c20>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dfa510>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x304b6d180>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dfedb0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305de1950>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x30641b690>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x30618a400>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dfa510>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061ca100>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305def4e0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x306419de0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dfe380>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305de53a0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061afaa0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x30618ac00>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x306419750>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3062fb300>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x30618ac00>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305de7260>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305df7f80>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305d8e1c0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305df6800>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061bde40>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x306419750>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dd95e0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3060a7c30>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dec340>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x304862aa0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061cec80>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061c8d20>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061aa690>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061c1a90>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dd95e0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fbb890>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fcbbe0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305fd1630>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x30617e600>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305def4e0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061ca950>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305df7f80>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061c0d50>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061c83b0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061c0d50>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x306419750>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x3061cc320>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dd95e0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Internal Error (00000001:Internal Error)
+	<AGXG14XFamilyCommandBuffer: 0x305dd95e0>
+    label = <none> 
+    device = <AGXG14SDevice: 0x137944000>
+        name = Apple M2 Pro 
+    commandQueue = <AGXG14XFamilyCommandQueue: 0x116331400>
+        label = <none> 
+        device = <AGXG14SDevice: 0x137944000>
+            name = Apple M2 Pro 
+    retainedReferences = 1

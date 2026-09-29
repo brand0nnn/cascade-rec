@@ -3,7 +3,7 @@
   "train_on": "AB",
   "seed": 0,
   "toy": false,
-  "train_time_s": 0.7611739635467529,
+  "train_time_s": 1.0410161018371582,
   "device": "cpu",
   "cpu": "Apple M2 Pro",
   "recbole_best_valid_subset": {},

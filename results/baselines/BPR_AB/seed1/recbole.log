@@ -1,0 +1,74 @@
+06:16:22 [Training]: train_batch_size = [4096] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
+06:16:22 [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+06:16:57 epoch 0 training [time: 33.38s, train loss: 373.2756]
+06:17:38 epoch 1 training [time: 41.00s, train loss: 317.7222]
+06:18:29 epoch 1 evaluating [time: 50.75s, valid_score: 0.021700]
+06:18:29 valid result: 
+recall@10 : 0.004    recall@100 : 0.0217    ndcg@10 : 0.0019    ndcg@100 : 0.0053
+06:18:30 Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed1/checkpoint/BPR-Sep-28-2026_06-16-23.pth
+06:34:59 epoch 2 training [time: 989.39s, train loss: 223.6432]
+06:35:33 epoch 3 training [time: 33.85s, train loss: 183.1995]
+06:36:21 epoch 3 evaluating [time: 47.44s, valid_score: 0.023700]
+06:36:21 valid result: 
+recall@10 : 0.0053    recall@100 : 0.0237    ndcg@10 : 0.0026    ndcg@100 : 0.0061
+06:36:21 Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed1/checkpoint/BPR-Sep-28-2026_06-16-23.pth
+06:36:57 epoch 4 training [time: 35.83s, train loss: 162.1240]
+06:53:45 epoch 5 training [time: 1007.89s, train loss: 146.0705]
+06:54:33 epoch 5 evaluating [time: 47.61s, valid_score: 0.023400]
+06:54:33 valid result: 
+recall@10 : 0.0048    recall@100 : 0.0234    ndcg@10 : 0.0023    ndcg@100 : 0.0059
+06:55:04 epoch 6 training [time: 31.24s, train loss: 131.5515]
+06:55:38 epoch 7 training [time: 34.27s, train loss: 117.6519]
+06:56:33 epoch 7 evaluating [time: 54.30s, valid_score: 0.024500]
+06:56:33 valid result: 
+recall@10 : 0.0051    recall@100 : 0.0245    ndcg@10 : 0.0023    ndcg@100 : 0.0061
+06:56:34 Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed1/checkpoint/BPR-Sep-28-2026_06-16-23.pth
+07:12:58 epoch 8 training [time: 983.83s, train loss: 105.0708]
+07:13:34 epoch 9 training [time: 36.14s, train loss: 92.4863]
+07:14:20 epoch 9 evaluating [time: 46.17s, valid_score: 0.024700]
+07:14:20 valid result: 
+recall@10 : 0.0045    recall@100 : 0.0247    ndcg@10 : 0.002    ndcg@100 : 0.0059
+07:14:21 Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed1/checkpoint/BPR-Sep-28-2026_06-16-23.pth
+07:14:54 epoch 10 training [time: 33.70s, train loss: 81.5504]
+07:31:45 epoch 11 training [time: 1011.09s, train loss: 71.6060]
+07:32:34 epoch 11 evaluating [time: 49.03s, valid_score: 0.025200]
+07:32:34 valid result: 
+recall@10 : 0.005    recall@100 : 0.0252    ndcg@10 : 0.0022    ndcg@100 : 0.0061
+07:32:35 Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed1/checkpoint/BPR-Sep-28-2026_06-16-23.pth
+07:33:09 epoch 12 training [time: 33.27s, train loss: 62.7316]
+07:33:42 epoch 13 training [time: 33.17s, train loss: 54.9077]
+07:51:10 epoch 13 evaluating [time: 1048.24s, valid_score: 0.025400]
+07:51:10 valid result: 
+recall@10 : 0.0048    recall@100 : 0.0254    ndcg@10 : 0.0022    ndcg@100 : 0.0061
+07:51:11 Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed1/checkpoint/BPR-Sep-28-2026_06-16-23.pth
+07:51:45 epoch 14 training [time: 34.15s, train loss: 48.0446]
+07:52:19 epoch 15 training [time: 34.43s, train loss: 42.0990]
+07:53:07 epoch 15 evaluating [time: 47.25s, valid_score: 0.025100]
+07:53:07 valid result: 
+recall@10 : 0.0046    recall@100 : 0.0251    ndcg@10 : 0.0021    ndcg@100 : 0.006
+07:53:44 epoch 16 training [time: 36.90s, train loss: 36.9127]
+08:11:15 epoch 17 training [time: 1051.50s, train loss: 32.5355]
+08:12:04 epoch 17 evaluating [time: 48.71s, valid_score: 0.024200]
+08:12:04 valid result: 
+recall@10 : 0.0044    recall@100 : 0.0242    ndcg@10 : 0.0019    ndcg@100 : 0.0057
+08:12:42 epoch 18 training [time: 37.82s, train loss: 28.8755]
+08:13:16 epoch 19 training [time: 34.56s, train loss: 25.5070]
+08:29:24 epoch 19 evaluating [time: 967.48s, valid_score: 0.024600]
+08:29:24 valid result: 
+recall@10 : 0.0048    recall@100 : 0.0246    ndcg@10 : 0.0021    ndcg@100 : 0.0058
+08:29:57 epoch 20 training [time: 33.68s, train loss: 22.6925]
+08:30:31 epoch 21 training [time: 33.22s, train loss: 20.3720]
+08:31:06 epoch 21 evaluating [time: 35.82s, valid_score: 0.023900]
+08:31:06 valid result: 
+recall@10 : 0.0045    recall@100 : 0.0239    ndcg@10 : 0.0019    ndcg@100 : 0.0056
+08:31:35 epoch 22 training [time: 28.76s, train loss: 18.1947]
+08:32:16 epoch 23 training [time: 41.15s, train loss: 16.3151]
+08:48:54 epoch 23 evaluating [time: 997.78s, valid_score: 0.023800]
+08:48:54 valid result: 
+recall@10 : 0.0047    recall@100 : 0.0238    ndcg@10 : 0.002    ndcg@100 : 0.0057
+08:49:25 epoch 24 training [time: 31.37s, train loss: 14.7327]
+08:49:55 epoch 25 training [time: 29.22s, train loss: 13.3679]
+08:50:35 epoch 25 evaluating [time: 39.87s, valid_score: 0.023600]
+08:50:35 valid result: 
+recall@10 : 0.0044    recall@100 : 0.0236    ndcg@10 : 0.002    ndcg@100 : 0.0056
+08:50:35 Finished training, best eval result in epoch 13
