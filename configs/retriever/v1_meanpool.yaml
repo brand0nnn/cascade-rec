@@ -1,0 +1,5 @@
+base: base.yaml
+name: v1_meanpool
+user_tower: meanpool
+item_tower: text
+logq: true

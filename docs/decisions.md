@@ -69,3 +69,22 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
   (floating-point nondeterminism), so all seeds of one model are run on the same device. Use `--device cuda` on a
   GPU machine.
 - **Environment:** Python 3.11, torch 2.5, numpy < 2, pandas < 3 (RecBole 1.2.1 is not compatible with newer).
+
+## 2026-10-06 — Retriever (Stage 1)
+
+- **Text embeddings:** `sentence-transformers/all-MiniLM-L6-v2`, L2-normalised, cached as
+  `data/processed/item_text_emb.npy` [N+1, 384] (row 0 = padding) with a text hash in `item_text_emb.json`.
+- **Training windows:** each user's period-A sequence; every position predicts the next item in one forward pass.
+  Sequences longer than L+1 are cut into consecutive windows (stride L) from the end, so every A target is predicted
+  exactly once, but a window's context does not reach back into the previous window.
+- Same-timestamp events of one user are ordered by `parent_asin` in training sequences (only evaluation histories
+  apply the strict "before t" rule).
+- **Attention mask:** causal + key padding; each position may always attend to itself so padded (left) positions do
+  not become fully masked (NaN). Pre-LN blocks + final LayerNorm, ReLU FFN (as SASRec), embedding dropout 0.2.
+- **ID embeddings** (`id_text`, `id_only`) are multiplied by a "seen in period A" mask, so items without A interactions
+  get no ID signal (`id_only` gives them a zero vector → score 0).
+- **logQ:** `q_j` = static period-A frequency; items unseen in A get log q = 0 (never used, since training targets are
+  A items).
+- **Early stopping:** Val-subset Recall@100 (20K fixed instances, seed 0) through the harness, i.e. with §4.6 filtering.
+- **Comparison caveat:** the retriever trains on period A only; compare it with the A-only baselines
+  (e.g. SASRec-A), not the A∪B ones.

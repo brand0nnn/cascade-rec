@@ -1,0 +1,10 @@
+# Shared retriever settings (CLAUDE.md §7). Variant files override item_tower / user_tower / logq.
+temperature: 0.05
+lr: 0.001
+batch_size: 256            # sequences (training windows) per batch
+max_inbatch: 4096          # max (position, target) pairs per in-batch softmax
+epochs: 50
+patience: 5                # early stopping on Val-subset Recall@100 (exact search)
+early_stop_val_subset: 20000
+eval_batch_size: 512
+logq: true

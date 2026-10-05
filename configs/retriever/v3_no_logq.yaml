@@ -1,0 +1,5 @@
+base: base.yaml
+name: v3_no_logq
+user_tower: transformer
+item_tower: text
+logq: false
