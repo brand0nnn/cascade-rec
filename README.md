@@ -2,6 +2,8 @@
 
 See `CLAUDE.md` for the full plan and `docs/decisions.md` for every design decision / deviation.
 
+The shared retrieval-to-ranking candidate-list interface is in `docs/candidate_contract.md`. It lets the ranking pipeline be developed with synthetic lists before the two-tower retriever is ready.
+
 ## Setup
 
 ```bash
@@ -11,6 +13,8 @@ uv pip install --python .venv/bin/python -r requirements.txt -e .
 RecBole 1.2.1 needs numpy < 2 and pandas < 3 (pinned in `requirements.txt`).
 
 ## Phase 0 — data + baselines
+
+The first data-preparation run downloads the official 5-core ratings (~46 MiB) and item metadata (~818 MiB) into ignored `data/raw/`, recording source URLs and SHA-256 hashes in `MANIFEST.json`. `--toy` still downloads these full archives, then processes a fixed ~2% user sample. The data package in this repository was reconstructed from the documented protocol on 7 Oct 2026 after the original `data/` ignore rule excluded it from the clone; see `docs/decisions.md` for the provenance and verification.
 
 ```bash
 scripts/prepare_data.sh --toy       # ~2% of users, for debugging (outputs in data/processed/toy)
