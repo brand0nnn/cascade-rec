@@ -2,6 +2,16 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-10-07 — Restore data pipeline in the cloned repository
+
+- The original `.gitignore` rule `data/` also ignored `src/cascade/data/`. The source package was therefore missing from the public clone even though the committed tests, scripts, and baseline code imported it. Changed the rule to `/data/` so only downloaded data at the repository root stays untracked.
+- Reconstructed `download.py`, `preprocess.py`, `split.py`, `instances.py`, and `stats.py` from the documented protocol and the call sites. These files are a new implementation, **not Brandon's original source**. They should be compared with his working copy if it is available.
+- Downloaded the official 5-core ratings and item metadata from the URLs in `configs/data.yaml`; `data/raw/MANIFEST.json` records their SHA-256 hashes. Both gzip archives passed integrity checks. `data/raw/`, `data/processed/`, and `.venv/` stay local and ignored.
+- The rebuilt full dataset exactly matches the committed counts: 380,999 users, 111,480 items, 2,752,785 interactions; period reviews A/B/Val/Test = 1,877,548 / 331,332 / 239,437 / 304,468; eligible Val/Test instances = 232,904 / 297,390. Item segments and metadata coverage also match. This verifies the data protocol's aggregate outputs, but does not independently reproduce trained-model results.
+- Independently recomputed the popularity baseline from A+B item counts through the shared harness, without overwriting saved run artifacts. Val Recall@10 / nDCG@10 / Recall@100 = 0.0041701709 / 0.0019899240 / 0.0260285139; Test = 0.0021552285 / 0.0009853854 / 0.0165917329. All six match the committed `results/baselines/summary.json` values exactly.
+- Added a small end-to-end data-pipeline test. The documented Python 3.11 environment runs the full suite with 16 passing tests after toy preparation.
+- The critique slide's BPR Test Recall@100 of 0.0172 uses 222,953 scorable cases; 74,437 cases from 11,970 users unseen in A+B are excluded. For comparison with the other baselines on all 297,390 cases, use the existing `BPR (skipped = miss)` row: Recall@100 0.0154. Of the affected users, 4,892 first appear in Val and 7,078 in Test.
+
 ## 2026-09-28 — Data
 
 - **Sources.** Interactions: official 5-core rating-only file (URL in `configs/data.yaml`). Metadata:
