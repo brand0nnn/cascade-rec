@@ -7,7 +7,8 @@
 #SBATCH --time=08:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:1
+#SBATCH --partition=gpu-long
+#SBATCH --gres=gpu:a100-40:1
 source scripts/slurm/common.sh
 RUNS=("sasrec 0" "sasrec 1" "sasrec 2" "bpr 0" "bpr 1" "bpr 2")
 read -r MODEL SEED <<< "${RUNS[$SLURM_ARRAY_TASK_ID]}"

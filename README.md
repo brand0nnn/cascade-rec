@@ -74,9 +74,10 @@ sbatch --export=ALL,RUN_DIR=results/retriever/v2_transformer/seed0 scripts/slurm
 
 Or chain them: `jid=$(sbatch --parsable scripts/slurm/prepare_data.sbatch); sbatch --dependency=afterok:$jid scripts/slurm/train_retriever.sbatch`.
 
-**Check before the first submit:** the scripts request a generic `--gres=gpu:1`. If the cluster requires a GPU type
-or partition (see `sinfo -o "%P %G %l"`), add e.g. `#SBATCH --partition=...` / `--gres=gpu:<type>:1`, and lower
-`--time` if a partition's limit is shorter.
+**Partitions** (checked 2026-10-15 with `sinfo`): the default `normal` partition has no GPUs, so every script names
+one. Short jobs (data, candidates; < 3 h) use `gpu` with any GPU type. Training jobs use `gpu-long` (3-day limit) and
+pin `a100-40`, so all seeds of a model run on the same GPU type. The account (`allusers`) and QoS (`normal`) are
+defaults and need no flag.
 
 **Getting results back:** metrics, configs, git hashes and per-case ranks under `results/` are tracked by git, so
 commit and push them from the cluster. Model weights (`model.pth`) and `data/` are not in git; build the candidate

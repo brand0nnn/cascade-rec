@@ -132,3 +132,5 @@ BPR row skips 74,437 test cases — the comparable row is 0.0027 / 0.0013 / 0.01
   single-thread latency protocol, and Linux is unaffected.
 - **SoC cluster:** Slurm array jobs in `scripts/slurm/`. v2 seed 0 and SASRec-A seed 0 are re-run there so all seeds of
   a model come from the same device type; the earlier Mac (MPS) runs are kept as development runs only.
+- **Cluster partitions (2026-10-15):** training jobs run on `gpu-long` with `--gres=gpu:a100-40:1` (one fixed GPU type
+  for every seed); data prep and candidate building use `gpu` (3 h limit, any GPU type).
