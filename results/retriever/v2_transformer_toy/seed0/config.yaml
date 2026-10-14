@@ -1,0 +1,14 @@
+temperature: 0.05
+lr: 0.001
+batch_size: 256
+max_inbatch: 4096
+epochs: 50
+patience: 5
+early_stop_val_subset: 20000
+eval_batch_size: 512
+logq: true
+name: v2_transformer
+user_tower: transformer
+item_tower: text
+seed: 0
+toy: true
