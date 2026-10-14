@@ -1,0 +1,683 @@
+{
+  "val": {
+    "n_instances": 4825,
+    "n_users": 2534,
+    "segment_sizes": {
+      "new-in-period": 3240,
+      "not new": 1585,
+      "cold": 0,
+      "tail": 3140,
+      "head": 1685,
+      "hist 1-2": 661,
+      "hist 3-5": 2431,
+      "hist 6-10": 1231,
+      "hist 11+": 502
+    },
+    "systems": {
+      "Popularity": {
+        "path": "baselines/Pop_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "ItemKNN": {
+        "path": "baselines/ItemKNN_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "BPR-MF": {
+        "path": "baselines/BPR_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "SASRec": {
+        "path": "baselines/SASRec_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "Two-tower v2 (text)": {
+        "path": "retriever/v2_transformer",
+        "seeds": [
+          0
+        ],
+        "devices": [
+          "mps"
+        ],
+        "git": [
+          "65e59de73459bb98eea77e117944eeb58ab4684f-dirty"
+        ],
+        "unscorable": [
+          0
+        ],
+        "recall@10": {
+          "mean": 0.005104859623407374,
+          "std": 0.0,
+          "per_seed": [
+            0.005104859623407374
+          ]
+        },
+        "recall@50": {
+          "mean": 0.01650458525951817,
+          "std": 0.0,
+          "per_seed": [
+            0.01650458525951817
+          ]
+        },
+        "recall@100": {
+          "mean": 0.027179877475852213,
+          "std": 0.0,
+          "per_seed": [
+            0.027179877475852213
+          ]
+        },
+        "recall@200": {
+          "mean": 0.040465854850227384,
+          "std": 0.0,
+          "per_seed": [
+            0.040465854850227384
+          ]
+        },
+        "recall@500": {
+          "mean": 0.07350869445384046,
+          "std": 0.0,
+          "per_seed": [
+            0.07350869445384046
+          ]
+        },
+        "ndcg@10": {
+          "mean": 0.003079915368929045,
+          "std": 0.0,
+          "per_seed": [
+            0.003079915368929045
+          ]
+        },
+        "segments": {
+          "recall@10": {
+            "new-in-period": 0.000772399588053553,
+            "not new": 0.013788261724234765,
+            "cold": null,
+            "tail": 0.0010277492291880781,
+            "head": 0.013205537806176783,
+            "hist 1-2": 0.0054466230936819175,
+            "hist 3-5": 0.004985754985754986,
+            "hist 6-10": 0.005256570713391738,
+            "hist 11+": 0.0034435261707988977
+          },
+          "recall@200": {
+            "new-in-period": 0.027217481568665915,
+            "not new": 0.06430777871384444,
+            "cold": null,
+            "tail": 0.01657245632065776,
+            "head": 0.08359957401490947,
+            "hist 1-2": 0.0392156862745098,
+            "hist 3-5": 0.039784289784289786,
+            "hist 6-10": 0.042594910304547345,
+            "hist 11+": 0.028443526170798896
+          }
+        }
+      },
+      "Two-tower v4 (ID + text)": {
+        "path": "retriever/v4_id_text",
+        "seeds": [
+          0
+        ],
+        "devices": [
+          "mps"
+        ],
+        "git": [
+          "2a62c35b79ee2a95512f937b0ee5b8dc3e14bb09"
+        ],
+        "unscorable": [
+          0
+        ],
+        "recall@10": {
+          "mean": 0.003973578381628895,
+          "std": 0.0,
+          "per_seed": [
+            0.003973578381628895
+          ]
+        },
+        "recall@50": {
+          "mean": 0.015415586123952345,
+          "std": 0.0,
+          "per_seed": [
+            0.015415586123952345
+          ]
+        },
+        "recall@100": {
+          "mean": 0.026843969632051715,
+          "std": 0.0,
+          "per_seed": [
+            0.026843969632051715
+          ]
+        },
+        "recall@200": {
+          "mean": 0.0392863406872878,
+          "std": 0.0,
+          "per_seed": [
+            0.0392863406872878
+          ]
+        },
+        "recall@500": {
+          "mean": 0.07430406785181845,
+          "std": 0.0,
+          "per_seed": [
+            0.07430406785181845
+          ]
+        },
+        "ndcg@10": {
+          "mean": 0.0015337850381829919,
+          "std": 0.0,
+          "per_seed": [
+            0.0015337850381829919
+          ]
+        },
+        "segments": {
+          "recall@10": {
+            "new-in-period": 0.0,
+            "not new": 0.011092389778152204,
+            "cold": null,
+            "tail": 0.0,
+            "head": 0.010782747603833865,
+            "hist 1-2": 0.0054466230936819175,
+            "hist 3-5": 0.004884004884004883,
+            "hist 6-10": 0.00358781810596579,
+            "hist 11+": 0.002066115702479339
+          },
+          "recall@200": {
+            "new-in-period": 0.012930949928890196,
+            "not new": 0.08921651221566976,
+            "cold": null,
+            "tail": 0.005897322957960162,
+            "head": 0.10005324813631522,
+            "hist 1-2": 0.04357298474945534,
+            "hist 3-5": 0.039987789987789985,
+            "hist 6-10": 0.03341677096370463,
+            "hist 11+": 0.04004820936639118
+          }
+        }
+      }
+    },
+    "warnings": [
+      "Two-tower v2 (text): only 1 seed(s)",
+      "Two-tower v4 (ID + text): only 1 seed(s)"
+    ],
+    "frozen_retriever_check": {
+      "all": {
+        "diff": -0.001179514162939577,
+        "ci_low": -0.006676485511331604,
+        "ci_high": 0.005187180535197506,
+        "n_users": 2534,
+        "n_resamples": 200,
+        "better": "tie (CI includes 0)"
+      },
+      "new-in-period": {
+        "diff": -0.014286531639775715,
+        "ci_low": -0.02116732463668612,
+        "ci_high": -0.0087142203259608,
+        "n_users": 1942,
+        "n_resamples": 200,
+        "better": "v2"
+      },
+      "recommendation": "v2 (better on one, no significant difference on the other)"
+    }
+  },
+  "test": {
+    "n_instances": 5747,
+    "n_users": 2210,
+    "segment_sizes": {
+      "new-in-period": 4168,
+      "not new": 1579,
+      "cold": 4168,
+      "tail": 893,
+      "head": 686,
+      "hist 1-2": 594,
+      "hist 3-5": 2450,
+      "hist 6-10": 1580,
+      "hist 11+": 1123
+    },
+    "systems": {
+      "Popularity": {
+        "path": "baselines/Pop_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "ItemKNN": {
+        "path": "baselines/ItemKNN_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "BPR-MF": {
+        "path": "baselines/BPR_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "SASRec": {
+        "path": "baselines/SASRec_A",
+        "seeds": [],
+        "devices": [],
+        "git": [],
+        "unscorable": [],
+        "recall@10": null,
+        "recall@50": null,
+        "recall@100": null,
+        "recall@200": null,
+        "recall@500": null,
+        "ndcg@10": null,
+        "segments": {
+          "recall@10": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          },
+          "recall@200": {
+            "new-in-period": null,
+            "not new": null,
+            "cold": null,
+            "tail": null,
+            "head": null,
+            "hist 1-2": null,
+            "hist 3-5": null,
+            "hist 6-10": null,
+            "hist 11+": null
+          }
+        }
+      },
+      "Two-tower v2 (text)": {
+        "path": "retriever/v2_transformer",
+        "seeds": [
+          0
+        ],
+        "devices": [
+          "mps"
+        ],
+        "git": [
+          "65e59de73459bb98eea77e117944eeb58ab4684f-dirty"
+        ],
+        "unscorable": [
+          0
+        ],
+        "recall@10": {
+          "mean": 0.0018325791855203619,
+          "std": 0.0,
+          "per_seed": [
+            0.0018325791855203619
+          ]
+        },
+        "recall@50": {
+          "mean": 0.007104072398190045,
+          "std": 0.0,
+          "per_seed": [
+            0.007104072398190045
+          ]
+        },
+        "recall@100": {
+          "mean": 0.014515190691661278,
+          "std": 0.0,
+          "per_seed": [
+            0.014515190691661278
+          ]
+        },
+        "recall@200": {
+          "mean": 0.028840937464509053,
+          "std": 0.0,
+          "per_seed": [
+            0.028840937464509053
+          ]
+        },
+        "recall@500": {
+          "mean": 0.0647829087720994,
+          "std": 0.0,
+          "per_seed": [
+            0.0647829087720994
+          ]
+        },
+        "ndcg@10": {
+          "mean": 0.0008218329937431396,
+          "std": 0.0,
+          "per_seed": [
+            0.0008218329937431396
+          ]
+        },
+        "segments": {
+          "recall@10": {
+            "new-in-period": 0.0018354055654233275,
+            "not new": 0.00195019501950195,
+            "cold": 0.0018354055654233275,
+            "tail": 0.0,
+            "head": 0.005226480836236934,
+            "hist 1-2": 0.0028328611898017,
+            "hist 3-5": 0.0025269928784746147,
+            "hist 6-10": 0.00038226299694189603,
+            "hist 11+": 0.0
+          },
+          "recall@200": {
+            "new-in-period": 0.018263446986799974,
+            "not new": 0.04387938793879388,
+            "cold": 0.018263446986799974,
+            "tail": 0.023084025854108955,
+            "head": 0.06925087108013937,
+            "hist 1-2": 0.026912181303116147,
+            "hist 3-5": 0.028715828164484265,
+            "hist 6-10": 0.02654816513761468,
+            "hist 11+": 0.028960708287865768
+          }
+        }
+      },
+      "Two-tower v4 (ID + text)": {
+        "path": "retriever/v4_id_text",
+        "seeds": [
+          0
+        ],
+        "devices": [
+          "mps"
+        ],
+        "git": [
+          "2a62c35b79ee2a95512f937b0ee5b8dc3e14bb09"
+        ],
+        "unscorable": [
+          0
+        ],
+        "recall@10": {
+          "mean": 0.002119155354449472,
+          "std": 0.0,
+          "per_seed": [
+            0.002119155354449472
+          ]
+        },
+        "recall@50": {
+          "mean": 0.007262443438914028,
+          "std": 0.0,
+          "per_seed": [
+            0.007262443438914028
+          ]
+        },
+        "recall@100": {
+          "mean": 0.012570028011204482,
+          "std": 0.0,
+          "per_seed": [
+            0.012570028011204482
+          ]
+        },
+        "recall@200": {
+          "mean": 0.02265308322265161,
+          "std": 0.0,
+          "per_seed": [
+            0.02265308322265161
+          ]
+        },
+        "recall@500": {
+          "mean": 0.052182714749033986,
+          "std": 0.0,
+          "per_seed": [
+            0.052182714749033986
+          ]
+        },
+        "ndcg@10": {
+          "mean": 0.0009264842984498565,
+          "std": 0.0,
+          "per_seed": [
+            0.0009264842984498565
+          ]
+        },
+        "segments": {
+          "recall@10": {
+            "new-in-period": 0.0,
+            "not new": 0.007350735073507352,
+            "cold": 0.0,
+            "tail": 0.0,
+            "head": 0.01684088269454123,
+            "hist 1-2": 0.0028328611898017,
+            "hist 3-5": 0.0018378130025269927,
+            "hist 6-10": 0.002102446483180428,
+            "hist 11+": 0.0006825938566552901
+          },
+          "recall@200": {
+            "new-in-period": 0.008265478200699181,
+            "not new": 0.04853985398539854,
+            "cold": 0.008265478200699181,
+            "tail": 0.0018467220683287165,
+            "head": 0.10801393728222997,
+            "hist 1-2": 0.0226628895184136,
+            "hist 3-5": 0.02458074890879853,
+            "hist 6-10": 0.016093272171253822,
+            "hist 11+": 0.020146317912830662
+          }
+        }
+      }
+    },
+    "warnings": [
+      "Two-tower v2 (text): only 1 seed(s)",
+      "Two-tower v4 (ID + text): only 1 seed(s)"
+    ]
+  }
+}
