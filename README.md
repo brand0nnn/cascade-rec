@@ -8,7 +8,7 @@ See `CLAUDE.md` for the full plan and `docs/decisions.md` for every design decis
 uv venv --python 3.11 .venv
 uv pip install --python .venv/bin/python -r requirements.txt -e .
 ```
-RecBole 1.2.1 needs numpy < 2 and pandas < 3 (pinned in `requirements.txt`).
+`requirements.txt` pins exact versions: RecBole 1.2.1 needs numpy < 2 and pandas < 3, and pyarrow > 25 needs numpy >= 2.
 
 ## Phase 0 — data + baselines
 

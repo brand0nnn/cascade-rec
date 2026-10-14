@@ -1,16 +1,19 @@
-torch>=2.2,<2.6
-numpy<2
-pandas>=2.0,<3
-pyarrow>=14
-scipy>=1.10
-scikit-learn>=1.3
-pyyaml>=6
-tqdm
-matplotlib
-pytest
-requests
+# Exact versions of the working local environment (Python 3.11). recbole 1.2.1 needs numpy<2 and pandas<3, and newer
+# pyarrow releases need numpy>=2, so keep these pinned together.
+torch==2.5.1
+numpy==1.26.4
+pandas==2.3.3
+pyarrow==25.0.1
+scipy==1.17.1
+scikit-learn==1.9.1
+pyyaml==6.0.3
+tqdm==4.70.1
+matplotlib==3.11.2
+pytest==9.1.1
+requests==2.34.2
 recbole==1.2.1
-# later phases
-sentence-transformers
-faiss-cpu
-lightgbm
+sentence-transformers==6.1.0
+transformers==5.17.0
+huggingface-hub==1.33.0
+tokenizers==0.23.2
+faiss-cpu==1.15.1
