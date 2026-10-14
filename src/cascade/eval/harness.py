@@ -16,7 +16,7 @@ from tqdm import tqdm
 
 from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
-from cascade.eval.segments import HIST_BUCKETS, ITEM_SEGMENTS, hist_bucket
+from cascade.eval.segments import HIST_BUCKETS, ITEM_SEGMENTS, hist_bucket, new_in_period
 from cascade.utils.logging import get_logger
 
 log = get_logger(__name__)
@@ -131,8 +131,12 @@ def evaluate(
         res["with_unscorable_as_miss"] = block(np.ones(n, dtype=bool))
     res["coverage@10"] = M.coverage(top10[scorable], data.n_items)
     res["pop_concentration@10"] = M.popularity_concentration(top10[scorable], top_pop)
+    first_ts_np = first_ts.numpy()
+    is_new = new_in_period(first_ts_np[inst["item"].values], split, data.split)
     res["segments"] = {
         **{f"item_{s}": block(scorable & (target_seg == s)) for s in ITEM_SEGMENTS},
+        "item_new_in_period": block(scorable & is_new),
+        "item_not_new": block(scorable & ~is_new),
         **{f"hist_{h}": block(scorable & (hb == h)) for h in HIST_BUCKETS},
     }
     if save_dir is not None:

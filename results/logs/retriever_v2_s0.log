@@ -1,0 +1,46 @@
+01:48:59 INFO __main__: v2_transformer | device=mps | 330497 training windows, 1526378 target positions
+01:57:25 INFO __main__: epoch 0 loss 7.6757 | val-subset R@100 0.0194 R@200 0.0266 | 199s
+01:58:56 INFO __main__: epoch 1 loss 7.3525 | val-subset R@100 0.0222 R@200 0.0333 | 85s
+02:00:21 INFO __main__: epoch 2 loss 7.1885 | val-subset R@100 0.0254 R@200 0.0385 | 79s
+02:19:13 INFO __main__: epoch 3 loss 7.0779 | val-subset R@100 0.0292 R@200 0.0454 | 1127s
+02:20:25 INFO __main__: epoch 4 loss 6.9902 | val-subset R@100 0.0309 R@200 0.0472 | 66s
+02:21:44 INFO __main__: epoch 5 loss 6.9186 | val-subset R@100 0.0343 R@200 0.0516 | 73s
+02:22:59 INFO __main__: epoch 6 loss 6.8561 | val-subset R@100 0.0367 R@200 0.0543 | 67s
+02:24:40 INFO __main__: epoch 7 loss 6.8028 | val-subset R@100 0.0377 R@200 0.0574 | 91s
+02:27:43 INFO __main__: epoch 8 loss 6.7572 | val-subset R@100 0.0362 R@200 0.0543 | 165s
+02:30:27 INFO __main__: epoch 9 loss 6.7172 | val-subset R@100 0.0384 R@200 0.0579 | 150s
+02:33:18 INFO __main__: epoch 10 loss 6.6818 | val-subset R@100 0.0385 R@200 0.0592 | 150s
+02:37:32 INFO __main__: epoch 11 loss 6.6490 | val-subset R@100 0.0409 R@200 0.0621 | 238s
+02:40:02 INFO __main__: epoch 12 loss 6.6230 | val-subset R@100 0.0404 R@200 0.0618 | 134s
+02:42:20 INFO __main__: epoch 13 loss 6.5969 | val-subset R@100 0.0420 R@200 0.0621 | 123s
+02:44:35 INFO __main__: epoch 14 loss 6.5720 | val-subset R@100 0.0417 R@200 0.0627 | 120s
+02:46:54 INFO __main__: epoch 15 loss 6.5535 | val-subset R@100 0.0425 R@200 0.0635 | 125s
+02:49:19 INFO __main__: epoch 16 loss 6.5352 | val-subset R@100 0.0438 R@200 0.0654 | 129s
+02:51:36 INFO __main__: epoch 17 loss 6.5170 | val-subset R@100 0.0438 R@200 0.0648 | 121s
+02:53:46 INFO __main__: epoch 18 loss 6.5018 | val-subset R@100 0.0442 R@200 0.0651 | 115s
+03:10:26 INFO __main__: epoch 19 loss 6.4860 | val-subset R@100 0.0442 R@200 0.0652 | 994s
+03:11:36 INFO __main__: epoch 20 loss 6.4728 | val-subset R@100 0.0444 R@200 0.0655 | 64s
+03:28:11 INFO __main__: epoch 21 loss 6.4604 | val-subset R@100 0.0447 R@200 0.0656 | 989s
+03:45:57 INFO __main__: epoch 22 loss 6.4447 | val-subset R@100 0.0458 R@200 0.0663 | 1060s
+04:04:56 INFO __main__: epoch 23 loss 6.4371 | val-subset R@100 0.0451 R@200 0.0667 | 1134s
+04:21:52 INFO __main__: epoch 24 loss 6.4246 | val-subset R@100 0.0457 R@200 0.0674 | 1010s
+04:23:05 INFO __main__: epoch 25 loss 6.4170 | val-subset R@100 0.0469 R@200 0.0682 | 67s
+04:39:29 INFO __main__: epoch 26 loss 6.4087 | val-subset R@100 0.0468 R@200 0.0673 | 978s
+04:56:05 INFO __main__: epoch 27 loss 6.3990 | val-subset R@100 0.0469 R@200 0.0687 | 990s
+05:13:41 INFO __main__: epoch 28 loss 6.3910 | val-subset R@100 0.0459 R@200 0.0674 | 1050s
+05:14:48 INFO __main__: epoch 29 loss 6.3829 | val-subset R@100 0.0463 R@200 0.0683 | 61s
+05:15:58 INFO __main__: epoch 30 loss 6.3758 | val-subset R@100 0.0473 R@200 0.0699 | 64s
+05:47:28 INFO __main__: epoch 31 loss 6.3695 | val-subset R@100 0.0476 R@200 0.0698 | 1885s
+06:04:31 INFO __main__: epoch 32 loss 6.3619 | val-subset R@100 0.0467 R@200 0.0689 | 1017s
+06:36:28 INFO __main__: epoch 33 loss 6.3563 | val-subset R@100 0.0476 R@200 0.0696 | 1911s
+06:37:37 INFO __main__: epoch 34 loss 6.3526 | val-subset R@100 0.0482 R@200 0.0698 | 63s
+06:38:47 INFO __main__: epoch 35 loss 6.3462 | val-subset R@100 0.0484 R@200 0.0705 | 64s
+07:10:44 INFO __main__: epoch 36 loss 6.3413 | val-subset R@100 0.0479 R@200 0.0708 | 974s
+07:27:56 INFO __main__: epoch 37 loss 6.3379 | val-subset R@100 0.0472 R@200 0.0692 | 1026s
+07:44:19 INFO __main__: epoch 38 loss 6.3330 | val-subset R@100 0.0474 R@200 0.0691 | 977s
+07:45:29 INFO __main__: epoch 39 loss 6.3268 | val-subset R@100 0.0476 R@200 0.0690 | 65s
+07:46:45 INFO __main__: epoch 40 loss 6.3223 | val-subset R@100 0.0473 R@200 0.0704 | 70s
+eval val:   0%|          | 0/455 [00:00<?, ?it/s]eval val:  18%|█▊        | 82/455 [00:10<00:45,  8.16it/s]eval val:  36%|███▋      | 166/455 [00:20<00:34,  8.27it/s]eval val:  55%|█████▍    | 250/455 [00:30<00:24,  8.33it/s]eval val:  74%|███████▍  | 336/455 [00:40<00:14,  8.40it/s]eval val:  93%|█████████▎| 422/455 [00:50<00:03,  8.38it/s]eval val: 100%|██████████| 455/455 [00:56<00:00,  8.06it/s]
+07:47:43 INFO __main__: v2_transformer val: R@50 0.0309 R@100 0.0467 R@200 0.0698 R@500 0.1172 nDCG@10 0.0062 (macro)
+eval test:   0%|          | 0/581 [00:00<?, ?it/s]eval test:  14%|█▍        | 84/581 [00:10<00:59,  8.31it/s]eval test:  29%|██▉       | 171/581 [00:20<00:48,  8.53it/s]eval test:  44%|████▍     | 258/581 [00:30<00:37,  8.60it/s]eval test:  59%|█████▉    | 345/581 [00:40<00:27,  8.60it/s]eval test:  74%|███████▍  | 431/581 [00:51<00:17,  8.37it/s]eval test:  88%|████████▊ | 513/581 [01:01<00:08,  8.28it/s]eval test: 100%|██████████| 581/581 [01:11<00:00,  8.15it/s]
+07:48:59 INFO __main__: v2_transformer test: R@50 0.0178 R@100 0.0277 R@200 0.0431 R@500 0.0777 nDCG@10 0.0032 (macro)

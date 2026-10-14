@@ -1,6 +1,8 @@
 # CLAUDE.md — Cascade Recommender Project (CP4285)
 
-**Project title:** Retrieve, Then Rank: How Much Does Candidate Retrieval Limit Product Recommendation?
+**Project title:** How Retrieval and Ranking Choices Affect Product Recommendations (Group 7: Brandon Kang, Tong Jing Yen, Phua Qing Rong)
+
+**Plan revision 2026-10-14:** scope narrowed to match the critique slides (`slides.pdf`) and the professor's consult feedback: fewer variables, @10 metrics as the headline (the user sees 10 products), explain *why* results change, and finish with one selected retriever–ranker combination. Details of what changed are in `docs/decisions.md` (2026-10-14).
 
 This file is the source of truth for implementing the project. Read it fully before writing code. If something here is ambiguous or seems wrong, **stop and ask** rather than guessing — especially anything touching the data split, evaluation protocol, or metric definitions, because those decide whether results are valid.
 
@@ -11,22 +13,25 @@ This file is the source of truth for implementing the project. Read it fully bef
 We build a **two-stage retrieve-then-rank recommender** on the **Cell_Phones_and_Accessories** category of **Amazon Reviews 2023**, then run a controlled **cascade study** measuring how retrieval choices limit the quality of the final ranked list.
 
 - **Stage 1 — Retrieval:** a two-tower model (text-based item tower + SASRec-style self-attention user tower), trained with in-batch softmax and logQ correction (Yi et al., 2019), served with FAISS (exact / HNSW / IVF).
-- **Stage 2 — Ranking:** a feature-based MLP ranker trained on candidate lists produced by the frozen retriever. LightGBM LambdaRank is a second ranker used as a robustness check.
-- **Cascade study:** freeze the ranker, vary one retrieval setting at a time (candidate count K₁, search approximation, retriever variant), and measure retrieval recall, end-to-end nDCG@10 and latency.
+- **Stage 2 — Ranking:** a feature-based MLP ranker trained on candidate lists produced by the frozen retriever, plus **one advanced ranker: DIN** (target attention over the user's history).
+- **Study design:** hold one stage fixed while varying the other (separate comparisons), explain the differences with a failure breakdown and segment analysis, then evaluate **one selected retriever–ranker combination** end to end.
 
 ### Research questions
 
 | ID | Question | Status |
 |---|---|---|
-| RQ1 | Which retriever components improve candidate recall? (transformer vs mean-pool user tower; logQ on/off; text-only vs ID+text vs ID-only item tower) | Core |
-| RQ2 | How do K₁, approximate search settings and retriever quality bound end-to-end nDCG@10? Do conclusions hold across two rankers (MLP, LightGBM)? | **Core — headline** |
-| RQ3 | Do DIN attention and DCN-V2 feature crosses improve ranking over the MLP? | **Stretch only** |
+| RQ1 | At a fixed candidate count, does the trained two-tower retriever improve Recall@K over baseline retrieval (Popularity, ItemKNN, BPR-MF, SASRec)? One ablation: does adding ID embeddings to the text item tower (`v4_id_text`) help, and for which items? | Core |
+| RQ2 | With the retriever and the MLP ranker fixed, how do candidate count K₁ and search settings (Flat, HNSW, IVF) affect Recall@K₁, final nDCG@10 and latency? | **Core — headline** |
+| RQ3 | On identical candidate lists, how do popularity order, retrieval-score order, the MLP and DIN compare on nDCG@10 (and ranking latency)? | Core |
+| Final | Does the selected combination (best retriever + best ranker at the recommended K₁) beat popularity retrieval + the same ranker and the best single-stage baseline? Explain the result either way. | Core |
 
 ### Scope
 
-**Core (must deliver):** data pipeline, baselines, retriever + RQ1 ablations, FAISS index configs, MLP + LightGBM rankers, cascade sweeps (RQ2), segment analysis, significance tests.
+**Core (must deliver):** data pipeline, baselines, two-tower retriever (`v2`, plus the `v4` ablation), FAISS index configs, MLP and DIN rankers, K₁ and index sweeps (RQ2), ranker comparison (RQ3), final combination test, failure breakdown and segment analysis, significance tests.
 
-**Stretch (only after core results exist; go/no-go ≈ 26 Oct 2026):** DIN ranker, DIN + DCN-V2 ranker (RQ3), K₁ sweep with the strongest ranker, MMR diversity re-ranker.
+**Only if time permits:** beyond-accuracy metrics (coverage, popularity concentration) in the final write-up; extra retriever variants `v1`/`v3`/`v5` (configs exist but are not part of the plan).
+
+**Dropped (2026-10-14):** LightGBM ranker, MLP-without-retrieval-score variant, retriever sweep over v1–v5, DIN + DCN-V2 combination, MMR re-ranker.
 
 **Out of scope:** multi-source retrieval merging, pre-ranking stage, multi-task ranking, online/A-B evaluation, serving infrastructure, knowledge graphs, fine-tuning the text encoder.
 
@@ -58,8 +63,8 @@ cascade-rec/
 │   ├── data.yaml
 │   ├── baselines/*.yaml
 │   ├── retriever/*.yaml       # v1_meanpool, v2_transformer, v3_no_logq, v4_id_text, v5_id_only
-│   ├── ranker/*.yaml          # mlp, mlp_no_retrieval_score, lgbm, (stretch) din, din_dcnv2
-│   └── cascade/*.yaml         # k1_sweep, index_sweep, retriever_sweep
+│   ├── ranker/*.yaml          # mlp, din
+│   └── cascade/*.yaml         # k1_sweep, index_sweep, final_combination
 ├── data/                      # gitignored
 │   ├── raw/
 │   └── processed/
@@ -67,8 +72,7 @@ cascade-rec/
 │   ├── data/        download.py, preprocess.py, split.py, instances.py, features.py, stats.py
 │   ├── text/        encode.py
 │   ├── models/      popularity.py, itemknn.py, bpr.py, sasrec_baseline.py,
-│   │                retriever.py, ranker_mlp.py, ranker_lgbm.py,
-│   │                (stretch) din.py, dcnv2.py, rerank_mmr.py
+│   │                retriever.py, ranker_mlp.py, ranker_din.py
 │   ├── index/       faiss_index.py
 │   ├── eval/        metrics.py, harness.py, bootstrap.py, segments.py, latency.py
 │   ├── pipelines/   train_baseline.py, train_retriever.py, build_candidates.py,
@@ -93,7 +97,7 @@ cascade-rec/
 
 ### Dependencies
 
-`torch`, `numpy`, `pandas` (or `polars`), `pyarrow`, `sentence-transformers`, `faiss-cpu` (and `faiss-gpu` if available), `lightgbm`, `scikit-learn`, `scipy`, `pyyaml`, `tqdm`, `matplotlib`, `pytest`. Optional: `recbole` (cross-check only, see §6).
+`torch`, `numpy`, `pandas` (or `polars`), `pyarrow`, `sentence-transformers`, `faiss-cpu` (and `faiss-gpu` if available), `scikit-learn`, `scipy`, `pyyaml`, `tqdm`, `matplotlib`, `pytest`. `recbole` (baselines, see §6 and `docs/decisions.md`).
 
 ---
 
@@ -177,6 +181,8 @@ Based on interaction counts **before T2** (i.e. all training + val data):
 - **cold**: 0 interactions before T2
 - **tail**: bottom 80% of items with ≥1 interaction
 - **head**: top 20% of items with ≥1 interaction
+
+**new-in-period** (added 2026-10-14): the target item's first interaction is at or after the start of the instance's period (T1 for Val, T2 for Test). On Test this equals **cold**; on Val it identifies the products released during Val, which the `cold` definition above labels as tail/head. Use it to judge cold-start behaviour on Val (e.g. when choosing the frozen retriever), since 44% of Test targets are new products but Val has 0% "cold".
 
 User segments by history length at instance time: `1–2`, `3–5`, `6–10`, `11+`.
 
@@ -276,19 +282,17 @@ All baselines are evaluated through **our harness** on **our split** (full ranki
 - **Duplicate masking:** if item j equals the target of pair i but j is a different pair, set that logit to `-inf`.
 - Optimiser Adam, lr 1e-3, batch 256 sequences, up to 50 epochs, early stopping (patience 5) on **Val Recall@100 with exact search** computed on a fixed random subset of 20K val instances.
 
-### 7.4 Retriever variants (RQ1)
+### 7.4 RQ1: retriever vs baseline retrieval
 
-| Config | User tower | Item tower | Loss |
-|---|---|---|---|
-| `v1_meanpool` | mean-pool | text | in-batch softmax + logQ |
-| `v2_transformer` (**main**) | transformer | text | in-batch softmax + logQ |
-| `v3_no_logq` | transformer | text | in-batch softmax, **no** logQ |
-| `v4_id_text` | transformer | id_text | in-batch softmax + logQ |
-| `v5_id_only` | transformer | id_only | in-batch softmax + logQ |
+| Config | User tower | Item tower | Loss | Role |
+|---|---|---|---|---|
+| `v2_transformer` | transformer | text | in-batch softmax + logQ | **main retriever** |
+| `v4_id_text` | transformer | id_text | in-batch softmax + logQ | the single ablation (does ID memorisation help head items without hurting new ones?) |
+| `v1_meanpool`, `v3_no_logq`, `v5_id_only` | — | — | — | configs kept; **not run** unless time permits |
 
-Comparisons this enables: v1 vs v2 (attention), v2 vs v3 (logQ), v2 vs v4 vs v5 (item representation), **SASRec baseline vs v5** (isolates the loss change: BCE-1-negative vs in-batch softmax + logQ).
+**RQ1 table:** v2 and v4 against the four baselines used as retrievers (Popularity, ItemKNN, BPR-MF, SASRec), all **trained on period A only** so every row sees the same training data (the A∪B baseline numbers are for the critique table only). Exact search; Recall@{10, 50, 100, 200, 500} on Val and Test, mean ± std over seeds 0–2; per segment, especially **new-in-period / cold** items and history-length buckets. The point to explain is *why* the ranking of methods differs by segment (text vs ID signal, popularity bias).
 
-Report for every variant, with **exact search**: Recall@{50, 100, 200, 500}, per segment (especially **cold items** and history-length buckets). Select the variant with the best Val Recall@200 as the **frozen retriever** for Stage 2 (expected: v2 or v4). Record the choice in `docs/decisions.md`.
+**Frozen retriever:** the better of v2 / v4 on **Val Recall@200**; also check Val Recall@200 on the **new-in-period** segment, and if the two disagree, discuss with the team before freezing. Record the choice in `docs/decisions.md`.
 
 ---
 
@@ -299,8 +303,10 @@ Item vectors `v_i` are precomputed; inner product = cosine (vectors are normalis
 | Index | Construction | Search settings |
 |---|---|---|
 | Exact | `IndexFlatIP` | — (reference) |
-| HNSW | `IndexHNSWFlat(d=64, M=32, METRIC_INNER_PRODUCT)`, `efConstruction = 200` | `efSearch ∈ {K₁, 2K₁, 4K₁}` — **efSearch must be ≥ the number of results requested** |
-| IVF | `IndexIVFFlat(quantizer=IndexFlatIP, d=64, nlist, METRIC_INNER_PRODUCT)`, `nlist = 1024` (≈ 3–4·√N), trained on all item vectors | `nprobe ∈ {1, 8, 32}` |
+| HNSW | `IndexHNSWFlat(d=64, M=32, METRIC_INNER_PRODUCT)`, `efConstruction = 200` | `efSearch ∈ {K₁, 4K₁}` — **efSearch must be ≥ the number of results requested** |
+| IVF | `IndexIVFFlat(quantizer=IndexFlatIP, d=64, nlist, METRIC_INNER_PRODUCT)`, `nlist = 1024` (≈ 3–4·√N), trained on all item vectors | `nprobe ∈ {4, 32}` |
+
+Two settings per approximate index (a fast/low-recall and a slow/high-recall point) keep the sweep small while still showing the accuracy–latency trade-off.
 
 For each approximate config, report **recall relative to exact search** (fraction of the exact top-K₁ that the index returns) alongside end-to-end metrics and latency.
 
@@ -322,7 +328,7 @@ Sanity test: IVF with `nprobe = nlist` must return exactly the exact-search resu
 
 Labels: target = 1, other candidates = 0. These zeros are *unobserved*, not confirmed dislikes; say so in the report.
 
-For MLP training, subsample **50 negatives per list** uniformly from the non-target candidates (configurable). LightGBM uses full lists.
+For MLP and DIN training, subsample **50 negatives per list** uniformly from the non-target candidates (configurable).
 
 Save for every list: instance id, candidate ids, retrieval scores, retrieval ranks.
 
@@ -354,36 +360,36 @@ All item statistics come from the per-period tables in §4.5 (no leakage).
 
 - Concatenate all feature embeddings and floats → MLP 256 → 128 → 64 (ReLU, dropout 0.1) → 1 logit.
 - Binary cross-entropy, Adam lr 1e-3, batch 2048 rows, early stopping (patience 3) on **ranker-val GAUC**.
-- Variant `mlp_no_retrieval_score`: drop retrieval score **and** retrieval rank.
 
-### 9.4 LightGBM ranker (robustness check)
+### 9.4 DIN ranker (advanced ranker; Zhou et al., 2018)
 
-- `lightgbm.LGBMRanker(objective="lambdarank", metric="ndcg", eval_at=[10])`, `n_estimators` up to 1000 with early stopping (50 rounds) on ranker-val, `learning_rate=0.05`, `num_leaves=63`. One group per candidate list.
-- Same features, flattened: categorical IDs as LightGBM categorical features (item ID excluded — too high-cardinality), history summarised as counts (history items in same leaf category; in same store), plus the float features.
-- Not implemented via RecBole (its LightGBM wrapper is set up for pointwise prediction; we need grouped lists).
+Chosen over DCN-V2 (2026-10-14) because our users are described by their *sequence* of products, and DIN's target attention directly asks "which past products are relevant to *this* candidate?", which suits accessory purchases tied to a specific phone.
 
-### 9.5 Ranker comparison (reported at K₁ = 200, exact search)
+Replace the MLP's mean-pooled history with **target attention**: for each history item `h_j` (item emb ⊕ leaf-category emb) and candidate `c` (same fields), weight `a_j = MLP_att([h_j, c, h_j − c, h_j ⊙ c])` (hidden 64 → 32, ReLU → 1, **no softmax**, masked for padding); interest = Σ a_j h_j. Every other feature, the MLP head, loss, training and early stopping are identical to the MLP ranker, so the comparison isolates the attention. Check against a reference implementation (FuxiCTR or RecBole's DIN); do not import it blindly.
+
+### 9.5 Ranker comparison (RQ3; reported at K₁ = 200, exact search, identical candidate lists)
 
 | Row | System |
 |---|---|
-| R0 | Retrieval order (no ranker) |
-| R1 | LightGBM LambdaRank |
+| R0 | Popularity order: candidates sorted by review count as of the period start |
+| R1 | Retrieval-score order (no ranker) |
 | R2 | MLP ranker |
-| R2′ | MLP without retrieval score/rank |
+| R3 | DIN ranker |
 
-**Required:** R2 must beat R0 on Val nDCG@10. If it does not, the cascade study is not meaningful — stop and report to the team before running RQ2.
+Report conditional nDCG@10 (ranking skill only), end-to-end nDCG@10 and Recall@10, GAUC, and ranking latency for K₁ candidates.
+
+**Required:** R2 must beat R1 on Val nDCG@10. If it does not, the cascade study is not meaningful — stop and report to the team before running RQ2.
 
 ---
 
 ## 10. Stage 3 — Cascade study (RQ2)
 
-**Rankers are trained once and frozen.** Only retrieval settings change. Each sweep is run with **both** the MLP (R2) and LightGBM (R1).
+**Rankers are trained once and frozen.** Only retrieval settings change. Both sweeps use the **MLP ranker (R2)**.
 
 | Sweep | Varied | Fixed |
 |---|---|---|
-| 1. K₁ (headline) | K₁ ∈ {50, 100, 200, 500, 1000} | exact search, frozen retriever |
-| 2. Index | exact; HNSW efSearch ∈ {200, 400, 800}; IVF nprobe ∈ {1, 8, 32} | K₁ = 200, frozen retriever |
-| 3. Retriever | v1–v5 | K₁ = 200, exact search |
+| 1. K₁ (headline) | K₁ ∈ {50, 100, 200, 500} | exact search, frozen retriever |
+| 2. Index | exact; HNSW efSearch ∈ {200, 800}; IVF nprobe ∈ {4, 32} | K₁ = 200, frozen retriever |
 
 For every run, record on Test (and Val):
 - Retrieval **Recall@K₁** (the ceiling)
@@ -394,37 +400,36 @@ For every run, record on Test (and Val):
 - For index sweep: recall relative to exact search
 - All metrics per segment
 
-Caveat to log in `docs/decisions.md`: rankers were trained on 200-candidate lists; at K₁ = 1000 they see longer lists than in training.
+Caveat to log in `docs/decisions.md`: rankers were trained on 200-candidate lists; at K₁ = 500 they see longer lists than in training.
+
+**Metrics framing (professor's feedback):** the user sees 10 products, so **Recall@10 and nDCG@10 are the headline** everywhere. Larger cut-offs (Recall@K₁ for K₁ up to 500) are only reported to show the candidate-stage ceiling and to explain the @10 numbers.
 
 ### Required outputs (plots in `results/figures/`)
 
-1. **Headline:** Recall@K₁, nDCG@10 (MLP and LightGBM) and total latency vs K₁ (log x-axis).
+1. **Headline:** Recall@K₁, end-to-end nDCG@10 (MLP) and total latency vs K₁ (log x-axis).
 2. Index sweep: recall-vs-exact and nDCG@10 vs latency, one point per config.
-3. Retriever sweep: Recall@200 vs end-to-end nDCG@10, one point per variant.
-4. Failure breakdown stacked bars per K₁.
-5. Segment breakdowns (cold / tail / head; history length).
+3. Failure breakdown stacked bars per K₁ (retrieval miss / ranking miss / hit).
+4. Segment breakdowns (new-in-period / cold / tail / head; history length).
 
 Deliverable decision: the **smallest K₁ at which nDCG@10 is within the bootstrap CI of its maximum** — report it as the recommended K₁.
 
+### 10.1 Final combination test
+
+After RQ1–RQ3, pick **one** pipeline: the frozen retriever + the better ranker (MLP or DIN, by Val nDCG@10) at the recommended K₁ (exact search, unless an approximate index was within the CI at lower latency). Evaluate it once on Test against:
+
+| Row | Pipeline |
+|---|---|
+| F0 | Best single-stage baseline (SASRec, trained on A∪B; full-catalogue ranking) |
+| F1 | Popularity retrieval (top-K₁ products by review count as of the period start, after §4.6 filtering) + the same ranker |
+| F2 | **Selected pipeline:** frozen retriever + selected ranker |
+
+Report Recall@10, nDCG@10, the failure breakdown and segments, plus the paired bootstrap CI of F2 − F0 and F2 − F1. F1 applies a ranker trained on retriever candidates to popularity candidates (a distribution shift), so log this. **If F2 underperforms, that is still a valid result:** explain it with the failure breakdown (retrieval vs ranking misses) and the segments, rather than adding more variants.
+
 ---
 
-## 11. Stretch work (only after core results exist)
+## 11. Stretch work (only if time permits, after §10.1)
 
-Only start when §10 sweep 1 is complete for both rankers and the team gives the go-ahead.
-
-### 11.1 DIN ranker (Zhou et al., 2018)
-Replace the MLP's mean-pooled history with **target attention**: for each history item `h_j` (item emb ⊕ category emb) and candidate `c` (same fields), weight `a_j = MLP_att([h_j, c, h_j − c, h_j ⊙ c])` (hidden 64 → 32, ReLU → 1, **no softmax**, masked for padding); interest = Σ a_j h_j. Everything else as the MLP ranker. Compare against R2 via GAUC and nDCG@10.
-
-### 11.2 DIN + DCN-V2 (Wang et al., 2021)
-Concatenated input `x0` → 3 cross layers `x_{l+1} = x0 ⊙ (W_l x_l + b_l) + x_l` (full-rank W) **in parallel** with the deep MLP; concatenate both outputs → linear → logit.
-
-Reference implementations to check against (not to import blindly): FuxiCTR and RecBole's DIN / DCNV2.
-
-### 11.3 RQ3 ladder and cross-check
-Report R0, R1, R2, R3 = DIN, R4 = DIN + DCN-V2 on identical candidate lists. Then re-run cascade sweep 1 with R4 and plot it alongside the MLP and LightGBM curves.
-
-### 11.4 MMR diversity re-ranker
-Greedy MMR over the ranker's top-50: `argmax λ·score(i) − (1−λ)·max_{j∈S} sim(i, j)`, sim = text-embedding cosine, λ ∈ {1.0, 0.9, 0.7}. Report nDCG@10 vs intra-list diversity and category coverage.
+Do not start without the team's go-ahead. Candidates: extra retriever variants (`v1`, `v3`, `v5`), beyond-accuracy analysis (coverage, popularity concentration) beyond what the harness already logs.
 
 ---
 
@@ -439,6 +444,7 @@ Write these alongside the code they test:
 - `test_logq.py` — logQ correction subtracts the right values; duplicate masking works.
 - `test_index.py` — exact FAISS top-K equals brute-force NumPy top-K; IVF with `nprobe = nlist` equals exact.
 - `test_candidates.py` — train/ranker-val lists always contain the positive; test lists never force it.
+- `test_segments.py` — new-in-period = target first interaction at/after the split start; equals `cold` on Test.
 
 Run tests before every experiment batch; do not proceed on a red test.
 
@@ -448,16 +454,19 @@ Run tests before every experiment batch; do not proceed on a red test.
 
 | Phase | Dates (2026) | Work | Done when |
 |---|---|---|---|
-| 0 | now → **29 Sep** (critique) | Download, preprocess, split, stats, harness, 4 baselines | `stats.json` + baseline table on Val/Test, tests green |
-| 1 | 30 Sep – 12 Oct | Text encoding, retriever v1–v5, RQ1 table; FAISS index module; ranker feature pipeline | RQ1 table with segments; frozen retriever chosen |
-| 2 | 13 – 26 Oct | Candidate lists; MLP and LightGBM rankers; R0–R2′ table; cascade sweeps 1–3 | R2 beats R0; all sweep results + headline plot |
-| 3 | 27 Oct – 4 Nov | Significance tests, segment analysis, failure breakdown, ethics metrics; **stretch work if go/no-go passed** | Final tables and figures reproducible from configs |
-| 4 | 5 – 11 Nov | STePS poster (11 Nov), README reproduction guide | Every poster number traceable to a `results/` run |
+| 0 | → **29 Sep** (critique) ✅ | Download, preprocess, split, stats, harness, 4 baselines | `stats.json` + baseline table on Val/Test, tests green |
+| 1 | 30 Sep – 12 Oct | Text encoding ✅, retriever v2 ✅ (seed 0) + v4, A-only baselines, RQ1 table; MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
+| 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | R2 beats R1; sweep results + headline plot |
+| 3 | 27 Oct – 4 Nov | Final combination test (§10.1), significance tests, segment analysis, failure breakdown, report figures | Final tables and figures reproducible from configs |
+| 4 | 5 – 11 Nov | Report, STePS poster (11 Nov), README reproduction guide | Every poster number traceable to a `results/` run |
 
-### Team ownership (coordinate through the shared harness)
-- **[Member A] Evaluation & analysis:** §4 data, §5 harness, §6 baselines, §10 sweeps, significance, ethics metrics.
-- **[Member B] Retrieval:** §7 retriever and RQ1 variants.
-- **[Member C] Ranking & search:** §8 FAISS index + latency, §9 rankers, §11 stretch.
+Phase 1 slipped: as of 14 Oct, candidate lists are not built yet; finish v2 seeds 1–2, v4 and the A-only baselines first, since Stage 2 depends on the frozen retriever.
+
+### Team ownership (as on the critique slides; coordinate through the shared harness)
+- **Phua Qing Rong — data & evaluation:** §4 data, §5 harness, §6 baselines (incl. the A-only runs for RQ1), failure breakdown and segment analysis, significance tests.
+- **Brandon Kang — retrieval & search:** §7 two-tower retriever (RQ1), §8 exact search and FAISS experiments, §10 K₁ and index sweeps (RQ2), candidate lists (§9.1).
+- **Tong Jing Yen — ranking:** §9.2 features, §9.3 MLP, §9.4 DIN, §9.5 ranker comparison on fixed candidate lists (RQ3).
+- **All:** §10.1 final combination test, interpretation, report and poster.
 
 ---
 
@@ -465,7 +474,7 @@ Run tests before every experiment batch; do not proceed on a red test.
 
 - Target: one GPU (Google Colab or NUS SoC cluster) for training; CPU for FAISS latency.
 - MiniLM encoding of ~111.5K items is a one-off job; cache it.
-- Candidate lists at K₁ = 1000 for all test instances can be large — store as int32 arrays in `.npy`/Parquet, not Python lists.
+- Candidate lists at K₁ = 500 for all test instances can be large — store as int32 arrays in `.npy`/Parquet, not Python lists.
 - Prefer command-line scripts for training (reproducible, resumable); notebooks only read from `results/`.
 
 ---
@@ -479,25 +488,22 @@ Run tests before every experiment batch; do not proceed on a red test.
 5. Start every new pipeline in `--toy` mode; only scale up once it runs end to end.
 6. Keep implementations simple and readable; follow the paper recipes cited here and note any deviation in `docs/decisions.md`.
 7. Every reported number must come from a saved run in `results/` with its config, seed and git hash.
-8. Don't start stretch work (§11) unless asked.
+8. Don't start stretch work (§11) unless asked. Don't re-add dropped items (LightGBM, v1/v3/v5 sweeps, DCN-V2, MMR) without the team agreeing.
 9. When results look surprising (e.g. a baseline beating the retriever, recall near 0 or 1), investigate for bugs and leakage before reporting.
 
 ---
 
 ## 16. References
 
-- Burges, C.J.C. (2010) *From RankNet to LambdaRank to LambdaMART: An overview*. Microsoft Research Technical Report MSR-TR-2010-82.
 - Covington, P., Adams, J. and Sargin, E. (2016) 'Deep neural networks for YouTube recommendations', *RecSys '16*.
 - Hou, Y. et al. (2024) 'Bridging language and items for retrieval and recommendation' (Amazon Reviews 2023), arXiv preprint.
 - Johnson, J., Douze, M. and Jégou, H. (2021) 'Billion-scale similarity search with GPUs', *IEEE Transactions on Big Data*, 7(3).
 - Kang, W.-C. and McAuley, J. (2018) 'Self-attentive sequential recommendation', *ICDM 2018*.
-- Ke, G. et al. (2017) 'LightGBM: A highly efficient gradient boosting decision tree', *NeurIPS 2017*.
 - Krichene, W. and Rendle, S. (2020) 'On sampled metrics for item recommendation', *KDD '20*.
 - Malkov, Y.A. and Yashunin, D.A. (2020) 'Efficient and robust approximate nearest neighbor search using HNSW graphs', *IEEE TPAMI*, 42(4).
 - Reimers, N. and Gurevych, I. (2019) 'Sentence-BERT', *EMNLP-IJCNLP 2019*.
 - Rendle, S. et al. (2009) 'BPR: Bayesian personalized ranking from implicit feedback', *UAI 2009*.
 - Sarwar, B. et al. (2001) 'Item-based collaborative filtering recommendation algorithms', *WWW '01*.
-- Wang, R. et al. (2021) 'DCN V2', *WWW '21*. (stretch)
 - Yi, X. et al. (2019) 'Sampling-bias-corrected neural modeling for large corpus item recommendations', *RecSys '19*.
 - Zhao, W.X. et al. (2021) 'RecBole', *CIKM '21*.
-- Zhou, G. et al. (2018) 'Deep interest network for click-through rate prediction', *KDD '18*. (stretch)
+- Zhou, G. et al. (2018) 'Deep interest network for click-through rate prediction', *KDD '18*.

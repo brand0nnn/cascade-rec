@@ -88,3 +88,34 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 - **Early stopping:** Val-subset Recall@100 (20K fixed instances, seed 0) through the harness, i.e. with §4.6 filtering.
 - **Comparison caveat:** the retriever trains on period A only; compare it with the A-only baselines
   (e.g. SASRec-A), not the A∪B ones.
+
+## 2026-10-14 — Scope revision after the critique (slides + professor's consult)
+
+Professor's feedback: the two-stage design and "hold one stage fixed" are sound; the risk is scope. Use fewer
+variables, match metrics to what the user sees (@10), explain *why* results change, and after the separate
+comparisons test one selected retriever–ranker combination (an underperforming one is fine if explained).
+
+Changes to CLAUDE.md:
+- **RQ1** is now "two-tower vs the four baselines as retrievers" (as on the slides), all trained on **period A** for a
+  fair comparison. Only one ablation is kept: `v4_id_text` (ID memorisation for head items vs text for new ones).
+  `v1`, `v3`, `v5` configs are kept but not run.
+- **Rankers:** LightGBM and the MLP-without-retrieval-score variant are **dropped**. The advanced ranker is **DIN**
+  (chosen over DCN-V2: users are product sequences, and target attention models "which past products matter for this
+  candidate", e.g. a case for the phone bought earlier). DIN is now core, not stretch.
+- **RQ3 rows** follow the slides: popularity order, retrieval-score order, MLP, DIN on identical candidate lists.
+- **RQ2:** MLP ranker only; K₁ ∈ {50, 100, 200, 500} (1000 dropped); HNSW efSearch ∈ {K₁, 4K₁}, IVF nprobe ∈ {4, 32}
+  (one fast and one accurate point each). The retriever sweep (v1–v5) is dropped.
+- **New §10.1 final combination test:** frozen retriever + better ranker at the recommended K₁, compared on Test with
+  the best single-stage baseline (SASRec A∪B) and popularity retrieval + the same ranker, with bootstrap CIs.
+- **Metrics:** @10 is the headline; retrieval Recall@K adds @10 (slides) and larger K only shows the ceiling.
+- **New segment `new-in-period`** (target first reviewed at/after the split start). Reason: under the `cold`
+  definition Val has 0% cold targets, but 44% of Test targets are new products, so selecting the frozen retriever on
+  overall Val recall alone would ignore cold-start. Implemented in the harness; `cascade.eval.resegment` backfills it
+  for earlier runs from their saved ranks into `extra_segments.json` (metrics.json is not modified).
+- **Roles** updated to the slides (Phua: data/eval/failure analysis; Brandon: retriever + FAISS + sweeps;
+  Tong: rankers). Dropped from the plan: DIN + DCN-V2, MMR.
+- Schedule kept as on the slides; Phase 1 has slipped (no candidate lists yet as of 14 Oct).
+
+Slide wording to correct in the report/poster: the Popularity baseline counts **all** reviews (not "positive"
+reviews); period B is 26 Jul 2020 – 11 Aug 2021 (not "2021"); the item text also includes the store name; the slide-6
+BPR row skips 74,437 test cases — the comparable row is 0.0027 / 0.0013 / 0.0154.
