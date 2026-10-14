@@ -59,6 +59,8 @@ Submit every job **from the repository root** (job logs go to `results/logs/slur
 # once, on the login node
 git clone https://github.com/brand0nnn/cascade-rec.git && cd cascade-rec
 bash scripts/slurm/setup_env.sh                      # uv + Python 3.11 venv + requirements
+# torch cannot be imported on the login node (memory cap), so test the venv on a GPU node:
+srun -p gpu --gres=gpu:1 -c 2 --mem=8G -t 00:10:00 .venv/bin/python -c "import torch; print(torch.cuda.is_available())"
 
 # 1. data (download ~0.9 GB, preprocess, encode item texts, run tests)
 sbatch scripts/slurm/prepare_data.sbatch
