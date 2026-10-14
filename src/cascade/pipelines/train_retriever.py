@@ -135,3 +135,17 @@ if __name__ == "__main__":
     ap.add_argument("--device", default="auto")
     a = ap.parse_args()
     main(a.config, a.seed, a.toy, a.device)
+
+
+def load_retriever(run_dir, data: ProcessedData, device: str = "cpu") -> tuple[TwoTowerRetriever, dict]:
+    """Rebuild a trained retriever from ``results/retriever/<name>/seed<k>`` (config.yaml + model.pth)."""
+    import yaml
+    from pathlib import Path
+
+    run_dir = Path(run_dir)
+    cfg = yaml.safe_load((run_dir / "config.yaml").read_text())
+    text_emb = np.load(data.dir / "item_text_emb.npy") if cfg["item_tower"] != "id_only" else None
+    _, seen_in_a = period_a_log_q(data)
+    model = TwoTowerRetriever(cfg["item_tower"], cfg["user_tower"], text_emb, data.n_items, seen_in_a, max_len=data.max_hist_len, temperature=cfg["temperature"])
+    model.load_state_dict(torch.load(run_dir / "model.pth", map_location="cpu"))
+    return model.to(pick_device(device)).eval(), cfg

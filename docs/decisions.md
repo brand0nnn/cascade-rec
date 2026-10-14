@@ -119,3 +119,16 @@ Changes to CLAUDE.md:
 Slide wording to correct in the report/poster: the Popularity baseline counts **all** reviews (not "positive"
 reviews); period B is 26 Jul 2020 – 11 Aug 2021 (not "2021"); the item text also includes the store name; the slide-6
 BPR row skips 74,437 test cases — the comparable row is 0.0027 / 0.0013 / 0.0154.
+
+## 2026-10-14 — Candidate lists, FAISS module, cluster scripts
+
+- **Candidate lists** (`build_candidates.py`): exact search = full scoring + the harness's own §4.6 filter
+  (`apply_filters`), then top-k. Built once per split: B with k = 200 (target force-appended as column 201 when
+  missed), Val/Test with k = 500 (never forced). Any K₁ <= 500 is a prefix; ranker-val lists (Val, 200, forced) are
+  derived at load time (`load_candidates(..., force=True)`). Verified: candidate Recall@200/500 equals the harness
+  Recall for the same model exactly. Scores are stored as float16 to keep test lists small.
+- **FAISS on macOS:** torch and faiss bundle separate `libomp` copies; using both multi-threaded in one process
+  segfaults (reproduced). On macOS faiss runs single-threaded (`faiss.omp_set_num_threads(1)`); this matches the §5
+  single-thread latency protocol, and Linux is unaffected.
+- **SoC cluster:** Slurm array jobs in `scripts/slurm/`. v2 seed 0 and SASRec-A seed 0 are re-run there so all seeds of
+  a model come from the same device type; the earlier Mac (MPS) runs are kept as development runs only.

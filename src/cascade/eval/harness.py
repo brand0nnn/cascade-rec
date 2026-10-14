@@ -62,13 +62,27 @@ def make_batch(data: ProcessedData, inst_df, max_hist_len: int) -> InstanceBatch
     )
 
 
-def filtered_ranks(scores: torch.Tensor, batch: InstanceBatch, first_ts: torch.Tensor, top_n: int = 10) -> tuple[np.ndarray, np.ndarray]:
-    """Apply §4.6 filtering in place and return (1-based target ranks, top-n item lists)."""
+def apply_filters(scores: torch.Tensor, batch: InstanceBatch, first_ts: torch.Tensor) -> torch.Tensor:
+    """§4.6 filtering: padding, the user's full history before t, and items first seen after t get -inf.
+
+    ``first_ts`` is indexed by item id (index 0 = padding). Works on CPU tensors; returns a float tensor.
+    """
     scores = torch.nan_to_num(scores.float(), nan=-torch.inf)
     scores[:, 0] = -torch.inf
     ts = torch.from_numpy(batch.ts)
     scores.masked_fill_(first_ts.unsqueeze(0) > ts.unsqueeze(1), -torch.inf)
     scores[torch.from_numpy(batch.mask_rows), torch.from_numpy(batch.mask_items.astype(np.int64))] = -torch.inf
+    return scores
+
+
+def first_ts_tensor(data: ProcessedData) -> torch.Tensor:
+    """Item first-interaction timestamps indexed by item id (padding id 0 = never released)."""
+    return torch.from_numpy(np.concatenate([[np.iinfo(np.int64).max], data.items["first_ts"].values]))
+
+
+def filtered_ranks(scores: torch.Tensor, batch: InstanceBatch, first_ts: torch.Tensor, top_n: int = 10) -> tuple[np.ndarray, np.ndarray]:
+    """Apply §4.6 filtering and return (1-based target ranks, top-n item lists)."""
+    scores = apply_filters(scores, batch, first_ts)
     ar = torch.arange(len(batch.targets))
     tgt = scores[ar, torch.from_numpy(batch.targets.astype(np.int64))]
     ranks = (scores >= tgt.unsqueeze(1)).sum(1)  # includes the target itself
@@ -98,7 +112,7 @@ def evaluate(
     if max_instances is not None and max_instances < len(inst):
         rng = np.random.default_rng(subset_seed)
         inst = inst.iloc[np.sort(rng.choice(len(inst), max_instances, replace=False))].reset_index(drop=True)
-    first_ts = torch.from_numpy(np.concatenate([[np.iinfo(np.int64).max], data.items["first_ts"].values]))
+    first_ts = first_ts_tensor(data)
     n = len(inst)
     ranks = np.full(n, np.inf)
     scorable = np.ones(n, dtype=bool)

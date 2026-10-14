@@ -50,3 +50,34 @@ Full table incl. Val and segments: `results/baselines/summary.md`.
   111,480 products, excluding products the user already reviewed and products not yet released at that time.
 - BPR counts the 74,437 cases from users with no training interactions as misses, so all rows use the same cases.
 - 44% of Test targets are products with no reviews before the Test period; all four ID-based baselines score ≈ 0 on them.
+
+## Running on the NUS SoC compute cluster (Slurm)
+
+Submit every job **from the repository root** (job logs go to `results/logs/slurm-*.out`).
+
+```bash
+# once, on the login node
+git clone https://github.com/brand0nnn/cascade-rec.git && cd cascade-rec
+bash scripts/slurm/setup_env.sh                      # uv + Python 3.11 venv + requirements
+
+# 1. data (download ~0.9 GB, preprocess, encode item texts, run tests)
+sbatch scripts/slurm/prepare_data.sbatch
+
+# 2. RQ1 runs (after job 1 finished): retriever v2/v4 x seeds 0-2, and A-only SASRec/BPR x seeds 0-2
+sbatch scripts/slurm/train_retriever.sbatch
+sbatch scripts/slurm/train_baselines_a.sbatch
+squeue -u $USER                                      # monitor; one array task per run
+
+# 3. after choosing the frozen retriever (record it in docs/decisions.md)
+sbatch --export=ALL,RUN_DIR=results/retriever/v2_transformer/seed0 scripts/slurm/build_candidates.sbatch
+```
+
+Or chain them: `jid=$(sbatch --parsable scripts/slurm/prepare_data.sbatch); sbatch --dependency=afterok:$jid scripts/slurm/train_retriever.sbatch`.
+
+**Check before the first submit:** the scripts request a generic `--gres=gpu:1`. If the cluster requires a GPU type
+or partition (see `sinfo -o "%P %G %l"`), add e.g. `#SBATCH --partition=...` / `--gres=gpu:<type>:1`, and lower
+`--time` if a partition's limit is shorter.
+
+**Getting results back:** metrics, configs, git hashes and per-case ranks under `results/` are tracked by git, so
+commit and push them from the cluster. Model weights (`model.pth`) and `data/` are not in git; build the candidate
+lists on the cluster, where the weights are.
