@@ -1,12 +1,10 @@
 .venv/
-data/
+/data/
 __pycache__/
 *.pyc
-saved/
-log/
-log_tensorboard/
+/saved/
+/log/
+/log_tensorboard/
 results/**/*.npy
 results/**/*.pth
 .DS_Store
-log/
-log_tensorboard/
