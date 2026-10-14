@@ -34,6 +34,15 @@ Single-run example:
 .venv/bin/python -m cascade.pipelines.train_baseline --config configs/baselines/sasrec.yaml --seed 0 --train-on AB [--toy] [--device cuda]
 ```
 
+## RQ1 — retriever vs baseline retrieval
+
+After the retriever (v2, v4) and A-only baseline runs (seeds 0–2), with their `{val,test}_ranks.npz` in `results/`:
+```bash
+.venv/bin/python -m cascade.eval.report_rq1   # -> results/rq1/summary.{md,json}
+```
+Recall@{10, 50, 100, 200, 500} and nDCG@10 (mean ± std over seeds), Recall@10/@200 by segment, and the
+frozen-retriever check (v4 − v2 on Val Recall@200, overall and new-in-period, paired bootstrap CI).
+
 ## Baseline results (Phase 0)
 
 Test set, trained on periods A+B, per-user macro average, mean ± std over seeds 0–2 (Pop / ItemKNN are deterministic).

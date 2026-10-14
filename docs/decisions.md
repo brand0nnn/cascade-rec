@@ -132,5 +132,11 @@ BPR row skips 74,437 test cases — the comparable row is 0.0027 / 0.0013 / 0.01
   single-thread latency protocol, and Linux is unaffected.
 - **SoC cluster:** Slurm array jobs in `scripts/slurm/`. v2 seed 0 and SASRec-A seed 0 are re-run there so all seeds of
   a model come from the same device type; the earlier Mac (MPS) runs are kept as development runs only.
+- **RQ1 report (2026-10-15, `cascade.eval.report_rq1`):** recomputed from each run's saved ranks. All Val/Test cases
+  count; cases a model cannot score (BPR-A users with no period-A interactions) are misses, since a retriever must
+  return candidates for every user (this is the "skipped = miss" row of the baseline table). The frozen-retriever check
+  averages each case's Recall@200 hit over seeds, then runs the paired bootstrap over users (v4 − v2), overall and on
+  new-in-period cases. A difference counts only if its 95% CI excludes 0; a tie keeps v2 (the main retriever).
+  Verified: on existing runs the recomputed numbers equal `metrics.json` / `extra_segments.json` exactly.
 - **Cluster partitions (2026-10-15):** training jobs run on `gpu-long` with `--gres=gpu:a100-40:1` (one fixed GPU type
   for every seed); data prep and candidate building use `gpu` (3 h limit, any GPU type).
