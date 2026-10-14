@@ -4,6 +4,9 @@
 # Installs uv into ~/.local/bin if missing, then creates .venv with Python 3.11 and the pinned requirements.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
+# the login node's /tmp has a small quota; keep temporary files (uv install, wheel builds) in the home directory
+export TMPDIR="$HOME/tmp"
+mkdir -p "$TMPDIR"
 if ! command -v uv >/dev/null; then
   curl -LsSf https://astral.sh/uv/install.sh | sh
   export PATH="$HOME/.local/bin:$PATH"
