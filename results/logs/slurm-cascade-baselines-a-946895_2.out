@@ -1,0 +1,52 @@
+job 947232 task 2 on xgph15 at Thu Oct 15 03:32:19 AM +08 2026
+NVIDIA A100 80GB PCIe, 81920 MiB
+env ok: torch 2.5.1+cu124 | cuda True
+command line args [--config configs/baselines/sasrec.yaml --train-on A --seed 2 --device cuda] will not be used in RecBole
+15 Oct 03:33    INFO  [Training]: train_batch_size = [512] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
+15 Oct 03:33    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+03:33:03 INFO __main__: SASRec on A | device=cuda | RecBole n_users=335864 n_items=111481
+15 Oct 03:33    INFO  epoch 0 training [time: 28.84s, train loss: 2995.0626]
+15 Oct 03:33    INFO  epoch 0 evaluating [time: 0.45s, valid_score: 0.020200]
+15 Oct 03:33    INFO  valid result: 
+recall@10 : 0.0057    recall@100 : 0.0202    ndcg@10 : 0.0026    ndcg@100 : 0.0054
+15 Oct 03:33    INFO  Saving current: /home/b/brandonk/cascade-rec/results/baselines/SASRec_A/seed2/checkpoint/SASRecBCE-Oct-15-2026_03-33-03.pth
+15 Oct 03:34    INFO  epoch 1 training [time: 27.92s, train loss: 2462.8090]
+15 Oct 03:34    INFO  epoch 1 evaluating [time: 0.42s, valid_score: 0.024000]
+15 Oct 03:34    INFO  valid result: 
+recall@10 : 0.0048    recall@100 : 0.024    ndcg@10 : 0.0023    ndcg@100 : 0.0059
+15 Oct 03:34    INFO  Saving current: /home/b/brandonk/cascade-rec/results/baselines/SASRec_A/seed2/checkpoint/SASRecBCE-Oct-15-2026_03-33-03.pth
+15 Oct 03:34    INFO  epoch 2 training [time: 26.37s, train loss: 2148.8409]
+15 Oct 03:34    INFO  epoch 2 evaluating [time: 0.43s, valid_score: 0.027400]
+15 Oct 03:34    INFO  valid result: 
+recall@10 : 0.0069    recall@100 : 0.0274    ndcg@10 : 0.0034    ndcg@100 : 0.0073
+15 Oct 03:34    INFO  Saving current: /home/b/brandonk/cascade-rec/results/baselines/SASRec_A/seed2/checkpoint/SASRecBCE-Oct-15-2026_03-33-03.pth
+15 Oct 03:34    INFO  epoch 3 training [time: 26.64s, train loss: 1898.7743]
+15 Oct 03:34    INFO  epoch 3 evaluating [time: 0.41s, valid_score: 0.025800]
+15 Oct 03:34    INFO  valid result: 
+recall@10 : 0.0066    recall@100 : 0.0258    ndcg@10 : 0.0033    ndcg@100 : 0.007
+15 Oct 03:35    INFO  epoch 4 training [time: 26.27s, train loss: 1714.4255]
+15 Oct 03:35    INFO  epoch 4 evaluating [time: 0.41s, valid_score: 0.025400]
+15 Oct 03:35    INFO  valid result: 
+recall@10 : 0.0058    recall@100 : 0.0254    ndcg@10 : 0.003    ndcg@100 : 0.0068
+15 Oct 03:35    INFO  epoch 5 training [time: 26.27s, train loss: 1570.3732]
+15 Oct 03:35    INFO  epoch 5 evaluating [time: 0.41s, valid_score: 0.024300]
+15 Oct 03:35    INFO  valid result: 
+recall@10 : 0.0066    recall@100 : 0.0243    ndcg@10 : 0.0031    ndcg@100 : 0.0065
+15 Oct 03:36    INFO  epoch 6 training [time: 26.28s, train loss: 1456.7592]
+15 Oct 03:36    INFO  epoch 6 evaluating [time: 0.41s, valid_score: 0.024300]
+15 Oct 03:36    INFO  valid result: 
+recall@10 : 0.0054    recall@100 : 0.0243    ndcg@10 : 0.0026    ndcg@100 : 0.0062
+15 Oct 03:36    INFO  epoch 7 training [time: 26.28s, train loss: 1366.5806]
+15 Oct 03:36    INFO  epoch 7 evaluating [time: 0.41s, valid_score: 0.023700]
+15 Oct 03:36    INFO  valid result: 
+recall@10 : 0.0053    recall@100 : 0.0237    ndcg@10 : 0.0024    ndcg@100 : 0.0059
+15 Oct 03:37    INFO  epoch 8 training [time: 26.27s, train loss: 1298.2556]
+15 Oct 03:37    INFO  epoch 8 evaluating [time: 0.41s, valid_score: 0.023000]
+15 Oct 03:37    INFO  valid result: 
+recall@10 : 0.0052    recall@100 : 0.023    ndcg@10 : 0.0023    ndcg@100 : 0.0057
+15 Oct 03:37    INFO  Finished training, best eval result in epoch 2
+sysctl: cannot stat /proc/sys/machdep/cpu/brand_string: No such file or directory
+eval val:   0%|          | 0/455 [00:00<?, ?it/s]eval val:   5%|▌         | 24/455 [00:10<03:05,  2.32it/s]eval val:  11%|█         | 49/455 [00:20<02:49,  2.39it/s]eval val:  16%|█▋        | 74/455 [00:30<02:37,  2.42it/s]eval val:  22%|██▏       | 99/455 [00:41<02:26,  2.43it/s]eval val:  27%|██▋       | 124/455 [00:51<02:16,  2.43it/s]eval val:  33%|███▎      | 149/455 [01:01<02:05,  2.44it/s]eval val:  38%|███▊      | 174/455 [01:11<01:55,  2.43it/s]eval val:  44%|████▎     | 199/455 [01:22<01:45,  2.43it/s]eval val:  49%|████▉     | 224/455 [01:32<01:34,  2.43it/s]eval val:  55%|█████▍    | 249/455 [01:42<01:24,  2.43it/s]eval val:  60%|██████    | 274/455 [01:52<01:14,  2.44it/s]eval val:  66%|██████▌   | 299/455 [02:03<01:04,  2.44it/s]eval val:  71%|███████   | 324/455 [02:13<00:53,  2.44it/s]eval val:  77%|███████▋  | 349/455 [02:23<00:43,  2.44it/s]eval val:  82%|████████▏ | 374/455 [02:33<00:33,  2.45it/s]eval val:  88%|████████▊ | 399/455 [02:43<00:22,  2.45it/s]eval val:  93%|█████████▎| 424/455 [02:54<00:12,  2.45it/s]eval val:  99%|█████████▊| 449/455 [03:04<00:02,  2.44it/s]eval val: 100%|██████████| 455/455 [03:06<00:00,  2.44it/s]
+03:40:19 INFO __main__: SASRec val: recall@10=0.0064 ndcg@10=0.0032 recall@100=0.0284 (macro)
+eval test:   0%|          | 0/581 [00:00<?, ?it/s]eval test:   4%|▍         | 25/581 [00:10<03:45,  2.47it/s]eval test:   9%|▊         | 50/581 [00:20<03:35,  2.47it/s]eval test:  13%|█▎        | 75/581 [00:30<03:25,  2.47it/s]eval test:  17%|█▋        | 100/581 [00:40<03:15,  2.46it/s]eval test:  22%|██▏       | 125/581 [00:50<03:05,  2.46it/s]eval test:  26%|██▌       | 150/581 [01:00<02:55,  2.46it/s]eval test:  30%|███       | 175/581 [01:11<02:45,  2.46it/s]eval test:  34%|███▍      | 200/581 [01:21<02:34,  2.46it/s]eval test:  39%|███▊      | 225/581 [01:31<02:24,  2.47it/s]eval test:  43%|████▎     | 250/581 [01:41<02:13,  2.47it/s]eval test:  43%|████▎     | 250/581 [01:51<02:13,  2.47it/s]eval test:  47%|████▋     | 275/581 [01:51<02:03,  2.47it/s]eval test:  52%|█████▏    | 300/581 [02:01<01:53,  2.47it/s]eval test:  56%|█████▌    | 325/581 [02:11<01:43,  2.47it/s]eval test:  60%|██████    | 350/581 [02:21<01:33,  2.47it/s]eval test:  65%|██████▍   | 375/581 [02:32<01:23,  2.46it/s]eval test:  69%|██████▉   | 400/581 [02:42<01:13,  2.46it/s]eval test:  73%|███████▎  | 425/581 [02:52<01:03,  2.46it/s]eval test:  77%|███████▋  | 450/581 [03:02<00:53,  2.46it/s]eval test:  82%|████████▏ | 475/581 [03:12<00:43,  2.46it/s]eval test:  86%|████████▌ | 500/581 [03:22<00:32,  2.46it/s]eval test:  90%|█████████ | 525/581 [03:33<00:22,  2.46it/s]eval test:  95%|█████████▍| 550/581 [03:43<00:12,  2.46it/s]eval test:  99%|█████████▉| 575/581 [03:53<00:02,  2.46it/s]eval test: 100%|██████████| 581/581 [03:55<00:00,  2.46it/s]
+03:44:16 INFO __main__: SASRec test: recall@10=0.0033 ndcg@10=0.0017 recall@100=0.0171 (macro)

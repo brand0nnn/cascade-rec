@@ -1,0 +1,48 @@
+job 947072 task 1 on xgph12 at Thu Oct 15 02:39:04 AM +08 2026
+NVIDIA A100 80GB PCIe, 81920 MiB
+env ok: torch 2.5.1+cu124 | cuda True
+02:39:33 INFO __main__: v2_transformer | device=cuda | 330497 training windows, 1526378 target positions
+02:40:19 INFO __main__: epoch 0 loss 7.6923 | val-subset R@100 0.0190 R@200 0.0267 | 30s
+02:41:04 INFO __main__: epoch 1 loss 7.3261 | val-subset R@100 0.0221 R@200 0.0340 | 29s
+02:41:48 INFO __main__: epoch 2 loss 7.1889 | val-subset R@100 0.0253 R@200 0.0379 | 28s
+02:42:33 INFO __main__: epoch 3 loss 7.0923 | val-subset R@100 0.0278 R@200 0.0432 | 28s
+02:43:18 INFO __main__: epoch 4 loss 7.0131 | val-subset R@100 0.0273 R@200 0.0419 | 28s
+02:44:02 INFO __main__: epoch 5 loss 6.9500 | val-subset R@100 0.0310 R@200 0.0493 | 28s
+02:44:46 INFO __main__: epoch 6 loss 6.8931 | val-subset R@100 0.0337 R@200 0.0521 | 28s
+02:45:31 INFO __main__: epoch 7 loss 6.8422 | val-subset R@100 0.0363 R@200 0.0558 | 28s
+02:46:15 INFO __main__: epoch 8 loss 6.8000 | val-subset R@100 0.0342 R@200 0.0549 | 28s
+02:47:00 INFO __main__: epoch 9 loss 6.7614 | val-subset R@100 0.0360 R@200 0.0559 | 28s
+02:47:44 INFO __main__: epoch 10 loss 6.7281 | val-subset R@100 0.0384 R@200 0.0590 | 28s
+02:48:28 INFO __main__: epoch 11 loss 6.6946 | val-subset R@100 0.0369 R@200 0.0573 | 29s
+02:49:13 INFO __main__: epoch 12 loss 6.6675 | val-subset R@100 0.0392 R@200 0.0594 | 28s
+02:49:58 INFO __main__: epoch 13 loss 6.6413 | val-subset R@100 0.0402 R@200 0.0623 | 29s
+02:50:42 INFO __main__: epoch 14 loss 6.6184 | val-subset R@100 0.0403 R@200 0.0621 | 28s
+02:51:27 INFO __main__: epoch 15 loss 6.5975 | val-subset R@100 0.0407 R@200 0.0639 | 28s
+02:52:11 INFO __main__: epoch 16 loss 6.5790 | val-subset R@100 0.0423 R@200 0.0648 | 28s
+02:52:56 INFO __main__: epoch 17 loss 6.5587 | val-subset R@100 0.0416 R@200 0.0653 | 29s
+02:53:41 INFO __main__: epoch 18 loss 6.5427 | val-subset R@100 0.0426 R@200 0.0654 | 28s
+02:54:25 INFO __main__: epoch 19 loss 6.5268 | val-subset R@100 0.0432 R@200 0.0653 | 28s
+02:55:10 INFO __main__: epoch 20 loss 6.5128 | val-subset R@100 0.0436 R@200 0.0658 | 28s
+02:55:55 INFO __main__: epoch 21 loss 6.5006 | val-subset R@100 0.0451 R@200 0.0694 | 28s
+02:56:39 INFO __main__: epoch 22 loss 6.4884 | val-subset R@100 0.0443 R@200 0.0677 | 28s
+02:57:23 INFO __main__: epoch 23 loss 6.4758 | val-subset R@100 0.0440 R@200 0.0685 | 28s
+02:58:08 INFO __main__: epoch 24 loss 6.4633 | val-subset R@100 0.0437 R@200 0.0682 | 28s
+02:58:52 INFO __main__: epoch 25 loss 6.4547 | val-subset R@100 0.0453 R@200 0.0695 | 28s
+02:59:37 INFO __main__: epoch 26 loss 6.4458 | val-subset R@100 0.0452 R@200 0.0706 | 29s
+03:00:22 INFO __main__: epoch 27 loss 6.4372 | val-subset R@100 0.0450 R@200 0.0699 | 28s
+03:01:06 INFO __main__: epoch 28 loss 6.4275 | val-subset R@100 0.0464 R@200 0.0711 | 28s
+03:01:51 INFO __main__: epoch 29 loss 6.4191 | val-subset R@100 0.0446 R@200 0.0717 | 28s
+03:02:35 INFO __main__: epoch 30 loss 6.4115 | val-subset R@100 0.0457 R@200 0.0695 | 28s
+03:03:20 INFO __main__: epoch 31 loss 6.4068 | val-subset R@100 0.0472 R@200 0.0707 | 28s
+03:04:05 INFO __main__: epoch 32 loss 6.3986 | val-subset R@100 0.0454 R@200 0.0706 | 29s
+03:04:49 INFO __main__: epoch 33 loss 6.3928 | val-subset R@100 0.0480 R@200 0.0720 | 28s
+03:05:34 INFO __main__: epoch 34 loss 6.3875 | val-subset R@100 0.0463 R@200 0.0707 | 28s
+03:06:19 INFO __main__: epoch 35 loss 6.3809 | val-subset R@100 0.0445 R@200 0.0687 | 28s
+03:07:04 INFO __main__: epoch 36 loss 6.3751 | val-subset R@100 0.0461 R@200 0.0717 | 29s
+03:07:48 INFO __main__: epoch 37 loss 6.3690 | val-subset R@100 0.0467 R@200 0.0700 | 28s
+03:08:33 INFO __main__: epoch 38 loss 6.3665 | val-subset R@100 0.0471 R@200 0.0717 | 28s
+sysctl: cannot stat /proc/sys/machdep/cpu/brand_string: No such file or directory
+eval val:   0%|          | 0/455 [00:00<?, ?it/s]eval val:   5%|▌         | 25/455 [00:10<02:52,  2.50it/s]eval val:  11%|█         | 50/455 [00:20<02:42,  2.50it/s]eval val:  17%|█▋        | 76/455 [00:30<02:31,  2.50it/s]eval val:  22%|██▏       | 102/455 [00:40<02:21,  2.50it/s]eval val:  28%|██▊       | 127/455 [00:50<02:11,  2.49it/s]eval val:  33%|███▎      | 152/455 [01:00<02:01,  2.49it/s]eval val:  39%|███▉      | 177/455 [01:10<01:51,  2.49it/s]eval val:  45%|████▍     | 203/455 [01:21<01:40,  2.50it/s]eval val:  50%|█████     | 229/455 [01:31<01:30,  2.49it/s]eval val:  56%|█████▌    | 254/455 [01:41<01:20,  2.49it/s]eval val:  61%|██████▏   | 279/455 [01:51<01:10,  2.49it/s]eval val:  67%|██████▋   | 304/455 [02:01<01:00,  2.49it/s]eval val:  72%|███████▏  | 329/455 [02:12<00:50,  2.49it/s]eval val:  78%|███████▊  | 354/455 [02:22<00:40,  2.49it/s]eval val:  83%|████████▎ | 379/455 [02:32<00:30,  2.49it/s]eval val:  89%|████████▉ | 404/455 [02:42<00:20,  2.49it/s]eval val:  94%|█████████▍| 429/455 [02:52<00:10,  2.49it/s]eval val: 100%|█████████▉| 454/455 [03:02<00:00,  2.49it/s]eval val: 100%|██████████| 455/455 [03:02<00:00,  2.49it/s]
+03:11:37 INFO __main__: v2_transformer val: R@50 0.0299 R@100 0.0460 R@200 0.0697 R@500 0.1198 nDCG@10 0.0058 (macro)
+eval test:   0%|          | 0/581 [00:00<?, ?it/s]eval test:   4%|▍         | 26/581 [00:10<03:40,  2.52it/s]eval test:   9%|▉         | 52/581 [00:20<03:30,  2.52it/s]eval test:  13%|█▎        | 78/581 [00:30<03:19,  2.52it/s]eval test:  18%|█▊        | 104/581 [00:41<03:09,  2.52it/s]eval test:  22%|██▏       | 130/581 [00:51<02:58,  2.52it/s]eval test:  27%|██▋       | 156/581 [01:01<02:48,  2.52it/s]eval test:  31%|███▏      | 182/581 [01:12<02:38,  2.51it/s]eval test:  36%|███▌      | 208/581 [01:22<02:28,  2.51it/s]eval test:  40%|████      | 234/581 [01:33<02:18,  2.51it/s]eval test:  45%|████▍     | 260/581 [01:43<02:07,  2.51it/s]eval test:  49%|████▉     | 286/581 [01:53<01:57,  2.51it/s]eval test:  54%|█████▎    | 312/581 [02:04<01:47,  2.51it/s]eval test:  58%|█████▊    | 338/581 [02:14<01:36,  2.51it/s]eval test:  63%|██████▎   | 364/581 [02:24<01:26,  2.51it/s]eval test:  67%|██████▋   | 390/581 [02:35<01:16,  2.51it/s]eval test:  67%|██████▋   | 390/581 [02:45<01:16,  2.51it/s]eval test:  72%|███████▏  | 416/581 [02:45<01:05,  2.51it/s]eval test:  76%|███████▌  | 442/581 [02:55<00:55,  2.51it/s]eval test:  81%|████████  | 468/581 [03:06<00:45,  2.51it/s]eval test:  85%|████████▌ | 494/581 [03:16<00:34,  2.51it/s]eval test:  90%|████████▉ | 520/581 [03:27<00:24,  2.51it/s]eval test:  94%|█████████▍| 546/581 [03:37<00:13,  2.51it/s]eval test:  98%|█████████▊| 572/581 [03:47<00:03,  2.51it/s]eval test: 100%|██████████| 581/581 [03:51<00:00,  2.51it/s]
+03:15:30 INFO __main__: v2_transformer test: R@50 0.0172 R@100 0.0278 R@200 0.0446 R@500 0.0819 nDCG@10 0.0030 (macro)

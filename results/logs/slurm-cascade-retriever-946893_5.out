@@ -1,0 +1,25 @@
+job 946893 task 5 on xgph12 at Thu Oct 15 03:15:31 AM +08 2026
+NVIDIA A100 80GB PCIe, 81920 MiB
+env ok: torch 2.5.1+cu124 | cuda True
+03:15:49 INFO __main__: v4_id_text | device=cuda | 330497 training windows, 1526378 target positions
+03:16:35 INFO __main__: epoch 0 loss 6.8809 | val-subset R@100 0.0354 R@200 0.0523 | 30s
+03:17:22 INFO __main__: epoch 1 loss 6.3720 | val-subset R@100 0.0402 R@200 0.0583 | 30s
+03:18:08 INFO __main__: epoch 2 loss 6.1038 | val-subset R@100 0.0455 R@200 0.0655 | 30s
+03:18:53 INFO __main__: epoch 3 loss 5.9041 | val-subset R@100 0.0444 R@200 0.0650 | 30s
+03:19:40 INFO __main__: epoch 4 loss 5.7516 | val-subset R@100 0.0471 R@200 0.0679 | 30s
+03:20:26 INFO __main__: epoch 5 loss 5.6399 | val-subset R@100 0.0464 R@200 0.0673 | 30s
+03:21:12 INFO __main__: epoch 6 loss 5.5526 | val-subset R@100 0.0463 R@200 0.0671 | 30s
+03:21:58 INFO __main__: epoch 7 loss 5.4844 | val-subset R@100 0.0486 R@200 0.0697 | 30s
+03:22:44 INFO __main__: epoch 8 loss 5.4258 | val-subset R@100 0.0492 R@200 0.0710 | 30s
+03:23:30 INFO __main__: epoch 9 loss 5.3724 | val-subset R@100 0.0491 R@200 0.0717 | 30s
+03:24:16 INFO __main__: epoch 10 loss 5.3315 | val-subset R@100 0.0507 R@200 0.0737 | 30s
+03:25:03 INFO __main__: epoch 11 loss 5.2929 | val-subset R@100 0.0500 R@200 0.0741 | 30s
+03:25:49 INFO __main__: epoch 12 loss 5.2589 | val-subset R@100 0.0490 R@200 0.0724 | 29s
+03:26:35 INFO __main__: epoch 13 loss 5.2318 | val-subset R@100 0.0475 R@200 0.0707 | 30s
+03:27:21 INFO __main__: epoch 14 loss 5.2028 | val-subset R@100 0.0459 R@200 0.0701 | 30s
+03:28:07 INFO __main__: epoch 15 loss 5.1776 | val-subset R@100 0.0454 R@200 0.0679 | 30s
+sysctl: cannot stat /proc/sys/machdep/cpu/brand_string: No such file or directory
+eval val:   0%|          | 0/455 [00:00<?, ?it/s]eval val:   5%|▌         | 25/455 [00:10<02:52,  2.50it/s]eval val:  11%|█         | 50/455 [00:20<02:42,  2.49it/s]eval val:  16%|█▋        | 75/455 [00:30<02:32,  2.49it/s]eval val:  22%|██▏       | 100/455 [00:40<02:22,  2.49it/s]eval val:  27%|██▋       | 125/455 [00:50<02:12,  2.49it/s]eval val:  33%|███▎      | 150/455 [01:00<02:02,  2.49it/s]eval val:  38%|███▊      | 175/455 [01:10<01:52,  2.49it/s]eval val:  44%|████▍     | 200/455 [01:20<01:42,  2.49it/s]eval val:  49%|████▉     | 225/455 [01:30<01:32,  2.49it/s]eval val:  55%|█████▍    | 250/455 [01:40<01:22,  2.49it/s]eval val:  60%|██████    | 275/455 [01:50<01:12,  2.49it/s]eval val:  66%|██████▌   | 300/455 [02:00<01:02,  2.49it/s]eval val:  71%|███████▏  | 325/455 [02:10<00:52,  2.49it/s]eval val:  77%|███████▋  | 350/455 [02:20<00:42,  2.49it/s]eval val:  82%|████████▏ | 375/455 [02:30<00:32,  2.49it/s]eval val:  88%|████████▊ | 400/455 [02:40<00:22,  2.49it/s]eval val:  93%|█████████▎| 425/455 [02:50<00:12,  2.49it/s]eval val:  99%|█████████▉| 450/455 [03:00<00:02,  2.49it/s]eval val: 100%|██████████| 455/455 [03:02<00:00,  2.49it/s]
+03:31:12 INFO __main__: v4_id_text val: R@50 0.0328 R@100 0.0488 R@200 0.0723 R@500 0.1227 nDCG@10 0.0064 (macro)
+eval test:   0%|          | 0/581 [00:00<?, ?it/s]eval test:   4%|▍         | 26/581 [00:10<03:41,  2.51it/s]eval test:   9%|▉         | 52/581 [00:20<03:31,  2.51it/s]eval test:  13%|█▎        | 78/581 [00:31<03:20,  2.51it/s]eval test:  18%|█▊        | 104/581 [00:41<03:10,  2.51it/s]eval test:  22%|██▏       | 130/581 [00:51<03:00,  2.50it/s]eval test:  27%|██▋       | 156/581 [01:02<02:49,  2.51it/s]eval test:  31%|███▏      | 182/581 [01:12<02:39,  2.51it/s]eval test:  36%|███▌      | 208/581 [01:22<02:28,  2.51it/s]eval test:  40%|████      | 234/581 [01:33<02:18,  2.51it/s]eval test:  45%|████▍     | 260/581 [01:43<02:07,  2.51it/s]eval test:  49%|████▉     | 286/581 [01:54<01:57,  2.51it/s]eval test:  54%|█████▎    | 312/581 [02:04<01:47,  2.51it/s]eval test:  58%|█████▊    | 338/581 [02:14<01:36,  2.51it/s]eval test:  63%|██████▎   | 364/581 [02:25<01:26,  2.51it/s]eval test:  67%|██████▋   | 390/581 [02:35<01:16,  2.51it/s]eval test:  72%|███████▏  | 416/581 [02:45<01:05,  2.51it/s]eval test:  76%|███████▌  | 442/581 [02:56<00:55,  2.51it/s]eval test:  81%|████████  | 468/581 [03:06<00:45,  2.51it/s]eval test:  81%|████████  | 468/581 [03:16<00:45,  2.51it/s]eval test:  85%|████████▌ | 494/581 [03:16<00:34,  2.51it/s]eval test:  90%|████████▉ | 520/581 [03:27<00:24,  2.51it/s]eval test:  94%|█████████▍| 546/581 [03:37<00:13,  2.51it/s]eval test:  98%|█████████▊| 572/581 [03:48<00:03,  2.51it/s]eval test: 100%|██████████| 581/581 [03:51<00:00,  2.51it/s]
+03:35:06 INFO __main__: v4_id_text test: R@50 0.0190 R@100 0.0288 R@200 0.0433 R@500 0.0787 nDCG@10 0.0035 (macro)

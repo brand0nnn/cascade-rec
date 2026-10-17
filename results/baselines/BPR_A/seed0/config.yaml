@@ -1,0 +1,63 @@
+model: BPR
+train_on: A
+early_stop_val_subset: 20000
+recbole:
+  data_path: /home/b/brandonk/cascade-rec/data/processed/recbole
+  dataset: general_A_v20000
+  benchmark_filename:
+  - train
+  - valid
+  - test
+  field_separator: "\t"
+  seq_separator: ' '
+  USER_ID_FIELD: user_id
+  ITEM_ID_FIELD: item_id
+  TIME_FIELD: timestamp
+  load_col:
+    inter:
+    - user_id
+    - item_id
+    - timestamp
+    item:
+    - item_id
+  eval_args:
+    split:
+      RS:
+      - 0.8
+      - 0.1
+      - 0.1
+    order: TO
+    group_by: user
+    mode: full
+  metrics:
+  - Recall
+  - NDCG
+  topk:
+  - 10
+  - 100
+  valid_metric: Recall@100
+  reproducibility: true
+  show_progress: false
+  save_dataset: false
+  save_dataloaders: false
+  log_wandb: false
+  embedding_size: 64
+  train_neg_sample_args:
+    distribution: uniform
+    sample_num: 1
+    alpha: 1.0
+    dynamic: false
+    candidate_num: 0
+  learner: adam
+  learning_rate: 0.001
+  train_batch_size: 4096
+  eval_batch_size: 1024
+  epochs: 300
+  eval_step: 2
+  stopping_step: 5
+  weight_decay: 0.0
+  seed: 0
+  checkpoint_dir: /home/b/brandonk/cascade-rec/results/baselines/BPR_A/seed0/checkpoint
+  use_gpu: false
+seed: 0
+toy: false
