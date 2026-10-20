@@ -9,3 +9,6 @@ results/**/*.npy
 results/**/*.pth
 .DS_Store
 *.egg-info/
+# trained retriever weights (full-data runs only) are small enough to share through git (2026-10-21)
+!results/retriever/*/seed*/model.pth
+results/retriever/*_sample/seed*/model.pth
