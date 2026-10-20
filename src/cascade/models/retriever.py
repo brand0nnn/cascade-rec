@@ -2,8 +2,8 @@
 trained with in-batch softmax and logQ correction (Yi et al., 2019).
 
 Item tower:  e_i = MLP(frozen MiniLM text emb)            (variant ``text``)
-             e_i = MLP(text) + ID emb (items seen in A)   (variant ``id_text``)
-             e_i = ID emb (items seen in A, else 0)       (variant ``id_only``)
+             e_i = MLP(text) + ID emb (items seen in retriever-train)   (variant ``id_text``)
+             e_i = ID emb (items seen in retriever-train, else 0)       (variant ``id_only``)
              v_i = normalize(e_i)                          (scoring vector)
 User tower:  causal transformer over the last L item vectors e_i (shared item tower), left-padded,
              u = normalize(hidden state at the last position)  (variant ``transformer``)
@@ -21,8 +21,8 @@ from cascade.eval.harness import InstanceBatch
 
 
 class ItemTower(nn.Module):
-    def __init__(self, variant: str, text_emb: np.ndarray | None, n_items: int, seen_in_a: np.ndarray, dim: int = 64, hidden: int = 256, dropout: float = 0.1):
-        """``text_emb``: [N+1, 384] frozen embeddings (row 0 = padding). ``seen_in_a``: bool [N+1], items with ≥1 period-A interaction."""
+    def __init__(self, variant: str, text_emb: np.ndarray | None, n_items: int, seen_in_retriever_train: np.ndarray, dim: int = 64, hidden: int = 256, dropout: float = 0.1):
+        """``text_emb``: [N+1, 384] frozen embeddings (row 0 = padding). ``seen_in_retriever_train``: bool [N+1], items with ≥1 interaction in the retriever-training period."""
         super().__init__()
         assert variant in ("text", "id_text", "id_only")
         self.variant = variant
@@ -32,8 +32,8 @@ class ItemTower(nn.Module):
         if variant in ("id_text", "id_only"):
             self.id_emb = nn.Embedding(n_items + 1, dim)
             nn.init.normal_(self.id_emb.weight, std=0.02)
-            # items never seen in period A get no ID signal (cold items fall back to text, or 0 for id_only)
-            self.register_buffer("id_mask", torch.as_tensor(seen_in_a, dtype=torch.float32).unsqueeze(1), persistent=False)
+            # items never seen in the retriever-training period get no ID signal (cold items fall back to text, or 0 for id_only)
+            self.register_buffer("id_mask", torch.as_tensor(seen_in_retriever_train, dtype=torch.float32).unsqueeze(1), persistent=False)
 
     def forward(self, items: torch.Tensor) -> torch.Tensor:
         """Unnormalised item vectors e_i for an id tensor of any shape (padding id 0 → 0 vector)."""
@@ -77,9 +77,9 @@ class UserTower(nn.Module):
 
 
 class TwoTowerRetriever(nn.Module):
-    def __init__(self, item_variant: str, user_variant: str, text_emb: np.ndarray | None, n_items: int, seen_in_a: np.ndarray, max_len: int = 50, temperature: float = 0.05, **kw):
+    def __init__(self, item_variant: str, user_variant: str, text_emb: np.ndarray | None, n_items: int, seen_in_retriever_train: np.ndarray, max_len: int = 50, temperature: float = 0.05, **kw):
         super().__init__()
-        self.item_tower = ItemTower(item_variant, text_emb, n_items, seen_in_a, **kw.get("item", {}))
+        self.item_tower = ItemTower(item_variant, text_emb, n_items, seen_in_retriever_train, **kw.get("item", {}))
         self.user_tower = UserTower(user_variant, max_len=max_len, **kw.get("user", {}))
         self.temperature = temperature
         self.n_items = n_items

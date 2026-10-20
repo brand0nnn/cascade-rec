@@ -15,7 +15,7 @@
     },
     "systems": {
       "Popularity": {
-        "path": "baselines/Pop_A",
+        "path": "baselines/popularity/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -52,7 +52,7 @@
         }
       },
       "ItemKNN": {
-        "path": "baselines/ItemKNN_A",
+        "path": "baselines/itemknn/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -89,7 +89,7 @@
         }
       },
       "BPR-MF": {
-        "path": "baselines/BPR_A",
+        "path": "baselines/bpr/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -126,7 +126,7 @@
         }
       },
       "SASRec": {
-        "path": "baselines/SASRec_A",
+        "path": "baselines/sasrec/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -162,8 +162,8 @@
           }
         }
       },
-      "Two-tower v2 (text)": {
-        "path": "retriever/v2_transformer",
+      "Two-tower (text)": {
+        "path": "retriever/two_tower_text",
         "seeds": [
           0
         ],
@@ -243,8 +243,8 @@
           }
         }
       },
-      "Two-tower v4 (ID + text)": {
-        "path": "retriever/v4_id_text",
+      "Two-tower (text + ID)": {
+        "path": "retriever/two_tower_text_id",
         "seeds": [
           0
         ],
@@ -326,8 +326,8 @@
       }
     },
     "warnings": [
-      "Two-tower v2 (text): only 1 seed(s)",
-      "Two-tower v4 (ID + text): only 1 seed(s)"
+      "Two-tower (text): only 1 seed(s)",
+      "Two-tower (text + ID): only 1 seed(s)"
     ],
     "frozen_retriever_check": {
       "all": {
@@ -344,9 +344,9 @@
         "ci_high": -0.0087142203259608,
         "n_users": 1942,
         "n_resamples": 200,
-        "better": "v2"
+        "better": "text"
       },
-      "recommendation": "v2 (better on one, no significant difference on the other)"
+      "recommendation": "Two-tower (text) (better on one, no significant difference on the other)"
     }
   },
   "test": {
@@ -365,7 +365,7 @@
     },
     "systems": {
       "Popularity": {
-        "path": "baselines/Pop_A",
+        "path": "baselines/popularity/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -402,7 +402,7 @@
         }
       },
       "ItemKNN": {
-        "path": "baselines/ItemKNN_A",
+        "path": "baselines/itemknn/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -439,7 +439,7 @@
         }
       },
       "BPR-MF": {
-        "path": "baselines/BPR_A",
+        "path": "baselines/bpr/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -476,7 +476,7 @@
         }
       },
       "SASRec": {
-        "path": "baselines/SASRec_A",
+        "path": "baselines/sasrec/retriever_train",
         "seeds": [],
         "devices": [],
         "git": [],
@@ -512,8 +512,8 @@
           }
         }
       },
-      "Two-tower v2 (text)": {
-        "path": "retriever/v2_transformer",
+      "Two-tower (text)": {
+        "path": "retriever/two_tower_text",
         "seeds": [
           0
         ],
@@ -593,8 +593,8 @@
           }
         }
       },
-      "Two-tower v4 (ID + text)": {
-        "path": "retriever/v4_id_text",
+      "Two-tower (text + ID)": {
+        "path": "retriever/two_tower_text_id",
         "seeds": [
           0
         ],
@@ -676,8 +676,8 @@
       }
     },
     "warnings": [
-      "Two-tower v2 (text): only 1 seed(s)",
-      "Two-tower v4 (ID + text): only 1 seed(s)"
+      "Two-tower (text): only 1 seed(s)",
+      "Two-tower (text + ID): only 1 seed(s)"
     ]
   }
 }

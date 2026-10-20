@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Download + preprocess the dataset, build toy data, encode item texts, run the tests.  sbatch scripts/slurm/prepare_data.sbatch
+# Download + preprocess the dataset, build sample data, encode item texts, run the tests.  sbatch scripts/slurm/prepare_data.sbatch
 #SBATCH --job-name=cascade-prep
 #SBATCH --output=results/logs/slurm-%x-%j.out
 #SBATCH --time=02:00:00
@@ -9,9 +9,9 @@
 #SBATCH --gres=gpu:1
 source scripts/slurm/common.sh
 scripts/prepare_data.sh
-scripts/prepare_data.sh --toy
+scripts/prepare_data.sh --sample
 python -m cascade.text.encode --device cuda
-python -m cascade.text.encode --toy
+python -m cascade.text.encode --sample
 # raw files must be byte-identical to the ones used locally (see docs/decisions.md)
 python - <<'PY'
 import json

@@ -1,6 +1,6 @@
 """Clean raw interactions + metadata into integer-ID tables (CLAUDE.md §4.2–4.3).
 
-Outputs in ``<processed_dir>[/toy]``:
+Outputs in ``<processed_dir>[/sample]``:
   interactions.parquet  user, item, rating, timestamp (sorted by user, timestamp, parent_asin)
   users.parquet         user (int, 1-based), user_id (raw)
   items.parquet         item (int, 1-based), parent_asin, title, categories, store, price_raw, price,
@@ -53,9 +53,9 @@ def item_text(title: str, categories: list[str], store: str) -> str:
     return " | ".join(p.strip() for p in parts if p and p.strip())
 
 
-def output_dir(cfg: dict, toy: bool) -> Path:
+def output_dir(cfg: dict, sample: bool) -> Path:
     d = REPO_ROOT / cfg["processed_dir"]
-    return d / "toy" if toy else d
+    return d / "sample" if sample else d
 
 
 def load_interactions(path: Path) -> pd.DataFrame:
@@ -104,22 +104,22 @@ def load_metadata(path: Path, asins: set[str]) -> pd.DataFrame:
     return meta.drop_duplicates("parent_asin", keep="first")
 
 
-def main(config_path: str, toy: bool) -> None:
+def main(config_path: str, sample: bool) -> None:
     cfg = load_config(config_path)
     raw = REPO_ROOT / cfg["raw_dir"]
-    out = output_dir(cfg, toy)
+    out = output_dir(cfg, sample)
     out.mkdir(parents=True, exist_ok=True)
-    info: dict = {"toy": toy}
+    info: dict = {"sample": sample}
 
     df = load_interactions(raw / cfg["sources"]["interactions"]["file"])
     df = clean_interactions(df, info)
 
-    if toy:
+    if sample:
         users = np.sort(df["user_id"].unique())
-        rng = np.random.default_rng(cfg["toy"]["seed"])
-        keep = rng.choice(users, size=int(len(users) * cfg["toy"]["user_fraction"]), replace=False)
+        rng = np.random.default_rng(cfg["sample"]["seed"])
+        keep = rng.choice(users, size=int(len(users) * cfg["sample"]["user_fraction"]), replace=False)
         df = df[df["user_id"].isin(set(keep))].reset_index(drop=True)
-        info["toy_users"] = len(keep)
+        info["sample_users"] = len(keep)
 
     # contiguous IDs, 0 = padding; deterministic order by raw id
     user_ids = np.sort(df["user_id"].unique())
@@ -166,6 +166,6 @@ def main(config_path: str, toy: bool) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/data.yaml")
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--sample", action="store_true")
     a = ap.parse_args()
-    main(a.config, a.toy)
+    main(a.config, a.sample)

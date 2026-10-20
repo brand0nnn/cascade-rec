@@ -10,11 +10,11 @@ def test_new_in_period_boundaries():
     assert new_in_period(ft, "test", info).tolist() == [False, False, False, False, True, True]
 
 
-def test_new_in_period_equals_cold_on_test(toy_data):
-    inst = toy_data.split_instances("test")
-    items = toy_data.items.set_index("item")
-    new = new_in_period(items.loc[inst["item"], "first_ts"].values, "test", toy_data.split)
+def test_new_in_period_equals_cold_on_test(sample_data):
+    inst = sample_data.split_instances("test")
+    items = sample_data.items.set_index("item")
+    new = new_in_period(items.loc[inst["item"], "first_ts"].values, "test", sample_data.split)
     cold = items.loc[inst["item"], "segment"].values == "cold"
     assert (new == cold).all()
-    val = toy_data.split_instances("val")
-    assert new_in_period(items.loc[val["item"], "first_ts"].values, "val", toy_data.split).any()
+    val = sample_data.split_instances("val")
+    assert new_in_period(items.loc[val["item"], "first_ts"].values, "val", sample_data.split).any()

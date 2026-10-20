@@ -1,0 +1,7 @@
+# Two-tower (text + ID): the RQ1 ablation. Text plus a learned ID vector for products seen in the
+# retriever-training period (new products get text only).
+base: base.yaml
+name: two_tower_text_id
+user_tower: transformer
+item_tower: id_text
+logq: true

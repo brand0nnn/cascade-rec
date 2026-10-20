@@ -1,0 +1,6 @@
+# Two-tower (text, mean-pooled history): user = average of past product vectors, no attention. Not run.
+base: base.yaml
+name: two_tower_text_meanpool
+user_tower: meanpool
+item_tower: text
+logq: true

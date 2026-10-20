@@ -20,24 +20,34 @@ We build a **two-stage retrieve-then-rank recommender** on the **Cell_Phones_and
 
 | ID | Question | Status |
 |---|---|---|
-| RQ1 | At a fixed candidate count, does the trained two-tower retriever improve Recall@K over baseline retrieval (Popularity, ItemKNN, BPR-MF, SASRec)? One ablation: does adding ID embeddings to the text item tower (`v4_id_text`) help, and for which items? | Core |
+| RQ1 | At a fixed candidate count, does the trained two-tower retriever improve Recall@K over baseline retrieval (Popularity, ItemKNN, BPR-MF, SASRec)? One ablation: does adding ID embeddings to the text item tower (Two-tower (text + ID), `two_tower_text_id`) help, and for which items? | Core |
 | RQ2 | With the retriever and the MLP ranker fixed, how do candidate count K₁ and search settings (Flat, HNSW, IVF) affect Recall@K₁, final nDCG@10 and latency? | **Core — headline** |
 | RQ3 | On identical candidate lists, how do popularity order, retrieval-score order, the MLP and DIN compare on nDCG@10 (and ranking latency)? | Core |
 | Final | Does the selected combination (best retriever + best ranker at the recommended K₁) beat popularity retrieval + the same ranker and the best single-stage baseline? Explain the result either way. | Core |
 
 ### Scope
 
-**Core (must deliver):** data pipeline, baselines, two-tower retriever (`v2`, plus the `v4` ablation), FAISS index configs, MLP and DIN rankers, K₁ and index sweeps (RQ2), ranker comparison (RQ3), final combination test, failure breakdown and segment analysis, significance tests.
+**Core (must deliver):** data pipeline, baselines, two-tower retriever (Two-tower (text), plus the Two-tower (text + ID) ablation), FAISS index configs, MLP and DIN rankers, K₁ and index sweeps (RQ2), ranker comparison (RQ3), final combination test, failure breakdown and segment analysis, significance tests.
 
-**Only if time permits:** beyond-accuracy metrics (coverage, popularity concentration) in the final write-up; extra retriever variants `v1`/`v3`/`v5` (configs exist but are not part of the plan).
+**Only if time permits:** beyond-accuracy metrics (coverage, popularity concentration) in the final write-up; extra retriever variants `two_tower_text_meanpool` / `two_tower_text_no_logq` / `two_tower_id_only` (configs exist but are not part of the plan).
 
-**Dropped (2026-10-14):** LightGBM ranker, MLP-without-retrieval-score variant, retriever sweep over v1–v5, DIN + DCN-V2 combination, MMR re-ranker.
+**Dropped (2026-10-14):** LightGBM ranker, MLP-without-retrieval-score variant, retriever sweep over all five variants, DIN + DCN-V2 combination, MMR re-ranker.
 
 **Out of scope:** multi-source retrieval merging, pre-ranking stage, multi-task ranking, online/A-B evaluation, serving infrastructure, knowledge graphs, fine-tuning the text encoder.
 
 ---
 
-## 2. Notation (use consistently in code, logs and plots)
+## 2. Names and notation (use consistently in code, logs and plots)
+
+| Name (in code) | Meaning |
+|---|---|
+| retriever-training period (`retriever_train`) | Reviews before 26 Jul 2020; trains the retriever and baselines (formerly "period A") |
+| ranker-training period (`ranker_train`) | Reviews 26 Jul 2020 – 11 Aug 2021; trains the rankers (formerly "period B") |
+| all training data (`all_train`) | Both training periods together (formerly "A ∪ B") |
+| Two-tower (text) (`two_tower_text`) | Main retriever: products described by their text (formerly "v2") |
+| Two-tower (text + ID) (`two_tower_text_id`) | Ablation: text plus a learned ID vector per product (formerly "v4") |
+| sample (`--sample`) | Fixed ~2% user sample of the same Cell Phones data, for debugging (formerly "toy") |
+
 
 | Symbol | Meaning |
 |---|---|
@@ -62,7 +72,7 @@ cascade-rec/
 ├── configs/                   # one YAML per experiment; nothing hard-coded
 │   ├── data.yaml
 │   ├── baselines/*.yaml
-│   ├── retriever/*.yaml       # v1_meanpool, v2_transformer, v3_no_logq, v4_id_text, v5_id_only
+│   ├── retriever/*.yaml       # two_tower_text (main), two_tower_text_id, + 3 unused variants
 │   ├── ranker/*.yaml          # mlp, din
 │   └── cascade/*.yaml         # k1_sweep, index_sweep, final_combination
 ├── data/                      # gitignored
@@ -90,7 +100,7 @@ cascade-rec/
 - Python 3.10+, PyTorch, type hints, docstrings on public functions.
 - **Config-driven:** every run is launched from a YAML config; the config, git hash and seed are saved with the results.
 - **Seeds:** all experiments run with seeds `{0, 1, 2}`; set Python, NumPy and PyTorch seeds, and cuDNN deterministic where feasible.
-- **Toy mode:** every pipeline accepts `--toy` which uses a fixed ~2% user sample, for fast debugging. Never report toy results.
+- **Sample mode:** every pipeline accepts `--sample`, which uses a fixed ~2% user sample of the same data (`data/processed/sample/`), for fast debugging. Never report sample results.
 - **One evaluation harness** (`src/cascade/eval/harness.py`) is used by *every* model, baseline included. No model computes its own metrics.
 - Cache expensive artefacts (text embeddings, candidate lists, item vectors) to `data/processed/` with the config hash in the filename.
 - Record every non-trivial design decision or deviation in `docs/decisions.md` with date and reason.
@@ -140,17 +150,17 @@ Use the **official benchmark cut-offs** so our test set matches the public absol
 - `T1 = 1628643414042` (≈ 2021-08-11) — start of validation
 - `T2 = 1658002729837` (≈ 2022-07-16) — start of test
 
-The training portion (`timestamp < T1`) is further cut at `T_AB` into two periods:
+The training portion (`timestamp < T1`) is further cut at `t_ranker_train` into two periods:
 
 | Period | Time range | Used for |
 |---|---|---|
-| **A** | `< T_AB` | Retriever training; baseline training |
-| **B** | `[T_AB, T1)` | Ranker training (candidates from the frozen retriever) |
+| **Retriever-training** (`retriever_train`) | `< t_ranker_train` (before 26 Jul 2020) | Retriever training; baseline training |
+| **Ranker-training** (`ranker_train`) | `[t_ranker_train, T1)` (26 Jul 2020 – 11 Aug 2021) | Ranker training (candidates from the frozen retriever) |
 | **Val** | `[T1, T2)` | Early stopping and tuning for all models |
 | **Test** | `≥ T2` | Final evaluation only |
 
-- `T_AB` = the timestamp at the **85th percentile** of training-period (`< T1`) interactions (configurable: `period_b_fraction: 0.15`). Log the resulting date.
-- **Baselines** train on A ∪ B (all training data) *and* on A only; report the A∪B version as the main baseline, since that is their fair full-data setting. Log both.
+- `t_ranker_train` = the timestamp at the **85th percentile** of training-period (`< T1`) interactions (configurable: `ranker_train_fraction: 0.15`). Log the resulting date.
+- **Baselines** train on all training data (`all_train` = both training periods) *and* on the retriever-training period only (`retriever_train`); report the all-training-data version as the main baseline, since that is their fair full-data setting. Log both.
 - Known limitation (document it, do not fix): the official 5-core filter was computed over the whole timeline, so it uses future information about which users/items survive filtering.
 - **The test period is never used for any tuning, early stopping or feature statistics.** Val is used for all selection. Test is run once per final configuration.
 
@@ -160,11 +170,11 @@ An **instance** = (user, history, target item, timestamp, period).
 
 - For every interaction at time `t` in a period, the history is **all of that user's interactions strictly before `t`** (from any earlier period, including earlier interactions in the same period), truncated to the most recent `L = 50`.
 - Instances with **empty history are skipped** (cold users are out of scope). Log the count per period.
-- **Retriever training** uses SASRec-style sequences over period A (every position predicts the next item; see §7).
-- **Ranker training** uses instances whose target falls in period B.
+- **Retriever training** uses SASRec-style sequences over the retriever-training period (every position predicts the next item; see §7).
+- **Ranker training** uses instances whose target falls in the ranker-training period.
 - **Val / test** instances are all interactions in Val / Test with non-empty history.
 
-**Item statistics as features** (review count, mean rating, item age = time since the item's first interaction): for each instance, compute them from **all interactions strictly before the start of the instance's period** (A-start for A, B-start for B, T1 for Val, T2 for Test). Implement as precomputed per-period tables, not per-instance.
+**Item statistics as features** (review count, mean rating, item age = time since the item's first interaction): for each instance, compute them from **all interactions strictly before the start of the instance's period** (the start of the timeline for retriever-training, `t_ranker_train` for ranker-training, T1 for Val, T2 for Test). Implement as precomputed per-period tables, not per-instance.
 
 ### 4.6 Item pool and candidate filtering
 
@@ -262,7 +272,7 @@ All baselines are evaluated through **our harness** on **our split** (full ranki
 3. **Projection:** MLP 384 → 256 → 64 (GELU, dropout 0.1). Output `e_i` (64-d, unnormalised; used as input tokens to the user tower).
 4. **Variants:**
    - `text` (default): as above.
-   - `id_text`: add a learned 64-d ID embedding to `e_i` for items with ≥1 interaction in period A; zeros otherwise (so cold items fall back to text).
+   - `id_text`: add a learned 64-d ID embedding to `e_i` for items with ≥1 interaction in the retriever-training period; zeros otherwise (so cold items fall back to text).
    - `id_only`: learned 64-d ID embedding only (no text).
 5. **Scoring vector:** `v_i = normalize(e_i)`.
 
@@ -276,9 +286,9 @@ All baselines are evaluated through **our harness** on **our split** (full ranki
 ### 7.3 Score and loss (Yi et al., 2019)
 
 - Score: `s(u, i) = (u · v_i) / τ`, τ = 0.05.
-- **Training targets:** SASRec-style — for each sequence in period A, every position `p` predicts item `p+1`; all positions computed in one forward pass via the causal mask.
+- **Training targets:** SASRec-style — for each sequence in the retriever-training period, every position `p` predicts item `p+1`; all positions computed in one forward pass via the causal mask.
 - **In-batch softmax:** flatten all valid (position, target) pairs in the batch; if more than `max_inbatch = 4096`, subsample 4096. For each pair, the negatives are the other targets in that set.
-- **logQ correction:** subtract `log(q_j)` from every logit, where `q_j` = item j's frequency among period-A interactions (count / total). Applied to all logits including the positive (standard formulation). Yi et al. estimate `q_j` from streaming data; we use static counts — document this simplification.
+- **logQ correction:** subtract `log(q_j)` from every logit, where `q_j` = item j's frequency among retriever-training interactions (count / total). Applied to all logits including the positive (standard formulation). Yi et al. estimate `q_j` from streaming data; we use static counts — document this simplification.
 - **Duplicate masking:** if item j equals the target of pair i but j is a different pair, set that logit to `-inf`.
 - Optimiser Adam, lr 1e-3, batch 256 sequences, up to 50 epochs, early stopping (patience 5) on **Val Recall@100 with exact search** computed on a fixed random subset of 20K val instances.
 
@@ -286,13 +296,13 @@ All baselines are evaluated through **our harness** on **our split** (full ranki
 
 | Config | User tower | Item tower | Loss | Role |
 |---|---|---|---|---|
-| `v2_transformer` | transformer | text | in-batch softmax + logQ | **main retriever** |
-| `v4_id_text` | transformer | id_text | in-batch softmax + logQ | the single ablation (does ID memorisation help head items without hurting new ones?) |
-| `v1_meanpool`, `v3_no_logq`, `v5_id_only` | — | — | — | configs kept; **not run** unless time permits |
+| `two_tower_text` — **Two-tower (text)** | transformer | text | in-batch softmax + logQ | **main retriever** |
+| `two_tower_text_id` — **Two-tower (text + ID)** | transformer | id_text | in-batch softmax + logQ | the single ablation (does ID memorisation help head items without hurting new ones?) |
+| `two_tower_text_meanpool`, `two_tower_text_no_logq`, `two_tower_id_only` | meanpool / transformer | text / text / id_only | — / no logQ / — | configs kept; **not run** unless time permits |
 
-**RQ1 table:** v2 and v4 against the four baselines used as retrievers (Popularity, ItemKNN, BPR-MF, SASRec), all **trained on period A only** so every row sees the same training data (the A∪B baseline numbers are for the critique table only). Exact search; Recall@{10, 50, 100, 200, 500} on Val and Test, mean ± std over seeds 0–2; per segment, especially **new-in-period / cold** items and history-length buckets. The point to explain is *why* the ranking of methods differs by segment (text vs ID signal, popularity bias).
+**RQ1 table:** both two-tower variants against the four baselines used as retrievers (Popularity, ItemKNN, BPR-MF, SASRec), all **trained on the retriever-training period only** so every row sees the same training data (the all-training-data baseline numbers are for the critique table only). Exact search; Recall@{10, 50, 100, 200, 500} on Val and Test, mean ± std over seeds 0–2; per segment, especially **new-in-period / cold** items and history-length buckets. The point to explain is *why* the ranking of methods differs by segment (text vs ID signal, popularity bias).
 
-**Frozen retriever:** the better of v2 / v4 on **Val Recall@200**; also check Val Recall@200 on the **new-in-period** segment, and if the two disagree, discuss with the team before freezing. Record the choice in `docs/decisions.md`.
+**Frozen retriever:** the better of the two variants on **Val Recall@200**; also check Val Recall@200 on the **new-in-period** segment, and if the two disagree, discuss with the team before freezing. Record the choice in `docs/decisions.md`.
 
 ---
 
@@ -322,7 +332,7 @@ Sanity test: IVF with `nprobe = nlist` must return exactly the exact-search resu
 
 | Split | Instances | List size | Force-insert positive? |
 |---|---|---|---|
-| Ranker train | Period B | 200 | **Yes** — if the target is missing, append it (label 1) |
+| Ranker train | Ranker-training period | 200 | **Yes** — if the target is missing, append it (label 1) |
 | Ranker val (loss / GAUC / early stopping) | Val | 200 | Yes |
 | Val / Test end-to-end | Val / Test | K₁ (from the sweep) | **No** — misses are real misses |
 
@@ -419,7 +429,7 @@ After RQ1–RQ3, pick **one** pipeline: the frozen retriever + the better ranker
 
 | Row | Pipeline |
 |---|---|
-| F0 | Best single-stage baseline (SASRec, trained on A∪B; full-catalogue ranking) |
+| F0 | Best single-stage baseline (SASRec, trained on all training data; full-catalogue ranking) |
 | F1 | Popularity retrieval (top-K₁ products by review count as of the period start, after §4.6 filtering) + the same ranker |
 | F2 | **Selected pipeline:** frozen retriever + selected ranker |
 
@@ -429,7 +439,7 @@ Report Recall@10, nDCG@10, the failure breakdown and segments, plus the paired b
 
 ## 11. Stretch work (only if time permits, after §10.1)
 
-Do not start without the team's go-ahead. Candidates: extra retriever variants (`v1`, `v3`, `v5`), beyond-accuracy analysis (coverage, popularity concentration) beyond what the harness already logs.
+Do not start without the team's go-ahead. Candidates: the three extra retriever variants, beyond-accuracy analysis (coverage, popularity concentration) beyond what the harness already logs.
 
 ---
 
@@ -437,8 +447,8 @@ Do not start without the team's go-ahead. Candidates: extra retriever variants (
 
 Write these alongside the code they test:
 
-- `test_metrics.py` — Recall/nDCG/GAUC on hand-computed toy examples; nDCG = 1 when target ranked first.
-- `test_split.py` — no Val/Test timestamps in training data; period boundaries correct; T_AB between min and T1.
+- `test_metrics.py` — Recall/nDCG/GAUC on small hand-computed examples; nDCG = 1 when target ranked first.
+- `test_split.py` — no Val/Test timestamps in training data; period boundaries correct; `t_ranker_train` between min and T1.
 - `test_no_leakage.py` — item statistics for an instance never use interactions at or after its period start; histories never contain the target or later events.
 - `test_filtering.py` — candidates never include history items or not-yet-released items.
 - `test_logq.py` — logQ correction subtracts the right values; duplicate masking works.
@@ -455,15 +465,15 @@ Run tests before every experiment batch; do not proceed on a red test.
 | Phase | Dates (2026) | Work | Done when |
 |---|---|---|---|
 | 0 | → **29 Sep** (critique) ✅ | Download, preprocess, split, stats, harness, 4 baselines | `stats.json` + baseline table on Val/Test, tests green |
-| 1 | 30 Sep – 12 Oct | Text encoding ✅, retriever v2 ✅ (seed 0) + v4, A-only baselines, RQ1 table; MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
+| 1 | 30 Sep – 12 Oct | Text encoding ✅, both two-tower variants ✅ (3 seeds), retriever-training-period baselines ✅, RQ1 table ✅; MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
 | 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | R2 beats R1; sweep results + headline plot |
 | 3 | 27 Oct – 4 Nov | Final combination test (§10.1), significance tests, segment analysis, failure breakdown, report figures | Final tables and figures reproducible from configs |
 | 4 | 5 – 11 Nov | Report, STePS poster (11 Nov), README reproduction guide | Every poster number traceable to a `results/` run |
 
-Phase 1 slipped: as of 14 Oct, candidate lists are not built yet; finish v2 seeds 1–2, v4 and the A-only baselines first, since Stage 2 depends on the frozen retriever.
+Phase 1 slipped: as of 14 Oct, candidate lists are not built yet; the RQ1 runs finished on 15 Oct; freezing the retriever and building candidates come next, since Stage 2 depends on them.
 
 ### Team ownership (as on the critique slides; coordinate through the shared harness)
-- **Phua Qing Rong — data & evaluation:** §4 data, §5 harness, §6 baselines (incl. the A-only runs for RQ1), failure breakdown and segment analysis, significance tests.
+- **Phua Qing Rong — data & evaluation:** §4 data, §5 harness, §6 baselines (incl. the retriever-training-period runs for RQ1), failure breakdown and segment analysis, significance tests.
 - **Brandon Kang — retrieval & search:** §7 two-tower retriever (RQ1), §8 exact search and FAISS experiments, §10 K₁ and index sweeps (RQ2), candidate lists (§9.1).
 - **Tong Jing Yen — ranking:** §9.2 features, §9.3 MLP, §9.4 DIN, §9.5 ranker comparison on fixed candidate lists (RQ3).
 - **All:** §10.1 final combination test, interpretation, report and poster.
@@ -485,10 +495,10 @@ Phase 1 slipped: as of 14 Oct, candidate lists are not built yet; finish v2 seed
 2. **Never** use Test data for tuning, early stopping, feature statistics or model selection.
 3. **Never** use metadata `average_rating` or `rating_number`.
 4. Build and test the harness (§5) before any model; every model goes through it.
-5. Start every new pipeline in `--toy` mode; only scale up once it runs end to end.
+5. Start every new pipeline in `--sample` mode; only scale up once it runs end to end.
 6. Keep implementations simple and readable; follow the paper recipes cited here and note any deviation in `docs/decisions.md`.
 7. Every reported number must come from a saved run in `results/` with its config, seed and git hash.
-8. Don't start stretch work (§11) unless asked. Don't re-add dropped items (LightGBM, v1/v3/v5 sweeps, DCN-V2, MMR) without the team agreeing.
+8. Don't start stretch work (§11) unless asked. Don't re-add dropped items (LightGBM, sweeps over the extra retriever variants, DCN-V2, MMR) without the team agreeing.
 9. When results look surprising (e.g. a baseline beating the retriever, recall near 0 or 1), investigate for bugs and leakage before reporting.
 
 ---

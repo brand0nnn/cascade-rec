@@ -1,8 +1,8 @@
-"""Train a two-tower retriever variant on period A and evaluate it with the harness (CLAUDE.md §7).
+"""Train a two-tower retriever variant on the retriever-training period and evaluate it with the harness (CLAUDE.md §7).
 
-    python -m cascade.pipelines.train_retriever --config configs/retriever/v2_transformer.yaml --seed 0 [--toy] [--device mps]
+    python -m cascade.pipelines.train_retriever --config configs/retriever/two_tower_text.yaml --seed 0 [--sample] [--device mps]
 
-Writes results/retriever/<name>[_toy]/seed<k>/{metrics.json, config.yaml, git_hash.txt, model.pth, *_ranks.npz, train_log.json}.
+Writes results/retriever/<name>[_sample]/seed<k>/{metrics.json, config.yaml, git_hash.txt, model.pth, *_ranks.npz, train_log.json}.
 """
 from __future__ import annotations
 
@@ -29,11 +29,11 @@ EVAL_CUTOFFS = (10, 50, 100, 200, 500)
 def training_windows(data: ProcessedData, max_len: int) -> tuple[np.ndarray, np.ndarray]:
     """Period-A sequences as left-padded (input, target) windows [W, L].
 
-    Each user's A-sequence x_1..x_n gives targets x_2..x_n with input = the previous item. Sequences longer than
+    Each user's retriever-training sequence x_1..x_n gives targets x_2..x_n with input = the previous item. Sequences longer than
     L+1 are cut into consecutive windows from the end (stride L), so every target is predicted exactly once;
     a window's context does not reach back into the previous window.
     """
-    a = data.interactions(["A"])
+    a = data.interactions(["retriever_train"])
     users, items = a["user"].values, a["item"].values
     starts = np.flatnonzero(np.r_[True, users[1:] != users[:-1]])
     ends = np.r_[starts[1:], len(users)]
@@ -53,10 +53,11 @@ def training_windows(data: ProcessedData, max_len: int) -> tuple[np.ndarray, np.
     return np.stack(ins), np.stack(tgts)
 
 
-def period_a_log_q(data: ProcessedData) -> tuple[np.ndarray, np.ndarray]:
-    """log q_j = log(count_A(j) / total_A) (static counts, §7.3) and the 'seen in A' mask. Unseen items get log q = 0
-    (never used: training targets are always period-A items)."""
-    cnt = np.bincount(data.interactions(["A"])["item"].values, minlength=data.n_items + 1).astype(np.float64)
+def retriever_train_log_q(data: ProcessedData) -> tuple[np.ndarray, np.ndarray]:
+    """log q_j = log(count(j) / total) over the retriever-training period (static counts, §7.3) and the
+    'seen in retriever-training' mask. Unseen items get log q = 0
+    (never used: training targets are always retriever-training items)."""
+    cnt = np.bincount(data.interactions(["retriever_train"])["item"].values, minlength=data.n_items + 1).astype(np.float64)
     q = cnt / cnt.sum()
     log_q = np.where(cnt > 0, np.log(np.maximum(q, 1e-30)), 0.0)
     return log_q.astype(np.float32), cnt > 0
@@ -68,21 +69,21 @@ def pick_device(want: str) -> torch.device:
     return torch.device(want)
 
 
-def main(config_path: str, seed: int, toy: bool, device: str) -> dict:
+def main(config_path: str, seed: int, sample: bool, device: str) -> dict:
     cfg = load_config(config_path)
     set_seed(seed)
     dev = pick_device(device)
-    data = ProcessedData.load(cfg.get("data_config", "configs/data.yaml"), toy)
+    data = ProcessedData.load(cfg.get("data_config", "configs/data.yaml"), sample)
     L = data.max_hist_len
     text_emb = np.load(data.dir / "item_text_emb.npy") if cfg["item_tower"] != "id_only" else None
-    log_q_np, seen_in_a = period_a_log_q(data)
-    model = TwoTowerRetriever(cfg["item_tower"], cfg["user_tower"], text_emb, data.n_items, seen_in_a, max_len=L, temperature=cfg["temperature"]).to(dev)
+    log_q_np, seen_in_retriever_train = retriever_train_log_q(data)
+    model = TwoTowerRetriever(cfg["item_tower"], cfg["user_tower"], text_emb, data.n_items, seen_in_retriever_train, max_len=L, temperature=cfg["temperature"]).to(dev)
     log_q = torch.from_numpy(log_q_np).to(dev) if cfg["logq"] else None
     opt = torch.optim.Adam(model.parameters(), lr=cfg["lr"])
 
     seq_in, seq_tgt = training_windows(data, L)
     log.info("%s | device=%s | %d training windows, %d target positions", cfg["name"], dev, len(seq_in), int((seq_tgt > 0).sum()))
-    run_dir = make_run_dir("retriever", f"{cfg['name']}{'_toy' if toy else ''}/seed{seed}")
+    run_dir = make_run_dir("retriever", f"{cfg['name']}{'_sample' if sample else ''}/seed{seed}")
     g = torch.Generator().manual_seed(seed)
     rng = np.random.default_rng(seed)
 
@@ -117,13 +118,13 @@ def main(config_path: str, seed: int, toy: bool, device: str) -> dict:
 
     model.load_state_dict(torch.load(run_dir / "model.pth", map_location=dev))
     scorer = RetrieverScorer(model)
-    metrics = {"name": cfg["name"], "seed": seed, "toy": toy, "device": str(dev), "cpu": cpu_model(),
+    metrics = {"name": cfg["name"], "seed": seed, "sample": sample, "device": str(dev), "cpu": cpu_model(),
                "best_epoch": best_epoch, "best_val_subset_recall@100": best, "train_time_s": train_time}
     for split in ("val", "test"):
         metrics[split] = evaluate(scorer, data, split, cutoffs=EVAL_CUTOFFS, save_dir=run_dir, batch_size=cfg["eval_batch_size"])
         log.info("%s %s: R@50 %.4f R@100 %.4f R@200 %.4f R@500 %.4f nDCG@10 %.4f (macro)", cfg["name"], split,
                  *[metrics[split][f"recall@{c}"]["macro"] for c in (50, 100, 200, 500)], metrics[split]["ndcg@10"]["macro"])
-    save_run(run_dir, metrics, {**cfg, "seed": seed, "toy": toy})
+    save_run(run_dir, metrics, {**cfg, "seed": seed, "sample": sample})
     return metrics
 
 
@@ -131,10 +132,10 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--sample", action="store_true")
     ap.add_argument("--device", default="auto")
     a = ap.parse_args()
-    main(a.config, a.seed, a.toy, a.device)
+    main(a.config, a.seed, a.sample, a.device)
 
 
 def load_retriever(run_dir, data: ProcessedData, device: str = "cpu") -> tuple[TwoTowerRetriever, dict]:
@@ -145,7 +146,7 @@ def load_retriever(run_dir, data: ProcessedData, device: str = "cpu") -> tuple[T
     run_dir = Path(run_dir)
     cfg = yaml.safe_load((run_dir / "config.yaml").read_text())
     text_emb = np.load(data.dir / "item_text_emb.npy") if cfg["item_tower"] != "id_only" else None
-    _, seen_in_a = period_a_log_q(data)
-    model = TwoTowerRetriever(cfg["item_tower"], cfg["user_tower"], text_emb, data.n_items, seen_in_a, max_len=data.max_hist_len, temperature=cfg["temperature"])
+    _, seen_in_retriever_train = retriever_train_log_q(data)
+    model = TwoTowerRetriever(cfg["item_tower"], cfg["user_tower"], text_emb, data.n_items, seen_in_retriever_train, max_len=data.max_hist_len, temperature=cfg["temperature"])
     model.load_state_dict(torch.load(run_dir / "model.pth", map_location="cpu"))
     return model.to(pick_device(device)).eval(), cfg

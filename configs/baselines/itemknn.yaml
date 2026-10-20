@@ -1,5 +1,5 @@
 model: ItemKNN          # Sarwar et al. (2001); cosine on the binary user-item matrix
-train_on: AB
+train_on: all_train      # main setting; also run with --train-on retriever_train (RQ1)
 deterministic: true
 recbole:
   k: 100                # neighbours kept per item

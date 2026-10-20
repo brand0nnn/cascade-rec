@@ -2,6 +2,24 @@
 
 See `CLAUDE.md` for the full plan and `docs/decisions.md` for every design decision / deviation.
 
+## Names used everywhere
+
+Data: Amazon Reviews 2023, Cell Phones & Accessories (5-core), split by time:
+
+| Name (in code) | Time range | Used for |
+|---|---|---|
+| retriever-training period (`retriever_train`) | before 26 Jul 2020 | training the retriever and the baselines |
+| ranker-training period (`ranker_train`) | 26 Jul 2020 – 11 Aug 2021 | training the rankers (on the retriever's candidate lists) |
+| all training data (`all_train`) | both of the above | the baselines' main setting |
+| validation (`val`) | 11 Aug 2021 – 16 Jul 2022 | early stopping and every choice we make |
+| test (`test`) | from 16 Jul 2022 | final numbers only |
+
+| Name | Meaning |
+|---|---|
+| Two-tower (text) (`two_tower_text`) | Main retriever: each product is described by its text (title, categories, store) |
+| Two-tower (text + ID) (`two_tower_text_id`) | Same, plus a learned vector per product seen in the retriever-training period |
+| sample (`--sample`) | A fixed ~2% of users from the same data, for quick debugging; never reported |
+
 ## Setup
 
 ```bash
@@ -13,10 +31,10 @@ uv pip install --python .venv/bin/python -r requirements.txt -e .
 ## Phase 0 — data + baselines
 
 ```bash
-scripts/prepare_data.sh --toy       # ~2% of users, for debugging (outputs in data/processed/toy)
+scripts/prepare_data.sh --sample    # ~2% of users of the same data, for debugging (outputs in data/processed/sample)
 scripts/prepare_data.sh             # download (+MANIFEST with SHA-256), preprocess, split, instances, stats
 .venv/bin/python -m pytest -q       # must be green before any experiment
-scripts/run_baselines.sh --toy      # Pop, ItemKNN, BPR, SASRec (RecBole) evaluated by our harness
+scripts/run_baselines.sh --sample   # Pop, ItemKNN, BPR, SASRec (RecBole) evaluated by our harness
 scripts/run_baselines.sh            # full data, sequential   (add --device cuda on a GPU machine)
 scripts/launch_full_baselines.sh    # full data, 4 parallel CPU queues (what was used locally)
 .venv/bin/python -m cascade.eval.report   # -> results/baselines/summary.{md,json}
@@ -26,26 +44,26 @@ Outputs:
 - `data/processed/`: `interactions.parquet`, `items.parquet`, `item_segments.parquet`, `instances.parquet`,
   `sequences.npz`, `split.json`, logs; `recbole/` holds the RecBole atomic-file export of our split.
 - `results/stats/stats.json` + figures (dataset statistics, §4.8).
-- `results/baselines/<Model>_<AB|A>/seed<k>/`: `metrics.json`, `config.yaml`, `git_hash.txt`, `recbole.log`,
+- `results/baselines/<model>/<all_train|retriever_train>/seed<k>/`: `metrics.json`, `config.yaml`, `git_hash.txt`, `recbole.log`,
   per-instance ranks (`val_ranks.npz`, `test_ranks.npz`) for bootstrap tests.
 
 Single-run example:
 ```bash
-.venv/bin/python -m cascade.pipelines.train_baseline --config configs/baselines/sasrec.yaml --seed 0 --train-on AB [--toy] [--device cuda]
+.venv/bin/python -m cascade.pipelines.train_baseline --config configs/baselines/sasrec.yaml --seed 0 --train-on all_train [--sample] [--device cuda]
 ```
 
 ## RQ1 — retriever vs baseline retrieval
 
-After the retriever (v2, v4) and A-only baseline runs (seeds 0–2), with their `{val,test}_ranks.npz` in `results/`:
+After the two-tower runs (text, text + ID) and the baseline runs on the retriever-training period (seeds 0–2), with their `{val,test}_ranks.npz` in `results/`:
 ```bash
 .venv/bin/python -m cascade.eval.report_rq1   # -> results/rq1/summary.{md,json}
 ```
 Recall@{10, 50, 100, 200, 500} and nDCG@10 (mean ± std over seeds), Recall@10/@200 by segment, and the
-frozen-retriever check (v4 − v2 on Val Recall@200, overall and new-in-period, paired bootstrap CI).
+frozen-retriever check ((text + ID) − (text) on Val Recall@200, overall and new-in-period, paired bootstrap CI).
 
 ## Baseline results (Phase 0)
 
-Test set, trained on periods A+B, per-user macro average, mean ± std over seeds 0–2 (Pop / ItemKNN are deterministic).
+Test set, trained on all training data, per-user macro average, mean ± std over seeds 0–2 (Pop / ItemKNN are deterministic).
 Full table incl. Val and segments: `results/baselines/summary.md`.
 
 | Model | nDCG@10 | Recall@10 | Recall@100 |
@@ -74,13 +92,13 @@ srun -p gpu --gres=gpu:1 -c 2 --mem=8G -t 00:10:00 .venv/bin/python -c "import t
 # 1. data (download ~0.9 GB, preprocess, encode item texts, run tests)
 sbatch scripts/slurm/prepare_data.sbatch
 
-# 2. RQ1 runs (after job 1 finished): retriever v2/v4 x seeds 0-2, and A-only SASRec/BPR x seeds 0-2
+# 2. RQ1 runs (after job 1 finished): two-tower (text, text + ID) x seeds 0-2, and SASRec/BPR on the retriever-training period x seeds 0-2
 sbatch scripts/slurm/train_retriever.sbatch
-sbatch scripts/slurm/train_baselines_a.sbatch
+sbatch scripts/slurm/train_baselines_retriever_train.sbatch
 squeue -u $USER                                      # monitor; one array task per run
 
 # 3. after choosing the frozen retriever (record it in docs/decisions.md)
-sbatch --export=ALL,RUN_DIR=results/retriever/v2_transformer/seed0 scripts/slurm/build_candidates.sbatch
+sbatch --export=ALL,RUN_DIR=results/retriever/two_tower_text/seed0 scripts/slurm/build_candidates.sbatch
 ```
 
 Or chain them: `jid=$(sbatch --parsable scripts/slurm/prepare_data.sbatch); sbatch --dependency=afterok:$jid scripts/slurm/train_retriever.sbatch`.

@@ -24,7 +24,7 @@ from cascade.utils.logging import get_logger
 
 log = get_logger(__name__)
 
-SPLIT_PERIODS = {"A": 0, "B": 1, "val": 2, "test": 3}
+SPLIT_PERIODS = {"retriever_train": 0, "ranker_train": 1, "val": 2, "test": 3}
 
 
 def build_sequences(inter: pd.DataFrame, n_users: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -67,7 +67,7 @@ def build_instances(inter: pd.DataFrame, user_ptr: np.ndarray) -> tuple[pd.DataF
 
 @dataclass
 class ProcessedData:
-    """Everything the harness and models need, loaded from ``data/processed[/toy]``."""
+    """Everything the harness and models need, loaded from ``data/processed[/sample]``."""
 
     dir: Path
     n_users: int
@@ -81,9 +81,9 @@ class ProcessedData:
     max_hist_len: int
 
     @classmethod
-    def load(cls, config_path: str = "configs/data.yaml", toy: bool = False) -> "ProcessedData":
+    def load(cls, config_path: str = "configs/data.yaml", sample: bool = False) -> "ProcessedData":
         cfg = load_config(config_path)
-        d = output_dir(cfg, toy)
+        d = output_dir(cfg, sample)
         z = np.load(d / "sequences.npz")
         items = pd.read_parquet(d / "items.parquet").merge(pd.read_parquet(d / "item_segments.parquet"), on="item")
         items = items.sort_values("item").reset_index(drop=True)
@@ -108,7 +108,7 @@ class ProcessedData:
         users = np.repeat(np.arange(len(self.user_ptr) - 1), np.diff(self.user_ptr))
         df = pd.DataFrame({"user": users, "item": self.seq_item, "ts": self.seq_ts})
         s = self.split
-        bounds = {"A": (-np.inf, s["t_ab"]), "B": (s["t_ab"], s["t1"]), "val": (s["t1"], s["t2"]), "test": (s["t2"], np.inf)}
+        bounds = {"retriever_train": (-np.inf, s["t_ranker_train"]), "ranker_train": (s["t_ranker_train"], s["t1"]), "val": (s["t1"], s["t2"]), "test": (s["t2"], np.inf)}
         m = np.zeros(len(df), dtype=bool)
         for p in periods:
             lo, hi = bounds[p]
@@ -127,9 +127,9 @@ class ProcessedData:
         return out
 
 
-def main(config_path: str, toy: bool) -> None:
+def main(config_path: str, sample: bool) -> None:
     cfg = load_config(config_path)
-    d = output_dir(cfg, toy)
+    d = output_dir(cfg, sample)
     inter = pd.read_parquet(d / "interactions.parquet")
     n_users, n_items = int(inter["user"].max()), int(inter["item"].max())
     user_ptr, seq_item, seq_ts = build_sequences(inter, n_users)
@@ -143,6 +143,6 @@ def main(config_path: str, toy: bool) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/data.yaml")
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--sample", action="store_true")
     a = ap.parse_args()
-    main(a.config, a.toy)
+    main(a.config, a.sample)

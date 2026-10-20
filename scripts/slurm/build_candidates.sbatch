@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Candidate lists from the frozen retriever (run after it is chosen and recorded in docs/decisions.md):
-#   sbatch --export=ALL,RUN_DIR=results/retriever/v2_transformer/seed0 scripts/slurm/build_candidates.sbatch
+#   sbatch --export=ALL,RUN_DIR=results/retriever/two_tower_text/seed0 scripts/slurm/build_candidates.sbatch
 #SBATCH --job-name=cascade-candidates
 #SBATCH --output=results/logs/slurm-%x-%j.out
 #SBATCH --time=02:00:00

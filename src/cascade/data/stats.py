@@ -1,4 +1,4 @@
-"""Dataset statistics for the critique (CLAUDE.md §4.8). Writes results/stats[_toy]/stats.json + figures."""
+"""Dataset statistics for the critique (CLAUDE.md §4.8). Writes results/stats[_sample]/stats.json + figures."""
 from __future__ import annotations
 
 import argparse
@@ -20,15 +20,15 @@ def _desc(x: np.ndarray) -> dict:
     return {"mean": float(np.mean(x)), "median": float(np.median(x)), "p90": float(np.percentile(x, 90)), "max": int(np.max(x))}
 
 
-def main(config_path: str, toy: bool) -> None:
-    data = ProcessedData.load(config_path, toy)
-    out = REPO_ROOT / "results" / ("stats_toy" if toy else "stats")
+def main(config_path: str, sample: bool) -> None:
+    data = ProcessedData.load(config_path, sample)
+    out = REPO_ROOT / "results" / ("stats_sample" if sample else "stats")
     out.mkdir(parents=True, exist_ok=True)
     inst_log = json.loads((data.dir / "instances_log.json").read_text())
     pre_log = json.loads((data.dir / "preprocess_log.json").read_text())
-    s: dict = {"toy": toy, "split": data.split, "preprocess": pre_log}
+    s: dict = {"sample": sample, "split": data.split, "preprocess": pre_log}
 
-    all_inter = data.interactions(["A", "B", "val", "test"])
+    all_inter = data.interactions(["retriever_train", "ranker_train", "val", "test"])
     s["overall"] = {
         "n_users": data.n_users,
         "n_items": data.n_items,
@@ -36,7 +36,7 @@ def main(config_path: str, toy: bool) -> None:
         "density": len(all_inter) / (data.n_users * data.n_items),
     }
     s["per_period"] = {}
-    for p in ["A", "B", "val", "test"]:
+    for p in ["retriever_train", "ranker_train", "val", "test"]:
         df = data.interactions([p])
         nu, ni = df["user"].nunique(), df["item"].nunique()
         s["per_period"][p] = {
@@ -47,13 +47,13 @@ def main(config_path: str, toy: bool) -> None:
             **inst_log[p],
         }
     # items that first appear in each period (new releases)
-    first_period = pd.cut(data.items["first_ts"], [-np.inf, data.split["t_ab"], data.split["t1"], data.split["t2"], np.inf], right=False, labels=["A", "B", "val", "test"])
-    s["items_first_seen_in_period"] = first_period.value_counts().reindex(["A", "B", "val", "test"]).astype(int).to_dict()
+    first_period = pd.cut(data.items["first_ts"], [-np.inf, data.split["t_ranker_train"], data.split["t1"], data.split["t2"], np.inf], right=False, labels=["retriever_train", "ranker_train", "val", "test"])
+    s["items_first_seen_in_period"] = first_period.value_counts().reindex(["retriever_train", "ranker_train", "val", "test"]).astype(int).to_dict()
 
     seq_len = np.diff(data.user_ptr)[1:]
     s["user_sequence_length"] = _desc(seq_len)
     s["history_length_at_instance"] = {}
-    for p in ["B", "val", "test"]:
+    for p in ["ranker_train", "val", "test"]:
         hl = data.split_instances(p)["hist_len"].values
         s["history_length_at_instance"][p] = {**_desc(hl), "buckets": {
             "1-2": float(np.mean(hl <= 2)), "3-5": float(np.mean((hl >= 3) & (hl <= 5))),
@@ -105,6 +105,6 @@ def main(config_path: str, toy: bool) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/data.yaml")
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--sample", action="store_true")
     a = ap.parse_args()
-    main(a.config, a.toy)
+    main(a.config, a.sample)

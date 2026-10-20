@@ -1,6 +1,6 @@
 """Compute the new-in-period segment for runs saved before it existed, from their per-instance ranks.
 
-    python -m cascade.eval.resegment results/retriever/v2_transformer/seed0 [more run dirs...]
+    python -m cascade.eval.resegment results/retriever/two_tower_text/seed0 [more run dirs...]
 
 Writes ``extra_segments.json`` next to each run's metrics.json (metrics.json itself is left untouched).
 """

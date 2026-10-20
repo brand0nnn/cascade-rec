@@ -1,30 +1,30 @@
 {
-  "toy": true,
+  "sample": true,
   "split": {
-    "t_ab": 1596679591746,
+    "t_ranker_train": 1596679591746,
     "t1": 1628643414042,
     "t2": 1658002729837,
-    "period_b_fraction": 0.15,
+    "ranker_train_fraction": 0.15,
     "dates": {
-      "t_ab": "2020-08-06 02:06:31 UTC",
+      "t_ranker_train": "2020-08-06 02:06:31 UTC",
       "t1": "2021-08-11 00:56:54 UTC",
       "t2": "2022-07-16 20:18:49 UTC",
       "min_ts": "2004-07-11 11:09:50 UTC",
       "max_ts": "2023-09-01 19:18:42 UTC"
     },
     "interactions_per_period": {
-      "A": 37506,
-      "B": 6619,
+      "retriever_train": 37506,
+      "ranker_train": 6619,
       "val": 4949,
       "test": 5893
     }
   },
   "preprocess": {
-    "toy": true,
+    "sample": true,
     "raw_rows": 2752785,
     "after_exact_dedup": 2752785,
     "after_user_item_dedup": 2752785,
-    "toy_users": 7619,
+    "sample_users": 7619,
     "n_users": 7619,
     "n_items": 30389,
     "n_interactions": 54967,
@@ -37,7 +37,7 @@
     "density": 0.00023740379217476726
   },
   "per_period": {
-    "A": {
+    "retriever_train": {
       "active_users": 7036,
       "active_items": 20740,
       "interactions": 37506,
@@ -45,7 +45,7 @@
       "skipped_empty_history": 7037,
       "instances": 30469
     },
-    "B": {
+    "ranker_train": {
       "active_users": 3180,
       "active_items": 4755,
       "interactions": 6619,
@@ -71,8 +71,8 @@
     }
   },
   "items_first_seen_in_period": {
-    "A": 20740,
-    "B": 3456,
+    "retriever_train": 20740,
+    "ranker_train": 3456,
     "val": 2688,
     "test": 3505
   },
@@ -83,7 +83,7 @@
     "max": 140
   },
   "history_length_at_instance": {
-    "B": {
+    "ranker_train": {
       "mean": 5.549318109736759,
       "median": 4.0,
       "p90": 10.0,
@@ -153,5 +153,5 @@
     "n_distinct_top_cat": 1,
     "n_distinct_store": 7625
   },
-  "git_hash": "b2029e7a63ac90c11b471f73e5e8709586b551a6-dirty"
+  "git_hash": "91604b7c799f6dec5bd1fd4e0689671524202442-dirty"
 }

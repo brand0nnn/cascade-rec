@@ -28,11 +28,11 @@ class CheatModel:
         return s
 
 
-def test_candidates_exclude_history_and_unreleased(toy_data):
-    inst = toy_data.split_instances("test").head(300)
-    b = make_batch(toy_data, inst, 50)
-    first_ts = torch.from_numpy(np.concatenate([[np.iinfo(np.int64).max], toy_data.items["first_ts"].values]))
-    ranks, top = filtered_ranks(CheatModel(toy_data).score_all(b), b, first_ts)
+def test_candidates_exclude_history_and_unreleased(sample_data):
+    inst = sample_data.split_instances("test").head(300)
+    b = make_batch(sample_data, inst, 50)
+    first_ts = torch.from_numpy(np.concatenate([[np.iinfo(np.int64).max], sample_data.items["first_ts"].values]))
+    ranks, top = filtered_ranks(CheatModel(sample_data).score_all(b), b, first_ts)
     assert (ranks == 1).all(), "history / unreleased items were not filtered out"
     ft = first_ts.numpy()
     for r in range(len(inst)):
@@ -42,13 +42,13 @@ def test_candidates_exclude_history_and_unreleased(toy_data):
             assert ft[i] <= b.ts[r] or i == b.targets[r]
 
 
-def test_target_released_at_its_own_event(toy_data):
-    inst = toy_data.split_instances("test")
-    ft = toy_data.items.set_index("item")["first_ts"]
+def test_target_released_at_its_own_event(sample_data):
+    inst = sample_data.split_instances("test")
+    ft = sample_data.items.set_index("item")["first_ts"]
     assert (ft.loc[inst["item"]].values <= inst["ts"].values).all()
 
 
-def test_random_model_near_chance(toy_data):
-    r = evaluate(RandomModel(toy_data.n_items), toy_data, "val", show_progress=False)
-    n_avail = toy_data.n_items  # upper bound; filtered catalogue is smaller
+def test_random_model_near_chance(sample_data):
+    r = evaluate(RandomModel(sample_data.n_items), sample_data, "val", show_progress=False)
+    n_avail = sample_data.n_items  # upper bound; filtered catalogue is smaller
     assert r["recall@100"]["micro"] < 5 * 100 / (n_avail * 0.5)

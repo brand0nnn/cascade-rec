@@ -1,0 +1,6 @@
+# Two-tower (text, no logQ correction): as two_tower_text without the popularity correction. Not run.
+base: base.yaml
+name: two_tower_text_no_logq
+user_tower: transformer
+item_tower: text
+logq: false

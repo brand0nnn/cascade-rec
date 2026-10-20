@@ -1,14 +1,15 @@
-"""RQ1 table: the two-tower retrievers vs the four baselines used as retrievers, all trained on period A (CLAUDE.md §7.4).
+"""RQ1 table: the two-tower retrievers vs the four baselines used as retrievers, all trained on the retriever-training
+period (CLAUDE.md §7.4).
 
-    python -m cascade.eval.report_rq1 [--toy] [--n-resamples 1000]
+    python -m cascade.eval.report_rq1 [--sample] [--n-resamples 1000]
 
 Every number is recomputed from the runs' saved per-case ranks ({val,test}_ranks.npz), so all systems are scored the
-same way: over every Val/Test case, with cases a model cannot score (BPR users unseen in A) counted as misses, since a
+same way: over every Val/Test case, with cases a model cannot score (BPR users with no retriever-training interactions) counted as misses, since a
 retriever has to return candidates for every user. Also reports per-segment Recall (new-in-period, cold/tail/head,
-history length) and the frozen-retriever check: v2 vs v4 on Val Recall@200, overall and on new-in-period products,
+history length) and the frozen-retriever check: Two-tower (text) vs (text + ID) on Val Recall@200, overall and on new-in-period products,
 with a paired bootstrap CI over users (per-case recall averaged over seeds).
 
-Writes results/rq1/summary[_toy].{md,json}.
+Writes results/rq1/summary[_sample].{md,json}.
 """
 from __future__ import annotations
 
@@ -24,20 +25,20 @@ from cascade.eval.bootstrap import paired_bootstrap
 from cascade.eval.segments import HIST_BUCKETS, ITEM_SEGMENTS, hist_bucket, new_in_period
 from cascade.utils.config import REPO_ROOT
 
-# (label, run directory under results/); all trained on period A only
+# (label, run directory under results/); all trained on the retriever-training period only
 SYSTEMS = [
-    ("Popularity", "baselines/Pop_A"),
-    ("ItemKNN", "baselines/ItemKNN_A"),
-    ("BPR-MF", "baselines/BPR_A"),
-    ("SASRec", "baselines/SASRec_A"),
-    ("Two-tower v2 (text)", "retriever/v2_transformer"),
-    ("Two-tower v4 (ID + text)", "retriever/v4_id_text"),
+    ("Popularity", "baselines/popularity/retriever_train"),
+    ("ItemKNN", "baselines/itemknn/retriever_train"),
+    ("BPR-MF", "baselines/bpr/retriever_train"),
+    ("SASRec", "baselines/sasrec/retriever_train"),
+    ("Two-tower (text)", "retriever/two_tower_text"),
+    ("Two-tower (text + ID)", "retriever/two_tower_text_id"),
 ]
 CUTOFFS = (10, 50, 100, 200, 500)
 SEGMENT_CUTOFFS = (10, 200)
 FROZEN_CUTOFF = 200  # the frozen retriever is chosen on Val Recall@200 (§7.4)
-V2, V4 = "retriever/v2_transformer", "retriever/v4_id_text"
-DETERMINISTIC = {"baselines/Pop_A", "baselines/ItemKNN_A"}  # run for seed 0 only; std over seeds is 0 by construction
+TEXT, TEXT_ID = "retriever/two_tower_text", "retriever/two_tower_text_id"
+DETERMINISTIC = {"baselines/popularity/retriever_train", "baselines/itemknn/retriever_train"}  # run for seed 0 only; std over seeds is 0 by construction
 
 
 def segment_masks(data: ProcessedData, inst, split: str) -> dict[str, np.ndarray]:
@@ -78,30 +79,30 @@ def _fmt(vals: list[float]) -> str:
 
 
 def frozen_check(runs: dict[str, list[dict]], users: np.ndarray, masks: dict[str, np.ndarray], n_resamples: int) -> dict | None:
-    """v4 − v2 on Val Recall@200, overall and on new-in-period cases (per-case recall averaged over seeds)."""
-    if not runs.get(V2) or not runs.get(V4):
+    """(text + ID) − (text) on Val Recall@200, overall and on new-in-period cases (per-case recall averaged over seeds)."""
+    if not runs.get(TEXT) or not runs.get(TEXT_ID):
         return None
-    hit = {k: np.mean([M.recall_at(r["rank"], FROZEN_CUTOFF) for r in runs[k]], axis=0) for k in (V2, V4)}
+    hit = {k: np.mean([M.recall_at(r["rank"], FROZEN_CUTOFF) for r in runs[k]], axis=0) for k in (TEXT, TEXT_ID)}
     out = {}
     for name, m in (("all", np.ones(len(users), dtype=bool)), ("new-in-period", masks["new-in-period"])):
-        bs = paired_bootstrap(users[m], hit[V2][m], hit[V4][m], n_resamples=n_resamples)
-        better = "tie (CI includes 0)" if bs["ci_low"] <= 0 <= bs["ci_high"] else ("v4" if bs["diff"] > 0 else "v2")
+        bs = paired_bootstrap(users[m], hit[TEXT][m], hit[TEXT_ID][m], n_resamples=n_resamples)
+        better = "tie (CI includes 0)" if bs["ci_low"] <= 0 <= bs["ci_high"] else ("text + ID" if bs["diff"] > 0 else "text")
         out[name] = {**bs, "better": better}
     picks = {v["better"] for v in out.values()}
     if len(picks) == 1:
         rec = picks.pop()
-        out["recommendation"] = f"{rec} on both" if not rec.startswith("tie") else "no significant difference: keep v2 (simpler, main retriever)"
-    elif "v2" in picks and "v4" in picks:
-        out["recommendation"] = "v2 and v4 disagree (overall vs new-in-period): discuss with the team before freezing (§7.4)"
+        out["recommendation"] = f"Two-tower ({rec}) on both" if not rec.startswith("tie") else "no significant difference: keep Two-tower (text) (simpler, main retriever)"
+    elif "text" in picks and "text + ID" in picks:
+        out["recommendation"] = "text and text + ID disagree (overall vs new-in-period): discuss with the team before freezing (§7.4)"
     else:
         winner = (picks - {"tie (CI includes 0)"}).pop()
-        out["recommendation"] = f"{winner} (better on one, no significant difference on the other)"
+        out["recommendation"] = f"Two-tower ({winner}) (better on one, no significant difference on the other)"
     return out
 
 
-def main(toy: bool, n_resamples: int) -> None:
-    data = ProcessedData.load(toy=toy)
-    suffix = "_toy" if toy else ""
+def main(sample: bool, n_resamples: int) -> None:
+    data = ProcessedData.load(sample=sample)
+    suffix = "_sample" if sample else ""
     summary, lines = {}, []
     for split in ("val", "test"):
         inst = data.split_instances(split)
@@ -152,20 +153,20 @@ def main(toy: bool, n_resamples: int) -> None:
         if split == "val":
             fc = frozen_check(runs, users, masks, n_resamples)
             block["frozen_retriever_check"] = fc
-            lines.append(f"\n### Frozen retriever check (Val Recall@{FROZEN_CUTOFF}, v4 − v2, paired bootstrap over users, 95% CI)\n")
+            lines.append(f"\n### Frozen retriever check (Val Recall@{FROZEN_CUTOFF}, (text + ID) − (text), paired bootstrap over users, 95% CI)\n")
             if fc is None:
-                lines.append("Needs at least one seed of both v2 and v4.")
+                lines.append("Needs at least one seed of both two-tower variants.")
             else:
-                lines += ["| Cases | v4 − v2 | 95% CI | better |", "|---|---|---|---|"]
+                lines += ["| Cases | (text + ID) − (text) | 95% CI | better |", "|---|---|---|---|"]
                 lines += [f"| {k} | {fc[k]['diff']:+.4f} | [{fc[k]['ci_low']:+.4f}, {fc[k]['ci_high']:+.4f}] | {fc[k]['better']} |" for k in ("all", "new-in-period")]
                 lines.append(f"\n**Recommendation:** {fc['recommendation']}. Record the choice in `docs/decisions.md`.")
 
     out_dir = REPO_ROOT / "results" / "rq1"
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"summary{suffix}.json").write_text(json.dumps(summary, indent=2))
-    md = ("# RQ1: two-tower retriever vs baseline retrieval (all trained on period A, exact search)\n\n"
+    md = ("# RQ1: two-tower retriever vs baseline retrieval (all trained on the retriever-training period, exact search)\n\n"
           "Full ranking over the filtered catalogue; every Val/Test case counts, so cases a model cannot score "
-          "(BPR users with no period-A interactions) are misses. Recomputed from each run's saved ranks.\n"
+          "(BPR users with no retriever-training interactions) are misses. Recomputed from each run's saved ranks.\n"
           + "\n".join(lines) + "\n")
     (out_dir / f"summary{suffix}.md").write_text(md)
     print(md)
@@ -173,7 +174,7 @@ def main(toy: bool, n_resamples: int) -> None:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--sample", action="store_true")
     ap.add_argument("--n-resamples", type=int, default=1000)
     a = ap.parse_args()
-    main(a.toy, a.n_resamples)
+    main(a.sample, a.n_resamples)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: scripts/prepare_data.sh [--toy]
+# Usage: scripts/prepare_data.sh [--sample]
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=${PY:-.venv/bin/python}

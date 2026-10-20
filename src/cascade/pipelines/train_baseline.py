@@ -1,14 +1,15 @@
 """Train a RecBole baseline on our split and evaluate it with our harness (CLAUDE.md §6).
 
-    python -m cascade.pipelines.train_baseline --config configs/baselines/sasrec.yaml --seed 0 [--train-on A] [--toy]
+    python -m cascade.pipelines.train_baseline --config configs/baselines/sasrec.yaml --seed 0 [--train-on retriever_train] [--sample]
 
-Writes results/baselines/<model>_<train_on>[_toy]/seed<k>/{metrics.json, config.yaml, git_hash.txt, *_ranks.npz}.
+Writes results/baselines/<model>_<train_on>[_sample]/seed<k>/{metrics.json, config.yaml, git_hash.txt, *_ranks.npz}.
 """
 from __future__ import annotations
 
 import argparse
 import logging
 import time
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -40,16 +41,16 @@ def pick_device(want: str) -> torch.device:
     return torch.device(want)
 
 
-def main(config_path: str, seed: int, train_on: str | None, toy: bool, device: str) -> dict:
+def main(config_path: str, seed: int, train_on: str | None, sample: bool, device: str) -> dict:
     cfg = load_config(config_path)
-    train_on = train_on or cfg.get("train_on", "AB")
+    train_on = train_on or cfg.get("train_on", "all_train")
     model_cls, kind = MODELS[cfg["model"]]
     set_seed(seed)
-    data = ProcessedData.load(cfg.get("data_config", "configs/data.yaml"), toy)
+    data = ProcessedData.load(cfg.get("data_config", "configs/data.yaml"), sample)
     rb_root = data.dir / "recbole"
     ds_name = RB.export_atomic(data, rb_root, kind, train_on, cfg.get("early_stop_val_subset", 20000))
 
-    run_dir = make_run_dir("baselines", f"{cfg['model']}_{train_on}{'_toy' if toy else ''}/seed{seed}")
+    run_dir = make_run_dir("baselines", f"{Path(config_path).stem}/{train_on}{'_sample' if sample else ''}/seed{seed}")
     rb_cfg = RB.recbole_config_dict(kind, rb_root, ds_name)
     rb_cfg.update(cfg.get("recbole", {}))
     rb_cfg.update(seed=seed, checkpoint_dir=str(run_dir / "checkpoint"), use_gpu=False)
@@ -90,7 +91,7 @@ def main(config_path: str, seed: int, train_on: str | None, toy: bool, device: s
         scorer = RB.SASRecScorer(model, dataset, data.n_items)
 
     metrics = {
-        "model": cfg["model"], "train_on": train_on, "seed": seed, "toy": toy,
+        "model": cfg["model"], "train_on": train_on, "seed": seed, "sample": sample,
         "train_time_s": train_time, "device": str(config["device"]), "cpu": cpu_model(),
         "recbole_best_valid_subset": {k: float(v) for k, v in (best_valid or {}).items()},
     }
@@ -98,7 +99,7 @@ def main(config_path: str, seed: int, train_on: str | None, toy: bool, device: s
         metrics[split] = evaluate(scorer, data, split, batch_size=cfg.get("eval_batch_size", 512), save_dir=run_dir)
         log.info("%s %s: recall@10=%.4f ndcg@10=%.4f recall@100=%.4f (macro)", cfg["model"], split,
                  metrics[split]["recall@10"]["macro"], metrics[split]["ndcg@10"]["macro"], metrics[split]["recall@100"]["macro"])
-    save_run(run_dir, metrics, {**cfg, "train_on": train_on, "seed": seed, "toy": toy, "recbole": {k: v for k, v in rb_cfg.items()}})
+    save_run(run_dir, metrics, {**cfg, "train_on": train_on, "seed": seed, "sample": sample, "recbole": {k: v for k, v in rb_cfg.items()}})
     return metrics
 
 
@@ -106,8 +107,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--train-on", choices=["AB", "A"], default=None)
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--train-on", choices=list(RB.TRAIN_PERIODS), default=None)
+    ap.add_argument("--sample", action="store_true")
     ap.add_argument("--device", default="cpu")
     a = ap.parse_args()
-    main(a.config, a.seed, a.train_on, a.toy, a.device)
+    main(a.config, a.seed, a.train_on, a.sample, a.device)

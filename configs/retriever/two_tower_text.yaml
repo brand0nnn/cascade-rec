@@ -1,0 +1,6 @@
+# Two-tower (text): MAIN retriever. Products described only by their text (title | categories | store).
+base: base.yaml
+name: two_tower_text
+user_tower: transformer
+item_tower: text
+logq: true

@@ -1,5 +1,0 @@
-base: base.yaml
-name: v4_id_text
-user_tower: transformer
-item_tower: id_text
-logq: true

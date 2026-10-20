@@ -12,8 +12,8 @@ processed_dir: data/processed
 split:
   t1: 1628643414042          # start of validation (official benchmark cut-off)
   t2: 1658002729837          # start of test (official benchmark cut-off)
-  period_b_fraction: 0.15    # T_AB = (1 - fraction) quantile of train-period timestamps
+  ranker_train_fraction: 0.15    # t_ranker_train = (1 - fraction) quantile of train-period timestamps
 max_hist_len: 50
-toy:
+sample:
   user_fraction: 0.02
   seed: 12345

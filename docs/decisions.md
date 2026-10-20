@@ -2,6 +2,10 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+Names follow the 2026-10-20 renaming (see the last entry): **retriever-training period** (formerly period A),
+**ranker-training period** (period B), **all training data** (A ∪ B), **Two-tower (text)** (v2), **Two-tower (text + ID)**
+(v4), **sample** (toy). Commits and run files from before that date use the old names.
+
 ## 2026-09-28 — Data
 
 - **Sources.** Interactions: official 5-core rating-only file (URL in `configs/data.yaml`). Metadata:
@@ -11,7 +15,8 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
   5-core file). All 111,480 items have a metadata row.
 - **Split cross-check.** Our Val / Test periods contain exactly 239,437 / 304,468 interactions — identical to the
   official `timestamp_w_his` valid/test files, confirming the T1/T2 cut-offs are applied correctly.
-- **T_AB** = 1595800947930 (2020-07-26 22:02 UTC), the 85th percentile of pre-T1 timestamps.
+- **`t_ranker_train`** (start of the ranker-training period) = 1595800947930 (2020-07-26 22:02 UTC), the 85th
+  percentile of pre-T1 timestamps.
 - **Leaf category** = the full category path joined with `" > "` (139 distinct), so identical leaf names under
   different parents are not merged. **Top-level category is constant** ("Cell Phones & Accessories") for every item
   with categories → useless as a feature; keep it for completeness but expect zero signal.
@@ -45,7 +50,7 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
   never loaded by RecBole.
 - **Pop:** RecBole's `Pop` counts items inside `calculate_loss` with `item_cnt[item] += 1`, which (a) also counts
   sampled negatives (negative sampling is on by default) and (b) does not accumulate duplicate items in a batch.
-  Verified on toy data that this changes the results. We use `PopExact` (a RecBole `GeneralRecommender` subclass)
+  Verified on the sample data that this changes the results. We use `PopExact` (a RecBole `GeneralRecommender` subclass)
   that counts from RecBole's training interaction matrix; verified identical to an independent count.
 - **ItemKNN:** RecBole's `ComputeSimilarity` (cosine, top-100 neighbours per item, shrink 0) on the binary
   user–item matrix. RecBole's `ItemKNN` also precomputes `X·W` for all 381K users (~10⁸ non-zeros), so we use
@@ -58,7 +63,7 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
   dropout 0.2, L = 50. RecBole only offers CE and BPR losses; `SASRecBCE` overrides `calculate_loss` with the
   original **BCE with 1 random negative**. RecBole trains one target per row (not every position in one pass), so we
   export every training instance (prefix → next item) as a row: the same set of training pairs, less compute-efficient.
-- Training rows for SASRec use histories that may include events from earlier periods (A-only training: A instances).
+- Training rows for SASRec use histories that may include events from earlier periods (retriever-training-period-only training: retriever-training instances).
 - **Deterministic baselines** (Pop, ItemKNN) are run for seed 0 only; their std over seeds is 0 by construction.
 - **RecBole anomaly-mode bug:** `recbole/model/sequential_recommender/sine.py` calls
   `torch.autograd.set_detect_anomaly(True)` at import time, which silently enables autograd anomaly detection for
@@ -74,20 +79,20 @@ Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
 - **Text embeddings:** `sentence-transformers/all-MiniLM-L6-v2`, L2-normalised, cached as
   `data/processed/item_text_emb.npy` [N+1, 384] (row 0 = padding) with a text hash in `item_text_emb.json`.
-- **Training windows:** each user's period-A sequence; every position predicts the next item in one forward pass.
-  Sequences longer than L+1 are cut into consecutive windows (stride L) from the end, so every A target is predicted
+- **Training windows:** each user's retriever-training sequence; every position predicts the next item in one forward pass.
+  Sequences longer than L+1 are cut into consecutive windows (stride L) from the end, so every retriever-training target is predicted
   exactly once, but a window's context does not reach back into the previous window.
 - Same-timestamp events of one user are ordered by `parent_asin` in training sequences (only evaluation histories
   apply the strict "before t" rule).
 - **Attention mask:** causal + key padding; each position may always attend to itself so padded (left) positions do
   not become fully masked (NaN). Pre-LN blocks + final LayerNorm, ReLU FFN (as SASRec), embedding dropout 0.2.
-- **ID embeddings** (`id_text`, `id_only`) are multiplied by a "seen in period A" mask, so items without A interactions
+- **ID embeddings** (`id_text`, `id_only`) are multiplied by a "seen in the retriever-training period" mask, so items without such interactions
   get no ID signal (`id_only` gives them a zero vector → score 0).
-- **logQ:** `q_j` = static period-A frequency; items unseen in A get log q = 0 (never used, since training targets are
-  A items).
+- **logQ:** `q_j` = static retriever-training frequency; items unseen there get log q = 0 (never used, since training
+  targets are retriever-training items).
 - **Early stopping:** Val-subset Recall@100 (20K fixed instances, seed 0) through the harness, i.e. with §4.6 filtering.
-- **Comparison caveat:** the retriever trains on period A only; compare it with the A-only baselines
-  (e.g. SASRec-A), not the A∪B ones.
+- **Comparison caveat:** the retriever trains on the retriever-training period only; compare it with the baselines
+  trained on that period (e.g. `sasrec/retriever_train`), not the all-training-data ones.
 
 ## 2026-10-14 — Scope revision after the critique (slides + professor's consult)
 
@@ -96,17 +101,17 @@ variables, match metrics to what the user sees (@10), explain *why* results chan
 comparisons test one selected retriever–ranker combination (an underperforming one is fine if explained).
 
 Changes to CLAUDE.md:
-- **RQ1** is now "two-tower vs the four baselines as retrievers" (as on the slides), all trained on **period A** for a
-  fair comparison. Only one ablation is kept: `v4_id_text` (ID memorisation for head items vs text for new ones).
-  `v1`, `v3`, `v5` configs are kept but not run.
+- **RQ1** is now "two-tower vs the four baselines as retrievers" (as on the slides), all trained on the **retriever-training period**
+  for a fair comparison. Only one ablation is kept: Two-tower (text + ID) (ID memorisation for head items vs text
+  for new ones). The other three variant configs are kept but not run.
 - **Rankers:** LightGBM and the MLP-without-retrieval-score variant are **dropped**. The advanced ranker is **DIN**
   (chosen over DCN-V2: users are product sequences, and target attention models "which past products matter for this
   candidate", e.g. a case for the phone bought earlier). DIN is now core, not stretch.
 - **RQ3 rows** follow the slides: popularity order, retrieval-score order, MLP, DIN on identical candidate lists.
 - **RQ2:** MLP ranker only; K₁ ∈ {50, 100, 200, 500} (1000 dropped); HNSW efSearch ∈ {K₁, 4K₁}, IVF nprobe ∈ {4, 32}
-  (one fast and one accurate point each). The retriever sweep (v1–v5) is dropped.
+  (one fast and one accurate point each). The sweep over all five retriever variants is dropped.
 - **New §10.1 final combination test:** frozen retriever + better ranker at the recommended K₁, compared on Test with
-  the best single-stage baseline (SASRec A∪B) and popularity retrieval + the same ranker, with bootstrap CIs.
+  the best single-stage baseline (SASRec on all training data) and popularity retrieval + the same ranker, with bootstrap CIs.
 - **Metrics:** @10 is the headline; retrieval Recall@K adds @10 (slides) and larger K only shows the ceiling.
 - **New segment `new-in-period`** (target first reviewed at/after the split start). Reason: under the `cold`
   definition Val has 0% cold targets, but 44% of Test targets are new products, so selecting the frozen retriever on
@@ -117,26 +122,53 @@ Changes to CLAUDE.md:
 - Schedule kept as on the slides; Phase 1 has slipped (no candidate lists yet as of 14 Oct).
 
 Slide wording to correct in the report/poster: the Popularity baseline counts **all** reviews (not "positive"
-reviews); period B is 26 Jul 2020 – 11 Aug 2021 (not "2021"); the item text also includes the store name; the slide-6
+reviews); the ranker-training period is 26 Jul 2020 – 11 Aug 2021 (not "2021"); the item text also includes the store name; the slide-6
 BPR row skips 74,437 test cases — the comparable row is 0.0027 / 0.0013 / 0.0154.
 
 ## 2026-10-14 — Candidate lists, FAISS module, cluster scripts
 
 - **Candidate lists** (`build_candidates.py`): exact search = full scoring + the harness's own §4.6 filter
-  (`apply_filters`), then top-k. Built once per split: B with k = 200 (target force-appended as column 201 when
+  (`apply_filters`), then top-k. Built once per split: ranker-training with k = 200 (target force-appended as column 201 when
   missed), Val/Test with k = 500 (never forced). Any K₁ <= 500 is a prefix; ranker-val lists (Val, 200, forced) are
   derived at load time (`load_candidates(..., force=True)`). Verified: candidate Recall@200/500 equals the harness
   Recall for the same model exactly. Scores are stored as float16 to keep test lists small.
 - **FAISS on macOS:** torch and faiss bundle separate `libomp` copies; using both multi-threaded in one process
   segfaults (reproduced). On macOS faiss runs single-threaded (`faiss.omp_set_num_threads(1)`); this matches the §5
   single-thread latency protocol, and Linux is unaffected.
-- **SoC cluster:** Slurm array jobs in `scripts/slurm/`. v2 seed 0 and SASRec-A seed 0 are re-run there so all seeds of
+- **SoC cluster:** Slurm array jobs in `scripts/slurm/`. Two-tower (text) seed 0 and SASRec (retriever-training) seed 0 are re-run there so all seeds of
   a model come from the same device type; the earlier Mac (MPS) runs are kept as development runs only.
 - **RQ1 report (2026-10-15, `cascade.eval.report_rq1`):** recomputed from each run's saved ranks. All Val/Test cases
-  count; cases a model cannot score (BPR-A users with no period-A interactions) are misses, since a retriever must
+  count; cases a model cannot score (users with no retriever-training interactions, for BPR trained on that period) are misses, since a retriever must
   return candidates for every user (this is the "skipped = miss" row of the baseline table). The frozen-retriever check
-  averages each case's Recall@200 hit over seeds, then runs the paired bootstrap over users (v4 − v2), overall and on
-  new-in-period cases. A difference counts only if its 95% CI excludes 0; a tie keeps v2 (the main retriever).
+  averages each case's Recall@200 hit over seeds, then runs the paired bootstrap over users ((text + ID) − (text)), overall and on
+  new-in-period cases. A difference counts only if its 95% CI excludes 0; a tie keeps Two-tower (text) (the main retriever).
   Verified: on existing runs the recomputed numbers equal `metrics.json` / `extra_segments.json` exactly.
 - **Cluster partitions (2026-10-15):** training jobs run on `gpu-long` with `--gres=gpu:a100-40:1` (one fixed GPU type
   for every seed); data prep and candidate building use `gpu` (3 h limit, any GPU type).
+
+## 2026-10-20 — Readable names
+
+Teammates found "period A/B", "v2/v4" and "toy" hard to follow, so everything user-facing was renamed (code, configs,
+CLI flags, result folders, reports, docs). Definitions and numbers are unchanged: the regenerated RQ1 and baseline
+tables match the earlier ones value for value.
+
+| Old | New (code / display) |
+|---|---|
+| period A, `A` | `retriever_train`, "retriever-training period" |
+| period B, `B` | `ranker_train`, "ranker-training period" |
+| A ∪ B, `AB` | `all_train`, "all training data" |
+| `T_AB`, `period_b_fraction` | `t_ranker_train`, `ranker_train_fraction` |
+| `v2_transformer` (v2) | `two_tower_text`, "Two-tower (text)" |
+| `v4_id_text` (v4) | `two_tower_text_id`, "Two-tower (text + ID)" |
+| `v1_meanpool`, `v3_no_logq`, `v5_id_only` | `two_tower_text_meanpool`, `two_tower_text_no_logq`, `two_tower_id_only` |
+| `toy`, `--toy`, `data/processed/toy` | `sample`, `--sample`, `data/processed/sample` (~2% user sample of the same data) |
+| `results/baselines/SASRec_A/` | `results/baselines/sasrec/retriever_train/` (same pattern for every baseline) |
+| `configs/baselines/pop.yaml` | `configs/baselines/popularity.yaml` |
+| candidate file `B.npz` | `ranker_train.npz` |
+
+- Run files saved before the rename keep their old `name` inside `config.yaml` / `metrics.json` (they record what ran).
+  Candidate folders are now named after the run folder, not the stored config name.
+- `scripts/migrate_names.py` updates each machine's untracked files once: the data folder, keys inside the processed
+  data's JSON files, candidate lists, and model weights left in old result folders after `git pull`.
+- RecBole's cached exports in `data/processed/recbole/` keep old names; they are re-created under new names if a
+  baseline is retrained.

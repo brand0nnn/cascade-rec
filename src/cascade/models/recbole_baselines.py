@@ -28,13 +28,14 @@ from recbole.utils import InputType, ModelType
 # model in autograd anomaly mode (several times slower). Undo it after importing RecBole models.
 torch.autograd.set_detect_anomaly(False)
 
-from cascade.data.instances import ProcessedData
+from cascade.data.instances import SPLIT_PERIODS, ProcessedData
 from cascade.eval.harness import InstanceBatch
 from cascade.utils.logging import get_logger
 
 log = get_logger(__name__)
 
-TRAIN_PERIODS = {"AB": ["A", "B"], "A": ["A"]}
+# ``train_on`` values: all training data, or only the retriever-training period (same data as the retriever)
+TRAIN_PERIODS = {"all_train": ["retriever_train", "ranker_train"], "retriever_train": ["retriever_train"]}
 
 
 # --------------------------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ def export_atomic(data: ProcessedData, root: Path, kind: str, train_on: str, val
         train = pd.DataFrame({"user_id:token": tr["user"], "item_id:token": tr["item"], "timestamp:float": tr["ts"]})
         valid = pd.DataFrame({"user_id:token": val["user"], "item_id:token": val["item"], "timestamp:float": val["ts"]})
     elif kind == "sequential":
-        tr = data.instances[data.instances["period"].isin([{"A": 0, "B": 1}[p] for p in TRAIN_PERIODS[train_on]])]
+        tr = data.instances[data.instances["period"].isin([SPLIT_PERIODS[p] for p in TRAIN_PERIODS[train_on]])]
         train = pd.DataFrame({"user_id:token": tr["user"], "item_id_list:token_seq": _hist_str(data, tr), "item_id:token": tr["item"], "timestamp:float": tr["ts"]})
         valid = pd.DataFrame({"user_id:token": val["user"], "item_id_list:token_seq": _hist_str(data, val), "item_id:token": val["item"], "timestamp:float": val["ts"]})
     else:

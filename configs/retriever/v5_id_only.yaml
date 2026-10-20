@@ -1,5 +1,0 @@
-base: base.yaml
-name: v5_id_only
-user_tower: transformer
-item_tower: id_only
-logq: true

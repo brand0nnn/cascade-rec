@@ -1,7 +1,7 @@
 """Aggregate baseline runs into a table: mean ± std over seeds, per-user macro (CLAUDE.md §6 acceptance).
 
-    python -m cascade.eval.report [--toy]
-Writes results/baselines/summary[_toy].{json,md}.
+    python -m cascade.eval.report [--sample]
+Reads results/baselines/<model>/<train_on>[_sample]/seed<k>/ and writes results/baselines/summary[_sample].{json,md}.
 """
 from __future__ import annotations
 
@@ -15,6 +15,8 @@ from cascade.utils.config import REPO_ROOT
 
 METRICS = ["recall@10", "ndcg@10", "recall@100"]
 SEGMENT_METRIC = "recall@100"
+MODEL_LABELS = {"popularity": "Popularity", "itemknn": "ItemKNN", "bpr": "BPR-MF", "sasrec": "SASRec"}
+TRAIN_LABELS = {"all_train": "all training data", "retriever_train": "retriever-training period"}
 
 
 def _fmt(vals: list[float]) -> str:
@@ -32,26 +34,28 @@ def _new_in_period(run_dir, block: dict, split: str) -> float | None:
     return None if seg is None else seg[SEGMENT_METRIC]["macro"]
 
 
-def main(toy: bool) -> None:
+def main(sample: bool) -> None:
     root = REPO_ROOT / "results" / "baselines"
     runs, run_dirs = defaultdict(list), defaultdict(list)
-    for f in sorted(root.glob("*/seed*/metrics.json")):
-        name = f.parent.parent.name
-        if name.endswith("_toy") != toy:
+    for f in sorted(root.glob("*/*/seed*/metrics.json")):
+        model, train_on = f.parent.parent.parent.name, f.parent.parent.name
+        if train_on.endswith("_sample") != sample:
             continue
-        runs[name.removesuffix("_toy")].append(json.loads(f.read_text()))
-        run_dirs[name.removesuffix("_toy")].append(f.parent)
+        name = (model, train_on.removesuffix("_sample"))
+        runs[name].append(json.loads(f.read_text()))
+        run_dirs[name].append(f.parent)
     summary, lines = {}, []
     for split in ("val", "test"):
         lines += [f"\n### {split.capitalize()} (per-user macro; mean ± std over seeds)\n",
-                  "| Model | train | seeds | cases | " + " | ".join(METRICS) + f" | {SEGMENT_METRIC} new-in-period | cold | tail | head | coverage@10 | top-1% share |",
+                  "| Model | trained on | seeds | cases | " + " | ".join(METRICS) + f" | {SEGMENT_METRIC} new-in-period | cold | tail | head | coverage@10 | top-1% share |",
                   "|---|---|---|---|" + "---|" * (len(METRICS) + 6)]
-        for name, rs in sorted(runs.items(), key=lambda kv: (kv[0].split("_")[-1] != "AB", kv[0])):
-            model, train_on = name.rsplit("_", 1)
-            variants = [(model, name, [r[split] for r in rs])]
+        for name, rs in sorted(runs.items(), key=lambda kv: (kv[0][1] != "all_train", list(MODEL_LABELS).index(kv[0][0]))):
+            model, train_on = MODEL_LABELS[name[0]], TRAIN_LABELS[name[1]]
+            key = "/".join(name)
+            variants = [(model, key, [r[split] for r in rs])]
             # models that skip some cases (BPR: users unseen in training) also get a row on the full case set
             if rs[0][split]["n_unscorable"] > 0:
-                variants.append((f"{model} (skipped = miss)", f"{name}_skipped_as_miss", [r[split]["with_unscorable_as_miss"] for r in rs]))
+                variants.append((f"{model} (skipped = miss)", f"{key}/skipped_as_miss", [r[split]["with_unscorable_as_miss"] for r in rs]))
             for label, key, blocks in variants:
                 row = {m: [b[m]["macro"] for b in blocks] for m in METRICS}
                 has_extra = "segments" in blocks[0]
@@ -70,7 +74,7 @@ def main(toy: bool) -> None:
                 summary.setdefault(split, {})[key] = entry
                 lines.append(f"| {label} | {train_on} | {len(rs)} | {blocks[0]['n_instances']:,} | " + " | ".join(_fmt(row[m]) for m in METRICS)
                              + " | " + " | ".join(cells) + " |")
-    suffix = "_toy" if toy else ""
+    suffix = "_sample" if sample else ""
     (root / f"summary{suffix}.json").write_text(json.dumps(summary, indent=2))
     md = ("## Baselines (full ranking, filtered catalogue, our harness)\n\n"
           "`cases` = number of evaluated instances. BPR cannot score users with no training interactions; its first row "
@@ -82,5 +86,5 @@ def main(toy: bool) -> None:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--toy", action="store_true")
-    main(ap.parse_args().toy)
+    ap.add_argument("--sample", action="store_true")
+    main(ap.parse_args().sample)

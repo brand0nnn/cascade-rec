@@ -1,5 +1,5 @@
 model: BPR              # Rendle et al. (2009)
-train_on: AB
+train_on: all_train      # main setting; also run with --train-on retriever_train (RQ1)
 early_stop_val_subset: 20000   # fixed random Val subset for RecBole early stopping
 recbole:
   embedding_size: 64

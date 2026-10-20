@@ -1,0 +1,6 @@
+# Two-tower (ID only): learned product ID vectors, no text. Not run.
+base: base.yaml
+name: two_tower_id_only
+user_tower: transformer
+item_tower: id_only
+logq: true

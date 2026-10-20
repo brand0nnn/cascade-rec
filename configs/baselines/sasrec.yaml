@@ -1,5 +1,5 @@
 model: SASRec           # Kang & McAuley (2018): original recipe, BCE with 1 random negative per position
-train_on: AB
+train_on: all_train      # main setting; also run with --train-on retriever_train (RQ1)
 early_stop_val_subset: 20000
 recbole:
   n_layers: 2

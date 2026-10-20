@@ -1,15 +1,15 @@
 """Candidate lists from the frozen retriever with exact search (CLAUDE.md §9.1).
 
-    python -m cascade.pipelines.build_candidates --run-dir results/retriever/v2_transformer/seed0 [--toy] [--device cuda]
+    python -m cascade.pipelines.build_candidates --run-dir results/retriever/two_tower_text/seed0 [--sample] [--device cuda]
 
-Writes ``data/processed[/toy]/candidates/<name>_seed<k>/``:
-  B.npz     ranker-train lists (period B): top-``k_train`` candidates, target force-inserted if missing (label 1)
+Writes ``data/processed[/sample]/candidates/<name>_seed<k>/``:
+  ranker_train.npz  ranker-training lists: top-``k_train`` candidates, target force-inserted if missing (label 1)
   val.npz   top-``k_eval`` candidates, never forced (ranker-val lists are derived from it by ``load_candidates``)
   test.npz  top-``k_eval`` candidates, never forced
   meta.json source run, git hash, list sizes, retrieval Recall@K per split
 Each npz: inst, cand [n, k] int32 (sorted by retrieval score, 0 = padding), score [n, k] float16,
 target_pos [n] (column of the target in ``cand``, -1 if absent), target_rank [n] (target's rank in the full
-filtered catalogue). B lists have one extra column holding the forced-in target when it was missed (else 0).
+filtered catalogue). Ranker-training lists have one extra column holding the forced-in target when it was missed (else 0).
 Top-K₁ lists for any K₁ <= k_eval are prefixes of the stored lists.
 """
 from __future__ import annotations
@@ -82,16 +82,16 @@ def target_scores(scorer, data: ProcessedData, inst, batch_size: int = 512) -> n
 
 
 def load_candidates(cand_dir: str | Path, split: str, k1: int | None = None, force: bool = False) -> dict:
-    """Load lists for ``split`` in {B, val, test}, cut to the top ``k1``.
+    """Load lists for ``split`` in {ranker_train, val, test}, cut to the top ``k1``.
 
-    ``force=True`` (ranker-val) appends the target where it is not in the top ``k1``. B lists are already forced.
+    ``force=True`` (ranker-val) appends the target where it is not in the top ``k1``. Ranker-training lists are already forced.
     ``label`` [n, cols] is 1 at the target, 0 elsewhere (0s are unobserved, not confirmed dislikes).
     """
     z = dict(np.load(Path(cand_dir) / f"{split}.npz"))
-    if k1 is not None and split != "B":
+    if k1 is not None and split != "ranker_train":
         z["cand"], z["score"] = z["cand"][:, :k1], z["score"][:, :k1]
         z["target_pos"] = np.where(z["target_pos"] < k1, z["target_pos"], -1)
-    if force and split != "B":
+    if force and split != "ranker_train":
         meta = json.loads((Path(cand_dir) / "meta.json").read_text())
         tgt = np.load(Path(cand_dir) / f"{split}_target_score.npz")
         z = force_insert(z, tgt["item"], tgt["score"])
@@ -103,15 +103,16 @@ def load_candidates(cand_dir: str | Path, split: str, k1: int | None = None, for
     return z
 
 
-def main(run_dir: str, toy: bool, device: str, k_train: int, k_eval: int, batch_size: int) -> None:
-    data = ProcessedData.load(toy=toy)
+def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int) -> None:
+    data = ProcessedData.load(sample=sample)
     model, cfg = load_retriever(run_dir, data, device)
     scorer = RetrieverScorer(model)
-    out = data.dir / "candidates" / f"{cfg['name']}_seed{cfg['seed']}"
+    name = Path(run_dir).parent.name.removesuffix("_sample")  # e.g. two_tower_text (folder name, not the run's old config name)
+    out = data.dir / "candidates" / f"{name}_seed{cfg['seed']}"
     out.mkdir(parents=True, exist_ok=True)
-    meta = {"source_run": str(run_dir), "retriever": cfg["name"], "seed": cfg["seed"], "search": "exact",
+    meta = {"source_run": str(run_dir), "retriever": name, "seed": cfg["seed"], "search": "exact",
             "k_train": k_train, "k_eval": k_eval, "git_hash": git_hash(), "splits": {}}
-    for split, k, force in (("B", k_train, True), ("val", k_eval, False), ("test", k_eval, False)):
+    for split, k, force in (("ranker_train", k_train, True), ("val", k_eval, False), ("test", k_eval, False)):
         inst = data.split_instances(split)
         log.info("%s: %d instances, top-%d", split, len(inst), k)
         lists = retrieve(scorer, data, inst, k, batch_size)
@@ -136,11 +137,11 @@ def main(run_dir: str, toy: bool, device: str, k_train: int, k_eval: int, batch_
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run-dir", required=True, help="trained retriever run, e.g. results/retriever/v2_transformer/seed0")
-    ap.add_argument("--toy", action="store_true")
+    ap.add_argument("--run-dir", required=True, help="trained retriever run, e.g. results/retriever/two_tower_text/seed0")
+    ap.add_argument("--sample", action="store_true")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--k-train", type=int, default=200)
     ap.add_argument("--k-eval", type=int, default=500)
     ap.add_argument("--batch-size", type=int, default=512)
     a = ap.parse_args()
-    main(a.run_dir, a.toy, a.device, a.k_train, a.k_eval, a.batch_size)
+    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size)
