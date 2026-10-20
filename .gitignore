@@ -12,3 +12,7 @@ results/**/*.pth
 # trained retriever weights (full-data runs only) are small enough to share through git (2026-10-21)
 !results/retriever/*/seed*/model.pth
 results/retriever/*_sample/seed*/model.pth
+# logs stay local (the folder itself is kept: Slurm writes job output there and fails if it is missing)
+results/logs/*
+!results/logs/.gitkeep
+results/**/recbole.log

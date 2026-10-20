@@ -1,33 +1,0 @@
-job 946842 task 0 on xgpe1 at Thu Oct 15 01:36:05 AM +08 2026
-NVIDIA TITAN RTX, 24576 MiB
-01:36:06 INFO __main__: downloading https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/benchmark/5core/rating_only/Cell_Phones_and_Accessories.csv.gz
-Cell_Phones_and_Accessories.csv.gz:   0%|          | 0.00/48.4M [00:00<?, ?B/s]Cell_Phones_and_Accessories.csv.gz: 100%|██████████| 48.4M/48.4M [00:03<00:00, 13.1MB/s]
-01:36:12 INFO __main__: Cell_Phones_and_Accessories.csv.gz sha256=63cfedbddeed0bf2c37a619f6712c4e3a330801933868fdd23128aabca9f8ce0
-01:36:12 INFO __main__: downloading https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/raw/meta_categories/meta_Cell_Phones_and_Accessories.jsonl.gz
-meta_Cell_Phones_and_Accessories.jsonl.gz:   0%|          | 0.00/858M [00:00<?, ?B/s]meta_Cell_Phones_and_Accessories.jsonl.gz:   8%|▊         | 69.2M/858M [00:05<00:57, 13.7MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  19%|█▊        | 160M/858M [00:10<00:42, 16.3MB/s] meta_Cell_Phones_and_Accessories.jsonl.gz:  29%|██▉       | 247M/858M [00:15<00:36, 16.8MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  39%|███▉      | 339M/858M [00:20<00:29, 17.3MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  50%|█████     | 430M/858M [00:25<00:24, 17.6MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  61%|██████    | 520M/858M [00:30<00:19, 17.7MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  71%|███████   | 609M/858M [00:35<00:14, 17.7MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  82%|████████▏ | 700M/858M [00:40<00:08, 17.9MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz:  92%|█████████▏| 791M/858M [00:45<00:03, 17.6MB/s]meta_Cell_Phones_and_Accessories.jsonl.gz: 100%|██████████| 858M/858M [00:49<00:00, 17.4MB/s]
-01:37:06 INFO __main__: meta_Cell_Phones_and_Accessories.jsonl.gz sha256=bfc3e7b93298a6c5591c091d532704b6c5bf32e2c8d34bad94a3b0fe93173430
-metadata: 0it [00:00, ?it/s]metadata: 267834it [00:10, 26782.97it/s]metadata: 554465it [00:20, 27888.84it/s]metadata: 854064it [00:30, 28834.48it/s]metadata: 1178119it [00:40, 30244.26it/s]metadata: 1288490it [00:43, 29808.33it/s]
-01:38:08 INFO __main__: items without metadata: 0
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/b/brandonk/cascade-rec/src/cascade/data/preprocess.py", line 171, in <module>
-    main(a.config, a.toy)
-  File "/home/b/brandonk/cascade-rec/src/cascade/data/preprocess.py", line 159, in main
-    inter.to_parquet(out / "interactions.parquet", index=False)
-  File "/home/b/brandonk/cascade-rec/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py", line 333, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/b/brandonk/cascade-rec/.venv/lib/python3.11/site-packages/pandas/core/frame.py", line 3124, in to_parquet
-    return to_parquet(
-           ^^^^^^^^^^^
-  File "/home/b/brandonk/cascade-rec/.venv/lib/python3.11/site-packages/pandas/io/parquet.py", line 478, in to_parquet
-    impl = get_engine(engine)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/b/brandonk/cascade-rec/.venv/lib/python3.11/site-packages/pandas/io/parquet.py", line 68, in get_engine
-    raise ImportError(
-ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
-A suitable version of pyarrow or fastparquet is required for parquet support.
-Trying to import the above resulted in these errors:
- - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.
- - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.

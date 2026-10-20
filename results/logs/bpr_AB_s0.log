@@ -1,90 +1,0 @@
-command line args [--config configs/baselines/bpr.yaml --train-on AB --seed 0 --device cpu] will not be used in RecBole
-28 Sep 03:31    INFO  [Training]: train_batch_size = [4096] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
-28 Sep 03:31    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
-03:31:20 INFO __main__: BPR on AB | device=cpu | RecBole n_users=368659 n_items=111481
-28 Sep 03:33    INFO  epoch 0 training [time: 136.00s, train loss: 373.0378]
-28 Sep 03:35    INFO  epoch 1 training [time: 126.98s, train loss: 313.3940]
-28 Sep 03:38    INFO  epoch 1 evaluating [time: 181.77s, valid_score: 0.020200]
-28 Sep 03:38    INFO  valid result: 
-recall@10 : 0.0034    recall@100 : 0.0202    ndcg@10 : 0.0016    ndcg@100 : 0.0049
-28 Sep 03:38    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_03-31-20.pth
-28 Sep 03:42    INFO  epoch 2 training [time: 192.51s, train loss: 220.8938]
-28 Sep 03:44    INFO  epoch 3 training [time: 133.31s, train loss: 183.0461]
-28 Sep 03:47    INFO  epoch 3 evaluating [time: 177.88s, valid_score: 0.023700]
-28 Sep 03:47    INFO  valid result: 
-recall@10 : 0.0048    recall@100 : 0.0237    ndcg@10 : 0.0023    ndcg@100 : 0.0059
-28 Sep 03:47    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_03-31-20.pth
-28 Sep 03:49    INFO  epoch 4 training [time: 128.20s, train loss: 163.5408]
-28 Sep 03:51    INFO  epoch 5 training [time: 123.62s, train loss: 148.2669]
-28 Sep 03:54    INFO  epoch 5 evaluating [time: 176.19s, valid_score: 0.023600]
-28 Sep 03:54    INFO  valid result: 
-recall@10 : 0.0055    recall@100 : 0.0236    ndcg@10 : 0.0026    ndcg@100 : 0.0061
-28 Sep 03:56    INFO  epoch 6 training [time: 148.63s, train loss: 134.4019]
-28 Sep 03:58    INFO  epoch 7 training [time: 124.66s, train loss: 120.9609]
-28 Sep 04:02    INFO  epoch 7 evaluating [time: 227.35s, valid_score: 0.024200]
-28 Sep 04:02    INFO  valid result: 
-recall@10 : 0.0057    recall@100 : 0.0242    ndcg@10 : 0.0026    ndcg@100 : 0.0062
-28 Sep 04:02    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_03-31-20.pth
-28 Sep 04:04    INFO  epoch 8 training [time: 130.22s, train loss: 108.1676]
-28 Sep 04:07    INFO  epoch 9 training [time: 151.45s, train loss: 95.7507]
-28 Sep 04:10    INFO  epoch 9 evaluating [time: 177.38s, valid_score: 0.025100]
-28 Sep 04:10    INFO  valid result: 
-recall@10 : 0.0053    recall@100 : 0.0251    ndcg@10 : 0.0024    ndcg@100 : 0.0063
-28 Sep 04:10    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_03-31-20.pth
-28 Sep 04:12    INFO  epoch 10 training [time: 125.89s, train loss: 84.8213]
-28 Sep 04:14    INFO  epoch 11 training [time: 122.75s, train loss: 74.4952]
-28 Sep 04:17    INFO  epoch 11 evaluating [time: 175.21s, valid_score: 0.025400]
-28 Sep 04:17    INFO  valid result: 
-recall@10 : 0.0054    recall@100 : 0.0254    ndcg@10 : 0.0025    ndcg@100 : 0.0063
-28 Sep 04:17    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_03-31-20.pth
-28 Sep 04:19    INFO  epoch 12 training [time: 120.15s, train loss: 65.6381]
-28 Sep 04:21    INFO  epoch 13 training [time: 121.47s, train loss: 57.4908]
-28 Sep 04:24    INFO  epoch 13 evaluating [time: 188.60s, valid_score: 0.024900]
-28 Sep 04:24    INFO  valid result: 
-recall@10 : 0.0044    recall@100 : 0.0249    ndcg@10 : 0.0022    ndcg@100 : 0.0062
-28 Sep 04:26    INFO  epoch 14 training [time: 129.88s, train loss: 50.4493]
-28 Sep 04:28    INFO  epoch 15 training [time: 126.31s, train loss: 44.1254]
-28 Sep 04:32    INFO  epoch 15 evaluating [time: 186.53s, valid_score: 0.025100]
-28 Sep 04:32    INFO  valid result: 
-recall@10 : 0.0048    recall@100 : 0.0251    ndcg@10 : 0.0023    ndcg@100 : 0.0062
-28 Sep 04:34    INFO  epoch 16 training [time: 126.09s, train loss: 38.8824]
-28 Sep 04:36    INFO  epoch 17 training [time: 122.52s, train loss: 34.2435]
-28 Sep 04:39    INFO  epoch 17 evaluating [time: 180.34s, valid_score: 0.025600]
-28 Sep 04:39    INFO  valid result: 
-recall@10 : 0.0047    recall@100 : 0.0256    ndcg@10 : 0.0023    ndcg@100 : 0.0063
-28 Sep 04:39    INFO  Saving current: /Users/brandonkang/nus/cp4285/project/results/baselines/BPR_AB/seed0/checkpoint/BPR-Sep-28-2026_03-31-20.pth
-28 Sep 04:41    INFO  epoch 18 training [time: 118.13s, train loss: 30.3183]
-28 Sep 04:43    INFO  epoch 19 training [time: 124.60s, train loss: 26.8773]
-28 Sep 04:46    INFO  epoch 19 evaluating [time: 177.41s, valid_score: 0.025200]
-28 Sep 04:46    INFO  valid result: 
-recall@10 : 0.0048    recall@100 : 0.0252    ndcg@10 : 0.0024    ndcg@100 : 0.0063
-28 Sep 04:48    INFO  epoch 20 training [time: 120.43s, train loss: 23.8438]
-28 Sep 04:50    INFO  epoch 21 training [time: 121.33s, train loss: 21.2780]
-28 Sep 04:53    INFO  epoch 21 evaluating [time: 180.61s, valid_score: 0.024300]
-28 Sep 04:53    INFO  valid result: 
-recall@10 : 0.0042    recall@100 : 0.0243    ndcg@10 : 0.0022    ndcg@100 : 0.0061
-28 Sep 04:55    INFO  epoch 22 training [time: 161.68s, train loss: 19.1743]
-28 Sep 04:58    INFO  epoch 23 training [time: 122.92s, train loss: 17.2247]
-28 Sep 05:18    INFO  epoch 23 evaluating [time: 1217.12s, valid_score: 0.025100]
-28 Sep 05:18    INFO  valid result: 
-recall@10 : 0.0045    recall@100 : 0.0251    ndcg@10 : 0.0023    ndcg@100 : 0.0062
-28 Sep 05:18    INFO  epoch 24 training [time: 34.88s, train loss: 15.4891]
-28 Sep 05:19    INFO  epoch 25 training [time: 33.92s, train loss: 14.0410]
-28 Sep 05:20    INFO  epoch 25 evaluating [time: 49.87s, valid_score: 0.024600]
-28 Sep 05:20    INFO  valid result: 
-recall@10 : 0.0046    recall@100 : 0.0246    ndcg@10 : 0.0023    ndcg@100 : 0.0061
-28 Sep 05:20    INFO  epoch 26 training [time: 35.95s, train loss: 12.8077]
-28 Sep 05:37    INFO  epoch 27 training [time: 975.68s, train loss: 11.6940]
-28 Sep 05:37    INFO  epoch 27 evaluating [time: 51.00s, valid_score: 0.024300]
-28 Sep 05:37    INFO  valid result: 
-recall@10 : 0.0045    recall@100 : 0.0243    ndcg@10 : 0.0022    ndcg@100 : 0.0061
-28 Sep 05:38    INFO  epoch 28 training [time: 30.89s, train loss: 10.6544]
-28 Sep 05:38    INFO  epoch 29 training [time: 28.47s, train loss: 9.8694]
-28 Sep 05:39    INFO  epoch 29 evaluating [time: 51.36s, valid_score: 0.023200]
-28 Sep 05:39    INFO  valid result: 
-recall@10 : 0.0047    recall@100 : 0.0232    ndcg@10 : 0.0022    ndcg@100 : 0.0057
-28 Sep 05:39    INFO  Finished training, best eval result in epoch 17
-eval val:   0%|          | 0/455 [00:00<?, ?it/s]eval val:   2%|▏         | 11/455 [15:45<10:36:03, 85.95s/it]eval val:   9%|▊         | 39/455 [15:55<2:10:32, 18.83s/it] eval val:  16%|█▌        | 71/455 [16:05<53:58,  8.43s/it]  eval val:  24%|██▎       | 108/455 [16:16<26:03,  4.51s/it]eval val:  33%|███▎      | 148/455 [16:26<13:46,  2.69s/it]eval val:  42%|████▏     | 191/455 [16:36<07:34,  1.72s/it]eval val:  51%|█████▏    | 234/455 [16:46<04:22,  1.19s/it]eval val:  61%|██████    | 276/455 [16:56<02:35,  1.15it/s]eval val:  70%|██████▉   | 318/455 [17:08<01:32,  1.48it/s]eval val:  78%|███████▊  | 356/455 [17:18<00:55,  1.80it/s]eval val:  87%|████████▋ | 397/455 [17:28<00:26,  2.18it/s]eval val:  97%|█████████▋| 441/455 [17:39<00:05,  2.58it/s]eval val: 100%|██████████| 455/455 [17:42<00:00,  2.34s/it]
-05:57:37 INFO __main__: BPR val: recall@10=0.0053 ndcg@10=0.0026 recall@100=0.0284 (macro)
-eval test:   0%|          | 0/581 [00:00<?, ?it/s]eval test:   7%|▋         | 38/581 [00:10<02:24,  3.75it/s]eval test:  13%|█▎        | 76/581 [00:20<02:19,  3.61it/s]eval test:  20%|█▉        | 115/581 [00:31<02:05,  3.71it/s]eval test:  27%|██▋       | 157/581 [00:41<01:49,  3.88it/s]eval test:  34%|███▍      | 199/581 [00:51<01:35,  3.99it/s]eval test:  42%|████▏     | 243/581 [01:01<01:22,  4.10it/s]eval test:  49%|████▉     | 287/581 [01:11<01:11,  4.14it/s]eval test:  57%|█████▋    | 330/581 [01:23<01:02,  4.00it/s]eval test:  57%|█████▋    | 330/581 [01:35<01:02,  4.00it/s]eval test:  62%|██████▏   | 359/581 [01:35<01:04,  3.47it/s]eval test:  66%|██████▌   | 384/581 [01:45<01:02,  3.17it/s]eval test:  70%|███████   | 409/581 [01:56<00:58,  2.92it/s]eval test:  75%|███████▍  | 434/581 [02:06<00:52,  2.80it/s]eval test:  75%|███████▍  | 434/581 [17:58<00:52,  2.80it/s]eval test:  78%|███████▊  | 456/581 [17:59<22:40, 10.88s/it]eval test:  84%|████████▍ | 488/581 [18:09<11:20,  7.32s/it]eval test:  93%|█████████▎| 540/581 [18:19<02:51,  4.19s/it]eval test: 100%|██████████| 581/581 [18:27<00:00,  1.91s/it]
-06:16:06 INFO __main__: BPR test: recall@10=0.0028 ndcg@10=0.0014 recall@100=0.0167 (macro)

@@ -1,6 +1,0 @@
-command line args [--config configs/baselines/bpr.yaml --train-on A --seed 0 --device cpu] will not be used in RecBole
-28 Sep 11:49    INFO  [Training]: train_batch_size = [4096] train_neg_sample_args: [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}]
-28 Sep 11:49    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
-11:49:06 INFO __main__: BPR on A | device=cpu | RecBole n_users=354259 n_items=111481
-28 Sep 11:49    INFO  epoch 0 training [time: 36.82s, train loss: 317.5303]
-28 Sep 11:50    INFO  epoch 1 training [time: 35.59s, train loss: 276.0398]
