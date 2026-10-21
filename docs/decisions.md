@@ -172,3 +172,64 @@ tables match the earlier ones value for value.
   data's JSON files, candidate lists, and model weights left in old result folders after `git pull`.
 - RecBole's cached exports in `data/processed/recbole/` keep old names; they are re-created under new names if a
   baseline is retrained.
+
+## 2026-10-21 — Frozen retriever: Two-tower (text), seed 0
+
+Decided by Brandon on 21 Oct (to confirm with Tong and Phua). Run: `results/retriever/two_tower_text/seed0`
+(`config.yaml` + `model.pth`, both in git).
+
+RQ1 numbers behind the choice (`results/rq1/summary.md`; per-user macro, mean ± std over seeds 0–2):
+
+| | Two-tower (text) | Two-tower (text + ID) |
+|---|---|---|
+| Val Recall@200, all 232,904 cases | 0.0686 ± 0.0009 | 0.0724 ± 0.0008 |
+| Val Recall@200, 76,768 new-in-period cases | 0.0263 | 0.0190 |
+| Test Recall@200 | 0.0438 ± 0.0008 | 0.0438 ± 0.0007 |
+| Test Recall@200, new products (cold) | 0.0193 | 0.0119 |
+
+Frozen-retriever check (paired bootstrap over users, (text + ID) − (text), 95% CI): overall +0.0037 [+0.0027, +0.0048],
+new-in-period −0.0074 [−0.0086, −0.0061]. The two disagree, which §7.4 says the team must settle. Reasons for text:
+- It loses 5% overall but gains 38% on new products, and 44% of Test targets are new products. (Test was not used for
+  the choice; it only confirms that the overall gain does not carry over: both have Test Recall@200 0.0438.)
+- Text + ID overfits early (seed 0: Val peaks at epoch 10, then falls while training loss keeps dropping): the per-product
+  vectors memorise the retriever-training period.
+- The ranker has its own item-ID embedding, so ID memorisation still enters the pipeline at the ranking stage.
+- Simpler and smaller (0.8 MB vs 28 MB of weights).
+
+**Seed 0** by convention, not as the best seed (seeds 0 / 1 / 2: 0.0687 / 0.0697 / 0.0675 Val Recall@200; picking
+the best would select on noise). Two-tower (text + ID) stays an RQ1 ablation only.
+
+**No hyperparameter tuning.** The settings are paper recipes (SASRec: 2 blocks, 1 head, L = 50, Adam lr 1e-3,
+dropout 0.2; Yi et al.: in-batch softmax + logQ) and our own choices (τ = 0.05, d = 64, MLP 384 → 256 → 64,
+batch 256 sequences, 4,096 pairs per softmax); none was varied on our data. A one-night Val check (τ, batch size, lr)
+was considered and skipped: the margin over the baselines is large (Val Recall@200 0.069 vs SASRec 0.040), a new
+retriever would mean rebuilding every candidate list and retraining every ranker, and the baselines are untuned too.
+Limitation for the report: SASRec used dropout 0.5 on its sparse Amazon datasets; we (and our SASRec baseline) use 0.2.
+
+### Candidate lists for the rankers
+
+- Built **once, on the cluster**, from this run:
+  `sbatch --export=ALL,RUN_DIR=results/retriever/two_tower_text/seed0 scripts/slurm/build_candidates.sbatch`
+  → `data/processed/candidates/two_tower_text_seed0/`. Everyone uses that one copy. `meta.json` records `source_run`.
+- Not in git: about 2 GB (ranker_train ≈ 0.4 GB, val ≈ 0.7 GB, test ≈ 0.9 GB, scaled from the sample lists), and
+  GitHub rejects files over 100 MB. Ranker training needs only `ranker_train.npz`, `val.npz`, `val_target_score.npz`,
+  `meta.json` (≈ 1.1 GB). Share via the cluster (or a drive copy), not by rebuilding: each machine's `prepare_data`
+  re-encodes `item_text_emb.npy`, which can differ in the last decimals across GPUs and swap near-tied candidates.
+- **One ranker for all retrieval settings.** Rankers are trained once on these top-200 lists and frozen; RQ2 varies
+  only K₁ and the search index of this same retriever, so differences come from retrieval alone. Comparing retriever
+  *models* end to end would need one ranker per retriever (scores and ranks are retriever-specific features); not
+  planned (optional extra if the team wants it after the main ranker works).
+
+### Open, for the team to decide before ranker training (§15 rule 1: positive/negative definitions)
+
+1. **Forced targets give the answer away.** In the sample lists the target had to be appended in 94% of
+   ranker-training lists (`forced_fraction` 0.942), always as column 201 with the lowest retrieval score. With
+   retrieval score and rank as features the ranker can learn "column 201 = positive", which never occurs in unforced
+   Val/Test lists, and ranker-val GAUC (also on forced lists) would reward it. Options: give a forced target a
+   retrieval rank/score drawn from the natural candidates; zero or mask the retrieval features for forced rows; or
+   train retrieval features only on lists that contain the target naturally.
+2. **Later reviews are labelled 0.** Each case has one positive (the next review). The user's later reviews in the same
+   period can sit in the list as negatives. Sample lists: ranker-training 3.7% of lists contain one in the top 200
+   (vs 5.8% containing the target itself), Val 2.9% (vs 4.2%). Proposal: exclude the user's later same-period items
+   from negative sampling (load-time change, no rebuild). Evaluation stays next-item (benchmark protocol); an optional
+   secondary "any later review in the top 10" metric would show how much next-item scoring understates all models.

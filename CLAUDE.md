@@ -304,6 +304,10 @@ All baselines are evaluated through **our harness** on **our split** (full ranki
 
 **Frozen retriever:** the better of the two variants on **Val Recall@200**; also check Val Recall@200 on the **new-in-period** segment, and if the two disagree, discuss with the team before freezing. Record the choice in `docs/decisions.md`.
 
+**Frozen (2026-10-21): Two-tower (text), seed 0** (`results/retriever/two_tower_text/seed0`), as trained, no
+hyperparameter tuning. The two variants disagreed (text + ID +0.0037 overall, −0.0074 on new-in-period, both
+significant); text was kept for new products. Reasons in `docs/decisions.md`.
+
 ---
 
 ## 8. Nearest-neighbour index (FAISS)
@@ -339,6 +343,12 @@ Sanity test: IVF with `nprobe = nlist` must return exactly the exact-search resu
 Labels: target = 1, other candidates = 0. These zeros are *unobserved*, not confirmed dislikes; say so in the report.
 
 For MLP and DIN training, subsample **50 negatives per list** uniformly from the non-target candidates (configurable).
+
+**Open (decide as a team before training any ranker; see `docs/decisions.md` 2026-10-21):** (1) forced targets sit in
+column 201 with the lowest retrieval score in ~94% of ranker-training lists, so retrieval score/rank features would
+give the positive away; (2) the user's later reviews in the same period can appear as negatives.
+
+The lists are built once on the cluster from the frozen retriever and shared from there (≈ 2 GB, not in git).
 
 Save for every list: instance id, candidate ids, retrieval scores, retrieval ranks.
 
@@ -465,12 +475,17 @@ Run tests before every experiment batch; do not proceed on a red test.
 | Phase | Dates (2026) | Work | Done when |
 |---|---|---|---|
 | 0 | → **29 Sep** (critique) ✅ | Download, preprocess, split, stats, harness, 4 baselines | `stats.json` + baseline table on Val/Test, tests green |
-| 1 | 30 Sep – 12 Oct | Text encoding ✅, both two-tower variants ✅ (3 seeds), retriever-training-period baselines ✅, RQ1 table ✅; MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
+| 1 | 30 Sep – 12 Oct | Text encoding ✅, both two-tower variants ✅ (3 seeds), retriever-training-period baselines ✅, RQ1 table ✅, frozen retriever chosen ✅ (21 Oct); MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
 | 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | R2 beats R1; sweep results + headline plot |
 | 3 | 27 Oct – 4 Nov | Final combination test (§10.1), significance tests, segment analysis, failure breakdown, report figures | Final tables and figures reproducible from configs |
 | 4 | 5 – 11 Nov | Report, STePS poster (11 Nov), README reproduction guide | Every poster number traceable to a `results/` run |
 
 Phase 1 slipped: as of 14 Oct, candidate lists are not built yet; the RQ1 runs finished on 15 Oct; freezing the retriever and building candidates come next, since Stage 2 depends on them.
+
+Status 21 Oct: retriever frozen (Two-tower (text), seed 0). Next: build the full candidate lists on the cluster;
+settle the two open ranker-training questions (§9.1); features + MLP (Tong) can start now on the sample lists
+(`data/processed/sample/candidates/two_tower_text_seed0/`); FAISS index sweep, `latency.py` and the retrieval half of
+`run_cascade.py` (Brandon) do not depend on the rankers.
 
 ### Team ownership (as on the critique slides; coordinate through the shared harness)
 - **Phua Qing Rong — data & evaluation:** §4 data, §5 harness, §6 baselines (incl. the retriever-training-period runs for RQ1), failure breakdown and segment analysis, significance tests.

@@ -61,6 +61,43 @@ After the two-tower runs (text, text + ID) and the baseline runs on the retrieve
 Recall@{10, 50, 100, 200, 500} and nDCG@10 (mean ± std over seeds), Recall@10/@200 by segment, and the
 frozen-retriever check ((text + ID) − (text) on Val Recall@200, overall and new-in-period, paired bootstrap CI).
 
+Val, all trained on the retriever-training period, per-user macro, mean over seeds 0–2 (full table: `results/rq1/summary.md`):
+
+| Retriever | Recall@10 | Recall@200 | Recall@200, new-in-period products |
+|---|---|---|---|
+| Popularity | 0.0042 | 0.0270 | 0 |
+| ItemKNN | 0.0012 | 0.0083 | 0 |
+| BPR-MF | 0.0036 | 0.0273 | 0.0001 |
+| SASRec | 0.0062 | 0.0402 | 0 |
+| **Two-tower (text)** | 0.0105 | 0.0686 | **0.0263** |
+| Two-tower (text + ID) | 0.0121 | 0.0724 | 0.0190 |
+
+**Frozen retriever (21 Oct): Two-tower (text), seed 0**, `results/retriever/two_tower_text/seed0` (weights in git).
+Text + ID is 5% better overall but 28% worse on new products; reasons in `docs/decisions.md`.
+
+## Candidate lists for the rankers
+
+Built once on the cluster from the frozen retriever (step 3 below), then shared from there: about 2 GB, too big
+for git. Output: `data/processed/candidates/two_tower_text_seed0/`
+
+| File | Contents | Used for |
+|---|---|---|
+| `ranker_train.npz` | 315,114 ranker-training cases × top 200 (+ the target as column 201 when missed) | ranker training |
+| `val.npz`, `val_target_score.npz` | 232,904 Val cases × top 500, target never added | early stopping (target added back at load time) and Val results |
+| `test.npz`, `test_target_score.npz` | 297,390 Test cases × top 500 | final evaluation only |
+| `meta.json` | source run, git hash, recall per split, share of lists with an added target | checks |
+
+```python
+from cascade.pipelines.build_candidates import load_candidates
+train = load_candidates(cand_dir, "ranker_train")              # labels: 1 = target, 0 = other candidates
+val   = load_candidates(cand_dir, "val", k1=200, force=True)   # ranker-val lists (loss / GAUC / early stopping)
+```
+
+For debugging, the sample lists (~40 MB) are built with
+`.venv/bin/python -m cascade.pipelines.build_candidates --run-dir results/retriever/two_tower_text_sample/seed0 --sample`
+(needs the sample retriever, which is not in git). Two questions about the training labels are open; see
+`docs/decisions.md` (2026-10-21) before training a ranker.
+
 ## Baseline results (Phase 0)
 
 Test set, trained on all training data, per-user macro average, mean ± std over seeds 0–2 (Pop / ItemKNN are deterministic).
@@ -97,7 +134,7 @@ sbatch scripts/slurm/train_retriever.sbatch
 sbatch scripts/slurm/train_baselines_retriever_train.sbatch
 squeue -u $USER                                      # monitor; one array task per run
 
-# 3. after choosing the frozen retriever (record it in docs/decisions.md)
+# 3. candidate lists from the frozen retriever (Two-tower (text), seed 0)
 sbatch --export=ALL,RUN_DIR=results/retriever/two_tower_text/seed0 scripts/slurm/build_candidates.sbatch
 ```
 
@@ -108,6 +145,8 @@ one. Short jobs (data, candidates; < 3 h) use `gpu` with any GPU type. Training 
 pin `a100-40`, so all seeds of a model run on the same GPU type. The account (`allusers`) and QoS (`normal`) are
 defaults and need no flag.
 
-**Getting results back:** metrics, configs, git hashes and per-case ranks under `results/` are tracked by git, so
-commit and push them from the cluster. Model weights (`model.pth`) and `data/` are not in git; build the candidate
-lists on the cluster, where the weights are.
+**Getting results back:** metrics, configs, git hashes and per-case ranks under `results/` are tracked by git;
+copy them to your machine with `rsync -avz --exclude 'checkpoint/' '<user>@xlogin.comp.nus.edu.sg:~/cascade-rec/results/' results/` and
+commit them there. The trained two-tower weights (`results/retriever/*/seed*/model.pth`, ~87 MB) are in git; the
+RecBole baseline checkpoints (BPR is 352 MB), job logs (`results/logs/`) and `data/` are not. Candidate lists stay on
+the cluster.
