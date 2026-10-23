@@ -344,9 +344,11 @@ Labels: target = 1, other candidates = 0. These zeros are *unobserved*, not conf
 
 For MLP and DIN training, subsample **50 negatives per list** uniformly from the non-target candidates (configurable).
 
-**Open (decide as a team before training any ranker; see `docs/decisions.md` 2026-10-21):** (1) forced targets sit in
-column 201 with the lowest retrieval score in ~94% of ranker-training lists, so retrieval score/rank features would
-give the positive away; (2) the user's later reviews in the same period can appear as negatives.
+**Open (decide as a team before training any ranker):** (1) forced positives can be identified through retrieval
+score/rank or insertion markers; see `docs/decisions.md` 2026-10-24 for the mechanism, options and checks;
+(2) the user's later reviews in the same period can appear as negatives (2026-10-21 entry). **Status confirmed
+2026-10-24: retrieval is done; no ranker exists yet.** The leakage concern is preventive, not an observed ranker
+failure. No training-policy change has been adopted by this documentation update.
 
 The lists are built once on the cluster from the frozen retriever and shared from there (≈ 2 GB, not in git).
 
@@ -398,7 +400,7 @@ Replace the MLP's mean-pooled history with **target attention**: for each histor
 
 Report conditional nDCG@10 (ranking skill only), end-to-end nDCG@10 and Recall@10, GAUC, and ranking latency for K₁ candidates.
 
-**Required:** R2 must beat R1 on Val nDCG@10. If it does not, the cascade study is not meaningful — stop and report to the team before running RQ2.
+**Checkpoint:** compare R2 with R1 on unforced Val nDCG@10. If it does not improve, investigate feature/label leakage, alignment and training. A verified negative result is valid; report it and agree with the team whether RQ2 sweeps remain useful. See `docs/evaluations.md` Step 1. No additional variants are required to obtain a win.
 
 ---
 
@@ -431,11 +433,11 @@ Caveat to log in `docs/decisions.md`: rankers were trained on 200-candidate list
 3. Failure breakdown stacked bars per K₁ (retrieval miss / ranking miss / hit).
 4. Segment breakdowns (new-in-period / cold / tail / head; history length).
 
-Deliverable decision: the **smallest K₁ at which nDCG@10 is within the bootstrap CI of its maximum** — report it as the recommended K₁.
+Deliverable decision: before inspecting sweep outcomes, record the acceptable absolute Val nDCG@10 loss margin δ and cost/tie-break rule in `docs/decisions.md`. Select a lower-cost setting only if the upper paired-CI bound on loss versus the stated reference is ≤ δ; CI overlap alone is not equivalence. Until δ is recorded, report the trade-off without a cost-optimal selection claim. See `docs/evaluations.md` Step 1.
 
 ### 10.1 Final combination test
 
-After RQ1–RQ3, pick **one** pipeline: the frozen retriever + the better ranker (MLP or DIN, by Val nDCG@10) at the recommended K₁ (exact search, unless an approximate index was within the CI at lower latency). Evaluate it once on Test against:
+After RQ1–RQ3, pick **one** pipeline using Val: the frozen retriever + selected ranker (MLP or DIN, by Val nDCG@10 with uncertainty reported). Use the MLP sweeps to shortlist retrieval settings, then verify the actual selected ranker at that setting on Val. Apply the recorded acceptable-loss/cost rule above; an approximate index needs the same check. Freeze the configuration before its final Test comparison against:
 
 | Row | Pipeline |
 |---|---|

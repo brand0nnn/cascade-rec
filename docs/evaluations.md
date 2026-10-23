@@ -1,190 +1,170 @@
 # Evaluation and Failure Investigation Plan
-Cascade recommender project (Group 7). This document covers what we investigate and how. It does not cover implementation.
+Cascade recommender project (Group 7). This document covers what we investigate and how. It does not implement models or change the data split, filtering, labels or headline metric definitions.
 
-## 0. Purpose and principles
+## 0. Purpose, status and responsibilities
 
-**Purpose.** The project measures how retrieval choices limit the quality of the final ranked list. The professor's 14 Oct feedback asked for four things:
-- fewer variables
-- @10 as the headline metric, because the user sees 10 products
-- an explanation of *why* results change
-- one selected retriever–ranker combination tested end to end
+**Purpose.** Measure how retrieval choices limit the quality of the final ranked list. The professor's 14 Oct feedback asked for fewer variables, @10 as the headline, an explanation of why results change, and one selected retriever–ranker combination tested end to end.
+
+**Status confirmed 2026-10-24.** Retrieval is done; no ranker exists yet. Two-tower (text), seed 0 is the frozen retriever. Ranker comparisons, cascade sweeps and their failure analyses below are planned work, not existing results. Saved retrieval results remain valid; the forced-positive concern is a risk to resolve before ranker training.
+
+| Responsibility | Work |
+|---|---|
+| Evaluation (Phua) | Shared metrics, denominators, segment/profile definitions, support counts, uncertainty, failure analysis and reporting |
+| Ranking (Tong) and team | Settle forced-positive/negative handling and early-stopping population; implement and train MLP/DIN |
+| Retrieval/search (Brandon) | Frozen candidate provenance, index configurations and retrieval/latency measurements |
+| Team | Freeze unresolved protocol choices and final selection rules; interpret the final comparison |
+
+**Dependency before ranker training.** Read [the forced-positive explanation in the 2026-10-24 decision entry](decisions.md). Appending a missing target can expose its label through retrieval rank/score or insertion markers; forced validation can reward the same shortcut. The sample forced fraction was 94.2%, not a measured full-data rate. The ranker owner/team must record the chosen remedy and early-stopping population before training. Evaluation audits natural-list results separately from forced-list diagnostics. This plan does not select a training remedy or add model variants.
 
 **Principles.**
-- **Zoom in only where needed.** Start from macro numbers, then locate the loss, then say for whom, then say why, then show examples.
-- **No new model variables.** Everything after Step 1 reads existing results and explains them.
-- **@10 is the headline.** Larger cut-offs (Recall@K₁) are used only to show the candidate-stage ceiling and to explain the @10 numbers.
-- **Associations, not causes.** The explanatory steps describe what co-occurs with success or failure. They do not prove why.
-- **Val for discovery, Test once.** Categories, thresholds and hypotheses are fixed on Val. Test is reported once. Nothing learned from Test changes a model, feature or definition.
-
-### Overview of the five steps
+- **Zoom in where needed.** Aggregate numbers → failure stage → affected segments → signal profiles → examples. Steps 1–3 are the core; focus Step 4 on the largest validation gaps.
+- **No new model variables.** Explanatory analyses use saved predictions, candidate lists and permitted data. No additional model variants are required.
+- **@10 is the headline.** Recall@K₁ describes the candidate-stage ceiling, not the user-facing result.
+- **Associations, not causes.** Profiles describe co-occurrence and redistribution. They do not establish which feature caused a prediction or what a user disliked.
+- **Val for remaining decisions.** Retrieval Test results have already been reported. Record this prior exposure; do not describe the whole study as specified before any Test inspection. Freeze remaining ranker/cascade choices, analysis definitions and thresholds using Val before inspecting their Test performance. No Test result changes them.
 
 | Step | Question | Scope |
 |---|---|---|
-| 1 | Which system wins? | Aggregate @10 metrics, with uncertainty |
-| 2 | Which stage is to blame? | Five-way funnel per pipeline |
-| 3 | For whom and for what does it fail? | Item and user segments (including history diversity) |
-| 4 | What signals does it over- or under-trust? | Focused 3-signal profiles of candidates |
-| 5 | Does a real case show the mechanism? | 3–5 hand-picked cases |
+| 1 | Which system wins? | Aggregate @10 metrics, uncertainty and cost |
+| 2 | Where is the target lost? | Five-way funnel and contributions to metric changes |
+| 3 | For whom and for what does it fail? | Item and user segments |
+| 4 | Which signal profiles accompany the gap? | Focused candidate/prediction/target comparisons |
+| 5 | What does a representative case show? | 3–5 reproducibly selected illustrations |
 
 ---
 
 ## Step 1 — Which system wins?
 
-**What we investigate.** Whether each design choice improves the user-facing list, and by how much.
-
 **Comparisons.**
-- **RQ1, retrieval quality.** The two-tower retriever (`v2` text-only, `v4` text plus ID embeddings) against the four baselines used as retrievers (Popularity, ItemKNN, BPR-MF, SASRec), all trained on period A only so every row sees the same data.
-- **RQ3, ranking skill.** On identical K₁ = 200 candidate lists: popularity order, retrieval-score order, MLP ranker, DIN ranker.
-- **RQ2, cascade trade-off.** How the number of candidates passed on (K₁ ∈ {50, 100, 200, 500}) and the search setting (exact, HNSW, IVF) change final quality and latency.
-- **Final test.** The selected pipeline against the best single-stage baseline (SASRec on A∪B) and against popularity retrieval plus the same ranker.
+- **RQ1, retrieval quality.** Two-tower (text) and Two-tower (text + ID) against Popularity, ItemKNN, BPR-MF and SASRec, all trained on the retriever-training period only, with exact search. The retriever choice is already recorded in `decisions.md`; this is not a new selection exercise.
+- **RQ3, ranking skill.** At K₁ = 200, exact search, identical natural candidate lists: R0 = popularity order, R1 = retrieval-score order, R2 = MLP, R3 = DIN.
+- **RQ2, cascade trade-off.** Train each ranker once per planned seed and freeze it. The K₁ sweep uses the frozen MLP at K₁ ∈ {50, 100, 200, 500} with exact search. The separate index sweep holds K₁ = 200 and the MLP fixed: exact, two HNSW settings and two IVF settings from `CLAUDE.md` §8–10. This is not a full K₁ × index × ranker grid. Check that HNSW `efSearch` covers the actual number of results requested, including filtering buffer; record effective settings.
+- **Final comparison.** F0 = SASRec trained on all training data; F1 = popularity retrieval plus the selected ranker; F2 = frozen two-tower retrieval plus the selected ranker. F1 reuses a ranker trained on two-tower candidates, so report its candidate/feature distribution shift; it is not a separately optimised popularity cascade.
 
-**How we measure.**
-- **Headline:** Recall@10 and nDCG@10 (per-user macro average, mean ± std over 3 seeds).
-- **Ceiling:** Recall@K₁, to show what the ranker could at most achieve.
-- **Ranking skill alone:** conditional nDCG@10 (only instances where the target is in the candidate list) and GAUC.
-- **Cost:** median and p95 latency.
-- **Differences between systems:** paired bootstrap over users, reporting the 95% CI of the difference. A difference counts only if the CI excludes 0.
+**Metrics and populations.** All systems use the shared harness's filtering and pessimistic score-tie policy. Align by instance ID; cases a model cannot score count as misses in end-to-end comparisons.
+- **Headline:** Recall@10 and nDCG@10 over all eligible instances, first averaged within user, then across users. Retrieval misses contribute zero. Also retain micro averages for diagnostics.
+- **Ceiling:** Recall@K₁, the maximum attainable Recall@10 for that candidate set under perfect ranking. Verify target membership in saved candidates and report any boundary-tie discrepancy with full-catalogue rank.
+- **Conditional nDCG@10:** the same metric restricted to natural candidate lists containing the target; average within user over qualifying instances, then over qualifying users. Report qualifying users/instances and retrieval coverage. R0–R3 share this subset in RQ3. Different retrievers/K₁ settings may select different subsets, so conditional scores alone cannot establish superior ranking across those settings.
+- **Natural-list GAUC:** for each list containing its target, compute the fraction of non-target candidates scoring below the target, with ties worth 0.5; average within user, then across users (`eval/metrics.py`). Exclude padding. Lists without a target have no positive and are excluded from GAUC, not from end-to-end metrics. State the pool and coverage. Forced-list loss/GAUC, if retained, is a separately labelled diagnostic, not evidence of end-to-end ranking quality.
+- **Cost:** median and p95 of user encoding, search/filtering, feature preparation/ranker scoring and total. Follow `CLAUDE.md` §5: same recorded CPU, single thread, one query at a time, 50 warm-ups and 1,000 fixed random instances. Use Val for selection and a fixed Test sample for final timing; retain query IDs and sampling seed. Time actual candidate processing, including filtering/refill if needed.
 
-**What a finding looks like.** *"Pipeline X beats SASRec on nDCG@10 by Δ, CI [a, b]"* or *"K₁ beyond 200 does not improve nDCG@10 but raises latency."*
+**Uncertainty.**
+- Report mean ± std over training seeds {0, 1, 2} for stochastic models, with actual seed IDs and per-seed values. Popularity/ItemKNN are deterministic and need one run. For the cascade, ranker seeds vary while retriever seed 0 and its candidates stay fixed: this measures ranker variation conditional on that retriever, not full-pipeline training variation.
+- Use the existing paired bootstrap over users: 1,000 resamples, bootstrap seed 0, 95% percentile CI of the difference. For seed-mean comparisons, average each instance's metric over the stated training seeds first, then compute paired user means and resample users. The CI measures user-sampling uncertainty conditional on those trained runs; it does not include retriever retraining uncertainty.
+- Report effect sizes and intervals. A CI excluding zero supports a directional difference; a CI including zero is inconclusive, not proof of equivalence or no improvement. Mark Step 3/4 profile tests as exploratory; do not interpret many unadjusted intervals as independent confirmations. Freeze any small confirmatory hypothesis family and its multiplicity treatment on Val before Test.
 
-**Check built into the plan.** The MLP ranker must beat retrieval-score order on Val nDCG@10. If it does not, the cascade study is not meaningful and we stop before running the sweeps.
+**MLP checkpoint, not a success requirement.** Compare R2 with R1 on unforced Val nDCG@10 and inspect Recall@10 too. If R2 does not improve it, first check feature/label leakage, alignment, filtering and training. If the result persists, report that reranking did not improve the observed task; the study remains meaningful. The team decides whether expensive sweeps still answer a useful question. No new variants are added merely to obtain a win.
 
-**Limits.** Step 1 says which system is better. It does not say why.
+**Final selection (Val only).** Compare MLP/DIN at K₁ = 200 using Val nDCG@10; report uncertainty and any inconclusive choice explicitly. Use the MLP sweeps to shortlist retrieval settings, then validate the actual selected ranker at the shortlisted setting on Val before freezing F2. Before inspecting sweep outcomes, the team must record an acceptable absolute nDCG@10 loss margin δ and the cost/tie-break rule in `decisions.md`. A lower-cost setting is acceptable only if the upper paired-CI bound on its loss relative to the stated reference is ≤ δ. CI overlap alone does not establish acceptable loss. Until δ is recorded, report the quality/latency trade-off without claiming equivalence or a selected cost-optimal setting. Record all selected run IDs, seeds, candidate hashes and settings before final Test reporting.
+
+**Example finding.** “Pipeline X changes nDCG@10 by Δ, CI [a, b].” Or: “The K₁ = 500 gain is inconclusive and latency is higher,” rather than “there is no gain.”
 
 ---
 
-## Step 2 — Which stage is to blame?
+## Step 2 — Where is the target lost?
 
-**What we investigate.** When the final top 10 misses the true target, did retrieval or ranking fail, and does the ranker add value over the retriever's own order?
+**Method.** Assign every instance to exactly one outcome for each pipeline/K₁. Use actual candidate membership for retrieval; use the shared score-tie policy for Stage-1 and final target ranks. Stage-1 ordering is two-tower score order for F2 and popularity order for F1. Log boundary ties so membership/rank conventions can be checked.
 
-**Method.** Assign every instance to exactly one of five outcomes, per pipeline and per K₁ (where "retrieved at rank 1–10" refers to that pipeline's Stage-1 ordering: two-tower score order `R1` for `F2`, and Popularity order `R0` for `F1`):
-1. **Retrieval miss.** The target is not among the K₁ candidates. Stage 1 is responsible, because the ranker never saw it.
-2. **Ranking miss, unrescued.** The target was retrieved at rank 11…K₁ and the ranker left it outside the top 10.
-3. **Ranking miss, demoted.** The target was retrieved at rank 1–10 and the ranker pushed it out of the top 10. Stage 2 actively hurt Stage 1.
-4. **Retained hit.** The target was retrieved at rank 1–10 and stayed there.
-5. **Rescued hit.** The target was retrieved at rank 11…K₁ and the ranker lifted it into the top 10.
+1. **Retrieval miss:** target absent from the K₁ candidates.
+2. **Ranking miss, unrescued:** target present, Stage-1 rank >10, final rank >10.
+3. **Ranking miss, demoted:** target present, Stage-1 rank ≤10, final rank >10.
+4. **Retained hit:** target present, Stage-1 rank ≤10, final rank ≤10.
+5. **Rescued hit:** target present, Stage-1 rank >10, final rank ≤10.
 
-**What we compare.**
-- **Rescued hits against demoted misses.** If rescues clearly outnumber demotions, the ranker adds value. If they are close, the ranker mostly shuffles.
-- **The retrieval-miss share against K₁.** This shows how much widening the funnel recovers, and whether any gain is then lost to ranking at longer lists. Rankers are trained on 200-candidate lists, so K₁ = 500 is a longer list than they have seen. Declining quality there is a result to note, not necessarily a bug.
-- **For the index sweep,** the share of instances where the exact index would have retrieved the target but the approximate one did not.
+**Denominators and interpretation.**
+- Report raw counts and user-macro shares over all eligible instances. The five macro shares sum to one. If also reporting percentages of misses, label that different denominator; do not mix it with percentages of all instances.
+- With the same instances and user weights, **ΔRecall@10 = macro rescued share − macro demoted share**. Raw rescue counts alone need not explain the headline macro metric.
+- For nDCG, compute each instance's final-minus-Stage-1 nDCG@10. Within each outcome, zero out other outcomes but keep the full user/instance denominator; macro-average these contributions so they sum to total ΔnDCG@10. Include retained hits moving within the top 10: rescues outnumbering demotions does not guarantee improved nDCG.
+- Also report rescue rate among target-present Stage-1 misses and demotion rate among Stage-1 hits. Use these at-risk denominators when comparing segments.
+- Across K₁, show which retrieval misses become available and whether ranking converts them into hits. Rankers trained on top-200 lists face a changed candidate distribution at K₁ = 500; report this caveat.
+- For approximate search, report overlap with exact filtered top-K₁, exact-hit/approximate-miss and exact-miss/approximate-hit counts, and final metric changes. Log short candidate lists; separate approximation effects from filtering shortfalls.
 
-**What a finding looks like.** *"At K₁ = 200, 52% of misses are retrieval misses, 30% unrescued and 18% demoted. DIN converts 6% of instances from miss to hit, while MLP demotes 4%."*
-
-**Limits.** The funnel gives the stage, not the cause. A retrieval miss could come from a cold item, a short history, or a text mismatch. That is Steps 3 and 4.
+**Limits.** This identifies where the observed target is lost, not its cause or the quality of every non-target recommendation.
 
 ---
 
 ## Step 3 — For whom and for what does it fail?
 
-**What we investigate.** Where failures concentrate, so a mean metric does not hide a structural weakness.
+**Axis A: item type.** Report two distinct breakdowns; do not present them as one partition:
+- **New-in-period vs not-new:** first interaction at/after the split start (T1 on Val, T2 on Test). On Test, new-in-period equals the canonical cold group; it is 44.4% of Test targets.
+- **Canonical cold/tail/head:** retain the existing labels based on pre-T2 counts (`CLAUDE.md` §4.7). On Val, new-in-period items already belong to tail/head, so these labels overlap with new-in-period. They are retrospective popularity descriptions, not evidence that a model knew those counts. Never feed them into model features or treat them as validation-period feature statistics.
+- When comparing new items with head items, use **new-in-period vs not-new-and-head** to avoid overlap. Keep the original labels unchanged. Report whether each target was seen in the compared model's training period as a separate flag: unseen-in-training is not the same as new-in-period.
 
-**Axis A: item type (the cold-start question).** This matters most because 44.4% of Test targets are products with no interactions before the test period.
-- **Segments:** `new-in-period` (use this on Val; on Test it equals `cold`), `tail`, `head`.
-- **Expectations to check:**
-  - ID-only baselines (Popularity, ItemKNN, BPR, SASRec) should do almost nothing on new items. Ties are broken pessimistically, so their recall on these is near zero.
-  - `v2` and `v4` use item text, so they should retain recall on new items.
-  - `v4` adds a learned ID signal for items seen in training. It should help head items and may crowd out new items.
-  - **Ranker question:** because the ranker sees review count and item age, does it systematically demote new items in favour of established ones? Compare rescue and demotion rates for `new-in-period` targets against `head` targets.
+**Questions.** Do text models retain new-item recall? Does Two-tower (text + ID) trade new-item recall for warm-item performance? Do rankers demote retrieved new targets more often than not-new head targets, after accounting for the different numbers of Stage-1 hits available to demote?
 
-**Axis B: user history length and category diversity** (`1–2`, `3–5`, `6–10`, `11+` prior purchases; with `11+` further split into **homogeneous** `1–2 distinct leaf categories` vs **mixed** `3+ distinct leaf categories`).
-- **Short histories (`1–2`):** expect failures to be mostly at retrieval, from too little context.
-- **Long, mixed histories (`11+` with `3+` distinct leaf categories):** expect failures at MLP ranking. A user who bought 12 phone cases has a homogeneous history where mean-pooling and target attention behave similarly; a user who bought across multiple categories has a mixed history where MLP mean-pooling blurs current intent. DIN's target attention is meant to address exactly this, so the tested claim is that DIN's rescues over the MLP are concentrated in **long, mixed histories**.
+**Axis B: history length and category diversity.** Keep existing full-history length bins: 1–2, 3–5, 6–10, 11+. Within 11+, count distinct known full leaf-category paths in the model-visible last 50 items, strictly before the target. Split into 1–2 known categories (homogeneous), 3+ (mixed), and zero known categories (unknown); report missing-category coverage. Unknown categories are not an extra category. These are descriptive thresholds, not established boundaries of user intent; freeze them before Test.
 
-**How we measure.** The same metrics and the same five-way funnel, sliced by segment. For each model comparison (`v2` vs `v4`, MLP vs DIN), report where the difference is concentrated.
+**Question.** Is DIN's improvement over MLP larger on long, mixed histories? Compare the actual DIN-minus-MLP effect between groups, not “significant in one group, non-significant in another.” Category diversity is a proxy; neither architecture guarantees the predicted result.
 
-**What a finding looks like.** *"v4's gain over v2 appears only on head items; on new items v4 is X lower."* *"DIN rescues over MLP are concentrated in mixed histories of 11+ items (3+ leaf categories) and absent on new items."*
-
-**Limits.** Segments are one axis at a time. They cannot show how multiple item-to-history relationships combine to drive a specific recommendation.
+**Measurement.** Report metrics, funnel shares/rates, users, instances, retrieved targets and hit counts for each slice. Check Val support before committing to profile intersections; sparse cells get counts and uncertain/descriptive estimates rather than strong claims. No universal minimum instance count guarantees adequate power. Report observed effect sizes/CIs and mark unsupported comparisons. Do not redefine bins after seeing Test.
 
 ---
 
-## Step 4 — What signals does it over- or under-trust? (signal profiles)
+## Step 4 — Which signal profiles accompany the gap?
 
-**What we investigate.** Which combinations of relationships between a user's history and a candidate product make the system rank it highly, and whether those same relationships predict what users really bought. Where the two diverge, the system trusts something users do not reward, or ignores something they do.
+**Purpose.** Describe which candidate relationships are amplified between the retrieved pool and top 10, and relate that redistribution to observed target outcomes. Concentrate on gaps located in Steps 2–3; do not infer that the model used a particular feature.
 
-**The signal vocabulary.** For each candidate, record six simple yes/no relationships to the user's history:
+**Definitions.** Unless stated otherwise, history means the last 50 items strictly before the target, matching the model input. The last purchase means the most recent such event under the existing deterministic event ordering. Missing category/store values do not match each other.
 
-| Signal | Meaning |
+| Signal | Definition |
 |---|---|
-| `Co-buy` | Other training users reviewed both this candidate and an item in the user's history |
-| `Same-device` | The candidate is for the same phone model as a history item (taken from the title; `"unknown"` tracked separately) |
-| `Same-leaf` | Same leaf category as the user's last purchase |
-| `Same-store` | Same store or brand as a history item |
-| `Head item` | The candidate is among the top 20% most-interacted items |
-| `Text-similar` | High text similarity to the history |
+| `Co-buy` | At least one other user in the permitted training graph reviewed both candidate and a history item; exclude the current user's own links. All reviews count, matching the interaction protocol. |
+| `Same-device` | Parse canonical phone-model sets from titles. True if known sets overlap with a history item's set; false if candidate and at least one history device are known and all known sets are disjoint; otherwise unknown. Generic/universal compatibility needs an explicit parser rule, not an assumed mismatch. |
+| `Same-leaf` | Candidate's known full leaf-category path equals the last purchase's known path. |
+| `Same-store` | Candidate's known store appears in history; store is not assumed identical to brand. Report as a marginal signal only. |
+| `Head item` | Top 20% of positive-count items in the permitted training graph, count descending/item-ID ascending. This training-head signal is separate from canonical pre-T2 head/tail reporting. |
+| `Text-similar` | Cosine similarity of frozen candidate MiniLM text to the mean of available history text vectors exceeds a Val-fixed threshold; do not use learned ranker scores to define it. Missing/zero-vector text is unknown. |
 
-**Two focused 3-signal profile tables (to avoid a $2^6 = 64$ combination explosion).** Rather than crossing all six signals at once, we group candidates into two readable 8-row profile tables:
-1. **Table 4A — Compatibility & Category Profile (`Same-device` × `Same-leaf` × `Text-similar`):** Tests whether the pipeline confuses substitutes (`Same-leaf = True`) for complements (`Same-leaf = False`) and whether high text similarity pulls in the wrong phone model (`Same-device = False`).
-2. **Table 4B — Popularity & Collaborative Profile (`Head item` × `Co-buy` × `Same-leaf`):** Evaluated on warm targets (`pre_count > 0`) to test whether `Head item` + `Same-leaf` overrides specific collaborative links (`Co-buy`).
+**Definition freeze before Test.** Save the parser/rule version, training-graph cutoffs, similarity aggregation and numeric threshold, reference-pool sampling method/seed and artifact hash, and missing-value handling. Evaluation chooses the text-similarity threshold from the Val reference distribution and records its rationale before applying it to Test; it is not yet a measured value. Audit a reproducible Val title sample for device-extraction correctness as well as coverage, by cold/warm status. If device evidence is inadequate, label the device hypothesis untested; text similarity alone cannot establish compatibility.
 
-**Method and denominators.**
-- **Compare slot share with target share (matched denominators).** We compare shares and not probabilities because a candidate is the target about 1 time in 200, so the two probabilities live on different scales:
-  - *For Stage 1 (Retriever analysis, RQ1):* Compare a profile's share of the **$K_1$ retrieved candidate pool** against its share across **all true targets** (split by warm vs `new-in-period`), plus the profile distribution of missed targets vs retrieved items.
-  - *For Stage 2 (Ranker analysis, RQ3):* Restrict to **instances where the target was retrieved (`ret_rank <= K₁`)**. Compare (a) the profile's share of **Top-10 ranked slots**, (b) its share of the **$K_1$ candidate pool offered to the ranker**, and (c) its share of **retrieved true targets**. If the ranker inflates a profile's share in the Top 10 far above its share in the $K_1$ candidate pool and true targets, it is a Stage 2 amplification effect.
-- **Compare systems.** Run the Stage 2 profile tables for retrieval-score order (`R1`), MLP (`R2`) and DIN (`R3`) to show which signal bundles each ranker reweights.
-- **Cold targets separately.** A new item cannot have a `Co-buy` or `Head item` signal, since no training user bought it. Report cold targets using Table 4A (text and attribute signals) only, and do not read absent `Co-buy` as a negative.
-- **Optional summaries.**
-  - A category-to-category transition view: what users buy after leaf category A against what the system recommends after A, to show self-loops such as recommending cases after a case.
-  - A depth-3 decision tree that summarises the ranker's top-10 decisions, included only if we also report its fidelity (accuracy/AUC in reproducing the ranker's top-10 choices).
+**Two focused tables, for readability rather than independence.**
+1. **4A:** `Same-device` × `Same-leaf` × `Text-similar`. Eight Boolean profiles for known device/text values, plus separate unknown/missing groups that preserve the full denominator. Same/different category are proxies; they do not establish substitutes/complements.
+2. **4B:** `Head item` × `Co-buy` × `Same-leaf`, on instances with not-new targets. Cold/new targets lack training-head and co-buy evidence by construction, so use 4A and cold-specific outcome rates for them. 4B describes warm-target instances, not all failures. The two tables share `Same-leaf`; their findings are not independent replications.
 
-**Hypotheses to test (fixed on Val before Test).**
+**Populations, weighting and outcomes.**
+- **Stage 1:** within the same user/instance population, compare a profile's candidate-pool slot share with its true-target share; also show profiles of retrieved vs missed targets. Separate new/not-new targets. Target share uses all targets, including retrieval misses.
+- **Stage 2:** restrict to natural lists containing the target. For the identical instances, compare profile shares in the candidate pool, retrieval-order top 10, MLP top 10, DIN top 10, and retrieved targets. Show the broader all-instance slot distribution separately so conditioning does not hide behaviour on retrieval-miss instances.
+- Compute slot/profile shares within each instance, average within user, then across users, matching headline weighting; retain raw counts. Exclude padding and report actual list lengths. Shares are distributions with different units, not interchangeable probabilities of relevance.
+- Add target retrieval/hit rates by target profile, and rescue/demotion rates with the at-risk denominators from Step 2. Slot amplification alone is not evidence of an error. Report support and uncertainty alongside each claimed gap; matched ranker comparisons use identical users/instances.
 
-| Mechanism | Prediction |
+**Hypotheses to examine on Val and freeze before further Test analysis.** These are proposed associations, not established mechanisms or a claim of preregistration before existing retrieval Test exposure.
+
+| Hypothesis | Evidence to examine |
 |---|---|
-| **Substitute trap** | `Same-leaf` + `Head item` candidates take many top-10 slots in Table 4B but are rarely the target (users seldom buy a second case right after a case) |
-| **Wrong-device match** | In Table 4A, candidates with `Text-similar = True` + `Same-device = False` are over-recommended and almost never the target |
-| **Popularity override** | A target with `Same-device = True` + `Co-buy = True` is displaced by a `Head item` lacking device match |
-| **Cold-start suppression** | `Same-device` new items are under-ranked in Top-10 slots relative to their share in the $K_1$ candidate pool and true targets, because ranker features reward review count and age |
-| **DIN attention** | DIN shifts Top-10 slot share toward `Same-device = True` + `Same-leaf = False` (complementary accessories) on warm items with mixed histories, but matches MLP on new items (whose item ID is a shared OOV vector in attention) |
-| **`v4` vs `v2`** | `v4`'s learned IDs shift candidate-pool slots toward items with training history (`Head`/`Tail`) at the expense of `new-in-period` items |
+| Same-category concentration | Same-leaf + training-head items gain top-10 share while same-profile targets have low hit rates. Check observed category transitions; do not assume users seldom buy another item in the same category. |
+| Apparent wrong-device match | Known-device-mismatch + text-similar candidates gain top-10 share relative to pool and targets. Validate parser errors and universal accessories before describing a compatibility failure. |
+| Popularity override | On matched within-instance rank transitions, a retrieved device-matching/co-buy target loses to training-head candidates without device match. This needs a targeted comparison beyond either three-signal table alone. |
+| New-item suppression | Retrieved new targets have lower promotion or higher demotion rates, alongside changes in new-item slot share. Review count/age are possible explanations; the analysis does not establish that those features caused it. |
+| DIN and mixed histories | DIN-minus-MLP outcomes improve more for long, mixed histories; inspect device/category profiles. Shared OOV item IDs do not require equal cold-item performance: attention also uses category embeddings, and other features/learned weights differ. |
+| Text + ID versus text | Learned IDs accompany a shift in candidate slots toward items seen during retriever training and a change in new-item retrieval rates. |
 
-**What a finding looks like.** *"In Table 4B (retrieved instances), `Same-leaf + Head` candidates fill X% of MLP top-10 slots, Y% of the K₁ = 200 candidate pool, and Z% of retrieved targets: the ranker amplifies a substitute bias that the retriever mostly lacks."*
-
-**Limits (must be stated in the write-up).**
-- **Association only.** A profile being over-recommended does not prove the model used that exact feature. Signals correlate (`Same-device` often co-occurs with `Same-leaf`; `Co-buy` tracks popularity). Report both single-signal marginal shares and the 3-signal profile combinations.
-- **A divergence is not always a failure.** The other nine items shown may be fine products the user never reviewed. Non-targets are unobserved, not disliked. Findings are relative to observed reviews.
-- **We only find what we chose to look for.** Always include the `"All false (No signal)"` row in Tables 4A and 4B to report the exact share of candidates and targets that no listed signal explains.
-- **Coverage.** Extracting the device from titles will miss some products. Report regex coverage and treat `"device unknown"` as its own bucket.
+**Limits.** Non-targets are unobserved, not disliked. Co-buy, popularity, category and text correlate. Report marginal shares alongside profiles. Include the all-false row as **none of these indicators present**, not “unexplained failure”; unknown/missing rows are separate. Counts cannot quantify all causes of failure. A category-transition view is optional; a surrogate decision tree is not required for this plan.
 
 ---
 
-## Step 5 — Does a real case show the mechanism?
+## Step 5 — What does a representative case show?
 
-**What we investigate.** Whether each pattern from Step 4 can be seen in a concrete example, so that the poster does not rest on percentages alone.
-
-**Method.**
-- Choose 3–5 cases, one per mechanism in Step 4, sampled systematically from the profile buckets flagged in Step 4 rather than cherry-picked by eye.
-- For each case show the user's last 3–5 purchases, the true target, what `v2` retrieved, and what the MLP and DIN ranked at positions 1–3. Annotate each with its signal profile.
-- Include at least one counter-example where the signal profile predicted a failure (e.g. a cold cross-category complement) yet the pipeline succeeded, so the examples are not only confirming ones.
-
-**What a finding looks like.** One illustrated example per mechanism, such as *"the user bought an iPhone 13 Pro case; the MLP's top three were other iPhone 13 Pro cases (`Same-device + Same-leaf + Head`), while DIN rescued the target compatible screen protector (`Same-device + Different-leaf + Co-buy`)."*
-
-**Limits.** Cases illustrate and do not prove. They carry no evidential weight beyond the counts in Step 4.
+- Select 3–5 cases covering the strongest supported patterns, including at least one counterexample. There is no requirement to illustrate every proposed hypothesis.
+- Freeze qualifying bucket definitions and the selection rule on Val. Within each selected bucket, sort stable instance IDs and take one with a seeded RNG (seed 0), recording the eligible count and chosen ID. Fix the bucket order and avoid duplicate IDs. Apply the same frozen rule if illustrating Test; disclose any additional presentation-based choice rather than replacing an inconvenient result silently.
+- Show the last 3–5 purchases, true target, Two-tower (text) retrieval rank and candidate membership, MLP/DIN top three, and the target's final rank/hit status. Top-three examples alone cannot explain a top-10 metric. Annotate profiles and unknowns; describe compatibility only where checked.
+- Cases illustrate the aggregate analysis; they do not provide independent proof.
 
 ---
 
-## Cross-cutting rules
+## Cross-cutting rules and completion checklist
 
-**Validity**
-- **Model-visible data only.** Any collaborative link (`Co-buy`) is built only from interactions the compared model could have seen: period A (`< T_AB`) for the A-only retrievers and baselines, A∪B (`< T1`) for the A∪B single-stage baseline and ranker analysis. Using the full pre-test graph for an A-only model would credit it with links it never saw.
-- **Test discipline.** Hypotheses, signal definitions and thresholds are fixed on Val. Test is reported once. Nothing found on Test changes a model, feature or definition.
-- **Replication.** A Step 3 or Step 4 pattern found on Val counts as evidence only if it replicates on Test. A pattern that does not replicate is reported as unstable.
-- **Cold-item split.** Report `cold` or `new-in-period` targets separately everywhere, since they are 44.4% of Test and behave differently by construction.
-- **Seed variation.** Report variation over seeds, so that a pattern is not one lucky run.
-- **Honesty about unexplained failures.** For every explanatory table, include the `"no signal"` row showing the share of failures that no listed signal or segment accounts for.
+- **Permitted evidence:** build co-buy/training-head signals from retriever-training interactions for RQ1 retrievers, and all training interactions for ranker analysis. Record each cutoff; do not credit an earlier model with later collaborative evidence. Keep descriptive canonical pre-T2 popularity labels separate from these signals and from model features.
+- **Prior Test exposure:** record existing retrieval Test reporting. Before any new ranker/cascade Test inspection, save run IDs, training/early-stopping policy, definitions, thresholds, hypothesis family, selection rule and planned comparisons. Additional hypotheses prompted by Test are explicitly exploratory, not independent confirmation.
+- **Replication:** compare direction, effect size and uncertainty across Val/Test. Non-replication may reflect uncertainty or population shift; report it as unstable or inconclusive rather than redefining the hypothesis. Neither matching direction nor two nominal p-values establishes a mechanism.
+- **New-item reporting:** provide new/not-new results wherever support permits; preserve the distinct canonical segment definitions and denominators.
+- **Provenance:** save configs, training seeds, bootstrap seed, git hashes, candidate source/hash and analysis definitions. Identify which components are fixed. Sample runs are for development, never reported as full-data results.
+- **Open choices before dependent work:** training remedy and early-stopping population (Tong/team); profile thresholds/parser audit and support (evaluation); acceptable loss margin δ and final selection rule (team). Recording these dependencies does not assign ranker implementation to evaluation.
 
-### How the steps fit together
-
-Step 1 gives the numbers. Step 2 says which stage lost the instance. Step 3 says for whom. Step 4 says what combination of signals the system relied on at the point of failure. Step 5 makes it visible. Each step narrows the previous one, and none introduces a new model.
-
-### Summary of what each research question draws on
-
-| Question | Primary steps | Explanation steps |
+| Research question | Primary evidence | Explanation |
 |---|---|---|
-| **RQ1:** retriever vs baselines, text vs ID | 1 | 2, 3 (item type), 4 (Table 4A/4B of retrieved vs missed) |
-| **RQ2:** K₁ and index setting | 1 | 2 (retrieval-miss share, index drops) |
-| **RQ3:** ranker comparison | 1 | 2 (rescued vs demoted), 3 (history length × category diversity), 4 (Table 4A/4B slot vs pool vs target share) |
-| **Final combination test** | 1 | 2, 3, 4 to explain a win or a loss |
+| RQ1: retrieval, text vs ID | Step 1 | Item segments, retrieved/missed target profiles; no ranker funnel is needed for a retriever-only row |
+| RQ2: K₁ and search index | Step 1 | Step 2 target losses/recoveries and exact-search overlap |
+| RQ3: rankers on fixed candidates | Step 1 | Step 2 metric contributions, Step 3 history groups, focused Step 4 profiles |
+| Final F0/F1/F2 comparison | Step 1, frozen Val selection | Steps 2–4 explain supported differences; Step 5 illustrates them |
 
-If the final combination underperforms, that remains a valid result. The funnel, segments, and signal profiles explain it, with no further variants added.
+An underperforming ranker or final pipeline is a valid result. Report the verified outcome, its uncertainty and the supported failure analysis without adding variants to manufacture an improvement.

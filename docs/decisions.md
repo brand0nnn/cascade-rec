@@ -222,14 +222,94 @@ Limitation for the report: SASRec used dropout 0.5 on its sparse Amazon datasets
 
 ### Open, for the team to decide before ranker training (§15 rule 1: positive/negative definitions)
 
-1. **Forced targets give the answer away.** In the sample lists the target had to be appended in 94% of
-   ranker-training lists (`forced_fraction` 0.942), always as column 201 with the lowest retrieval score. With
-   retrieval score and rank as features the ranker can learn "column 201 = positive", which never occurs in unforced
-   Val/Test lists, and ranker-val GAUC (also on forced lists) would reward it. Options: give a forced target a
-   retrieval rank/score drawn from the natural candidates; zero or mask the retrieval features for forced rows; or
-   train retrieval features only on lists that contain the target naturally.
+1. **Forced-positive leakage is an unresolved training-design risk.** The sample lists force-append the target
+   in 94.2% of ranker-training instances. No ranker exists yet (status confirmed 2026-10-24), so this is not an
+   observed ranker failure. See the detailed 2026-10-24 entry below for the mechanism, unsafe shortcuts, options
+   and checks to settle before ranker training.
 2. **Later reviews are labelled 0.** Each case has one positive (the next review). The user's later reviews in the same
    period can sit in the list as negatives. Sample lists: ranker-training 3.7% of lists contain one in the top 200
    (vs 5.8% containing the target itself), Val 2.9% (vs 4.2%). Proposal: exclude the user's later same-period items
    from negative sampling (load-time change, no rebuild). Evaluation stays next-item (benchmark protocol); an optional
    secondary "any later review in the top 10" metric would show how much next-item scoring understates all models.
+
+
+## 2026-10-24 — Forced-positive leakage before ranker training (open)
+
+**Current status and scope.** Retrieval is done; there is no ranker yet. This entry documents a risk in the
+planned ranker training and validation protocol, not a failure in an existing trained ranker. It does not
+invalidate the saved retrieval results. No training policy, feature set, labels or metric definition is changed
+by this note. The ranker owner (Tong) and team must choose a policy before training; evaluation checks it.
+
+### How the shortcut arises
+
+- `build_candidates.py::force_insert` keeps the natural top-200 candidates and appends a missed target as column
+  201, using its actual retrieval score. The existing sample audit found `forced_fraction = 0.942`; this is a
+  sample finding, not a measured full-data fraction.
+- When inserted, the target has a retrieval score no greater than the top-200 candidates (ties are possible).
+  If the feature builder uses the appended position as rank, it gets rank 201; if it uses the full-catalogue
+  retrieval rank, that also identifies a target outside the natural top 200. Both may expose insertion.
+- All natural candidates in such a list are labelled 0; the inserted candidate is the only label 1. For example,
+  a positive with score 0.2 and rank >200 competes with negatives scoring 0.5–0.9 at ranks 1–200. A model can
+  exploit the selection procedure instead of learning which naturally retrieved product is the next target.
+- Column 201 by itself is not automatically an input to a pointwise MLP. Leakage occurs if position, retrieval
+  rank/score, an insertion flag or another label-dependent marker reaches its input. This is training-label
+  leakage through candidate construction, not future-interaction leakage.
+
+### Why forced validation can hide it
+
+`load_candidates(..., force=True)` also inserts missed validation targets. A model using the same shortcut
+could score well on forced-list GAUC or loss, including the planned early-stopping criterion. In actual
+end-to-end Val/Test lists no target is inserted: retrieval misses stay misses and every scored candidate is
+naturally retrieved. Good forced-list GAUC therefore does not establish good ranking on that population.
+Naturally retrieved positives still provide legitimate training examples; the concern is the shortcut on the
+forced majority, not a claim that training must necessarily fail.
+
+### Options for the team to assess (none adopted here)
+
+1. **Train on naturally retrieved positives.** Keep only training lists whose target is naturally in the top 200;
+   retain retrieval rank/score. This matches the ranker's inference task, but the sample audit suggests only
+   about 5.8% of lists remain. Check full-data support and item/user coverage before choosing it.
+2. **Use forced lists with a feature policy applied equally to all candidates.** For example, excluding retrieval
+   score/rank and all insertion markers from every row removes those direct shortcuts. This changes the planned
+   feature set and needs team agreement; it also leaves a mismatch between forced and natural positives.
+   It is an alternative policy, not a request to add another model ablation.
+3. **Another documented sampling/feature policy.** Explain why it does not reveal which row was inserted and
+   validate it on natural candidate lists. Giving only forced rows random ranks/scores is not automatically a
+   solution: the synthetic joint feature pattern can still reveal insertion.
+
+**Insufficient fixes.** Shuffling rows does not remove score/rank clues. Masking or zeroing retrieval features
+only for forced targets, or exposing `forced`/`target_pos`, creates a positive-only marker. Keep these fields
+for labels/audits, not as model inputs.
+
+### Checks and responsibilities before interpreting ranker results
+
+- **Ranker owner/team:** record the chosen policy and its trade-offs here, including the early-stopping population.
+  Inspect the actual feature tensors, not just the candidate-file column order. Fit any standardisation using
+  training data only.
+- **Evaluation:** report the full-data training forced fraction and retained support. On Val, separately label
+  forced-list diagnostics and natural-list results; do not pool them under one GAUC number. For natural-list
+  GAUC/conditional nDCG, state that only lists containing the target are included and report their coverage.
+- **Evaluation:** measure end-to-end Recall@10/nDCG@10 on all eligible, unforced Val instances, with retrieval
+  misses counted as zero, and compare with retrieval-score order on the same instances. Use Val to verify the
+  chosen protocol; Test remains for final reporting under the frozen protocol.
+- No retriever retraining is required merely to document or address this ranker-training risk. No existing
+  ranker needs retraining because none has been trained yet.
+
+
+## 2026-10-24 — Evaluation-plan review and current scope
+
+- Updated `docs/evaluations.md` after review. Retrieval is complete; ranker/cascade results remain future work.
+  The forced-positive policy remains an open dependency owned by ranking/the team, not an implemented fix.
+- Clarified natural versus forced validation, GAUC populations, fixed retriever versus ranker seed variation,
+  paired user-bootstrap interpretation, and prior exposure to retrieval Test results. Existing retrieval results
+  and canonical metric/segment definitions are unchanged.
+- Evaluation will report new/not-new separately from canonical pre-T2 cold/tail/head labels, use matching macro
+  weights for the funnel, include nDCG contributions and within-top-10 movements, and check profile support and
+  proxy accuracy. Remaining analysis thresholds/parser rules must be saved on Val before further Test analysis.
+- A verified MLP loss against retrieval-score order is a valid finding, not a declaration that the study is
+  meaningless. Investigate protocol/implementation first, then agree whether expensive sweeps remain useful.
+- Replaced the CI-overlap selection wording in `CLAUDE.md`: the team must record an acceptable absolute Val
+  nDCG@10 loss margin δ and cost/tie-break rule before inspecting sweep outcomes. No numeric margin is chosen
+  here. MLP sweeps shortlist settings; the actual selected ranker must be checked there on Val before Test.
+- These are documentation/protocol clarifications. No model training, feature implementation, label policy,
+  data split or metric implementation was changed; no experiments were rerun.
