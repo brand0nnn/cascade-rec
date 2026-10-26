@@ -1,0 +1,20 @@
+# Exact versions of the working local environment (Python 3.11). recbole 1.2.1 needs numpy<2 and pandas<3, and newer
+# pyarrow releases need numpy>=2, so keep these pinned together.
+torch==2.5.1
+numpy==1.26.4
+pandas==2.3.3
+pyarrow==25.0.1
+scipy==1.17.1
+scikit-learn==1.9.1
+threadpoolctl==3.7.0
+pyyaml==6.0.3
+tqdm==4.70.1
+matplotlib==3.11.2
+pytest==9.1.1
+requests==2.34.2
+recbole==1.2.1
+sentence-transformers==3.4.1
+transformers==4.48.3
+huggingface-hub==0.28.1
+tokenizers==0.21.0
+faiss-cpu==1.15.1

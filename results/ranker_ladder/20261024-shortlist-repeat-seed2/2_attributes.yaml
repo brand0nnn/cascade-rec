@@ -1,0 +1,26 @@
+model: mlp
+history_length: 50
+item_text_dim: 384
+hidden_dims:
+- 256
+- 128
+- 64
+dropout: 0.1
+loss: binary_cross_entropy
+optimizer: adam
+learning_rate: 0.001
+batch_size: 2048
+max_epochs: 30
+early_stopping:
+  metric: ndcg@10_macro
+  patience: 3
+negative_sampling:
+  negatives_per_list: 50
+  strategy: uniform_without_replacement
+seed: 2
+experiment: feature_ladder_2_attributes
+feature_groups:
+- retrieval
+- matching
+- attributes
+k1: 200

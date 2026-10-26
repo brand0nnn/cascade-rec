@@ -1,0 +1,235 @@
+{
+  "runtime": {
+    "cpu": "Apple M1 Max",
+    "platform": "macOS-15.6-arm64-arm-64bit",
+    "torch_version": "2.5.1",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "threadpools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libopenblas",
+        "filepath": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/.venv/lib/python3.11/site-packages/numpy/.dylibs/libopenblas64_.0.dylib",
+        "version": "0.3.23.dev",
+        "threading_layer": "pthreads",
+        "architecture": "armv8"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "filepath": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/.venv/lib/python3.11/site-packages/torch/lib/libomp.dylib",
+        "version": null
+      }
+    ],
+    "n_queries": 1000,
+    "n_warmup": 50,
+    "random_seed": 0,
+    "k1": 200,
+    "scope": "validation only",
+    "query_unit": "one instance, all naturally retrieved candidates",
+    "excludes": [
+      "retrieval",
+      "disk I/O",
+      "checkpoint load",
+      "one-time feature-table creation"
+    ],
+    "accuracy_device": "saved training-run validation outputs",
+    "latency_device": "cpu"
+  },
+  "measurements": [
+    {
+      "system": "R3",
+      "key": "R3_seed0",
+      "seed": 0,
+      "phases": {
+        "prepare_ms": {
+          "median": 1.2243955,
+          "p95": 2.2710472999999984
+        },
+        "score_ms": {
+          "median": 6.084104,
+          "p95": 6.958208
+        },
+        "order_ms": {
+          "median": 0.026333,
+          "p95": 0.034919099999999995
+        },
+        "total_ms": {
+          "median": 7.402229500000001,
+          "p95": 8.930443449999999
+        }
+      }
+    },
+    {
+      "system": "R0",
+      "key": "R0",
+      "seed": null,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.002917,
+          "p95": 0.003252049999999998
+        },
+        "score_ms": {
+          "median": 0.001,
+          "p95": 0.00170805
+        },
+        "order_ms": {
+          "median": 0.005583,
+          "p95": 0.006
+        },
+        "total_ms": {
+          "median": 0.009583,
+          "p95": 0.010709
+        }
+      }
+    },
+    {
+      "system": "R2",
+      "key": "R2_seed1",
+      "seed": 1,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.82975,
+          "p95": 1.0782854499999999
+        },
+        "score_ms": {
+          "median": 0.74175,
+          "p95": 0.9965993999999998
+        },
+        "order_ms": {
+          "median": 0.013417,
+          "p95": 0.020545199999999996
+        },
+        "total_ms": {
+          "median": 1.5941665,
+          "p95": 2.0166375
+        }
+      }
+    },
+    {
+      "system": "R1",
+      "key": "R1",
+      "seed": null,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.002792,
+          "p95": 0.003042
+        },
+        "score_ms": {
+          "median": 8.4e-05,
+          "p95": 0.000125
+        },
+        "order_ms": {
+          "median": 0.000292,
+          "p95": 0.000334
+        },
+        "total_ms": {
+          "median": 0.003208,
+          "p95": 0.003459
+        }
+      }
+    },
+    {
+      "system": "R2",
+      "key": "R2_seed2",
+      "seed": 2,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.82675,
+          "p95": 1.0608896
+        },
+        "score_ms": {
+          "median": 0.7433755,
+          "p95": 1.0053701999999998
+        },
+        "order_ms": {
+          "median": 0.0134375,
+          "p95": 0.020085099999999998
+        },
+        "total_ms": {
+          "median": 1.590375,
+          "p95": 2.01063125
+        }
+      }
+    },
+    {
+      "system": "R2",
+      "key": "R2_seed0",
+      "seed": 0,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.8213539999999999,
+          "p95": 1.0899583499999999
+        },
+        "score_ms": {
+          "median": 0.7404795,
+          "p95": 1.0134642999999999
+        },
+        "order_ms": {
+          "median": 0.013333,
+          "p95": 0.021673249999999995
+        },
+        "total_ms": {
+          "median": 1.5871875,
+          "p95": 2.0160708499999997
+        }
+      }
+    },
+    {
+      "system": "R3",
+      "key": "R3_seed2",
+      "seed": 2,
+      "phases": {
+        "prepare_ms": {
+          "median": 1.038354,
+          "p95": 1.2565312499999999
+        },
+        "score_ms": {
+          "median": 6.1420835,
+          "p95": 6.8759628
+        },
+        "order_ms": {
+          "median": 0.025271000000000002,
+          "p95": 0.034095499999999994
+        },
+        "total_ms": {
+          "median": 7.24225,
+          "p95": 8.0420077
+        }
+      }
+    },
+    {
+      "system": "R3",
+      "key": "R3_seed1",
+      "seed": 1,
+      "phases": {
+        "prepare_ms": {
+          "median": 1.064896,
+          "p95": 1.2783851
+        },
+        "score_ms": {
+          "median": 6.242583,
+          "p95": 6.95741215
+        },
+        "order_ms": {
+          "median": 0.0260835,
+          "p95": 0.034625
+        },
+        "total_ms": {
+          "median": 7.3283125,
+          "p95": 8.116441649999999
+        }
+      }
+    }
+  ],
+  "columns": [
+    "prepare_ms",
+    "score_ms",
+    "order_ms",
+    "total_ms"
+  ]
+}

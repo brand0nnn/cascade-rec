@@ -1,0 +1,7 @@
+{
+  "status": "complete",
+  "development_sample": false,
+  "recommended_k1": 50,
+  "observed_best_k1": 100,
+  "report": "report.md"
+}

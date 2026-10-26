@@ -1,0 +1,296 @@
+seed,axis,group,candidate_occurrences,overtaker_occurrences,tied_overtaker_occurrences,added_top10_occurrences,unique_available_items,unique_overtaking_items,available_share,overtaker_share,added_top10_share
+0,item_type,new-in-period,85272,30111,0,8325,1905,1548,0.09029224904701398,0.15110123094988384,0.2730851238313925
+0,item_type,warm-tail,281639,67706,0,10607,13350,8511,0.29822003388394747,0.3397582259869428,0.3479416106281778
+0,item_type,warm-head,577489,101460,0,11553,9144,6438,0.6114877170690386,0.5091405430631734,0.3789732655404297
+0,leaf_category,(unknown),14546,3447,0,521,976,557,0.015402371876323592,0.017297530573021472,0.01709037231425291
+0,leaf_category,Cell Phones & Accessories > Accessories,1714,303,0,63,225,102,0.0018149089368911478,0.0015204965951916176,0.0020665901262916187
+0,leaf_category,Cell Phones & Accessories > Accessories > Adhesive Card Holders,380,115,0,6,8,6,0.0004023718763235917,0.0005770861664918681,0.00019681810726586847
+0,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories,1,0,0,0,1,0,1.058873358746294e-06,0.0,0.0
+0,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles,41821,8325,0,1663,383,320,0.04428314273612876,0.04177602031343306,0.05455141873052321
+0,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Kits,191,73,0,14,4,4,0.00020224481152054214,0.0003663242622078815,0.0004592422502870264
+0,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Pads & Mats,1015,145,0,4,7,6,0.0010747564591274883,0.0007276303838375728,0.00013121207151057897
+0,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Speakerphones,403,43,0,1,14,8,0.0004267259635747565,0.00021578004486217677,3.280301787764474e-05
+0,leaf_category,Cell Phones & Accessories > Accessories > Cables & Adapters,3270,442,0,16,89,65,0.0034625158831003812,0.0022180181355600497,0.0005248482860423159
+0,leaf_category,Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters,5538,1314,0,202,80,68,0.005864040660736976,0.006593836719741866,0.006626209611284238
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters,2137,515,0,66,25,19,0.00226281236764083,0.002584342397767931,0.002164999179924553
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers,33048,6680,0,1025,422,343,0.03499364675984752,0.03352117906231025,0.033623093324585865
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations,16012,4363,0,1228,226,174,0.01695468022024566,0.021894147342643656,0.040282105953747746
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks,18608,3464,0,394,396,237,0.019703515459551037,0.017382838962850707,0.012924389043792029
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Solar Chargers,955,262,0,24,28,19,0.0010112240576027108,0.0013147528314858211,0.0007872724290634739
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers,30964,8475,0,1554,548,450,0.03278695468022025,0.042528741400161586,0.050975889781859934
+0,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers,37650,6623,0,1007,323,239,0.039866581956797965,0.03323514504935341,0.03303263900278826
+0,leaf_category,Cell Phones & Accessories > Accessories > Décor,19,2,0,0,3,2,2.0118593816179584e-05,1.0036281156380314e-05,0.0
+0,leaf_category,Cell Phones & Accessories > Accessories > Décor > Phone Charms,16,2,0,1,2,2,1.6941973739940702e-05,1.0036281156380314e-05,3.280301787764474e-05
+0,leaf_category,Cell Phones & Accessories > Accessories > Gaming Accessories,15,6,0,0,1,1,1.588310038119441e-05,3.0108843469140944e-05,0.0
+0,leaf_category,Cell Phones & Accessories > Accessories > Gaming Accessories > Controllers,31,23,0,8,1,1,3.282507412113511e-05,0.00011541723329837362,0.00026242414302115794
+0,leaf_category,Cell Phones & Accessories > Accessories > Grips,8755,2540,0,354,191,131,0.009270436255823803,0.012746077068603,0.01161226832868624
+0,leaf_category,Cell Phones & Accessories > Accessories > Lanyards & Wrist Straps,489,144,0,5,6,6,0.0005177890724269378,0.0007226122432593827,0.0001640150893882237
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs",173,49,0,1,25,7,0.00018318509106310886,0.0002458888883313177,3.280301787764474e-05
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Anti-Dust Plugs",43,23,0,3,3,2,4.553155442609064e-05,0.00011541723329837362,9.840905363293423e-05
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Lens Protectors",1710,710,0,73,11,11,0.0018106734434561627,0.0035628798105150116,0.0023946203050680664
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Repair Kits",70,24,0,1,21,12,7.412113511224057e-05,0.00012043537387656378,3.280301787764474e-05
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts",282,40,0,4,102,24,0.00029860228716645487,0.0002007256231276063,0.00013121207151057897
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Back Covers",95,34,0,4,20,13,0.00010059296908089793,0.00017061677965846535,0.00013121207151057897
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",445,111,0,18,96,57,0.0004711986446421008,0.0005570136041791074,0.0005904543217976054
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Screens",227,25,0,9,98,18,0.00024036425243540872,0.00012545351445475392,0.0002952271608988027
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > SIM Card Tools & Accessories",138,27,0,3,7,3,0.00014612452350698857,0.00013548979561113424,9.840905363293423e-05
+0,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",194292,29682,0,3410,3792,2438,0.20573062261753494,0.14894844864184026,0.11185829096276857
+0,leaf_category,Cell Phones & Accessories > Accessories > Mounts > Bedstand & Desk Mounts,788,253,0,22,4,3,0.0008343922066920797,0.0012695895662821097,0.0007216663933081843
+0,leaf_category,Cell Phones & Accessories > Accessories > Mounts > Handlebar Mounts,440,123,0,7,1,1,0.0004659042778483693,0.0006172312911173894,0.0002296211251435132
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights,141,40,0,12,13,11,0.00014930114358322743,0.0002007256231276063,0.00039363621453173694
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights > Selfie Lights,2093,575,0,61,29,26,0.0022162219398559934,0.0028854308324593406,0.0020009840905363292
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Handheld Gimbals & Stabilizers,24,24,0,21,6,6,2.5412960609911054e-05,0.00012043537387656378,0.0006888633754305396
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Lens Attachments,560,199,0,13,12,8,0.0005929690808979246,0.0009986099750598414,0.00042643923240938164
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Photo & Video Kits,831,179,0,6,2,2,0.0008799237611181702,0.0008982471634960381,0.00019681810726586847
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Selfie Sticks,1611,400,0,15,6,6,0.0017058449809402795,0.0020072562312760628,0.0004920452681646711
+0,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods,7401,1333,0,148,83,64,0.007836721728081322,0.00668918139072748,0.004854846645891422
+0,leaf_category,Cell Phones & Accessories > Accessories > Screen Expanders & Magnifiers,178,42,0,12,11,8,0.00018847945785684033,0.00021076190428398662,0.00039363621453173694
+0,leaf_category,Cell Phones & Accessories > Accessories > Signal Boosters,28,20,0,8,9,8,2.964845404489623e-05,0.00010036281156380315,0.00026242414302115794
+0,leaf_category,Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets,19794,2047,0,187,137,116,0.02095933926302414,0.010272133763555253,0.006134164343119567
+0,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories,905,490,0,47,28,14,0.000958280389665396,0.002458888883313177,0.001541741840249303
+0,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands,57255,17813,0,2417,1171,959,0.06062579415501906,0.08938813811930127,0.07928489421026734
+0,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers,9390,2605,0,520,212,148,0.0099428208386277,0.01307225620618536,0.017057569296375266
+0,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases,29361,7318,0,942,354,291,0.031089580686149938,0.036722752751195575,0.030900442840741348
+0,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases with Band,2932,432,0,23,21,19,0.003104616687844134,0.002167836729778148,0.0007544694111858291
+0,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors,45800,10882,0,1182,529,418,0.04849639983058026,0.05460740577186529,0.03877316713137609
+0,leaf_category,Cell Phones & Accessories > Accessories > Stands,20798,3600,0,372,129,109,0.02202244811520542,0.018065306081484565,0.012202722650483845
+0,leaf_category,Cell Phones & Accessories > Accessories > Stylus Pens,12661,3310,0,418,731,578,0.013406395595086827,0.01661004531380942,0.013711661472855503
+0,leaf_category,Cell Phones & Accessories > Accessories > UV Phone Sterilizer Boxes,33,3,0,1,5,1,3.49428208386277e-05,1.5054421734570472e-05,3.280301787764474e-05
+0,leaf_category,Cell Phones & Accessories > Accessories > Virtual Reality (VR) Headsets,331,35,0,0,9,3,0.0003504870817450233,0.00017563492023665552,0.0
+0,leaf_category,Cell Phones & Accessories > Android 101,184,14,0,3,14,6,0.00019483269800931808,7.025396809466221e-05,9.840905363293423e-05
+0,leaf_category,Cell Phones & Accessories > BlackBerry,4,0,0,0,2,0,4.235493434985176e-06,0.0,0.0
+0,leaf_category,Cell Phones & Accessories > Cases Under $10,3,0,0,0,2,0,3.1766200762388817e-06,0.0,0.0
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves",1280,374,0,43,167,92,0.0013553578991952562,0.0018767845762431188,0.001410529768738724
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Armbands",1351,337,0,24,20,12,0.0014305379076662431,0.001691113374850083,0.0007872724290634739
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",250816,54551,0,10288,8440,5753,0.26558238034731046,0.2737445866808513,0.3374774479252091
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Battery Charger Cases",1979,744,0,177,94,81,0.0020955103769589156,0.003733496590173477,0.00580613416434312
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Bumpers",2023,387,0,77,42,35,0.0021421008047437526,0.001942020403759591,0.0025258323765786454
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Case & Cover Bundles",4758,693,0,47,140,103,0.005038119440914867,0.0034775714206857792,0.001541741840249303
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Crossbody & Lanyard Cases",45,26,0,7,12,8,4.7649301143583225e-05,0.0001304716550329441,0.0002296211251435132
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Dry Bags",2292,188,0,47,11,11,0.0024269377382465057,0.0009434104286997496,0.001541741840249303
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",13868,4219,0,575,959,694,0.014684455739093605,0.021171535099384273,0.018861735279645728
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",17454,3716,0,373,1284,821,0.018481575603557815,0.018647410388554626,0.01223552566836149
+0,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Sleeves",386,204,0,64,24,20,0.0004087251164760695,0.001023700677950792,0.0020993931441692635
+0,leaf_category,Cell Phones & Accessories > Cell Phone Battery Chargers,202,64,0,2,7,6,0.00021389241846675138,0.00032116099700417005,6.560603575528948e-05
+0,leaf_category,Cell Phones & Accessories > Cell Phones,12145,2923,0,561,600,412,0.01286001694197374,0.01466802491004983,0.018402493029358702
+0,leaf_category,Cell Phones & Accessories > Deal of the Day: Save 50% or more on Samsung Galaxy S7 cases,2,2,0,0,1,1,2.117746717492588e-06,1.0036281156380314e-05,0.0
+0,leaf_category,Cell Phones & Accessories > Deals in Unlocked Cell Phones,1,0,0,0,1,0,1.058873358746294e-06,0.0,0.0
+0,leaf_category,Cell Phones & Accessories > Huawei Brand Store,6,3,0,0,2,2,6.353240152477763e-06,1.5054421734570472e-05,0.0
+0,leaf_category,Cell Phones & Accessories > Nokia,269,62,0,19,41,25,0.0002848369335027531,0.00031112471584778976,0.0006232573396752502
+0,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes,146,76,0,2,2,1,0.00015459551037695892,0.00038137868394245197,6.560603575528948e-05
+0,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes > Cell Phone Minutes,14,5,0,1,7,3,1.4824227022448115e-05,2.5090702890950788e-05,3.280301787764474e-05
+0,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes > SIM Cards,689,118,0,18,66,38,0.0007295637441761965,0.0005921405882264386,0.0005904543217976054
+0,leaf_category,Cell Phones & Accessories > Samsung Galaxy S8 Wallet Cases,6,0,0,0,1,0,6.353240152477763e-06,0.0,0.0
+0,leaf_category,Cell Phones & Accessories > Save on Samsung Galaxy S8/8 Plus Cases,14,1,0,0,2,1,1.4824227022448115e-05,5.018140578190157e-06,0.0
+0,leaf_category,Cell Phones & Accessories > TracFone,15,3,0,0,7,2,1.588310038119441e-05,1.5054421734570472e-05,0.0
+0,leaf_category,Cell Phones & Accessories > Use Alexa Built-in Smartphones > Alexa Features: Entertainment,60,2,0,0,1,1,6.353240152477763e-05,1.0036281156380314e-05,0.0
+0,leaf_category,Cell Phones & Accessories > V4 Customers Keep It - 30%,23,5,0,0,2,2,2.435408725116476e-05,2.5090702890950788e-05,0.0
+0,leaf_category,Cell Phones & Accessories > V4 Customers Keep It - 70%,2,1,0,0,1,1,2.117746717492588e-06,5.018140578190157e-06,0.0
+0,leaf_category,Cell Phones & Accessories > Verizon Wireless,35,1,0,0,7,1,3.7060567556120286e-05,5.018140578190157e-06,0.0
+0,leaf_category,Cell Phones & Accessories > Virgin Mobile,3,0,0,0,3,0,3.1766200762388817e-06,0.0,0.0
+0,leaf_category,Cell Phones & Accessories > Wireless Trade-In,932,345,0,19,43,16,0.0009868699703515459,0.0017312584994756044,0.0006232573396752502
+0,leaf_category,Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Carrier Branded Wireless Trade-In,182,11,0,0,20,4,0.0001927149512918255,5.519954636009173e-05,0.0
+0,leaf_category,Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Unlocked Wireless Trade-In,4630,401,0,18,651,179,0.004902583650995341,0.002012274371854253,0.0005904543217976054
+0,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7 Cases",1,1,0,0,1,1,1.058873358746294e-06,5.018140578190157e-06,0.0
+0,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Cases",4,3,0,0,2,2,4.235493434985176e-06,1.5054421734570472e-05,0.0
+0,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Heavy Duty Cases",2,1,0,0,1,1,2.117746717492588e-06,5.018140578190157e-06,0.0
+0,leaf_category,Cell Phones & Accessories > iPhone Accessories,133,34,0,3,82,17,0.00014083015671325708,0.00017061677965846535,9.840905363293423e-05
+0,leaf_category,Cell Phones & Accessories > iPhone SE 2020 and iPhone 6-8 Cases > iPhone X Wallet,33,8,0,1,1,1,3.49428208386277e-05,4.014512462552126e-05,3.280301787764474e-05
+1,item_type,new-in-period,81106,29328,0,8420,1880,1496,0.08931395220790662,0.15882763886858053,0.2882377105299192
+1,item_type,warm-tail,275001,65062,0,10336,13593,7999,0.30283118599273207,0.3523473758888293,0.3538271943037108
+1,item_type,warm-head,551993,90263,0,10456,9222,5852,0.6078548617993613,0.48882498524259016,0.35793509516637
+1,leaf_category,(unknown),14504,3007,0,465,987,515,0.015971809272106598,0.01628459867968568,0.015918115842804326
+1,leaf_category,Cell Phones & Accessories > Accessories,1586,239,0,29,222,99,0.0017465036890210329,0.001294319615711632,0.0009927427084759689
+1,leaf_category,Cell Phones & Accessories > Accessories > Adhesive Card Holders,396,74,0,1,7,6,0.00043607532210109017,0.00040075168017849694,3.423250718882651e-05
+1,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories,1,0,0,0,1,0,1.1012003083360864e-06,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles,39868,6945,0,1125,373,312,0.04390265389274309,0.03761108674107651,0.03851157058742982
+1,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Kits,177,69,0,10,4,3,0.00019491245457548727,0.00037367386395022016,0.0003423250718882651
+1,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Pads & Mats,977,78,0,0,6,5,0.0010758727012443563,0.00042241393316111843,0.0
+1,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Speakerphones,384,44,0,7,17,10,0.00042286091840105714,0.00023828478280883602,0.00023962755032178558
+1,leaf_category,Cell Phones & Accessories > Accessories > Cables & Adapters,3126,342,0,11,89,56,0.003442352163858606,0.0018521226300141347,0.0003765575790770916
+1,leaf_category,Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters,5316,1132,0,142,75,62,0.005853980839114635,0.006130417594081872,0.004861016020813364
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters,1947,539,0,75,23,18,0.00214403700033036,0.0029189885894082414,0.0025674380391619883
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers,31227,6899,0,1295,416,328,0.03438718202841097,0.03736197083177636,0.04433109680953033
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations,14927,4552,0,1844,205,163,0.01643761700253276,0.024651643894223217,0.06312474325619609
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks,16921,3924,0,520,394,263,0.018633410417354918,0.02125067017595165,0.017800903738189783
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Solar Chargers,839,224,0,11,28,19,0.0009239070586939764,0.0012130861670268016,0.0003765575790770916
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers,28779,8080,0,1346,518,423,0.03169144367360423,0.04375775102489535,0.046076954676160485
+1,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers,35654,6566,0,1136,310,225,0.03926219579341482,0.03555858827097312,0.03888812816650691
+1,leaf_category,Cell Phones & Accessories > Accessories > Décor,19,5,0,3,3,2,2.092280585838564e-05,2.7077816228276823e-05,0.00010269752156647952
+1,leaf_category,Cell Phones & Accessories > Accessories > Décor > Phone Charms,18,1,0,1,2,1,1.9821605550049552e-05,5.4155632456553645e-06,3.423250718882651e-05
+1,leaf_category,Cell Phones & Accessories > Accessories > Gaming Accessories,7,7,0,1,1,1,7.708402158352604e-06,3.790894271958755e-05,3.423250718882651e-05
+1,leaf_category,Cell Phones & Accessories > Accessories > Gaming Accessories > Controllers,23,19,0,8,1,1,2.5327607091729986e-05,0.00010289570166745192,0.00027386005751061206
+1,leaf_category,Cell Phones & Accessories > Accessories > Grips,8401,1949,0,144,192,137,0.009251183790331461,0.010554932765782305,0.004929481035191017
+1,leaf_category,Cell Phones & Accessories > Accessories > Lanyards & Wrist Straps,478,200,0,10,6,6,0.0005263737473846493,0.001083112649131073,0.0003423250718882651
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs",183,55,0,17,22,7,0.0002015196564255038,0.00029785597851104506,0.0005819526222100507
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Anti-Dust Plugs",36,25,0,4,2,2,3.9643211100099105e-05,0.0001353890811413841,0.00013693002875530603
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Home Button Stickers",2,2,0,0,1,1,2.2024006166721727e-06,1.0831126491310729e-05,0.0
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Lens Protectors",1583,885,0,149,11,11,0.0017432000880960247,0.004792773472404997,0.00510064357113515
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Repair Kits",96,41,0,3,30,15,0.00010571522960026428,0.00022203809307186993,0.00010269752156647952
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts",437,62,0,1,186,35,0.0004812245347428697,0.0003357649212306326,3.423250718882651e-05
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Back Covers",95,33,0,4,21,11,0.0001046140292919282,0.00017871358710662704,0.00013693002875530603
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",427,99,0,21,92,47,0.00047021253165950886,0.0005361407613198811,0.0007188826509653567
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Screens",392,141,0,27,174,79,0.00043167052086774585,0.0007635944176374064,0.0009242776940983158
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > SIM Card Tools & Accessories",139,21,0,5,7,3,0.000153066842858716,0.00011372682815876265,0.00017116253594413254
+1,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",187031,28794,0,3874,3892,2229,0.20595859486840656,0.15593572809540057,0.1326167328495139
+1,leaf_category,Cell Phones & Accessories > Accessories > Mounts > Bedstand & Desk Mounts,733,95,0,11,3,3,0.0008071798260103513,0.0005144785083372596,0.0003765575790770916
+1,leaf_category,Cell Phones & Accessories > Accessories > Mounts > Handlebar Mounts,423,107,0,0,1,1,0.00046580773042616453,0.000579465267285124,0.0
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights,138,62,0,27,13,12,0.00015196564255037993,0.0003357649212306326,0.0009242776940983158
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights > Selfie Lights,1997,563,0,41,28,26,0.0021990970157471645,0.00304896210730397,0.001403532794741887
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Handheld Gimbals & Stabilizers,28,28,0,27,6,6,3.0833608633410416e-05,0.0001516357708783502,0.0009242776940983158
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Lens Attachments,512,232,0,13,12,9,0.0005638145578680762,0.0012564106729920446,0.00044502259345474465
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Photo & Video Kits,752,218,0,6,2,2,0.000828102631868737,0.0011805927875528693,0.00020539504313295905
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Selfie Sticks,1544,219,0,2,8,6,0.0017002532760709173,0.0011860083507985249,6.846501437765302e-05
+1,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods,7016,1224,0,153,71,66,0.007726021363285982,0.006628649412682166,0.005237573599890456
+1,leaf_category,Cell Phones & Accessories > Accessories > Screen Expanders & Magnifiers,167,41,0,13,11,8,0.00018390045149212643,0.00022203809307186993,0.00044502259345474465
+1,leaf_category,Cell Phones & Accessories > Accessories > Signal Boosters,27,13,0,3,9,8,2.973240832507433e-05,7.040232219351974e-05,0.00010269752156647952
+1,leaf_category,Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets,19031,1965,0,170,142,123,0.02095694306794406,0.01064158177771279,0.005819526222100507
+1,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories,891,488,0,92,25,11,0.000981169474727453,0.002642794863879818,0.003149390661372039
+1,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands,55315,19244,0,2517,1133,958,0.060912895055610615,0.10421709909939184,0.08616322059427632
+1,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers,8669,3098,0,769,207,151,0.009546305472965533,0.01677741493504032,0.026324798028207586
+1,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases,28515,8370,0,1033,341,287,0.0314007267922035,0.0453282643661354,0.03536217992605779
+1,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases with Band,2799,456,0,17,21,17,0.0030822596630327055,0.002469496840018846,0.0005819526222100507
+1,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors,44119,10688,0,985,513,419,0.04858385640347979,0.057881539969564536,0.03371901958099411
+1,leaf_category,Cell Phones & Accessories > Accessories > Stands,19787,3883,0,297,126,112,0.02178945050104614,0.02102863208287978,0.010167054635081474
+1,leaf_category,Cell Phones & Accessories > Accessories > Stylus Pens,12419,2604,0,324,702,492,0.013675806629225856,0.014102126691686569,0.01109133232917979
+1,leaf_category,Cell Phones & Accessories > Accessories > UV Phone Sterilizer Boxes,27,6,0,2,3,2,2.973240832507433e-05,3.2493379473932185e-05,6.846501437765302e-05
+1,leaf_category,Cell Phones & Accessories > Accessories > Virtual Reality (VR) Headsets,313,41,0,2,10,3,0.000344675696509195,0.00022203809307186993,6.846501437765302e-05
+1,leaf_category,Cell Phones & Accessories > Android 101,202,24,0,1,13,7,0.00022244246228388944,0.00012997351789572874,3.423250718882651e-05
+1,leaf_category,Cell Phones & Accessories > BlackBerry,1,0,0,0,1,0,1.1012003083360864e-06,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Cases Under $10,4,1,0,0,3,1,4.4048012333443454e-06,5.4155632456553645e-06,0.0
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves",1285,242,0,22,173,92,0.0014150423962118709,0.0013105663054485983,0.0007531151581541832
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Armbands",1299,235,0,9,27,21,0.0014304592005285762,0.0012726573627290106,0.00030809256469943857
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",241060,42294,0,8310,8602,5091,0.26545534632749695,0.229045831911748,0.2844721347391483
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Battery Charger Cases",1836,621,0,126,94,72,0.0020218037661050544,0.0033630647755519814,0.00431329590579214
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Bumpers",1920,222,0,38,41,32,0.002114304592005286,0.001202255040535491,0.0013008352731754074
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Case & Cover Bundles",4361,366,0,41,131,63,0.004802334544653672,0.001982096147909863,0.001403532794741887
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Crossbody & Lanyard Cases",44,26,0,9,11,7,4.84528135667878e-05,0.00014080464438703948,0.00030809256469943857
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Dry Bags",2190,301,0,52,10,10,0.002411628675256029,0.0016300845369422647,0.0017800903738189786
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",14288,3460,0,385,1063,659,0.015733950005506002,0.01873784882996756,0.013179515267698207
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",16659,2908,0,288,1252,700,0.018344895936570862,0.0157484579183658,0.009858962070382034
+1,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Sleeves",418,238,0,70,25,20,0.0004603017288844841,0.0012889040524659767,0.0023962755032178556
+1,leaf_category,Cell Phones & Accessories > Cell Phone Battery Chargers,197,80,0,2,7,6,0.00021693646074220902,0.00043324505965242917,6.846501437765302e-05
+1,leaf_category,Cell Phones & Accessories > Cell Phones,13368,3668,0,929,653,437,0.014720845721836802,0.019864285985063877,0.031801999178419825
+1,leaf_category,Cell Phones & Accessories > Deal of the Day: Save 50% or more on Samsung Galaxy S7 cases,1,0,0,0,1,0,1.1012003083360864e-06,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Huawei Brand Store,1,0,0,0,1,0,1.1012003083360864e-06,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Nokia,316,68,0,33,42,22,0.0003479792974342033,0.00036825830070456476,0.001129672737231275
+1,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes,155,69,0,4,3,1,0.0001706860477920934,0.00037367386395022016,0.00013693002875530603
+1,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes > Cell Phone Minutes,29,11,0,5,10,6,3.1934808941746504e-05,5.9571195702209005e-05,0.00017116253594413254
+1,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes > SIM Cards,772,136,0,15,69,43,0.0008501266380354587,0.0007365166014091295,0.0005134876078323977
+1,leaf_category,Cell Phones & Accessories > Samsung Galaxy S6 Cases,1,0,0,0,1,0,1.1012003083360864e-06,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Samsung Galaxy S8 Heavy Duty Cases,1,1,0,0,1,1,1.1012003083360864e-06,5.4155632456553645e-06,0.0
+1,leaf_category,Cell Phones & Accessories > Samsung Galaxy S8 Wallet Cases,10,1,0,0,1,1,1.1012003083360863e-05,5.4155632456553645e-06,0.0
+1,leaf_category,Cell Phones & Accessories > Save on Samsung Galaxy S8/8 Plus Cases,13,1,0,0,2,1,1.4315604008369122e-05,5.4155632456553645e-06,0.0
+1,leaf_category,Cell Phones & Accessories > TracFone,24,5,0,0,8,2,2.642880740006607e-05,2.7077816228276823e-05,0.0
+1,leaf_category,Cell Phones & Accessories > Use Alexa Built-in Smartphones > Alexa Features: Entertainment,52,3,0,0,1,1,5.726241603347649e-05,1.6246689736966093e-05,0.0
+1,leaf_category,Cell Phones & Accessories > V4 Customers Keep It - 30%,28,9,0,1,2,2,3.0833608633410416e-05,4.874006921089828e-05,3.423250718882651e-05
+1,leaf_category,Cell Phones & Accessories > V4 Customers Keep It - 70%,1,0,0,0,1,0,1.1012003083360864e-06,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Verizon Wireless,44,5,0,0,6,3,4.84528135667878e-05,2.7077816228276823e-05,0.0
+1,leaf_category,Cell Phones & Accessories > Virgin Mobile,11,0,0,0,5,0,1.211320339169695e-05,0.0,0.0
+1,leaf_category,Cell Phones & Accessories > Wireless Trade-In,906,381,0,48,41,17,0.0009976874793524943,0.002063329596594694,0.0016431603450636724
+1,leaf_category,Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Carrier Branded Wireless Trade-In,208,9,0,0,24,6,0.00022904966413390596,4.874006921089828e-05,0.0
+1,leaf_category,Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Unlocked Wireless Trade-In,4990,522,0,27,576,184,0.005494989538597071,0.0028269240142321,0.0009242776940983158
+1,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7 Cases",3,2,0,0,2,2,3.303600925008259e-06,1.0831126491310729e-05,0.0
+1,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Cases",10,3,0,0,2,1,1.1012003083360863e-05,1.6246689736966093e-05,0.0
+1,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Heavy Duty Cases",2,1,0,0,1,1,2.2024006166721727e-06,5.4155632456553645e-06,0.0
+1,leaf_category,Cell Phones & Accessories > iPhone Accessories,141,38,0,4,83,17,0.00015526924347538816,0.00020579140333490384,0.00013693002875530603
+1,leaf_category,Cell Phones & Accessories > iPhone SE 2020 and iPhone 6-8 Cases > iPhone X Wallet,31,4,0,0,1,1,3.4137209558418675e-05,2.1662252982621458e-05,0.0
+2,item_type,new-in-period,81927,29063,0,8228,1891,1518,0.08826438267614738,0.1472125700276565,0.27507354907729337
+2,item_type,warm-tail,283246,68840,0,10670,13330,8478,0.3051562163326869,0.3486946743524025,0.3567130248729607
+2,item_type,warm-head,563027,99519,1,11014,9062,6538,0.6065794009911657,0.504092755619941,0.36821342604974594
+2,leaf_category,(unknown),14849,3402,0,451,971,525,0.015997629821159234,0.017232122053266605,0.015077560845145761
+2,leaf_category,Cell Phones & Accessories > Accessories,1652,320,0,41,206,110,0.001779788838612368,0.0016208933148281347,0.0013706873495587055
+2,leaf_category,Cell Phones & Accessories > Accessories > Adhesive Card Holders,409,93,0,3,8,6,0.00044063779357897,0.00047107211962192663,0.00010029419630917357
+2,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories,1,0,0,0,1,0,1.077354018530489e-06,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles,40604,7603,0,1543,392,341,0.04374488256841198,0.03851141210199471,0.051584648301684945
+2,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Kits,174,83,0,8,4,3,0.0001874595992243051,0.00042041920353354744,0.0002674511901577962
+2,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Pads & Mats,954,89,0,1,7,7,0.0010277957336780866,0.000450810953186575,3.343139876972452e-05
+2,leaf_category,Cell Phones & Accessories > Accessories > Automobile Accessories > Speakerphones,378,57,0,1,14,9,0.0004072398190045249,0.00028872162170376147,3.343139876972452e-05
+2,leaf_category,Cell Phones & Accessories > Accessories > Cables & Adapters,3048,490,0,33,84,56,0.0032837750484809307,0.002481992888330581,0.0011032361594009094
+2,leaf_category,Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters,5299,1219,0,181,74,65,0.005708898944193062,0.0061745904711734256,0.006051083177320139
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters,1937,566,0,120,22,17,0.0020868347338935576,0.0028669550506022633,0.004011767852366943
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers,31137,6835,0,1212,401,329,0.03354557207498384,0.03462126814640719,0.04051885530890612
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations,15161,3969,0,1173,213,170,0.016333764274940744,0.020104142395477708,0.03921503075688687
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks,16821,4172,0,537,384,257,0.018122171945701357,0.021132396592071806,0.01795266113934207
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Solar Chargers,824,237,0,27,27,15,0.000887739711269123,0.0012004741112945872,0.0009026477667825622
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers,28145,7845,0,1437,519,420,0.030322128851540616,0.03973721267133349,0.04804092003209414
+2,leaf_category,Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers,35805,7142,0,1691,325,241,0.038574660633484165,0.03617631267032043,0.05653249531960417
+2,leaf_category,Cell Phones & Accessories > Accessories > Décor,16,3,0,0,2,2,1.7237664296487824e-05,1.5195874826513762e-05,0.0
+2,leaf_category,Cell Phones & Accessories > Accessories > Décor > Phone Charms,19,5,0,2,2,2,2.0469726352079293e-05,2.5326458044189604e-05,6.686279753944904e-05
+2,leaf_category,Cell Phones & Accessories > Accessories > Gaming Accessories,14,9,0,1,1,1,1.5082956259426848e-05,4.558762447954129e-05,3.343139876972452e-05
+2,leaf_category,Cell Phones & Accessories > Accessories > Gaming Accessories > Controllers,34,29,0,14,1,1,3.663003663003663e-05,0.0001468934566562997,0.0004680395827761434
+2,leaf_category,Cell Phones & Accessories > Accessories > Grips,8538,2092,0,166,173,123,0.009198448610213315,0.01059659004568893,0.005549612195774272
+2,leaf_category,Cell Phones & Accessories > Accessories > Lanyards & Wrist Straps,509,131,0,7,5,4,0.000548373195432019,0.0006635532007577676,0.0002340197913880717
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs",160,62,0,8,18,4,0.00017237664296487827,0.00031404807974795107,0.0002674511901577962
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Anti-Dust Plugs",44,24,0,2,3,3,4.7403576815341524e-05,0.0001215669986121101,6.686279753944904e-05
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Lens Protectors",1628,810,0,58,11,11,0.0017539323421676364,0.004102886203158716,0.0019390211286440225
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Repair Kits",95,22,0,1,21,9,0.00010234863176039647,0.00011143641539443426,3.343139876972452e-05
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts",433,40,0,5,151,26,0.0004664942900237018,0.00020261166435351684,0.00016715699384862263
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Back Covers",89,35,0,1,21,17,9.588450764921354e-05,0.00017728520630932724,3.343139876972452e-05
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",388,91,0,15,82,46,0.0004180133591898298,0.0004609415364042508,0.0005014709815458679
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Screens",467,79,0,18,146,51,0.0005031243266537384,0.00040015803709819573,0.0006017651778550414
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > SIM Card Tools & Accessories",146,37,0,5,6,4,0.0001572936867054514,0.00018741578952700307,0.00016715699384862263
+2,leaf_category,"Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",191207,30082,1,3277,3788,2447,0.20599762982115924,0.15237410217706232,0.10955469376838727
+2,leaf_category,Cell Phones & Accessories > Accessories > Mounts > Bedstand & Desk Mounts,766,162,0,16,3,3,0.0008252531781943546,0.0008205772406317431,0.0005349023803155924
+2,leaf_category,Cell Phones & Accessories > Accessories > Mounts > Handlebar Mounts,416,92,0,0,1,1,0.0004481792717086835,0.0004660068280130887,0.0
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights,133,45,0,17,13,10,0.00014328808446455505,0.00022793812239770643,0.000568333779085317
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights > Selfie Lights,2032,555,0,56,29,24,0.002189183365653954,0.002811236842905046,0.0018721583311045735
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Handheld Gimbals & Stabilizers,16,16,0,16,4,4,1.7237664296487824e-05,8.104466574140674e-05,0.0005349023803155924
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Lens Attachments,514,136,0,5,10,7,0.0005537599655246714,0.0006888796588019572,0.00016715699384862263
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Photo & Video Kits,801,198,0,6,2,2,0.0008629605688429217,0.0010029277385499083,0.00020058839261834715
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Selfie Sticks,1532,284,0,6,6,5,0.0016505063563887093,0.0014385428169099695,0.00020058839261834715
+2,leaf_category,Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods,7146,1152,0,111,68,61,0.007698771816418875,0.005835215933381285,0.0037108852634394223
+2,leaf_category,Cell Phones & Accessories > Accessories > Screen Expanders & Magnifiers,147,54,0,18,9,6,0.0001583710407239819,0.0002735257468772477,0.0006017651778550414
+2,leaf_category,Cell Phones & Accessories > Accessories > Signal Boosters,34,32,0,6,15,15,3.663003663003663e-05,0.00016208933148281347,0.00020058839261834715
+2,leaf_category,Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets,19634,2191,0,253,141,124,0.021152768799827623,0.011098053914963884,0.008458143888740305
+2,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories,921,505,0,47,28,17,0.0009922430510665805,0.00255797226246315,0.0015712757421770527
+2,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands,58953,19341,0,2651,1193,983,0.06351325145442792,0.09796780500653422,0.08862663813853972
+2,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers,9351,2675,0,608,212,175,0.010074337427278604,0.013549655053641438,0.02032629045199251
+2,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases,29654,7818,0,824,357,293,0.03194785606550313,0.039600449797894864,0.027547472586253008
+2,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases with Band,2858,430,0,20,20,17,0.003079077784960138,0.002178075391800306,0.0006686279753944905
+2,leaf_category,Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors,46054,9638,0,1036,536,439,0.04961646196940315,0.04881928052597988,0.03463492912543461
+2,leaf_category,Cell Phones & Accessories > Accessories > Stands,20200,3851,0,316,126,110,0.02176255117431588,0.019506437985634832,0.01056432201123295
+2,leaf_category,Cell Phones & Accessories > Accessories > Stylus Pens,12547,3211,0,248,709,544,0.013517560870502047,0.016264651355978564,0.008290986894891682
+2,leaf_category,Cell Phones & Accessories > Accessories > UV Phone Sterilizer Boxes,27,5,0,2,4,2,2.9088558500323205e-05,2.5326458044189604e-05,6.686279753944904e-05
+2,leaf_category,Cell Phones & Accessories > Accessories > Virtual Reality (VR) Headsets,304,45,0,0,9,6,0.0003275156216332687,0.00022793812239770643,0.0
+2,leaf_category,Cell Phones & Accessories > Android 101,197,20,0,0,16,8,0.00021223874165050635,0.00010130583217675842,0.0
+2,leaf_category,Cell Phones & Accessories > BlackBerry,1,0,0,0,1,0,1.077354018530489e-06,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > Cases Under $10,4,1,0,0,3,1,4.309416074121956e-06,5.065291608837921e-06,0.0
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves",1231,296,0,26,152,88,0.001326222796811032,0.0014993263162160245,0.0008692163680128377
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Armbands",1312,247,0,5,18,14,0.0014134884723120016,0.0012511270273829664,0.00016715699384862263
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",247396,52245,0,9544,8551,5812,0.2665330747683689,0.2646361601037372,0.31906926985825085
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Battery Charger Cases",1854,769,0,206,96,78,0.001997414350355527,0.003895209247196361,0.006886868146563252
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Bumpers",1998,315,0,56,41,35,0.0021525533290239172,0.001595566856783945,0.0018721583311045735
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Case & Cover Bundles",4563,642,0,51,125,85,0.0049159663865546216,0.003251917212873945,0.0017050013372559509
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Crossbody & Lanyard Cases",40,30,0,7,8,6,4.309416074121957e-05,0.00015195874826513762,0.0002340197913880717
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Dry Bags",2223,317,0,28,10,10,0.0023949579831932773,0.001605697440001621,0.0009360791655522868
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",13779,4240,0,524,928,667,0.01484486102133161,0.021476836421472783,0.01751805295533565
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",17075,3510,0,327,1233,816,0.018395819866408102,0.0177791735470211,0.01093206739769992
+2,leaf_category,"Cell Phones & Accessories > Cases, Holsters & Sleeves > Sleeves",422,237,0,72,30,29,0.00045464339581986643,0.0012004741112945872,0.0024070607114201658
+2,leaf_category,Cell Phones & Accessories > Cell Phone Battery Chargers,177,55,0,0,6,5,0.00019069166127989659,0.00027859103848608565,0.0
+2,leaf_category,Cell Phones & Accessories > Cell Phones,13306,3288,0,659,647,400,0.014335272570566689,0.016654678809859085,0.022031291789248463
+2,leaf_category,Cell Phones & Accessories > Deal of the Day: Save 50% or more on Samsung Galaxy S7 cases,1,1,0,0,1,1,1.077354018530489e-06,5.065291608837921e-06,0.0
+2,leaf_category,Cell Phones & Accessories > Deals in Unlocked Cell Phones,1,0,0,0,1,0,1.077354018530489e-06,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > Huawei Brand Store,1,0,0,0,1,0,1.077354018530489e-06,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > Nokia,320,63,0,20,49,22,0.00034475328592975654,0.000319113371356789,0.0006686279753944905
+2,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes,138,41,0,0,3,1,0.0001486748545572075,0.00020767695596235475,0.0
+2,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes > Cell Phone Minutes,25,9,0,0,10,9,2.6933850463262227e-05,4.558762447954129e-05,0.0
+2,leaf_category,Cell Phones & Accessories > SIM Cards & Prepaid Minutes > SIM Cards,729,108,0,18,73,44,0.0007853910795087266,0.0005470514937544954,0.0006017651778550414
+2,leaf_category,Cell Phones & Accessories > Samsung Galaxy S6 Cases,1,1,0,0,1,1,1.077354018530489e-06,5.065291608837921e-06,0.0
+2,leaf_category,Cell Phones & Accessories > Samsung Galaxy S8 Heavy Duty Cases,1,1,0,0,1,1,1.077354018530489e-06,5.065291608837921e-06,0.0
+2,leaf_category,Cell Phones & Accessories > Samsung Galaxy S8 Wallet Cases,6,3,0,0,1,1,6.464124111182935e-06,1.5195874826513762e-05,0.0
+2,leaf_category,Cell Phones & Accessories > Save on Samsung Galaxy S8/8 Plus Cases,10,2,0,0,2,1,1.0773540185304892e-05,1.0130583217675842e-05,0.0
+2,leaf_category,Cell Phones & Accessories > TracFone,14,3,0,0,8,3,1.5082956259426848e-05,1.5195874826513762e-05,0.0
+2,leaf_category,Cell Phones & Accessories > Use Alexa Built-in Smartphones > Alexa Features: Entertainment,62,1,0,0,1,1,6.679594914889033e-05,5.065291608837921e-06,0.0
+2,leaf_category,Cell Phones & Accessories > V4 Customers Keep It - 30%,26,8,0,0,3,2,2.8011204481792718e-05,4.052233287070337e-05,0.0
+2,leaf_category,Cell Phones & Accessories > V4 Customers Keep It - 70%,1,0,0,0,1,0,1.077354018530489e-06,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > Verizon Wireless,37,6,0,0,6,4,3.9862098685628095e-05,3.0391749653027525e-05,0.0
+2,leaf_category,Cell Phones & Accessories > Virgin Mobile,11,0,0,0,8,0,1.1850894203835381e-05,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > Wireless Trade-In,926,444,0,45,41,18,0.000997629821159233,0.002248989474324037,0.0015044129446376037
+2,leaf_category,Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Carrier Branded Wireless Trade-In,185,5,0,0,24,3,0.00019931049342814048,2.5326458044189604e-05,0.0
+2,leaf_category,Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Unlocked Wireless Trade-In,4912,349,0,17,514,170,0.005291962939021762,0.0017677867714844344,0.000568333779085317
+2,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7 Cases",1,1,0,0,1,1,1.077354018530489e-06,5.065291608837921e-06,0.0
+2,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Cases",5,1,0,0,2,1,5.386770092652446e-06,5.065291608837921e-06,0.0
+2,leaf_category,"Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Heavy Duty Cases",1,0,0,0,1,0,1.077354018530489e-06,0.0,0.0
+2,leaf_category,Cell Phones & Accessories > iPhone Accessories,145,40,0,5,86,25,0.0001562163326869209,0.00020261166435351684,0.00016715699384862263
+2,leaf_category,Cell Phones & Accessories > iPhone SE 2020 and iPhone 6-8 Cases > iPhone X Wallet,38,14,0,1,1,1,4.0939452704158586e-05,7.09140825237309e-05,3.343139876972452e-05

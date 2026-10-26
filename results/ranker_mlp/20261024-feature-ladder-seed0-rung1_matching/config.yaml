@@ -1,0 +1,50 @@
+model: mlp
+history_length: 50
+item_text_dim: 384
+hidden_dims:
+- 256
+- 128
+- 64
+dropout: 0.1
+loss: binary_cross_entropy
+optimizer: adam
+learning_rate: 0.001
+batch_size: 2048
+max_epochs: 30
+early_stopping:
+  metric: ndcg@10_macro
+  patience: 3
+negative_sampling:
+  negatives_per_list: 50
+  strategy: uniform_without_replacement
+seed: 0
+experiment: feature_ladder_1_matching
+feature_groups:
+- retrieval
+- matching
+k1: 200
+run:
+  candidate_dir: data/processed/candidates/two_tower_text_seed0
+  resume_checkpoint: null
+  seed: 0
+  git_hash: df4899d6dee44e6093b457b486ccedbb10006dd7-dirty
+  device: mps
+  feature_spec:
+    cardinalities:
+      item_id: 111482
+      leaf_category: 141
+      top_category: 3
+      store: 3499
+      price_bucket: 12
+      review_count_bucket: 16
+      rating_bucket: 12
+      item_age_bucket: 18
+      history_length_bucket: 6
+      recency_bucket: 8
+    history_length: 50
+    item_text_dim: 384
+    feature_groups:
+    - retrieval
+    - matching
+  score_mean: -0.17960958182811737
+  score_std: 0.08012501895427704

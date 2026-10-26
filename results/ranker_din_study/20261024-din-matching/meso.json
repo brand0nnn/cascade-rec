@@ -1,0 +1,3354 @@
+{
+  "scope": "validation only",
+  "planned_seeds": [
+    0,
+    1,
+    2
+  ],
+  "models": {
+    "matching": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "groups": {
+        "overall": {
+          "all": {
+            "n_instances": 232904,
+            "n_users": 124416,
+            "n_retrieved": 16672,
+            "n_retrieved_users": 15011,
+            "retrieval_recall200_micro": 0.07158314155188404,
+            "retrieval_recall200_macro": 0.06871385894573473,
+            "baseline_ndcg10_macro": 0.005642046683164716,
+            "baseline_ndcg10_micro": 0.006099651216869439,
+            "baseline_conditional_ndcg10_macro": 0.08281619200260189,
+            "ndcg10_macro_mean": 0.006842766568130873,
+            "ndcg10_macro_seed_std": 0.0002328523097736525,
+            "ndcg10_micro_mean": 0.007066492722724434,
+            "conditional_ndcg10_macro_mean": 0.09905604291794774,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012007198849661592,
+              "ci_low": 0.0009022351833109799,
+              "ci_high": 0.001494127952750265,
+              "n_users": 124416,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 2476.3333333333335,
+            "demoted_mean": 1747.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.00710484924666734,
+                "ndcg10_micro": 0.00737746567867788,
+                "recall10_macro": 0.01415619790264707,
+                "conditional_ndcg10_macro": 0.10284316935274888,
+                "rescued": 2533,
+                "demoted": 1707,
+                "retained": 906,
+                "unrescued": 11526
+              },
+              {
+                "ndcg10_macro": 0.006659718494920886,
+                "ndcg10_micro": 0.006829695377780125,
+                "recall10_macro": 0.013689042197393742,
+                "conditional_ndcg10_macro": 0.09578244701148966,
+                "rescued": 2467,
+                "demoted": 1818,
+                "retained": 795,
+                "unrescued": 11592
+              },
+              {
+                "ndcg10_macro": 0.0067637319628043955,
+                "ndcg10_micro": 0.006992317111715296,
+                "recall10_macro": 0.013757998114203869,
+                "conditional_ndcg10_macro": 0.09854251238960471,
+                "rescued": 2429,
+                "demoted": 1716,
+                "retained": 897,
+                "unrescued": 11630
+              }
+            ]
+          }
+        },
+        "item_type": {
+          "new-in-period": {
+            "n_instances": 76768,
+            "n_users": 52420,
+            "n_retrieved": 2224,
+            "n_retrieved_users": 2116,
+            "retrieval_recall200_micro": 0.02897040433513964,
+            "retrieval_recall200_macro": 0.02611270692891464,
+            "baseline_ndcg10_macro": 0.0003605173300036584,
+            "baseline_ndcg10_micro": 0.0003598405097925591,
+            "baseline_conditional_ndcg10_macro": 0.012432487641663974,
+            "ndcg10_macro_mean": 0.002820110373446538,
+            "ndcg10_macro_seed_std": 0.00023007960727493507,
+            "ndcg10_micro_mean": 0.003099408205013775,
+            "conditional_ndcg10_macro_mean": 0.10719901065094979,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.002459593043442879,
+              "ci_low": 0.0021650417005403435,
+              "ci_high": 0.002786611030948591,
+              "n_users": 52420,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 475.3333333333333,
+            "demoted_mean": 51.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0030802864779402098,
+                "ndcg10_micro": 0.003437428962107019,
+                "recall10_macro": 0.0063538674276382955,
+                "conditional_ndcg10_macro": 0.11855751901280105,
+                "rescued": 534,
+                "demoted": 50,
+                "retained": 16,
+                "unrescued": 1624
+              },
+              {
+                "ndcg10_macro": 0.002736583266976841,
+                "ndcg10_micro": 0.002969041546035183,
+                "recall10_macro": 0.005417572962880098,
+                "conditional_ndcg10_macro": 0.1024825037819038,
+                "rescued": 446,
+                "demoted": 54,
+                "retained": 12,
+                "unrescued": 1712
+              },
+              {
+                "ndcg10_macro": 0.002643461375422562,
+                "ndcg10_micro": 0.002891754106899124,
+                "recall10_macro": 0.005494014707578232,
+                "conditional_ndcg10_macro": 0.10055700915814454,
+                "rescued": 446,
+                "demoted": 49,
+                "retained": 17,
+                "unrescued": 1712
+              }
+            ]
+          },
+          "warm-head": {
+            "n_instances": 109765,
+            "n_users": 75877,
+            "n_retrieved": 13687,
+            "n_retrieved_users": 12447,
+            "retrieval_recall200_micro": 0.12469366373616363,
+            "retrieval_recall200_macro": 0.11799383248519142,
+            "baseline_ndcg10_macro": 0.011289672487539563,
+            "baseline_ndcg10_micro": 0.012617914145383664,
+            "baseline_conditional_ndcg10_macro": 0.09829290422755496,
+            "ndcg10_macro_mean": 0.011538265715238262,
+            "ndcg10_macro_seed_std": 0.0003125141654167993,
+            "ndcg10_micro_mean": 0.012282277555593095,
+            "conditional_ndcg10_macro_mean": 0.09848233892889324,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.00024859322769870155,
+              "ci_low": -0.0003027334810906773,
+              "ci_high": 0.000838949655165375,
+              "n_users": 75877,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 2,
+            "rescued_mean": 1881.3333333333333,
+            "demoted_mean": 1680.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.011867106123050253,
+                "ndcg10_micro": 0.012696468967647478,
+                "recall10_macro": 0.02360335385785243,
+                "conditional_ndcg10_macro": 0.10117558506962722,
+                "rescued": 1878,
+                "demoted": 1641,
+                "retained": 887,
+                "unrescued": 9281
+              },
+              {
+                "ndcg10_macro": 0.011245147829812003,
+                "ndcg10_micro": 0.011860833917117656,
+                "recall10_macro": 0.023185633976123846,
+                "conditional_ndcg10_macro": 0.09524788540001276,
+                "rescued": 1897,
+                "demoted": 1748,
+                "retained": 780,
+                "unrescued": 9262
+              },
+              {
+                "ndcg10_macro": 0.011502543192852531,
+                "ndcg10_micro": 0.012289529782014155,
+                "recall10_macro": 0.023432661984141196,
+                "conditional_ndcg10_macro": 0.09902354631703976,
+                "rescued": 1869,
+                "demoted": 1651,
+                "retained": 877,
+                "unrescued": 9290
+              }
+            ]
+          },
+          "warm-tail": {
+            "n_instances": 46371,
+            "n_users": 37944,
+            "n_retrieved": 761,
+            "n_retrieved_users": 740,
+            "retrieval_recall200_micro": 0.01641111901835199,
+            "retrieval_recall200_macro": 0.01529436541098464,
+            "baseline_ndcg10_macro": 0.00016606664280761403,
+            "baseline_ndcg10_micro": 0.0001725989215235217,
+            "baseline_conditional_ndcg10_macro": 0.01049474747553407,
+            "ndcg10_macro_mean": 0.001174881701524971,
+            "ndcg10_macro_seed_std": 4.870885250935561e-05,
+            "ndcg10_micro_mean": 0.0012877629579098563,
+            "conditional_ndcg10_macro_mean": 0.07867663121464004,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.001008815058717357,
+              "ci_low": 0.0008054312743790359,
+              "ci_high": 0.0012241965429659757,
+              "n_users": 37944,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 119.66666666666667,
+            "demoted_mean": 16.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0011592073851079195,
+                "ndcg10_micro": 0.0013096289411471773,
+                "recall10_macro": 0.002347318855857755,
+                "conditional_ndcg10_macro": 0.08054171868999825,
+                "rescued": 121,
+                "demoted": 16,
+                "retained": 3,
+                "unrescued": 621
+              },
+              {
+                "ndcg10_macro": 0.001229498012851331,
+                "ndcg10_micro": 0.001311844815683381,
+                "recall10_macro": 0.0024848021645934365,
+                "conditional_ndcg10_macro": 0.07979764862995273,
+                "rescued": 124,
+                "demoted": 16,
+                "retained": 3,
+                "unrescued": 618
+              },
+              {
+                "ndcg10_macro": 0.0011359397066156628,
+                "ndcg10_micro": 0.0012418151168990107,
+                "recall10_macro": 0.0022805537985803636,
+                "conditional_ndcg10_macro": 0.07569052632396917,
+                "rescued": 114,
+                "demoted": 16,
+                "retained": 3,
+                "unrescued": 628
+              }
+            ]
+          }
+        },
+        "history_length": {
+          "1-2": {
+            "n_instances": 31556,
+            "n_users": 22413,
+            "n_retrieved": 2236,
+            "n_retrieved_users": 2137,
+            "retrieval_recall200_micro": 0.07085815692736722,
+            "retrieval_recall200_macro": 0.06833087940034802,
+            "baseline_ndcg10_macro": 0.0057829682290809654,
+            "baseline_ndcg10_micro": 0.006233748601886873,
+            "baseline_conditional_ndcg10_macro": 0.08626113931338175,
+            "ndcg10_macro_mean": 0.006629457966867504,
+            "ndcg10_macro_seed_std": 0.0004221195278491109,
+            "ndcg10_micro_mean": 0.0067395780684382485,
+            "conditional_ndcg10_macro_mean": 0.09430395933601553,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008464897377865364,
+              "ci_low": 0.00013745136727349723,
+              "ci_high": 0.0016076968060408214,
+              "n_users": 22413,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 314.0,
+            "demoted_mean": 231.66666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007052028706718573,
+                "ndcg10_micro": 0.007085545571095461,
+                "recall10_macro": 0.01423281131486191,
+                "conditional_ndcg10_macro": 0.09893344572288594,
+                "rescued": 317,
+                "demoted": 222,
+                "retained": 136,
+                "unrescued": 1561
+              },
+              {
+                "ndcg10_macro": 0.006207791102608826,
+                "ndcg10_micro": 0.006401395297327729,
+                "recall10_macro": 0.012871993932092981,
+                "conditional_ndcg10_macro": 0.08923278333604044,
+                "rescued": 307,
+                "demoted": 243,
+                "retained": 115,
+                "unrescued": 1571
+              },
+              {
+                "ndcg10_macro": 0.006628554091275111,
+                "ndcg10_micro": 0.006731793336891555,
+                "recall10_macro": 0.013875875607906126,
+                "conditional_ndcg10_macro": 0.09474564894912019,
+                "rescued": 318,
+                "demoted": 230,
+                "retained": 128,
+                "unrescued": 1560
+              }
+            ]
+          },
+          "11+": {
+            "n_instances": 25271,
+            "n_users": 11043,
+            "n_retrieved": 1685,
+            "n_retrieved_users": 1451,
+            "retrieval_recall200_micro": 0.06667721894661865,
+            "retrieval_recall200_macro": 0.06659866832485457,
+            "baseline_ndcg10_macro": 0.005225736460317078,
+            "baseline_ndcg10_micro": 0.005404989379706554,
+            "baseline_conditional_ndcg10_macro": 0.07965533815775104,
+            "ndcg10_macro_mean": 0.005487965331263187,
+            "ndcg10_macro_seed_std": 0.0002399032500038812,
+            "ndcg10_micro_mean": 0.0054378334595001345,
+            "conditional_ndcg10_macro_mean": 0.08158737876124479,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.00026222887094610873,
+              "ci_low": -0.0007205975756138042,
+              "ci_high": 0.001265197646116207,
+              "n_users": 11043,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 240.66666666666666,
+            "demoted_mean": 204.66666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005764758501455895,
+                "ndcg10_micro": 0.005775719088342208,
+                "recall10_macro": 0.012266432956494084,
+                "conditional_ndcg10_macro": 0.0864904497751386,
+                "rescued": 245,
+                "demoted": 195,
+                "retained": 64,
+                "unrescued": 1181
+              },
+              {
+                "ndcg10_macro": 0.005359198131579609,
+                "ndcg10_micro": 0.0052629234159910126,
+                "recall10_macro": 0.012308266418902114,
+                "conditional_ndcg10_macro": 0.07826974426955771,
+                "rescued": 255,
+                "demoted": 221,
+                "retained": 38,
+                "unrescued": 1171
+              },
+              {
+                "ndcg10_macro": 0.005339939360754058,
+                "ndcg10_micro": 0.005274857874167182,
+                "recall10_macro": 0.011211097706852984,
+                "conditional_ndcg10_macro": 0.08000194223903806,
+                "rescued": 222,
+                "demoted": 198,
+                "retained": 61,
+                "unrescued": 1204
+              }
+            ]
+          },
+          "3-5": {
+            "n_instances": 116282,
+            "n_users": 79720,
+            "n_retrieved": 8406,
+            "n_retrieved_users": 7984,
+            "retrieval_recall200_micro": 0.0722897782975869,
+            "retrieval_recall200_macro": 0.06941587221943468,
+            "baseline_ndcg10_macro": 0.005697577163978726,
+            "baseline_ndcg10_micro": 0.0061686856872734605,
+            "baseline_conditional_ndcg10_macro": 0.08418371796431733,
+            "ndcg10_macro_mean": 0.006979258241010404,
+            "ndcg10_macro_seed_std": 0.0002918553372289593,
+            "ndcg10_micro_mean": 0.007379661689927721,
+            "conditional_ndcg10_macro_mean": 0.10263998850148637,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012816810770316792,
+              "ci_low": 0.0008981967912359456,
+              "ci_high": 0.001675562058686574,
+              "n_users": 79720,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1249.0,
+            "demoted_mean": 835.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007290059487190487,
+                "ndcg10_micro": 0.007747567665059287,
+                "recall10_macro": 0.014448486368958013,
+                "conditional_ndcg10_macro": 0.10756629075109793,
+                "rescued": 1288,
+                "demoted": 820,
+                "retained": 488,
+                "unrescued": 5810
+              },
+              {
+                "ndcg10_macro": 0.006711023771496916,
+                "ndcg10_micro": 0.007058949032270479,
+                "recall10_macro": 0.013739755812008696,
+                "conditional_ndcg10_macro": 0.09816503194983493,
+                "rescued": 1227,
+                "demoted": 862,
+                "retained": 446,
+                "unrescued": 5871
+              },
+              {
+                "ndcg10_macro": 0.006936691464343807,
+                "ndcg10_micro": 0.007332468372453397,
+                "recall10_macro": 0.014044990801137311,
+                "conditional_ndcg10_macro": 0.10218864280352626,
+                "rescued": 1232,
+                "demoted": 824,
+                "retained": 484,
+                "unrescued": 5866
+              }
+            ]
+          },
+          "6-10": {
+            "n_instances": 59795,
+            "n_users": 39178,
+            "n_retrieved": 4345,
+            "n_retrieved_users": 4087,
+            "retrieval_recall200_micro": 0.0726649385400117,
+            "retrieval_recall200_macro": 0.07192557047322477,
+            "baseline_ndcg10_macro": 0.0059557316114270745,
+            "baseline_ndcg10_micro": 0.006188216413253973,
+            "baseline_conditional_ndcg10_macro": 0.0838781261878261,
+            "ndcg10_macro_mean": 0.0072080361175232595,
+            "ndcg10_macro_seed_std": 0.00015595200266767446,
+            "ndcg10_micro_mean": 0.007318320688729347,
+            "conditional_ndcg10_macro_mean": 0.10118763742271676,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012523045060961841,
+              "ci_low": 0.0006237610889320799,
+              "ci_high": 0.0018829290150148494,
+              "n_users": 39178,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 672.6666666666666,
+            "demoted_mean": 475.3333333333333,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007327468671550169,
+                "ndcg10_micro": 0.007488735347025416,
+                "recall10_macro": 0.014704255789814009,
+                "conditional_ndcg10_macro": 0.1028056374095962,
+                "rescued": 683,
+                "demoted": 470,
+                "retained": 218,
+                "unrescued": 2974
+              },
+              {
+                "ndcg10_macro": 0.00726503713106701,
+                "ndcg10_micro": 0.00727206109621279,
+                "recall10_macro": 0.014641295284768662,
+                "conditional_ndcg10_macro": 0.10078572907851599,
+                "rescued": 678,
+                "demoted": 492,
+                "retained": 196,
+                "unrescued": 2979
+              },
+              {
+                "ndcg10_macro": 0.007031602549952598,
+                "ndcg10_micro": 0.007194165622949833,
+                "recall10_macro": 0.01443454659928191,
+                "conditional_ndcg10_macro": 0.09997154578003813,
+                "rescued": 657,
+                "demoted": 464,
+                "retained": 224,
+                "unrescued": 3000
+              }
+            ]
+          }
+        },
+        "history_diversity": {
+          "1-2": {
+            "n_instances": 31556,
+            "n_users": 22413,
+            "n_retrieved": 2236,
+            "n_retrieved_users": 2137,
+            "retrieval_recall200_micro": 0.07085815692736722,
+            "retrieval_recall200_macro": 0.06833087940034802,
+            "baseline_ndcg10_macro": 0.0057829682290809654,
+            "baseline_ndcg10_micro": 0.006233748601886873,
+            "baseline_conditional_ndcg10_macro": 0.08626113931338175,
+            "ndcg10_macro_mean": 0.006629457966867504,
+            "ndcg10_macro_seed_std": 0.0004221195278491109,
+            "ndcg10_micro_mean": 0.0067395780684382485,
+            "conditional_ndcg10_macro_mean": 0.09430395933601553,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008464897377865364,
+              "ci_low": 0.00013745136727349723,
+              "ci_high": 0.0016076968060408214,
+              "n_users": 22413,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 314.0,
+            "demoted_mean": 231.66666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007052028706718573,
+                "ndcg10_micro": 0.007085545571095461,
+                "recall10_macro": 0.01423281131486191,
+                "conditional_ndcg10_macro": 0.09893344572288594,
+                "rescued": 317,
+                "demoted": 222,
+                "retained": 136,
+                "unrescued": 1561
+              },
+              {
+                "ndcg10_macro": 0.006207791102608826,
+                "ndcg10_micro": 0.006401395297327729,
+                "recall10_macro": 0.012871993932092981,
+                "conditional_ndcg10_macro": 0.08923278333604044,
+                "rescued": 307,
+                "demoted": 243,
+                "retained": 115,
+                "unrescued": 1571
+              },
+              {
+                "ndcg10_macro": 0.006628554091275111,
+                "ndcg10_micro": 0.006731793336891555,
+                "recall10_macro": 0.013875875607906126,
+                "conditional_ndcg10_macro": 0.09474564894912019,
+                "rescued": 318,
+                "demoted": 230,
+                "retained": 128,
+                "unrescued": 1560
+              }
+            ]
+          },
+          "11+ / homogeneous": {
+            "n_instances": 248,
+            "n_users": 138,
+            "n_retrieved": 20,
+            "n_retrieved_users": 18,
+            "retrieval_recall200_micro": 0.08064516129032258,
+            "retrieval_recall200_macro": 0.08699677938808374,
+            "baseline_ndcg10_macro": 0.0066337153840533404,
+            "baseline_ndcg10_micro": 0.008326773738188338,
+            "baseline_conditional_ndcg10_macro": 0.07858471606881762,
+            "ndcg10_macro_mean": 0.0019694403258163806,
+            "ndcg10_macro_seed_std": 0.0014188763333368858,
+            "ndcg10_micro_mean": 0.0023301485355482535,
+            "conditional_ndcg10_macro_mean": 0.019350349051443727,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": -0.004664275058236961,
+              "ci_low": -0.011865796804994305,
+              "ci_high": 0.0006180286357971701,
+              "n_users": 138,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 0,
+            "rescued_mean": 1.3333333333333333,
+            "demoted_mean": 3.6666666666666665,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.001665556812660279,
+                "ndcg10_micro": 0.0027804053243603044,
+                "recall10_macro": 0.004830917874396135,
+                "conditional_ndcg10_macro": 0.019153903345593207,
+                "rescued": 1,
+                "demoted": 3,
+                "retained": 1,
+                "unrescued": 15
+              },
+              {
+                "ndcg10_macro": 0.0007271255933912589,
+                "ndcg10_micro": 0.0012138306276773436,
+                "recall10_macro": 0.0024154589371980675,
+                "conditional_ndcg10_macro": 0.008361944323999478,
+                "rescued": 1,
+                "demoted": 4,
+                "retained": 0,
+                "unrescued": 15
+              },
+              {
+                "ndcg10_macro": 0.0035156385713976043,
+                "ndcg10_micro": 0.002996209654607112,
+                "recall10_macro": 0.00966183574879227,
+                "conditional_ndcg10_macro": 0.0305351994847385,
+                "rescued": 2,
+                "demoted": 4,
+                "retained": 0,
+                "unrescued": 14
+              }
+            ]
+          },
+          "11+ / mixed": {
+            "n_instances": 25023,
+            "n_users": 10936,
+            "n_retrieved": 1665,
+            "n_retrieved_users": 1433,
+            "retrieval_recall200_micro": 0.06653878431842705,
+            "retrieval_recall200_macro": 0.06627338706821834,
+            "baseline_ndcg10_macro": 0.005193156090735381,
+            "baseline_ndcg10_micro": 0.00537603191973359,
+            "baseline_conditional_ndcg10_macro": 0.07966878630680951,
+            "ndcg10_macro_mean": 0.005517249097959219,
+            "ndcg10_macro_seed_std": 0.00024765051145915246,
+            "ndcg10_micro_mean": 0.005468633358039081,
+            "conditional_ndcg10_macro_mean": 0.08236914186995131,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0003240930072238367,
+              "ci_low": -0.0006998440328436441,
+              "ci_high": 0.001214121686922956,
+              "n_users": 10936,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 239.33333333333334,
+            "demoted_mean": 201.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005801466215503495,
+                "ndcg10_micro": 0.005805405289575773,
+                "recall10_macro": 0.012330061491578045,
+                "conditional_ndcg10_macro": 0.08733626822296263,
+                "rescued": 244,
+                "demoted": 192,
+                "retained": 63,
+                "unrescued": 1166
+              },
+              {
+                "ndcg10_macro": 0.005402458086608049,
+                "ndcg10_micro": 0.0053030534967767615,
+                "recall10_macro": 0.012398212575951239,
+                "conditional_ndcg10_macro": 0.0791478603889018,
+                "rescued": 254,
+                "demoted": 217,
+                "retained": 38,
+                "unrescued": 1156
+              },
+              {
+                "ndcg10_macro": 0.005347822991766111,
+                "ndcg10_micro": 0.00529744128776471,
+                "recall10_macro": 0.011198867834989409,
+                "conditional_ndcg10_macro": 0.0806232969979895,
+                "rescued": 220,
+                "demoted": 194,
+                "retained": 61,
+                "unrescued": 1190
+              }
+            ]
+          },
+          "3-5": {
+            "n_instances": 116282,
+            "n_users": 79720,
+            "n_retrieved": 8406,
+            "n_retrieved_users": 7984,
+            "retrieval_recall200_micro": 0.0722897782975869,
+            "retrieval_recall200_macro": 0.06941587221943468,
+            "baseline_ndcg10_macro": 0.005697577163978726,
+            "baseline_ndcg10_micro": 0.0061686856872734605,
+            "baseline_conditional_ndcg10_macro": 0.08418371796431733,
+            "ndcg10_macro_mean": 0.006979258241010404,
+            "ndcg10_macro_seed_std": 0.0002918553372289593,
+            "ndcg10_micro_mean": 0.007379661689927721,
+            "conditional_ndcg10_macro_mean": 0.10263998850148637,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012816810770316792,
+              "ci_low": 0.0008981967912359456,
+              "ci_high": 0.001675562058686574,
+              "n_users": 79720,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1249.0,
+            "demoted_mean": 835.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007290059487190487,
+                "ndcg10_micro": 0.007747567665059287,
+                "recall10_macro": 0.014448486368958013,
+                "conditional_ndcg10_macro": 0.10756629075109793,
+                "rescued": 1288,
+                "demoted": 820,
+                "retained": 488,
+                "unrescued": 5810
+              },
+              {
+                "ndcg10_macro": 0.006711023771496916,
+                "ndcg10_micro": 0.007058949032270479,
+                "recall10_macro": 0.013739755812008696,
+                "conditional_ndcg10_macro": 0.09816503194983493,
+                "rescued": 1227,
+                "demoted": 862,
+                "retained": 446,
+                "unrescued": 5871
+              },
+              {
+                "ndcg10_macro": 0.006936691464343807,
+                "ndcg10_micro": 0.007332468372453397,
+                "recall10_macro": 0.014044990801137311,
+                "conditional_ndcg10_macro": 0.10218864280352626,
+                "rescued": 1232,
+                "demoted": 824,
+                "retained": 484,
+                "unrescued": 5866
+              }
+            ]
+          },
+          "6-10": {
+            "n_instances": 59795,
+            "n_users": 39178,
+            "n_retrieved": 4345,
+            "n_retrieved_users": 4087,
+            "retrieval_recall200_micro": 0.0726649385400117,
+            "retrieval_recall200_macro": 0.07192557047322477,
+            "baseline_ndcg10_macro": 0.0059557316114270745,
+            "baseline_ndcg10_micro": 0.006188216413253973,
+            "baseline_conditional_ndcg10_macro": 0.0838781261878261,
+            "ndcg10_macro_mean": 0.0072080361175232595,
+            "ndcg10_macro_seed_std": 0.00015595200266767446,
+            "ndcg10_micro_mean": 0.007318320688729347,
+            "conditional_ndcg10_macro_mean": 0.10118763742271676,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012523045060961841,
+              "ci_low": 0.0006237610889320799,
+              "ci_high": 0.0018829290150148494,
+              "n_users": 39178,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 672.6666666666666,
+            "demoted_mean": 475.3333333333333,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007327468671550169,
+                "ndcg10_micro": 0.007488735347025416,
+                "recall10_macro": 0.014704255789814009,
+                "conditional_ndcg10_macro": 0.1028056374095962,
+                "rescued": 683,
+                "demoted": 470,
+                "retained": 218,
+                "unrescued": 2974
+              },
+              {
+                "ndcg10_macro": 0.00726503713106701,
+                "ndcg10_micro": 0.00727206109621279,
+                "recall10_macro": 0.014641295284768662,
+                "conditional_ndcg10_macro": 0.10078572907851599,
+                "rescued": 678,
+                "demoted": 492,
+                "retained": 196,
+                "unrescued": 2979
+              },
+              {
+                "ndcg10_macro": 0.007031602549952598,
+                "ndcg10_micro": 0.007194165622949833,
+                "recall10_macro": 0.01443454659928191,
+                "conditional_ndcg10_macro": 0.09997154578003813,
+                "rescued": 657,
+                "demoted": 464,
+                "retained": 224,
+                "unrescued": 3000
+              }
+            ]
+          }
+        },
+        "validation_window": {
+          "days 0-89": {
+            "n_instances": 61523,
+            "n_users": 43362,
+            "n_retrieved": 5297,
+            "n_retrieved_users": 4894,
+            "retrieval_recall200_micro": 0.08609788209287583,
+            "retrieval_recall200_macro": 0.08143113278646695,
+            "baseline_ndcg10_macro": 0.007170018248137472,
+            "baseline_ndcg10_micro": 0.008047512619656663,
+            "baseline_conditional_ndcg10_macro": 0.09087705188599182,
+            "ndcg10_macro_mean": 0.008360225684012831,
+            "ndcg10_macro_seed_std": 0.00030404246740088473,
+            "ndcg10_micro_mean": 0.009055118058593175,
+            "conditional_ndcg10_macro_mean": 0.10501838068340417,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.00119020743587536,
+              "ci_low": 0.0005687511903690187,
+              "ci_high": 0.0018397314810200726,
+              "n_users": 43362,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 789.6666666666666,
+            "demoted_mean": 592.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.008674934500042359,
+                "ndcg10_micro": 0.009484614939752098,
+                "recall10_macro": 0.016858939570645673,
+                "conditional_ndcg10_macro": 0.10938593243476931,
+                "rescued": 810,
+                "demoted": 579,
+                "retained": 329,
+                "unrescued": 3579
+              },
+              {
+                "ndcg10_macro": 0.008068110032243834,
+                "ndcg10_micro": 0.008656890446840065,
+                "recall10_macro": 0.016268564641852314,
+                "conditional_ndcg10_macro": 0.10050580837619061,
+                "rescued": 773,
+                "demoted": 615,
+                "retained": 293,
+                "unrescued": 3616
+              },
+              {
+                "ndcg10_macro": 0.008337632519752303,
+                "ndcg10_micro": 0.009023848789187362,
+                "recall10_macro": 0.016712031261636905,
+                "conditional_ndcg10_macro": 0.1051634012392526,
+                "rescued": 786,
+                "demoted": 583,
+                "retained": 325,
+                "unrescued": 3603
+              }
+            ]
+          },
+          "days 180-269": {
+            "n_instances": 63759,
+            "n_users": 42556,
+            "n_retrieved": 4018,
+            "n_retrieved_users": 3755,
+            "retrieval_recall200_micro": 0.0630185542433225,
+            "retrieval_recall200_macro": 0.0602878803959511,
+            "baseline_ndcg10_macro": 0.004584877227895826,
+            "baseline_ndcg10_micro": 0.005041633902153476,
+            "baseline_conditional_ndcg10_macro": 0.07787494174170036,
+            "ndcg10_macro_mean": 0.00564153569001603,
+            "ndcg10_macro_seed_std": 0.0001347147171588988,
+            "ndcg10_micro_mean": 0.005961814892085374,
+            "conditional_ndcg10_macro_mean": 0.09451738258025294,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0010566584621202043,
+              "ci_low": 0.000565483525647659,
+              "ci_high": 0.001622080498430118,
+              "n_users": 42556,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 587.6666666666666,
+            "demoted_mean": 398.3333333333333,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005785905473921838,
+                "ndcg10_micro": 0.006125074986095883,
+                "recall10_macro": 0.01171287377168215,
+                "conditional_ndcg10_macro": 0.0965319334210646,
+                "rescued": 596,
+                "demoted": 399,
+                "retained": 196,
+                "unrescued": 2827
+              },
+              {
+                "ndcg10_macro": 0.005619511331756908,
+                "ndcg10_micro": 0.005896163825839531,
+                "recall10_macro": 0.011654942315948581,
+                "conditional_ndcg10_macro": 0.0935759580623055,
+                "rescued": 602,
+                "demoted": 412,
+                "retained": 183,
+                "unrescued": 2821
+              },
+              {
+                "ndcg10_macro": 0.005519190264369345,
+                "ndcg10_micro": 0.005864205864320707,
+                "recall10_macro": 0.011590484581358943,
+                "conditional_ndcg10_macro": 0.09344425625738871,
+                "rescued": 565,
+                "demoted": 384,
+                "retained": 211,
+                "unrescued": 2858
+              }
+            ]
+          },
+          "days 270+": {
+            "n_instances": 44863,
+            "n_users": 31365,
+            "n_retrieved": 2603,
+            "n_retrieved_users": 2437,
+            "retrieval_recall200_micro": 0.05802108641865234,
+            "retrieval_recall200_macro": 0.055486944653470656,
+            "baseline_ndcg10_macro": 0.0042733651785412,
+            "baseline_ndcg10_micro": 0.004684427899012059,
+            "baseline_conditional_ndcg10_macro": 0.07887387351907894,
+            "ndcg10_macro_mean": 0.005304339097685038,
+            "ndcg10_macro_seed_std": 0.0002822734096738608,
+            "ndcg10_micro_mean": 0.005394346625463027,
+            "conditional_ndcg10_macro_mean": 0.09374617036904896,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.001030973919143836,
+              "ci_low": 0.00041762513670101994,
+              "ci_high": 0.0016797320882006748,
+              "n_users": 31365,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 395.3333333333333,
+            "demoted_mean": 284.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005575570858813987,
+                "ndcg10_micro": 0.005655533480853783,
+                "recall10_macro": 0.011213125985821292,
+                "conditional_ndcg10_macro": 0.09821830047105172,
+                "rescued": 402,
+                "demoted": 280,
+                "retained": 109,
+                "unrescued": 1812
+              },
+              {
+                "ndcg10_macro": 0.005325258441990473,
+                "ndcg10_micro": 0.00537738627189851,
+                "recall10_macro": 0.010925963881487553,
+                "conditional_ndcg10_macro": 0.09377069451652015,
+                "rescued": 397,
+                "demoted": 289,
+                "retained": 100,
+                "unrescued": 1817
+              },
+              {
+                "ndcg10_macro": 0.005012187992250652,
+                "ndcg10_micro": 0.005150120123636791,
+                "recall10_macro": 0.01065116561529761,
+                "conditional_ndcg10_macro": 0.08924951611957499,
+                "rescued": 387,
+                "demoted": 283,
+                "retained": 106,
+                "unrescued": 1827
+              }
+            ]
+          },
+          "days 90-179": {
+            "n_instances": 62759,
+            "n_users": 42934,
+            "n_retrieved": 4754,
+            "n_retrieved_users": 4412,
+            "retrieval_recall200_micro": 0.07575009162032537,
+            "retrieval_recall200_macro": 0.071750569541947,
+            "baseline_ndcg10_macro": 0.005805602311499417,
+            "baseline_ndcg10_micro": 0.006276693754104463,
+            "baseline_conditional_ndcg10_macro": 0.0805245506080807,
+            "ndcg10_macro_mean": 0.007143326826150864,
+            "ndcg10_macro_seed_std": 0.0002920293922637536,
+            "ndcg10_micro_mean": 0.007434638289519665,
+            "conditional_ndcg10_macro_mean": 0.09849907474826218,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.001337724514651446,
+              "ci_low": 0.0007955432247869574,
+              "ci_high": 0.00193788977445469,
+              "n_users": 42934,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 703.6666666666666,
+            "demoted_mean": 472.3333333333333,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007428843661726636,
+                "ndcg10_micro": 0.007815077469341352,
+                "recall10_macro": 0.015041405634525305,
+                "conditional_ndcg10_macro": 0.10305750400172509,
+                "rescued": 725,
+                "demoted": 449,
+                "retained": 272,
+                "unrescued": 3308
+              },
+              {
+                "ndcg10_macro": 0.006845193801692405,
+                "ndcg10_micro": 0.007025069099534336,
+                "recall10_macro": 0.014137340056774536,
+                "conditional_ndcg10_macro": 0.09309795941349311,
+                "rescued": 695,
+                "demoted": 502,
+                "retained": 219,
+                "unrescued": 3338
+              },
+              {
+                "ndcg10_macro": 0.007155943015033551,
+                "ndcg10_micro": 0.007463768299683304,
+                "recall10_macro": 0.014382235053497922,
+                "conditional_ndcg10_macro": 0.09934176082956833,
+                "rescued": 691,
+                "demoted": 466,
+                "retained": 255,
+                "unrescued": 3342
+              }
+            ]
+          }
+        }
+      },
+      "global_gauc_macro_by_seed": [
+        0.7133332317885923,
+        0.7105350706708621,
+        0.7121179792923864
+      ]
+    },
+    "attributes": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "groups": {
+        "overall": {
+          "all": {
+            "n_instances": 232904,
+            "n_users": 124416,
+            "n_retrieved": 16672,
+            "n_retrieved_users": 15011,
+            "retrieval_recall200_micro": 0.07158314155188404,
+            "retrieval_recall200_macro": 0.06871385894573473,
+            "baseline_ndcg10_macro": 0.005642046683164716,
+            "baseline_ndcg10_micro": 0.006099651216869439,
+            "baseline_conditional_ndcg10_macro": 0.08281619200260189,
+            "ndcg10_macro_mean": 0.006550516470015252,
+            "ndcg10_macro_seed_std": 0.0002895247264268715,
+            "ndcg10_micro_mean": 0.0068200602362243025,
+            "conditional_ndcg10_macro_mean": 0.09591848726129655,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0009084697868505378,
+              "ci_low": 0.0005808653007625575,
+              "ci_high": 0.001255553213122731,
+              "n_users": 124416,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 2843.6666666666665,
+            "demoted_mean": 2042.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006521973937293584,
+                "ndcg10_micro": 0.006746097978759412,
+                "recall10_macro": 0.014099679540249403,
+                "conditional_ndcg10_macro": 0.09467419791470905,
+                "rescued": 2853,
+                "demoted": 2054,
+                "retained": 559,
+                "unrescued": 11206
+              },
+              {
+                "ndcg10_macro": 0.006853255343018373,
+                "ndcg10_micro": 0.007210047312849728,
+                "recall10_macro": 0.01435136602963212,
+                "conditional_ndcg10_macro": 0.10158165817257497,
+                "rescued": 2871,
+                "demoted": 1980,
+                "retained": 633,
+                "unrescued": 11188
+              },
+              {
+                "ndcg10_macro": 0.006276320129733799,
+                "ndcg10_micro": 0.006504035417063768,
+                "recall10_macro": 0.013844574851011631,
+                "conditional_ndcg10_macro": 0.09149960569660566,
+                "rescued": 2807,
+                "demoted": 2092,
+                "retained": 521,
+                "unrescued": 11252
+              }
+            ]
+          }
+        },
+        "item_type": {
+          "new-in-period": {
+            "n_instances": 76768,
+            "n_users": 52420,
+            "n_retrieved": 2224,
+            "n_retrieved_users": 2116,
+            "retrieval_recall200_micro": 0.02897040433513964,
+            "retrieval_recall200_macro": 0.02611270692891464,
+            "baseline_ndcg10_macro": 0.0003605173300036584,
+            "baseline_ndcg10_micro": 0.0003598405097925591,
+            "baseline_conditional_ndcg10_macro": 0.012432487641663974,
+            "ndcg10_macro_mean": 0.004125960509619963,
+            "ndcg10_macro_seed_std": 0.0004263239763440804,
+            "ndcg10_micro_mean": 0.004576493596236482,
+            "conditional_ndcg10_macro_mean": 0.15732137543602867,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.003765443179616304,
+              "ci_low": 0.0034261434207034295,
+              "ci_high": 0.004164010662496271,
+              "n_users": 52420,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 718.0,
+            "demoted_mean": 58.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0045278539545992695,
+                "ndcg10_micro": 0.004969330807790897,
+                "recall10_macro": 0.009361420735938106,
+                "conditional_ndcg10_macro": 0.17034602895046724,
+                "rescued": 776,
+                "demoted": 55,
+                "retained": 11,
+                "unrescued": 1382
+              },
+              {
+                "ndcg10_macro": 0.003678815946019087,
+                "ndcg10_micro": 0.004175593799021475,
+                "recall10_macro": 0.007856509905584686,
+                "conditional_ndcg10_macro": 0.14347649202050225,
+                "rescued": 672,
+                "demoted": 61,
+                "retained": 5,
+                "unrescued": 1486
+              },
+              {
+                "ndcg10_macro": 0.004171211628241532,
+                "ndcg10_micro": 0.004584556181897074,
+                "recall10_macro": 0.008452971252738818,
+                "conditional_ndcg10_macro": 0.15814160533711652,
+                "rescued": 706,
+                "demoted": 58,
+                "retained": 8,
+                "unrescued": 1452
+              }
+            ]
+          },
+          "warm-head": {
+            "n_instances": 109765,
+            "n_users": 75877,
+            "n_retrieved": 13687,
+            "n_retrieved_users": 12447,
+            "retrieval_recall200_micro": 0.12469366373616363,
+            "retrieval_recall200_macro": 0.11799383248519142,
+            "baseline_ndcg10_macro": 0.011289672487539563,
+            "baseline_ndcg10_micro": 0.012617914145383664,
+            "baseline_conditional_ndcg10_macro": 0.09829290422755496,
+            "ndcg10_macro_mean": 0.010150301418669086,
+            "ndcg10_macro_seed_std": 0.000814663834531713,
+            "ndcg10_micro_mean": 0.010708547235785766,
+            "conditional_ndcg10_macro_mean": 0.08651137166724239,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": -0.0011393710688704746,
+              "ci_low": -0.0017142043064799438,
+              "ci_high": -0.0005205851947562122,
+              "n_users": 75877,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 0,
+            "rescued_mean": 1998.3333333333333,
+            "demoted_mean": 1967.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.009777984783960964,
+                "ndcg10_micro": 0.010274365719390971,
+                "recall10_macro": 0.02154472641708563,
+                "conditional_ndcg10_macro": 0.08289620635103868,
+                "rescued": 1951,
+                "demoted": 1982,
+                "retained": 546,
+                "unrescued": 9208
+              },
+              {
+                "ndcg10_macro": 0.011084599031832176,
+                "ndcg10_micro": 0.011775591425442251,
+                "recall10_macro": 0.02323879541053388,
+                "conditional_ndcg10_macro": 0.09541679176833152,
+                "rescued": 2064,
+                "demoted": 1902,
+                "retained": 626,
+                "unrescued": 9095
+              },
+              {
+                "ndcg10_macro": 0.009588320440214121,
+                "ndcg10_micro": 0.010075684562524076,
+                "recall10_macro": 0.021699132535090728,
+                "conditional_ndcg10_macro": 0.08122111688235698,
+                "rescued": 1980,
+                "demoted": 2017,
+                "retained": 511,
+                "unrescued": 9179
+              }
+            ]
+          },
+          "warm-tail": {
+            "n_instances": 46371,
+            "n_users": 37944,
+            "n_retrieved": 761,
+            "n_retrieved_users": 740,
+            "retrieval_recall200_micro": 0.01641111901835199,
+            "retrieval_recall200_macro": 0.01529436541098464,
+            "baseline_ndcg10_macro": 0.00016606664280761403,
+            "baseline_ndcg10_micro": 0.0001725989215235217,
+            "baseline_conditional_ndcg10_macro": 0.01049474747553407,
+            "ndcg10_macro_mean": 0.0012184831081855712,
+            "ndcg10_macro_seed_std": 9.546037206320201e-05,
+            "ndcg10_micro_mean": 0.0013298691321230538,
+            "conditional_ndcg10_macro_mean": 0.08053717334836841,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0010524164653779573,
+              "ci_low": 0.0008076370875420324,
+              "ci_high": 0.0013015857820118115,
+              "n_users": 37944,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 127.33333333333333,
+            "demoted_mean": 17.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0012270824248849272,
+                "ndcg10_micro": 0.0013357888120493551,
+                "recall10_macro": 0.002546296296296296,
+                "conditional_ndcg10_macro": 0.08114280336655572,
+                "rescued": 126,
+                "demoted": 17,
+                "retained": 2,
+                "unrescued": 616
+              },
+              {
+                "ndcg10_macro": 0.0013093528853111189,
+                "ndcg10_micro": 0.001426518336352541,
+                "recall10_macro": 0.0027167228898727948,
+                "conditional_ndcg10_macro": 0.08692207048868135,
+                "rescued": 135,
+                "demoted": 17,
+                "retained": 2,
+                "unrescued": 607
+              },
+              {
+                "ndcg10_macro": 0.001119014014360668,
+                "ndcg10_micro": 0.0012273002479672652,
+                "recall10_macro": 0.002372355752336777,
+                "conditional_ndcg10_macro": 0.07354664618986816,
+                "rescued": 121,
+                "demoted": 17,
+                "retained": 2,
+                "unrescued": 621
+              }
+            ]
+          }
+        },
+        "history_length": {
+          "1-2": {
+            "n_instances": 31556,
+            "n_users": 22413,
+            "n_retrieved": 2236,
+            "n_retrieved_users": 2137,
+            "retrieval_recall200_micro": 0.07085815692736722,
+            "retrieval_recall200_macro": 0.06833087940034802,
+            "baseline_ndcg10_macro": 0.0057829682290809654,
+            "baseline_ndcg10_micro": 0.006233748601886873,
+            "baseline_conditional_ndcg10_macro": 0.08626113931338175,
+            "ndcg10_macro_mean": 0.0066331251373815585,
+            "ndcg10_macro_seed_std": 0.0005413269766840821,
+            "ndcg10_micro_mean": 0.00693887076197833,
+            "conditional_ndcg10_macro_mean": 0.09745692121246312,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008501569083005932,
+              "ci_low": 6.41497343696531e-05,
+              "ci_high": 0.001701293713026914,
+              "n_users": 22413,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 377.6666666666667,
+            "demoted_mean": 276.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0065372243471717405,
+                "ndcg10_micro": 0.0068571336550706415,
+                "recall10_macro": 0.014009726498014545,
+                "conditional_ndcg10_macro": 0.09601972592300596,
+                "rescued": 382,
+                "demoted": 279,
+                "retained": 79,
+                "unrescued": 1496
+              },
+              {
+                "ndcg10_macro": 0.007215993446295474,
+                "ndcg10_micro": 0.00756548663636539,
+                "recall10_macro": 0.01467898094855664,
+                "conditional_ndcg10_macro": 0.10617814556359857,
+                "rescued": 380,
+                "demoted": 257,
+                "retained": 101,
+                "unrescued": 1498
+              },
+              {
+                "ndcg10_macro": 0.0061461576186774645,
+                "ndcg10_micro": 0.006393991994498957,
+                "recall10_macro": 0.013452014455896132,
+                "conditional_ndcg10_macro": 0.0901728921507848,
+                "rescued": 371,
+                "demoted": 292,
+                "retained": 66,
+                "unrescued": 1507
+              }
+            ]
+          },
+          "11+": {
+            "n_instances": 25271,
+            "n_users": 11043,
+            "n_retrieved": 1685,
+            "n_retrieved_users": 1451,
+            "retrieval_recall200_micro": 0.06667721894661865,
+            "retrieval_recall200_macro": 0.06659866832485457,
+            "baseline_ndcg10_macro": 0.005225736460317078,
+            "baseline_ndcg10_micro": 0.005404989379706554,
+            "baseline_conditional_ndcg10_macro": 0.07965533815775104,
+            "ndcg10_macro_mean": 0.005675236968368156,
+            "ndcg10_macro_seed_std": 0.00018935501235089273,
+            "ndcg10_micro_mean": 0.005600088289881002,
+            "conditional_ndcg10_macro_mean": 0.08442288614644938,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0004495005080510773,
+              "ci_low": -0.0005695113327401556,
+              "ci_high": 0.001620603258067189,
+              "n_users": 11043,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 290.0,
+            "demoted_mean": 230.33333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005757704848107802,
+                "ndcg10_micro": 0.005685589595061278,
+                "recall10_macro": 0.013072961386594063,
+                "conditional_ndcg10_macro": 0.08381267991545613,
+                "rescued": 298,
+                "demoted": 231,
+                "retained": 28,
+                "unrescued": 1128
+              },
+              {
+                "ndcg10_macro": 0.005809372944136227,
+                "ndcg10_micro": 0.0057384138913668305,
+                "recall10_macro": 0.013239749507753293,
+                "conditional_ndcg10_macro": 0.08717698712516878,
+                "rescued": 295,
+                "demoted": 230,
+                "retained": 29,
+                "unrescued": 1131
+              },
+              {
+                "ndcg10_macro": 0.005458633112860438,
+                "ndcg10_micro": 0.005376261383214896,
+                "recall10_macro": 0.012232918714966167,
+                "conditional_ndcg10_macro": 0.08227899139872324,
+                "rescued": 277,
+                "demoted": 230,
+                "retained": 29,
+                "unrescued": 1149
+              }
+            ]
+          },
+          "3-5": {
+            "n_instances": 116282,
+            "n_users": 79720,
+            "n_retrieved": 8406,
+            "n_retrieved_users": 7984,
+            "retrieval_recall200_micro": 0.0722897782975869,
+            "retrieval_recall200_macro": 0.06941587221943468,
+            "baseline_ndcg10_macro": 0.005697577163978726,
+            "baseline_ndcg10_micro": 0.0061686856872734605,
+            "baseline_conditional_ndcg10_macro": 0.08418371796431733,
+            "ndcg10_macro_mean": 0.006624185763385373,
+            "ndcg10_macro_seed_std": 0.00034770663328949927,
+            "ndcg10_micro_mean": 0.0069812735125132095,
+            "conditional_ndcg10_macro_mean": 0.09690232974043118,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0009266085994066466,
+              "ci_low": 0.0004961743267884739,
+              "ci_high": 0.001355031940169749,
+              "n_users": 79720,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1420.0,
+            "demoted_mean": 988.6666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006529102627809295,
+                "ndcg10_micro": 0.006872301091117975,
+                "recall10_macro": 0.014088894463957181,
+                "conditional_ndcg10_macro": 0.09537138920589026,
+                "rescued": 1406,
+                "demoted": 986,
+                "retained": 322,
+                "unrescued": 5692
+              },
+              {
+                "ndcg10_macro": 0.007009542814581564,
+                "ndcg10_micro": 0.007426427309872878,
+                "recall10_macro": 0.014546746947650107,
+                "conditional_ndcg10_macro": 0.10329070147881969,
+                "rescued": 1451,
+                "demoted": 968,
+                "retained": 340,
+                "unrescued": 5647
+              },
+              {
+                "ndcg10_macro": 0.0063339118477652575,
+                "ndcg10_micro": 0.006645092136548777,
+                "recall10_macro": 0.014015721692590733,
+                "conditional_ndcg10_macro": 0.09204489853658361,
+                "rescued": 1403,
+                "demoted": 1012,
+                "retained": 296,
+                "unrescued": 5695
+              }
+            ]
+          },
+          "6-10": {
+            "n_instances": 59795,
+            "n_users": 39178,
+            "n_retrieved": 4345,
+            "n_retrieved_users": 4087,
+            "retrieval_recall200_micro": 0.0726649385400117,
+            "retrieval_recall200_macro": 0.07192557047322477,
+            "baseline_ndcg10_macro": 0.0059557316114270745,
+            "baseline_ndcg10_micro": 0.006188216413253973,
+            "baseline_conditional_ndcg10_macro": 0.0838781261878261,
+            "ndcg10_macro_mean": 0.006766330330363778,
+            "ndcg10_macro_seed_std": 0.00022599378598605151,
+            "ndcg10_micro_mean": 0.006959445200049384,
+            "conditional_ndcg10_macro_mean": 0.09663294155306353,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008105987189367028,
+              "ci_low": 0.00014319506718393012,
+              "ci_high": 0.001464979389964744,
+              "n_users": 39178,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 756.0,
+            "demoted_mean": 547.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006753165719531558,
+                "ndcg10_micro": 0.006890275840645523,
+                "recall10_macro": 0.01464001905831504,
+                "conditional_ndcg10_macro": 0.09571686989292862,
+                "rescued": 767,
+                "demoted": 558,
+                "retained": 130,
+                "unrescued": 2890
+              },
+              {
+                "ndcg10_macro": 0.006998618663768811,
+                "ndcg10_micro": 0.0072236321625459895,
+                "recall10_macro": 0.014817839944186362,
+                "conditional_ndcg10_macro": 0.10050112665153223,
+                "rescued": 745,
+                "demoted": 525,
+                "retained": 163,
+                "unrescued": 2912
+              },
+              {
+                "ndcg10_macro": 0.006547206607790965,
+                "ndcg10_micro": 0.0067644275969566394,
+                "recall10_macro": 0.014442629366821514,
+                "conditional_ndcg10_macro": 0.09368082811472976,
+                "rescued": 756,
+                "demoted": 558,
+                "retained": 130,
+                "unrescued": 2901
+              }
+            ]
+          }
+        },
+        "history_diversity": {
+          "1-2": {
+            "n_instances": 31556,
+            "n_users": 22413,
+            "n_retrieved": 2236,
+            "n_retrieved_users": 2137,
+            "retrieval_recall200_micro": 0.07085815692736722,
+            "retrieval_recall200_macro": 0.06833087940034802,
+            "baseline_ndcg10_macro": 0.0057829682290809654,
+            "baseline_ndcg10_micro": 0.006233748601886873,
+            "baseline_conditional_ndcg10_macro": 0.08626113931338175,
+            "ndcg10_macro_mean": 0.0066331251373815585,
+            "ndcg10_macro_seed_std": 0.0005413269766840821,
+            "ndcg10_micro_mean": 0.00693887076197833,
+            "conditional_ndcg10_macro_mean": 0.09745692121246312,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008501569083005932,
+              "ci_low": 6.41497343696531e-05,
+              "ci_high": 0.001701293713026914,
+              "n_users": 22413,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 377.6666666666667,
+            "demoted_mean": 276.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0065372243471717405,
+                "ndcg10_micro": 0.0068571336550706415,
+                "recall10_macro": 0.014009726498014545,
+                "conditional_ndcg10_macro": 0.09601972592300596,
+                "rescued": 382,
+                "demoted": 279,
+                "retained": 79,
+                "unrescued": 1496
+              },
+              {
+                "ndcg10_macro": 0.007215993446295474,
+                "ndcg10_micro": 0.00756548663636539,
+                "recall10_macro": 0.01467898094855664,
+                "conditional_ndcg10_macro": 0.10617814556359857,
+                "rescued": 380,
+                "demoted": 257,
+                "retained": 101,
+                "unrescued": 1498
+              },
+              {
+                "ndcg10_macro": 0.0061461576186774645,
+                "ndcg10_micro": 0.006393991994498957,
+                "recall10_macro": 0.013452014455896132,
+                "conditional_ndcg10_macro": 0.0901728921507848,
+                "rescued": 371,
+                "demoted": 292,
+                "retained": 66,
+                "unrescued": 1507
+              }
+            ]
+          },
+          "11+ / homogeneous": {
+            "n_instances": 248,
+            "n_users": 138,
+            "n_retrieved": 20,
+            "n_retrieved_users": 18,
+            "retrieval_recall200_micro": 0.08064516129032258,
+            "retrieval_recall200_macro": 0.08699677938808374,
+            "baseline_ndcg10_macro": 0.0066337153840533404,
+            "baseline_ndcg10_micro": 0.008326773738188338,
+            "baseline_conditional_ndcg10_macro": 0.07858471606881762,
+            "ndcg10_macro_mean": 0.003958384373881497,
+            "ndcg10_macro_seed_std": 0.0012517882228351785,
+            "ndcg10_micro_mean": 0.006112484294533277,
+            "conditional_ndcg10_macro_mean": 0.0630696267549128,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": -0.0026753310101718447,
+              "ci_low": -0.009635058356503173,
+              "ci_high": 0.0027680003246756957,
+              "n_users": 138,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 0,
+            "rescued_mean": 3.0,
+            "demoted_mean": 3.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0025293995906355143,
+                "ndcg10_micro": 0.004222465445657674,
+                "recall10_macro": 0.007246376811594203,
+                "conditional_ndcg10_macro": 0.0374500396163079,
+                "rescued": 2,
+                "demoted": 3,
+                "retained": 1,
+                "unrescued": 14
+              },
+              {
+                "ndcg10_macro": 0.00486122649809636,
+                "ndcg10_micro": 0.00763678505235416,
+                "recall10_macro": 0.012681159420289856,
+                "conditional_ndcg10_macro": 0.0852127568166608,
+                "rescued": 4,
+                "demoted": 3,
+                "retained": 1,
+                "unrescued": 12
+              },
+              {
+                "ndcg10_macro": 0.004484527032912615,
+                "ndcg10_micro": 0.0064782023855879944,
+                "recall10_macro": 0.010869565217391304,
+                "conditional_ndcg10_macro": 0.06654608383176974,
+                "rescued": 3,
+                "demoted": 3,
+                "retained": 1,
+                "unrescued": 13
+              }
+            ]
+          },
+          "11+ / mixed": {
+            "n_instances": 25023,
+            "n_users": 10936,
+            "n_retrieved": 1665,
+            "n_retrieved_users": 1433,
+            "retrieval_recall200_micro": 0.06653878431842705,
+            "retrieval_recall200_macro": 0.06627338706821834,
+            "baseline_ndcg10_macro": 0.005193156090735381,
+            "baseline_ndcg10_micro": 0.00537603191973359,
+            "baseline_conditional_ndcg10_macro": 0.07966878630680951,
+            "ndcg10_macro_mean": 0.00568476335476928,
+            "ndcg10_macro_seed_std": 0.0001970984355026162,
+            "ndcg10_micro_mean": 0.005595009993547478,
+            "conditional_ndcg10_macro_mean": 0.08469110573406118,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.000491607264033898,
+              "ci_low": -0.0006586105870958252,
+              "ci_high": 0.0015517694711270522,
+              "n_users": 10936,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 287.0,
+            "demoted_mean": 227.33333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005784407232456726,
+                "ndcg10_micro": 0.005700090445840644,
+                "recall10_macro": 0.013114000785676504,
+                "conditional_ndcg10_macro": 0.08439504385501277,
+                "rescued": 296,
+                "demoted": 228,
+                "retained": 27,
+                "unrescued": 1114
+              },
+              {
+                "ndcg10_macro": 0.005812145017771388,
+                "ndcg10_micro": 0.005719599358819781,
+                "recall10_macro": 0.01322755612784561,
+                "conditional_ndcg10_macro": 0.08720165994132589,
+                "rescued": 291,
+                "demoted": 227,
+                "retained": 28,
+                "unrescued": 1119
+              },
+              {
+                "ndcg10_macro": 0.005457737814079725,
+                "ndcg10_micro": 0.005365340175982009,
+                "recall10_macro": 0.012220018413439225,
+                "conditional_ndcg10_macro": 0.0824766134058448,
+                "rescued": 274,
+                "demoted": 227,
+                "retained": 28,
+                "unrescued": 1136
+              }
+            ]
+          },
+          "3-5": {
+            "n_instances": 116282,
+            "n_users": 79720,
+            "n_retrieved": 8406,
+            "n_retrieved_users": 7984,
+            "retrieval_recall200_micro": 0.0722897782975869,
+            "retrieval_recall200_macro": 0.06941587221943468,
+            "baseline_ndcg10_macro": 0.005697577163978726,
+            "baseline_ndcg10_micro": 0.0061686856872734605,
+            "baseline_conditional_ndcg10_macro": 0.08418371796431733,
+            "ndcg10_macro_mean": 0.006624185763385373,
+            "ndcg10_macro_seed_std": 0.00034770663328949927,
+            "ndcg10_micro_mean": 0.0069812735125132095,
+            "conditional_ndcg10_macro_mean": 0.09690232974043118,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0009266085994066466,
+              "ci_low": 0.0004961743267884739,
+              "ci_high": 0.001355031940169749,
+              "n_users": 79720,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1420.0,
+            "demoted_mean": 988.6666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006529102627809295,
+                "ndcg10_micro": 0.006872301091117975,
+                "recall10_macro": 0.014088894463957181,
+                "conditional_ndcg10_macro": 0.09537138920589026,
+                "rescued": 1406,
+                "demoted": 986,
+                "retained": 322,
+                "unrescued": 5692
+              },
+              {
+                "ndcg10_macro": 0.007009542814581564,
+                "ndcg10_micro": 0.007426427309872878,
+                "recall10_macro": 0.014546746947650107,
+                "conditional_ndcg10_macro": 0.10329070147881969,
+                "rescued": 1451,
+                "demoted": 968,
+                "retained": 340,
+                "unrescued": 5647
+              },
+              {
+                "ndcg10_macro": 0.0063339118477652575,
+                "ndcg10_micro": 0.006645092136548777,
+                "recall10_macro": 0.014015721692590733,
+                "conditional_ndcg10_macro": 0.09204489853658361,
+                "rescued": 1403,
+                "demoted": 1012,
+                "retained": 296,
+                "unrescued": 5695
+              }
+            ]
+          },
+          "6-10": {
+            "n_instances": 59795,
+            "n_users": 39178,
+            "n_retrieved": 4345,
+            "n_retrieved_users": 4087,
+            "retrieval_recall200_micro": 0.0726649385400117,
+            "retrieval_recall200_macro": 0.07192557047322477,
+            "baseline_ndcg10_macro": 0.0059557316114270745,
+            "baseline_ndcg10_micro": 0.006188216413253973,
+            "baseline_conditional_ndcg10_macro": 0.0838781261878261,
+            "ndcg10_macro_mean": 0.006766330330363778,
+            "ndcg10_macro_seed_std": 0.00022599378598605151,
+            "ndcg10_micro_mean": 0.006959445200049384,
+            "conditional_ndcg10_macro_mean": 0.09663294155306353,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008105987189367028,
+              "ci_low": 0.00014319506718393012,
+              "ci_high": 0.001464979389964744,
+              "n_users": 39178,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 756.0,
+            "demoted_mean": 547.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006753165719531558,
+                "ndcg10_micro": 0.006890275840645523,
+                "recall10_macro": 0.01464001905831504,
+                "conditional_ndcg10_macro": 0.09571686989292862,
+                "rescued": 767,
+                "demoted": 558,
+                "retained": 130,
+                "unrescued": 2890
+              },
+              {
+                "ndcg10_macro": 0.006998618663768811,
+                "ndcg10_micro": 0.0072236321625459895,
+                "recall10_macro": 0.014817839944186362,
+                "conditional_ndcg10_macro": 0.10050112665153223,
+                "rescued": 745,
+                "demoted": 525,
+                "retained": 163,
+                "unrescued": 2912
+              },
+              {
+                "ndcg10_macro": 0.006547206607790965,
+                "ndcg10_micro": 0.0067644275969566394,
+                "recall10_macro": 0.014442629366821514,
+                "conditional_ndcg10_macro": 0.09368082811472976,
+                "rescued": 756,
+                "demoted": 558,
+                "retained": 130,
+                "unrescued": 2901
+              }
+            ]
+          }
+        },
+        "validation_window": {
+          "days 0-89": {
+            "n_instances": 61523,
+            "n_users": 43362,
+            "n_retrieved": 5297,
+            "n_retrieved_users": 4894,
+            "retrieval_recall200_micro": 0.08609788209287583,
+            "retrieval_recall200_macro": 0.08143113278646695,
+            "baseline_ndcg10_macro": 0.007170018248137472,
+            "baseline_ndcg10_micro": 0.008047512619656663,
+            "baseline_conditional_ndcg10_macro": 0.09087705188599182,
+            "ndcg10_macro_mean": 0.009147158464762212,
+            "ndcg10_macro_seed_std": 0.00021176978587727376,
+            "ndcg10_micro_mean": 0.009815772082350035,
+            "conditional_ndcg10_macro_mean": 0.11411796701370107,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0019771402166247408,
+              "ci_low": 0.001272212748253826,
+              "ci_high": 0.00273718173028605,
+              "n_users": 43362,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1016.6666666666666,
+            "demoted_mean": 687.6666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.009320102328592875,
+                "ndcg10_micro": 0.010013440790978744,
+                "recall10_macro": 0.018843601914897055,
+                "conditional_ndcg10_macro": 0.11625164904989077,
+                "rescued": 1043,
+                "demoted": 688,
+                "retained": 220,
+                "unrescued": 3346
+              },
+              {
+                "ndcg10_macro": 0.00921040045064679,
+                "ndcg10_micro": 0.009865069171899854,
+                "recall10_macro": 0.018882596265154723,
+                "conditional_ndcg10_macro": 0.1150585088882526,
+                "rescued": 1001,
+                "demoted": 669,
+                "retained": 239,
+                "unrescued": 3388
+              },
+              {
+                "ndcg10_macro": 0.008910972615046975,
+                "ndcg10_micro": 0.009568806284171505,
+                "recall10_macro": 0.01806960703892349,
+                "conditional_ndcg10_macro": 0.11104374310295986,
+                "rescued": 1006,
+                "demoted": 706,
+                "retained": 202,
+                "unrescued": 3383
+              }
+            ]
+          },
+          "days 180-269": {
+            "n_instances": 63759,
+            "n_users": 42556,
+            "n_retrieved": 4018,
+            "n_retrieved_users": 3755,
+            "retrieval_recall200_micro": 0.0630185542433225,
+            "retrieval_recall200_macro": 0.0602878803959511,
+            "baseline_ndcg10_macro": 0.004584877227895826,
+            "baseline_ndcg10_micro": 0.005041633902153476,
+            "baseline_conditional_ndcg10_macro": 0.07787494174170036,
+            "ndcg10_macro_mean": 0.004943928091814989,
+            "ndcg10_macro_seed_std": 0.0003896048589329336,
+            "ndcg10_micro_mean": 0.005140839796577762,
+            "conditional_ndcg10_macro_mean": 0.08199539659665965,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0003590508639191637,
+              "ci_low": -0.00020023786423768505,
+              "ci_high": 0.0009187783408547294,
+              "n_users": 42556,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 615.3333333333334,
+            "demoted_mean": 475.6666666666667,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.004772906323490411,
+                "ndcg10_micro": 0.0049363636013934325,
+                "recall10_macro": 0.01085781131485615,
+                "conditional_ndcg10_macro": 0.0787452556452477,
+                "rescued": 597,
+                "demoted": 476,
+                "retained": 119,
+                "unrescued": 2826
+              },
+              {
+                "ndcg10_macro": 0.00538979381800594,
+                "ndcg10_micro": 0.0056870838926182735,
+                "recall10_macro": 0.011425816994183179,
+                "conditional_ndcg10_macro": 0.09074912254945568,
+                "rescued": 636,
+                "demoted": 462,
+                "retained": 133,
+                "unrescued": 2787
+              },
+              {
+                "ndcg10_macro": 0.0046690841339486165,
+                "ndcg10_micro": 0.004799071895721582,
+                "recall10_macro": 0.011035737468555403,
+                "conditional_ndcg10_macro": 0.0764918115952756,
+                "rescued": 613,
+                "demoted": 489,
+                "retained": 106,
+                "unrescued": 2810
+              }
+            ]
+          },
+          "days 270+": {
+            "n_instances": 44863,
+            "n_users": 31365,
+            "n_retrieved": 2603,
+            "n_retrieved_users": 2437,
+            "retrieval_recall200_micro": 0.05802108641865234,
+            "retrieval_recall200_macro": 0.055486944653470656,
+            "baseline_ndcg10_macro": 0.0042733651785412,
+            "baseline_ndcg10_micro": 0.004684427899012059,
+            "baseline_conditional_ndcg10_macro": 0.07887387351907894,
+            "ndcg10_macro_mean": 0.004474281567617385,
+            "ndcg10_macro_seed_std": 0.0002784557403638989,
+            "ndcg10_micro_mean": 0.004683410698721006,
+            "conditional_ndcg10_macro_mean": 0.0811730287678671,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.00020091638907618437,
+              "ci_low": -0.0004677547477719671,
+              "ci_high": 0.0008417404552321279,
+              "n_users": 31365,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 2,
+            "rescued_mean": 400.3333333333333,
+            "demoted_mean": 319.6666666666667,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.004360851409963693,
+                "ndcg10_micro": 0.004584742072492141,
+                "recall10_macro": 0.010235557492709995,
+                "conditional_ndcg10_macro": 0.07947792376367036,
+                "rescued": 415,
+                "demoted": 327,
+                "retained": 62,
+                "unrescued": 1799
+              },
+              {
+                "ndcg10_macro": 0.00479154951793599,
+                "ndcg10_micro": 0.005059369686860125,
+                "recall10_macro": 0.010181555253291265,
+                "conditional_ndcg10_macro": 0.08762497819182492,
+                "rescued": 399,
+                "demoted": 304,
+                "retained": 85,
+                "unrescued": 1815
+              },
+              {
+                "ndcg10_macro": 0.0042704437749524725,
+                "ndcg10_micro": 0.004406120336810753,
+                "recall10_macro": 0.00983323706422702,
+                "conditional_ndcg10_macro": 0.07641618434810606,
+                "rescued": 387,
+                "demoted": 328,
+                "retained": 61,
+                "unrescued": 1827
+              }
+            ]
+          },
+          "days 90-179": {
+            "n_instances": 62759,
+            "n_users": 42934,
+            "n_retrieved": 4754,
+            "n_retrieved_users": 4412,
+            "retrieval_recall200_micro": 0.07575009162032537,
+            "retrieval_recall200_macro": 0.071750569541947,
+            "baseline_ndcg10_macro": 0.005805602311499417,
+            "baseline_ndcg10_micro": 0.006276693754104463,
+            "baseline_conditional_ndcg10_macro": 0.0805245506080807,
+            "ndcg10_macro_mean": 0.006771035825642054,
+            "ndcg10_macro_seed_std": 0.000473948691555901,
+            "ndcg10_micro_mean": 0.007116698874558895,
+            "conditional_ndcg10_macro_mean": 0.09487494069180907,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0009654335141426358,
+              "ci_low": 0.00039601160438584604,
+              "ci_high": 0.001638911256179352,
+              "n_users": 42934,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 811.3333333333334,
+            "demoted_mean": 559.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006614898209180986,
+                "ndcg10_micro": 0.006926710040028336,
+                "recall10_macro": 0.014561958204525867,
+                "conditional_ndcg10_macro": 0.09233292920241468,
+                "rescued": 798,
+                "demoted": 563,
+                "retained": 158,
+                "unrescued": 3235
+              },
+              {
+                "ndcg10_macro": 0.0073033547255312945,
+                "ndcg10_micro": 0.007691947362419793,
+                "recall10_macro": 0.015329952729216714,
+                "conditional_ndcg10_macro": 0.10247207863820815,
+                "rescued": 835,
+                "demoted": 545,
+                "retained": 176,
+                "unrescued": 3198
+              },
+              {
+                "ndcg10_macro": 0.0063948545422138825,
+                "ndcg10_micro": 0.006731439221228556,
+                "recall10_macro": 0.014526356807532564,
+                "conditional_ndcg10_macro": 0.08981981423480441,
+                "rescued": 801,
+                "demoted": 569,
+                "retained": 152,
+                "unrescued": 3232
+              }
+            ]
+          }
+        }
+      },
+      "global_gauc_macro_by_seed": [
+        0.7570011193354912,
+        0.7472590824052684,
+        0.74859863235972
+      ]
+    },
+    "din": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "groups": {
+        "overall": {
+          "all": {
+            "n_instances": 232904,
+            "n_users": 124416,
+            "n_retrieved": 16672,
+            "n_retrieved_users": 15011,
+            "retrieval_recall200_micro": 0.07158314155188404,
+            "retrieval_recall200_macro": 0.06871385894573473,
+            "baseline_ndcg10_macro": 0.005642046683164716,
+            "baseline_ndcg10_micro": 0.006099651216869439,
+            "baseline_conditional_ndcg10_macro": 0.08281619200260189,
+            "ndcg10_macro_mean": 0.00643640794877122,
+            "ndcg10_macro_seed_std": 0.000498998539727493,
+            "ndcg10_micro_mean": 0.006704271458925569,
+            "conditional_ndcg10_macro_mean": 0.09415143853766493,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0007943612656065053,
+              "ci_low": 0.0004704122008396308,
+              "ci_high": 0.00110402867566643,
+              "n_users": 124416,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 2672.6666666666665,
+            "demoted_mean": 1977.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006038551499934629,
+                "ndcg10_micro": 0.006355182575295837,
+                "recall10_macro": 0.013179460123407477,
+                "conditional_ndcg10_macro": 0.08964704391540304,
+                "rescued": 2653,
+                "demoted": 2049,
+                "retained": 564,
+                "unrescued": 11406
+              },
+              {
+                "ndcg10_macro": 0.00627438987906874,
+                "ndcg10_micro": 0.006430927903681624,
+                "recall10_macro": 0.013421558909230942,
+                "conditional_ndcg10_macro": 0.0902019100273636,
+                "rescued": 2634,
+                "demoted": 2038,
+                "retained": 575,
+                "unrescued": 11425
+              },
+              {
+                "ndcg10_macro": 0.006996282467310294,
+                "ndcg10_micro": 0.007326703897799244,
+                "recall10_macro": 0.014286379389907778,
+                "conditional_ndcg10_macro": 0.10260536167022814,
+                "rescued": 2731,
+                "demoted": 1844,
+                "retained": 769,
+                "unrescued": 11328
+              }
+            ]
+          }
+        },
+        "item_type": {
+          "new-in-period": {
+            "n_instances": 76768,
+            "n_users": 52420,
+            "n_retrieved": 2224,
+            "n_retrieved_users": 2116,
+            "retrieval_recall200_micro": 0.02897040433513964,
+            "retrieval_recall200_macro": 0.02611270692891464,
+            "baseline_ndcg10_macro": 0.0003605173300036584,
+            "baseline_ndcg10_micro": 0.0003598405097925591,
+            "baseline_conditional_ndcg10_macro": 0.012432487641663974,
+            "ndcg10_macro_mean": 0.004073830140160081,
+            "ndcg10_macro_seed_std": 4.961623098196949e-05,
+            "ndcg10_micro_mean": 0.004492156334129516,
+            "conditional_ndcg10_macro_mean": 0.1550164351271156,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0037133128101564227,
+              "ci_low": 0.003369487591508004,
+              "ci_high": 0.004071594990905617,
+              "n_users": 52420,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 708.3333333333334,
+            "demoted_mean": 51.333333333333336,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.004018943170109867,
+                "ndcg10_micro": 0.00445112656030002,
+                "recall10_macro": 0.0087805990279057,
+                "conditional_ndcg10_macro": 0.15324822608249228,
+                "rescued": 730,
+                "demoted": 54,
+                "retained": 12,
+                "unrescued": 1428
+              },
+              {
+                "ndcg10_macro": 0.004115498102886894,
+                "ndcg10_micro": 0.004528762567035643,
+                "recall10_macro": 0.00856349397009099,
+                "conditional_ndcg10_macro": 0.15615966052664634,
+                "rescued": 706,
+                "demoted": 50,
+                "retained": 16,
+                "unrescued": 1452
+              },
+              {
+                "ndcg10_macro": 0.004087049147483482,
+                "ndcg10_micro": 0.0044965798750528875,
+                "recall10_macro": 0.008300279927784999,
+                "conditional_ndcg10_macro": 0.1556414187722082,
+                "rescued": 689,
+                "demoted": 50,
+                "retained": 16,
+                "unrescued": 1469
+              }
+            ]
+          },
+          "warm-head": {
+            "n_instances": 109765,
+            "n_users": 75877,
+            "n_retrieved": 13687,
+            "n_retrieved_users": 12447,
+            "retrieval_recall200_micro": 0.12469366373616363,
+            "retrieval_recall200_macro": 0.11799383248519142,
+            "baseline_ndcg10_macro": 0.011289672487539563,
+            "baseline_ndcg10_micro": 0.012617914145383664,
+            "baseline_conditional_ndcg10_macro": 0.09829290422755496,
+            "ndcg10_macro_mean": 0.009864995134265137,
+            "ndcg10_macro_seed_std": 0.0010479361813575511,
+            "ndcg10_micro_mean": 0.01044557742098594,
+            "conditional_ndcg10_macro_mean": 0.08418731953539167,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": -0.0014246773532744243,
+              "ci_low": -0.0019642718196675396,
+              "ci_high": -0.0008151067468705105,
+              "n_users": 75877,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 0,
+            "rescued_mean": 1812.3333333333333,
+            "demoted_mean": 1909.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.009170116675300008,
+                "ndcg10_micro": 0.009756786227435482,
+                "recall10_macro": 0.019987752735159722,
+                "conditional_ndcg10_macro": 0.07913431007216214,
+                "rescued": 1775,
+                "demoted": 1977,
+                "retained": 551,
+                "unrescued": 9384
+              },
+              {
+                "ndcg10_macro": 0.009354513513291246,
+                "ndcg10_micro": 0.009763462387501849,
+                "recall10_macro": 0.02014584066819922,
+                "conditional_ndcg10_macro": 0.07859871863639456,
+                "rescued": 1764,
+                "demoted": 1973,
+                "retained": 555,
+                "unrescued": 9395
+              },
+              {
+                "ndcg10_macro": 0.01107035521420416,
+                "ndcg10_micro": 0.011816483648020492,
+                "recall10_macro": 0.022661780730760788,
+                "conditional_ndcg10_macro": 0.09482892989761835,
+                "rescued": 1898,
+                "demoted": 1777,
+                "retained": 751,
+                "unrescued": 9261
+              }
+            ]
+          },
+          "warm-tail": {
+            "n_instances": 46371,
+            "n_users": 37944,
+            "n_retrieved": 761,
+            "n_retrieved_users": 740,
+            "retrieval_recall200_micro": 0.01641111901835199,
+            "retrieval_recall200_macro": 0.01529436541098464,
+            "baseline_ndcg10_macro": 0.00016606664280761403,
+            "baseline_ndcg10_micro": 0.0001725989215235217,
+            "baseline_conditional_ndcg10_macro": 0.01049474747553407,
+            "ndcg10_macro_mean": 0.001397696599805887,
+            "ndcg10_macro_seed_std": 0.00014799215818603169,
+            "ndcg10_micro_mean": 0.0015104047097673973,
+            "conditional_ndcg10_macro_mean": 0.09151667640259244,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012316299569982729,
+              "ci_low": 0.0009928943511267295,
+              "ci_high": 0.0014832232727452475,
+              "n_users": 37944,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 152.0,
+            "demoted_mean": 16.666666666666668,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0013686191640292992,
+                "ndcg10_micro": 0.00145542943825094,
+                "recall10_macro": 0.0029613816852906033,
+                "conditional_ndcg10_macro": 0.08852386029166077,
+                "rescued": 148,
+                "demoted": 18,
+                "retained": 1,
+                "unrescued": 594
+              },
+              {
+                "ndcg10_macro": 0.0015580693189800718,
+                "ndcg10_micro": 0.0016915386506379435,
+                "recall10_macro": 0.003296085459273315,
+                "conditional_ndcg10_macro": 0.1019507475681085,
+                "rescued": 164,
+                "demoted": 15,
+                "retained": 4,
+                "unrescued": 578
+              },
+              {
+                "ndcg10_macro": 0.0012664013164082899,
+                "ndcg10_micro": 0.0013842460404133086,
+                "recall10_macro": 0.002869140487736313,
+                "conditional_ndcg10_macro": 0.08407542134800805,
+                "rescued": 144,
+                "demoted": 17,
+                "retained": 2,
+                "unrescued": 598
+              }
+            ]
+          }
+        },
+        "history_length": {
+          "1-2": {
+            "n_instances": 31556,
+            "n_users": 22413,
+            "n_retrieved": 2236,
+            "n_retrieved_users": 2137,
+            "retrieval_recall200_micro": 0.07085815692736722,
+            "retrieval_recall200_macro": 0.06833087940034802,
+            "baseline_ndcg10_macro": 0.0057829682290809654,
+            "baseline_ndcg10_micro": 0.006233748601886873,
+            "baseline_conditional_ndcg10_macro": 0.08626113931338175,
+            "ndcg10_macro_mean": 0.006639158086986496,
+            "ndcg10_macro_seed_std": 0.0005970399671916029,
+            "ndcg10_micro_mean": 0.006897862577272415,
+            "conditional_ndcg10_macro_mean": 0.09644472438804673,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.00085618985790553,
+              "ci_low": 0.00010151061146112342,
+              "ci_high": 0.001605343552902777,
+              "n_users": 22413,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 344.6666666666667,
+            "demoted_mean": 247.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006308112879890892,
+                "ndcg10_micro": 0.006486296921507578,
+                "recall10_macro": 0.013452014455896132,
+                "conditional_ndcg10_macro": 0.09107199926622303,
+                "rescued": 335,
+                "demoted": 255,
+                "retained": 103,
+                "unrescued": 1543
+              },
+              {
+                "ndcg10_macro": 0.006280978938037306,
+                "ndcg10_micro": 0.0064585435746405346,
+                "recall10_macro": 0.013362780529157186,
+                "conditional_ndcg10_macro": 0.09021075450137078,
+                "rescued": 338,
+                "demoted": 263,
+                "retained": 95,
+                "unrescued": 1540
+              },
+              {
+                "ndcg10_macro": 0.007328382443031292,
+                "ndcg10_micro": 0.007748747235669135,
+                "recall10_macro": 0.014857448802034533,
+                "conditional_ndcg10_macro": 0.10805141939654637,
+                "rescued": 361,
+                "demoted": 223,
+                "retained": 135,
+                "unrescued": 1517
+              }
+            ]
+          },
+          "11+": {
+            "n_instances": 25271,
+            "n_users": 11043,
+            "n_retrieved": 1685,
+            "n_retrieved_users": 1451,
+            "retrieval_recall200_micro": 0.06667721894661865,
+            "retrieval_recall200_macro": 0.06659866832485457,
+            "baseline_ndcg10_macro": 0.005225736460317078,
+            "baseline_ndcg10_micro": 0.005404989379706554,
+            "baseline_conditional_ndcg10_macro": 0.07965533815775104,
+            "ndcg10_macro_mean": 0.005247412663464725,
+            "ndcg10_macro_seed_std": 0.00035610760738951264,
+            "ndcg10_micro_mean": 0.005294199380473762,
+            "conditional_ndcg10_macro_mean": 0.07890516423036499,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 2.1676203147647044e-05,
+              "ci_low": -0.0010123436974324392,
+              "ci_high": 0.0010446280063451455,
+              "n_users": 11043,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 1,
+            "rescued_mean": 252.0,
+            "demoted_mean": 224.33333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.005030485974910404,
+                "ndcg10_micro": 0.005040552489089349,
+                "recall10_macro": 0.011027565698511092,
+                "conditional_ndcg10_macro": 0.07542203389036467,
+                "rescued": 248,
+                "demoted": 230,
+                "retained": 29,
+                "unrescued": 1178
+              },
+              {
+                "ndcg10_macro": 0.0050533537161907924,
+                "ndcg10_micro": 0.005271469577007523,
+                "recall10_macro": 0.01084553544418508,
+                "conditional_ndcg10_macro": 0.07687717600561071,
+                "rescued": 250,
+                "demoted": 227,
+                "retained": 32,
+                "unrescued": 1176
+              },
+              {
+                "ndcg10_macro": 0.005658398299292981,
+                "ndcg10_micro": 0.005570576075324414,
+                "recall10_macro": 0.012290842881876467,
+                "conditional_ndcg10_macro": 0.08441628279511959,
+                "rescued": 258,
+                "demoted": 216,
+                "retained": 43,
+                "unrescued": 1168
+              }
+            ]
+          },
+          "3-5": {
+            "n_instances": 116282,
+            "n_users": 79720,
+            "n_retrieved": 8406,
+            "n_retrieved_users": 7984,
+            "retrieval_recall200_micro": 0.0722897782975869,
+            "retrieval_recall200_macro": 0.06941587221943468,
+            "baseline_ndcg10_macro": 0.005697577163978726,
+            "baseline_ndcg10_micro": 0.0061686856872734605,
+            "baseline_conditional_ndcg10_macro": 0.08418371796431733,
+            "ndcg10_macro_mean": 0.006501225136279004,
+            "ndcg10_macro_seed_std": 0.0004871203299159016,
+            "ndcg10_micro_mean": 0.006855829870985025,
+            "conditional_ndcg10_macro_mean": 0.09525463689721987,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008036479723002785,
+              "ci_low": 0.00039313398250905365,
+              "ci_high": 0.0012225984186486735,
+              "n_users": 79720,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1340.3333333333333,
+            "demoted_mean": 962.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006114817777384539,
+                "ndcg10_micro": 0.006479023507044225,
+                "recall10_macro": 0.01337598260578692,
+                "conditional_ndcg10_macro": 0.09005410254498922,
+                "rescued": 1334,
+                "demoted": 999,
+                "retained": 309,
+                "unrescued": 5764
+              },
+              {
+                "ndcg10_macro": 0.006340446852115758,
+                "ndcg10_micro": 0.006606470327949363,
+                "recall10_macro": 0.013534872052182637,
+                "conditional_ndcg10_macro": 0.09171197992548256,
+                "rescued": 1322,
+                "demoted": 992,
+                "retained": 316,
+                "unrescued": 5776
+              },
+              {
+                "ndcg10_macro": 0.007048410779336715,
+                "ndcg10_micro": 0.00748199577796149,
+                "recall10_macro": 0.014406673356748617,
+                "conditional_ndcg10_macro": 0.10399782822118783,
+                "rescued": 1365,
+                "demoted": 896,
+                "retained": 412,
+                "unrescued": 5733
+              }
+            ]
+          },
+          "6-10": {
+            "n_instances": 59795,
+            "n_users": 39178,
+            "n_retrieved": 4345,
+            "n_retrieved_users": 4087,
+            "retrieval_recall200_micro": 0.0726649385400117,
+            "retrieval_recall200_macro": 0.07192557047322477,
+            "baseline_ndcg10_macro": 0.0059557316114270745,
+            "baseline_ndcg10_micro": 0.006188216413253973,
+            "baseline_conditional_ndcg10_macro": 0.0838781261878261,
+            "ndcg10_macro_mean": 0.006869870653351731,
+            "ndcg10_macro_seed_std": 0.0005265901171107456,
+            "ndcg10_micro_mean": 0.006903309085698788,
+            "conditional_ndcg10_macro_mean": 0.09565432684673507,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0009141390419246566,
+              "ci_low": 0.00020968474076052092,
+              "ci_high": 0.001572305201514439,
+              "n_users": 39178,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 735.6666666666666,
+            "demoted_mean": 543.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006538979631245306,
+                "ndcg10_micro": 0.006600756642925248,
+                "recall10_macro": 0.01418866030255075,
+                "conditional_ndcg10_macro": 0.09226656138537674,
+                "rescued": 736,
+                "demoted": 565,
+                "retained": 123,
+                "unrescued": 2921
+              },
+              {
+                "ndcg10_macro": 0.00659352379229364,
+                "ndcg10_micro": 0.006564999432771025,
+                "recall10_macro": 0.014249919172324606,
+                "conditional_ndcg10_macro": 0.09102943954477281,
+                "rescued": 724,
+                "demoted": 556,
+                "retained": 132,
+                "unrescued": 2933
+              },
+              {
+                "ndcg10_macro": 0.007477108536516248,
+                "ndcg10_micro": 0.007544171181400092,
+                "recall10_macro": 0.01533088297854238,
+                "conditional_ndcg10_macro": 0.10366697961005565,
+                "rescued": 747,
+                "demoted": 509,
+                "retained": 179,
+                "unrescued": 2910
+              }
+            ]
+          }
+        },
+        "history_diversity": {
+          "1-2": {
+            "n_instances": 31556,
+            "n_users": 22413,
+            "n_retrieved": 2236,
+            "n_retrieved_users": 2137,
+            "retrieval_recall200_micro": 0.07085815692736722,
+            "retrieval_recall200_macro": 0.06833087940034802,
+            "baseline_ndcg10_macro": 0.0057829682290809654,
+            "baseline_ndcg10_micro": 0.006233748601886873,
+            "baseline_conditional_ndcg10_macro": 0.08626113931338175,
+            "ndcg10_macro_mean": 0.006639158086986496,
+            "ndcg10_macro_seed_std": 0.0005970399671916029,
+            "ndcg10_micro_mean": 0.006897862577272415,
+            "conditional_ndcg10_macro_mean": 0.09644472438804673,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.00085618985790553,
+              "ci_low": 0.00010151061146112342,
+              "ci_high": 0.001605343552902777,
+              "n_users": 22413,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 344.6666666666667,
+            "demoted_mean": 247.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006308112879890892,
+                "ndcg10_micro": 0.006486296921507578,
+                "recall10_macro": 0.013452014455896132,
+                "conditional_ndcg10_macro": 0.09107199926622303,
+                "rescued": 335,
+                "demoted": 255,
+                "retained": 103,
+                "unrescued": 1543
+              },
+              {
+                "ndcg10_macro": 0.006280978938037306,
+                "ndcg10_micro": 0.0064585435746405346,
+                "recall10_macro": 0.013362780529157186,
+                "conditional_ndcg10_macro": 0.09021075450137078,
+                "rescued": 338,
+                "demoted": 263,
+                "retained": 95,
+                "unrescued": 1540
+              },
+              {
+                "ndcg10_macro": 0.007328382443031292,
+                "ndcg10_micro": 0.007748747235669135,
+                "recall10_macro": 0.014857448802034533,
+                "conditional_ndcg10_macro": 0.10805141939654637,
+                "rescued": 361,
+                "demoted": 223,
+                "retained": 135,
+                "unrescued": 1517
+              }
+            ]
+          },
+          "11+ / homogeneous": {
+            "n_instances": 248,
+            "n_users": 138,
+            "n_retrieved": 20,
+            "n_retrieved_users": 18,
+            "retrieval_recall200_micro": 0.08064516129032258,
+            "retrieval_recall200_macro": 0.08699677938808374,
+            "baseline_ndcg10_macro": 0.0066337153840533404,
+            "baseline_ndcg10_micro": 0.008326773738188338,
+            "baseline_conditional_ndcg10_macro": 0.07858471606881762,
+            "ndcg10_macro_mean": 0.002825458162892088,
+            "ndcg10_macro_seed_std": 0.0010308155752835012,
+            "ndcg10_micro_mean": 0.004486176690020058,
+            "conditional_ndcg10_macro_mean": 0.05040485519455992,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": -0.0038082572211612527,
+              "ci_low": -0.01112536847905943,
+              "ci_high": 0.0018798157990016302,
+              "n_users": 138,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 0,
+            "rescued_mean": 2.6666666666666665,
+            "demoted_mean": 3.6666666666666665,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.003986463428056154,
+                "ndcg10_micro": 0.006363426018692644,
+                "recall10_macro": 0.010265700483091786,
+                "conditional_ndcg10_macro": 0.07378498070198754,
+                "rescued": 4,
+                "demoted": 4,
+                "retained": 0,
+                "unrescued": 12
+              },
+              {
+                "ndcg10_macro": 0.002472179716837468,
+                "ndcg10_micro": 0.004444954120835258,
+                "recall10_macro": 0.006642512077294686,
+                "conditional_ndcg10_macro": 0.04927835238502486,
+                "rescued": 3,
+                "demoted": 4,
+                "retained": 0,
+                "unrescued": 13
+              },
+              {
+                "ndcg10_macro": 0.002017731343782644,
+                "ndcg10_micro": 0.0026501499305322715,
+                "recall10_macro": 0.006038647342995168,
+                "conditional_ndcg10_macro": 0.028151232496667376,
+                "rescued": 1,
+                "demoted": 3,
+                "retained": 1,
+                "unrescued": 15
+              }
+            ]
+          },
+          "11+ / mixed": {
+            "n_instances": 25023,
+            "n_users": 10936,
+            "n_retrieved": 1665,
+            "n_retrieved_users": 1433,
+            "retrieval_recall200_micro": 0.06653878431842705,
+            "retrieval_recall200_macro": 0.06627338706821834,
+            "baseline_ndcg10_macro": 0.005193156090735381,
+            "baseline_ndcg10_micro": 0.00537603191973359,
+            "baseline_conditional_ndcg10_macro": 0.07966878630680951,
+            "ndcg10_macro_mean": 0.0052676771192993535,
+            "ndcg10_macro_seed_std": 0.0003662770201407665,
+            "ndcg10_micro_mean": 0.005302207598002936,
+            "conditional_ndcg10_macro_mean": 0.07926315834246861,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 7.452102856397131e-05,
+              "ci_low": -0.0009300822623998684,
+              "ci_high": 0.0010055998922967194,
+              "n_users": 10936,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 1,
+            "rescued_mean": 249.33333333333334,
+            "demoted_mean": 220.66666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.0050356514623090265,
+                "ndcg10_micro": 0.005027441645651647,
+                "recall10_macro": 0.011024208242683919,
+                "conditional_ndcg10_macro": 0.0754425970148523,
+                "rescued": 244,
+                "demoted": 226,
+                "retained": 29,
+                "unrescued": 1166
+              },
+              {
+                "ndcg10_macro": 0.0050774515988620955,
+                "ndcg10_micro": 0.005279661074155376,
+                "recall10_macro": 0.010886117524091913,
+                "conditional_ndcg10_macro": 0.07722384650468296,
+                "rescued": 247,
+                "demoted": 223,
+                "retained": 32,
+                "unrescued": 1163
+              },
+              {
+                "ndcg10_macro": 0.005689928296726937,
+                "ndcg10_micro": 0.005599520074201786,
+                "recall10_macro": 0.012339470063206704,
+                "conditional_ndcg10_macro": 0.08512303150787057,
+                "rescued": 257,
+                "demoted": 213,
+                "retained": 42,
+                "unrescued": 1153
+              }
+            ]
+          },
+          "3-5": {
+            "n_instances": 116282,
+            "n_users": 79720,
+            "n_retrieved": 8406,
+            "n_retrieved_users": 7984,
+            "retrieval_recall200_micro": 0.0722897782975869,
+            "retrieval_recall200_macro": 0.06941587221943468,
+            "baseline_ndcg10_macro": 0.005697577163978726,
+            "baseline_ndcg10_micro": 0.0061686856872734605,
+            "baseline_conditional_ndcg10_macro": 0.08418371796431733,
+            "ndcg10_macro_mean": 0.006501225136279004,
+            "ndcg10_macro_seed_std": 0.0004871203299159016,
+            "ndcg10_micro_mean": 0.006855829870985025,
+            "conditional_ndcg10_macro_mean": 0.09525463689721987,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0008036479723002785,
+              "ci_low": 0.00039313398250905365,
+              "ci_high": 0.0012225984186486735,
+              "n_users": 79720,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 1340.3333333333333,
+            "demoted_mean": 962.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006114817777384539,
+                "ndcg10_micro": 0.006479023507044225,
+                "recall10_macro": 0.01337598260578692,
+                "conditional_ndcg10_macro": 0.09005410254498922,
+                "rescued": 1334,
+                "demoted": 999,
+                "retained": 309,
+                "unrescued": 5764
+              },
+              {
+                "ndcg10_macro": 0.006340446852115758,
+                "ndcg10_micro": 0.006606470327949363,
+                "recall10_macro": 0.013534872052182637,
+                "conditional_ndcg10_macro": 0.09171197992548256,
+                "rescued": 1322,
+                "demoted": 992,
+                "retained": 316,
+                "unrescued": 5776
+              },
+              {
+                "ndcg10_macro": 0.007048410779336715,
+                "ndcg10_micro": 0.00748199577796149,
+                "recall10_macro": 0.014406673356748617,
+                "conditional_ndcg10_macro": 0.10399782822118783,
+                "rescued": 1365,
+                "demoted": 896,
+                "retained": 412,
+                "unrescued": 5733
+              }
+            ]
+          },
+          "6-10": {
+            "n_instances": 59795,
+            "n_users": 39178,
+            "n_retrieved": 4345,
+            "n_retrieved_users": 4087,
+            "retrieval_recall200_micro": 0.0726649385400117,
+            "retrieval_recall200_macro": 0.07192557047322477,
+            "baseline_ndcg10_macro": 0.0059557316114270745,
+            "baseline_ndcg10_micro": 0.006188216413253973,
+            "baseline_conditional_ndcg10_macro": 0.0838781261878261,
+            "ndcg10_macro_mean": 0.006869870653351731,
+            "ndcg10_macro_seed_std": 0.0005265901171107456,
+            "ndcg10_micro_mean": 0.006903309085698788,
+            "conditional_ndcg10_macro_mean": 0.09565432684673507,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0009141390419246566,
+              "ci_low": 0.00020968474076052092,
+              "ci_high": 0.001572305201514439,
+              "n_users": 39178,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 735.6666666666666,
+            "demoted_mean": 543.3333333333334,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006538979631245306,
+                "ndcg10_micro": 0.006600756642925248,
+                "recall10_macro": 0.01418866030255075,
+                "conditional_ndcg10_macro": 0.09226656138537674,
+                "rescued": 736,
+                "demoted": 565,
+                "retained": 123,
+                "unrescued": 2921
+              },
+              {
+                "ndcg10_macro": 0.00659352379229364,
+                "ndcg10_micro": 0.006564999432771025,
+                "recall10_macro": 0.014249919172324606,
+                "conditional_ndcg10_macro": 0.09102943954477281,
+                "rescued": 724,
+                "demoted": 556,
+                "retained": 132,
+                "unrescued": 2933
+              },
+              {
+                "ndcg10_macro": 0.007477108536516248,
+                "ndcg10_micro": 0.007544171181400092,
+                "recall10_macro": 0.01533088297854238,
+                "conditional_ndcg10_macro": 0.10366697961005565,
+                "rescued": 747,
+                "demoted": 509,
+                "retained": 179,
+                "unrescued": 2910
+              }
+            ]
+          }
+        },
+        "validation_window": {
+          "days 0-89": {
+            "n_instances": 61523,
+            "n_users": 43362,
+            "n_retrieved": 5297,
+            "n_retrieved_users": 4894,
+            "retrieval_recall200_micro": 0.08609788209287583,
+            "retrieval_recall200_macro": 0.08143113278646695,
+            "baseline_ndcg10_macro": 0.007170018248137472,
+            "baseline_ndcg10_micro": 0.008047512619656663,
+            "baseline_conditional_ndcg10_macro": 0.09087705188599182,
+            "ndcg10_macro_mean": 0.008426103285980509,
+            "ndcg10_macro_seed_std": 0.000582004742231229,
+            "ndcg10_micro_mean": 0.009205296795119533,
+            "conditional_ndcg10_macro_mean": 0.10655805483509029,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0012560850378430367,
+              "ci_low": 0.0005990852809822295,
+              "ci_high": 0.0019914816498610055,
+              "n_users": 43362,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 923.3333333333334,
+            "demoted_mean": 670.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.007955424191417678,
+                "ndcg10_micro": 0.008840893561902518,
+                "recall10_macro": 0.01668371208377435,
+                "conditional_ndcg10_macro": 0.10220369046296525,
+                "rescued": 925,
+                "demoted": 691,
+                "retained": 217,
+                "unrescued": 3464
+              },
+              {
+                "ndcg10_macro": 0.008246020864132012,
+                "ndcg10_micro": 0.008897096822723589,
+                "recall10_macro": 0.016833548858420862,
+                "conditional_ndcg10_macro": 0.10313413452469236,
+                "rescued": 912,
+                "demoted": 693,
+                "retained": 215,
+                "unrescued": 3477
+              },
+              {
+                "ndcg10_macro": 0.009076864802391837,
+                "ndcg10_micro": 0.009877900000732489,
+                "recall10_macro": 0.018065883804606647,
+                "conditional_ndcg10_macro": 0.11433633951761324,
+                "rescued": 933,
+                "demoted": 626,
+                "retained": 282,
+                "unrescued": 3456
+              }
+            ]
+          },
+          "days 180-269": {
+            "n_instances": 63759,
+            "n_users": 42556,
+            "n_retrieved": 4018,
+            "n_retrieved_users": 3755,
+            "retrieval_recall200_micro": 0.0630185542433225,
+            "retrieval_recall200_macro": 0.0602878803959511,
+            "baseline_ndcg10_macro": 0.004584877227895826,
+            "baseline_ndcg10_micro": 0.005041633902153476,
+            "baseline_conditional_ndcg10_macro": 0.07787494174170036,
+            "ndcg10_macro_mean": 0.005195323307353185,
+            "ndcg10_macro_seed_std": 0.00043283356378425966,
+            "ndcg10_micro_mean": 0.005391929388436392,
+            "conditional_ndcg10_macro_mean": 0.08586655029318829,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.000610446079457359,
+              "ci_low": 3.6570361631044294e-05,
+              "ci_high": 0.0011586795046580867,
+              "n_users": 42556,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 613.6666666666666,
+            "demoted_mean": 457.3333333333333,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.004824319763077779,
+                "ndcg10_micro": 0.005064794753994118,
+                "recall10_macro": 0.01083388919633847,
+                "conditional_ndcg10_macro": 0.08108163499921202,
+                "rescued": 612,
+                "demoted": 479,
+                "retained": 116,
+                "unrescued": 2811
+              },
+              {
+                "ndcg10_macro": 0.005090804094837195,
+                "ndcg10_micro": 0.005173109968272785,
+                "recall10_macro": 0.011290411843621529,
+                "conditional_ndcg10_macro": 0.08204815938277056,
+                "rescued": 603,
+                "demoted": 468,
+                "retained": 127,
+                "unrescued": 2820
+              },
+              {
+                "ndcg10_macro": 0.005670846064144581,
+                "ndcg10_micro": 0.005937883443042273,
+                "recall10_macro": 0.011850234419141065,
+                "conditional_ndcg10_macro": 0.09446985649758231,
+                "rescued": 626,
+                "demoted": 425,
+                "retained": 170,
+                "unrescued": 2797
+              }
+            ]
+          },
+          "days 270+": {
+            "n_instances": 44863,
+            "n_users": 31365,
+            "n_retrieved": 2603,
+            "n_retrieved_users": 2437,
+            "retrieval_recall200_micro": 0.05802108641865234,
+            "retrieval_recall200_macro": 0.055486944653470656,
+            "baseline_ndcg10_macro": 0.0042733651785412,
+            "baseline_ndcg10_micro": 0.004684427899012059,
+            "baseline_conditional_ndcg10_macro": 0.07887387351907894,
+            "ndcg10_macro_mean": 0.0045998455609590925,
+            "ndcg10_macro_seed_std": 0.0003628956760150138,
+            "ndcg10_micro_mean": 0.0048150750767353865,
+            "conditional_ndcg10_macro_mean": 0.08274139196036885,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0003264803824178911,
+              "ci_low": -0.00030077060270346115,
+              "ci_high": 0.000957486955876324,
+              "n_users": 31365,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 386.0,
+            "demoted_mean": 315.0,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.00446316935486441,
+                "ndcg10_micro": 0.004600620731047328,
+                "recall10_macro": 0.009811488527413922,
+                "conditional_ndcg10_macro": 0.07974431743473473,
+                "rescued": 382,
+                "demoted": 322,
+                "retained": 67,
+                "unrescued": 1832
+              },
+              {
+                "ndcg10_macro": 0.004325134130139869,
+                "ndcg10_micro": 0.004542853891270195,
+                "recall10_macro": 0.009411993589420657,
+                "conditional_ndcg10_macro": 0.0780092251373397,
+                "rescued": 371,
+                "demoted": 323,
+                "retained": 66,
+                "unrescued": 1843
+              },
+              {
+                "ndcg10_macro": 0.005011233197872997,
+                "ndcg10_micro": 0.005301750607888637,
+                "recall10_macro": 0.010545526762507099,
+                "conditional_ndcg10_macro": 0.09047063330903213,
+                "rescued": 405,
+                "demoted": 300,
+                "retained": 89,
+                "unrescued": 1809
+              }
+            ]
+          },
+          "days 90-179": {
+            "n_instances": 62759,
+            "n_users": 42934,
+            "n_retrieved": 4754,
+            "n_retrieved_users": 4412,
+            "retrieval_recall200_micro": 0.07575009162032537,
+            "retrieval_recall200_macro": 0.071750569541947,
+            "baseline_ndcg10_macro": 0.005805602311499417,
+            "baseline_ndcg10_micro": 0.006276693754104463,
+            "baseline_conditional_ndcg10_macro": 0.0805245506080807,
+            "ndcg10_macro_mean": 0.006575302314847324,
+            "ndcg10_macro_seed_std": 0.0006361299996620046,
+            "ndcg10_micro_mean": 0.006936239042982934,
+            "conditional_ndcg10_macro_mean": 0.09262306324369336,
+            "delta_vs_r1_user_bootstrap": {
+              "diff": 0.0007697000033479069,
+              "ci_low": 0.0002047266358886202,
+              "ci_high": 0.0013719839500395828,
+              "n_users": 42934,
+              "n_resamples": 1000
+            },
+            "positive_seeds_vs_r1": 3,
+            "rescued_mean": 749.6666666666666,
+            "demoted_mean": 534.6666666666666,
+            "per_seed": [
+              {
+                "ndcg10_macro": 0.006064178502901716,
+                "ndcg10_micro": 0.006483615916934398,
+                "recall10_macro": 0.013396511202445891,
+                "conditional_ndcg10_macro": 0.08688372478447497,
+                "rescued": 734,
+                "demoted": 557,
+                "retained": 164,
+                "unrescued": 3299
+              },
+              {
+                "ndcg10_macro": 0.006373999127913455,
+                "ndcg10_micro": 0.00664087018696095,
+                "recall10_macro": 0.013831768519778022,
+                "conditional_ndcg10_macro": 0.08897141208468311,
+                "rescued": 748,
+                "demoted": 554,
+                "retained": 167,
+                "unrescued": 3285
+              },
+              {
+                "ndcg10_macro": 0.007287729313726804,
+                "ndcg10_micro": 0.0076842310250534555,
+                "recall10_macro": 0.014963195464080543,
+                "conditional_ndcg10_macro": 0.10201405286192204,
+                "rescued": 767,
+                "demoted": 493,
+                "retained": 228,
+                "unrescued": 3266
+              }
+            ]
+          }
+        }
+      },
+      "global_gauc_macro_by_seed": [
+        0.7372686681544274,
+        0.7434211728819301,
+        0.7483539578885403
+      ]
+    }
+  },
+  "novelty_by_window": [
+    {
+      "window": "days 0-89",
+      "n_instances": 61523,
+      "new_at_val_entry_fraction": 0.18084293678786795
+    },
+    {
+      "window": "days 180-269",
+      "n_instances": 63759,
+      "new_at_val_entry_fraction": 0.40930692137580577
+    },
+    {
+      "window": "days 270+",
+      "n_instances": 44863,
+      "new_at_val_entry_fraction": 0.45469540601386443
+    },
+    {
+      "window": "days 90-179",
+      "n_instances": 62759,
+      "new_at_val_entry_fraction": 0.3050717825331825
+    }
+  ],
+  "source_runs": {
+    "matching_seed0": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching",
+      "metrics_sha256": "7d450f8b5c23a746a28c085061dc85f1eccc136a7dc58ec51b50699322918ab1",
+      "ranks_sha256": "ae3f577090646c8debdbfe66bb63444dfcdc714ffabd7cfd4457904f84ffb97b"
+    },
+    "matching_seed1": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching",
+      "metrics_sha256": "83233dc486edf2362a62d360db6abcd515c56f330cf5e0ab0cba95031f169592",
+      "ranks_sha256": "1f06be5e7a526ab0eae189ee1e9e1ae2bbf496b7a65d33a3b77b7b16718ca970"
+    },
+    "matching_seed2": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching",
+      "metrics_sha256": "d932b21c092c87d8382b07bfdfdeae33375756d4bfa51a65ee473a74ea179a20",
+      "ranks_sha256": "815c0ce37e8ffef2e27113b8eefccb1bbd7ca271d4f6b66b7932f6f473cf4f0d"
+    },
+    "attributes_seed0": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung2_attributes",
+      "metrics_sha256": "123aa7a74bccf6a4dfe8c16f8d161e09d4c682827bfccc5be93c66eb1074b93c",
+      "ranks_sha256": "efcacb605d535932ace84eda28ab9fd306adeb5728ff483687ba06373cec8dfb"
+    },
+    "attributes_seed1": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed1-rung2_attributes",
+      "metrics_sha256": "ed75b57081a9721da8efccbc4f9ce9efff6b91d2d0604ad878575f1c586988a0",
+      "ranks_sha256": "2ce33cabed8b386bd1a9f0bb0f14bad6751940b946091c8383ebe247f1a3ad26"
+    },
+    "attributes_seed2": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed2-rung2_attributes",
+      "metrics_sha256": "925cd3a2d2c524102d4a9b0f8247f2026b3e69294f9540f26bf9df982c0d36c4",
+      "ranks_sha256": "21cd20295f4670f98e1668f71933dffc5bc639c921135359097246ddbe33f24d"
+    },
+    "din_seed0": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_din/20261024-din-matching-seed0",
+      "metrics_sha256": "af09e992fc20b1afae01a1db7193ccd16e400b72b6069481f2a7bab650bcf29b",
+      "ranks_sha256": "40628203b529fe190c837e8c43c117d47191d08bd8b34934a54af6d8d2128464"
+    },
+    "din_seed1": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_din/20261024-din-matching-seed1",
+      "metrics_sha256": "a6c95d59263d212b119c7ee492a939d98aa30ac1667c3dff6a25f1ec82a27a6c",
+      "ranks_sha256": "3404b5c5291b685a2933f4a948b7385ea0ffb62a0e33b13574a638d4d6ae169b"
+    },
+    "din_seed2": {
+      "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_din/20261024-din-matching-seed2",
+      "metrics_sha256": "e72f5a40cb70bbd22e841191fd8b558440e99c93c40fc71a5ee818e7d0b152de",
+      "ranks_sha256": "72e48951ddecbb05779fa5124cde8df37c27f0b2127162002f27d3aa966e6a12"
+    }
+  },
+  "attributes_minus_matching": {
+    "common_seeds": [
+      0,
+      1,
+      2
+    ],
+    "groups": {
+      "overall": {
+        "all": {
+          "diff": -0.0002922500981156215,
+          "ci_low": -0.0004931049713127118,
+          "ci_high": -9.217062904912793e-05,
+          "n_users": 124416,
+          "n_resamples": 1000
+        }
+      },
+      "item_type": {
+        "new-in-period": {
+          "diff": 0.0013058501361734249,
+          "ci_low": 0.0009925380352284895,
+          "ci_high": 0.0016137499720995018,
+          "n_users": 52420,
+          "n_resamples": 1000
+        },
+        "warm-head": {
+          "diff": -0.0013879642965691763,
+          "ci_low": -0.001732048130351211,
+          "ci_high": -0.0010351755754991609,
+          "n_users": 75877,
+          "n_resamples": 1000
+        },
+        "warm-tail": {
+          "diff": 4.360140666060032e-05,
+          "ci_low": -0.0001671351683518926,
+          "ci_high": 0.00024305840460221104,
+          "n_users": 37944,
+          "n_resamples": 1000
+        }
+      },
+      "history_length": {
+        "1-2": {
+          "diff": 3.6671705140568683e-06,
+          "ci_low": -0.0005042154342883344,
+          "ci_high": 0.0004912218423724554,
+          "n_users": 22413,
+          "n_resamples": 1000
+        },
+        "11+": {
+          "diff": 0.0001872716371049684,
+          "ci_low": -0.0004032424027435035,
+          "ci_high": 0.0008387977757989321,
+          "n_users": 11043,
+          "n_resamples": 1000
+        },
+        "3-5": {
+          "diff": -0.00035507247762503263,
+          "ci_low": -0.0006417300980072044,
+          "ci_high": -7.53732861119728e-05,
+          "n_users": 79720,
+          "n_resamples": 1000
+        },
+        "6-10": {
+          "diff": -0.0004417057871594815,
+          "ci_low": -0.0008724986921997193,
+          "ci_high": -3.271075455682689e-05,
+          "n_users": 39178,
+          "n_resamples": 1000
+        }
+      },
+      "history_diversity": {
+        "1-2": {
+          "diff": 3.6671705140568683e-06,
+          "ci_low": -0.0005042154342883344,
+          "ci_high": 0.0004912218423724554,
+          "n_users": 22413,
+          "n_resamples": 1000
+        },
+        "11+ / homogeneous": {
+          "diff": 0.001988944048065116,
+          "ci_low": -0.0010902783955552542,
+          "ci_high": 0.0058271766188697045,
+          "n_users": 138,
+          "n_resamples": 1000
+        },
+        "11+ / mixed": {
+          "diff": 0.0001675142568100614,
+          "ci_low": -0.0004808019742573657,
+          "ci_high": 0.0007749146608435998,
+          "n_users": 10936,
+          "n_resamples": 1000
+        },
+        "3-5": {
+          "diff": -0.00035507247762503263,
+          "ci_low": -0.0006417300980072044,
+          "ci_high": -7.53732861119728e-05,
+          "n_users": 79720,
+          "n_resamples": 1000
+        },
+        "6-10": {
+          "diff": -0.0004417057871594815,
+          "ci_low": -0.0008724986921997193,
+          "ci_high": -3.271075455682689e-05,
+          "n_users": 39178,
+          "n_resamples": 1000
+        }
+      },
+      "validation_window": {
+        "days 0-89": {
+          "diff": 0.0007869327807493804,
+          "ci_low": 0.00035531957982941874,
+          "ci_high": 0.001269983023118728,
+          "n_users": 43362,
+          "n_resamples": 1000
+        },
+        "days 180-269": {
+          "diff": -0.0006976075982010406,
+          "ci_low": -0.0010286976938606847,
+          "ci_high": -0.00036094811932133123,
+          "n_users": 42556,
+          "n_resamples": 1000
+        },
+        "days 270+": {
+          "diff": -0.0008300575300676517,
+          "ci_low": -0.0012302533554744885,
+          "ci_high": -0.00043704766340758736,
+          "n_users": 31365,
+          "n_resamples": 1000
+        },
+        "days 90-179": {
+          "diff": -0.0003722910005088102,
+          "ci_low": -0.0007230110177798009,
+          "ci_high": -8.690391536354809e-06,
+          "n_users": 42934,
+          "n_resamples": 1000
+        }
+      }
+    }
+  },
+  "din_minus_matching": {
+    "common_seeds": [
+      0,
+      1,
+      2
+    ],
+    "groups": {
+      "overall": {
+        "all": {
+          "diff": -0.00040635861935965384,
+          "ci_low": -0.0005783287227436934,
+          "ci_high": -0.00022671627084853852,
+          "n_users": 124416,
+          "n_resamples": 1000
+        }
+      },
+      "item_type": {
+        "new-in-period": {
+          "diff": 0.0012537197667135428,
+          "ci_low": 0.0010131172556296234,
+          "ci_high": 0.001501292439881324,
+          "n_users": 52420,
+          "n_resamples": 1000
+        },
+        "warm-head": {
+          "diff": -0.0016732705809731259,
+          "ci_low": -0.001961053240700636,
+          "ci_high": -0.0013449678964968918,
+          "n_users": 75877,
+          "n_resamples": 1000
+        },
+        "warm-tail": {
+          "diff": 0.00022281489828091582,
+          "ci_low": 4.849137059636918e-05,
+          "ci_high": 0.0004087458908900313,
+          "n_users": 37944,
+          "n_resamples": 1000
+        }
+      },
+      "history_length": {
+        "1-2": {
+          "diff": 9.700120118993593e-06,
+          "ci_low": -0.00046063264962782093,
+          "ci_high": 0.00044132132795537824,
+          "n_users": 22413,
+          "n_resamples": 1000
+        },
+        "11+": {
+          "diff": -0.00024055266779846168,
+          "ci_low": -0.0007605320982754575,
+          "ci_high": 0.00029564941846446955,
+          "n_users": 11043,
+          "n_resamples": 1000
+        },
+        "3-5": {
+          "diff": -0.00047803310473140074,
+          "ci_low": -0.0007251463534776934,
+          "ci_high": -0.00025034617507398626,
+          "n_users": 79720,
+          "n_resamples": 1000
+        },
+        "6-10": {
+          "diff": -0.00033816546417152785,
+          "ci_low": -0.0007073657737039167,
+          "ci_high": 1.6216554430343933e-05,
+          "n_users": 39178,
+          "n_resamples": 1000
+        }
+      },
+      "history_diversity": {
+        "1-2": {
+          "diff": 9.700120118993593e-06,
+          "ci_low": -0.00046063264962782093,
+          "ci_high": 0.00044132132795537824,
+          "n_users": 22413,
+          "n_resamples": 1000
+        },
+        "11+ / homogeneous": {
+          "diff": 0.0008560178370757079,
+          "ci_low": -0.0019192217660513999,
+          "ci_high": 0.003708179660427416,
+          "n_users": 138,
+          "n_resamples": 1000
+        },
+        "11+ / mixed": {
+          "diff": -0.00024957197865986536,
+          "ci_low": -0.000823004555974953,
+          "ci_high": 0.0002999169568431989,
+          "n_users": 10936,
+          "n_resamples": 1000
+        },
+        "3-5": {
+          "diff": -0.00047803310473140074,
+          "ci_low": -0.0007251463534776934,
+          "ci_high": -0.00025034617507398626,
+          "n_users": 79720,
+          "n_resamples": 1000
+        },
+        "6-10": {
+          "diff": -0.00033816546417152785,
+          "ci_low": -0.0007073657737039167,
+          "ci_high": 1.6216554430343933e-05,
+          "n_users": 39178,
+          "n_resamples": 1000
+        }
+      },
+      "validation_window": {
+        "days 0-89": {
+          "diff": 6.587760196767659e-05,
+          "ci_low": -0.0003007037556107371,
+          "ci_high": 0.00046946526827070667,
+          "n_users": 43362,
+          "n_resamples": 1000
+        },
+        "days 180-269": {
+          "diff": -0.00044621238266284534,
+          "ci_low": -0.0007615032505843264,
+          "ci_high": -0.00012483848302235155,
+          "n_users": 42556,
+          "n_resamples": 1000
+        },
+        "days 270+": {
+          "diff": -0.0007044935367259448,
+          "ci_low": -0.0010792528857046135,
+          "ci_high": -0.0003381446830870382,
+          "n_users": 31365,
+          "n_resamples": 1000
+        },
+        "days 90-179": {
+          "diff": -0.000568024511303539,
+          "ci_low": -0.0008969260247789275,
+          "ci_high": -0.00022448375452047153,
+          "n_users": 42934,
+          "n_resamples": 1000
+        }
+      }
+    }
+  },
+  "window_entry_novelty": [
+    {
+      "period": "ranker_train",
+      "n_instances": 315114,
+      "new_in_period_fraction": 0.37571164721338945
+    },
+    {
+      "period": "val",
+      "n_instances": 232904,
+      "new_in_period_fraction": 0.3296122007350668
+    }
+  ],
+  "analysis_source_sha256": "ceb6270cc735541ed35ca71d49107f4912c71f615e949b0c7b24c03af98aa1a4",
+  "analysis_sources": {
+    "ranker_meso.py": "ceb6270cc735541ed35ca71d49107f4912c71f615e949b0c7b24c03af98aa1a4",
+    "plot_ranker_meso.py": "15746c55ca72f5e5eb4f873814dd926167c867e1aba3e6e5559e975c2ac40235",
+    "bootstrap.py": "7d62479921ae9c02f6a56b3410b0a0ffcd3294b6f2e0befc8100816b0b47a20c",
+    "metrics.py": "11e92706861bd2b176b850797708d232892898fcbb33d43b2c6d5b718df1cad8",
+    "segments.py": "19982ad14c7751234a525e50a7d123962d5bf8d6be5a5b0eee1cfe2bef912044"
+  }
+}

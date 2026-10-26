@@ -6,14 +6,16 @@ pandas==2.3.3
 pyarrow==25.0.1
 scipy==1.17.1
 scikit-learn==1.9.1
+threadpoolctl==3.7.0
 pyyaml==6.0.3
 tqdm==4.70.1
 matplotlib==3.11.2
 pytest==9.1.1
 requests==2.34.2
 recbole==1.2.1
-sentence-transformers==6.1.0
-transformers==5.17.0
-huggingface-hub==1.33.0
-tokenizers==0.23.2
+# Text encoder stack used for the completed local ranker runs; keep these compatible pins together.
+sentence-transformers==3.4.1
+transformers==4.48.3
+huggingface-hub==0.28.1
+tokenizers==0.21.0
 faiss-cpu==1.15.1

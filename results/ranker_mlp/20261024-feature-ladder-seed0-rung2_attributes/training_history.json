@@ -1,0 +1,68 @@
+[
+  {
+    "epoch": 1.0,
+    "train_bce": 0.03891141373848257,
+    "gauc_macro": 0.7259523194994805,
+    "gauc_micro": 0.7247842499445404,
+    "ndcg@10_macro": 0.07721870297658526,
+    "ndcg@10_micro": 0.0765066047330379,
+    "end_to_end_ndcg@10_macro": 0.005283714857457515,
+    "rescued_count": 2303,
+    "demoted_count": 2203
+  },
+  {
+    "epoch": 2.0,
+    "train_bce": 0.031288441307722854,
+    "gauc_macro": 0.7389701339806606,
+    "gauc_micro": 0.7376844937258269,
+    "ndcg@10_macro": 0.0741392655671552,
+    "ndcg@10_micro": 0.07380322806464165,
+    "end_to_end_ndcg@10_macro": 0.005117144612737154,
+    "rescued_count": 2334,
+    "demoted_count": 2220
+  },
+  {
+    "epoch": 3.0,
+    "train_bce": 0.02929814827930079,
+    "gauc_macro": 0.7570011193354912,
+    "gauc_micro": 0.7563676106058123,
+    "ndcg@10_macro": 0.09467419791470905,
+    "ndcg@10_micro": 0.0942414349595119,
+    "end_to_end_ndcg@10_macro": 0.006521973937293584,
+    "rescued_count": 2853,
+    "demoted_count": 2054
+  },
+  {
+    "epoch": 4.0,
+    "train_bce": 0.027949626715926577,
+    "gauc_macro": 0.7519254314935473,
+    "gauc_micro": 0.7508397312859885,
+    "ndcg@10_macro": 0.08138337555947307,
+    "ndcg@10_micro": 0.0808445213198154,
+    "end_to_end_ndcg@10_macro": 0.0056092815732360175,
+    "rescued_count": 2549,
+    "demoted_count": 2184
+  },
+  {
+    "epoch": 5.0,
+    "train_bce": 0.026965389708880984,
+    "gauc_macro": 0.7578521516754083,
+    "gauc_micro": 0.7571321398258084,
+    "ndcg@10_macro": 0.09064545372458259,
+    "ndcg@10_micro": 0.09048743627587999,
+    "end_to_end_ndcg@10_macro": 0.00627902927970135,
+    "rescued_count": 2662,
+    "demoted_count": 1971
+  },
+  {
+    "epoch": 6.0,
+    "train_bce": 0.02613195424918055,
+    "gauc_macro": 0.7574359763197666,
+    "gauc_micro": 0.7565986422033392,
+    "ndcg@10_macro": 0.08727740414351295,
+    "ndcg@10_micro": 0.08695772050760467,
+    "end_to_end_ndcg@10_macro": 0.006012568876866541,
+    "rescued_count": 2570,
+    "demoted_count": 1943
+  }
+]

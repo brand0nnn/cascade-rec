@@ -304,6 +304,10 @@ All baselines are evaluated through **our harness** on **our split** (full ranki
 
 **Frozen retriever:** the better of the two variants on **Val Recall@200**; also check Val Recall@200 on the **new-in-period** segment, and if the two disagree, discuss with the team before freezing. Record the choice in `docs/decisions.md`.
 
+**Frozen (2026-10-21): Two-tower (text), seed 0** (`results/retriever/two_tower_text/seed0`), as trained, no
+hyperparameter tuning. The two variants disagreed (text + ID +0.0037 overall, −0.0074 on new-in-period, both
+significant); text was kept for new products. Reasons in `docs/decisions.md`.
+
 ---
 
 ## 8. Nearest-neighbour index (FAISS)
@@ -333,12 +337,24 @@ Sanity test: IVF with `nprobe = nlist` must return exactly the exact-search resu
 | Split | Instances | List size | Force-insert positive? |
 |---|---|---|---|
 | Ranker train | Ranker-training period | 200 | **Yes** — if the target is missing, append it (label 1) |
-| Ranker val (loss / GAUC / early stopping) | Val | 200 | Yes |
+| Ranker val (conditional nDCG / GAUC / early stopping) | Val | 200 | Loaded with target appended; evaluate only natural retrieval hits |
 | Val / Test end-to-end | Val / Test | K₁ (from the sweep) | **No** — misses are real misses |
 
 Labels: target = 1, other candidates = 0. These zeros are *unobserved*, not confirmed dislikes; say so in the report.
 
 For MLP and DIN training, subsample **50 negatives per list** uniformly from the non-target candidates (configurable).
+
+**Open training-design questions:** (1) forced positives can be identified through retrieval score/rank or
+insertion markers; see `docs/decisions.md` 2026-10-24; (2) the user's later reviews in the same period can appear
+as negatives (2026-10-21 entry). **Draft ranker status, 2026-10-26:** exploratory MLP/DIN runs now exist under
+the original force-insertion/negative policy. Retrieval rank and insertion markers are excluded from model
+inputs; the actual retrieval score remains. Full-data diagnostics find a reversed raw-score training signal
+and a low-score preference in the frozen MLP. These observations do not settle a training remedy or establish
+causation. Any controlled retraining or label-policy change needs a separate recorded decision. Checkpoints
+use natural-hit conditional per-user macro nDCG@10 (user-approved), with GAUC secondary; end-to-end metrics
+use all natural lists. See `docs/ranker_experiment.md` for completed validation evidence and limitations.
+
+The lists are built once on the cluster from the frozen retriever and shared from there (≈ 2 GB, not in git).
 
 Save for every list: instance id, candidate ids, retrieval scores, retrieval ranks.
 
@@ -360,7 +376,7 @@ All item statistics come from the per-period tables in §4.5 (no leakage).
 | | history leaf categories | same category table, mean-pooled |
 | | history length | bucket → embedding 8-d |
 | Pair / context | retrieval score | float (standardised) |
-| | retrieval rank | `log1p(rank)` |
+| | retrieval rank | **Excluded**: a force-inserted target's rank can expose its label |
 | | candidate leaf category == last history item's leaf category | binary |
 | | candidate store appears in history | binary |
 | | time since user's last interaction | log-bucket → embedding 8-d |
@@ -369,13 +385,13 @@ All item statistics come from the per-period tables in §4.5 (no leakage).
 ### 9.3 MLP ranker (main)
 
 - Concatenate all feature embeddings and floats → MLP 256 → 128 → 64 (ReLU, dropout 0.1) → 1 logit.
-- Binary cross-entropy, Adam lr 1e-3, batch 2048 rows, early stopping (patience 3) on **ranker-val GAUC**.
+- Binary cross-entropy, Adam lr 1e-3, batch setting 2048 rows (40 lists × 51 rows), early stopping (patience 3) on **conditional per-user macro Val nDCG@10 over natural retrieval hits**. Report GAUC beside it. The selected feature setup is retrieval + history/text matching; the cumulative feature ladder and three-seed repetition are documented in `docs/ranker_experiment.md`.
 
 ### 9.4 DIN ranker (advanced ranker; Zhou et al., 2018)
 
 Chosen over DCN-V2 (2026-10-14) because our users are described by their *sequence* of products, and DIN's target attention directly asks "which past products are relevant to *this* candidate?", which suits accessory purchases tied to a specific phone.
 
-Replace the MLP's mean-pooled history with **target attention**: for each history item `h_j` (item emb ⊕ leaf-category emb) and candidate `c` (same fields), weight `a_j = MLP_att([h_j, c, h_j − c, h_j ⊙ c])` (hidden 64 → 32, ReLU → 1, **no softmax**, masked for padding); interest = Σ a_j h_j. Every other feature, the MLP head, loss, training and early stopping are identical to the MLP ranker, so the comparison isolates the attention. Check against a reference implementation (FuxiCTR or RecBole's DIN); do not import it blindly.
+Replace the MLP's mean-pooled history with **target attention**: for each history item `h_j` (item emb ⊕ leaf-category emb) and candidate `c` (same fields), weight `a_j = MLP_att([c, h_j, c − h_j, c ⊙ h_j])` (hidden 64 → 32, ReLU → 1, **no softmax**, masked for padding); interest = Σ a_j h_j. The shared head, loss, training and checkpoint rule match the selected MLP. This comparison also introduces candidate identity inside the attention query and changes mean pooling to an unnormalised sum, so it does not isolate attention alone. FuxiCTR's input algebra was inspected; its package/benchmarks were not executed. This ReLU/BCE adaptation does not reproduce the full DIN paper recipe. See the dated decision for details.
 
 ### 9.5 Ranker comparison (RQ3; reported at K₁ = 200, exact search, identical candidate lists)
 
@@ -388,7 +404,7 @@ Replace the MLP's mean-pooled history with **target attention**: for each histor
 
 Report conditional nDCG@10 (ranking skill only), end-to-end nDCG@10 and Recall@10, GAUC, and ranking latency for K₁ candidates.
 
-**Required:** R2 must beat R1 on Val nDCG@10. If it does not, the cascade study is not meaningful — stop and report to the team before running RQ2.
+**Checkpoint:** compare R2 with R1 on unforced Val nDCG@10. If it does not improve, investigate feature/label leakage, alignment and training. A verified negative result is valid; report it and agree with the team whether RQ2 sweeps remain useful. See `docs/evaluations.md` Step 1. No additional variants are required to obtain a win.
 
 ---
 
@@ -421,11 +437,11 @@ Caveat to log in `docs/decisions.md`: rankers were trained on 200-candidate list
 3. Failure breakdown stacked bars per K₁ (retrieval miss / ranking miss / hit).
 4. Segment breakdowns (new-in-period / cold / tail / head; history length).
 
-Deliverable decision: the **smallest K₁ at which nDCG@10 is within the bootstrap CI of its maximum** — report it as the recommended K₁.
+Deliverable decision: before inspecting sweep outcomes, record the acceptable absolute Val nDCG@10 loss margin δ and cost/tie-break rule in `docs/decisions.md`. Select a lower-cost setting only if the upper paired-CI bound on loss versus the stated reference is ≤ δ; CI overlap alone is not equivalence. Until δ is recorded, report the trade-off without a cost-optimal selection claim. See `docs/evaluations.md` Step 1.
 
 ### 10.1 Final combination test
 
-After RQ1–RQ3, pick **one** pipeline: the frozen retriever + the better ranker (MLP or DIN, by Val nDCG@10) at the recommended K₁ (exact search, unless an approximate index was within the CI at lower latency). Evaluate it once on Test against:
+After RQ1–RQ3, pick **one** pipeline using Val: the frozen retriever + selected ranker (MLP or DIN, by Val nDCG@10 with uncertainty reported). Use the MLP sweeps to shortlist retrieval settings, then verify the actual selected ranker at that setting on Val. Apply the recorded acceptable-loss/cost rule above; an approximate index needs the same check. Freeze the configuration before its final Test comparison against:
 
 | Row | Pipeline |
 |---|---|
@@ -465,12 +481,17 @@ Run tests before every experiment batch; do not proceed on a red test.
 | Phase | Dates (2026) | Work | Done when |
 |---|---|---|---|
 | 0 | → **29 Sep** (critique) ✅ | Download, preprocess, split, stats, harness, 4 baselines | `stats.json` + baseline table on Val/Test, tests green |
-| 1 | 30 Sep – 12 Oct | Text encoding ✅, both two-tower variants ✅ (3 seeds), retriever-training-period baselines ✅, RQ1 table ✅; MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
-| 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | R2 beats R1; sweep results + headline plot |
+| 1 | 30 Sep – 12 Oct | Text encoding ✅, both two-tower variants ✅ (3 seeds), retriever-training-period baselines ✅, RQ1 table ✅, frozen retriever chosen ✅ (21 Oct); MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
+| 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | Verified R2–R1 comparison; sweep results + headline plot |
 | 3 | 27 Oct – 4 Nov | Final combination test (§10.1), significance tests, segment analysis, failure breakdown, report figures | Final tables and figures reproducible from configs |
 | 4 | 5 – 11 Nov | Report, STePS poster (11 Nov), README reproduction guide | Every poster number traceable to a `results/` run |
 
 Phase 1 slipped: as of 14 Oct, candidate lists are not built yet; the RQ1 runs finished on 15 Oct; freezing the retriever and building candidates come next, since Stage 2 depends on them.
+
+Status 21 Oct: retriever frozen (Two-tower (text), seed 0). Next: build the full candidate lists on the cluster;
+settle the two open ranker-training questions (§9.1); features + MLP (Tong) can start now on the sample lists
+(`data/processed/sample/candidates/two_tower_text_seed0/`); FAISS index sweep, `latency.py` and the retrieval half of
+`run_cascade.py` (Brandon) do not depend on the rankers.
 
 ### Team ownership (as on the critique slides; coordinate through the shared harness)
 - **Phua Qing Rong — data & evaluation:** §4 data, §5 harness, §6 baselines (incl. the retriever-training-period runs for RQ1), failure breakdown and segment analysis, significance tests.

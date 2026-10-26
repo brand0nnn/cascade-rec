@@ -1,0 +1,30 @@
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+data_config: configs/data.yaml
+k1: 200
+cutoff: 10
+bootstrap_resamples: 1000
+models:
+  R2:
+    name: MLP matching
+    runs:
+      - results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching
+      - results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching
+      - results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching
+  R3:
+    name: DIN matching
+    runs:
+      - results/ranker_din/20261024-din-matching-seed0
+      - results/ranker_din/20261024-din-matching-seed1
+      - results/ranker_din/20261024-din-matching-seed2
+latency:
+  scope: validation
+  queries: 1000
+  warmup_queries: 50
+  random_seed: 0
+  threads: 1
+development:
+  user_fraction: 0.02
+  random_seed: 0
+  bootstrap_resamples: 50
+  latency_queries: 20
+  latency_warmup_queries: 5

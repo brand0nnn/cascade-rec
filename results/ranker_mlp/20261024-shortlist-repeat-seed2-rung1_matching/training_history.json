@@ -1,0 +1,134 @@
+[
+  {
+    "epoch": 1.0,
+    "train_bce": 0.04852332175506222,
+    "gauc_macro": 0.622453139798728,
+    "gauc_micro": 0.6202289639174758,
+    "ndcg@10_macro": 0.04728379880384512,
+    "ndcg@10_micro": 0.04664334944750304,
+    "end_to_end_ndcg@10_macro": 0.003308476442140337,
+    "rescued_count": 1368,
+    "demoted_count": 2316
+  },
+  {
+    "epoch": 2.0,
+    "train_bce": 0.038486258410140035,
+    "gauc_macro": 0.6596377415542022,
+    "gauc_micro": 0.6575456155537766,
+    "ndcg@10_macro": 0.06707147674402898,
+    "ndcg@10_micro": 0.06635292404991104,
+    "end_to_end_ndcg@10_macro": 0.004526651650494624,
+    "rescued_count": 1978,
+    "demoted_count": 2236
+  },
+  {
+    "epoch": 3.0,
+    "train_bce": 0.03459880832051359,
+    "gauc_macro": 0.6619764620034272,
+    "gauc_micro": 0.6599540408375854,
+    "ndcg@10_macro": 0.06884334966339722,
+    "ndcg@10_micro": 0.0681063812406166,
+    "end_to_end_ndcg@10_macro": 0.004603955636852864,
+    "rescued_count": 1946,
+    "demoted_count": 2133
+  },
+  {
+    "epoch": 4.0,
+    "train_bce": 0.032329852125673714,
+    "gauc_macro": 0.6851039314143759,
+    "gauc_micro": 0.6834363757366487,
+    "ndcg@10_macro": 0.07834777308859639,
+    "ndcg@10_micro": 0.07786117514174995,
+    "end_to_end_ndcg@10_macro": 0.005355174488581707,
+    "rescued_count": 2187,
+    "demoted_count": 2023
+  },
+  {
+    "epoch": 5.0,
+    "train_bce": 0.03076621224482476,
+    "gauc_macro": 0.6965723144921716,
+    "gauc_micro": 0.6953630617097001,
+    "ndcg@10_macro": 0.08127346639839357,
+    "ndcg@10_micro": 0.0806584906548347,
+    "end_to_end_ndcg@10_macro": 0.005533410551912308,
+    "rescued_count": 2141,
+    "demoted_count": 1844
+  },
+  {
+    "epoch": 6.0,
+    "train_bce": 0.029565836110952058,
+    "gauc_macro": 0.6975461229790133,
+    "gauc_micro": 0.696304067120632,
+    "ndcg@10_macro": 0.08192453432091709,
+    "ndcg@10_micro": 0.08149944054859802,
+    "end_to_end_ndcg@10_macro": 0.005628655072197886,
+    "rescued_count": 2144,
+    "demoted_count": 1866
+  },
+  {
+    "epoch": 7.0,
+    "train_bce": 0.02857375821020766,
+    "gauc_macro": 0.6976150246193922,
+    "gauc_micro": 0.6958132191668516,
+    "ndcg@10_macro": 0.08772884562285517,
+    "ndcg@10_micro": 0.0869828923872794,
+    "end_to_end_ndcg@10_macro": 0.0059643262393164545,
+    "rescued_count": 2235,
+    "demoted_count": 1853
+  },
+  {
+    "epoch": 8.0,
+    "train_bce": 0.027705834539288574,
+    "gauc_macro": 0.7045404801042794,
+    "gauc_micro": 0.7031510720589511,
+    "ndcg@10_macro": 0.08936616071298852,
+    "ndcg@10_micro": 0.08878085642747077,
+    "end_to_end_ndcg@10_macro": 0.00614104834704481,
+    "rescued_count": 2302,
+    "demoted_count": 1810
+  },
+  {
+    "epoch": 9.0,
+    "train_bce": 0.02697085375727071,
+    "gauc_macro": 0.7121179792923864,
+    "gauc_micro": 0.7110545228541941,
+    "ndcg@10_macro": 0.09854251238960471,
+    "ndcg@10_micro": 0.09768105953616481,
+    "end_to_end_ndcg@10_macro": 0.0067637319628043955,
+    "rescued_count": 2429,
+    "demoted_count": 1716
+  },
+  {
+    "epoch": 10.0,
+    "train_bce": 0.026252018241660124,
+    "gauc_macro": 0.7059753668080595,
+    "gauc_micro": 0.7048549489289055,
+    "ndcg@10_macro": 0.09387334788088905,
+    "ndcg@10_micro": 0.09332559462361327,
+    "end_to_end_ndcg@10_macro": 0.006408818105732578,
+    "rescued_count": 2317,
+    "demoted_count": 1754
+  },
+  {
+    "epoch": 11.0,
+    "train_bce": 0.025544366699227293,
+    "gauc_macro": 0.7113431445638917,
+    "gauc_micro": 0.7105929117757693,
+    "ndcg@10_macro": 0.0974697563507537,
+    "ndcg@10_micro": 0.09703577611576632,
+    "end_to_end_ndcg@10_macro": 0.00667719702312775,
+    "rescued_count": 2462,
+    "demoted_count": 1802
+  },
+  {
+    "epoch": 12.0,
+    "train_bce": 0.02493228001958789,
+    "gauc_macro": 0.6984050185270797,
+    "gauc_micro": 0.6975246313139594,
+    "ndcg@10_macro": 0.0920900438751217,
+    "ndcg@10_micro": 0.09168069939911565,
+    "end_to_end_ndcg@10_macro": 0.006282772511872364,
+    "rescued_count": 2351,
+    "demoted_count": 1854
+  }
+]

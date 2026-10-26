@@ -16,3 +16,6 @@ results/retriever/*_sample/seed*/model.pth
 results/logs/*
 !results/logs/.gitkeep
 results/**/recbole.log
+# Ranker output is local by default. Explicitly shared artifacts are tracked via
+# results/ranker_artifacts.json (use git add -f only for that reviewed allowlist).
+results/ranker_*/

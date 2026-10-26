@@ -1,0 +1,309 @@
+[
+  {
+    "rung": "matching",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching",
+    "metrics": {
+      "best_epoch": 7,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching"
+      ],
+      "n_parameters": 3649185,
+      "best_val_gauc_macro": 0.7105350706708621,
+      "best_val_ndcg10_macro": 0.09578244701148966,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.04912773098303414,
+          "gauc_macro": 0.628508139257342,
+          "gauc_micro": 0.6257001779531053,
+          "ndcg@10_macro": 0.05662558201037011,
+          "ndcg@10_micro": 0.0556734070174258,
+          "end_to_end_ndcg@10_macro": 0.00386481816998886,
+          "rescued_count": 1689,
+          "demoted_count": 2319
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.03888201913267004,
+          "gauc_macro": 0.6467481728734867,
+          "gauc_micro": 0.6441799930554886,
+          "ndcg@10_macro": 0.06087938704593812,
+          "ndcg@10_micro": 0.059778430747816136,
+          "end_to_end_ndcg@10_macro": 0.0041127655633543606,
+          "rescued_count": 1752,
+          "demoted_count": 2239
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.03501524056418868,
+          "gauc_macro": 0.6740224114822776,
+          "gauc_micro": 0.6721958521011969,
+          "ndcg@10_macro": 0.07370131957505259,
+          "ndcg@10_micro": 0.07329695081072567,
+          "end_to_end_ndcg@10_macro": 0.004982451826294267,
+          "rescued_count": 2024,
+          "demoted_count": 2082
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.032582702774126795,
+          "gauc_macro": 0.6928513655405727,
+          "gauc_micro": 0.6918526774949605,
+          "ndcg@10_macro": 0.08827452581766385,
+          "ndcg@10_micro": 0.0880038344678695,
+          "end_to_end_ndcg@10_macro": 0.005964428807376992,
+          "rescued_count": 2168,
+          "demoted_count": 1755
+        },
+        {
+          "epoch": 5.0,
+          "train_bce": 0.030854982038696476,
+          "gauc_macro": 0.6981750364268511,
+          "gauc_micro": 0.6967780360535885,
+          "ndcg@10_macro": 0.08332661763972335,
+          "ndcg@10_micro": 0.08283138299638246,
+          "end_to_end_ndcg@10_macro": 0.005700766986262226,
+          "rescued_count": 2260,
+          "demoted_count": 1952
+        },
+        {
+          "epoch": 6.0,
+          "train_bce": 0.029563122072595985,
+          "gauc_macro": 0.6915480797052568,
+          "gauc_micro": 0.6903218105884509,
+          "ndcg@10_macro": 0.08047452575094384,
+          "ndcg@10_micro": 0.08000596790193426,
+          "end_to_end_ndcg@10_macro": 0.0055151841853440095,
+          "rescued_count": 2232,
+          "demoted_count": 1966
+        },
+        {
+          "epoch": 7.0,
+          "train_bce": 0.02857537563651579,
+          "gauc_macro": 0.7105350706708621,
+          "gauc_micro": 0.7092445492819182,
+          "ndcg@10_macro": 0.09578244701148966,
+          "ndcg@10_micro": 0.09540927136915202,
+          "end_to_end_ndcg@10_macro": 0.006659718494920886,
+          "rescued_count": 2467,
+          "demoted_count": 1818
+        },
+        {
+          "epoch": 8.0,
+          "train_bce": 0.027622978269633565,
+          "gauc_macro": 0.6990471569685675,
+          "gauc_micro": 0.6979897086198749,
+          "ndcg@10_macro": 0.084603280424824,
+          "ndcg@10_micro": 0.08424471390381198,
+          "end_to_end_ndcg@10_macro": 0.0058375321675203625,
+          "rescued_count": 2199,
+          "demoted_count": 1881
+        },
+        {
+          "epoch": 9.0,
+          "train_bce": 0.026859500045349944,
+          "gauc_macro": 0.7010164238017749,
+          "gauc_micro": 0.6997528127682558,
+          "ndcg@10_macro": 0.09327779542225881,
+          "ndcg@10_micro": 0.09273262641225492,
+          "end_to_end_ndcg@10_macro": 0.006342898588377623,
+          "rescued_count": 2461,
+          "demoted_count": 1971
+        },
+        {
+          "epoch": 10.0,
+          "train_bce": 0.026147977545095333,
+          "gauc_macro": 0.7074562387731222,
+          "gauc_micro": 0.7061370009838057,
+          "ndcg@10_macro": 0.09505034669004339,
+          "ndcg@10_micro": 0.09469037993385146,
+          "end_to_end_ndcg@10_macro": 0.006576647828595906,
+          "rescued_count": 2373,
+          "demoted_count": 1760
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.006659718494920886,
+            "micro": 0.006829695377780125
+          },
+          "recall@10": {
+            "macro": 0.013689042197393742,
+            "micro": 0.014005770617937004
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.09578244701148966,
+            "micro": 0.09540927136915202
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 11592,
+            "fraction_of_all_lists": 0.049771579706660254
+          },
+          "demoted": {
+            "count": 1818,
+            "fraction_of_all_lists": 0.007805791227286779
+          },
+          "retained": {
+            "count": 795,
+            "fraction_of_all_lists": 0.003413423556486793
+          },
+          "rescued": {
+            "count": 2467,
+            "fraction_of_all_lists": 0.010592347061450211
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  },
+  {
+    "rung": "attributes",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed1-rung2_attributes",
+    "metrics": {
+      "best_epoch": 1,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching",
+        "attributes"
+      ],
+      "n_parameters": 3727841,
+      "best_val_gauc_macro": 0.7472590824052684,
+      "best_val_ndcg10_macro": 0.10158165817257497,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.03889011375350846,
+          "gauc_macro": 0.7472590824052684,
+          "gauc_micro": 0.7462789294360478,
+          "ndcg@10_macro": 0.10158165817257497,
+          "ndcg@10_micro": 0.10072270029702213,
+          "end_to_end_ndcg@10_macro": 0.006853255343018373,
+          "rescued_count": 2871,
+          "demoted_count": 1980
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.03130965887081758,
+          "gauc_macro": 0.7332739408186091,
+          "gauc_micro": 0.7325709039439038,
+          "ndcg@10_macro": 0.0802628398860363,
+          "ndcg@10_micro": 0.07948884466147738,
+          "end_to_end_ndcg@10_macro": 0.005416041585042074,
+          "rescued_count": 2608,
+          "demoted_count": 2271
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.02928900978953539,
+          "gauc_macro": 0.7534868325297723,
+          "gauc_micro": 0.7525815859527967,
+          "ndcg@10_macro": 0.0866346470823084,
+          "ndcg@10_micro": 0.0856445816228911,
+          "end_to_end_ndcg@10_macro": 0.00597143768918229,
+          "rescued_count": 2650,
+          "demoted_count": 2092
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.02798599629413799,
+          "gauc_macro": 0.7538871512835497,
+          "gauc_micro": 0.7530609802853038,
+          "ndcg@10_macro": 0.0942769910314885,
+          "ndcg@10_micro": 0.09367014047109382,
+          "end_to_end_ndcg@10_macro": 0.00652760872737738,
+          "rescued_count": 2838,
+          "demoted_count": 2059
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.006853255343018373,
+            "micro": 0.007210047312849728
+          },
+          "recall@10": {
+            "macro": 0.01435136602963212,
+            "micro": 0.015044825335760657
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.10158165817257497,
+            "micro": 0.10072270029702213
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 11188,
+            "fraction_of_all_lists": 0.04803695943392986
+          },
+          "demoted": {
+            "count": 1980,
+            "fraction_of_all_lists": 0.008501356782193522
+          },
+          "retained": {
+            "count": 633,
+            "fraction_of_all_lists": 0.00271785800158005
+          },
+          "rescued": {
+            "count": 2871,
+            "fraction_of_all_lists": 0.012326967334180606
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  }
+]

@@ -103,7 +103,7 @@ def load_candidates(cand_dir: str | Path, split: str, k1: int | None = None, for
     return z
 
 
-def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int) -> None:
+def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int, splits: tuple[str, ...] = ("ranker_train", "val", "test")) -> None:
     data = ProcessedData.load(sample=sample)
     model, cfg = load_retriever(run_dir, data, device)
     scorer = RetrieverScorer(model)
@@ -112,7 +112,9 @@ def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, bat
     out.mkdir(parents=True, exist_ok=True)
     meta = {"source_run": str(run_dir), "retriever": name, "seed": cfg["seed"], "search": "exact",
             "k_train": k_train, "k_eval": k_eval, "git_hash": git_hash(), "splits": {}}
-    for split, k, force in (("ranker_train", k_train, True), ("val", k_eval, False), ("test", k_eval, False)):
+    split_config = {"ranker_train": (k_train, True), "val": (k_eval, False), "test": (k_eval, False)}
+    for split in splits:
+        k, force = split_config[split]
         inst = data.split_instances(split)
         log.info("%s: %d instances, top-%d", split, len(inst), k)
         lists = retrieve(scorer, data, inst, k, batch_size)
@@ -143,5 +145,7 @@ if __name__ == "__main__":
     ap.add_argument("--k-train", type=int, default=200)
     ap.add_argument("--k-eval", type=int, default=500)
     ap.add_argument("--batch-size", type=int, default=512)
+    ap.add_argument("--splits", nargs="+", choices=("ranker_train", "val", "test"), default=("ranker_train", "val"),
+                    help="splits to build; defaults to ranker training and validation, leaving test for final evaluation")
     a = ap.parse_args()
-    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size)
+    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size, tuple(a.splits))
