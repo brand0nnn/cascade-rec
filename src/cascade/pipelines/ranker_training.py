@@ -510,10 +510,16 @@ def main() -> None:
     parser.add_argument("--candidate-dir", help="full grouped candidate directory from build_candidates")
     parser.add_argument("--data-config", default="configs/data.yaml")
     parser.add_argument("--sample", action="store_true", help="development only: fixed 2% full-data user IDs, one epoch")
-    parser.add_argument("--resume", help="continue from a leakage-free ranker checkpoint")
+    parser.add_argument("--resume", help="unsupported: exact training resumption is not implemented")
     parser.add_argument("--run-id", default=None)
     parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
+    if args.resume is not None:
+        parser.error(
+            "--resume is unsupported: exact training resumption requires optimizer/RNG state "
+            "and selected-artifact carryover, which are not implemented. Start a fresh run "
+            "with an unused --run-id."
+        )
 
     cfg = load_config(args.config)
     if args.candidate_dir:
@@ -540,12 +546,8 @@ def main() -> None:
             feature_groups=tuple(cfg.get("feature_groups", ("retrieval", "matching", "attributes", "statistics"))),
         )
         model = create_ranker(spec, cfg)
-        resume_checkpoint = None
-        if args.resume:
-            resume_checkpoint = torch.load(args.resume, map_location="cpu", weights_only=True)
-            model.load_state_dict(resume_checkpoint["state_dict"])
         negatives = cfg.get("negative_sampling", {})
-        run_dir = make_run_dir(f"ranker_{cfg.get('model', 'mlp')}", args.run_id)
+        run_dir = make_run_dir(f"ranker_{cfg.get('model', 'mlp')}", args.run_id, exist_ok=False)
         save_run(run_dir, {"status": "running", "development_sample": args.sample}, cfg)
         result = fit_candidate_lists(
             model, builder, train_lists, val_lists,
@@ -556,7 +558,6 @@ def main() -> None:
             patience=int(cfg.get("early_stopping", {}).get("patience", 3)),
             seed=int(cfg.get("seed", 0)), device=args.device,
             checkpoint_path=run_dir / "model.pt",
-            resume_checkpoint=resume_checkpoint,
         )
         metrics = {
             "model": cfg.get("model", "mlp"),
@@ -602,7 +603,7 @@ def main() -> None:
     model = create_ranker(spec, cfg)
     training = cfg.get("training", {})
     negatives = cfg.get("negative_sampling", {})
-    run_dir = make_run_dir(f"ranker_{cfg.get('model', 'mlp')}", args.run_id)
+    run_dir = make_run_dir(f"ranker_{cfg.get('model', 'mlp')}", args.run_id, exist_ok=False)
     result = fit_ranker(
         model, train_features, train_labels, train_inst,
         val_features, val_labels, val_inst, val_users,

@@ -176,6 +176,9 @@ its values need not equal the saved Apple M1 Max timings. Retrieval time is excl
 Fresh training is separate from loading the saved checkpoints. For the selected MLP recipe, first run one
 development epoch, then a full seed-0 run:
 
+Direct ranker training refuses existing run directories to protect saved evidence. CLI `--resume` is rejected:
+exact optimizer/random-state resumption and selected-artifact carryover are not implemented.
+
 ```bash
 .venv/bin/python -m cascade.pipelines.ranker_training \
   --config configs/ranker/ladder_1_matching.yaml \

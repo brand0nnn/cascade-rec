@@ -10,6 +10,8 @@ Training retains the original force-insertion/negative policy. Excluding retriev
 
 Start with the [README](../README.md) for commands and [artifact guide](ranker_artifacts.md) for shared models, compact evidence and locally retained development files. The sections below are a chronological experiment record; early failed runs and next-step statements describe their date, not the current status.
 
+**Final pre-merge verification, 2026-10-26:** the user authorised a final review, current tests and merge. Built the missing separately remapped sample fixtures from cached raw data and reused the existing full-catalogue text vectors for their items; the full-data experiment artifacts were unchanged. The current suite passes **66 tests with no skips**, including DIN algebra/masking/gradient checks and new run-directory/resume safety checks. Direct training now refuses existing run directories, and the incomplete CLI resume option is explicitly rejected. Independent code and artifact reviews found no blocker for merging this exploratory milestone; the research limitations above remain open.
+
 ## Historical: first real candidate-list run
 
 ## Question
