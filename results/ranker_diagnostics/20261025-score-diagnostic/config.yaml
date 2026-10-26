@@ -1,0 +1,47 @@
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+data_config: configs/data.yaml
+sweep_run: results/ranker_k1_sweep/20261025-k1
+comparison_config: configs/ranker/comparison.yaml
+old_k1: 200
+new_k1: 500
+cutoff: 10
+uniform_queries: 1000
+random_seed: 0
+score_batch_pairs: 8000
+retrieval_rank_bands:
+- - 1
+  - 10
+- - 11
+  - 50
+- - 51
+  - 100
+- - 101
+  - 200
+- - 201
+  - 300
+- - 301
+  - 400
+- - 401
+  - 500
+probe:
+  candidate_retrieval_rank: 100
+  standardized_score_grid:
+  - -3
+  - -2
+  - -1
+  - 0
+  - 1
+  - 2
+  - 3
+examples:
+  seed: 0
+  target_groups:
+  - warm-head
+  - new-in-period
+  - warm-tail
+  selection: nearest_median_rank_loss_with_title
+  added_competitors: 5
+development:
+  user_fraction: 0.02
+  random_seed: 0
+  uniform_queries: 20

@@ -1,0 +1,26 @@
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+data_config: configs/data.yaml
+candidate_counts: [50, 100, 200, 500]
+cutoff: 10
+bootstrap_resamples: 1000
+score_batch_pairs: 8000
+ranker_runs:
+  - results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching
+  - results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching
+  - results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching
+anchor_comparison: results/ranker_comparison/20261025-rq3
+anchor_k1: 200
+anchor_macro_ndcg_tolerance: 0.000001
+selection_rule: smallest_k_with_mean_inside_best_mean_user_bootstrap_ci
+latency:
+  scope: validation
+  queries: 1000
+  warmup_queries: 50
+  random_seed: 0
+  threads: 1
+development:
+  user_fraction: 0.02
+  random_seed: 0
+  bootstrap_resamples: 50
+  latency_queries: 20
+  latency_warmup_queries: 5

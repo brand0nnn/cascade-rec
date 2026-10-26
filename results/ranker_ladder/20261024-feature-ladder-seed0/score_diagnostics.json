@@ -1,0 +1,36 @@
+{
+  "ranker_train": {
+    "all": {
+      "n": 315114,
+      "target_score_mean": -0.31870415806770325,
+      "raw_score_auc_micro": 0.08036993894177501
+    },
+    "retrieval_hit": {
+      "n": 38793,
+      "target_score_mean": -0.15383808314800262,
+      "raw_score_auc_micro": 0.6528391189054338
+    },
+    "forced_positive": {
+      "n": 276321,
+      "target_score_mean": -0.3418499529361725,
+      "raw_score_auc_micro": 3.7999283442083176e-07
+    }
+  },
+  "val": {
+    "all": {
+      "n": 232904,
+      "target_score_mean": -0.314526230096817,
+      "raw_score_auc_micro": 0.04502432931367585
+    },
+    "retrieval_hit": {
+      "n": 16672,
+      "target_score_mean": -0.14660443365573883,
+      "raw_score_auc_micro": 0.6289754615206551
+    },
+    "forced_positive": {
+      "n": 216232,
+      "target_score_mean": -0.32747334241867065,
+      "raw_score_auc_micro": 3.1216471197602267e-07
+    }
+  }
+}

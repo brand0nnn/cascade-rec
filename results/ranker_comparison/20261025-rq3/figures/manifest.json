@@ -1,0 +1,5 @@
+{
+  "results/ranker_comparison/20261025-rq3/comparison.json": "c087f64b47099fc7da517b588001f1869173a5d83dd0f844d1e05392b6341ee4",
+  "results/ranker_comparison/20261025-rq3/summary.csv": "b5b01c3917dea112df0a67680a03f0913d06fc4d40318e7e9a90e21f5e66de9d",
+  "src/cascade/eval/plot_ranker_comparison.py": "70a41e5634e779f644678eb6ef2826d4025503841348b3715f22a394f419303a"
+}

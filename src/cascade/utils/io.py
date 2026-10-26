@@ -30,10 +30,11 @@ def cpu_model() -> str:
         return platform.processor() or platform.machine()
 
 
-def make_run_dir(experiment: str, run_id: str | None = None) -> Path:
+def make_run_dir(experiment: str, run_id: str | None = None, *, exist_ok: bool = True) -> Path:
+    """Create a run directory; ``exist_ok=False`` atomically rejects collisions."""
     run_id = run_id or datetime.now().strftime("%Y%m%d-%H%M%S")
     d = REPO_ROOT / "results" / experiment / run_id
-    d.mkdir(parents=True, exist_ok=True)
+    d.mkdir(parents=True, exist_ok=exist_ok)
     return d
 
 

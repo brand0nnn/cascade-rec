@@ -1,0 +1,19 @@
+{
+  "scope": "Validation only; no new training or test evaluation",
+  "cases": 232904,
+  "users": 124416,
+  "sources": {
+    "results/ranker_repeat/20261024-shortlist-repeat/meso.json": "4be633d41e20917999abef19e4d0b2f7c65f18b6a5fa0234758f5c735ebe5ff4",
+    "results/ranker_ladder/20261024-feature-ladder-seed0/summary.json": "0bfe8bff5b037e67ce4c43b79c8f6c90dbb5a436e7ea5c6a4abc761593c8106d",
+    "src/cascade/eval/plot_ranker_results.py": "37ab917b43e6e70f8bf34bcfa774c452b50d47ad5637b418baf30f9f5753c44d",
+    "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/val_ranks.npz": "ae3f577090646c8debdbfe66bb63444dfcdc714ffabd7cfd4457904f84ffb97b"
+  },
+  "figures": [
+    "01_overall_and_seeds.png",
+    "02_group_gains.png",
+    "03_retrieval_bottleneck.png",
+    "04_rescues_and_demotions.png",
+    "05_window_entry_novelty.png"
+  ],
+  "uncertainty": "Figure 1: ranker seed SD. Figure 2: paired-user CI on seed means; exploratory, no seed uncertainty or multiple-comparison adjustment."
+}

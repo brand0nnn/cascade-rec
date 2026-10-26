@@ -1,0 +1,20 @@
+{
+  "phase": "complete",
+  "development_sample": false,
+  "seeds": [
+    {
+      "seed": 0,
+      "status": "scored"
+    },
+    {
+      "seed": 1,
+      "status": "scored"
+    },
+    {
+      "seed": 2,
+      "status": "scored"
+    }
+  ],
+  "started_at": "2026-10-25T04:54:29.868921+00:00",
+  "updated_at": "2026-10-25T04:58:48.040204+00:00"
+}

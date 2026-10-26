@@ -27,6 +27,8 @@ uv venv --python 3.11 .venv
 uv pip install --python .venv/bin/python -r requirements.txt -e .
 ```
 `requirements.txt` pins exact versions: RecBole 1.2.1 needs numpy < 2 and pandas < 3, and pyarrow > 25 needs numpy >= 2.
+The text-encoder dependency pins also retain compatibility with the environment used for the saved ranker runs;
+upgrading that stack is a separate environment change, not part of reproducing those results.
 
 ## Phase 0 — data + baselines
 
@@ -90,13 +92,127 @@ for git. Output: `data/processed/candidates/two_tower_text_seed0/`
 ```python
 from cascade.pipelines.build_candidates import load_candidates
 train = load_candidates(cand_dir, "ranker_train")              # labels: 1 = target, 0 = other candidates
-val   = load_candidates(cand_dir, "val", k1=200, force=True)   # ranker-val lists (loss / GAUC / early stopping)
+val   = load_candidates(cand_dir, "val", k1=200, force=True)   # bookkeeping; checkpoint metric uses natural retrieval hits only
 ```
 
 For debugging, the sample lists (~40 MB) are built with
 `.venv/bin/python -m cascade.pipelines.build_candidates --run-dir results/retriever/two_tower_text_sample/seed0 --sample`
-(needs the sample retriever, which is not in git). Two questions about the training labels are open; see
-`docs/decisions.md` (2026-10-21) before training a ranker.
+(needs the sample retriever, which is not in git). The ranker runs below retain the recorded target/unobserved-alternative
+labels and force-insertion policy. Their limitations and diagnostics are recorded in `docs/decisions.md`.
+
+## Ranker draft — MLP, DIN and validation experiments
+
+This draft implements the ranker feature ladder, three-seed MLP/DIN comparisons, group analysis, CPU ranking
+latency, a frozen-MLP candidate-count sweep and retrieval-score diagnostics. All ranker findings below use
+**validation**, with the same frozen text retriever seed 0. Training seeds vary the ranker only. They are not final
+Test results. See [artifact scope and checkpoint inventory](docs/ranker_artifacts.md),
+[feature interface](docs/ranker_feature_contract.md) and the chronological [experiment record](docs/ranker_experiment.md).
+
+| System, identical top-200 candidates | End-to-end per-user macro nDCG@10, mean ± sample seed SD |
+|---|---:|
+| Retrieval order | 0.005642 |
+| **MLP, retrieval + matching features** | **0.006843 ± 0.000233** |
+| DIN, retrieval + matching features | 0.006436 ± 0.000499 |
+
+The MLP has the higher overall validation mean. DIN improves new-in-period and warm-tail targets relative to MLP
+while losing on warm-head targets; it does not establish the proposed benefit for long mixed histories. DIN also
+introduces candidate item/category identity inside attention and changes averaging to an unnormalised weighted
+sum, so this comparison cannot attribute differences to attention alone.
+
+Checkpoint selection uses the user-approved **conditional per-user macro nDCG@10** on naturally retrieved targets;
+GAUC is secondary. End-to-end scores count retrieval misses as zero. Sample/development scores are excluded.
+Seed SD and exploratory paired-user bootstrap intervals describe different sources of uncertainty.
+
+### Read the shared results
+
+Reading these files requires no local data or model execution:
+
+- [MLP feature discovery](results/ranker_ladder/20261024-feature-ladder-seed0/summary.md)
+- [Three-seed MLP repetition and groups](results/ranker_repeat/20261024-shortlist-repeat/meso.md)
+- [Three-seed DIN comparison and groups](results/ranker_din_study/20261024-din-matching/meso.md)
+- [Four-system accuracy and CPU ranking latency](results/ranker_comparison/20261025-rq3/report.md)
+- [Candidate-count trade-off](results/ranker_k1_sweep/20261025-k1/report.md)
+- [Retrieval-score diagnostics and product examples](results/ranker_diagnostics/20261025-score-diagnostic/report.md)
+
+The historical sweep applied a CI-overlap heuristic that suggested K1=50. **That is not a final setting selection.**
+The current evaluation protocol requires a predeclared acceptable-loss margin δ and cost/tie-break rule; none was
+recorded before this sweep. Retain its measurements as exploratory trade-offs, then establish the required rule
+before a new selection study. Diagnostics support a retrieval-score mismatch hypothesis; they do not prove that
+force-inserting training targets caused the learned behaviour. Index/full-cascade timing and the final ranker
+Test comparison remain separate work.
+
+### Load the six selected checkpoints and rerun their comparison
+
+`configs/ranker/comparison.yaml` names the three selected matching-only MLP checkpoints and three DIN checkpoints,
+including their companion configs, metrics and validation ranks. Their inventory and exclusions are listed in
+[ranker_artifacts.md](docs/ranker_artifacts.md). The comparison loads them with strict parameter, selected-epoch,
+feature-normalisation and case-alignment checks; it does not retrain them.
+
+Execution requires **local full processed data**, the matching catalogue/ID mappings, frozen MiniLM text vectors,
+and frozen-retriever candidate files. `data/` and candidate lists are external prerequisites and are not supplied
+by the ranker PR. Prepare or obtain the exact artefacts described above. If candidates must be regenerated, use
+the frozen retriever and restrict this stage to training/validation:
+
+```bash
+.venv/bin/python -m cascade.pipelines.build_candidates \
+  --run-dir results/retriever/two_tower_text/seed0 \
+  --k-train 200 --k-eval 500 --splits ranker_train val
+```
+
+Run from the repository root. Choose unused run IDs for every invocation; the pipelines reject collisions.
+First run the fixed-user development subset, then the full validation comparison:
+
+```bash
+.venv/bin/python -m cascade.pipelines.ranker_comparison --run-id ranker-review-dev --sample
+.venv/bin/python -m cascade.pipelines.ranker_comparison --run-id ranker-review-full
+.venv/bin/python -m cascade.eval.plot_ranker_comparison --run-id ranker-review-full
+```
+
+These write new result directories. The comparison measures CPU ranking latency on the current machine;
+its values need not equal the saved Apple M1 Max timings. Retrieval time is excluded.
+
+### Fresh training uses fresh IDs
+
+Fresh training is separate from loading the saved checkpoints. For the selected MLP recipe, first run one
+development epoch, then a full seed-0 run:
+
+Direct ranker training refuses existing run directories to protect saved evidence. CLI `--resume` is rejected:
+exact optimizer/random-state resumption and selected-artifact carryover are not implemented.
+
+```bash
+.venv/bin/python -m cascade.pipelines.ranker_training \
+  --config configs/ranker/ladder_1_matching.yaml \
+  --candidate-dir data/processed/candidates/two_tower_text_seed0 \
+  --run-id my-mlp-matching-dev --device cpu --sample
+.venv/bin/python -m cascade.pipelines.ranker_training \
+  --config configs/ranker/ladder_1_matching.yaml \
+  --candidate-dir data/processed/candidates/two_tower_text_seed0 \
+  --run-id my-mlp-matching-seed0 --device cpu
+```
+
+Use `--device cuda` on a CUDA machine or `--device mps` on a compatible Mac. For a three-seed rerun, copy the YAML
+for each seed, set its `seed` to 0, 1 or 2, and give each full run a distinct ID. The training CLI has no `--seed`
+override. Ranker `--sample` uses a fixed 2% of full-data users, retains full catalogue IDs, and runs one epoch; it
+still needs full processed data/candidates and does not use the separately remapped `data/processed/sample/` files.
+
+For DIN, complete its own development run, then launch the three-seed study against the shared MLP references:
+
+```bash
+.venv/bin/python -m cascade.pipelines.ranker_training \
+  --config configs/ranker/din_matching.yaml \
+  --candidate-dir data/processed/candidates/two_tower_text_seed0 \
+  --run-id my-din-matching-dev --device cpu --sample
+.venv/bin/python -u -m cascade.pipelines.ranker_din_study \
+  --candidate-dir data/processed/candidates/two_tower_text_seed0 \
+  --run-id my-din-study --development-run my-din-matching-dev --device cpu
+```
+
+The feature ladder runner supports fresh `--run-id` and `--seed` values. However, `ranker_meso` and
+`plot_ranker_results` currently hard-code the original seed-0 discovery ID `20261024-feature-ladder-seed0`.
+`ranker_repeat` and the DIN study's automatic reports therefore reuse that shared discovery reference. Renaming a
+fresh ladder does not redirect these reports. To compare entirely fresh models, explicitly update the relevant
+run paths/configs and analysis references in a separate reproduction setup; do not interpret a report mixing shared
+and fresh runs as a complete retraining replication.
 
 ## Baseline results (Phase 0)
 

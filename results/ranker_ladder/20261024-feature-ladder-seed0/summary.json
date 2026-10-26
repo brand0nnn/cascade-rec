@@ -1,0 +1,660 @@
+[
+  {
+    "rung": "score",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung0_score",
+    "metrics": {
+      "best_epoch": 6,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval"
+      ],
+      "n_parameters": 41729,
+      "best_val_gauc_macro": 0.44232833387285947,
+      "best_val_ndcg10_macro": 0.025049174050658356,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.06650282219400355,
+          "gauc_macro": 0.42009107521783484,
+          "gauc_micro": 0.4174014566594971,
+          "ndcg@10_macro": 0.01847227367620562,
+          "ndcg@10_micro": 0.01840344898790082,
+          "end_to_end_ndcg@10_macro": 0.0011752646419917279,
+          "rescued_count": 555,
+          "demoted_count": 2498
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.06505671508563292,
+          "gauc_macro": 0.4284932199915483,
+          "gauc_micro": 0.4259050169272466,
+          "ndcg@10_macro": 0.023048076038472597,
+          "ndcg@10_micro": 0.023104320497255717,
+          "end_to_end_ndcg@10_macro": 0.0014852698040014284,
+          "rescued_count": 512,
+          "demoted_count": 2317
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.0648229886428139,
+          "gauc_macro": 0.4314110225737679,
+          "gauc_micro": 0.429080985541913,
+          "ndcg@10_macro": 0.0226775574705584,
+          "ndcg@10_micro": 0.022302945240112757,
+          "end_to_end_ndcg@10_macro": 0.0014454240227747255,
+          "rescued_count": 592,
+          "demoted_count": 2406
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.06468956758695231,
+          "gauc_macro": 0.4256022877100251,
+          "gauc_micro": 0.4228993455762498,
+          "ndcg@10_macro": 0.023270397445172643,
+          "ndcg@10_micro": 0.023210926926859637,
+          "end_to_end_ndcg@10_macro": 0.0015102204806838801,
+          "rescued_count": 490,
+          "demoted_count": 2301
+        },
+        {
+          "epoch": 5.0,
+          "train_bce": 0.06463651929489968,
+          "gauc_macro": 0.3823262382572155,
+          "gauc_micro": 0.378780599253465,
+          "ndcg@10_macro": 0.014113256408018963,
+          "ndcg@10_micro": 0.014051185730839364,
+          "end_to_end_ndcg@10_macro": 0.0009447817396666072,
+          "rescued_count": 483,
+          "demoted_count": 2582
+        },
+        {
+          "epoch": 6.0,
+          "train_bce": 0.06457030854749105,
+          "gauc_macro": 0.44232833387285947,
+          "gauc_micro": 0.4406595417104717,
+          "ndcg@10_macro": 0.025049174050658356,
+          "ndcg@10_micro": 0.024721555827206615,
+          "end_to_end_ndcg@10_macro": 0.0015998614760114503,
+          "rescued_count": 554,
+          "demoted_count": 2292
+        },
+        {
+          "epoch": 7.0,
+          "train_bce": 0.06456115632161466,
+          "gauc_macro": 0.38829426817876833,
+          "gauc_micro": 0.38520834137096227,
+          "ndcg@10_macro": 0.015675092625911203,
+          "ndcg@10_micro": 0.015504050777270071,
+          "end_to_end_ndcg@10_macro": 0.0010715507619629917,
+          "rescued_count": 531,
+          "demoted_count": 2571
+        },
+        {
+          "epoch": 8.0,
+          "train_bce": 0.06453441064303184,
+          "gauc_macro": 0.4276079972025726,
+          "gauc_micro": 0.42515028356754986,
+          "ndcg@10_macro": 0.02232414296373101,
+          "ndcg@10_micro": 0.021931422789170055,
+          "end_to_end_ndcg@10_macro": 0.001437947739257451,
+          "rescued_count": 577,
+          "demoted_count": 2418
+        },
+        {
+          "epoch": 9.0,
+          "train_bce": 0.06450611290556907,
+          "gauc_macro": 0.4179774976853936,
+          "gauc_micro": 0.4151978402087211,
+          "ndcg@10_macro": 0.020429977293969157,
+          "ndcg@10_micro": 0.020244380105360192,
+          "end_to_end_ndcg@10_macro": 0.0013281205381036026,
+          "rescued_count": 534,
+          "demoted_count": 2424
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.0015998614760114503,
+            "micro": 0.0017696466301617346
+          },
+          "recall@10": {
+            "macro": 0.0034226967435670823,
+            "micro": 0.0037569127194037027
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.025049174050658356,
+            "micro": 0.024721555827206615
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 13505,
+            "fraction_of_all_lists": 0.05798526431491086
+          },
+          "demoted": {
+            "count": 2292,
+            "fraction_of_all_lists": 0.00984096451756947
+          },
+          "retained": {
+            "count": 321,
+            "fraction_of_all_lists": 0.0013782502662041012
+          },
+          "rescued": {
+            "count": 554,
+            "fraction_of_all_lists": 0.0023786624531996017
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  },
+  {
+    "rung": "matching",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching",
+    "metrics": {
+      "best_epoch": 10,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching"
+      ],
+      "n_parameters": 3649185,
+      "best_val_gauc_macro": 0.7133332317885923,
+      "best_val_ndcg10_macro": 0.10284316935274888,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.049026872118595945,
+          "gauc_macro": 0.6173647160889012,
+          "gauc_micro": 0.6145735877082148,
+          "ndcg@10_macro": 0.04463710303246547,
+          "ndcg@10_micro": 0.044011493763978504,
+          "end_to_end_ndcg@10_macro": 0.0030516955139220036,
+          "rescued_count": 1376,
+          "demoted_count": 2393
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.038690791162349074,
+          "gauc_macro": 0.6504673661797467,
+          "gauc_micro": 0.6483008854252066,
+          "ndcg@10_macro": 0.05972970925930976,
+          "ndcg@10_micro": 0.0591758070532463,
+          "end_to_end_ndcg@10_macro": 0.00402967924178656,
+          "rescued_count": 1768,
+          "demoted_count": 2278
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.03484718998571129,
+          "gauc_macro": 0.6731640255177099,
+          "gauc_micro": 0.6715017023698144,
+          "ndcg@10_macro": 0.07354844394998916,
+          "ndcg@10_micro": 0.07299426164643294,
+          "end_to_end_ndcg@10_macro": 0.004949867816855661,
+          "rescued_count": 2077,
+          "demoted_count": 2116
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.03248188400074418,
+          "gauc_macro": 0.678452985212668,
+          "gauc_micro": 0.6766706010860446,
+          "ndcg@10_macro": 0.08068443154285539,
+          "ndcg@10_micro": 0.08009970270697989,
+          "end_to_end_ndcg@10_macro": 0.005534562057764453,
+          "rescued_count": 2202,
+          "demoted_count": 2058
+        },
+        {
+          "epoch": 5.0,
+          "train_bce": 0.030867868511154212,
+          "gauc_macro": 0.6918875757628846,
+          "gauc_micro": 0.6904640766211094,
+          "ndcg@10_macro": 0.09348138682510501,
+          "ndcg@10_micro": 0.0929323154132344,
+          "end_to_end_ndcg@10_macro": 0.006408354459128775,
+          "rescued_count": 2399,
+          "demoted_count": 1857
+        },
+        {
+          "epoch": 6.0,
+          "train_bce": 0.029578056710094867,
+          "gauc_macro": 0.7005123992266085,
+          "gauc_micro": 0.6993481683851118,
+          "ndcg@10_macro": 0.09326211727889812,
+          "ndcg@10_micro": 0.09309211195110874,
+          "end_to_end_ndcg@10_macro": 0.00635887171394209,
+          "rescued_count": 2203,
+          "demoted_count": 1666
+        },
+        {
+          "epoch": 7.0,
+          "train_bce": 0.02856189305964684,
+          "gauc_macro": 0.6975745183106185,
+          "gauc_micro": 0.6963144658031039,
+          "ndcg@10_macro": 0.09115747088307329,
+          "ndcg@10_micro": 0.09083083749181527,
+          "end_to_end_ndcg@10_macro": 0.006272021043005925,
+          "rescued_count": 2397,
+          "demoted_count": 1884
+        },
+        {
+          "epoch": 8.0,
+          "train_bce": 0.027649872273700776,
+          "gauc_macro": 0.7078409929126607,
+          "gauc_micro": 0.7074476870918893,
+          "ndcg@10_macro": 0.09749868776304528,
+          "ndcg@10_micro": 0.09759306515323478,
+          "end_to_end_ndcg@10_macro": 0.006733170793809647,
+          "rescued_count": 2345,
+          "demoted_count": 1662
+        },
+        {
+          "epoch": 9.0,
+          "train_bce": 0.02686241123358885,
+          "gauc_macro": 0.7058743855845747,
+          "gauc_micro": 0.7050122855158711,
+          "ndcg@10_macro": 0.09715900476388903,
+          "ndcg@10_micro": 0.09690276456875384,
+          "end_to_end_ndcg@10_macro": 0.006624151851269469,
+          "rescued_count": 2344,
+          "demoted_count": 1685
+        },
+        {
+          "epoch": 10.0,
+          "train_bce": 0.026150272011025256,
+          "gauc_macro": 0.7133332317885923,
+          "gauc_micro": 0.7124402603227269,
+          "ndcg@10_macro": 0.10284316935274888,
+          "ndcg@10_micro": 0.10306149630678942,
+          "end_to_end_ndcg@10_macro": 0.00710484924666734,
+          "rescued_count": 2533,
+          "demoted_count": 1707
+        },
+        {
+          "epoch": 11.0,
+          "train_bce": 0.025490153001777736,
+          "gauc_macro": 0.7055502811803636,
+          "gauc_micro": 0.7047226294620897,
+          "ndcg@10_macro": 0.09414080945312225,
+          "ndcg@10_micro": 0.0942106682721132,
+          "end_to_end_ndcg@10_macro": 0.006519545710012998,
+          "rescued_count": 2213,
+          "demoted_count": 1647
+        },
+        {
+          "epoch": 12.0,
+          "train_bce": 0.02486212855452127,
+          "gauc_macro": 0.7110327933347669,
+          "gauc_micro": 0.7104170384070062,
+          "ndcg@10_macro": 0.10215737461231546,
+          "ndcg@10_micro": 0.10199509810480795,
+          "end_to_end_ndcg@10_macro": 0.0070031886065784425,
+          "rescued_count": 2486,
+          "demoted_count": 1694
+        },
+        {
+          "epoch": 13.0,
+          "train_bce": 0.02421968963997319,
+          "gauc_macro": 0.7031971008344114,
+          "gauc_micro": 0.7021078882898176,
+          "ndcg@10_macro": 0.10070939870923212,
+          "ndcg@10_micro": 0.10050462984473844,
+          "end_to_end_ndcg@10_macro": 0.006897611128199727,
+          "rescued_count": 2445,
+          "demoted_count": 1780
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.00710484924666734,
+            "micro": 0.00737746567867788
+          },
+          "recall@10": {
+            "macro": 0.01415619790264707,
+            "micro": 0.014765740390890668
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.10284316935274888,
+            "micro": 0.10306149630678942
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 11526,
+            "fraction_of_all_lists": 0.0494882011472538
+          },
+          "demoted": {
+            "count": 1707,
+            "fraction_of_all_lists": 0.007329200013739567
+          },
+          "retained": {
+            "count": 906,
+            "fraction_of_all_lists": 0.0038900147700340055
+          },
+          "rescued": {
+            "count": 2533,
+            "fraction_of_all_lists": 0.010875725620856662
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  },
+  {
+    "rung": "attributes",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung2_attributes",
+    "metrics": {
+      "best_epoch": 3,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching",
+        "attributes"
+      ],
+      "n_parameters": 3727841,
+      "best_val_gauc_macro": 0.7570011193354912,
+      "best_val_ndcg10_macro": 0.09467419791470905,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.03891141373848257,
+          "gauc_macro": 0.7259523194994805,
+          "gauc_micro": 0.7247842499445404,
+          "ndcg@10_macro": 0.07721870297658526,
+          "ndcg@10_micro": 0.0765066047330379,
+          "end_to_end_ndcg@10_macro": 0.005283714857457515,
+          "rescued_count": 2303,
+          "demoted_count": 2203
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.031288441307722854,
+          "gauc_macro": 0.7389701339806606,
+          "gauc_micro": 0.7376844937258269,
+          "ndcg@10_macro": 0.0741392655671552,
+          "ndcg@10_micro": 0.07380322806464165,
+          "end_to_end_ndcg@10_macro": 0.005117144612737154,
+          "rescued_count": 2334,
+          "demoted_count": 2220
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.02929814827930079,
+          "gauc_macro": 0.7570011193354912,
+          "gauc_micro": 0.7563676106058123,
+          "ndcg@10_macro": 0.09467419791470905,
+          "ndcg@10_micro": 0.0942414349595119,
+          "end_to_end_ndcg@10_macro": 0.006521973937293584,
+          "rescued_count": 2853,
+          "demoted_count": 2054
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.027949626715926577,
+          "gauc_macro": 0.7519254314935473,
+          "gauc_micro": 0.7508397312859885,
+          "ndcg@10_macro": 0.08138337555947307,
+          "ndcg@10_micro": 0.0808445213198154,
+          "end_to_end_ndcg@10_macro": 0.0056092815732360175,
+          "rescued_count": 2549,
+          "demoted_count": 2184
+        },
+        {
+          "epoch": 5.0,
+          "train_bce": 0.026965389708880984,
+          "gauc_macro": 0.7578521516754083,
+          "gauc_micro": 0.7571321398258084,
+          "ndcg@10_macro": 0.09064545372458259,
+          "ndcg@10_micro": 0.09048743627587999,
+          "end_to_end_ndcg@10_macro": 0.00627902927970135,
+          "rescued_count": 2662,
+          "demoted_count": 1971
+        },
+        {
+          "epoch": 6.0,
+          "train_bce": 0.02613195424918055,
+          "gauc_macro": 0.7574359763197666,
+          "gauc_micro": 0.7565986422033392,
+          "ndcg@10_macro": 0.08727740414351295,
+          "ndcg@10_micro": 0.08695772050760467,
+          "end_to_end_ndcg@10_macro": 0.006012568876866541,
+          "rescued_count": 2570,
+          "demoted_count": 1943
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.006521973937293584,
+            "micro": 0.006746097978759412
+          },
+          "recall@10": {
+            "macro": 0.014099679540249403,
+            "micro": 0.01464981279840621
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.09467419791470905,
+            "micro": 0.0942414349595119
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 11206,
+            "fraction_of_all_lists": 0.04811424449558616
+          },
+          "demoted": {
+            "count": 2054,
+            "fraction_of_all_lists": 0.008819084257891664
+          },
+          "retained": {
+            "count": 559,
+            "fraction_of_all_lists": 0.0024001305258819082
+          },
+          "rescued": {
+            "count": 2853,
+            "fraction_of_all_lists": 0.012249682272524301
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  },
+  {
+    "rung": "statistics",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung3_statistics",
+    "metrics": {
+      "best_epoch": 1,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching",
+        "attributes",
+        "statistics"
+      ],
+      "n_parameters": 3734353,
+      "best_val_gauc_macro": 0.7137649680388858,
+      "best_val_ndcg10_macro": 0.056142083600182364,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.03722141310061912,
+          "gauc_macro": 0.7137649680388858,
+          "gauc_micro": 0.7125234497825018,
+          "ndcg@10_macro": 0.056142083600182364,
+          "ndcg@10_micro": 0.055494093517603295,
+          "end_to_end_ndcg@10_macro": 0.00391399237030358,
+          "rescued_count": 1745,
+          "demoted_count": 2249
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.030697917618784352,
+          "gauc_macro": 0.7069377487218476,
+          "gauc_micro": 0.7056389191639579,
+          "ndcg@10_macro": 0.04154499706422061,
+          "ndcg@10_micro": 0.041217741230261264,
+          "end_to_end_ndcg@10_macro": 0.0029005643088080776,
+          "rescued_count": 1414,
+          "demoted_count": 2415
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.028807439582941637,
+          "gauc_macro": 0.7113485640029992,
+          "gauc_micro": 0.7104563725537476,
+          "ndcg@10_macro": 0.04368117145790361,
+          "ndcg@10_micro": 0.043360583481974066,
+          "end_to_end_ndcg@10_macro": 0.0030528429824135113,
+          "rescued_count": 1501,
+          "demoted_count": 2406
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.02750637640177347,
+          "gauc_macro": 0.7028988066484355,
+          "gauc_micro": 0.7014738700701204,
+          "ndcg@10_macro": 0.03599235049207041,
+          "ndcg@10_micro": 0.03562757448657392,
+          "end_to_end_ndcg@10_macro": 0.0024864747694839013,
+          "rescued_count": 1216,
+          "demoted_count": 2433
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.00391399237030358,
+            "micro": 0.003972441551564087
+          },
+          "recall@10": {
+            "macro": 0.00884732690859911,
+            "micro": 0.00905523305739704
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.056142083600182364,
+            "micro": 0.055494093517603295
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 12314,
+            "fraction_of_all_lists": 0.05287156940198537
+          },
+          "demoted": {
+            "count": 2249,
+            "fraction_of_all_lists": 0.009656339092501631
+          },
+          "retained": {
+            "count": 364,
+            "fraction_of_all_lists": 0.0015628756912719403
+          },
+          "rescued": {
+            "count": 1745,
+            "fraction_of_all_lists": 0.007492357366125099
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  }
+]

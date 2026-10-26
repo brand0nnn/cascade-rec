@@ -337,18 +337,22 @@ Sanity test: IVF with `nprobe = nlist` must return exactly the exact-search resu
 | Split | Instances | List size | Force-insert positive? |
 |---|---|---|---|
 | Ranker train | Ranker-training period | 200 | **Yes** — if the target is missing, append it (label 1) |
-| Ranker val (loss / GAUC / early stopping) | Val | 200 | Yes |
+| Ranker val (conditional nDCG / GAUC / early stopping) | Val | 200 | Loaded with target appended; evaluate only natural retrieval hits |
 | Val / Test end-to-end | Val / Test | K₁ (from the sweep) | **No** — misses are real misses |
 
 Labels: target = 1, other candidates = 0. These zeros are *unobserved*, not confirmed dislikes; say so in the report.
 
 For MLP and DIN training, subsample **50 negatives per list** uniformly from the non-target candidates (configurable).
 
-**Open (decide as a team before training any ranker):** (1) forced positives can be identified through retrieval
-score/rank or insertion markers; see `docs/decisions.md` 2026-10-24 for the mechanism, options and checks;
-(2) the user's later reviews in the same period can appear as negatives (2026-10-21 entry). **Status confirmed
-2026-10-24: retrieval is done; no ranker exists yet.** The leakage concern is preventive, not an observed ranker
-failure. No training-policy change has been adopted by this documentation update.
+**Open training-design questions:** (1) forced positives can be identified through retrieval score/rank or
+insertion markers; see `docs/decisions.md` 2026-10-24; (2) the user's later reviews in the same period can appear
+as negatives (2026-10-21 entry). **Draft ranker status, 2026-10-26:** exploratory MLP/DIN runs now exist under
+the original force-insertion/negative policy. Retrieval rank and insertion markers are excluded from model
+inputs; the actual retrieval score remains. Full-data diagnostics find a reversed raw-score training signal
+and a low-score preference in the frozen MLP. These observations do not settle a training remedy or establish
+causation. Any controlled retraining or label-policy change needs a separate recorded decision. Checkpoints
+use natural-hit conditional per-user macro nDCG@10 (user-approved), with GAUC secondary; end-to-end metrics
+use all natural lists. See `docs/ranker_experiment.md` for completed validation evidence and limitations.
 
 The lists are built once on the cluster from the frozen retriever and shared from there (≈ 2 GB, not in git).
 
@@ -372,7 +376,7 @@ All item statistics come from the per-period tables in §4.5 (no leakage).
 | | history leaf categories | same category table, mean-pooled |
 | | history length | bucket → embedding 8-d |
 | Pair / context | retrieval score | float (standardised) |
-| | retrieval rank | `log1p(rank)` |
+| | retrieval rank | **Excluded**: a force-inserted target's rank can expose its label |
 | | candidate leaf category == last history item's leaf category | binary |
 | | candidate store appears in history | binary |
 | | time since user's last interaction | log-bucket → embedding 8-d |
@@ -381,13 +385,13 @@ All item statistics come from the per-period tables in §4.5 (no leakage).
 ### 9.3 MLP ranker (main)
 
 - Concatenate all feature embeddings and floats → MLP 256 → 128 → 64 (ReLU, dropout 0.1) → 1 logit.
-- Binary cross-entropy, Adam lr 1e-3, batch 2048 rows, early stopping (patience 3) on **ranker-val GAUC**.
+- Binary cross-entropy, Adam lr 1e-3, batch setting 2048 rows (40 lists × 51 rows), early stopping (patience 3) on **conditional per-user macro Val nDCG@10 over natural retrieval hits**. Report GAUC beside it. The selected feature setup is retrieval + history/text matching; the cumulative feature ladder and three-seed repetition are documented in `docs/ranker_experiment.md`.
 
 ### 9.4 DIN ranker (advanced ranker; Zhou et al., 2018)
 
 Chosen over DCN-V2 (2026-10-14) because our users are described by their *sequence* of products, and DIN's target attention directly asks "which past products are relevant to *this* candidate?", which suits accessory purchases tied to a specific phone.
 
-Replace the MLP's mean-pooled history with **target attention**: for each history item `h_j` (item emb ⊕ leaf-category emb) and candidate `c` (same fields), weight `a_j = MLP_att([h_j, c, h_j − c, h_j ⊙ c])` (hidden 64 → 32, ReLU → 1, **no softmax**, masked for padding); interest = Σ a_j h_j. Every other feature, the MLP head, loss, training and early stopping are identical to the MLP ranker, so the comparison isolates the attention. Check against a reference implementation (FuxiCTR or RecBole's DIN); do not import it blindly.
+Replace the MLP's mean-pooled history with **target attention**: for each history item `h_j` (item emb ⊕ leaf-category emb) and candidate `c` (same fields), weight `a_j = MLP_att([c, h_j, c − h_j, c ⊙ h_j])` (hidden 64 → 32, ReLU → 1, **no softmax**, masked for padding); interest = Σ a_j h_j. The shared head, loss, training and checkpoint rule match the selected MLP. This comparison also introduces candidate identity inside the attention query and changes mean pooling to an unnormalised sum, so it does not isolate attention alone. FuxiCTR's input algebra was inspected; its package/benchmarks were not executed. This ReLU/BCE adaptation does not reproduce the full DIN paper recipe. See the dated decision for details.
 
 ### 9.5 Ranker comparison (RQ3; reported at K₁ = 200, exact search, identical candidate lists)
 
@@ -478,7 +482,7 @@ Run tests before every experiment batch; do not proceed on a red test.
 |---|---|---|---|
 | 0 | → **29 Sep** (critique) ✅ | Download, preprocess, split, stats, harness, 4 baselines | `stats.json` + baseline table on Val/Test, tests green |
 | 1 | 30 Sep – 12 Oct | Text encoding ✅, both two-tower variants ✅ (3 seeds), retriever-training-period baselines ✅, RQ1 table ✅, frozen retriever chosen ✅ (21 Oct); MLP ranker prototype + feature pipeline | RQ1 table with segments; frozen retriever chosen |
-| 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | R2 beats R1; sweep results + headline plot |
+| 2 | 13 – 26 Oct | Candidate lists; FAISS index module; K₁ and index sweeps (RQ2); MLP + DIN rankers, R0–R3 table (RQ3) | Verified R2–R1 comparison; sweep results + headline plot |
 | 3 | 27 Oct – 4 Nov | Final combination test (§10.1), significance tests, segment analysis, failure breakdown, report figures | Final tables and figures reproducible from configs |
 | 4 | 5 – 11 Nov | Report, STePS poster (11 Nov), README reproduction guide | Every poster number traceable to a `results/` run |
 

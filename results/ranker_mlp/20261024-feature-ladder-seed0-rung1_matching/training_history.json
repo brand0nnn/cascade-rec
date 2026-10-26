@@ -1,0 +1,145 @@
+[
+  {
+    "epoch": 1.0,
+    "train_bce": 0.049026872118595945,
+    "gauc_macro": 0.6173647160889012,
+    "gauc_micro": 0.6145735877082148,
+    "ndcg@10_macro": 0.04463710303246547,
+    "ndcg@10_micro": 0.044011493763978504,
+    "end_to_end_ndcg@10_macro": 0.0030516955139220036,
+    "rescued_count": 1376,
+    "demoted_count": 2393
+  },
+  {
+    "epoch": 2.0,
+    "train_bce": 0.038690791162349074,
+    "gauc_macro": 0.6504673661797467,
+    "gauc_micro": 0.6483008854252066,
+    "ndcg@10_macro": 0.05972970925930976,
+    "ndcg@10_micro": 0.0591758070532463,
+    "end_to_end_ndcg@10_macro": 0.00402967924178656,
+    "rescued_count": 1768,
+    "demoted_count": 2278
+  },
+  {
+    "epoch": 3.0,
+    "train_bce": 0.03484718998571129,
+    "gauc_macro": 0.6731640255177099,
+    "gauc_micro": 0.6715017023698144,
+    "ndcg@10_macro": 0.07354844394998916,
+    "ndcg@10_micro": 0.07299426164643294,
+    "end_to_end_ndcg@10_macro": 0.004949867816855661,
+    "rescued_count": 2077,
+    "demoted_count": 2116
+  },
+  {
+    "epoch": 4.0,
+    "train_bce": 0.03248188400074418,
+    "gauc_macro": 0.678452985212668,
+    "gauc_micro": 0.6766706010860446,
+    "ndcg@10_macro": 0.08068443154285539,
+    "ndcg@10_micro": 0.08009970270697989,
+    "end_to_end_ndcg@10_macro": 0.005534562057764453,
+    "rescued_count": 2202,
+    "demoted_count": 2058
+  },
+  {
+    "epoch": 5.0,
+    "train_bce": 0.030867868511154212,
+    "gauc_macro": 0.6918875757628846,
+    "gauc_micro": 0.6904640766211094,
+    "ndcg@10_macro": 0.09348138682510501,
+    "ndcg@10_micro": 0.0929323154132344,
+    "end_to_end_ndcg@10_macro": 0.006408354459128775,
+    "rescued_count": 2399,
+    "demoted_count": 1857
+  },
+  {
+    "epoch": 6.0,
+    "train_bce": 0.029578056710094867,
+    "gauc_macro": 0.7005123992266085,
+    "gauc_micro": 0.6993481683851118,
+    "ndcg@10_macro": 0.09326211727889812,
+    "ndcg@10_micro": 0.09309211195110874,
+    "end_to_end_ndcg@10_macro": 0.00635887171394209,
+    "rescued_count": 2203,
+    "demoted_count": 1666
+  },
+  {
+    "epoch": 7.0,
+    "train_bce": 0.02856189305964684,
+    "gauc_macro": 0.6975745183106185,
+    "gauc_micro": 0.6963144658031039,
+    "ndcg@10_macro": 0.09115747088307329,
+    "ndcg@10_micro": 0.09083083749181527,
+    "end_to_end_ndcg@10_macro": 0.006272021043005925,
+    "rescued_count": 2397,
+    "demoted_count": 1884
+  },
+  {
+    "epoch": 8.0,
+    "train_bce": 0.027649872273700776,
+    "gauc_macro": 0.7078409929126607,
+    "gauc_micro": 0.7074476870918893,
+    "ndcg@10_macro": 0.09749868776304528,
+    "ndcg@10_micro": 0.09759306515323478,
+    "end_to_end_ndcg@10_macro": 0.006733170793809647,
+    "rescued_count": 2345,
+    "demoted_count": 1662
+  },
+  {
+    "epoch": 9.0,
+    "train_bce": 0.02686241123358885,
+    "gauc_macro": 0.7058743855845747,
+    "gauc_micro": 0.7050122855158711,
+    "ndcg@10_macro": 0.09715900476388903,
+    "ndcg@10_micro": 0.09690276456875384,
+    "end_to_end_ndcg@10_macro": 0.006624151851269469,
+    "rescued_count": 2344,
+    "demoted_count": 1685
+  },
+  {
+    "epoch": 10.0,
+    "train_bce": 0.026150272011025256,
+    "gauc_macro": 0.7133332317885923,
+    "gauc_micro": 0.7124402603227269,
+    "ndcg@10_macro": 0.10284316935274888,
+    "ndcg@10_micro": 0.10306149630678942,
+    "end_to_end_ndcg@10_macro": 0.00710484924666734,
+    "rescued_count": 2533,
+    "demoted_count": 1707
+  },
+  {
+    "epoch": 11.0,
+    "train_bce": 0.025490153001777736,
+    "gauc_macro": 0.7055502811803636,
+    "gauc_micro": 0.7047226294620897,
+    "ndcg@10_macro": 0.09414080945312225,
+    "ndcg@10_micro": 0.0942106682721132,
+    "end_to_end_ndcg@10_macro": 0.006519545710012998,
+    "rescued_count": 2213,
+    "demoted_count": 1647
+  },
+  {
+    "epoch": 12.0,
+    "train_bce": 0.02486212855452127,
+    "gauc_macro": 0.7110327933347669,
+    "gauc_micro": 0.7104170384070062,
+    "ndcg@10_macro": 0.10215737461231546,
+    "ndcg@10_micro": 0.10199509810480795,
+    "end_to_end_ndcg@10_macro": 0.0070031886065784425,
+    "rescued_count": 2486,
+    "demoted_count": 1694
+  },
+  {
+    "epoch": 13.0,
+    "train_bce": 0.02421968963997319,
+    "gauc_macro": 0.7031971008344114,
+    "gauc_micro": 0.7021078882898176,
+    "ndcg@10_macro": 0.10070939870923212,
+    "ndcg@10_micro": 0.10050462984473844,
+    "end_to_end_ndcg@10_macro": 0.006897611128199727,
+    "rescued_count": 2445,
+    "demoted_count": 1780
+  }
+]

@@ -5,7 +5,7 @@ Cascade recommender project (Group 7). This document covers what we investigate 
 
 **Purpose.** Measure how retrieval choices limit the quality of the final ranked list. The professor's 14 Oct feedback asked for fewer variables, @10 as the headline, an explanation of why results change, and one selected retriever–ranker combination tested end to end.
 
-**Status confirmed 2026-10-24.** Retrieval is done; no ranker exists yet. Two-tower (text), seed 0 is the frozen retriever. Ranker comparisons, cascade sweeps and their failure analyses below are planned work, not existing results. Saved retrieval results remain valid; the forced-positive concern is a risk to resolve before ranker training.
+**Status updated 2026-10-26 for the draft ranker PR.** Two-tower (text), seed 0 is the frozen retriever. Exploratory MLP feature discovery, three-seed MLP/DIN comparisons, a validation-only K₁ sweep and frozen-model score diagnostics are complete; see [the experiment record](ranker_experiment.md). They retain the original forced-positive/negative training policy, exclude rank/insertion markers from model inputs, and select checkpoints by natural-hit conditional macro nDCG@10 as the user approved. The score remains an input and diagnostics identify an associated training-signal mismatch; no remedy or causal claim has been established. The index sweep, wider profile analyses below and final ranker/cascade Test comparison remain pending. Existing retrieval Test results were already inspected.
 
 | Responsibility | Work |
 |---|---|
@@ -14,7 +14,7 @@ Cascade recommender project (Group 7). This document covers what we investigate 
 | Retrieval/search (Brandon) | Frozen candidate provenance, index configurations and retrieval/latency measurements |
 | Team | Freeze unresolved protocol choices and final selection rules; interpret the final comparison |
 
-**Dependency before ranker training.** Read [the forced-positive explanation in the 2026-10-24 decision entry](decisions.md). Appending a missing target can expose its label through retrieval rank/score or insertion markers; forced validation can reward the same shortcut. The sample forced fraction was 94.2%, not a measured full-data rate. The ranker owner/team must record the chosen remedy and early-stopping population before training. Evaluation audits natural-list results separately from forced-list diagnostics. This plan does not select a training remedy or add model variants.
+**Dependency before further training-policy changes.** Read [the forced-positive explanation and subsequent ranker entries](decisions.md). Appending a missing target can expose its label through retrieval rank/score or insertion markers; forced validation can reward the same shortcut. The sample forced fraction was 94.2%; the completed full-data audit measures 87.69%. The current exploratory runs are not evidence that this risk is resolved. The ranker owner/team must record any proposed remedy and its comparison before controlled retraining. Evaluation audits natural-list results separately from forced-list diagnostics. This plan does not select a training remedy or add model variants.
 
 **Principles.**
 - **Zoom in where needed.** Aggregate numbers → failure stage → affected segments → signal profiles → examples. Steps 1–3 are the core; focus Step 4 on the largest validation gaps.
@@ -158,7 +158,7 @@ Cascade recommender project (Group 7). This document covers what we investigate 
 - **Replication:** compare direction, effect size and uncertainty across Val/Test. Non-replication may reflect uncertainty or population shift; report it as unstable or inconclusive rather than redefining the hypothesis. Neither matching direction nor two nominal p-values establishes a mechanism.
 - **New-item reporting:** provide new/not-new results wherever support permits; preserve the distinct canonical segment definitions and denominators.
 - **Provenance:** save configs, training seeds, bootstrap seed, git hashes, candidate source/hash and analysis definitions. Identify which components are fixed. Sample runs are for development, never reported as full-data results.
-- **Open choices before dependent work:** training remedy and early-stopping population (Tong/team); profile thresholds/parser audit and support (evaluation); acceptable loss margin δ and final selection rule (team). Recording these dependencies does not assign ranker implementation to evaluation.
+- **Open choices before dependent work:** training remedy and any future training/early-stopping population changes (Tong/team); profile thresholds/parser audit and support (evaluation); acceptable loss margin δ and final selection rule (team). Recording these dependencies does not assign ranker implementation to evaluation.
 
 | Research question | Primary evidence | Explanation |
 |---|---|---|

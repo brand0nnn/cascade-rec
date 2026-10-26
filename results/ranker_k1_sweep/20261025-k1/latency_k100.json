@@ -1,0 +1,120 @@
+{
+  "runtime": {
+    "cpu": "Apple M1 Max",
+    "platform": "macOS-15.6-arm64-arm-64bit",
+    "torch_version": "2.5.1",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "threadpools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libopenblas",
+        "filepath": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/.venv/lib/python3.11/site-packages/numpy/.dylibs/libopenblas64_.0.dylib",
+        "version": "0.3.23.dev",
+        "threading_layer": "pthreads",
+        "architecture": "armv8"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "filepath": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/.venv/lib/python3.11/site-packages/torch/lib/libomp.dylib",
+        "version": null
+      }
+    ],
+    "n_queries": 1000,
+    "n_warmup": 50,
+    "random_seed": 0,
+    "k1": 100,
+    "scope": "validation only",
+    "query_unit": "one instance, all naturally retrieved candidates",
+    "excludes": [
+      "retrieval",
+      "disk I/O",
+      "checkpoint load",
+      "one-time feature-table creation"
+    ],
+    "accuracy_device": "mps",
+    "latency_device": "cpu"
+  },
+  "measurements": [
+    {
+      "system": "R2",
+      "key": "R2_seed1",
+      "seed": 1,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.535542,
+          "p95": 0.74420865
+        },
+        "score_ms": {
+          "median": 0.39575,
+          "p95": 0.5633791499999999
+        },
+        "order_ms": {
+          "median": 0.006875,
+          "p95": 0.01075
+        },
+        "total_ms": {
+          "median": 0.942438,
+          "p95": 1.33617355
+        }
+      }
+    },
+    {
+      "system": "R2",
+      "key": "R2_seed0",
+      "seed": 0,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.5504374999999999,
+          "p95": 0.7747076999999999
+        },
+        "score_ms": {
+          "median": 0.42591650000000003,
+          "p95": 0.5457979
+        },
+        "order_ms": {
+          "median": 0.006916,
+          "p95": 0.010127099999999998
+        },
+        "total_ms": {
+          "median": 1.0138745,
+          "p95": 1.3161375
+        }
+      }
+    },
+    {
+      "system": "R2",
+      "key": "R2_seed2",
+      "seed": 2,
+      "phases": {
+        "prepare_ms": {
+          "median": 0.5030205000000001,
+          "p95": 0.68688125
+        },
+        "score_ms": {
+          "median": 0.3721875,
+          "p95": 0.5218999999999999
+        },
+        "order_ms": {
+          "median": 0.006542,
+          "p95": 0.00941605
+        },
+        "total_ms": {
+          "median": 0.8681460000000001,
+          "p95": 1.210775
+        }
+      }
+    }
+  ],
+  "columns": [
+    "prepare_ms",
+    "score_ms",
+    "order_ms",
+    "total_ms"
+  ]
+}

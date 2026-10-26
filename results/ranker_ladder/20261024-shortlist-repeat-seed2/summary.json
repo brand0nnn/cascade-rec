@@ -1,0 +1,353 @@
+[
+  {
+    "rung": "matching",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching",
+    "metrics": {
+      "best_epoch": 9,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching"
+      ],
+      "n_parameters": 3649185,
+      "best_val_gauc_macro": 0.7121179792923864,
+      "best_val_ndcg10_macro": 0.09854251238960471,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.04852332175506222,
+          "gauc_macro": 0.622453139798728,
+          "gauc_micro": 0.6202289639174758,
+          "ndcg@10_macro": 0.04728379880384512,
+          "ndcg@10_micro": 0.04664334944750304,
+          "end_to_end_ndcg@10_macro": 0.003308476442140337,
+          "rescued_count": 1368,
+          "demoted_count": 2316
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.038486258410140035,
+          "gauc_macro": 0.6596377415542022,
+          "gauc_micro": 0.6575456155537766,
+          "ndcg@10_macro": 0.06707147674402898,
+          "ndcg@10_micro": 0.06635292404991104,
+          "end_to_end_ndcg@10_macro": 0.004526651650494624,
+          "rescued_count": 1978,
+          "demoted_count": 2236
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.03459880832051359,
+          "gauc_macro": 0.6619764620034272,
+          "gauc_micro": 0.6599540408375854,
+          "ndcg@10_macro": 0.06884334966339722,
+          "ndcg@10_micro": 0.0681063812406166,
+          "end_to_end_ndcg@10_macro": 0.004603955636852864,
+          "rescued_count": 1946,
+          "demoted_count": 2133
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.032329852125673714,
+          "gauc_macro": 0.6851039314143759,
+          "gauc_micro": 0.6834363757366487,
+          "ndcg@10_macro": 0.07834777308859639,
+          "ndcg@10_micro": 0.07786117514174995,
+          "end_to_end_ndcg@10_macro": 0.005355174488581707,
+          "rescued_count": 2187,
+          "demoted_count": 2023
+        },
+        {
+          "epoch": 5.0,
+          "train_bce": 0.03076621224482476,
+          "gauc_macro": 0.6965723144921716,
+          "gauc_micro": 0.6953630617097001,
+          "ndcg@10_macro": 0.08127346639839357,
+          "ndcg@10_micro": 0.0806584906548347,
+          "end_to_end_ndcg@10_macro": 0.005533410551912308,
+          "rescued_count": 2141,
+          "demoted_count": 1844
+        },
+        {
+          "epoch": 6.0,
+          "train_bce": 0.029565836110952058,
+          "gauc_macro": 0.6975461229790133,
+          "gauc_micro": 0.696304067120632,
+          "ndcg@10_macro": 0.08192453432091709,
+          "ndcg@10_micro": 0.08149944054859802,
+          "end_to_end_ndcg@10_macro": 0.005628655072197886,
+          "rescued_count": 2144,
+          "demoted_count": 1866
+        },
+        {
+          "epoch": 7.0,
+          "train_bce": 0.02857375821020766,
+          "gauc_macro": 0.6976150246193922,
+          "gauc_micro": 0.6958132191668516,
+          "ndcg@10_macro": 0.08772884562285517,
+          "ndcg@10_micro": 0.0869828923872794,
+          "end_to_end_ndcg@10_macro": 0.0059643262393164545,
+          "rescued_count": 2235,
+          "demoted_count": 1853
+        },
+        {
+          "epoch": 8.0,
+          "train_bce": 0.027705834539288574,
+          "gauc_macro": 0.7045404801042794,
+          "gauc_micro": 0.7031510720589511,
+          "ndcg@10_macro": 0.08936616071298852,
+          "ndcg@10_micro": 0.08878085642747077,
+          "end_to_end_ndcg@10_macro": 0.00614104834704481,
+          "rescued_count": 2302,
+          "demoted_count": 1810
+        },
+        {
+          "epoch": 9.0,
+          "train_bce": 0.02697085375727071,
+          "gauc_macro": 0.7121179792923864,
+          "gauc_micro": 0.7110545228541941,
+          "ndcg@10_macro": 0.09854251238960471,
+          "ndcg@10_micro": 0.09768105953616481,
+          "end_to_end_ndcg@10_macro": 0.0067637319628043955,
+          "rescued_count": 2429,
+          "demoted_count": 1716
+        },
+        {
+          "epoch": 10.0,
+          "train_bce": 0.026252018241660124,
+          "gauc_macro": 0.7059753668080595,
+          "gauc_micro": 0.7048549489289055,
+          "ndcg@10_macro": 0.09387334788088905,
+          "ndcg@10_micro": 0.09332559462361327,
+          "end_to_end_ndcg@10_macro": 0.006408818105732578,
+          "rescued_count": 2317,
+          "demoted_count": 1754
+        },
+        {
+          "epoch": 11.0,
+          "train_bce": 0.025544366699227293,
+          "gauc_macro": 0.7113431445638917,
+          "gauc_micro": 0.7105929117757693,
+          "ndcg@10_macro": 0.0974697563507537,
+          "ndcg@10_micro": 0.09703577611576632,
+          "end_to_end_ndcg@10_macro": 0.00667719702312775,
+          "rescued_count": 2462,
+          "demoted_count": 1802
+        },
+        {
+          "epoch": 12.0,
+          "train_bce": 0.02493228001958789,
+          "gauc_macro": 0.6984050185270797,
+          "gauc_micro": 0.6975246313139594,
+          "ndcg@10_macro": 0.0920900438751217,
+          "ndcg@10_micro": 0.09168069939911565,
+          "end_to_end_ndcg@10_macro": 0.006282772511872364,
+          "rescued_count": 2351,
+          "demoted_count": 1854
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.0067637319628043955,
+            "micro": 0.006992317111715296
+          },
+          "recall@10": {
+            "macro": 0.013757998114203869,
+            "micro": 0.014280561948270532
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.09854251238960471,
+            "micro": 0.09768105953616481
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 11630,
+            "fraction_of_all_lists": 0.04993473705904579
+          },
+          "demoted": {
+            "count": 1716,
+            "fraction_of_all_lists": 0.0073678425445677185
+          },
+          "retained": {
+            "count": 897,
+            "fraction_of_all_lists": 0.003851372239205853
+          },
+          "rescued": {
+            "count": 2429,
+            "fraction_of_all_lists": 0.010429189709064679
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  },
+  {
+    "rung": "attributes",
+    "run_dir": "/Users/jingyen/Documents/NUS/CP4285/cascade-rec/results/ranker_mlp/20261024-shortlist-repeat-seed2-rung2_attributes",
+    "metrics": {
+      "best_epoch": 3,
+      "development_sample": false,
+      "feature_groups": [
+        "retrieval",
+        "matching",
+        "attributes"
+      ],
+      "n_parameters": 3727841,
+      "best_val_gauc_macro": 0.74859863235972,
+      "best_val_ndcg10_macro": 0.09149960569660566,
+      "history": [
+        {
+          "epoch": 1.0,
+          "train_bce": 0.03906773021747145,
+          "gauc_macro": 0.7384723359951074,
+          "gauc_micro": 0.7369386519931713,
+          "ndcg@10_macro": 0.08046173782785765,
+          "ndcg@10_micro": 0.07975113972033716,
+          "end_to_end_ndcg@10_macro": 0.005461711439312982,
+          "rescued_count": 2507,
+          "demoted_count": 2208
+        },
+        {
+          "epoch": 2.0,
+          "train_bce": 0.03115479802610762,
+          "gauc_macro": 0.7431900786250142,
+          "gauc_micro": 0.741908016570376,
+          "ndcg@10_macro": 0.08034861057759875,
+          "ndcg@10_micro": 0.07963200887900196,
+          "end_to_end_ndcg@10_macro": 0.005532895779310095,
+          "rescued_count": 2600,
+          "demoted_count": 2238
+        },
+        {
+          "epoch": 3.0,
+          "train_bce": 0.0291597930496265,
+          "gauc_macro": 0.74859863235972,
+          "gauc_micro": 0.7479146874005344,
+          "ndcg@10_macro": 0.09149960569660566,
+          "ndcg@10_micro": 0.09085987672599687,
+          "end_to_end_ndcg@10_macro": 0.006276320129733799,
+          "rescued_count": 2807,
+          "demoted_count": 2092
+        },
+        {
+          "epoch": 4.0,
+          "train_bce": 0.027775523620716645,
+          "gauc_macro": 0.7483282629775203,
+          "gauc_micro": 0.7474455410449561,
+          "ndcg@10_macro": 0.08609226228302073,
+          "ndcg@10_micro": 0.08528257227987682,
+          "end_to_end_ndcg@10_macro": 0.00593213938599184,
+          "rescued_count": 2687,
+          "demoted_count": 2143
+        },
+        {
+          "epoch": 5.0,
+          "train_bce": 0.026786949919687074,
+          "gauc_macro": 0.755706249067081,
+          "gauc_micro": 0.7550002592135342,
+          "ndcg@10_macro": 0.08602567465830185,
+          "ndcg@10_micro": 0.08530575124181336,
+          "end_to_end_ndcg@10_macro": 0.005885649583051257,
+          "rescued_count": 2605,
+          "demoted_count": 1965
+        },
+        {
+          "epoch": 6.0,
+          "train_bce": 0.025938467239102855,
+          "gauc_macro": 0.7515186945913961,
+          "gauc_micro": 0.7502821207766278,
+          "ndcg@10_macro": 0.08479150375369192,
+          "ndcg@10_micro": 0.08389346421198902,
+          "end_to_end_ndcg@10_macro": 0.005864232090402099,
+          "rescued_count": 2636,
+          "demoted_count": 2097
+        }
+      ],
+      "validation_comparison": {
+        "n_lists": 232904,
+        "n_retrieved": 16672,
+        "retrieval_order": {
+          "ndcg@10": {
+            "macro": 0.005642046683164716,
+            "micro": 0.006099651216869439
+          },
+          "recall@10": {
+            "macro": 0.010446287825913704,
+            "micro": 0.011219214783773572
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.08281619200260189,
+            "micro": 0.08521072258959696
+          }
+        },
+        "ranker": {
+          "ndcg@10": {
+            "macro": 0.006276320129733799,
+            "micro": 0.006504035417063768
+          },
+          "recall@10": {
+            "macro": 0.013844574851011631,
+            "micro": 0.014289149177343455
+          },
+          "conditional_ndcg@10": {
+            "macro": 0.09149960569660566,
+            "micro": 0.09085987672599687
+          }
+        },
+        "outcomes": {
+          "retrieval_miss": {
+            "count": 216232,
+            "fraction_of_all_lists": 0.928416858448116
+          },
+          "unrescued": {
+            "count": 11252,
+            "fraction_of_all_lists": 0.04831175076426339
+          },
+          "demoted": {
+            "count": 2092,
+            "fraction_of_all_lists": 0.008982241610277195
+          },
+          "retained": {
+            "count": 521,
+            "fraction_of_all_lists": 0.0022369731734963763
+          },
+          "rescued": {
+            "count": 2807,
+            "fraction_of_all_lists": 0.012052176003847078
+          }
+        }
+      },
+      "n_train_lists": 315114,
+      "n_val_lists": 232904,
+      "train_forced_fraction": 0.8768921723566709,
+      "val_forced_fraction": 0.928416858448116,
+      "val_conditional_lists": 16672
+    }
+  }
+]
