@@ -1,24 +1,35 @@
+# Python environments and generated files
 .venv/
-/data/
 __pycache__/
-*.pyc
-/saved/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+
+# Local editor and operating-system files
+.idea/
+.DS_Store
+
+# Local datasets and experiment logs
+/data/
 /log/
 /log_tensorboard/
-results/**/*.npy
-results/**/*.pth
-.DS_Store
-*.egg-info/
-# trained retriever weights (full-data runs only) are small enough to share through git (2026-10-21)
-!results/retriever/*/seed*/model.pth
-results/retriever/*_sample/seed*/model.pth
-# logs stay local (the folder itself is kept: Slurm writes job output there and fails if it is missing)
-results/logs/*
-!results/logs/.gitkeep
-results/**/recbole.log
+
+# Generated model and evaluation outputs
+/results/**/*.npy
+/results/**/*.pth
+/results/**/recbole.log
+
+# Trained retriever weights (full-data runs only are small enough to share)
+!/results/retriever/*/seed*/model.pth
+/results/retriever/*_sample/seed*/model.pth
+
+# Logs stay local; keep the directory for Slurm job output.
+/results/logs/*
+!/results/logs/.gitkeep
+
 # Ranker output is local by default. Explicitly shared artifacts are tracked via
 # results/ranker_artifacts.json (use git add -f only for that reviewed allowlist).
-results/ranker_*/
+/results/ranker_*/
 
 # Consolidated evaluation handoff: share compact evidence, keep generated copies local.
 /docs/_local_evaluation_archive/
