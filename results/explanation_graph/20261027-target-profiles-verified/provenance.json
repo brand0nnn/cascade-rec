@@ -1,0 +1,224 @@
+{
+  "status": "target_profiles_complete_candidate_profiles_deferred",
+  "population": {
+    "events": 232904,
+    "users": 124416
+  },
+  "data_config": {
+    "path": "results/targeted_study/data.yaml",
+    "sha256": "bec616eed1eca770f50431ab48c97ede08ed3259073fc61664ad5bda80b30bfc"
+  },
+  "graph_manifest_sha256": "20c982dc43c651bd976461d6c94bc40e1791a859a87ef29b8235a4b13c517e7a",
+  "review_edges_sha256": "7765cec319a9d1745ba68180dc08ba44fa4e4d8b9fb9ca9dbb39fa5d00cfc3a6",
+  "graph_review_integrity": "Base manifest has no output-edge hash; review content exactly matches the restored pre-T1 interaction projection.",
+  "restored_structure": {
+    "structure_manifest": {
+      "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/structure_manifest.json",
+      "sha256": "0498bc2e785287b239e32a0d7dcdc70aa2e3179dfd247cfd1a1c7c5df2f8237e"
+    },
+    "original_source": {
+      "directory": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed",
+      "sha256": {
+        "interactions.parquet": "937209d2e16bc075cbe05964bd1d135ddbd22ea6a358c0945bd8fe1f0afeae6f",
+        "items.parquet": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c",
+        "users.parquet": "a9722be134b0b91a0b4dc0b1ea1a3f3cf327d97a343d56276e8ce200d2377ecf"
+      }
+    },
+    "processed_inputs": [
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/items.parquet",
+        "sha256": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/users.parquet",
+        "sha256": "a9722be134b0b91a0b4dc0b1ea1a3f3cf327d97a343d56276e8ce200d2377ecf"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/interactions.parquet",
+        "sha256": "5bfea16773bff2f22bec12272f51e75a7d89faac7f2e9a4dd1ea41b3962863ea"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/instances.parquet",
+        "sha256": "6ce91c5ef0fec3fce4bf817dc29ec892b4dcf28dc6c87fe6686ac4502867c39b"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/sequences.npz",
+        "sha256": "b982ba4931f1a605196e39543a090c18f827cc0f80de967d76a6afd36c4b7c06"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/item_segments.parquet",
+        "sha256": "5c51f83f64edd8fd22dc3e7941d795de245333fafa21f6e7ea7ee13a50568424"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/split.json",
+        "sha256": "82ad93379ffe8ab826b41a19104673264064f6a5b31928fb8db297f66bceeebc"
+      },
+      {
+        "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/studies/20261027-targeted/structure_manifest.json",
+        "sha256": "0498bc2e785287b239e32a0d7dcdc70aa2e3179dfd247cfd1a1c7c5df2f8237e"
+      }
+    ],
+    "validation": "source hashes and mapping bytes verified; split, interactions, sequences, instances, metadata and segments reconstructed/compared; graph pre-T1 review content exactly matched"
+  },
+  "saved_ranks": [
+    {
+      "path": "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/val_ranks.npz",
+      "sha256": "ae3f577090646c8debdbfe66bb63444dfcdc714ffabd7cfd4457904f84ffb97b"
+    },
+    {
+      "path": "results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching/val_ranks.npz",
+      "sha256": "1f06be5e7a526ab0eae189ee1e9e1ae2bbf496b7a65d33a3b77b7b16718ca970"
+    },
+    {
+      "path": "results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching/val_ranks.npz",
+      "sha256": "815c0ce37e8ffef2e27113b8eefccb1bbd7ca271d4f6b66b7932f6f473cf4f0d"
+    },
+    {
+      "path": "results/ranker_din/20261024-din-matching-seed0/val_ranks.npz",
+      "sha256": "40628203b529fe190c837e8c43c117d47191d08bd8b34934a54af6d8d2128464"
+    },
+    {
+      "path": "results/ranker_din/20261024-din-matching-seed1/val_ranks.npz",
+      "sha256": "3404b5c5291b685a2933f4a948b7385ea0ffb62a0e33b13574a638d4d6ae169b"
+    },
+    {
+      "path": "results/ranker_din/20261024-din-matching-seed2/val_ranks.npz",
+      "sha256": "72e48951ddecbb05779fa5124cde8df37c27f0b2127162002f27d3aa966e6a12"
+    }
+  ],
+  "source_runs": [
+    {
+      "system": "matching",
+      "seed": 0,
+      "config": {
+        "path": "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/config.yaml",
+        "sha256": "f35b5c94054c7f1cee800bcb909a42a91d535c2018f432f87060751b156b9aad"
+      },
+      "metrics": {
+        "path": "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/metrics.json",
+        "sha256": "7d450f8b5c23a746a28c085061dc85f1eccc136a7dc58ec51b50699322918ab1"
+      },
+      "ranks": {
+        "path": "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/val_ranks.npz",
+        "sha256": "ae3f577090646c8debdbfe66bb63444dfcdc714ffabd7cfd4457904f84ffb97b"
+      },
+      "reproduced_ndcg10_macro": 0.00710484924666734
+    },
+    {
+      "system": "matching",
+      "seed": 1,
+      "config": {
+        "path": "results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching/config.yaml",
+        "sha256": "dfcc132c966bc3e030a662fae08f55d44d2f84aaa78aa03d483cbdb0a3301d5c"
+      },
+      "metrics": {
+        "path": "results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching/metrics.json",
+        "sha256": "83233dc486edf2362a62d360db6abcd515c56f330cf5e0ab0cba95031f169592"
+      },
+      "ranks": {
+        "path": "results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching/val_ranks.npz",
+        "sha256": "1f06be5e7a526ab0eae189ee1e9e1ae2bbf496b7a65d33a3b77b7b16718ca970"
+      },
+      "reproduced_ndcg10_macro": 0.006659718494920886
+    },
+    {
+      "system": "matching",
+      "seed": 2,
+      "config": {
+        "path": "results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching/config.yaml",
+        "sha256": "a15dcc9e6bebe797523fa1defd7a554ae39f2df292633c376e05c3f8b422d0ac"
+      },
+      "metrics": {
+        "path": "results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching/metrics.json",
+        "sha256": "d932b21c092c87d8382b07bfdfdeae33375756d4bfa51a65ee473a74ea179a20"
+      },
+      "ranks": {
+        "path": "results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching/val_ranks.npz",
+        "sha256": "815c0ce37e8ffef2e27113b8eefccb1bbd7ca271d4f6b66b7932f6f473cf4f0d"
+      },
+      "reproduced_ndcg10_macro": 0.0067637319628043955
+    },
+    {
+      "system": "din",
+      "seed": 0,
+      "config": {
+        "path": "results/ranker_din/20261024-din-matching-seed0/config.yaml",
+        "sha256": "34d240b8efc0ab74d438d710bdf5397f2c9f32f5b27604da1df8b9033029817d"
+      },
+      "metrics": {
+        "path": "results/ranker_din/20261024-din-matching-seed0/metrics.json",
+        "sha256": "af09e992fc20b1afae01a1db7193ccd16e400b72b6069481f2a7bab650bcf29b"
+      },
+      "ranks": {
+        "path": "results/ranker_din/20261024-din-matching-seed0/val_ranks.npz",
+        "sha256": "40628203b529fe190c837e8c43c117d47191d08bd8b34934a54af6d8d2128464"
+      },
+      "reproduced_ndcg10_macro": 0.006038551499934629
+    },
+    {
+      "system": "din",
+      "seed": 1,
+      "config": {
+        "path": "results/ranker_din/20261024-din-matching-seed1/config.yaml",
+        "sha256": "0090e95e9ed3ef0e00c11610a696e82b120c8db96486047671563a1df2b69d79"
+      },
+      "metrics": {
+        "path": "results/ranker_din/20261024-din-matching-seed1/metrics.json",
+        "sha256": "a6c95d59263d212b119c7ee492a939d98aa30ac1667c3dff6a25f1ec82a27a6c"
+      },
+      "ranks": {
+        "path": "results/ranker_din/20261024-din-matching-seed1/val_ranks.npz",
+        "sha256": "3404b5c5291b685a2933f4a948b7385ea0ffb62a0e33b13574a638d4d6ae169b"
+      },
+      "reproduced_ndcg10_macro": 0.00627438987906874
+    },
+    {
+      "system": "din",
+      "seed": 2,
+      "config": {
+        "path": "results/ranker_din/20261024-din-matching-seed2/config.yaml",
+        "sha256": "800602cb42537faf83560225f96a6560a066f1785b3a2a0a46be5746e57c2654"
+      },
+      "metrics": {
+        "path": "results/ranker_din/20261024-din-matching-seed2/metrics.json",
+        "sha256": "e72f5a40cb70bbd22e841191fd8b558440e99c93c40fc71a5ee818e7d0b152de"
+      },
+      "ranks": {
+        "path": "results/ranker_din/20261024-din-matching-seed2/val_ranks.npz",
+        "sha256": "72e48951ddecbb05779fa5124cde8df37c27f0b2127162002f27d3aa966e6a12"
+      },
+      "reproduced_ndcg10_macro": 0.006996282467310294
+    }
+  ],
+  "source_sha256": {
+    "src/cascade/pipelines/graph_target_profiles.py": "e374b5639412fd46a1b70fdf3c73c8f746aac69715eb63ff583a4158e3fa9916",
+    "src/cascade/analysis/graph_target_profiles.py": "9649a9ed62954ff297e2e843ec936eaacb847d6b20d9ff53394cbd99c2cdf580",
+    "src/cascade/analysis/explanation_graph.py": "a7366d505fed22f783238fd9f2310d051326b6c3407f4a6478e19e84addd090a",
+    "src/cascade/eval/metrics.py": "11e92706861bd2b176b850797708d232892898fcbb33d43b2c6d5b718df1cad8",
+    "src/cascade/eval/bootstrap.py": "7d62479921ae9c02f6a56b3410b0a0ffcd3294b6f2e0befc8100816b0b47a20c",
+    "src/cascade/eval/saved_results.py": "adb077969b0f1791a7e8cbbef8d7fa4535caf3eb96dcf37ac171ea465e80c412",
+    "src/cascade/eval/ranker_meso.py": "ceb6270cc735541ed35ca71d49107f4912c71f615e949b0c7b24c03af98aa1a4",
+    "src/cascade/data/instances.py": "adb5019ee65b7ed7f31d810a0a735e4443b4c448424a41a6bdc3742469255fad",
+    "src/cascade/data/split.py": "469dc9fd2e8652fbe0409928cf75b8f6e1ed311d675bae719bf1d9037456b661",
+    "src/cascade/utils/config.py": "d51f476136d718148a96c47429e00ad57c5a53d6d49b96dc0eb9a247a3eac209"
+  },
+  "saved_config": {
+    "path": "configs/evaluation/saved_results.yaml",
+    "sha256": "2ed903378505518e0015a3436f36d66a2328972f08874225a5878dd751f38829"
+  },
+  "cutoffs": {
+    "retriever_train": 1595800947930,
+    "all_train": 1628643414042
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 0,
+    "scope": "exploratory paired users conditional on archived training runs"
+  },
+  "alignment": "complete restored Val IDs/order/users checked against all six saved rank archives",
+  "stage1_rank_convention": "Historical returned positions from the ranker archives, not reconciled pessimistic full-catalogue ranks; original report notes two nDCG event differences with no hit change.",
+  "device_profiles": "not computed: locked manual audit incomplete",
+  "candidate_slot_profiles": "not computed: original full candidates/vectors unavailable",
+  "test_predictions_loaded": false,
+  "models_executed": false
+}

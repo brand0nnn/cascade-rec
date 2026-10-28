@@ -1,0 +1,22 @@
+{
+  "population": {
+    "events": 232904,
+    "users": 124416
+  },
+  "warm_events": 156136,
+  "warm_joint_cells": 12,
+  "warm_contribution": 0.00040657932094076134,
+  "new_contribution": 0.000794178270882752,
+  "total_change": 0.0012007575918235134,
+  "cases": 5,
+  "bootstrap_resamples": 1000,
+  "bootstrap_seed": 0,
+  "scope": "saved validation predictions and restored histories only; no models or Test predictions",
+  "limitations": [
+    "joint profiles describe target outcomes, not candidate slot amplification",
+    "profile intervals exploratory/unadjusted",
+    "MLP/DIN top-three candidates unavailable",
+    "device audit and frozen text vectors unavailable",
+    "final Test/index/cost work paused"
+  ]
+}

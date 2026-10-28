@@ -1,0 +1,17 @@
+{
+  "source_sha256": {
+    "results/explanation_graph/20261027-target-profiles-verified/target_profiles.parquet": "e1fae5094448dc2b4a2b0e9926e16b7eea35d9036e4ca12a7b9b880bc36500f8",
+    "results/ranker_comparison/20261025-rq3/validation_ranks.npz": "70999cd4dccc4aed306cd4097b39edc1f74729aa378d51a9361c38be98098df2",
+    "results/retriever/two_tower_text/seed0/val_ranks.npz": "aaec9f1aed4665ded3a5e358cf7ea6136e70797e8563da710414b24d2346a73f",
+    "results/retriever/two_tower_text/seed1/val_ranks.npz": "fa01d151faca20910cafb0b6bf9c427f75188983092f5d4b53070e6ed63c3f1a",
+    "results/retriever/two_tower_text/seed2/val_ranks.npz": "1f7cacef50189d01ce61432f0b901065f8cb67503f54342ba90c9511f321c7b8",
+    "results/retriever/two_tower_text_id/seed0/val_ranks.npz": "0c2140566adb6cebb31cdfd683c87ca1fd62ef33269c6fe03fc9249e7d7bd761",
+    "results/retriever/two_tower_text_id/seed1/val_ranks.npz": "9108cba3a541e9c6649c73ef078f0ce9684fe1d7b44a3349038d45fb83f9aae5",
+    "results/retriever/two_tower_text_id/seed2/val_ranks.npz": "9814ccc0eafbe7dc4d3c679ce9eac84e7995c2b528c3857b66c53dbc1ead67fd"
+  },
+  "script_sha256": "3c540d78f15860e902b8d754a20e58d5e4120415e7c02724a078b388f2957d87",
+  "data_structure_manifest_sha256": "0498bc2e785287b239e32a0d7dcdc70aa2e3179dfd247cfd1a1c7c5df2f8237e",
+  "stage_rank_convention": "pessimistic full-catalogue rank capped at K200 for natural members",
+  "test_predictions_loaded": false,
+  "models_executed": false
+}

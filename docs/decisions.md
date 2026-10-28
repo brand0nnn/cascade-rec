@@ -476,7 +476,8 @@ Everything below is **exploratory**: no Test data is loaded, nothing is committe
   after 3 epochs, `STOPPED.md`); opt-in `negative_sampling.exclude_later_reviews` (`later_review_cells` in
   `ranker_training.py`; flag off reproduces the old sampler exactly, tested) and `20261028-natural-laterneg-seed0`;
   K_train = 500 lists via the new opt-in `build_candidates.py --out-dir`
-  (`data/processed/candidates/two_tower_text_seed0_ktrain500/`) and MLP/DIN runs on them; DIN on natural lists
+  (`data/processed/candidates/two_tower_text_seed0_ktrain500/`; on the 28 Oct merge `--out-dir` was replaced by the
+  equivalent `--output-name two_tower_text_seed0_ktrain500 --k-train 500`) and MLP/DIN runs on them; DIN on natural lists
   (`20261028-din-natural-seed{0,1,2}`, `20261028-din-natural-ktrain500-seed{0,1,2}`); K₁ curves via
   `index_rank_eval.py` (`k1_counts`); final latency `20261028-latency-final`. Full-data correction to the 2026-10-21
   entry: later same-period reviews appear in 8.9% of all ranker-training lists and 13.1% of natural ones (3.7% was the

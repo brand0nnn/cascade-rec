@@ -1,0 +1,15 @@
+# Exploratory validation experiment. Prior validation outcomes were inspected.
+scope: validation only
+data_config: configs/data.yaml
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+ranker_config: configs/ranker/ladder_1_matching.yaml
+reference_comparison: results/ranker_comparison/20261025-rq3/comparison.json
+reference_ranker_config: results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/config.yaml
+candidate_counts: [50, 100, 200, 500]
+anchor_k1: 200
+anchor_macro_ndcg_tolerance: 0.000001
+score_batch_pairs: 8192
+development:
+  user_fraction: 0.02
+  seed: 0
+  max_epochs: 1

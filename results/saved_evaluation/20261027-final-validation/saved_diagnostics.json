@@ -1,0 +1,2484 @@
+{
+  "cohorts": {
+    "eligible_validation_cases": 232904,
+    "uniform_cases": 1000,
+    "rescored_union_cases": 5814,
+    "demotion_events_by_seed": [
+      3148,
+      3027,
+      3094
+    ]
+  },
+  "training_distribution": {
+    "n_lists": 315114,
+    "forced_positive_fraction": 0.8768921723566709,
+    "groups": {
+      "all": {
+        "n": 315114,
+        "raw_retrieval_score_auc": {
+          "macro": 0.07623060103020328,
+          "micro": 0.08036993894177501
+        },
+        "target_score_mean": -0.31870415806770325,
+        "target_score_quantiles": [
+          -0.75537109375,
+          -0.48291015625,
+          -0.31982421875,
+          -0.1534423828125,
+          0.198486328125
+        ]
+      },
+      "retrieved_positive": {
+        "n": 38793,
+        "raw_retrieval_score_auc": {
+          "macro": 0.6495800064086645,
+          "micro": 0.6528391189054338
+        },
+        "target_score_mean": -0.15383808314800262,
+        "target_score_quantiles": [
+          -0.396484375,
+          -0.260009765625,
+          -0.15625,
+          -0.046844482421875,
+          0.198486328125
+        ]
+      },
+      "forced_positive": {
+        "n": 276321,
+        "raw_retrieval_score_auc": {
+          "macro": 3.3766996178909584e-07,
+          "micro": 3.7999283442083674e-07
+        },
+        "target_score_mean": -0.3418499529361725,
+        "target_score_quantiles": [
+          -0.75537109375,
+          -0.49169921875,
+          -0.33984375,
+          -0.1973876953125,
+          0.028961181640625
+        ]
+      }
+    }
+  },
+  "uniform_by_seed": [
+    {
+      "seed": 0,
+      "correlations": {
+        "all500": {
+          "pearson": {
+            "macro": -0.31303938725936065,
+            "micro": -0.31255679709929973,
+            "median_per_query": -0.34381596744060516,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.4025604611846572,
+            "micro": -0.4019018312601231,
+            "median_per_query": -0.4196382858081339,
+            "valid_queries": 1000
+          }
+        },
+        "original200": {
+          "pearson": {
+            "macro": -0.015232373301761498,
+            "micro": -0.014933196881436742,
+            "median_per_query": -0.043248455971479416,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.08408649702603131,
+            "micro": -0.08362949344339297,
+            "median_per_query": -0.10027970476249332,
+            "valid_queries": 1000
+          }
+        },
+        "added300": {
+          "pearson": {
+            "macro": -0.29456295975707886,
+            "micro": -0.2942346907260362,
+            "median_per_query": -0.28795598447322845,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.2962223981317362,
+            "micro": -0.2958052146988232,
+            "median_per_query": -0.28567142661125855,
+            "valid_queries": 1000
+          }
+        }
+      },
+      "added_candidates_top10_fraction": {
+        "macro": 0.9470321931589537,
+        "micro": 0.947
+      }
+    },
+    {
+      "seed": 1,
+      "correlations": {
+        "all500": {
+          "pearson": {
+            "macro": -0.2931993863943208,
+            "micro": -0.2933251378601999,
+            "median_per_query": -0.3182269483804703,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.3719822841959398,
+            "micro": -0.37196648702676655,
+            "median_per_query": -0.38513392263678586,
+            "valid_queries": 1000
+          }
+        },
+        "original200": {
+          "pearson": {
+            "macro": -0.007014702434455498,
+            "micro": -0.007360908656351967,
+            "median_per_query": -0.0202754195779562,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.07585051776764028,
+            "micro": -0.07618760179569893,
+            "median_per_query": -0.09192917660251611,
+            "valid_queries": 1000
+          }
+        },
+        "added300": {
+          "pearson": {
+            "macro": -0.2662812474609345,
+            "micro": -0.26605457928741816,
+            "median_per_query": -0.26097214221954346,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.26409239971695436,
+            "micro": -0.2637631850455305,
+            "median_per_query": -0.2540885735904753,
+            "valid_queries": 1000
+          }
+        }
+      },
+      "added_candidates_top10_fraction": {
+        "macro": 0.9556841046277665,
+        "micro": 0.9556999999999999
+      }
+    },
+    {
+      "seed": 2,
+      "correlations": {
+        "all500": {
+          "pearson": {
+            "macro": -0.3096587942357801,
+            "micro": -0.3100209889683174,
+            "median_per_query": -0.3333233445882797,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.39937518945346756,
+            "micro": -0.39960997848173135,
+            "median_per_query": -0.41085413969122553,
+            "valid_queries": 1000
+          }
+        },
+        "original200": {
+          "pearson": {
+            "macro": -0.00034576959321715715,
+            "micro": -0.0010158053907216526,
+            "median_per_query": 0.0024643265642225742,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.07505780040001296,
+            "micro": -0.07563609325614314,
+            "median_per_query": -0.06521822853794082,
+            "valid_queries": 1000
+          }
+        },
+        "added300": {
+          "pearson": {
+            "macro": -0.29206293990154625,
+            "micro": -0.2919805825146032,
+            "median_per_query": -0.2866681218147278,
+            "valid_queries": 1000
+          },
+          "spearman": {
+            "macro": -0.29383156503933444,
+            "micro": -0.2936092408016046,
+            "median_per_query": -0.28065637725342696,
+            "valid_queries": 1000
+          }
+        }
+      },
+      "added_candidates_top10_fraction": {
+        "macro": 0.951559356136821,
+        "micro": 0.9517
+      }
+    }
+  ],
+  "rank_bands": [
+    [
+      1,
+      10
+    ],
+    [
+      11,
+      50
+    ],
+    [
+      51,
+      100
+    ],
+    [
+      101,
+      200
+    ],
+    [
+      201,
+      300
+    ],
+    [
+      301,
+      400
+    ],
+    [
+      401,
+      500
+    ]
+  ],
+  "score_probe": {
+    "config": {
+      "candidate_retrieval_rank": 100,
+      "standardized_score_grid": [
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "by_seed": [
+      {
+        "seed": 0,
+        "mean_logits": [
+          20.270374298095703,
+          3.8060989379882812,
+          -3.405447006225586,
+          -5.833785533905029,
+          -6.1192097663879395,
+          -5.6417059898376465,
+          -5.037436485290527
+        ],
+        "user_macro_logits": [
+          20.285093307495117,
+          3.813411235809326,
+          -3.4017200469970703,
+          -5.8342976570129395,
+          -6.118428707122803,
+          -5.638118743896484,
+          -5.035224437713623
+        ],
+        "high_minus_low_logit": {
+          "macro": -25.3203182220459,
+          "micro": -25.307809829711914
+        },
+        "fraction_queries_low_score_gets_higher_logit": 0.999
+      },
+      {
+        "seed": 1,
+        "mean_logits": [
+          10.910209655761719,
+          1.110889196395874,
+          -3.7696597576141357,
+          -5.860991954803467,
+          -6.035431385040283,
+          -5.555311679840088,
+          -5.0211896896362305
+        ],
+        "user_macro_logits": [
+          10.917866706848145,
+          1.1150116920471191,
+          -3.7676050662994385,
+          -5.859284400939941,
+          -6.033486366271973,
+          -5.5517191886901855,
+          -5.017828464508057
+        ],
+        "high_minus_low_logit": {
+          "macro": -15.93569564819336,
+          "micro": -15.93139934539795
+        },
+        "fraction_queries_low_score_gets_higher_logit": 0.997
+      },
+      {
+        "seed": 2,
+        "mean_logits": [
+          17.74552345275879,
+          3.468549966812134,
+          -3.2619478702545166,
+          -5.819738388061523,
+          -5.955371856689453,
+          -5.4519243240356445,
+          -4.80262565612793
+        ],
+        "user_macro_logits": [
+          17.754148483276367,
+          3.4731178283691406,
+          -3.26123309135437,
+          -5.817264556884766,
+          -5.9526214599609375,
+          -5.448233127593994,
+          -4.800145626068115
+        ],
+        "high_minus_low_logit": {
+          "macro": -22.554290771484375,
+          "micro": -22.548145294189453
+        },
+        "fraction_queries_low_score_gets_higher_logit": 1.0
+      }
+    ]
+  },
+  "rank_band_scores": [
+    {
+      "seed": 0,
+      "from_rank": 1,
+      "to_rank": 10,
+      "mean_logit": -6.120921611785889,
+      "user_macro_logit": -6.122463226318359,
+      "mean_raw_retrieval_score": -0.08931473642587662
+    },
+    {
+      "seed": 0,
+      "from_rank": 11,
+      "to_rank": 50,
+      "mean_logit": -6.584346771240234,
+      "user_macro_logit": -6.587610721588135,
+      "mean_raw_retrieval_score": -0.1332397758960724
+    },
+    {
+      "seed": 0,
+      "from_rank": 51,
+      "to_rank": 100,
+      "mean_logit": -6.582896709442139,
+      "user_macro_logit": -6.585246562957764,
+      "mean_raw_retrieval_score": -0.1590569168329239
+    },
+    {
+      "seed": 0,
+      "from_rank": 101,
+      "to_rank": 200,
+      "mean_logit": -6.281073093414307,
+      "user_macro_logit": -6.28294563293457,
+      "mean_raw_retrieval_score": -0.17903785407543182
+    },
+    {
+      "seed": 0,
+      "from_rank": 201,
+      "to_rank": 300,
+      "mean_logit": -5.7373223304748535,
+      "user_macro_logit": -5.738090515136719,
+      "mean_raw_retrieval_score": -0.19510670006275177
+    },
+    {
+      "seed": 0,
+      "from_rank": 301,
+      "to_rank": 400,
+      "mean_logit": -5.094974994659424,
+      "user_macro_logit": -5.094323635101318,
+      "mean_raw_retrieval_score": -0.2059967964887619
+    },
+    {
+      "seed": 0,
+      "from_rank": 401,
+      "to_rank": 500,
+      "mean_logit": -4.475854396820068,
+      "user_macro_logit": -4.474418640136719,
+      "mean_raw_retrieval_score": -0.21421411633491516
+    },
+    {
+      "seed": 1,
+      "from_rank": 1,
+      "to_rank": 10,
+      "mean_logit": -5.994398593902588,
+      "user_macro_logit": -5.994056224822998,
+      "mean_raw_retrieval_score": -0.08931473642587662
+    },
+    {
+      "seed": 1,
+      "from_rank": 11,
+      "to_rank": 50,
+      "mean_logit": -6.527038097381592,
+      "user_macro_logit": -6.528044700622559,
+      "mean_raw_retrieval_score": -0.1332397758960724
+    },
+    {
+      "seed": 1,
+      "from_rank": 51,
+      "to_rank": 100,
+      "mean_logit": -6.530035018920898,
+      "user_macro_logit": -6.530575275421143,
+      "mean_raw_retrieval_score": -0.1590569168329239
+    },
+    {
+      "seed": 1,
+      "from_rank": 101,
+      "to_rank": 200,
+      "mean_logit": -6.236434459686279,
+      "user_macro_logit": -6.237886905670166,
+      "mean_raw_retrieval_score": -0.17903785407543182
+    },
+    {
+      "seed": 1,
+      "from_rank": 201,
+      "to_rank": 300,
+      "mean_logit": -5.744478702545166,
+      "user_macro_logit": -5.745973110198975,
+      "mean_raw_retrieval_score": -0.19510670006275177
+    },
+    {
+      "seed": 1,
+      "from_rank": 301,
+      "to_rank": 400,
+      "mean_logit": -5.173304557800293,
+      "user_macro_logit": -5.174058437347412,
+      "mean_raw_retrieval_score": -0.2059967964887619
+    },
+    {
+      "seed": 1,
+      "from_rank": 401,
+      "to_rank": 500,
+      "mean_logit": -4.643336296081543,
+      "user_macro_logit": -4.643818378448486,
+      "mean_raw_retrieval_score": -0.21421411633491516
+    },
+    {
+      "seed": 2,
+      "from_rank": 1,
+      "to_rank": 10,
+      "mean_logit": -5.9563703536987305,
+      "user_macro_logit": -5.955057621002197,
+      "mean_raw_retrieval_score": -0.08931473642587662
+    },
+    {
+      "seed": 2,
+      "from_rank": 11,
+      "to_rank": 50,
+      "mean_logit": -6.516152381896973,
+      "user_macro_logit": -6.516749382019043,
+      "mean_raw_retrieval_score": -0.1332397758960724
+    },
+    {
+      "seed": 2,
+      "from_rank": 51,
+      "to_rank": 100,
+      "mean_logit": -6.540024280548096,
+      "user_macro_logit": -6.540835857391357,
+      "mean_raw_retrieval_score": -0.1590569168329239
+    },
+    {
+      "seed": 2,
+      "from_rank": 101,
+      "to_rank": 200,
+      "mean_logit": -6.214235305786133,
+      "user_macro_logit": -6.215841293334961,
+      "mean_raw_retrieval_score": -0.17903785407543182
+    },
+    {
+      "seed": 2,
+      "from_rank": 201,
+      "to_rank": 300,
+      "mean_logit": -5.636879920959473,
+      "user_macro_logit": -5.6386895179748535,
+      "mean_raw_retrieval_score": -0.19510670006275177
+    },
+    {
+      "seed": 2,
+      "from_rank": 301,
+      "to_rank": 400,
+      "mean_logit": -4.961966037750244,
+      "user_macro_logit": -4.96333122253418,
+      "mean_raw_retrieval_score": -0.2059967964887619
+    },
+    {
+      "seed": 2,
+      "from_rank": 401,
+      "to_rank": 500,
+      "mean_logit": -4.311698913574219,
+      "user_macro_logit": -4.313009738922119,
+      "mean_raw_retrieval_score": -0.21421411633491516
+    }
+  ],
+  "overtaker_profiles": [
+    {
+      "axis": "item_type",
+      "group": "new-in-period",
+      "candidate_occurrences": 248305,
+      "overtaker_occurrences": 88502,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 24973,
+      "available_share": 0.08929586075448628,
+      "overtaker_share": 0.15223479062598907,
+      "added_top10_share": 0.2786885245901639,
+      "overtaker_share_ratio": 1.7048359166899087
+    },
+    {
+      "axis": "item_type",
+      "group": "warm-head",
+      "candidate_occurrences": 1692509,
+      "overtaker_occurrences": 291242,
+      "tied_overtaker_occurrences": 1,
+      "added_top10_occurrences": 33023,
+      "available_share": 0.6086629266012156,
+      "overtaker_share": 0.5009735925910636,
+      "added_top10_share": 0.3685232510127331,
+      "overtaker_share_ratio": 0.8230722961697517
+    },
+    {
+      "axis": "item_type",
+      "group": "warm-tail",
+      "candidate_occurrences": 839886,
+      "overtaker_occurrences": 201608,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 31613,
+      "available_share": 0.3020412126442982,
+      "overtaker_share": 0.34679161678294734,
+      "added_top10_share": 0.35278822439710295,
+      "overtaker_share_ratio": 1.1481599274048404
+    },
+    {
+      "axis": "leaf_category",
+      "group": "(unknown)",
+      "candidate_occurrences": 43899,
+      "overtaker_occurrences": 9856,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 1437,
+      "available_share": 0.01578703204229151,
+      "overtaker_share": 0.016953584059227457,
+      "added_top10_share": 0.016036335635929426,
+      "overtaker_share_ratio": 1.0738930543632836
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories",
+      "candidate_occurrences": 4952,
+      "overtaker_occurrences": 862,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 133,
+      "available_share": 0.0017808465494299995,
+      "overtaker_share": 0.0014827505538812973,
+      "added_top10_share": 0.0014842259148076643,
+      "overtaker_share_ratio": 0.8326099485415436
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Adhesive Card Holders",
+      "candidate_occurrences": 1185,
+      "overtaker_occurrences": 282,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 10,
+      "available_share": 0.0004261516884237782,
+      "overtaker_share": 0.00048507616727903234,
+      "added_top10_share": 0.00011159593344418529,
+      "overtaker_share_ratio": 1.1382711378504684
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Automobile Accessories",
+      "candidate_occurrences": 3,
+      "overtaker_occurrences": 0,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.0788650339842485e-06,
+      "overtaker_share": 0.0,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.0
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+      "candidate_occurrences": 122293,
+      "overtaker_occurrences": 22873,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 4331,
+      "available_share": 0.0439792138670119,
+      "overtaker_share": 0.03934449352543726,
+      "added_top10_share": 0.04833219877467665,
+      "overtaker_share_ratio": 0.894615661944538
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Automobile Accessories > Kits",
+      "candidate_occurrences": 542,
+      "overtaker_occurrences": 225,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 32,
+      "available_share": 0.00019491494947315423,
+      "overtaker_share": 0.00038702885687156836,
+      "added_top10_share": 0.00035710698702139294,
+      "overtaker_share_ratio": 1.9856294138427495
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Automobile Accessories > Pads & Mats",
+      "candidate_occurrences": 2946,
+      "overtaker_occurrences": 312,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 5,
+      "available_share": 0.0010594454633725322,
+      "overtaker_share": 0.0005366800148619081,
+      "added_top10_share": 5.5797966722092644e-05,
+      "overtaker_share_ratio": 0.506566910158353
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Automobile Accessories > Speakerphones",
+      "candidate_occurrences": 1165,
+      "overtaker_occurrences": 144,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 9,
+      "available_share": 0.0004189592548638832,
+      "overtaker_share": 0.00024769846839780375,
+      "added_top10_share": 0.00010043634009976676,
+      "overtaker_share_ratio": 0.5912232884753416
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Cables & Adapters",
+      "candidate_occurrences": 9444,
+      "overtaker_occurrences": 1274,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 60,
+      "available_share": 0.0033962671269824143,
+      "overtaker_share": 0.002191443394019458,
+      "added_top10_share": 0.0006695756006651118,
+      "overtaker_share_ratio": 0.6452505978134168
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+      "candidate_occurrences": 16153,
+      "overtaker_occurrences": 3665,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 525,
+      "available_share": 0.005808968964649189,
+      "overtaker_share": 0.006304270046374657,
+      "added_top10_share": 0.005858786505819728,
+      "overtaker_share_ratio": 1.0852648868912282
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters",
+      "candidate_occurrences": 6021,
+      "overtaker_occurrences": 1620,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 261,
+      "available_share": 0.002165282123206387,
+      "overtaker_share": 0.002786607769475292,
+      "added_top10_share": 0.0029126538628932363,
+      "overtaker_share_ratio": 1.2869490490915036
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+      "candidate_occurrences": 95412,
+      "overtaker_occurrences": 20414,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 3532,
+      "available_share": 0.03431222354083504,
+      "overtaker_share": 0.035114698151894205,
+      "added_top10_share": 0.03941568369248625,
+      "overtaker_share_ratio": 1.023387426644156
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations",
+      "candidate_occurrences": 46100,
+      "overtaker_occurrences": 12884,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 4245,
+      "available_share": 0.016578559355557954,
+      "overtaker_share": 0.022162132408592383,
+      "added_top10_share": 0.04737247374705666,
+      "overtaker_share_ratio": 1.336794828385528
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+      "candidate_occurrences": 52350,
+      "overtaker_occurrences": 11560,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 1451,
+      "available_share": 0.018826194843025137,
+      "overtaker_share": 0.0198846826019348,
+      "added_top10_share": 0.016192569942751287,
+      "overtaker_share_ratio": 1.0562242007870124
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Solar Chargers",
+      "candidate_occurrences": 2618,
+      "overtaker_occurrences": 723,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 62,
+      "available_share": 0.0009414895529902543,
+      "overtaker_share": 0.0012436527267473063,
+      "added_top10_share": 0.0006918947873539488,
+      "overtaker_share_ratio": 1.3209416108732752
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+      "candidate_occurrences": 87888,
+      "overtaker_occurrences": 24400,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 4337,
+      "available_share": 0.03160643003560255,
+      "overtaker_share": 0.04197112936740564,
+      "added_top10_share": 0.04839915633474316,
+      "overtaker_share_ratio": 1.3279300863820414
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+      "candidate_occurrences": 109109,
+      "overtaker_occurrences": 20331,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 3834,
+      "available_share": 0.03923796166432913,
+      "overtaker_share": 0.03497192750691491,
+      "added_top10_share": 0.04278588088250064,
+      "overtaker_share_ratio": 0.8912778855866912
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > D\u00e9cor",
+      "candidate_occurrences": 54,
+      "overtaker_occurrences": 10,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 3,
+      "available_share": 1.9419570611716475e-05,
+      "overtaker_share": 1.720128252762526e-05,
+      "added_top10_share": 3.3478780033255585e-05,
+      "overtaker_share_ratio": 0.8857704874919918
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > D\u00e9cor > Phone Charms",
+      "candidate_occurrences": 53,
+      "overtaker_occurrences": 8,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 4,
+      "available_share": 1.9059948933721726e-05,
+      "overtaker_share": 1.3761026022100208e-05,
+      "added_top10_share": 4.463837337767412e-05,
+      "overtaker_share_ratio": 0.7219865105595104
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Gaming Accessories",
+      "candidate_occurrences": 36,
+      "overtaker_occurrences": 22,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 2,
+      "available_share": 1.2946380407810982e-05,
+      "overtaker_share": 3.7842821560775575e-05,
+      "added_top10_share": 2.231918668883706e-05,
+      "overtaker_share_ratio": 2.9230426087235735
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Gaming Accessories > Controllers",
+      "candidate_occurrences": 88,
+      "overtaker_occurrences": 71,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 30,
+      "available_share": 3.164670766353796e-05,
+      "overtaker_share": 0.00012212910594613935,
+      "added_top10_share": 0.0003347878003325559,
+      "overtaker_share_ratio": 3.8591409648230646
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Grips",
+      "candidate_occurrences": 25694,
+      "overtaker_occurrences": 6581,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 664,
+      "available_share": 0.009240119394397095,
+      "overtaker_share": 0.011320164031430184,
+      "added_top10_share": 0.0074099699806939034,
+      "overtaker_share_ratio": 1.2251101472016
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Lanyards & Wrist Straps",
+      "candidate_occurrences": 1476,
+      "overtaker_occurrences": 475,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 22,
+      "available_share": 0.0005308015967202503,
+      "overtaker_share": 0.0008170609200621998,
+      "added_top10_share": 0.0002455110535772076,
+      "overtaker_share_ratio": 1.5392962739952298
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs",
+      "candidate_occurrences": 516,
+      "overtaker_occurrences": 166,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 26,
+      "available_share": 0.00018556478584529076,
+      "overtaker_share": 0.00028554128995857933,
+      "added_top10_share": 0.0002901494269548818,
+      "overtaker_share_ratio": 1.5387687305965534
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Anti-Dust Plugs",
+      "candidate_occurrences": 123,
+      "overtaker_occurrences": 72,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 9,
+      "available_share": 4.423346639335419e-05,
+      "overtaker_share": 0.00012384923419890188,
+      "added_top10_share": 0.00010043634009976676,
+      "overtaker_share_ratio": 2.799898906803955
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Home Button Stickers",
+      "candidate_occurrences": 2,
+      "overtaker_occurrences": 2,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 7.192433559894991e-07,
+      "overtaker_share": 3.440256505525052e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 4.783160632456756
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Lens Protectors",
+      "candidate_occurrences": 4921,
+      "overtaker_occurrences": 2405,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 280,
+      "available_share": 0.0017696982774121624,
+      "overtaker_share": 0.004136908447893875,
+      "added_top10_share": 0.003124686136437188,
+      "overtaker_share_ratio": 2.3376348955615724
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Repair Kits",
+      "candidate_occurrences": 261,
+      "overtaker_occurrences": 87,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 5,
+      "available_share": 9.386125795662962e-05,
+      "overtaker_share": 0.00014965115799033977,
+      "added_top10_share": 5.5797966722092644e-05,
+      "overtaker_share_ratio": 1.5943868774855856
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts",
+      "candidate_occurrences": 1152,
+      "overtaker_occurrences": 142,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 10,
+      "available_share": 0.00041428417304995144,
+      "overtaker_share": 0.0002442582118922787,
+      "added_top10_share": 0.00011159593344418529,
+      "overtaker_share_ratio": 0.5895909807368571
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Back Covers",
+      "candidate_occurrences": 279,
+      "overtaker_occurrences": 102,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 9,
+      "available_share": 0.00010033444816053512,
+      "overtaker_share": 0.00017545308178177764,
+      "added_top10_share": 0.00010043634009976676,
+      "overtaker_share_ratio": 1.7486823817583836
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+      "candidate_occurrences": 1260,
+      "overtaker_occurrences": 301,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 54,
+      "available_share": 0.0004531233142733844,
+      "overtaker_share": 0.0005177586040815203,
+      "added_top10_share": 0.0006026180405986006,
+      "overtaker_share_ratio": 1.1426439288646695
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Screens",
+      "candidate_occurrences": 1086,
+      "overtaker_occurrences": 245,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 54,
+      "available_share": 0.000390549142302298,
+      "overtaker_share": 0.00042143142192681884,
+      "added_top10_share": 0.0006026180405986006,
+      "overtaker_share_ratio": 1.0790739916684209
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > SIM Card Tools & Accessories",
+      "candidate_occurrences": 423,
+      "overtaker_occurrences": 85,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 13,
+      "available_share": 0.00015211996979177904,
+      "overtaker_share": 0.00014621090148481472,
+      "added_top10_share": 0.0001450747134774409,
+      "overtaker_share_ratio": 0.961155209831736
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+      "candidate_occurrences": 572530,
+      "overtaker_occurrences": 88558,
+      "tied_overtaker_occurrences": 1,
+      "added_top10_occurrences": 10561,
+      "available_share": 0.20589419930233394,
+      "overtaker_share": 0.15233111780814376,
+      "added_top10_share": 0.11785646531040408,
+      "overtaker_share_ratio": 0.7398514301243697
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Mounts > Bedstand & Desk Mounts",
+      "candidate_occurrences": 2287,
+      "overtaker_occurrences": 510,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 49,
+      "available_share": 0.0008224547775739922,
+      "overtaker_share": 0.0008772654089088882,
+      "added_top10_share": 0.0005468200738765079,
+      "overtaker_share_ratio": 1.066642729581524
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Mounts > Handlebar Mounts",
+      "candidate_occurrences": 1279,
+      "overtaker_occurrences": 322,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 7,
+      "available_share": 0.00045995612615528465,
+      "overtaker_share": 0.0005538812973895333,
+      "added_top10_share": 7.811715341092971e-05,
+      "overtaker_share_ratio": 1.204204631470739
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights",
+      "candidate_occurrences": 412,
+      "overtaker_occurrences": 147,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 56,
+      "available_share": 0.0001481641313338368,
+      "overtaker_share": 0.0002528588531560913,
+      "added_top10_share": 0.0006249372272874377,
+      "overtaker_share_ratio": 1.7066131382794736
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Flashes & Selfie Lights > Selfie Lights",
+      "candidate_occurrences": 6122,
+      "overtaker_occurrences": 1693,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 158,
+      "available_share": 0.0022016039126838568,
+      "overtaker_share": 0.0029121771319269565,
+      "added_top10_share": 0.0017632157484181277,
+      "overtaker_share_ratio": 1.3227525238074629
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Handheld Gimbals & Stabilizers",
+      "candidate_occurrences": 68,
+      "overtaker_occurrences": 68,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 64,
+      "available_share": 2.4454274103642968e-05,
+      "overtaker_share": 0.00011696872118785177,
+      "added_top10_share": 0.0007142139740427859,
+      "overtaker_share_ratio": 4.783160632456756
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Lens Attachments",
+      "candidate_occurrences": 1586,
+      "overtaker_occurrences": 567,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 31,
+      "available_share": 0.0005703599812996727,
+      "overtaker_share": 0.0009753127193163522,
+      "added_top10_share": 0.0003459473936769744,
+      "overtaker_share_ratio": 1.7099950054243258
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Photo & Video Kits",
+      "candidate_occurrences": 2384,
+      "overtaker_occurrences": 595,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 18,
+      "available_share": 0.0008573380803394828,
+      "overtaker_share": 0.0010234763103937029,
+      "added_top10_share": 0.00020087268019953352,
+      "overtaker_share_ratio": 1.193783798788494
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Selfie Sticks",
+      "candidate_occurrences": 4687,
+      "overtaker_occurrences": 903,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 23,
+      "available_share": 0.001685546804761391,
+      "overtaker_share": 0.001553275812244561,
+      "added_top10_share": 0.00025667064692162615,
+      "overtaker_share_ratio": 0.9215263603815769
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+      "candidate_occurrences": 21563,
+      "overtaker_occurrences": 3709,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 412,
+      "available_share": 0.007754522242600784,
+      "overtaker_share": 0.006379955689496209,
+      "added_top10_share": 0.004597752457900434,
+      "overtaker_share_ratio": 0.8227400076882673
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Screen Expanders & Magnifiers",
+      "candidate_occurrences": 492,
+      "overtaker_occurrences": 137,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 43,
+      "available_share": 0.00017693386557341676,
+      "overtaker_share": 0.00023565757062846607,
+      "added_top10_share": 0.0004798625138099968,
+      "overtaker_share_ratio": 1.3318963549727147
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Signal Boosters",
+      "candidate_occurrences": 89,
+      "overtaker_occurrences": 65,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 17,
+      "available_share": 3.200632934153271e-05,
+      "overtaker_share": 0.00011180833642956419,
+      "added_top10_share": 0.000189713086855115,
+      "overtaker_share_ratio": 3.493319563030215
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+      "candidate_occurrences": 58459,
+      "overtaker_occurrences": 6203,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 610,
+      "available_share": 0.021023123673895062,
+      "overtaker_share": 0.010669955551885948,
+      "added_top10_share": 0.0068073519400953025,
+      "overtaker_share_ratio": 0.5075342616727836
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Smartwatch Accessories",
+      "candidate_occurrences": 2717,
+      "overtaker_occurrences": 1483,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 186,
+      "available_share": 0.0009770920991117344,
+      "overtaker_share": 0.002550950198846826,
+      "added_top10_share": 0.0020756843620618466,
+      "overtaker_share_ratio": 2.610757165231273
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+      "candidate_occurrences": 171523,
+      "overtaker_occurrences": 56398,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 7585,
+      "available_share": 0.06168338907469342,
+      "overtaker_share": 0.09701179319930094,
+      "added_top10_share": 0.08464551551741455,
+      "overtaker_share_ratio": 1.5727377281722923
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+      "candidate_occurrences": 27410,
+      "overtaker_occurrences": 8378,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 1897,
+      "available_share": 0.009857230193836084,
+      "overtaker_share": 0.014411234501644443,
+      "added_top10_share": 0.02116974857436195,
+      "overtaker_share_ratio": 1.4619963436235937
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+      "candidate_occurrences": 87530,
+      "overtaker_occurrences": 23506,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 2799,
+      "available_share": 0.031477685474880425,
+      "overtaker_share": 0.040433334709435935,
+      "added_top10_share": 0.031235701771027465,
+      "overtaker_share_ratio": 1.2845078696050327
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases with Band",
+      "candidate_occurrences": 8589,
+      "overtaker_occurrences": 1318,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 60,
+      "available_share": 0.0030887905922969035,
+      "overtaker_share": 0.002267129037141009,
+      "added_top10_share": 0.0006695756006651118,
+      "overtaker_share_ratio": 0.7339859952937483
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+      "candidate_occurrences": 135973,
+      "overtaker_occurrences": 31208,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 3203,
+      "available_share": 0.048898838421980076,
+      "overtaker_share": 0.05368176251221291,
+      "added_top10_share": 0.03574417748217255,
+      "overtaker_share_ratio": 1.097812632049822
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Stands",
+      "candidate_occurrences": 60785,
+      "overtaker_occurrences": 11334,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 985,
+      "available_share": 0.02185960369691085,
+      "overtaker_share": 0.01949593361681047,
+      "added_top10_share": 0.01099219944425225,
+      "overtaker_share_ratio": 0.8918704056636485
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Stylus Pens",
+      "candidate_occurrences": 37627,
+      "overtaker_occurrences": 9125,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 990,
+      "available_share": 0.01353148487790844,
+      "overtaker_share": 0.01569617030645805,
+      "added_top10_share": 0.011047997410974343,
+      "overtaker_share_ratio": 1.159973975367898
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > UV Phone Sterilizer Boxes",
+      "candidate_occurrences": 87,
+      "overtaker_occurrences": 14,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 5,
+      "available_share": 3.128708598554321e-05,
+      "overtaker_share": 2.4081795538675363e-05,
+      "added_top10_share": 5.5797966722092644e-05,
+      "overtaker_share_ratio": 0.7697040098206274
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Accessories > Virtual Reality (VR) Headsets",
+      "candidate_occurrences": 948,
+      "overtaker_occurrences": 121,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 2,
+      "available_share": 0.00034092135073902257,
+      "overtaker_share": 0.00020813551858426564,
+      "added_top10_share": 2.231918668883706e-05,
+      "overtaker_share_ratio": 0.6105088992903664
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Android 101",
+      "candidate_occurrences": 583,
+      "overtaker_occurrences": 58,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 4,
+      "available_share": 0.00020965943827093897,
+      "overtaker_share": 9.97674386602265e-05,
+      "added_top10_share": 4.463837337767412e-05,
+      "overtaker_share_ratio": 0.4758547455960409
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > BlackBerry",
+      "candidate_occurrences": 6,
+      "overtaker_occurrences": 0,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 2.157730067968497e-06,
+      "overtaker_share": 0.0,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.0
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases Under $10",
+      "candidate_occurrences": 11,
+      "overtaker_occurrences": 2,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 3.955838457942245e-06,
+      "overtaker_share": 3.440256505525052e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.869665569537592
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves",
+      "candidate_occurrences": 3796,
+      "overtaker_occurrences": 912,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 91,
+      "available_share": 0.0013651238896680692,
+      "overtaker_share": 0.0015687569665194237,
+      "added_top10_share": 0.0010155229943420861,
+      "overtaker_share_ratio": 1.1491682025291257
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Armbands",
+      "candidate_occurrences": 3962,
+      "overtaker_occurrences": 819,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 38,
+      "available_share": 0.0014248210882151977,
+      "overtaker_share": 0.0014087850390125088,
+      "added_top10_share": 0.0004240645470879041,
+      "overtaker_share_ratio": 0.9887452190767498
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+      "candidate_occurrences": 739272,
+      "overtaker_occurrences": 149090,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 28142,
+      "available_share": 0.2658582371345345,
+      "overtaker_share": 0.256453921204365,
+      "added_top10_share": 0.31405327589862625,
+      "overtaker_share_ratio": 0.9646265768120228
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Battery Charger Cases",
+      "candidate_occurrences": 5669,
+      "overtaker_occurrences": 2134,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 509,
+      "available_share": 0.002038695292552235,
+      "overtaker_share": 0.0036707536913952303,
+      "added_top10_share": 0.005680233012309031,
+      "overtaker_share_ratio": 1.8005406226252807
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Bumpers",
+      "candidate_occurrences": 5941,
+      "overtaker_occurrences": 924,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 171,
+      "available_share": 0.002136512388966807,
+      "overtaker_share": 0.001589398505552574,
+      "added_top10_share": 0.0019082904618955684,
+      "overtaker_share_ratio": 0.7439219701043668
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Case & Cover Bundles",
+      "candidate_occurrences": 13682,
+      "overtaker_occurrences": 1701,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 139,
+      "available_share": 0.004920343798324163,
+      "overtaker_share": 0.0029259381579490565,
+      "added_top10_share": 0.0015511834748741756,
+      "overtaker_share_ratio": 0.5946613240614634
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Crossbody & Lanyard Cases",
+      "candidate_occurrences": 129,
+      "overtaker_occurrences": 82,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 23,
+      "available_share": 4.639119646132269e-05,
+      "overtaker_share": 0.00014105051672652714,
+      "added_top10_share": 0.00025667064692162615,
+      "overtaker_share_ratio": 3.040458696600419
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Dry Bags",
+      "candidate_occurrences": 6705,
+      "overtaker_occurrences": 806,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 127,
+      "available_share": 0.0024112633509547955,
+      "overtaker_share": 0.001386423371726596,
+      "added_top10_share": 0.0014172683547411533,
+      "overtaker_share_ratio": 0.574977996981379
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+      "candidate_occurrences": 41935,
+      "overtaker_occurrences": 11919,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 1484,
+      "available_share": 0.015080735066709821,
+      "overtaker_share": 0.020502208644676546,
+      "added_top10_share": 0.016560836523117097,
+      "overtaker_share_ratio": 1.3594966395195438
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+      "candidate_occurrences": 51188,
+      "overtaker_occurrences": 10134,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 988,
+      "available_share": 0.01840831445319524,
+      "overtaker_share": 0.017431779713495438,
+      "added_top10_share": 0.011025678224285507,
+      "overtaker_share_ratio": 0.9469514309861053
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Sleeves",
+      "candidate_occurrences": 1226,
+      "overtaker_occurrences": 679,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 206,
+      "available_share": 0.0004408961772215629,
+      "overtaker_share": 0.0011679670836257552,
+      "added_top10_share": 0.002298876228950217,
+      "overtaker_share_ratio": 2.649075097420993
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cell Phone Battery Chargers",
+      "candidate_occurrences": 576,
+      "overtaker_occurrences": 199,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 4,
+      "available_share": 0.00020714208652497572,
+      "overtaker_share": 0.0003423055222997427,
+      "added_top10_share": 4.463837337767412e-05,
+      "overtaker_share_ratio": 1.6525155657272474
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Cell Phones",
+      "candidate_occurrences": 38819,
+      "overtaker_occurrences": 9879,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 2149,
+      "available_share": 0.013960153918078182,
+      "overtaker_share": 0.016993147009040994,
+      "added_top10_share": 0.02398196609715542,
+      "overtaker_share_ratio": 1.21726071995776
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Deal of the Day: Save 50% or more on Samsung Galaxy S7 cases",
+      "candidate_occurrences": 4,
+      "overtaker_occurrences": 3,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.4384867119789982e-06,
+      "overtaker_share": 5.160384758287578e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 3.5873704743425665
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Deals in Unlocked Cell Phones",
+      "candidate_occurrences": 2,
+      "overtaker_occurrences": 0,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 7.192433559894991e-07,
+      "overtaker_share": 0.0,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.0
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Huawei Brand Store",
+      "candidate_occurrences": 8,
+      "overtaker_occurrences": 3,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 2.8769734239579964e-06,
+      "overtaker_share": 5.160384758287578e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 1.7936852371712833
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Nokia",
+      "candidate_occurrences": 905,
+      "overtaker_occurrences": 193,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 72,
+      "available_share": 0.0003254576185852483,
+      "overtaker_share": 0.0003319847527831675,
+      "added_top10_share": 0.0008034907207981341,
+      "overtaker_share_ratio": 1.0200552508996177
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > SIM Cards & Prepaid Minutes",
+      "candidate_occurrences": 439,
+      "overtaker_occurrences": 186,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 6,
+      "available_share": 0.00015787391663969505,
+      "overtaker_share": 0.0003199438550138298,
+      "added_top10_share": 6.695756006651117e-05,
+      "overtaker_share_ratio": 2.02657830896801
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > SIM Cards & Prepaid Minutes > Cell Phone Minutes",
+      "candidate_occurrences": 68,
+      "overtaker_occurrences": 25,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 6,
+      "available_share": 2.4454274103642968e-05,
+      "overtaker_share": 4.300320631906315e-05,
+      "added_top10_share": 6.695756006651117e-05,
+      "overtaker_share_ratio": 1.758514938403219
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > SIM Cards & Prepaid Minutes > SIM Cards",
+      "candidate_occurrences": 2190,
+      "overtaker_occurrences": 362,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 51,
+      "available_share": 0.0007875714748085015,
+      "overtaker_share": 0.0006226864275000344,
+      "added_top10_share": 0.000569139260565345,
+      "overtaker_share_ratio": 0.7906411639038108
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Samsung Galaxy S6 Cases",
+      "candidate_occurrences": 2,
+      "overtaker_occurrences": 1,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 7.192433559894991e-07,
+      "overtaker_share": 1.720128252762526e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 2.391580316228378
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Samsung Galaxy S8 Heavy Duty Cases",
+      "candidate_occurrences": 2,
+      "overtaker_occurrences": 2,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 7.192433559894991e-07,
+      "overtaker_share": 3.440256505525052e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 4.783160632456756
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Samsung Galaxy S8 Wallet Cases",
+      "candidate_occurrences": 22,
+      "overtaker_occurrences": 4,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 7.91167691588449e-06,
+      "overtaker_share": 6.880513011050104e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.869665569537592
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Save on Samsung Galaxy S8/8 Plus Cases",
+      "candidate_occurrences": 37,
+      "overtaker_occurrences": 4,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.3306002085805732e-05,
+      "overtaker_share": 6.880513011050104e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.5170984467520817
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > TracFone",
+      "candidate_occurrences": 53,
+      "overtaker_occurrences": 11,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.9059948933721726e-05,
+      "overtaker_share": 1.8921410780387787e-05,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.9927314520193268
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Use Alexa Built-in Smartphones > Alexa Features: Entertainment",
+      "candidate_occurrences": 174,
+      "overtaker_occurrences": 6,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 6.257417197108642e-05,
+      "overtaker_share": 1.0320769516575155e-05,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.16493657353299157
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > V4 Customers Keep It - 30%",
+      "candidate_occurrences": 77,
+      "overtaker_occurrences": 22,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 1,
+      "available_share": 2.7690869205595714e-05,
+      "overtaker_share": 3.7842821560775575e-05,
+      "added_top10_share": 1.115959334441853e-05,
+      "overtaker_share_ratio": 1.3666173235590733
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > V4 Customers Keep It - 70%",
+      "candidate_occurrences": 4,
+      "overtaker_occurrences": 1,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.4384867119789982e-06,
+      "overtaker_share": 1.720128252762526e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 1.195790158114189
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Verizon Wireless",
+      "candidate_occurrences": 116,
+      "overtaker_occurrences": 12,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 4.1716114647390944e-05,
+      "overtaker_share": 2.064153903315031e-05,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.4948097205989747
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Virgin Mobile",
+      "candidate_occurrences": 25,
+      "overtaker_occurrences": 0,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 8.990541949868737e-06,
+      "overtaker_share": 0.0,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.0
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Wireless Trade-In",
+      "candidate_occurrences": 2764,
+      "overtaker_occurrences": 1170,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 112,
+      "available_share": 0.0009939943179774877,
+      "overtaker_share": 0.0020125500557321555,
+      "added_top10_share": 0.0012498744545748753,
+      "overtaker_share_ratio": 2.0247098190934896
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Carrier Branded Wireless Trade-In",
+      "candidate_occurrences": 575,
+      "overtaker_occurrences": 25,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 0.00020678246484698098,
+      "overtaker_share": 4.300320631906315e-05,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 0.2079635057589894
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Unlocked Wireless Trade-In",
+      "candidate_occurrences": 14532,
+      "overtaker_occurrences": 1272,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 62,
+      "available_share": 0.0052260222246197,
+      "overtaker_share": 0.002188003137513933,
+      "added_top10_share": 0.0006918947873539488,
+      "overtaker_share_ratio": 0.4186746713793692
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7 Cases",
+      "candidate_occurrences": 5,
+      "overtaker_occurrences": 4,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.7981083899737476e-06,
+      "overtaker_share": 6.880513011050104e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 3.826528505965405
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Cases",
+      "candidate_occurrences": 19,
+      "overtaker_occurrences": 7,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 6.832811881900241e-06,
+      "overtaker_share": 1.2040897769337682e-05,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 1.7622170751156467
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > iPhone 7 Cases, Accessories & Bluetooth Headphones > iPhone 7+ Heavy Duty Cases",
+      "candidate_occurrences": 5,
+      "overtaker_occurrences": 2,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 0,
+      "available_share": 1.7981083899737476e-06,
+      "overtaker_share": 3.440256505525052e-06,
+      "added_top10_share": 0.0,
+      "overtaker_share_ratio": 1.9132642529827024
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > iPhone Accessories",
+      "candidate_occurrences": 419,
+      "overtaker_occurrences": 112,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 12,
+      "available_share": 0.00015068148307980004,
+      "overtaker_share": 0.0001926543643094029,
+      "added_top10_share": 0.00013391512013302234,
+      "overtaker_share_ratio": 1.2785536774108752
+    },
+    {
+      "axis": "leaf_category",
+      "group": "Cell Phones & Accessories > iPhone SE 2020 and iPhone 6-8 Cases > iPhone X Wallet",
+      "candidate_occurrences": 102,
+      "overtaker_occurrences": 26,
+      "tied_overtaker_occurrences": 0,
+      "added_top10_occurrences": 2,
+      "available_share": 3.668141115546445e-05,
+      "overtaker_share": 4.4723334571825674e-05,
+      "added_top10_share": 2.231918668883706e-05,
+      "overtaker_share_ratio": 1.2192370239595653
+    }
+  ],
+  "demotion_event_summary_by_seed": [
+    {
+      "seed": 0,
+      "n_events": 3148,
+      "mean_added_strict_overtakers": 63.302731893265566,
+      "mean_added_tied_overtakers": 0.0,
+      "mean_added_top10_items": 9.683926302414232
+    },
+    {
+      "seed": 1,
+      "n_events": 3027,
+      "mean_added_strict_overtakers": 61.001982160555,
+      "mean_added_tied_overtakers": 0.0,
+      "mean_added_top10_items": 9.650479022134126
+    },
+    {
+      "seed": 2,
+      "n_events": 3094,
+      "mean_added_strict_overtakers": 63.80769230769231,
+      "mean_added_tied_overtakers": 0.0003232062055591467,
+      "mean_added_top10_items": 9.667744020685197
+    }
+  ],
+  "validation_retrieved_raw_score_auc": {
+    "n": 16672,
+    "macro": 0.6257564311390333,
+    "micro": 0.6289754615206551
+  },
+  "retrieval_score_histograms": {
+    "edges": [
+      -0.654806640625,
+      -0.63954328125,
+      -0.624279921875,
+      -0.6090165625,
+      -0.593753203125,
+      -0.57848984375,
+      -0.563226484375,
+      -0.547963125,
+      -0.532699765625,
+      -0.5174364062500001,
+      -0.5021730468750001,
+      -0.4869096875,
+      -0.471646328125,
+      -0.45638296875,
+      -0.44111960937500005,
+      -0.42585625000000005,
+      -0.41059289062500004,
+      -0.39532953125000003,
+      -0.380066171875,
+      -0.3648028125,
+      -0.349539453125,
+      -0.33427609375,
+      -0.319012734375,
+      -0.303749375,
+      -0.288486015625,
+      -0.27322265625,
+      -0.25795929687499997,
+      -0.24269593750000001,
+      -0.227432578125,
+      -0.21216921875,
+      -0.196905859375,
+      -0.18164249999999998,
+      -0.16637914062499998,
+      -0.15111578125000003,
+      -0.13585242187500002,
+      -0.12058906250000001,
+      -0.105325703125,
+      -0.09006234375,
+      -0.07479898437499999,
+      -0.05953562499999998,
+      -0.044272265624999974,
+      -0.029008906249999966,
+      -0.013745546874999959,
+      0.0015178125000000486,
+      0.016781171875000056,
+      0.03204453125000006,
+      0.04730789062500007,
+      0.06257125000000008,
+      0.07783460937500009,
+      0.09309796875000009,
+      0.10836132812500006
+    ],
+    "groups": {
+      "forced training targets": {
+        "n": 276321,
+        "counts": [
+          304,
+          475,
+          785,
+          1133,
+          1698,
+          2288,
+          2902,
+          3778,
+          4380,
+          5392,
+          6085,
+          7433,
+          8224,
+          9367,
+          10230,
+          11522,
+          12046,
+          12964,
+          13539,
+          14011,
+          14218,
+          14615,
+          13857,
+          13827,
+          13104,
+          12466,
+          11142,
+          10339,
+          8749,
+          7637,
+          6240,
+          5080,
+          3998,
+          3185,
+          2428,
+          1861,
+          1444,
+          1014,
+          827,
+          569,
+          412,
+          203,
+          96,
+          34,
+          13,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "below_range_fraction": 0.0014729246058026715,
+        "above_range_fraction": 0.0,
+        "mean": -0.3418499529361725,
+        "median": -0.33984375
+      },
+      "retrieved training targets": {
+        "n": 38793,
+        "counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          37,
+          73,
+          178,
+          319,
+          524,
+          757,
+          984,
+          1162,
+          1392,
+          1800,
+          2116,
+          2517,
+          2695,
+          2907,
+          2927,
+          2823,
+          2753,
+          2357,
+          2170,
+          1866,
+          1527,
+          1179,
+          993,
+          812,
+          619,
+          452,
+          289,
+          188,
+          119,
+          76,
+          36,
+          22
+        ],
+        "below_range_fraction": 0.0,
+        "above_range_fraction": 0.0030933415822442193,
+        "mean": -0.15383808314800262,
+        "median": -0.15625
+      },
+      "uniform training alternatives": {
+        "n": 315114,
+        "counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          146,
+          651,
+          1701,
+          3306,
+          5450,
+          7583,
+          10144,
+          11738,
+          13440,
+          15363,
+          17990,
+          21001,
+          23306,
+          24594,
+          24704,
+          23706,
+          21359,
+          18839,
+          16029,
+          13099,
+          10391,
+          7774,
+          5889,
+          4647,
+          3659,
+          2914,
+          2332,
+          1507,
+          861,
+          474,
+          267,
+          116,
+          40
+        ],
+        "below_range_fraction": 0.0,
+        "above_range_fraction": 0.000272917103016686,
+        "mean": -0.17958232760429382,
+        "median": -0.1810302734375
+      },
+      "original validation alternatives": {
+        "n": 199906,
+        "counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          276,
+          554,
+          1125,
+          1904,
+          2319,
+          3574,
+          5325,
+          6328,
+          7822,
+          9797,
+          11613,
+          12783,
+          14927,
+          15913,
+          15749,
+          16194,
+          15420,
+          12398,
+          10507,
+          8513,
+          6540,
+          5458,
+          4291,
+          3244,
+          2735,
+          2171,
+          1171,
+          653,
+          310,
+          136,
+          60,
+          32
+        ],
+        "below_range_fraction": 0.0,
+        "above_range_fraction": 0.0002801316618810841,
+        "mean": -0.16040027141571045,
+        "median": -0.16082763671875
+      },
+      "added validation alternatives": {
+        "n": 299964,
+        "counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          92,
+          640,
+          1450,
+          3045,
+          4252,
+          4558,
+          6833,
+          10524,
+          11404,
+          14079,
+          17377,
+          19696,
+          20805,
+          23709,
+          25564,
+          22979,
+          24053,
+          21123,
+          15995,
+          11946,
+          9465,
+          6948,
+          5783,
+          5905,
+          4089,
+          3315,
+          2889,
+          1376,
+          70,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "below_range_fraction": 0.0,
+        "above_range_fraction": 0.0,
+        "mean": -0.20510995388031006,
+        "median": -0.205322265625
+      }
+    }
+  },
+  "examples": [
+    {
+      "seed": 0,
+      "inst": 26725,
+      "target_group": "warm-head",
+      "selection": "nearest median rank loss among seed-0 demotions in this target group with a title",
+      "date_utc": "2021-12-13T18:37:19.595000+00:00",
+      "rank200": 4.0,
+      "rank500": 55.0,
+      "target": {
+        "item": 100888,
+        "asin": "B0B7FJXP3M",
+        "title": "Moto G fast | 2020 | Unlocked | Made for US by Motorola | 3/32GB | 16MP Camera | White",
+        "leaf_category": "Cell Phones & Accessories > Cell Phones",
+        "store": "Motorola",
+        "item_group": "warm-head",
+        "retrieval_rank": 55,
+        "retrieval_score": -0.165283203125,
+        "mlp_logit": -2.5879085063934326,
+        "mlp_rank500": 55,
+        "category_match_input": 0.0,
+        "store_match_input": 1.0,
+        "text_cosine_input": 0.7219510078430176
+      },
+      "history_last3_titles": [
+        "ykooe Moto X Pure Edition Case (5.7 inch), (Armor Series) Heavy Duty Protection Hybrid Shockproof Dual Layer Protective Case Cover with Stand for Motorola MotoPure Edition (Blue)",
+        "LG V30 H932 Dual Camera 4G LTE 64GB Silver (GSM Unlocked) (Renewed)",
+        "Spigen Rugged Armor Designed for Moto G Stylus Case (2020) / Designed for Moto G Pro Case (2020) - Matte Black"
+      ],
+      "added_competitors": [
+        {
+          "item": 110931,
+          "asin": "B0C7CVF2QD",
+          "title": "iOttie Velox Magnetic Car Mount Air Vent Phone Holder. Compatible with MagSafe iPhones including iPhone 12, iPhone 13, iPhone 14, iPhone 12/13/14 Pro & Pro Max, iPhone 12/13 mini, iPhone 14 Plus",
+          "leaf_category": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "iOttie",
+          "item_group": "new-in-period",
+          "retrieval_rank": 418,
+          "retrieval_score": -0.2318115234375,
+          "mlp_logit": 4.720301151275635,
+          "mlp_rank500": 1,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.30269163846969604
+        },
+        {
+          "item": 86930,
+          "asin": "B08SM9CY4Y",
+          "title": "QHOHQ Case for Motorola Moto G Power 2021 (Not fit G Power 2020) with 2 Pack Screen Protector,[360\u00b0 Rotating Stand] [5 Times Military Grade Anti-Fall Protection],Transparent PC Back Cover-Black",
+          "leaf_category": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "QHOHQ",
+          "item_group": "warm-tail",
+          "retrieval_rank": 421,
+          "retrieval_score": -0.23193359375,
+          "mlp_logit": 3.7448577880859375,
+          "mlp_rank500": 2,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6290829181671143
+        },
+        {
+          "item": 86057,
+          "asin": "B08QM9TTVZ",
+          "title": "TOCOL [6 Pack] Compatible with Moto G Power 2021 (Not for Moto G Power 2020) - 3 Pack Tempered Glass Screen Protector and 3 Pack Camera Lens Protector [Easy Installation Frame] HD Clear Case Friendly",
+          "leaf_category": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "TOCOL",
+          "item_group": "warm-head",
+          "retrieval_rank": 434,
+          "retrieval_score": -0.2332763671875,
+          "mlp_logit": 3.100886821746826,
+          "mlp_rank500": 3,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.5368131399154663
+        },
+        {
+          "item": 87985,
+          "asin": "B08XTL23FT",
+          "title": "for Motorola Moto G Play 2021 Case: Dual Layer Protective Heavy Duty Cell Phone Cover Shockproof Rugged with Non Slip Textured Back - Military Protection Bumper Tough - 6.5inch (Black Black)",
+          "leaf_category": "",
+          "store": "BNIUT",
+          "item_group": "new-in-period",
+          "retrieval_rank": 429,
+          "retrieval_score": -0.2330322265625,
+          "mlp_logit": 3.0762619972229004,
+          "mlp_rank500": 4,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.708668053150177
+        },
+        {
+          "item": 88884,
+          "asin": "B091MR3BB3",
+          "title": "ONOLA Compatible with Moto G Power 2021 Case with HD Screen Protector (2 Packs) [Not for G Power 2020],Moto G Power Case 2021 Full Body 3 in 1 Durable Case for Moto G Power 2021 (Grey-SkyBlue)",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ONOLA",
+          "item_group": "warm-tail",
+          "retrieval_rank": 388,
+          "retrieval_score": -0.2291259765625,
+          "mlp_logit": 2.44826078414917,
+          "mlp_rank500": 5,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6219149231910706
+        }
+      ]
+    },
+    {
+      "seed": 0,
+      "inst": 274648,
+      "target_group": "new-in-period",
+      "selection": "nearest median rank loss among seed-0 demotions in this target group with a title",
+      "date_utc": "2022-04-02T22:23:19.004000+00:00",
+      "rank200": 4.0,
+      "rank500": 50.0,
+      "target": {
+        "item": 109195,
+        "asin": "B0BZT4P292",
+        "title": "OtterBox IPhone 13 Pro Max & IPhone 12 Pro Max Symmetry Series Case - BLACK, Ultra-Sleek, Wireless Charging Compatible, Raised Edges Protect Camera & Screen",
+        "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "store": "OtterBox",
+        "item_group": "new-in-period",
+        "retrieval_rank": 64,
+        "retrieval_score": -0.130859375,
+        "mlp_logit": -4.512351989746094,
+        "mlp_rank500": 50,
+        "category_match_input": 1.0,
+        "store_match_input": 1.0,
+        "text_cosine_input": 0.7762184143066406
+      },
+      "history_last3_titles": [
+        "[10 Pack] Screen Protector for Apple Watch Series 4 44mm / Series 3 42mm, SPARIN TPU Full Coverage Flexible Film with Case Friendly/Ultimate Thin/HD Clear",
+        "Miracase Product Great",
+        "OtterBox IPhone 13 Pro Max & IPhone 12 Pro Max Defender Series Case - FORT BLUE, Rugged & Durable, With Port Protection, Includes Holster Clip Kickstand"
+      ],
+      "added_competitors": [
+        {
+          "item": 105593,
+          "asin": "B0BMQFD1GZ",
+          "title": "ESR for iPhone 13 Pro Max Phone Case, Military-Grade Protection, Shockproof Air-Guard Corners, Yellowing-Resistant Acrylic Back, Phone Case for iPhone 13 Pro Max, Air Armor Case, Clear Black",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ESR",
+          "item_group": "new-in-period",
+          "retrieval_rank": 350,
+          "retrieval_score": -0.1845703125,
+          "mlp_logit": 3.1986289024353027,
+          "mlp_rank500": 1,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6914838552474976
+        },
+        {
+          "item": 110476,
+          "asin": "B0C5W4M1WR",
+          "title": "UniqueMe for iPhone 13 Pro/iPhone 13 Pro Max Camera Lens Protector, [Strong Drop Protection] [Not Easy to Fall-off] Metal Ring Tempered Glass Rear Camera Screen Cover, Alpine Green",
+          "leaf_category": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "UniqueMe",
+          "item_group": "new-in-period",
+          "retrieval_rank": 434,
+          "retrieval_score": -0.1915283203125,
+          "mlp_logit": 2.102128505706787,
+          "mlp_rank500": 2,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6315500736236572
+        },
+        {
+          "item": 92284,
+          "asin": "B09D8RFW44",
+          "title": "TETHYS 3 Pack Glass Screen Protector Compatible with iPhone 13 Pro Max 2021 6.7 Inch, Case Friendly Tempered Glass Film 9H Hardness HD Shield (Guidance Frame included)",
+          "leaf_category": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "TETHYS",
+          "item_group": "new-in-period",
+          "retrieval_rank": 431,
+          "retrieval_score": -0.1912841796875,
+          "mlp_logit": 1.38734769821167,
+          "mlp_rank500": 3,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6064133048057556
+        },
+        {
+          "item": 92560,
+          "asin": "B09DYD41ZF",
+          "title": "Saupsitnz Designed for iPhone 13 Pro Max Waterproof Case, Built-in Screen Protector 360\u00b0 Full Body Protective Dust-Proof Shockproof Waterproof Case for iPhone 13 Pro Max 6.7 inch 2021 (Blue)",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Saupsitnz",
+          "item_group": "new-in-period",
+          "retrieval_rank": 438,
+          "retrieval_score": -0.1917724609375,
+          "mlp_logit": 0.8839447498321533,
+          "mlp_rank500": 4,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6569526195526123
+        },
+        {
+          "item": 89091,
+          "asin": "B09293RKGL",
+          "title": "Redpepper for iPhone 12 Pro Max Case with Built-in Screen Protector,Compatible with Magsafe Full Body Heavy Duty Shockproof Case for iPhone 12 Pro Max-6.7inch (Black)",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "RedPepper",
+          "item_group": "warm-tail",
+          "retrieval_rank": 432,
+          "retrieval_score": -0.1912841796875,
+          "mlp_logit": 0.5059247016906738,
+          "mlp_rank500": 5,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6253857016563416
+        }
+      ]
+    },
+    {
+      "seed": 0,
+      "inst": 483053,
+      "target_group": "warm-tail",
+      "selection": "nearest median rank loss among seed-0 demotions in this target group with a title",
+      "date_utc": "2021-09-06T20:53:04.231000+00:00",
+      "rank200": 4.0,
+      "rank500": 55.0,
+      "target": {
+        "item": 88527,
+        "asin": "B08ZN3Z5TD",
+        "title": "amFilm (3 Pack) Glass Screen Protector for Samsung Galaxy Note 9, Full Screen Coverage Screen Protector, 3D Curved Tempered Glass, Dot Matrix with Easy Installation Tray",
+        "leaf_category": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "store": "amFilm",
+        "item_group": "warm-tail",
+        "retrieval_rank": 1,
+        "retrieval_score": 0.0035305023193359375,
+        "mlp_logit": -3.9998738765716553,
+        "mlp_rank500": 55,
+        "category_match_input": 0.0,
+        "store_match_input": 1.0,
+        "text_cosine_input": 0.7141700983047485
+      },
+      "history_last3_titles": [
+        "BENTOBEN Galaxy Note 9 Case, Purple Space Design Slim 2 in 1 Hybrid Soft TPU Bumper Hard PC Cover with PU Faux Leather Heavy Duty Shockproof Protective Phone Case Cover for Samsung Note 9, Purple",
+        "OTAO (2 Pack) Tempered Glass Screen Protector for Samsung Galaxy Note 9 3D Curved Dot Matrix with Easy Installation Tray (Full Coverage)",
+        "Kitoo Designed for Samsung Galaxy Note 9 Case with Kickstand, Military Grade 12ft. Drop Tested - Blue"
+      ],
+      "added_competitors": [
+        {
+          "item": 85547,
+          "asin": "B08P86TW9Q",
+          "title": "PIXIU for Galaxy Note 9 case, Unique Pattern Heavy Duty Shockproof 3 in 1 hybird Rubber stury Full-Body Protective case Cover for Samsung Galaxy Note 9 2018 Released Marble",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "PIXIU",
+          "item_group": "warm-tail",
+          "retrieval_rank": 436,
+          "retrieval_score": -0.186767578125,
+          "mlp_logit": 1.7163653373718262,
+          "mlp_rank500": 1,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6836951971054077
+        },
+        {
+          "item": 59113,
+          "asin": "B07GCR3Q6G",
+          "title": "GPEL Privacy Screen Protector Compatible for Galaxy Note 9 Real Tempered Premium Japanese Asahi Glass w/Applicator Anti Spy Case-Friendly HD Clarity 9H Hardness 99% Touch Accurate",
+          "leaf_category": "",
+          "store": "Gpel",
+          "item_group": "warm-head",
+          "retrieval_rank": 485,
+          "retrieval_score": -0.19140625,
+          "mlp_logit": 1.2191195487976074,
+          "mlp_rank500": 2,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6255189776420593
+        },
+        {
+          "item": 59711,
+          "asin": "B07GSZKGDY",
+          "title": "eSamcore Samsung Galaxy Note 9 Case Ring Holder Kickstand Cases + Dashboard Magnetic Phone Car Mount [RED]",
+          "leaf_category": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "eSamcore",
+          "item_group": "warm-tail",
+          "retrieval_rank": 424,
+          "retrieval_score": -0.1861572265625,
+          "mlp_logit": 0.27461767196655273,
+          "mlp_rank500": 3,
+          "category_match_input": 0.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.7010172009468079
+        },
+        {
+          "item": 88473,
+          "asin": "B08ZJ7V2CP",
+          "title": "AUPAI Compatible with Samsung Galaxy Note 9 Case, Heavy Duty 15ft Drop Tested Shockproof Cover with Ring Kickstand for Samsung Galaxy Note 9, Rosegold",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "AUPAI",
+          "item_group": "warm-tail",
+          "retrieval_rank": 455,
+          "retrieval_score": -0.188232421875,
+          "mlp_logit": -0.16333341598510742,
+          "mlp_rank500": 4,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6627082824707031
+        },
+        {
+          "item": 74763,
+          "asin": "B07Z5WG32F",
+          "title": "SURITCH for Samsung Galaxy Note 9 Marble Case, [Built-in Screen Protector] Natural Marble Full-Body Protection Shockproof Rugged Bumper Protective Cover for Galaxy Note 9 6.4 Inch (Gold Marble)",
+          "leaf_category": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "SURITCH",
+          "item_group": "warm-head",
+          "retrieval_rank": 352,
+          "retrieval_score": -0.1788330078125,
+          "mlp_logit": -0.26609301567077637,
+          "mlp_rank500": 5,
+          "category_match_input": 1.0,
+          "store_match_input": 0.0,
+          "text_cosine_input": 0.6967064738273621
+        }
+      ]
+    }
+  ],
+  "scope": "validation diagnostics with training-distribution audit",
+  "development_sample": false,
+  "source_runs": {
+    "seed0": {
+      "run": "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching",
+      "best_epoch": 10,
+      "model.pt_sha256": "5e287fbade8c61ad4eb5ea394dc812b9b8be6caceb7c94c6e901e173943a3c96",
+      "config.yaml_sha256": "f35b5c94054c7f1cee800bcb909a42a91d535c2018f432f87060751b156b9aad",
+      "metrics.json_sha256": "7d450f8b5c23a746a28c085061dc85f1eccc136a7dc58ec51b50699322918ab1"
+    },
+    "seed1": {
+      "run": "results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching",
+      "best_epoch": 7,
+      "model.pt_sha256": "9dcd28561df971cacf5f5d87761b2d73d26a8b508dca5b3aaa03a6eed8af9e98",
+      "config.yaml_sha256": "dfcc132c966bc3e030a662fae08f55d44d2f84aaa78aa03d483cbdb0a3301d5c",
+      "metrics.json_sha256": "83233dc486edf2362a62d360db6abcd515c56f330cf5e0ab0cba95031f169592"
+    },
+    "seed2": {
+      "run": "results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching",
+      "best_epoch": 9,
+      "model.pt_sha256": "c7846b768c89ddb360030d1430060c55d676cb9f4b3011bae896ab60834befad",
+      "config.yaml_sha256": "a15dcc9e6bebe797523fa1defd7a554ae39f2df292633c376e05c3f8b422d0ac",
+      "metrics.json_sha256": "d932b21c092c87d8382b07bfdfdeae33375756d4bfa51a65ee473a74ea179a20"
+    }
+  },
+  "reproduction_checks": [
+    {
+      "seed": 0,
+      "k1": 200,
+      "rank_changed_cases": 0,
+      "n_cases": 5814
+    },
+    {
+      "seed": 0,
+      "k1": 500,
+      "rank_changed_cases": 0,
+      "n_cases": 5814
+    },
+    {
+      "seed": 1,
+      "k1": 200,
+      "rank_changed_cases": 0,
+      "n_cases": 5814
+    },
+    {
+      "seed": 1,
+      "k1": 500,
+      "rank_changed_cases": 0,
+      "n_cases": 5814
+    },
+    {
+      "seed": 2,
+      "k1": 200,
+      "rank_changed_cases": 0,
+      "n_cases": 5814
+    },
+    {
+      "seed": 2,
+      "k1": 500,
+      "rank_changed_cases": 0,
+      "n_cases": 5814
+    }
+  ],
+  "created_at": "2026-10-25T10:03:56.851351+00:00",
+  "score_mean": -0.17960958182811737,
+  "score_std": 0.08012501895427704,
+  "source_artifacts": {
+    "sweep_sha256": "1634b32e64325aaab74bd8db7445a1bdeb8fba6e89d436c41ed74560dcbaac99",
+    "candidate_meta_sha256": "afa071462a4c9c81a0160f8d8584143b5d16240451a6961600a9fd4dbf328b17"
+  }
+}

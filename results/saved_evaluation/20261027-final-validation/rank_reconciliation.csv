@@ -1,0 +1,5 @@
+k1,full_instances,selected_instances,membership_vs_full_rank_count,retrieved_position_vs_full_rank_count,ndcg10_changed_instances,recall10_changed_instances
+50,232904,232904,0,,2,0
+100,232904,232904,2,,2,0
+200,232904,232904,0,77.0,2,0
+500,232904,232904,1,,2,0

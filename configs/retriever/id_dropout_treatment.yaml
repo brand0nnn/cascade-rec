@@ -1,0 +1,4 @@
+# One shared per-item residual mask per batch, inverted scaling; eval retains IDs.
+base: two_tower_text_id.yaml
+name: id_dropout_treatment
+id_dropout: 0.5
