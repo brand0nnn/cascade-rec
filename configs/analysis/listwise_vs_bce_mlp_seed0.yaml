@@ -1,0 +1,7 @@
+# Exploratory (2026-10-28, H9): listwise softmax vs BCE, mlp, natural K_train=500 lists, seed 0. Val only.
+run_id: 20261028-listwise-vs-bce-mlp-seed0
+groups:
+  bce:
+    - results/ranker_mlp/20261028-natural-ktrain500-seed0
+  listwise:
+    - results/ranker_mlp/20261028-natural-ktrain500-listwise-seed0

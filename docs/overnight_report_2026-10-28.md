@@ -1,0 +1,508 @@
+# Overnight run, 28 Oct 2026 (exploratory, Val only)
+
+Autonomous overnight session driven by `/loop`. Everything here is **exploratory**: the natural-only training
+population changes the ranker's positive/negative definition and needs team sign-off (CLAUDE.md §15 rule 1).
+Test is never loaded. No commits. All numbers: Val, frozen Two-tower (text) seed-0 retriever, per-user macro,
+mean ± sample SD over ranker seeds 0–2 unless stated; CIs are paired user bootstraps (1,000 resamples) on the
+seed-mean and do not include seed variance.
+
+## Morning summary
+
+### Headline
+
+**The ranker problem was the training data, not the ranker.** Training only on lists where the retriever found the
+target ("natural lists") instead of force-appending missed targets fixes the inverted retrieval-score signal, removes
+the K₁ = 500 collapse, and reverses the MLP-vs-DIN ranking.
+
+| Pipeline at K₁ = 200, exact search | End-to-end nDCG@10 | Recall@10 | vs R1 | Ranker-stage median ms* |
+|---|---|---|---|---|
+| R0 popularity order (team) | 0.003281 | 0.0073 | −42% | 0.01 |
+| R1 retrieval order | 0.005642 | 0.0104 | — | 0.003 |
+| MLP, forced lists (team's R2) | 0.006843 ± 0.000233 | 0.0139 | +21% | 2.2 |
+| DIN, forced lists (team's R3) | 0.006436 ± 0.000499 | 0.0136 | +14% | — |
+| MLP, natural lists | 0.008607 ± 0.000258 | 0.0159 | +53% | 2.2 |
+| MLP, natural lists, K_train 500 | 0.009026 ± 0.000129 | — | +60% | ≈2.2 |
+| DIN, natural lists | 0.009824 ± 0.000175 | 0.0182 | +74% | 8.8 |
+| **DIN, natural lists, K_train 500** | **0.010137 ± 0.000070** | **0.0188** | **+80%** | ≈8.8 |
+| DIN, natural lists, K_train 500, **at K₁ = 500** | **0.010379 ± 0.000035** | — | **+84%** | ≈25 |
+
+\*Single-thread CPU, M2 Pro, from `results/latency/20261028-latency-final/` (approximate: load average rose to
+1.3–2.7 during the run). Total cascade median at K₁ = 200: MLP 4.1 ms, DIN 11.4 ms; at K₁ = 500: MLP 7.1 ms, DIN 28.3 ms.
+
+### Findings, ranked by strength of evidence
+
+1. **F2/F3: forced positives caused the K₁ collapse (strong).** Changing only the training population (natural
+   lists) flips the score response (Spearman −0.40 → +0.19; probe "lower score wins" 99.9% → 0–3% of queries), cuts
+   deep-pool overtakes in the top 10 from ~95% to 31%, and turns the K₁ = 500 result from 0.00221 into 0.00809
+   (MLP, 3 seeds, all reproduction checks exact).
+2. **F1/F7: natural lists improve both rankers, and DIN overtakes the MLP (strong, 3 seeds each).** Natural MLP −
+   forced MLP +0.00176 [0.00154, 0.00199]; natural DIN − natural MLP +0.00122 [0.00101, 0.00141]. This reverses the
+   team's RQ3 ranking (MLP > DIN), which was measured under forced lists.
+3. **F5: dropping the score does not remove the shortcut (strong mechanism, 1 seed + feature audit).** A
+   force-appended target is also less text-similar to the history (text-cosine AUC 0.41 vs 0.56 on natural lists),
+   because the retriever is text-based. A forced-list MLP without the score scored < R1 and was stopped. Natural lists
+   are the safe remedy; "keep forced lists, drop the score" is not.
+4. **F9: with the fix, a better ranker uses a bigger pool better (strong, 3 seeds) — the RQ2 headline changes.**
+   K₁ 500 − 200: forced MLP −0.00463, natural MLP −0.00051, K_train-500 MLP −0.00032, natural DIN −0.00009 (ns),
+   **K_train-500 DIN +0.00024 [0.00008, 0.00042]**. For the best ranker, nDCG@10 now rises over the whole sweep
+   (0.00893 / 0.00973 / 0.01014 / 0.01038 at K₁ 50/100/200/500): the gain at 500 comes from new-in-period (+0.00042)
+   and tail (+0.00041) targets, with head flat. So "more candidates hurt" was a ranker-training artefact; with a ranker
+   trained on lists as deep as it ranks, extra retrieval recall becomes top-10 quality, at ~3× the ranking latency.
+5. **F8/H8: deeper training lists (K_train 500) help (moderate–strong, 3 seeds).** MLP +0.00042 [0.00025, 0.00060]
+   (head only); DIN +0.00031 [0.00018, 0.00045], including new-in-period +0.00023 [0.00011, 0.00034].
+6. **F4: approximate indexes push the top 10 toward new/tail products (moderate–strong; replicated with the best
+   DIN: IVF-32 new-in-period +0.00034, tail +0.00020, head −0.00068).** With the natural MLP: IVF-32:
+   new-in-period nDCG +17%, tail +28%, head −6%, overall −3.5%. They drop exact candidates from unprobed cells,
+   mostly older/head ones. HNSW-800 equals exact overall (−0.00004, CI includes 0) but saves no time at this catalogue
+   size: exact search is only ~1.2 ms.
+7. **F1/F6: the new-product trade-off (strong descriptive).** Natural positives are 84% head (forced: 43%); only 4.5%
+   of new-in-period training targets are natural. Natural rankers lose some new/tail accuracy versus forced ones
+   (MLP new-in-period −0.00059), yet stay 5–7× above R1 there. Retrieval is the bottleneck: 93% of Val targets
+   (97–98% for new/tail) never reach the ranker.
+8. **H9: listwise softmax beats BCE (moderate: MLP 2 seeds, DIN 1 seed).** MLP seeds 0–1 +0.00049 [0.00031, 0.00069]
+   (seed 0: gains in all item groups); DIN seed 0 +0.00054 [0.00029, 0.00078] (head-driven). Best single run of the
+   night: DIN listwise, K_train 500, **0.010648** at K₁ = 200 (+89% over R1). Needs a third MLP seed and DIN seeds 1–2.
+9. **Nulls:** H2: the score adds only ~0.0003 on natural lists (matching features carry the gain). H4: excluding later
+   same-period reviews from negatives +0.00018 (ns), though it affects 13.1% of natural lists (not 3.7% as the
+   2026-10-21 entry said from the sample).
+
+### Failed, stopped or provisional runs
+
+- `results/ranker_mlp/20261028-forced-noscore-seed0` — stopped by hand after 3 epochs (`STOPPED.md`); evidence for F5 only.
+- `results/index_rank_eval/20261028-k1-ktrain500` — malformed config from my sed error (`FAILED.md`); rerun as `-r2`.
+- `results/latency/20261028-latency` — provisional (machine not idle); superseded by `20261028-latency-final`, which is
+  also only approximately idle.
+- Single-seed only: H2, H4, H7, H9 (DIN). H9 MLP has seeds 0–1.
+
+### Caveats
+
+- Val only; one frozen retriever. Retrieval Test results were already inspected earlier (see `docs/evaluations.md`).
+- My candidate lists were rebuilt locally: training lists match the team's exactly; Val has 16,673 vs 16,672 natural
+  hits (near-tie), and 58 target positions differ by ties. The team's runs reproduce to 6 decimals in every check.
+- All training-label changes (natural lists, later-review exclusion) need team sign-off (§15 rule 1).
+- HNSW "efSearch = 200" actually runs at 450 (FAISS does not raise it to K₁ + buffer; §8 rule).
+- CIs are user-bootstrap on seed means; with 3 seeds, seed SD is reported separately. No multiplicity correction.
+- The saved "recommended_k1" in sweep reports is the historical heuristic, not a selection (no δ).
+
+### Decisions for the team
+
+1. **Remedy:** adopt natural-list training for both rankers (and K_train = 500 lists? listwise loss after 3-seed
+   replication?). Record it in `decisions.md`.
+2. **RQ3 conclusion:** with natural lists DIN beats the MLP by +0.0012 nDCG@10 but costs ~4× ranker latency
+   (8.8 vs 2.2 ms at K₁ = 200). Which ranker goes into the final combination (§10.1)?
+3. **δ and cost rule:** record them before any K₁/index selection. With the K_train-500 DIN, K₁ = 500 is better than
+   200 (+0.00024) but its ranker stage is ~3× slower (≈25 vs 8.8 ms), so the cost rule decides.
+4. **New-product trade-off:** natural training loses some new/tail accuracy vs forced lists. Acceptable, or study a
+   remedy (e.g. extra negatives/positives for new items) as future work?
+5. **HNSW efSearch:** keep "200 → 450" or allow a real efSearch = 200 point with a smaller buffer?
+6. Re-run the RQ2 sweeps (K₁, index) with the chosen ranker before the final Test comparison.
+
+## Status board
+
+| Step | Status | Run ID / notes |
+|---|---|---|
+| 0. Candidate lists rebuilt locally | done 01:20 | `data/processed/candidates/two_tower_text_seed0/`; train lists identical to the team's (315,114 / 276,321 forced / 38,793 natural); Val natural@200 = 16,673 vs 16,672 (one near-tie at the K=200 boundary) |
+| 1a. Natural-only MLP `--sample` | done 01:50 | `20261028-natural-matching_sample` (dev only) |
+| 1b. Natural-only MLP seeds 0/1/2 | **done 02:11** | `20261028-natural-matching-seed{0,1,2}`; comparison `results/ranker_compare/20261028-natural-vs-forced-mlp/` |
+| 2. K₁ sweep + score diagnostic, natural checkpoints | **done 02:20** | `results/ranker_k1_sweep/20261028-k1-natural/`, `results/ranker_diagnostics/20261028-score-diagnostic-natural/` |
+| 3. FAISS index sweep | **done 02:40** (retrieval half + ranker on its lists) | `results/index_sweep/20261028-index-sweep/`, `results/index_rank_eval/20261028-index-rank-natural/` |
+| 4. Latency | **done**: first run provisional; final run 05:57 (approximately idle) | `results/latency/20261028-latency/`, `results/latency/20261028-latency-final/` |
+| Phase 2 | **done**: H2, H3, H4, H5, H6, H7 (stopped), H8, A1, K₁ curves | see log below |
+
+## Log
+
+- 01:46 Started natural-only `--sample` check. Spawned subagent for the index-sweep pipeline
+  (`src/cascade/index/faiss_index.py` and `tests/test_index.py` already exist; the sweep pipeline does not).
+  Open point for it: `filtered_search` requests K₁ + buffer (450) results, more than efSearch = 200.
+
+- 01:54 Seed 0 natural-only (best epoch 3 of 6): end-to-end macro nDCG@10 **0.00834** vs forced-list MLP seed 0
+  0.00710 and R1 0.00564; conditional 0.1242 vs 0.1028 / 0.0828; GAUC 0.721 vs 0.713. Rescued 2,607 / demoted 1,397
+  (forced: 2,533 / 1,707). One seed only — wait for seeds 1–2 and the paired bootstrap.
+- 01:59 Index-sweep subagent finished; reviewed diff (new pipeline + `segment_masks` helper in `segments.py`), tests 74
+  passed. Dev sample (not reportable): recall vs exact 0.935 (HNSW "200"→450), 0.974 (HNSW 800), 0.304 (IVF 4),
+  0.734 (IVF 32); FAISS exact vs saved lists: 99.99% overlap, all differences are exact ties at the cut-off.
+  Wrote `src/cascade/eval/compare_rankers.py` (natural vs forced vs R1, paired bootstrap, by group).
+- 02:02 Spawned latency subagent (code + tiny dev check only; real timing runs alone at the end).
+
+- 02:07 Latency subagent finished; reviewed (Val-only asserted, reuses index_sweep/faiss_index/ranker code, no
+  existing file changed), tests 82 passed. Dev timings invalid (loaded machine) but suggestive: exact search over
+  111.5K × 64-d is only ~1.1–1.5 ms single-thread, HNSW saves < 1 ms, and at K₁ = 500 the ranker's Python feature
+  builder (~5 ms) dominates total latency. Buffer 250 leaves some K₁ = 500 queries short.
+
+- 02:11 **Seeds 1–2 done. Step 1 result** (`results/ranker_compare/20261028-natural-vs-forced-mlp/`, Val, K₁ = 200,
+  per-user macro, mean ± seed SD, paired user bootstrap 1,000):
+
+  | | End-to-end nDCG@10 | Conditional nDCG@10 | Recall@10 | Rescued / demoted | vs R1 (95% CI) |
+  |---|---|---|---|---|---|
+  | R1 retrieval order | 0.005642 | 0.0828 | 0.0104 | — | — |
+  | Forced-list MLP (team's, seeds 0–2) | 0.006843 ± 0.000233 | 0.0991 | 0.0139 | 2,476 / 1,747 | +0.00120 [0.00090, 0.00149] |
+  | **Natural-only MLP (seeds 0–2)** | **0.008607 ± 0.000258** | **0.1270** | **0.0159** | 2,674 / 1,388 | **+0.00296 [0.00264, 0.00330]** |
+
+  Natural − forced = **+0.00176 [0.00154, 0.00199]** (+26%); natural is +53% over R1 (forced +21%). Per-seed
+  natural: 0.00834 / 0.00886 / 0.00863 — every seed above every forced seed. Forced numbers reproduce the team's
+  0.006843 exactly (check on the comparison code). GAUC 0.721 / 0.732 / 0.730 (forced ≈ 0.712).
+
+  **By item group the gain is not uniform:**
+
+  | Group (n Val cases / natural hits) | R1 | Forced | Natural | Natural − forced (CI) |
+  |---|---|---|---|---|
+  | warm-head (109,765 / 13,688) | 0.01129 | 0.01154 | **0.01590** | **+0.00436 [0.00394, 0.00478]** |
+  | new-in-period (76,768 / 2,224) | 0.00036 | **0.00282** | 0.00223 | −0.00059 [−0.00085, −0.00030] |
+  | warm-tail (46,371 / 761) | 0.00017 | **0.00117** | 0.00079 | −0.00039 [−0.00061, −0.00018] |
+
+  Every history-length bucket improves (+0.0015 to +0.0026). **Finding F1 (exploratory):** dropping forced positives
+  removes most training examples of new and tail products (the retriever misses them), so the ranker gets better at
+  head items and worse at new/tail ones — although still 6× (new) and 5× (tail) above R1. The forced lists were
+  carrying useful new/tail signal along with the score shortcut. Next step for this: check the training-positive mix
+  by group (H6 below).
+- 02:12 Started K₁ sweep with natural checkpoints (`20261028-k1-natural`), alone on the machine (it times the ranker).
+
+- 02:18 **Step 2a result — K₁ sweep, natural checkpoints** (`results/ranker_k1_sweep/20261028-k1-natural/`; K₁ = 200
+  ranks reproduce every saved checkpoint exactly, 0 changed cases). End-to-end macro nDCG@10, mean ± seed SD:
+
+  | K₁ | Recall@K₁ | Forced-list MLP (team, `20261025-k1`) | **Natural-only MLP** | Ranker median ms (natural) |
+  |---|---|---|---|---|
+  | 50 | 0.0298 | 0.008315 ± 0.000119 | 0.008277 ± 0.000183 | 0.76 |
+  | 100 | 0.0457 | 0.008363 ± 0.000109 | 0.008596 ± 0.000226 | 1.08 |
+  | 200 | 0.0687 | 0.006843 ± 0.000233 | **0.008607 ± 0.000258** | 1.50 |
+  | 500 | 0.1175 | **0.002210** ± 0.000095 | **0.008094** ± 0.000190 | 3.68 |
+
+  **Finding F2: the K₁ = 500 collapse is gone** (0.00221 → 0.00809). The curve is now nearly flat from 100 to 200
+  (K200 − K100 = +0.000011 [−0.000139, 0.000164]) and drops only slightly at 500 (K200 − K500 = +0.00051
+  [0.00037, 0.00065]). Expansion decomposition 200→500: newly retrieved targets +0.00128, competition −0.00179
+  (forced MLP: +0.00176 / −0.00639); demotions of already-ranked targets fall from 3,090 to 827 per seed.
+  By item group, K₁ = 500 vs 200 is **better** for new-in-period (+0.00013) and warm-tail (+0.00044) and worse for
+  warm-head (−0.00127): a larger pool helps exactly the items the retriever ranks low. The saved report's
+  "recommended_k1 = 50" is the historical CI heuristic and is **not** a selection (no δ recorded).
+- 02:19 Started score diagnostic (`20261028-score-diagnostic-natural`).
+
+- 02:20 **Step 2b result — score diagnostic, natural checkpoints**
+  (`results/ranker_diagnostics/20261028-score-diagnostic-natural/`; all six K200/K500 rank reproductions exact):
+
+  | Diagnostic (seeds 0 / 1 / 2) | Forced-list MLP (`20261025-score-diagnostic`) | Natural-only MLP |
+  |---|---|---|
+  | Spearman(raw retrieval score, logit), 500 candidates, 1,000 uniform queries | −0.402 / −0.372 / −0.400 | **+0.188 / +0.173 / …** (positive all seeds) |
+  | Top-10 slots taken by added ranks 201–500 at K₁ = 500 | 94.7% / 95.6% / 95.2% | **31.2%** (seed 0) |
+  | Probe z = −3 vs +3: lower score gets the higher logit | 99.9% / 99.7% / 100% of queries | **0.0% / 1.8% / 3.2%** |
+  | Demotion events K200 → K500 | 3,148 / 3,027 / 3,094 | 680 / 853 / 949 |
+
+  Logits now increase monotonically with the score input (seed 0: −4.77 → −2.90 across z = −3…3), and mean logit
+  falls smoothly with retrieval rank band. **Finding F3:** removing forced positives reverses the learned score
+  response and removes the deep-pool overtaking. Together with F2 this is strong (still observational) evidence
+  that the forced-positive shortcut caused the K₁ collapse: one training-population change, everything else fixed.
+- 02:21 Started full index sweep (`20261028-index-sweep`).
+
+- 02:24 **H6 checked — confirmed** (ranker-training targets; new-in-period = first interaction ≥ t_ranker_train):
+
+  | Training targets | new-in-period | warm-head | warm-tail |
+  |---|---|---|---|
+  | Natural (38,793) | 13.7% (5,303) | **83.9%** (32,554) | 2.4% (936) |
+  | Forced (276,321) | **40.9%** (113,089) | 43.1% (118,962) | 16.0% (44,270) |
+
+  Only 4.5% of new-in-period and 2.1% of warm-tail training targets are natural. Natural-only training therefore
+  sees very few new/tail positives, which explains F1.
+- 02:25 Phase 2 prep: `ranker_mlp.py` now accepts `feature_groups: [matching]` (no retrieval-score input; opt-in,
+  default and checkpoints unchanged; test added, 83 passed). Configs `configs/ranker/{forced,natural}_noscore_seed0.yaml`.
+  **Pre-registered (before running):**
+  - **H7 — forced lists, no score.** Keeps the new/tail positives without the score shortcut. Prediction: better than
+    natural-only on new-in-period/warm-tail. **Risk:** the retriever is text-based, so a forced positive also has
+    low text cosine with the history; the shortcut may come back through text cosine (watch for an inverted
+    text-cosine response and a K₁ = 500 drop). If overall nDCG falls well below natural-only, the shortcut is not
+    only the score.
+  - **H2 — natural lists, no score.** If natural-only's gain over R1 mostly comes from re-weighting the score, this
+    drops toward R1 (0.00564). If it stays near 0.0086, the matching features carry the gain.
+
+- 02:31 **Step 3 result — index sweep, retrieval half** (`results/index_sweep/20261028-index-sweep/`, Val, K₁ = 200,
+  single-thread FAISS 1.15.1, M2 Pro). Search requests K₁ + 250 = 450 results, then §4.6 filtering:
+
+  | Config | efSearch used | Build s | Recall vs exact | Recall@200 macro | New-in-period Recall@200 | Queries short of 200 |
+  |---|---|---|---|---|---|---|
+  | Exact | — | 0 | 1.000 | **0.0687** | 0.0261 | 80 |
+  | HNSW "200" | **450** | 19.9 | 0.936 | 0.0671 | 0.0272 | 125 |
+  | HNSW 800 | 800 | 19.7 | 0.975 | 0.0680 | 0.0265 | 108 |
+  | IVF nprobe 4 | — | 2.3 | 0.309 | 0.0434 | 0.0288 | **51,709** (22%) |
+  | IVF nprobe 32 | — | 2.3 | 0.739 | 0.0643 | **0.0309** | 471 |
+
+  Exact FAISS reproduces the saved lists (overlap 0.99994; all differences are ties within 2.5e−7 of the 200th
+  score; identical target found in all 16,673 cases). Recall vs exact is almost the same in every segment.
+  **Finding F4 (surprising, checked):** approximate indexes retrieve *more* new-in-period targets than exact search.
+  No bug: the extra hits are targets that exact search ranks just past the cut-off (IVF-32 median exact rank 239, p90 307);
+  they enter because the index drops other items from unprobed cells. The effect is asymmetric — IVF-32 loses 8%
+  of exact's new-item hits (183 / 2,224) but 21% of the rest (3,044 / 14,449) — so new-item targets tend to sit in
+  the query's own cell, while the items IVF drops are mostly older ones. Overall Recall@200 still falls (0.0687 → 0.0643).
+  Whether this carries through to nDCG@10 needs the ranker on these lists (next).
+- 02:33 Starting the §5 latency measurement alone on the machine.
+
+- 02:33 **Step 4 — latency (PROVISIONAL)** (`results/latency/20261028-latency/`; 1,000 Val queries one at a time
+  after 50 warm-ups, single thread, M2 Pro, natural-only MLP seed 0). Medians in ms:
+
+  | Job | User tower | Retrieval (search + filter) | Ranker (features + forward + order) | **Total** median / p95 |
+  |---|---|---|---|---|
+  | Exact, K₁ = 50 | 0.63 | 1.13 | 0.98 | **2.74** / 2.90 |
+  | Exact, K₁ = 100 | 0.64 | 1.18 | 1.34 | **3.17** / 3.37 |
+  | Exact, K₁ = 200 | 0.67 | 1.28 | 2.16 | **4.11** / 4.47 |
+  | Exact, K₁ = 500 | 0.69 | 1.50 | 4.40 | **6.61** / 7.53 |
+  | HNSW "200" (ef 450), K₁ = 200 | 0.60 | 0.66 | 1.76 | 3.03 / 3.28 |
+  | HNSW 800, K₁ = 200 | 0.60 | 1.28 | 1.84 | 3.74 / 4.01 |
+  | IVF 4, K₁ = 200 | 0.60 | 0.11 | 1.74 | 2.44 / 2.91 |
+  | IVF 32, K₁ = 200 | 0.58 | 0.19 | 1.76 | 2.53 / 2.67 |
+
+  **Provisional:** load average was 1.6–1.8 (leftover from the index sweep), and the first-timed job (exact K₁ = 200)
+  looks inflated (ranker 2.16 ms vs ~1.76 ms for the other K₁ = 200 jobs). Rerun after a quiet pause at the end.
+  Pattern so far: exact search over 111.5K items costs only ~1.1–1.5 ms; HNSW 800 saves nothing; the ranker
+  (mostly Python feature building) dominates from K₁ = 200 upwards.
+- 02:40 **RQ2 sweep 2 completed with the ranker** (`results/index_rank_eval/20261028-index-rank-natural/`, natural MLP
+  seeds 0–2; the exact row reproduces 0.008607 exactly). End-to-end macro nDCG@10:
+
+  | Config | Recall@200 | nDCG@10 | − exact (95% CI) | New-in-period nDCG | Warm-tail | Warm-head |
+  |---|---|---|---|---|---|---|
+  | Exact | 0.0687 | 0.008607 | — | 0.00223 | 0.00079 | 0.01590 |
+  | HNSW "200" (ef 450) | 0.0671 | 0.008411 | −0.00020 [−0.00028, −0.00012] | +0.00011 | +0.00002 | −0.00049 |
+  | HNSW 800 | 0.0680 | 0.008565 | −0.00004 [−0.00009, +0.00000] | +0.00006 | +0.00004 | −0.00016 |
+  | IVF 4 | 0.0434 | 0.005506 | −0.00310 [−0.00340, −0.00282] | +0.00039 | +0.00036 | −0.00670 |
+  | IVF 32 | 0.0643 | 0.008302 | −0.00030 [−0.00045, −0.00015] | **+0.00039** (+17%) | **+0.00022** (+28%) | −0.00101 |
+
+  **Finding F4 confirmed end to end:** every approximate index shifts the final top-10 toward new and tail
+  products (all new-in-period differences have CIs above 0) and away from head products. Approximate search acts
+  as an accidental popularity de-biaser: it drops exact candidates from unprobed cells, and those are mostly
+  older/head items. Overall it is a small loss, except IVF 4, which fails because 22% of its lists are short.
+  HNSW 800 is statistically indistinguishable from exact overall, but gives no latency saving (above).
+- 02:41 Started Phase 2 training: natural-noscore seed 0, then forced-noscore seed 0 (H2, H7).
+
+- 02:45 Added opt-in `--out-dir` to `build_candidates.py` (default path unchanged; refuses an existing directory),
+  so experimental training lists cannot overwrite the shared ones. **Pre-registered H3 (next after H2/H7):** natural
+  lists built at K_train = 500 give ~1.7× more natural positives (Val Recall@500 0.118 vs Recall@200 0.069), with a
+  larger share of new/tail ones, and negatives drawn from the same depth the ranker sees at K₁ = 500. Predictions:
+  (a) better new/tail nDCG than natural-200, recovering part of F1's loss; (b) a smaller K₁ = 500 drop than
+  natural-200 (−0.00051).
+
+- 02:51 **H2 result — natural lists, no score** (`results/ranker_mlp/20261028-natural-noscore-seed0`, seed 0, best
+  epoch 7): end-to-end nDCG@10 **0.00804**, conditional 0.1164, GAUC 0.729, against natural with score (seed 0)
+  0.00834 and R1 0.00564. **H2 rejected:** the score adds only ~0.0003 (about 10% of the gain over R1); most of the
+  natural MLP's gain comes from the history/text matching features. One seed, so treat the 0.0003 as approximate.
+- 03:14 **H7 result — forced lists, no score: fails.** After 3 epochs (~10 min each), end-to-end nDCG@10 is
+  0.00233 → 0.00250 → 0.00283 (conditional 0.035–0.043, GAUC 0.60–0.65), **less than half of R1**. Stopped by hand
+  (`STOPPED.md` in the run dir) because it was far from competitive.
+  **Mechanism check** (scratchpad `feature_auc.py`: per-list AUC of each input, target vs the other candidates,
+  4,000 lists each):
+
+  | Input | Natural positives | Forced positives |
+  |---|---|---|
+  | Retrieval score | 0.657 | **0.000** |
+  | Text cosine (candidate vs mean history) | 0.559 | **0.407** |
+  | Category match | 0.516 | 0.475 |
+  | Store in history | 0.551 | 0.486 |
+
+  **Finding F5:** the forced-positive shortcut is not only the score. The retriever is text-based, so a force-appended
+  target is also less similar to the history on every text/matching input. Removing the score leaves these inverted
+  signals, and the MLP can amplify them through its candidate text projection and history embeddings. So
+  "keep forced lists, drop the score" (option 2 in the 2026-10-24 decision entry) is **not** a safe remedy. Natural-
+  only lists remove the shortcut by construction.
+- 03:16 Started H3 list build: K_train = 500 ranker-training lists in
+  `data/processed/candidates/two_tower_text_seed0_ktrain500/` (Val files copied unchanged from the shared folder).
+
+- 03:17 H3 lists built (`two_tower_text_seed0_ktrain500/`): 315,114 lists of 500 (+1 forced column); natural
+  fraction 19.4% → **61,069 natural positives** (1.57× the 38,793 at K = 200). H3 training waits for the H4
+  subagent's edit of `ranker_training.py` to be reviewed, so it doesn't start on half-edited code.
+- 03:19 **A1 — failure breakdown at K₁ = 200** (per-instance shares, seed-mean for rankers; Val):
+
+  | Group | Retrieval miss | Hit@10: R1 / forced / natural | Hit rate given retrieved: R1 / forced / natural |
+  |---|---|---|---|
+  | All (232,904) | **92.8%** | 1.12% / 1.44% / **1.67%** | 15.7% / 20.0% / **23.4%** |
+  | New-in-period (76,768) | **97.1%** | 0.09% / **0.64%** / 0.57% | 3.0% / **22.1%** / 19.6% |
+  | Warm-head (109,765) | 87.5% | 2.30% / 2.49% / **3.08%** | 18.5% / 19.9% / **24.7%** |
+  | Warm-tail (46,371) | **98.4%** | 0.04% / **0.26%** / 0.18% | 2.5% / **16.1%** / 10.7% |
+
+  **Finding F6:** retrieval is the bottleneck (93% of Val targets never reach the ranker; 97–98% for new and tail
+  products). Among retrieved new/tail targets, though, the retriever's own order almost never puts them in the
+  top 10 (3.0% / 2.5%), while either ranker lifts them 6–8×: the retriever finds new products but ranks them
+  low inside the 200. The rankers' different weaknesses show up only in that small retrieved slice.
+
+- 03:25 H4 subagent finished: opt-in `negative_sampling.exclude_later_reviews` in `ranker_training.py`
+  (`later_review_cells` mask from interactions with ts in (t, T1) only; refuses Val lists; flag off → identical
+  sampler output and RNG state, proved by test). Reviewed; 87 tests pass. **Full-data counts:** 8.9% of all
+  training lists (28,117) and **13.1% of natural lists** (5,088; 6,146 cells, mean retrieval rank ≈ 70) contain a later
+  same-period review among the sampled-negative pool. The 2026-10-21 entry's 3.7% was a sample figure; the full
+  rate is 2–3.5× higher, and it is highest exactly in the natural lists.
+  **Pre-registered H4:** excluding them helps natural-only training slightly (expected < +0.0003 nDCG@10, since only
+  ~0.3% of sampled negatives are affected); a null result is likely and is still informative.
+  **Pre-registered H5:** DIN on natural lists. The team's forced-list DIN beat the forced MLP on new/tail but lost on
+  head. Prediction: natural DIN improves on the natural MLP overall if attention helps once the shortcut is gone;
+  the new/tail weakness from F1 likely persists (same training-positive mix).
+- 03:26 Queued seed-0 runs back to back: H3 `20261028-natural-ktrain500-seed0` → H4 `20261028-natural-laterneg-seed0`
+  → H5 `20261028-din-natural-seed0`.
+
+- 03:36 / 03:45 **H3 and H4 results (seed 0)**, paired with natural seed 0 (0.008340) on the same Val instances
+  (`results/ranker_compare/20261028-natural-{ktrain500,laterneg}-vs-natural-seed0/`; user-bootstrap CI only,
+  seed variance not included: natural seed SD is 0.00026):
+
+  | Run | Best epoch | End-to-end nDCG@10 | Δ vs natural seed 0 (CI) | Δ new-in-period | Δ warm-tail | Δ warm-head |
+  |---|---|---|---|---|---|---|
+  | H3 K_train = 500 | 8 / 11 | **0.008926** | **+0.00059 [0.00032, 0.00085]** | −0.00005 (ns) | +0.00002 (ns) | **+0.00117** |
+  | H4 later reviews excluded | 6 / 9 | 0.008518 | +0.00018 [−0.00002, 0.00039] | +0.00014 (ns) | +0.00009 (ns) | +0.00016 (ns) |
+
+  **H3:** better overall (above all three natural seeds), but **prediction (a) failed**: the gain is all on warm-head;
+  new/tail are unchanged despite more new/tail natural positives. Deeper negatives seem to help head ranking. Needs
+  seeds 1–2 before it counts; K₁ = 500 robustness (prediction b) not yet tested.
+  **H4:** null, as predicted (CI includes 0). Not worth more seeds tonight; the label issue is real but small.
+
+- 03:56 **H5 result — DIN on natural lists (seed 0)** (`results/ranker_din/20261028-din-natural-seed0`, best epoch
+  5 of 8): end-to-end nDCG@10 **0.009878**, conditional 0.1452, GAUC 0.769, rescued 3,208 / demoted 1,376.
+  Compare: forced-list DIN (team, 3 seeds) 0.006436 ± 0.000499; natural MLP 0.008607 ± 0.000258 (seed 0 0.008340).
+  **If it replicates, this reverses the team's RQ3 conclusion (MLP > DIN):** the forced-positive shortcut hurt DIN
+  more than the MLP. Plausible reason: DIN's attention query uses the candidate's item/category embeddings, giving
+  it more ways to detect "dissimilar to the history = forced positive" (cf. F5). No new leakage path: only the
+  training population changed, with the team's DIN code. Queued DIN seeds 1–2, then H3 seeds 1–2
+  (`results/logs/overnight/queue2.log`).
+
+- 04:05 DIN natural seed 1: end-to-end 0.009628 (best epoch 3), conditional 0.1413, GAUC 0.767 — consistent with seed 0.
+
+- 04:17 **H5 confirmed over 3 seeds** (`results/ranker_compare/20261028-din-natural-vs-mlp-natural/`,
+  `results/ranker_compare/20261028-din-natural-vs-din-forced/`; Val, K₁ = 200):
+
+  | Ranker (seeds 0–2) | End-to-end nDCG@10 | Conditional | Recall@10 | vs R1 |
+  |---|---|---|---|---|
+  | R1 retrieval order | 0.005642 | 0.0828 | 0.0104 | — |
+  | DIN, forced lists (team) | 0.006436 ± 0.000499 | 0.0942 | 0.0136 | +14% |
+  | MLP, forced lists (team) | 0.006843 ± 0.000233 | 0.0991 | 0.0139 | +21% |
+  | MLP, natural lists | 0.008607 ± 0.000258 | 0.1270 | 0.0159 | +53% |
+  | **DIN, natural lists** | **0.009824 ± 0.000175** | **0.1441** | **0.0182** | **+74%** |
+
+  Per-seed DIN natural: 0.009878 / 0.009628 / 0.009966 (all above every MLP seed).
+  **DIN natural − MLP natural = +0.00122 [0.00101, 0.00141].** By group: new-in-period +0.00032 [0.00014, 0.00051],
+  warm-head +0.00221 [0.00183, 0.00261], warm-tail +0.00004 (ns); history 1–2 +0.00122, 11+ / mixed +0.00136
+  [0.00066, 0.00207]. **Finding F7:** with natural lists, DIN beats the MLP, reversing the team's RQ3 ranking.
+  The team's pre-registered DIN hypothesis (attention helps long mixed histories) now has a positive CI, but the
+  gain is about as large for short histories, so it is not specific to mixed histories.
+  DIN natural − DIN forced = +0.00339 [0.00311, 0.00364], but forced DIN is still best on new-in-period
+  (0.00407 vs 0.00254) and warm-tail (0.00140 vs 0.00082): the F1 trade-off holds for DIN too.
+- 04:18 Extended `index_rank_eval.py` with optional nested `k1_counts` and a `reference` key (my own new script;
+  pointwise rankers only). Config `configs/cascade/k1_rank_eval_din_natural.yaml` (DIN K₁ curve). Runs after H3 seeds.
+
+- 04:49 **H3 confirmed over 3 seeds** (`results/ranker_compare/20261028-natural-ktrain500-vs-natural/`): natural MLP
+  trained on K_train = 500 lists **0.009026 ± 0.000129** (0.008926 / 0.009171 / 0.008980) vs K_train = 200
+  0.008607 ± 0.000258; **diff +0.00042 [0.00025, 0.00060]**, higher in every seed. By group: warm-head +0.00077
+  [0.00044, 0.00113], new-in-period +0.00015 [−0.00003, 0.00033] (ns), warm-tail −0.00005 (ns). **Finding F8:** more
+  and deeper natural training lists help, mostly for head items. Prediction (a), better new/tail, is not supported.
+- 04:50 Started K₁ curves (exact lists, K₁ = 50/100/200/500) for DIN natural and the K_train = 500 MLP
+  (`results/index_rank_eval/20261028-k1-{din-natural,ktrain500}/`).
+
+- 04:52 **Pre-registered H8:** DIN on natural K_train = 500 lists. If F7 (DIN) and F8 (deeper lists) act on
+  different things, the gains should roughly add: prediction ≈ 0.0098 + 0.0004 ≈ 0.0102. If both mainly help head
+  items through the same route, the combination gives less than the sum. Seed 0 first; config
+  `configs/ranker/din_natural_ktrain500_seed0.yaml`.
+
+- 05:05 **K₁ curves, exact search** (`results/index_rank_eval/20261028-k1-din-natural/`,
+  `results/index_rank_eval/20261028-k1-ktrain500-r2/`; the first `20261028-k1-ktrain500` attempt failed on a
+  malformed config and is marked `FAILED.md`). End-to-end macro nDCG@10, mean ± seed SD, 3 seeds each:
+
+  | K₁ | Recall@K₁ | MLP forced (team) | MLP natural | MLP natural, K_train 500 | **DIN natural** |
+  |---|---|---|---|---|---|
+  | 50 | 0.0298 | 0.008315 | 0.008277 | 0.008311 | 0.008800 |
+  | 100 | 0.0457 | 0.008363 | 0.008596 | 0.008785 | 0.009538 |
+  | 200 | 0.0687 | 0.006843 | 0.008607 | **0.009026** | **0.009824** |
+  | 500 | 0.1175 | **0.002210** | 0.008094 | 0.008705 | **0.009734** |
+  | K500 − K200 (CI) | | −0.00463 | −0.00051 [−0.00065, −0.00037] | −0.00032 [−0.00048, −0.00014] | **−0.00009 [−0.00022, +0.00007]** |
+
+  **Finding F9:** after the training fix, a better ranker uses a larger candidate pool better. DIN natural keeps
+  gaining up to K₁ = 200, and K₁ = 500 is statistically equal to it; the K_train = 500 MLP drops less at 500 than
+  the K_train = 200 MLP (H3 prediction b weakly supported; seed-mean CIs, not a formal interaction test). For every
+  ranker, K₁ 500 vs 200 helps new-in-period and warm-tail and costs warm-head (DIN: +0.00008 / +0.00038 /
+  −0.00040). This is the cascade trade-off RQ2 asks about, and its shape now depends on the ranker.
+- 05:06 Started H8 training `20261028-din-natural-ktrain500-seed0`.
+
+- 05:19 **H8 seed 0** (`results/ranker_din/20261028-din-natural-ktrain500-seed0`, 61,070 natural K500 lists, best
+  epoch 5 of 8): end-to-end **0.010107**, conditional 0.1489, GAUC 0.780, against DIN natural seed 0 0.009878
+  (+0.00023). That is about half of the additive prediction (+0.0004), so the two gains partly overlap. Seeds 1–2 queued.
+
+- 05:47 **H8 confirmed over 3 seeds** (`results/ranker_compare/20261028-din-ktrain500-vs-din-natural/`): DIN on
+  natural K_train = 500 lists **0.010137 ± 0.000070** (0.010107 / 0.010088 / 0.010217), conditional 0.149, Recall@10
+  0.0188, **+80% over R1**. Diff vs DIN natural (K_train 200): **+0.00031 [0.00018, 0.00045]**, smaller than the
+  additive prediction (+0.0004), so the gains partly overlap. Unlike the MLP (F8), DIN also gains on **new-in-period
+  +0.00023 [0.00011, 0.00034]** and warm-tail +0.00011 [0.00002, 0.00020], as well as warm-head +0.00051.
+- 05:48 Final latency run (`20261028-latency-final`, MLP natural + DIN natural seed 0) waits for load average < 1.0
+  before timing.
+
+- 05:59 **Final latency run** (`results/latency/20261028-latency-final/`; started at load 0.89, ended at 1.30/2.70,
+  so approximate). Medians in ms, total = user tower + FAISS + filter + ranker:
+
+  | Job | MLP natural: ranker / total | DIN natural: ranker / total |
+  |---|---|---|
+  | Exact K₁ = 50 | 1.18 / 3.04 | 1.99 / 3.81 |
+  | Exact K₁ = 100 | 1.47 / 3.31 | 4.04 / 5.86 |
+  | Exact K₁ = 200 | 2.16 / 4.09 | 8.77 / 11.40 |
+  | Exact K₁ = 500 | 4.93 / 7.09 | 25.10 / 28.26 |
+  | HNSW "200" (ef 450), K₁ = 200 | 2.01 / 3.31 | 8.01 / 9.71 |
+  | HNSW 800, K₁ = 200 | 1.95 / 3.92 | 7.40 / 9.88 |
+  | IVF 32, K₁ = 200 | 1.85 / 2.68 | 7.09 / 8.03 |
+
+  MLP rows agree with the first (provisional) run within ~10%. DIN's attention forward pass dominates its cost
+  (≈ 6–7 ms at K₁ = 200, 22 ms at K₁ = 500). User tower ≈ 0.6–0.7 ms and exact FAISS ≈ 1.1–1.6 ms in all rows.
+
+- 06:15 **Best ranker (DIN natural, K_train 500, seeds 0–2) on the K₁ and index sweeps**
+  (`results/index_rank_eval/20261028-k1-din-ktrain500/`, `results/index_rank_eval/20261028-index-rank-din-ktrain500/`).
+  Pre-registered prediction: F4 and F9 replicate. Result: both do, and F9 becomes stronger.
+
+  | Setting | Recall@K₁ | nDCG@10 | − reference (CI) |
+  |---|---|---|---|
+  | Exact K₁ = 50 | 0.0298 | 0.008932 ± 0.000067 | −0.00121 [−0.00147, −0.00097] vs K₁ 200 |
+  | Exact K₁ = 100 | 0.0457 | 0.009725 ± 0.000078 | −0.00041 [−0.00058, −0.00025] |
+  | Exact K₁ = 200 | 0.0687 | 0.010137 ± 0.000070 | — |
+  | **Exact K₁ = 500** | 0.1175 | **0.010379 ± 0.000035** | **+0.00024 [+0.00008, +0.00042]** |
+  | HNSW "200" (ef 450) | 0.0671 | 0.009936 | −0.00020 [−0.00030, −0.00010] vs exact |
+  | HNSW 800 | 0.0680 | 0.010075 | −0.00006 [−0.00013, −0.00000] |
+  | IVF 4 | 0.0434 | 0.007175 | −0.00296 |
+  | IVF 32 | 0.0643 | 0.009977 | −0.00016 [−0.00032, −0.00001] |
+
+  K₁ 500 vs 200 by group: new-in-period +0.00042 [0.00026, 0.00059], warm-tail +0.00041 [0.00024, 0.00061],
+  warm-head +0.00003 (ns). This is the first ranker whose nDCG@10 keeps rising up to K₁ = 500.
+
+- 06:20 **Pre-registered H9 — listwise softmax loss vs pointwise BCE.** The team's 2026-10-21 note blamed the
+  GAUC-vs-nDCG gap on BCE's objective mismatch; that could not be tested while forced positives dominated. New opt-in
+  `loss: listwise_softmax` (−log softmax of the positive over its 1 + 50 sampled columns; default BCE path
+  unchanged; test added, 88 passed). Prediction: higher conditional and end-to-end nDCG@10 than BCE for the same
+  model and data (seed-0 baselines: MLP K_train 500 0.008926, DIN K_train 500 0.010107), with GAUC possibly lower.
+  Runs: `20261028-natural-ktrain500-listwise-seed0`, then `20261028-din-natural-ktrain500-listwise-seed0`.
+
+- 06:55 **H9 results — listwise softmax vs BCE (seed 0, natural K_train = 500 lists)**
+  (`results/ranker_compare/20261028-listwise-vs-bce-{mlp,din}-seed0/`; user-bootstrap CI, seed variance not included):
+
+  | Model | BCE | Listwise | Diff (CI) | New-in-period | Warm-head | Warm-tail | GAUC BCE → listwise |
+  |---|---|---|---|---|---|---|---|
+  | MLP | 0.008926 | **0.009431** | **+0.00051 [0.00026, 0.00076]** | +0.00027 [0.00008, 0.00047] | +0.00070 | +0.00033 [0.00014, 0.00051] | 0.741 → 0.753 |
+  | DIN | 0.010107 | **0.010648** | **+0.00054 [0.00029, 0.00078]** | −0.00012 (ns) | +0.00108 | +0.00012 (ns) | 0.780 → 0.785 |
+
+  **H9 supported (seed 0):** listwise beats BCE by ~0.0005 for both models, which is 3–4× the BCE seed SD (0.00007–0.00013).
+  Wrong side-prediction: GAUC also went up. The listwise DIN at K₁ = 200 (0.010648) is the best single run of the night.
+  MLP listwise seed 1 running for replication; DIN listwise is single-seed only.
+
+- 07:02 **H9 MLP replication (seed 1):** listwise 0.009647 vs BCE 0.009171. Seeds 0–1
+  (`results/ranker_compare/20261028-listwise-vs-bce-mlp-seeds01/`): listwise 0.009539 vs BCE 0.009048,
+  **diff +0.00049 [0.00031, 0.00069]**, higher in both seeds. Final test suite: 88 passed. **End of overnight run (07:03).**
+
+### Compute queue after seeds 1–2 (one job at a time)
+1. `compare_rankers` natural vs forced (cheap, saved ranks) → 2. K₁ sweep natural (includes ranker timing, run
+alone) → 3. score diagnostic natural → 4. index sweep full → 5. latency full (alone, idle machine).
+
+### Phase 2 hypotheses (pre-registered; pick by Phase 1 outcome)
+- H2: the natural-only MLP's gain over R1 mostly comes from re-weighting the retrieval score. Test: natural lists
+  without the retrieval-score input (opt-in feature exclusion). Prediction if H2 true: large drop toward R1.
+- H3: training lists at K_train = 500 (≈1.7× more natural positives, negatives from ranks up to 500) reduce the
+  K₁ = 500 collapse, because training negatives then cover the deeper pool seen at inference.
+- H4: the user's later same-period reviews sampled as negatives hurt slightly (≈3.7% of lists). Small effect expected.
+- H5: DIN on natural lists closes or reverses the DIN–MLP gap (DIN may have suffered more from forced positives).
+- A1 (analysis): failure breakdown per segment for natural vs forced — where do the extra hits come from?
+- H6 (from F1): natural training positives are dominated by head items, so new/tail products are under-represented.
+  Check: item-group mix of natural vs forced training positives (cheap). If confirmed, test a remedy that keeps
+  forced positives' new/tail signal without the score shortcut: forced lists with the retrieval-score input
+  removed for all rows, or natural + forced lists without the score (seed 0 first).
+
+## Current hypothesis
+
+H1 (Phase 1): training on natural lists removes the inverted retrieval-score signal (training raw-score AUC 0.08 on
+forced lists vs 0.63 on natural Val hits), so the ranker should (a) correlate positively with retrieval score,
+(b) stop collapsing at K₁ = 500. It may lose some of the current MLP's +21% gain over R1 if it leans on the score.
+
+## Next step
+
+Wait for the sample check; then start full seed 0.

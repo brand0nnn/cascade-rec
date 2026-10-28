@@ -1,0 +1,1195 @@
+{
+  "scope": "validation only",
+  "split": "val",
+  "development_sample": true,
+  "retriever_run": "results/retriever/two_tower_text/seed0",
+  "retriever_seed": 0,
+  "k1": 200,
+  "buffer": 250,
+  "n_instances": 4775,
+  "n_users": 2553,
+  "n_items": 111480,
+  "faiss_version": "1.15.1",
+  "faiss_threads": 1,
+  "cpu": "Apple M2 Pro",
+  "machine": "arm64",
+  "user_vector_seconds": 0.5975847910158336,
+  "configs": {
+    "exact": {
+      "kind": "exact",
+      "n_requested": 450,
+      "build_seconds": 0.00559504100237973,
+      "search_seconds_batch": 2.56400220800424,
+      "mean_filtered_candidates": 199.99350785340314,
+      "search_ms_per_query_batch": 0.5369638131946052,
+      "metrics": {
+        "n_instances": 4775,
+        "n_users": 2553,
+        "recall@10": {
+          "macro": 0.010374349504784289,
+          "micro": 0.01130890052356021
+        },
+        "recall@50": {
+          "macro": 0.03086535151752543,
+          "micro": 0.031413612565445025
+        },
+        "recall@100": {
+          "macro": 0.04726575813532335,
+          "micro": 0.049005235602094244
+        },
+        "recall@200": {
+          "macro": 0.0693586867499911,
+          "micro": 0.07308900523560209
+        },
+        "recall_vs_exact": 1.0,
+        "short_of_k1": 5,
+        "segments": {
+          "item_cold": {
+            "n_instances": 0,
+            "n_users": 0,
+            "recall@10": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@50": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@100": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@200": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall_vs_exact": NaN,
+            "short_of_k1": 0
+          },
+          "item_tail": {
+            "n_instances": 2019,
+            "n_users": 1414,
+            "recall@10": {
+              "macro": 0.0007072135785007072,
+              "micro": 0.0004952947003467063
+            },
+            "recall@50": {
+              "macro": 0.00525052505250525,
+              "micro": 0.004952947003467063
+            },
+            "recall@100": {
+              "macro": 0.009114942106455543,
+              "micro": 0.009410599306587419
+            },
+            "recall@200": {
+              "macro": 0.017034101369320605,
+              "micro": 0.019316493313521546
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 1
+          },
+          "item_head": {
+            "n_instances": 2756,
+            "n_users": 1821,
+            "recall@10": {
+              "macro": 0.016602599304411495,
+              "micro": 0.019230769230769232
+            },
+            "recall@50": {
+              "macro": 0.049112209408749774,
+              "micro": 0.05079825834542816
+            },
+            "recall@100": {
+              "macro": 0.07595643419366647,
+              "micro": 0.07801161103047896
+            },
+            "recall@200": {
+              "macro": 0.11025993044114955,
+              "micro": 0.11248185776487664
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 4
+          },
+          "item_new_in_period": {
+            "n_instances": 1575,
+            "n_users": 1052,
+            "recall@10": {
+              "macro": 0.0009505703422053232,
+              "micro": 0.0006349206349206349
+            },
+            "recall@50": {
+              "macro": 0.004641231708722203,
+              "micro": 0.005079365079365079
+            },
+            "recall@100": {
+              "macro": 0.011662569053253465,
+              "micro": 0.015238095238095238
+            },
+            "recall@200": {
+              "macro": 0.024463970756746424,
+              "micro": 0.029841269841269842
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 2
+          },
+          "item_not_new": {
+            "n_instances": 3200,
+            "n_users": 2000,
+            "recall@10": {
+              "macro": 0.014096428571428572,
+              "micro": 0.0165625
+            },
+            "recall@50": {
+              "macro": 0.04175059523809524,
+              "micro": 0.044375
+            },
+            "recall@100": {
+              "macro": 0.06168869047619047,
+              "micro": 0.065625
+            },
+            "recall@200": {
+              "macro": 0.0895220238095238,
+              "micro": 0.094375
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 3
+          },
+          "hist_1-2": {
+            "n_instances": 645,
+            "n_users": 455,
+            "recall@10": {
+              "macro": 0.00989010989010989,
+              "micro": 0.007751937984496124
+            },
+            "recall@50": {
+              "macro": 0.02967032967032967,
+              "micro": 0.027906976744186046
+            },
+            "recall@100": {
+              "macro": 0.05384615384615385,
+              "micro": 0.04961240310077519
+            },
+            "recall@200": {
+              "macro": 0.07802197802197802,
+              "micro": 0.07441860465116279
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 0
+          },
+          "hist_3-5": {
+            "n_instances": 2386,
+            "n_users": 1630,
+            "recall@10": {
+              "macro": 0.013599182004089978,
+              "micro": 0.013830678960603521
+            },
+            "recall@50": {
+              "macro": 0.03701431492842536,
+              "micro": 0.03562447611064543
+            },
+            "recall@100": {
+              "macro": 0.0525562372188139,
+              "micro": 0.051969823973176864
+            },
+            "recall@200": {
+              "macro": 0.07464212678936605,
+              "micro": 0.07376362112321877
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 0
+          },
+          "hist_6-10": {
+            "n_instances": 1234,
+            "n_users": 832,
+            "recall@10": {
+              "macro": 0.009214743589743592,
+              "micro": 0.009724473257698542
+            },
+            "recall@50": {
+              "macro": 0.023978365384615383,
+              "micro": 0.027552674230145867
+            },
+            "recall@100": {
+              "macro": 0.038421474358974354,
+              "micro": 0.046191247974068074
+            },
+            "recall@200": {
+              "macro": 0.060737179487179487,
+              "micro": 0.07293354943273905
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 0
+          },
+          "hist_11+": {
+            "n_instances": 510,
+            "n_users": 217,
+            "recall@10": {
+              "macro": 0.004147465437788019,
+              "micro": 0.00784313725490196
+            },
+            "recall@50": {
+              "macro": 0.023098330241187386,
+              "micro": 0.025490196078431372
+            },
+            "recall@100": {
+              "macro": 0.041147485387116725,
+              "micro": 0.041176470588235294
+            },
+            "recall@200": {
+              "macro": 0.06079158936301793,
+              "micro": 0.06862745098039216
+            },
+            "recall_vs_exact": 1.0,
+            "short_of_k1": 5
+          }
+        }
+      }
+    },
+    "hnsw_ef200": {
+      "kind": "hnsw",
+      "n_requested": 450,
+      "m": 32,
+      "ef_construction": 200,
+      "ef_search_configured": 200,
+      "ef_search_effective": 450,
+      "build_seconds": 23.423858875001315,
+      "search_seconds_batch": 2.955848875019001,
+      "mean_filtered_candidates": 199.98638743455498,
+      "search_ms_per_query_batch": 0.6190259424123562,
+      "metrics": {
+        "n_instances": 4775,
+        "n_users": 2553,
+        "recall@10": {
+          "macro": 0.010374349504784289,
+          "micro": 0.01130890052356021
+        },
+        "recall@50": {
+          "macro": 0.031975156975156974,
+          "micro": 0.03204188481675393
+        },
+        "recall@100": {
+          "macro": 0.04788891093238919,
+          "micro": 0.049214659685863874
+        },
+        "recall@200": {
+          "macro": 0.06879404212891724,
+          "micro": 0.07246073298429319
+        },
+        "recall_vs_exact": 0.935364100735098,
+        "short_of_k1": 5,
+        "segments": {
+          "item_cold": {
+            "n_instances": 0,
+            "n_users": 0,
+            "recall@10": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@50": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@100": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@200": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall_vs_exact": NaN,
+            "short_of_k1": 0
+          },
+          "item_tail": {
+            "n_instances": 2019,
+            "n_users": 1414,
+            "recall@10": {
+              "macro": 0.0007072135785007072,
+              "micro": 0.0004952947003467063
+            },
+            "recall@50": {
+              "macro": 0.005427328447130427,
+              "micro": 0.005448241703813769
+            },
+            "recall@100": {
+              "macro": 0.009179234249955606,
+              "micro": 0.009905894006934125
+            },
+            "recall@200": {
+              "macro": 0.01878578029661183,
+              "micro": 0.022288261515601784
+            },
+            "recall_vs_exact": 0.933556533445092,
+            "short_of_k1": 1
+          },
+          "item_head": {
+            "n_instances": 2756,
+            "n_users": 1821,
+            "recall@10": {
+              "macro": 0.016602599304411495,
+              "micro": 0.019230769230769232
+            },
+            "recall@50": {
+              "macro": 0.05039355665385319,
+              "micro": 0.05152394775036284
+            },
+            "recall@100": {
+              "macro": 0.0762310086033315,
+              "micro": 0.07801161103047896
+            },
+            "recall@200": {
+              "macro": 0.10703825736774665,
+              "micro": 0.10921625544267054
+            },
+            "recall_vs_exact": 0.9366882946242568,
+            "short_of_k1": 4
+          },
+          "item_new_in_period": {
+            "n_instances": 1575,
+            "n_users": 1052,
+            "recall@10": {
+              "macro": 0.0009505703422053232,
+              "micro": 0.0006349206349206349
+            },
+            "recall@50": {
+              "macro": 0.005354159465376196,
+              "micro": 0.006349206349206349
+            },
+            "recall@100": {
+              "macro": 0.011748984538908493,
+              "micro": 0.015873015873015872
+            },
+            "recall@200": {
+              "macro": 0.02650027412384827,
+              "micro": 0.03301587301587302
+            },
+            "recall_vs_exact": 0.935868376068376,
+            "short_of_k1": 2
+          },
+          "item_not_new": {
+            "n_instances": 3200,
+            "n_users": 2000,
+            "recall@10": {
+              "macro": 0.014096428571428572,
+              "micro": 0.0165625
+            },
+            "recall@50": {
+              "macro": 0.042875595238095233,
+              "micro": 0.0446875
+            },
+            "recall@100": {
+              "macro": 0.06268869047619047,
+              "micro": 0.065625
+            },
+            "recall@200": {
+              "macro": 0.0882345238095238,
+              "micro": 0.091875
+            },
+            "recall_vs_exact": 0.9351159027195,
+            "short_of_k1": 3
+          },
+          "hist_1-2": {
+            "n_instances": 645,
+            "n_users": 455,
+            "recall@10": {
+              "macro": 0.00989010989010989,
+              "micro": 0.007751937984496124
+            },
+            "recall@50": {
+              "macro": 0.03076923076923077,
+              "micro": 0.027906976744186046
+            },
+            "recall@100": {
+              "macro": 0.054945054945054944,
+              "micro": 0.04961240310077519
+            },
+            "recall@200": {
+              "macro": 0.07692307692307693,
+              "micro": 0.07131782945736434
+            },
+            "recall_vs_exact": 0.9343953488372092,
+            "short_of_k1": 0
+          },
+          "hist_3-5": {
+            "n_instances": 2386,
+            "n_users": 1630,
+            "recall@10": {
+              "macro": 0.013599182004089978,
+              "micro": 0.013830678960603521
+            },
+            "recall@50": {
+              "macro": 0.0385480572597137,
+              "micro": 0.036881810561609385
+            },
+            "recall@100": {
+              "macro": 0.05316973415132924,
+              "micro": 0.052388935456831515
+            },
+            "recall@200": {
+              "macro": 0.07505112474437628,
+              "micro": 0.07334450963956413
+            },
+            "recall_vs_exact": 0.9357837384744341,
+            "short_of_k1": 0
+          },
+          "hist_6-10": {
+            "n_instances": 1234,
+            "n_users": 832,
+            "recall@10": {
+              "macro": 0.009214743589743592,
+              "micro": 0.009724473257698542
+            },
+            "recall@50": {
+              "macro": 0.023978365384615383,
+              "micro": 0.027552674230145867
+            },
+            "recall@100": {
+              "macro": 0.039823717948717946,
+              "micro": 0.04700162074554295
+            },
+            "recall@200": {
+              "macro": 0.05753205128205127,
+              "micro": 0.07050243111831442
+            },
+            "recall_vs_exact": 0.9382050243111832,
+            "short_of_k1": 0
+          },
+          "hist_11+": {
+            "n_instances": 510,
+            "n_users": 217,
+            "recall@10": {
+              "macro": 0.004147465437788019,
+              "micro": 0.00784313725490196
+            },
+            "recall@50": {
+              "macro": 0.023098330241187386,
+              "micro": 0.025490196078431372
+            },
+            "recall@100": {
+              "macro": 0.036958126359048014,
+              "micro": 0.0392156862745098
+            },
+            "recall@200": {
+              "macro": 0.06376376975455317,
+              "micro": 0.07450980392156863
+            },
+            "recall_vs_exact": 0.9277521196276322,
+            "short_of_k1": 5
+          }
+        }
+      }
+    },
+    "hnsw_ef800": {
+      "kind": "hnsw",
+      "n_requested": 450,
+      "m": 32,
+      "ef_construction": 200,
+      "ef_search_configured": 800,
+      "ef_search_effective": 800,
+      "build_seconds": 23.069072750018677,
+      "search_seconds_batch": 5.800587166973855,
+      "mean_filtered_candidates": 199.9882722513089,
+      "search_ms_per_query_batch": 1.214782652769394,
+      "metrics": {
+        "n_instances": 4775,
+        "n_users": 2553,
+        "recall@10": {
+          "macro": 0.010374349504784289,
+          "micro": 0.01130890052356021
+        },
+        "recall@50": {
+          "macro": 0.031648743605265345,
+          "micro": 0.03183246073298429
+        },
+        "recall@100": {
+          "macro": 0.04742896482026917,
+          "micro": 0.04879581151832461
+        },
+        "recall@200": {
+          "macro": 0.06912221068095258,
+          "micro": 0.07267015706806283
+        },
+        "recall_vs_exact": 0.9740040621850692,
+        "short_of_k1": 5,
+        "segments": {
+          "item_cold": {
+            "n_instances": 0,
+            "n_users": 0,
+            "recall@10": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@50": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@100": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@200": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall_vs_exact": NaN,
+            "short_of_k1": 0
+          },
+          "item_tail": {
+            "n_instances": 2019,
+            "n_users": 1414,
+            "recall@10": {
+              "macro": 0.0007072135785007072,
+              "micro": 0.0004952947003467063
+            },
+            "recall@50": {
+              "macro": 0.005427328447130427,
+              "micro": 0.005448241703813769
+            },
+            "recall@100": {
+              "macro": 0.009114942106455543,
+              "micro": 0.009410599306587419
+            },
+            "recall@200": {
+              "macro": 0.017860956342680454,
+              "micro": 0.020802377414561663
+            },
+            "recall_vs_exact": 0.9732780254251279,
+            "short_of_k1": 1
+          },
+          "item_head": {
+            "n_instances": 2756,
+            "n_users": 1821,
+            "recall@10": {
+              "macro": 0.016602599304411495,
+              "micro": 0.019230769230769232
+            },
+            "recall@50": {
+              "macro": 0.04993593263774483,
+              "micro": 0.0511611030478955
+            },
+            "recall@100": {
+              "macro": 0.07540728537433644,
+              "micro": 0.07764876632801161
+            },
+            "recall@200": {
+              "macro": 0.10824638477027275,
+              "micro": 0.1106676342525399
+            },
+            "recall_vs_exact": 0.9745359447026024,
+            "short_of_k1": 4
+          },
+          "item_new_in_period": {
+            "n_instances": 1575,
+            "n_users": 1052,
+            "recall@10": {
+              "macro": 0.0009505703422053232,
+              "micro": 0.0006349206349206349
+            },
+            "recall@50": {
+              "macro": 0.004878874294273534,
+              "micro": 0.005714285714285714
+            },
+            "recall@100": {
+              "macro": 0.011662569053253465,
+              "micro": 0.015238095238095238
+            },
+            "recall@200": {
+              "macro": 0.025574710460642018,
+              "micro": 0.031746031746031744
+            },
+            "recall_vs_exact": 0.9743567765567764,
+            "short_of_k1": 2
+          },
+          "item_not_new": {
+            "n_instances": 3200,
+            "n_users": 2000,
+            "recall@10": {
+              "macro": 0.014096428571428572,
+              "micro": 0.0165625
+            },
+            "recall@50": {
+              "macro": 0.04262559523809523,
+              "micro": 0.0446875
+            },
+            "recall@100": {
+              "macro": 0.06214702380952381,
+              "micro": 0.0653125
+            },
+            "recall@200": {
+              "macro": 0.0886470238095238,
+              "micro": 0.0928125
+            },
+            "recall_vs_exact": 0.9738304605802444,
+            "short_of_k1": 3
+          },
+          "hist_1-2": {
+            "n_instances": 645,
+            "n_users": 455,
+            "recall@10": {
+              "macro": 0.00989010989010989,
+              "micro": 0.007751937984496124
+            },
+            "recall@50": {
+              "macro": 0.03076923076923077,
+              "micro": 0.027906976744186046
+            },
+            "recall@100": {
+              "macro": 0.05274725274725275,
+              "micro": 0.04806201550387597
+            },
+            "recall@200": {
+              "macro": 0.07912087912087912,
+              "micro": 0.07441860465116279
+            },
+            "recall_vs_exact": 0.9722635658914727,
+            "short_of_k1": 0
+          },
+          "hist_3-5": {
+            "n_instances": 2386,
+            "n_users": 1630,
+            "recall@10": {
+              "macro": 0.013599182004089978,
+              "micro": 0.013830678960603521
+            },
+            "recall@50": {
+              "macro": 0.03762781186094069,
+              "micro": 0.03604358759430008
+            },
+            "recall@100": {
+              "macro": 0.05296523517382413,
+              "micro": 0.051969823973176864
+            },
+            "recall@200": {
+              "macro": 0.07443762781186093,
+              "micro": 0.07292539815590947
+            },
+            "recall_vs_exact": 0.9740108968985751,
+            "short_of_k1": 0
+          },
+          "hist_6-10": {
+            "n_instances": 1234,
+            "n_users": 832,
+            "recall@10": {
+              "macro": 0.009214743589743592,
+              "micro": 0.009724473257698542
+            },
+            "recall@50": {
+              "macro": 0.023978365384615383,
+              "micro": 0.027552674230145867
+            },
+            "recall@100": {
+              "macro": 0.0390224358974359,
+              "micro": 0.04700162074554295
+            },
+            "recall@200": {
+              "macro": 0.06033653846153846,
+              "micro": 0.07293354943273905
+            },
+            "recall_vs_exact": 0.9752471636952997,
+            "short_of_k1": 0
+          },
+          "hist_11+": {
+            "n_instances": 510,
+            "n_users": 217,
+            "recall@10": {
+              "macro": 0.004147465437788019,
+              "micro": 0.00784313725490196
+            },
+            "recall@50": {
+              "macro": 0.02540247770662517,
+              "micro": 0.027450980392156862
+            },
+            "recall@100": {
+              "macro": 0.03884333792167893,
+              "micro": 0.0392156862745098
+            },
+            "recall@200": {
+              "macro": 0.058611990409225434,
+              "micro": 0.06862745098039216
+            },
+            "recall_vs_exact": 0.9731654841837357,
+            "short_of_k1": 5
+          }
+        }
+      }
+    },
+    "ivf_nprobe4": {
+      "kind": "ivf",
+      "n_requested": 450,
+      "nlist": 1024,
+      "nprobe": 4,
+      "build_seconds": 2.3332851250015665,
+      "search_seconds_batch": 0.33026041599805467,
+      "mean_filtered_candidates": 193.98534031413612,
+      "search_ms_per_query_batch": 0.0691644850257706,
+      "metrics": {
+        "n_instances": 4775,
+        "n_users": 2553,
+        "recall@10": {
+          "macro": 0.008549698767090072,
+          "micro": 0.008795811518324608
+        },
+        "recall@50": {
+          "macro": 0.026081064124542388,
+          "micro": 0.02575916230366492
+        },
+        "recall@100": {
+          "macro": 0.03447822168913751,
+          "micro": 0.033507853403141365
+        },
+        "recall@200": {
+          "macro": 0.04550673731987331,
+          "micro": 0.045654450261780104
+        },
+        "recall_vs_exact": 0.3039213448314414,
+        "short_of_k1": 1109,
+        "segments": {
+          "item_cold": {
+            "n_instances": 0,
+            "n_users": 0,
+            "recall@10": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@50": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@100": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@200": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall_vs_exact": NaN,
+            "short_of_k1": 0
+          },
+          "item_tail": {
+            "n_instances": 2019,
+            "n_users": 1414,
+            "recall@10": {
+              "macro": 0.0003536067892503536,
+              "micro": 0.0004952947003467063
+            },
+            "recall@50": {
+              "macro": 0.009056007641580485,
+              "micro": 0.009410599306587419
+            },
+            "recall@100": {
+              "macro": 0.01285138717953428,
+              "micro": 0.014363546310054482
+            },
+            "recall@200": {
+              "macro": 0.023533679898602104,
+              "micro": 0.024764735017335313
+            },
+            "recall_vs_exact": 0.306285543744682,
+            "short_of_k1": 453
+          },
+          "item_head": {
+            "n_instances": 2756,
+            "n_users": 1821,
+            "recall@10": {
+              "macro": 0.014039904814204649,
+              "micro": 0.014876632801161103
+            },
+            "recall@50": {
+              "macro": 0.037836353651839655,
+              "micro": 0.03773584905660377
+            },
+            "recall@100": {
+              "macro": 0.04874305936908902,
+              "micro": 0.04753265602322206
+            },
+            "recall@200": {
+              "macro": 0.06028128622856794,
+              "micro": 0.06095791001451379
+            },
+            "recall_vs_exact": 0.30218937182497085,
+            "short_of_k1": 656
+          },
+          "item_new_in_period": {
+            "n_instances": 1575,
+            "n_users": 1052,
+            "recall@10": {
+              "macro": 0.0,
+              "micro": 0.0
+            },
+            "recall@50": {
+              "macro": 0.01098924839419136,
+              "micro": 0.013333333333333334
+            },
+            "recall@100": {
+              "macro": 0.0183805421448007,
+              "micro": 0.02095238095238095
+            },
+            "recall@200": {
+              "macro": 0.02830059674166138,
+              "micro": 0.030476190476190476
+            },
+            "recall_vs_exact": 0.2988035816035816,
+            "short_of_k1": 403
+          },
+          "item_not_new": {
+            "n_instances": 3200,
+            "n_users": 2000,
+            "recall@10": {
+              "macro": 0.0124875,
+              "micro": 0.013125
+            },
+            "recall@50": {
+              "macro": 0.031608333333333336,
+              "micro": 0.031875
+            },
+            "recall@100": {
+              "macro": 0.040025,
+              "micro": 0.0396875
+            },
+            "recall@200": {
+              "macro": 0.05172499999999999,
+              "micro": 0.053125
+            },
+            "recall_vs_exact": 0.3064402439201536,
+            "short_of_k1": 706
+          },
+          "hist_1-2": {
+            "n_instances": 645,
+            "n_users": 455,
+            "recall@10": {
+              "macro": 0.012087912087912088,
+              "micro": 0.009302325581395349
+            },
+            "recall@50": {
+              "macro": 0.02857142857142857,
+              "micro": 0.023255813953488372
+            },
+            "recall@100": {
+              "macro": 0.03296703296703297,
+              "micro": 0.027906976744186046
+            },
+            "recall@200": {
+              "macro": 0.04285714285714286,
+              "micro": 0.040310077519379844
+            },
+            "recall_vs_exact": 0.3050387596899225,
+            "short_of_k1": 134
+          },
+          "hist_3-5": {
+            "n_instances": 2386,
+            "n_users": 1630,
+            "recall@10": {
+              "macro": 0.00838445807770961,
+              "micro": 0.00796311818943839
+            },
+            "recall@50": {
+              "macro": 0.02627811860940695,
+              "micro": 0.026823134953897737
+            },
+            "recall@100": {
+              "macro": 0.033128834355828224,
+              "micro": 0.03310980720871752
+            },
+            "recall@200": {
+              "macro": 0.04498977505112474,
+              "micro": 0.04610226320201174
+            },
+            "recall_vs_exact": 0.3054170159262364,
+            "short_of_k1": 530
+          },
+          "hist_6-10": {
+            "n_instances": 1234,
+            "n_users": 832,
+            "recall@10": {
+              "macro": 0.011017628205128204,
+              "micro": 0.01053484602917342
+            },
+            "recall@50": {
+              "macro": 0.022876602564102563,
+              "micro": 0.02674230145867099
+            },
+            "recall@100": {
+              "macro": 0.03569711538461538,
+              "micro": 0.03970826580226904
+            },
+            "recall@200": {
+              "macro": 0.04505208333333333,
+              "micro": 0.04862236628849271
+            },
+            "recall_vs_exact": 0.3056685575364668,
+            "short_of_k1": 275
+          },
+          "hist_11+": {
+            "n_instances": 510,
+            "n_users": 217,
+            "recall@10": {
+              "macro": 0.004147465437788018,
+              "micro": 0.00784313725490196
+            },
+            "recall@50": {
+              "macro": 0.019312945119396734,
+              "micro": 0.021568627450980392
+            },
+            "recall@100": {
+              "macro": 0.02558188687220945,
+              "micro": 0.027450980392156862
+            },
+            "recall@200": {
+              "macro": 0.04394923381098496,
+              "micro": 0.043137254901960784
+            },
+            "recall_vs_exact": 0.2912831795492794,
+            "short_of_k1": 170
+          }
+        }
+      }
+    },
+    "ivf_nprobe32": {
+      "kind": "ivf",
+      "n_requested": 450,
+      "nlist": 1024,
+      "nprobe": 32,
+      "build_seconds": 2.3310317909927107,
+      "search_seconds_batch": 0.7331059580028523,
+      "mean_filtered_candidates": 199.9503664921466,
+      "search_ms_per_query_batch": 0.15353004356080677,
+      "metrics": {
+        "n_instances": 4775,
+        "n_users": 2553,
+        "recall@10": {
+          "macro": 0.010733404211665082,
+          "micro": 0.010890052356020943
+        },
+        "recall@50": {
+          "macro": 0.029009755096711616,
+          "micro": 0.027853403141361255
+        },
+        "recall@100": {
+          "macro": 0.04274773079120905,
+          "micro": 0.0437696335078534
+        },
+        "recall@200": {
+          "macro": 0.06835536234241135,
+          "micro": 0.06890052356020943
+        },
+        "recall_vs_exact": 0.7342929479726316,
+        "short_of_k1": 17,
+        "segments": {
+          "item_cold": {
+            "n_instances": 0,
+            "n_users": 0,
+            "recall@10": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@50": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@100": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall@200": {
+              "macro": NaN,
+              "micro": NaN
+            },
+            "recall_vs_exact": NaN,
+            "short_of_k1": 0
+          },
+          "item_tail": {
+            "n_instances": 2019,
+            "n_users": 1414,
+            "recall@10": {
+              "macro": 0.0007072135785007072,
+              "micro": 0.0004952947003467063
+            },
+            "recall@50": {
+              "macro": 0.0047568532363440426,
+              "micro": 0.004952947003467063
+            },
+            "recall@100": {
+              "macro": 0.01043114515533186,
+              "micro": 0.01188707280832095
+            },
+            "recall@200": {
+              "macro": 0.021865169868222054,
+              "micro": 0.024764735017335313
+            },
+            "recall_vs_exact": 0.737785080199642,
+            "short_of_k1": 9
+          },
+          "item_head": {
+            "n_instances": 2756,
+            "n_users": 1821,
+            "recall@10": {
+              "macro": 0.016968698517298188,
+              "micro": 0.018505079825834544
+            },
+            "recall@50": {
+              "macro": 0.04561596192568186,
+              "micro": 0.04462989840348331
+            },
+            "recall@100": {
+              "macro": 0.06775581182500458,
+              "micro": 0.06712626995645864
+            },
+            "recall@200": {
+              "macro": 0.1014277869302581,
+              "micro": 0.10123367198838897
+            },
+            "recall_vs_exact": 0.7317346696829604,
+            "short_of_k1": 8
+          },
+          "item_new_in_period": {
+            "n_instances": 1575,
+            "n_users": 1052,
+            "recall@10": {
+              "macro": 0.0009505703422053232,
+              "micro": 0.0006349206349206349
+            },
+            "recall@50": {
+              "macro": 0.004334148107912366,
+              "micro": 0.005079365079365079
+            },
+            "recall@100": {
+              "macro": 0.013326067152112778,
+              "micro": 0.017777777777777778
+            },
+            "recall@200": {
+              "macro": 0.03410630086010314,
+              "micro": 0.03873015873015873
+            },
+            "recall_vs_exact": 0.7353598697598698,
+            "short_of_k1": 9
+          },
+          "item_not_new": {
+            "n_instances": 3200,
+            "n_users": 2000,
+            "recall@10": {
+              "macro": 0.014429761904761904,
+              "micro": 0.0159375
+            },
+            "recall@50": {
+              "macro": 0.03870059523809524,
+              "micro": 0.0390625
+            },
+            "recall@100": {
+              "macro": 0.05504642857142858,
+              "micro": 0.0565625
+            },
+            "recall@200": {
+              "macro": 0.0827422619047619,
+              "micro": 0.08375
+            },
+            "recall_vs_exact": 0.7337678224054752,
+            "short_of_k1": 8
+          },
+          "hist_1-2": {
+            "n_instances": 645,
+            "n_users": 455,
+            "recall@10": {
+              "macro": 0.00989010989010989,
+              "micro": 0.007751937984496124
+            },
+            "recall@50": {
+              "macro": 0.025274725274725275,
+              "micro": 0.021705426356589147
+            },
+            "recall@100": {
+              "macro": 0.04945054945054945,
+              "micro": 0.04496124031007752
+            },
+            "recall@200": {
+              "macro": 0.06373626373626373,
+              "micro": 0.05891472868217054
+            },
+            "recall_vs_exact": 0.7264263565891473,
+            "short_of_k1": 1
+          },
+          "hist_3-5": {
+            "n_instances": 2386,
+            "n_users": 1630,
+            "recall@10": {
+              "macro": 0.014212678936605315,
+              "micro": 0.013830678960603521
+            },
+            "recall@50": {
+              "macro": 0.03517382413087934,
+              "micro": 0.03394803017602682
+            },
+            "recall@100": {
+              "macro": 0.04826175869120654,
+              "micro": 0.04777870913663034
+            },
+            "recall@200": {
+              "macro": 0.0738241308793456,
+              "micro": 0.07250628667225482
+            },
+            "recall_vs_exact": 0.7315695725062867,
+            "short_of_k1": 3
+          },
+          "hist_6-10": {
+            "n_instances": 1234,
+            "n_users": 832,
+            "recall@10": {
+              "macro": 0.008613782051282052,
+              "micro": 0.008914100486223663
+            },
+            "recall@50": {
+              "macro": 0.020733173076923076,
+              "micro": 0.022690437601296597
+            },
+            "recall@100": {
+              "macro": 0.03323317307692308,
+              "micro": 0.03808752025931929
+            },
+            "recall@200": {
+              "macro": 0.05891426282051282,
+              "micro": 0.06807131280388978
+            },
+            "recall_vs_exact": 0.7406239870340358,
+            "short_of_k1": 3
+          },
+          "hist_11+": {
+            "n_instances": 510,
+            "n_users": 217,
+            "recall@10": {
+              "macro": 0.0029953917050691246,
+              "micro": 0.0058823529411764705
+            },
+            "recall@50": {
+              "macro": 0.021198156682027652,
+              "micro": 0.0196078431372549
+            },
+            "recall@100": {
+              "macro": 0.03653919045624115,
+              "micro": 0.03725490196078431
+            },
+            "recall@200": {
+              "macro": 0.06799302744003205,
+              "micro": 0.06666666666666667
+            },
+            "recall_vs_exact": 0.7416643658221876,
+            "short_of_k1": 10
+          }
+        }
+      }
+    }
+  },
+  "cross_check_exact_vs_reference": {
+    "mean_overlap": 0.999910994764398,
+    "rows_same_set": 0.9878534031413613,
+    "rows_same_order": 0.3620942408376963,
+    "target_found_both": 349,
+    "target_found_ours_only": 0,
+    "target_found_ref_only": 0,
+    "target_same_position": 0.9997905759162303,
+    "reference": "data/processed/candidates/two_tower_text_seed0/val.npz",
+    "rows_short_ours": 5,
+    "rows_different_set_excluding_short": 53,
+    "mismatch_items": 108,
+    "mismatch_max_score_gap": 8.940696716308594e-08
+  }
+}

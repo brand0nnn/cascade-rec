@@ -1,0 +1,27 @@
+# Exploratory (2026-10-28, H3): natural-only MLP trained on K_train = 500 lists (use --candidate-dir ..._ktrain500). Val lists unchanged (k1 200).
+model: mlp
+history_length: 50
+item_text_dim: 384
+hidden_dims:
+- 256
+- 128
+- 64
+dropout: 0.1
+loss: binary_cross_entropy
+optimizer: adam
+learning_rate: 0.001
+batch_size: 2048
+max_epochs: 30
+early_stopping:
+  metric: ndcg@10_macro
+  patience: 3
+negative_sampling:
+  negatives_per_list: 50
+  strategy: uniform_without_replacement
+seed: 0
+experiment: natural_ktrain500
+feature_groups:
+- retrieval
+- matching
+k1: 200
+train_population: natural  # train only on lists where retrieval found the target (no forced positives)

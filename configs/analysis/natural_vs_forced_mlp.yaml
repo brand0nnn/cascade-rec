@@ -1,0 +1,11 @@
+# Exploratory, Val only: natural-only MLP vs the forced-list MLP (same matching features and recipe).
+run_id: 20261028-natural-vs-forced-mlp
+groups:
+  forced:
+    - results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching
+    - results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching
+    - results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching
+  natural:
+    - results/ranker_mlp/20261028-natural-matching-seed0
+    - results/ranker_mlp/20261028-natural-matching-seed1
+    - results/ranker_mlp/20261028-natural-matching-seed2

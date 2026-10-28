@@ -1,0 +1,11 @@
+# Exploratory (2026-10-28): DIN vs MLP, both trained on natural lists, seeds 0-2. Val only.
+run_id: 20261028-din-natural-vs-mlp-natural
+groups:
+  mlp_natural:
+    - results/ranker_mlp/20261028-natural-matching-seed0
+    - results/ranker_mlp/20261028-natural-matching-seed1
+    - results/ranker_mlp/20261028-natural-matching-seed2
+  din_natural:
+    - results/ranker_din/20261028-din-natural-seed0
+    - results/ranker_din/20261028-din-natural-seed1
+    - results/ranker_din/20261028-din-natural-seed2

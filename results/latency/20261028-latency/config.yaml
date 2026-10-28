@@ -1,0 +1,50 @@
+retriever_run: results/retriever/two_tower_text/seed0
+data_config: configs/data.yaml
+split: val
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+buffer: 250
+index_sweep_config: configs/cascade/index_sweep.yaml
+ef_search_policy: at_least_requested
+hnsw:
+  m: 32
+  ef_construction: 200
+ivf:
+  nlist: 1024
+  seed: 0
+indexes:
+- name: exact
+  kind: exact
+- name: hnsw_ef200
+  kind: hnsw
+  ef_search: 200
+- name: hnsw_ef800
+  kind: hnsw
+  ef_search: 800
+- name: ivf_nprobe4
+  kind: ivf
+  nprobe: 4
+- name: ivf_nprobe32
+  kind: ivf
+  nprobe: 32
+k1:
+  exact:
+  - 50
+  - 100
+  - 200
+  - 500
+  approximate:
+  - 200
+ranker_runs:
+- results/ranker_mlp/20261028-natural-matching-seed0
+threads: 1
+queries: 1000
+warmup_queries: 50
+random_seed: 0
+development:
+  user_fraction: 0.02
+  random_seed: 0
+  queries: 20
+  warmup_queries: 5
+run_id: 20261028-latency
+sample: false
+config_path: configs/cascade/latency.yaml

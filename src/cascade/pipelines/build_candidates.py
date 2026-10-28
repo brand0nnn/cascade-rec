@@ -103,12 +103,15 @@ def load_candidates(cand_dir: str | Path, split: str, k1: int | None = None, for
     return z
 
 
-def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int, splits: tuple[str, ...] = ("ranker_train", "val", "test")) -> None:
+def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int, splits: tuple[str, ...] = ("ranker_train", "val", "test"), out_dir: str | None = None) -> None:
     data = ProcessedData.load(sample=sample)
     model, cfg = load_retriever(run_dir, data, device)
     scorer = RetrieverScorer(model)
     name = Path(run_dir).parent.name.removesuffix("_sample")  # e.g. two_tower_text (folder name, not the run's old config name)
     out = data.dir / "candidates" / f"{name}_seed{cfg['seed']}"
+    if out_dir is not None:  # separate experiment lists; never overwrite an existing directory
+        out = Path(out_dir)
+        out.mkdir(parents=True, exist_ok=False)
     out.mkdir(parents=True, exist_ok=True)
     meta = {"source_run": str(run_dir), "retriever": name, "seed": cfg["seed"], "search": "exact",
             "k_train": k_train, "k_eval": k_eval, "git_hash": git_hash(), "splits": {}}
@@ -147,5 +150,6 @@ if __name__ == "__main__":
     ap.add_argument("--batch-size", type=int, default=512)
     ap.add_argument("--splits", nargs="+", choices=("ranker_train", "val", "test"), default=("ranker_train", "val"),
                     help="splits to build; defaults to ranker training and validation, leaving test for final evaluation")
+    ap.add_argument("--out-dir", default=None, help="write to this new directory instead of the default candidate folder")
     a = ap.parse_args()
-    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size, tuple(a.splits))
+    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size, tuple(a.splits), a.out_dir)

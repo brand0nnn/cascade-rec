@@ -436,3 +436,54 @@ The user explicitly authorised a final review, current test run and merging PR #
 The initial suite passed 32 tests and skipped 13 because the separately remapped sample data was absent. Built those existing sample fixtures from cached raw inputs and reused full-data text embeddings by item mapping; this only creates ignored sample files, without changing full-data experiments. Added 16 deterministic DIN checks and five run-safety checks. The final command `.venv/bin/python -m pytest -q -ra` passes **66 tests with no skips**.
 
 Fixed two future rerun hazards before merging: direct grouped/toy ranker training atomically refuses an existing run directory; CLI `--resume` is rejected before loading config/data because exact optimizer/RNG restoration and selected-artifact carryover are incomplete. Other callers of the shared run-directory helper retain its default behaviour. The internal historical fitting function, models, features, labels, metric definitions, saved checkpoints and research results are unchanged. No research retraining or final Test comparison was performed. The forced-positive policy remedy and final pipeline selection remain open research decisions.
+
+## 2026-10-28 — Overnight exploratory runs (Val only; awaiting team sign-off)
+
+Autonomous overnight session at Brandon's request; running log and results in `docs/overnight_report_2026-10-28.md`.
+Everything below is **exploratory**: no Test data is loaded, nothing is committed, and no setting is selected.
+
+- **Candidate lists rebuilt locally** (`build_candidates.py`, frozen Two-tower (text) seed 0, `--k-train 200 --k-eval 500
+  --splits ranker_train val`), because the team's copy lived only on one laptop. Training lists match the team's
+  exactly (315,114; 276,321 forced; 38,793 natural). Val natural@200 is 16,673 vs 16,672, and 58 of the natural Val
+  target positions differ by near-tied scores (float differences across machines). Paired comparisons with the
+  team's runs use each run's own saved ranks over the same 232,904 Val instances.
+- **Natural-only ranker training** (`train_population: natural`, opt-in; default unchanged): drop ranker-training
+  lists whose target was force-appended. Filtered after `RankerFeatureBuilder.create`, so vocabularies and score
+  standardisation are identical to the forced-list runs; only the training population changes. This changes the
+  positive/negative definition (§15 rule 1), so it is a candidate remedy for the 2026-10-24 forced-positive issue, not
+  an adopted policy. Configs `configs/ranker/natural_matching_seed{0,1,2}.yaml` (matching-only MLP recipe otherwise).
+- **FAISS index sweep (retrieval half)**: `src/cascade/pipelines/index_sweep.py`, `configs/cascade/index_sweep.yaml`.
+  FAISS 1.15.1 does **not** raise HNSW efSearch to the number of results requested (verified on synthetic and real
+  data). Because filtered search asks for K₁ + buffer = 450 results and §8 requires efSearch ≥ results requested, the
+  sweep uses `efSearch_effective = max(efSearch, 450)` and reports both. **Consequence:** the "efSearch = 200" point
+  runs at 450, so the two HNSW points are effectively 450 vs 800. A genuine efSearch = 200 point needs a team decision
+  (break the §8 rule, or use a smaller buffer for HNSW). Also: with IVF nprobe = 4, the 4 probed cells hold ~436 items
+  (< 450), so many queries end up short of K₁ after filtering; exact FAISS search with the 250 buffer leaves ~0.1% of
+  queries short of K₁ (early-Val instances where many products are not yet released), which §4.6 says should be ~never.
+  Import torch before faiss on macOS (libomp clash segfaults otherwise).
+- **Further overnight runs** (all Val, exploratory; details and numbers in the overnight report):
+  natural-only seeds 0–2 (`results/ranker_mlp/20261028-natural-matching-seed{0,1,2}`); comparison with the forced-list
+  MLP (`results/ranker_compare/20261028-natural-vs-forced-mlp`, new `src/cascade/eval/compare_rankers.py`); K₁ sweep
+  and score diagnostic rerun with natural checkpoints (`configs/cascade/k1_sweep_natural.yaml`,
+  `configs/ranker/diagnostics_natural.yaml`, `configs/ranker/comparison_natural.yaml`; the saved "recommended_k1"
+  is the historical heuristic, not a selection); full index sweep and the natural MLP on its lists
+  (`src/cascade/pipelines/index_rank_eval.py`); §5 latency (`src/cascade/pipelines/latency.py`; first run provisional
+  because the machine was not idle).
+- **`feature_groups: [matching]` (no retrieval-score input)** is now accepted by `ranker_mlp.py` as an opt-in
+  exploratory setting (numeric column 0 dropped; default and saved checkpoints unchanged; test added). Used for
+  `configs/ranker/{natural,forced}_noscore_seed0.yaml`.
+- **Phase 2 runs (exploratory, Val):** no-score MLPs (`20261028-{natural,forced}-noscore-seed0`; forced one stopped
+  after 3 epochs, `STOPPED.md`); opt-in `negative_sampling.exclude_later_reviews` (`later_review_cells` in
+  `ranker_training.py`; flag off reproduces the old sampler exactly, tested) and `20261028-natural-laterneg-seed0`;
+  K_train = 500 lists via the new opt-in `build_candidates.py --out-dir`
+  (`data/processed/candidates/two_tower_text_seed0_ktrain500/`) and MLP/DIN runs on them; DIN on natural lists
+  (`20261028-din-natural-seed{0,1,2}`, `20261028-din-natural-ktrain500-seed{0,1,2}`); K₁ curves via
+  `index_rank_eval.py` (`k1_counts`); final latency `20261028-latency-final`. Full-data correction to the 2026-10-21
+  entry: later same-period reviews appear in 8.9% of all ranker-training lists and 13.1% of natural ones (3.7% was the
+  sample figure). **Summary and team decisions: `docs/overnight_report_2026-10-28.md`, "Morning summary".**
+- Final overnight evaluations: K₁ and index sweeps for the K_train-500 DIN (`results/index_rank_eval/20261028-k1-din-ktrain500`,
+  `.../20261028-index-rank-din-ktrain500`). Its nDCG@10 rises up to K₁ = 500 (+0.00024 vs 200). No K₁ or index is
+  selected (δ not recorded).
+- **Opt-in `loss: listwise_softmax`** in `ranker_training.py` (−log softmax of the positive over each list's sampled
+  columns; default BCE unchanged; test added). H9 runs: `20261028-natural-ktrain500-listwise-seed{0,1}`,
+  `20261028-din-natural-ktrain500-listwise-seed0`. Exploratory.

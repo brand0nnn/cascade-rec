@@ -24,8 +24,9 @@ class RankerFeatureSpec:
     feature_groups: tuple[str, ...] = FEATURE_GROUPS
 
     def __post_init__(self) -> None:
-        if "retrieval" not in self.feature_groups or set(self.feature_groups) - set(FEATURE_GROUPS):
-            raise ValueError("feature_groups must include retrieval and use known group names")
+        # Dropping retrieval (the score input) is an opt-in exploratory setting; it needs matching for inputs.
+        if not ({"retrieval", "matching"} & set(self.feature_groups)) or set(self.feature_groups) - set(FEATURE_GROUPS):
+            raise ValueError("feature_groups must include retrieval or matching and use known group names")
         if len(set(self.feature_groups)) != len(self.feature_groups):
             raise ValueError("feature_groups must not repeat")
         required = {
@@ -97,7 +98,9 @@ class MLPRanker(nn.Module):
             nn.Linear(spec.item_text_dim, 32) if spec.item_text_dim and self.use_matching else None
         )
         self.numeric_dim = 4
-        self.numeric_indices = (0, 1, 2, 3) if self.use_matching else (0,)
+        self.numeric_indices = tuple(
+            i for i in range(4) if (i == 0 and "retrieval" in groups) or (i > 0 and self.use_matching)
+        )
         input_dim = (
             sum(self.embedding_dims[n] for n in self.active_categorical_names)
             + (self.embedding_dims["item_id"] + self.embedding_dims["leaf_category"] if self.use_matching else 0)
