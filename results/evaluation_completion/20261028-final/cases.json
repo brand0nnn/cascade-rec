@@ -1,0 +1,379 @@
+{
+  "seed": 0,
+  "cases": [
+    {
+      "bucket": "rescued_with_co_review",
+      "eligible_events": 1454,
+      "inst": 2241582,
+      "target": 82405,
+      "query_user": 310231,
+      "retrieval_rank": "29.0",
+      "mlp_rank": "3.0",
+      "last_history_items": [
+        15322,
+        22534,
+        44921
+      ],
+      "cutoff": 1628643414042,
+      "witness": {
+        "user": 178127,
+        "history_item": 44921,
+        "history_ts": 1458865232000,
+        "target_ts": 1602954216241
+      },
+      "target_item": 82405,
+      "target_asin": "B08H8HZ3J3",
+      "target_title": "SUPCASE Unicorn Beetle Pro Series Designed for Samsung Galaxy A71 5G Case[Not for A71 5G UW Verizon], Full-Body Rugged Holster & Kickstand Case with Built-in Screen Protector (Black)",
+      "history": [
+        {
+          "item": 15322,
+          "title": "SUPCASE Samsung Galaxy Tab 4 7.0(SM-T280/SM-T285) Case - Unicorn Beetle Pro Series Full-body Hybrid Protective Case with Screen Protector (Black), Dual Layer Design/Impact Resistant Bumper"
+        },
+        {
+          "item": 22534,
+          "title": "HTC One M9 Case, SUPCASE Full-body Rugged Holster Case with Built-in Screen Protector for HTC One M9 (2015 Release), Unicorn Beetle PRO Series - Retail Package (Black/Black)"
+        },
+        {
+          "item": 44921,
+          "title": "SUPCASE Unicorn Beetle Pro Series Case Designed for Galaxy S7, with Built-In Screen Protector Full-body Rugged Holster Case for Samsung Galaxy S7 (2016 Release) (Blue/Black)"
+        }
+      ],
+      "profile": {
+        "item_type": "warm-head",
+        "seen_retriever_train": "false",
+        "same_leaf_last": "false",
+        "same_store_history": "true",
+        "co_review_all_train": "true"
+      },
+      "ranks": {
+        "retriever_full_catalogue": 29.0,
+        "candidate_member_k200": true,
+        "mlp_by_seed": [
+          3.0,
+          5.0,
+          12.0
+        ],
+        "din_by_seed": [
+          5.0,
+          13.0,
+          9.0
+        ]
+      },
+      "retrieval_top3": [
+        {
+          "item": 31072,
+          "title": "Armorsuit 2 Pack Screen Protector Designed for Samsung Galaxy S7 Edge (5.5 Inch) Case Friendly MilitaryShield HD Clear Film - Made in USA"
+        },
+        {
+          "item": 31890,
+          "title": "SUPCASE Unicorn Beetle Pro Series Case Designed for Galaxy S7 Edge, Full-Body Rugged Holster Case Without Built-in Screen Protector for Samsung Galaxy S7 Edge (2016 Release) (Black/Black)"
+        },
+        {
+          "item": 96647,
+          "title": "Armorsuit MilitaryShield\u00ae Samsung Galaxy S7 Screen Protector (Case Friendly) Anti-Bubble Ultra HD Shield w/Lifetime Replacements"
+        }
+      ],
+      "mlp_top3": null,
+      "din_top3": null,
+      "missing_reason": "original candidate IDs and per-candidate model outputs unavailable"
+    },
+    {
+      "bucket": "demoted_despite_co_review",
+      "eligible_events": 1403,
+      "inst": 1777200,
+      "target": 66116,
+      "query_user": 246037,
+      "retrieval_rank": "9.0",
+      "mlp_rank": "26.0",
+      "last_history_items": [
+        109726,
+        45317,
+        108966,
+        72953
+      ],
+      "cutoff": 1628643414042,
+      "witness": {
+        "user": 17108,
+        "history_item": 109726,
+        "history_ts": 1546785386919,
+        "target_ts": 1546785523375
+      },
+      "target_item": 66116,
+      "target_asin": "B07P9S6R9Y",
+      "target_title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+      "history": [
+        {
+          "item": 109726,
+          "title": "RinoGear (6-Pack Screen Protector for Fitbit Charge 4 3 SE (0.9\"-inch) Screen Protector Case Friendly Accessories Flexible Full Coverage Clear TPU Film"
+        },
+        {
+          "item": 45317,
+          "title": "Oitom Stainless Steel Bands Compatilbe with Fitbit Charge 2,Premium Stainless Steel SS Metal Replacement Watch Band Strap for Smart Fitness Watch(Silver Stainless)"
+        },
+        {
+          "item": 108966,
+          "title": "Fullmosa Compatible Apple Watch Band 42mm 44mm 45mm 49mm 38mm 40mm 41mm, Stainless Steel iWatch Band with Case for Apple Watch Series 8/7/6/5/4/3/2/1/SE/SE2/Ultra, 38mm 40mm 41mm Rose Pink"
+        },
+        {
+          "item": 72953,
+          "title": "Encased Heavy Duty iPhone 11 Protective Case Camo (2019 Rebel Armor) Military Grade Full Body Rugged Cover (Camouflage Green)"
+        }
+      ],
+      "profile": {
+        "item_type": "warm-head",
+        "seen_retriever_train": "true",
+        "same_leaf_last": "unknown",
+        "same_store_history": "false",
+        "co_review_all_train": "true"
+      },
+      "ranks": {
+        "retriever_full_catalogue": 9.0,
+        "candidate_member_k200": true,
+        "mlp_by_seed": [
+          26.0,
+          32.0,
+          32.0
+        ],
+        "din_by_seed": [
+          18.0,
+          37.0,
+          47.0
+        ]
+      },
+      "retrieval_top3": [
+        {
+          "item": 61450,
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear"
+        },
+        {
+          "item": 60188,
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass"
+        },
+        {
+          "item": 98269,
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ultra-Thin Protective Cover for iWatch, Transparent"
+        }
+      ],
+      "mlp_top3": null,
+      "din_top3": null,
+      "missing_reason": "original candidate IDs and per-candidate model outputs unavailable"
+    },
+    {
+      "bucket": "retrieval_miss_despite_co_review",
+      "eligible_events": 30306,
+      "inst": 1405134,
+      "target": 107498,
+      "query_user": 194338,
+      "retrieval_rank": "inf",
+      "mlp_rank": "inf",
+      "last_history_items": [
+        98269,
+        73816,
+        42392,
+        17514,
+        100895
+      ],
+      "cutoff": 1628643414042,
+      "witness": {
+        "user": 239765,
+        "history_item": 98269,
+        "history_ts": 1596047147938,
+        "target_ts": 1596046503742
+      },
+      "target_item": 107498,
+      "target_asin": "B0BTBQ9D9B",
+      "target_title": "TOPGO Cup Holder Phone Mount, Cup Phone Holder for Car [Secure & Stable] Cup Holder Phone Holder Cell Phone Automobile Cradle for iPhone 14, Samsung and More Smart Phone -Black",
+      "history": [
+        {
+          "item": 98269,
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ultra-Thin Protective Cover for iWatch, Transparent"
+        },
+        {
+          "item": 73816,
+          "title": "OMOTON Portable Aluminum 2 in 1 Charging Stand Holder Dock for Nightstand, Rose Gold"
+        },
+        {
+          "item": 42392,
+          "title": "Bargains Depot 15Pcs 0.24\" (Dia) Soft Replacement Rubber Tips **** Please Note : **** These Tips (Only Fit / for Bargains Depot\u00ae 2-in-1 Stylus)"
+        },
+        {
+          "item": 17514,
+          "title": "Bargains Depot 20Pcs 0.18-inch (Dia) Soft Replacement Rubber Tips - Please Note : These Tips Only Fit/for bargains Depot [0.18-inch Rubber Tip Series] Stylus"
+        },
+        {
+          "item": 100895,
+          "title": "Charlam Case Compatible with Apple Watch 38mm Series 3 2 1 Built-in Screen Protector All-Around Thin Bumper Full Cover Hard PC Protective Case for iWatch Accessories (Black/Pine Green/Clear, 38mm)"
+        }
+      ],
+      "profile": {
+        "item_type": "warm-head",
+        "seen_retriever_train": "true",
+        "same_leaf_last": "false",
+        "same_store_history": "false",
+        "co_review_all_train": "true"
+      },
+      "ranks": {
+        "retriever_full_catalogue": 1146.0,
+        "candidate_member_k200": false,
+        "mlp_by_seed": [
+          null,
+          null,
+          null
+        ],
+        "din_by_seed": [
+          null,
+          null,
+          null
+        ]
+      },
+      "retrieval_top3": [
+        {
+          "item": 108023,
+          "title": "Tranesca 8 Pack 41mm Case with Built-in HD Clear Ultra-Thin TPU Screen Protector Cover Compatible with Apple Watch Series 7 (Clear+Black+Gold+Rose Gold+Red+Blue+Green+Silver)"
+        },
+        {
+          "item": 67365,
+          "title": "OMOTON Stand for Apple Watch - 2 in 1 Universal Desktop Stand Holder for iPhone 14 13 12 11 All Series and Apple Watch Series 8/SE2/7/6/SE/5/4/3/2 (Both 38mm/40mm/41mm/42mm/44mm/45mm) (Black)"
+        },
+        {
+          "item": 90133,
+          "title": "Secbolt Bling Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm Women iWatch SE Series 8 7 6 5 4 3 2 1, Dressy Jewelry Metal Wristband Strap Diamond Rhinestone"
+        }
+      ],
+      "mlp_top3": null,
+      "din_top3": null,
+      "missing_reason": "original candidate IDs and per-candidate model outputs unavailable"
+    },
+    {
+      "bucket": "new_item_rescued",
+      "inst": 2328439,
+      "eligible_events": 534,
+      "selection": "seed0 draw from sorted stable eligible IDs",
+      "target_item": 99784,
+      "target_asin": "B0B4DN7W4Z",
+      "target_title": "Anker USB C Charger 40W, 521 Charger (Nano Pro), PIQ 3.0 Durable Compact Fast Charger (Not Foldable) for iPhone 14/14 Plus/14 Pro/14 Pro Max/13, Galaxy, Pixel 4/3, iPad/iPad Mini (Cable Not Included)",
+      "history": [
+        {
+          "item": 57118,
+          "title": "iPhone 7 Case,iPhone 8 Case, MISSCASE Ultra Slim Magnet Protective Case with Metal Frame Tempered Glass Back [Magnetic Adsorption Technology] [Support Wireless Charging](Black Frame + Clear Back)"
+        },
+        {
+          "item": 50012,
+          "title": "Elecjet AnyWatt USB-C MagSafe Adapter, Type-C to MagSafe 1 and 2 Converter, Compatible with USB-C M1 MacBook Pro Air"
+        },
+        {
+          "item": 82315,
+          "title": "[2-Pack] Anker USB C Charger 20W, 511 Charger (Nano), PIQ 3.0 Durable Compact Fast Charger, Anker Nano for iPhone 13/13 Mini/13 Pro/13 Pro Max/12, Galaxy, Pixel 4/3, iPad/iPad Mini and More"
+        },
+        {
+          "item": 77385,
+          "title": "USB Charger, Anker Elite Dual Port 24W Wall Charger, PowerPort 2 with PowerIQ and Foldable Plug, for iPhone 11/Xs/XS Max/XR/X/8/7/6/Plus, iPad Pro/Air 2/Mini 3/Mini 4, Samsung S4/S5, and More"
+        },
+        {
+          "item": 93187,
+          "title": "LVFAN Portable Charger for Apple Watch, 4000mAh iWatch Charger Power Bank Wireless Battery Pack Magnetic Travel Smart Watch Charger for Apple Watch Series 8 7 6 5 4 3 2 1 SE Ultra (Pink)"
+        }
+      ],
+      "profile": {
+        "item_type": "new-in-period",
+        "seen_retriever_train": "false",
+        "same_leaf_last": "false",
+        "same_store_history": "true",
+        "co_review_all_train": "false"
+      },
+      "ranks": {
+        "retriever_full_catalogue": 74.0,
+        "candidate_member_k200": true,
+        "mlp_by_seed": [
+          10.0,
+          18.0,
+          14.0
+        ],
+        "din_by_seed": [
+          26.0,
+          16.0,
+          24.0
+        ]
+      },
+      "retrieval_top3": [
+        {
+          "item": 108206,
+          "title": "Anker 313 Wireless Charger (Pad), Qi-Certified 10W Max for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, AirPods (No AC Adapter, Not Compatible with MagSafe Magnetic Charging)"
+        },
+        {
+          "item": 66116,
+          "title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)"
+        },
+        {
+          "item": 90784,
+          "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fast-Charging Galaxy S20, S10 (No AC Adapter)"
+        }
+      ],
+      "mlp_top3": null,
+      "din_top3": null,
+      "missing_reason": "original candidate IDs and per-candidate model outputs unavailable"
+    },
+    {
+      "bucket": "same_store_demoted_counterexample",
+      "inst": 1814991,
+      "eligible_events": 269,
+      "selection": "seed0 draw from sorted stable eligible IDs",
+      "target_item": 92134,
+      "target_asin": "B09CTCHDL9",
+      "target_title": "i-Blason Ares Case for iPhone 13 Pro Max 6.7 inch (2021 Release), Dual Layer Rugged Clear Bumper Case with Built-in Screen Protector (Green)",
+      "history": [
+        {
+          "item": 58141,
+          "title": "i-Blason Ares Full-Body Rugged Clear Bumper Case for iPhone Xs Max 2018 Release, Black, 6.5\""
+        },
+        {
+          "item": 93793,
+          "title": "KumWum Phone Case for iPhone 13 Pro Max Front and Back Protection Ultra Thin Tempered Glass Metal Bumper Double Sided Buckle Clear Cover with Camera Lens Protector - Gold"
+        },
+        {
+          "item": 92141,
+          "title": "SUPCASE UB Edge Pro Series Case for iPhone 13 Pro Max (2021 Release) 6.7 Inch, Slim Frame Clear Protective Case with Built-in Screen Protector (Guldan)"
+        }
+      ],
+      "profile": {
+        "item_type": "new-in-period",
+        "seen_retriever_train": "false",
+        "same_leaf_last": "true",
+        "same_store_history": "true",
+        "co_review_all_train": "false"
+      },
+      "ranks": {
+        "retriever_full_catalogue": 6.0,
+        "candidate_member_k200": true,
+        "mlp_by_seed": [
+          34.0,
+          8.0,
+          38.0
+        ],
+        "din_by_seed": [
+          12.0,
+          9.0,
+          8.0
+        ]
+      },
+      "retrieval_top3": [
+        {
+          "item": 104005,
+          "title": "TETHYS Glass Screen Protector Designed for Apple iPhone 11 Pro Max/iPhone Xs Max (6.5\") [Edge to Edge Coverage] Full Protection Durable Tempered Glass [Guidance Frame Included] - Pack of 3"
+        },
+        {
+          "item": 60097,
+          "title": "Ailun Screen Protector for iPhone 11 Pro Max/iPhone Xs Max 3 Pack 6.5 Inch 2019/2018 Release Case Friendly Tempered Glass"
+        },
+        {
+          "item": 71907,
+          "title": "Supcase Unicorn Beetle Pro Series Case Designed for iPhone 11 Pro Max 6.5 Inch (2019 Release), Built-in Screen Protector Full-Body Rugged Holster Case (Black)"
+        }
+      ],
+      "mlp_top3": null,
+      "din_top3": null,
+      "missing_reason": "original candidate IDs and per-candidate model outputs unavailable"
+    }
+  ],
+  "selection": "first three retain prior frozen buckets/draws; last two use stated new buckets and sorted IDs with RNG0"
+}

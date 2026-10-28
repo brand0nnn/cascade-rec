@@ -1,0 +1,84 @@
+{
+  "status": "base_complete_overlays_deferred",
+  "counts": {
+    "products": 111480,
+    "reviewers_before_t1": 367388,
+    "reviews_before_t1": 2208880,
+    "reviews_before_retriever_cutoff": 1877548,
+    "metadata_edges": 305632,
+    "parser_status": {
+      "parsed": 51678,
+      "unknown": 45905,
+      "ambiguous": 9684,
+      "universal": 4189,
+      "negated": 24
+    },
+    "audit_development": 100,
+    "audit_locked": 100
+  },
+  "snapshots": {
+    "retriever_train": {
+      "strict_before_ms": 1595800947930
+    },
+    "all_train": {
+      "strict_before_ms": 1628643414042
+    }
+  },
+  "review_snapshot_storage": "One pre-T1 edge table; filter timestamp strictly below the selected cutoff.",
+  "parser_version": "phone-title-v1",
+  "device_claim_gate": {
+    "status": "blocked",
+    "minimum_precision": 0.95,
+    "required_locked_titles": 100,
+    "reviewed_locked_titles": 0,
+    "reason": "Locked human device audit is incomplete; no quantitative device claims."
+  },
+  "seed": 0,
+  "sources": {
+    "items": {
+      "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/items.parquet",
+      "sha256": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c"
+    },
+    "interactions": {
+      "path": "/Users/qingrong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/Desktop/CP4285/Project/cascade-rec/data/processed/interactions.parquet",
+      "sha256": "937209d2e16bc075cbe05964bd1d135ddbd22ea6a358c0945bd8fe1f0afeae6f"
+    }
+  },
+  "analysis_sha256": "a6a27a03fd855235f511a83fa50e9f3be617d8f4c615ab03b6d56b19ddfe4a3f",
+  "parser_source_sha256": "a7366d505fed22f783238fd9f2310d051326b6c3407f4a6478e19e84addd090a",
+  "config_sha256": "600b53a24dafd40ef645f8be1c454759bdf205c5a92ac48ec3b1e6e30874d8d0",
+  "candidate_overlay": {
+    "status": "deferred",
+    "missing_inputs": [
+      "instances",
+      "sequences",
+      "frozen_text_vectors",
+      "natural_validation_candidates"
+    ],
+    "reason": "Base builder does not infer model outputs; original aligned candidates, histories, vectors and checkpoint provenance are required."
+  },
+  "examples": [
+    {
+      "item": 6,
+      "path": "metadata_example_parsed.html",
+      "selection": "smallest item ID in parser status; metadata illustration only"
+    },
+    {
+      "item": 33846,
+      "path": "metadata_example_negated.html",
+      "selection": "smallest item ID in parser status; metadata illustration only"
+    },
+    {
+      "item": 24,
+      "path": "metadata_example_universal.html",
+      "selection": "smallest item ID in parser status; metadata illustration only"
+    }
+  ],
+  "limits": [
+    "Reviews are observed reviews, not purchases or known likes/dislikes.",
+    "Metadata is a crawl-time snapshot, not proof of historical compatibility.",
+    "Device mentions remain unaudited title claims; quantitative device profiles are gated.",
+    "No Test predictions, embeddings, candidate lists or trained models were loaded.",
+    "Evidence paths describe relations, not causal model explanations."
+  ]
+}

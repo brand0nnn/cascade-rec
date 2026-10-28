@@ -1,6 +1,6 @@
 # Retrieve, Then Rank — cascade recommender study (CP4285)
 
-See `CLAUDE.md` for the full plan and `docs/decisions.md` for every design decision / deviation.
+Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
 ## Names used everywhere
 
@@ -127,12 +127,8 @@ Seed SD and exploratory paired-user bootstrap intervals describe different sourc
 
 Reading these files requires no local data or model execution:
 
-- [MLP feature discovery](results/ranker_ladder/20261024-feature-ladder-seed0/summary.md)
-- [Three-seed MLP repetition and groups](results/ranker_repeat/20261024-shortlist-repeat/meso.md)
-- [Three-seed DIN comparison and groups](results/ranker_din_study/20261024-din-matching/meso.md)
-- [Four-system accuracy and CPU ranking latency](results/ranker_comparison/20261025-rq3/report.md)
-- [Candidate-count trade-off](results/ranker_k1_sweep/20261025-k1/report.md)
-- [Retrieval-score diagnostics and product examples](results/ranker_diagnostics/20261025-score-diagnostic/report.md)
+- [Consolidated evaluation findings, failure analysis and progress](docs/evaluations.md)
+- [Shared artifact inventory](docs/ranker_artifacts.md)
 
 The historical sweep applied a CI-overlap heuristic that suggested K1=50. **That is not a final setting selection.**
 The current evaluation protocol requires a predeclared acceptable-loss margin δ and cost/tie-break rule; none was
@@ -142,6 +138,22 @@ force-inserting training targets caused the learned behaviour. Index/full-cascad
 Test comparison remain separate work.
 
 ### Load the six selected checkpoints and rerun their comparison
+
+To evaluate the **already saved validation predictions**, use the separate saved-results evaluator instead.
+It needs no files under `data/`, downloads, checkpoint execution or new Test predictions:
+
+```bash
+.venv/bin/python -m cascade.eval.saved_results --run-id my-saved-evaluation-dev --sample
+.venv/bin/python -m cascade.eval.saved_results --run-id my-saved-evaluation-full
+```
+
+Choose fresh IDs. `configs/evaluation/saved_results.yaml` names every source explicitly; sample mode selects a
+fixed 2% of saved validation users and is only an analysis check. Outputs under `results/saved_evaluation/`
+include the report, per-seed/group/funnel/uncertainty tables, outcome archives, figures, reproduction checks,
+source hashes and a completion matrix. Historical results stay unchanged. Full runs follow
+`docs/evaluations.md`. Target/history profiles are complete; candidate-slot/device analyses need original inputs/audits. Final Test remains deferred.
+
+The commands below execute the selected checkpoints and therefore have additional prerequisites.
 
 `configs/ranker/comparison.yaml` names the three selected matching-only MLP checkpoints and three DIN checkpoints,
 including their companion configs, metrics and validation ranks. Their inventory and exclusions are listed in

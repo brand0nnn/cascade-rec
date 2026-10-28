@@ -78,6 +78,9 @@ class MLPRanker(nn.Module):
     def __init__(self, spec: RankerFeatureSpec, dropout: float = 0.1) -> None:
         super().__init__()
         self.spec = spec
+        # Keep the intervention in the checkpoint, so every existing inference
+        # caller respects it without a special policy-aware feature builder.
+        self.register_buffer("_retrieval_score_enabled", torch.tensor(True))
         groups = set(spec.feature_groups)
         self.use_matching = "matching" in groups
         active = set()
@@ -118,6 +121,19 @@ class MLPRanker(nn.Module):
             nn.Linear(64, 1),
         )
 
+    def set_retrieval_score_enabled(self, enabled: bool) -> None:
+        """Enable or uniformly mask the score input without changing model shape."""
+        self._retrieval_score_enabled.fill_(bool(enabled))
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict,
+                              missing_keys, unexpected_keys, error_msgs):
+        # Historical checkpoints predate the opt-in intervention and used score.
+        key = prefix + "_retrieval_score_enabled"
+        if key not in state_dict:
+            state_dict[key] = torch.tensor(True)
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+                                      missing_keys, unexpected_keys, error_msgs)
+
     def pool_history(self, batch: Mapping[str, torch.Tensor]) -> torch.Tensor:
         """Mean-pool the shared item and leaf tables, preserving their order."""
         parts = []
@@ -144,6 +160,9 @@ class MLPRanker(nn.Module):
             raise ValueError(
                 f"numeric must have shape [batch, {self.numeric_dim}] in the documented feature order"
             )
+        numeric = torch.cat((torch.where(self._retrieval_score_enabled,
+                                        numeric[:, :1], torch.zeros_like(numeric[:, :1])),
+                             numeric[:, 1:]), dim=1)
         parts.append(numeric[:, self.numeric_indices])
         if self.text_projection is not None:
             text = batch["item_text"].float()

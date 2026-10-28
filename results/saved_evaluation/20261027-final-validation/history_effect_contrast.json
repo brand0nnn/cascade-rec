@@ -1,0 +1,13 @@
+{
+  "diff": -0.0011055898157355734,
+  "ci_low": -0.003927639133800642,
+  "ci_high": 0.0017525939212722458,
+  "mixed_instances": 25023,
+  "homogeneous_instances": 248,
+  "mixed_users": 10936,
+  "homogeneous_users": 138,
+  "n_resamples": 1000,
+  "valid_resamples": 1000,
+  "seed": 0,
+  "interpretation": "exploratory; positive means a larger DIN-minus-MLP effect for mixed histories"
+}

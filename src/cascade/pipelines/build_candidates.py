@@ -25,7 +25,7 @@ from tqdm import tqdm
 from cascade.data.instances import ProcessedData
 from cascade.eval.harness import apply_filters, first_ts_tensor, make_batch
 from cascade.models.retriever import RetrieverScorer
-from cascade.pipelines.train_retriever import load_retriever
+from cascade.pipelines.train_retriever import load_retriever, safe_run_id
 from cascade.utils.io import git_hash
 from cascade.utils.logging import get_logger
 
@@ -103,15 +103,23 @@ def load_candidates(cand_dir: str | Path, split: str, k1: int | None = None, for
     return z
 
 
-def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int, splits: tuple[str, ...] = ("ranker_train", "val", "test")) -> None:
-    data = ProcessedData.load(sample=sample)
+def main(run_dir: str, sample: bool, device: str, k_train: int, k_eval: int, batch_size: int, splits: tuple[str, ...] = ("ranker_train", "val"), *, data_config: str = "configs/data.yaml", output_name: str | None = None) -> None:
+    if not splits or len(set(splits)) != len(splits) or any(s not in ("ranker_train", "val", "test") for s in splits):
+        raise ValueError("splits must be a nonempty unique selection of ranker_train/val/test")
+    if k_train < 1 or k_eval < 1 or batch_size < 1:
+        raise ValueError("candidate counts and batch_size must be positive")
+    data = ProcessedData.load(data_config, sample=sample)
     model, cfg = load_retriever(run_dir, data, device)
     scorer = RetrieverScorer(model)
     name = Path(run_dir).parent.name.removesuffix("_sample")  # e.g. two_tower_text (folder name, not the run's old config name)
-    out = data.dir / "candidates" / f"{name}_seed{cfg['seed']}"
-    out.mkdir(parents=True, exist_ok=True)
+    namespace = cfg.get("run_id", "")
+    # Keep conventional model_seedN paths; preserve custom nested study namespaces.
+    default_name = namespace if len(Path(namespace).parts) > 2 else f"{name}_seed{cfg['seed']}"
+    candidate_name = safe_run_id(output_name or default_name)
+    out = data.dir / "candidates" / candidate_name
+    out.mkdir(parents=True, exist_ok=False)
     meta = {"source_run": str(run_dir), "retriever": name, "seed": cfg["seed"], "search": "exact",
-            "k_train": k_train, "k_eval": k_eval, "git_hash": git_hash(), "splits": {}}
+            "k_train": k_train, "k_eval": k_eval, "git_hash": git_hash(), "data_config": str(data_config), "splits": {}}
     split_config = {"ranker_train": (k_train, True), "val": (k_eval, False), "test": (k_eval, False)}
     for split in splits:
         k, force = split_config[split]
@@ -145,7 +153,9 @@ if __name__ == "__main__":
     ap.add_argument("--k-train", type=int, default=200)
     ap.add_argument("--k-eval", type=int, default=500)
     ap.add_argument("--batch-size", type=int, default=512)
+    ap.add_argument("--data-config", default="configs/data.yaml")
+    ap.add_argument("--output-name", help="fresh relative directory inside processed candidates")
     ap.add_argument("--splits", nargs="+", choices=("ranker_train", "val", "test"), default=("ranker_train", "val"),
                     help="splits to build; defaults to ranker training and validation, leaving test for final evaluation")
     a = ap.parse_args()
-    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size, tuple(a.splits))
+    main(a.run_dir, a.sample, a.device, a.k_train, a.k_eval, a.batch_size, tuple(a.splits), data_config=a.data_config, output_name=a.output_name)

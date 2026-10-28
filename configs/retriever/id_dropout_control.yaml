@@ -1,0 +1,4 @@
+# Matched control for the ID-residual dropout study. No objective/selector change.
+base: two_tower_text_id.yaml
+name: id_dropout_control
+id_dropout: 0.0

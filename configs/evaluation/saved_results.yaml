@@ -1,0 +1,90 @@
+# Saved validation evidence only. Paths are explicit; no data/ or Test predictions are opened.
+artifact_manifest: results/ranker_artifacts.json
+groups: results/ranker_k1_sweep/20261025-k1/validation_groups.parquet
+comparison: results/ranker_comparison/20261025-rq3
+sweep: results/ranker_k1_sweep/20261025-k1
+diagnostics: results/ranker_diagnostics/20261025-score-diagnostic
+rq1_summary: results/rq1/summary.json
+baseline_summary: results/baselines/summary.json
+bootstrap_resamples: 1000
+bootstrap_seed: 0
+# Historical DIN configs record this exact absolute path on the original machine.
+# Identity is also checked against the shared candidate hashes and aligned ranks.
+candidate_directory_aliases:
+  - /Users/jingyen/Documents/NUS/CP4285/cascade-rec/data/processed/candidates/two_tower_text_seed0
+development:
+  user_fraction: 0.02
+  seed: 0
+  bootstrap_resamples: 50
+retrieval_systems:
+  popularity_retriever_train:
+    label: Popularity
+    train_on: retriever_train
+    seeds: [0]
+    runs: [results/baselines/popularity/retriever_train/seed0]
+  itemknn_retriever_train:
+    label: ItemKNN
+    train_on: retriever_train
+    seeds: [0]
+    runs: [results/baselines/itemknn/retriever_train/seed0]
+  bpr_retriever_train:
+    label: BPR-MF
+    train_on: retriever_train
+    seeds: [0, 1, 2]
+    runs: [results/baselines/bpr/retriever_train/seed0, results/baselines/bpr/retriever_train/seed1, results/baselines/bpr/retriever_train/seed2]
+  sasrec_retriever_train:
+    label: SASRec
+    train_on: retriever_train
+    seeds: [0, 1, 2]
+    runs: [results/baselines/sasrec/retriever_train/seed0, results/baselines/sasrec/retriever_train/seed1, results/baselines/sasrec/retriever_train/seed2]
+  text:
+    label: Two-tower (text)
+    train_on: retriever_train
+    seeds: [0, 1, 2]
+    runs: [results/retriever/two_tower_text/seed0, results/retriever/two_tower_text/seed1, results/retriever/two_tower_text/seed2]
+  text_id:
+    label: Two-tower (text + ID)
+    train_on: retriever_train
+    seeds: [0, 1, 2]
+    runs: [results/retriever/two_tower_text_id/seed0, results/retriever/two_tower_text_id/seed1, results/retriever/two_tower_text_id/seed2]
+  popularity_all_train:
+    label: Popularity
+    train_on: all_train
+    seeds: [0]
+    runs: [results/baselines/popularity/all_train/seed0]
+  itemknn_all_train:
+    label: ItemKNN
+    train_on: all_train
+    seeds: [0]
+    runs: [results/baselines/itemknn/all_train/seed0]
+  bpr_all_train:
+    label: BPR-MF
+    train_on: all_train
+    seeds: [0, 1, 2]
+    runs: [results/baselines/bpr/all_train/seed0, results/baselines/bpr/all_train/seed1, results/baselines/bpr/all_train/seed2]
+  sasrec_all_train:
+    label: SASRec
+    train_on: all_train
+    seeds: [0, 1, 2]
+    runs: [results/baselines/sasrec/all_train/seed0, results/baselines/sasrec/all_train/seed1, results/baselines/sasrec/all_train/seed2]
+ranker_systems:
+  score:
+    label: MLP score only (discovery)
+    seeds: [0]
+    runs: [results/ranker_mlp/20261024-feature-ladder-seed0-rung0_score]
+  matching:
+    label: MLP matching
+    seeds: [0, 1, 2]
+    runs: [results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching, results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching, results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching]
+  attributes:
+    label: MLP attributes
+    seeds: [0, 1, 2]
+    runs: [results/ranker_mlp/20261024-feature-ladder-seed0-rung2_attributes, results/ranker_mlp/20261024-shortlist-repeat-seed1-rung2_attributes, results/ranker_mlp/20261024-shortlist-repeat-seed2-rung2_attributes]
+  statistics:
+    label: MLP statistics (discovery)
+    seeds: [0]
+    runs: [results/ranker_mlp/20261024-feature-ladder-seed0-rung3_statistics]
+  din:
+    label: DIN matching
+    seeds: [0, 1, 2]
+    runs: [results/ranker_din/20261024-din-matching-seed0, results/ranker_din/20261024-din-matching-seed1, results/ranker_din/20261024-din-matching-seed2]

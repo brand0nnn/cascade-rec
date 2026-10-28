@@ -19,3 +19,33 @@ results/**/recbole.log
 # Ranker output is local by default. Explicitly shared artifacts are tracked via
 # results/ranker_artifacts.json (use git add -f only for that reviewed allowlist).
 results/ranker_*/
+
+# Consolidated evaluation handoff: share compact evidence, keep generated copies local.
+/docs/_local_evaluation_archive/
+/results/targeted_study/
+/results/saved_evaluation/*
+!/results/saved_evaluation/20261027-saved-validation/
+/results/saved_evaluation/20261027-saved-validation/*
+!/results/saved_evaluation/20261027-saved-validation/provenance.json
+!/results/saved_evaluation/20261027-final-validation/
+/results/saved_evaluation/20261027-final-validation/*
+!/results/saved_evaluation/20261027-final-validation/*.csv
+!/results/saved_evaluation/20261027-final-validation/*.json
+!/results/saved_evaluation/20261027-final-validation/config.yaml
+!/results/saved_evaluation/20261027-final-validation/git_hash.txt
+/results/explanation_graph/*
+!/results/explanation_graph/20261027-base/
+/results/explanation_graph/20261027-base/*
+!/results/explanation_graph/20261027-base/manifest.json
+!/results/explanation_graph/20261027-base/device_audit_development.csv
+!/results/explanation_graph/20261027-base/device_audit_locked.csv
+!/results/explanation_graph/20261027-target-profiles-verified/
+/results/explanation_graph/20261027-target-profiles-verified/*
+!/results/explanation_graph/20261027-target-profiles-verified/*.csv
+!/results/explanation_graph/20261027-target-profiles-verified/provenance.json
+!/results/explanation_graph/20261027-target-profiles-verified/examples.json
+/results/evaluation_completion/*
+!/results/evaluation_completion/20261028-final/
+/results/evaluation_completion/20261028-final/*
+!/results/evaluation_completion/20261028-final/*.csv
+!/results/evaluation_completion/20261028-final/*.json

@@ -1,0 +1,9 @@
+{
+  "status": "complete",
+  "development_sample": false,
+  "n_instances": 232904,
+  "n_users": 124416,
+  "historical_sources_unchanged": true,
+  "test_predictions_loaded": false,
+  "models_executed": false
+}

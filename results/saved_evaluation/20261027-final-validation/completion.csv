@@ -1,0 +1,11 @@
+work,status,evidence_or_gap
+Full-data aggregate comparisons,complete,Recomputed from aligned validation ranks; sample runs are development only.
+Five-way funnel and contributions,complete,Computed per seed with full-denominator user-macro contributions.
+Saved item/history/window groups,complete,"Includes support, at-risk rates and paired-user intervals."
+Canonical cold/tail/head,reused aggregates,Original retrieval aggregates retained; ranker per-instance canonical masks unavailable.
+Long mixed versus homogeneous,exploratory,Direct DIN-minus-MLP contrast; homogeneous support is sparse.
+K1 selection,deferred,Observed trade-offs only; team loss-margin/cost rule remains unresolved.
+Score diagnostics and examples,reused evidence,Original training audit/uniform sample/demotion cohort populations retained; no causal claim.
+Device/co-buy/text profiles and new examples,unavailable,"Requires missing candidate lists, text vectors, mappings and histories; defer recovery/regeneration."
+Index and full-cascade latency,unavailable,Current timings cover ranking only; retrieval owner supplies index/filtering timings.
+Final F0/F1/F2 Test comparison,deferred,"Finish this review, obtain inputs, freeze the team selection protocol, then evaluate the final systems."

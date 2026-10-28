@@ -4,7 +4,9 @@
 
 **Plan revision 2026-10-14:** scope narrowed to match the critique slides (`slides.pdf`) and the professor's consult feedback: fewer variables, @10 metrics as the headline (the user sees 10 products), explain *why* results change, and finish with one selected retriever–ranker combination. Details of what changed are in `docs/decisions.md` (2026-10-14).
 
-This file is the source of truth for implementing the project. Read it fully before writing code. If something here is ambiguous or seems wrong, **stop and ask** rather than guessing — especially anything touching the data split, evaluation protocol, or metric definitions, because those decide whether results are valid.
+**Current evaluation handoff (28 October 2026):** read `docs/evaluations.md` first for consolidated results, failure analysis, completion status, missing inputs and authorised ablation commands. Record all new evaluation observations there. Do not reconstruct current status from older experiment notes or generated `results/**/report.md` files. Available saved-validation/target-profile analysis is complete; controlled retraining has no full-data result. Final Test, approximate-index work and full-cascade timing remain paused; SSH/cluster execution is user-managed. Keep work focused on evaluation and failure analysis; do not add nonessential tests or engineering work.
+
+This file is the source of truth for implementing the project; the current evaluation status and authorised follow-up in `docs/evaluations.md` supersede dated progress statements here. Read it fully before writing code. If something here is ambiguous or seems wrong, **stop and ask** rather than guessing — especially anything touching the data split, evaluation protocol, or metric definitions, because those decide whether results are valid.
 
 ---
 
@@ -33,7 +35,7 @@ We build a **two-stage retrieve-then-rank recommender** on the **Cell_Phones_and
 
 **Dropped (2026-10-14):** LightGBM ranker, MLP-without-retrieval-score variant, retriever sweep over all five variants, DIN + DCN-V2 combination, MMR re-ranker.
 
-**Out of scope:** multi-source retrieval merging, pre-ranking stage, multi-task ranking, online/A-B evaluation, serving infrastructure, knowledge graphs, fine-tuning the text encoder.
+**Out of scope:** multi-source retrieval merging, pre-ranking stage, multi-task ranking, online/A-B evaluation, serving infrastructure, knowledge-graph model training, fine-tuning the text encoder. An explanation-only relationship graph is authorised for the failure analysis in `docs/evaluations.md`.
 
 ---
 
@@ -352,7 +354,7 @@ inputs; the actual retrieval score remains. Full-data diagnostics find a reverse
 and a low-score preference in the frozen MLP. These observations do not settle a training remedy or establish
 causation. Any controlled retraining or label-policy change needs a separate recorded decision. Checkpoints
 use natural-hit conditional per-user macro nDCG@10 (user-approved), with GAUC secondary; end-to-end metrics
-use all natural lists. See `docs/ranker_experiment.md` for completed validation evidence and limitations.
+use all natural lists. See `docs/evaluations.md` for completed validation evidence, limitations and the authorised controlled retraining protocol.
 
 The lists are built once on the cluster from the frozen retriever and shared from there (≈ 2 GB, not in git).
 

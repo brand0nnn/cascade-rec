@@ -1,0 +1,72 @@
+{
+  "seed": 0,
+  "selection": "seeded draw from stable eligible Val order in listed bucket order, without replacement",
+  "cases": [
+    {
+      "bucket": "rescued_with_co_review",
+      "eligible_events": 1454,
+      "inst": 2241582,
+      "target": 82405,
+      "query_user": 310231,
+      "retrieval_rank": "29.0",
+      "mlp_rank": "3.0",
+      "last_history_items": [
+        15322,
+        22534,
+        44921
+      ],
+      "cutoff": 1628643414042,
+      "witness": {
+        "user": 178127,
+        "history_item": 44921,
+        "history_ts": 1458865232000,
+        "target_ts": 1602954216241
+      }
+    },
+    {
+      "bucket": "demoted_despite_co_review",
+      "eligible_events": 1403,
+      "inst": 1777200,
+      "target": 66116,
+      "query_user": 246037,
+      "retrieval_rank": "9.0",
+      "mlp_rank": "26.0",
+      "last_history_items": [
+        109726,
+        45317,
+        108966,
+        72953
+      ],
+      "cutoff": 1628643414042,
+      "witness": {
+        "user": 17108,
+        "history_item": 109726,
+        "history_ts": 1546785386919,
+        "target_ts": 1546785523375
+      }
+    },
+    {
+      "bucket": "retrieval_miss_despite_co_review",
+      "eligible_events": 30306,
+      "inst": 1405134,
+      "target": 107498,
+      "query_user": 194338,
+      "retrieval_rank": "inf",
+      "mlp_rank": "inf",
+      "last_history_items": [
+        98269,
+        73816,
+        42392,
+        17514,
+        100895
+      ],
+      "cutoff": 1628643414042,
+      "witness": {
+        "user": 239765,
+        "history_item": 98269,
+        "history_ts": 1596047147938,
+        "target_ts": 1596046503742
+      }
+    }
+  ]
+}

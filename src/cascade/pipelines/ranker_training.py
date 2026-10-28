@@ -31,14 +31,20 @@ FeatureArrays = Mapping[str, np.ndarray]
 def create_ranker(spec: RankerFeatureSpec, cfg: Mapping) -> MLPRanker:
     """Construct a named ranker without changing the common training recipe."""
     kind = cfg.get("model", "mlp")
+    score_input = cfg.get("retrieval_score_input", "enabled")
+    if score_input not in ("enabled", "masked"):
+        raise ValueError("retrieval_score_input must be enabled or masked")
     if kind == "mlp":
-        return MLPRanker(spec, dropout=float(cfg.get("dropout", 0.1)))
-    if kind == "din":
+        model = MLPRanker(spec, dropout=float(cfg.get("dropout", 0.1)))
+    elif kind == "din":
         if cfg.get("attention_use_softmax", False):
             raise ValueError("this DIN recipe uses unnormalised attention; softmax must be false")
-        return DINRanker(spec, dropout=float(cfg.get("dropout", 0.1)),
+        model = DINRanker(spec, dropout=float(cfg.get("dropout", 0.1)),
                          attention_hidden_dims=tuple(cfg.get("attention_hidden_dims", (64, 32))))
-    raise ValueError(f"unknown ranker model: {kind}")
+    else:
+        raise ValueError(f"unknown ranker model: {kind}")
+    model.set_retrieval_score_enabled(score_input == "enabled")
+    return model
 
 
 @dataclass
@@ -370,6 +376,40 @@ def _sample_list_columns(lists: Mapping[str, np.ndarray], n_negatives: int, rng:
     return selected
 
 
+def policy_training_columns(lists: Mapping[str, np.ndarray], n_negatives: int,
+                            seed: int, epoch: int) -> np.ndarray:
+    """Common negatives keyed by seed/epoch/instance, invariant to list filtering."""
+    if n_negatives < 1 or seed < 0 or epoch < 1:
+        raise ValueError("policy sampling requires positive epoch/negative count and nonnegative seed")
+    selected = np.full((len(lists["inst"]), n_negatives + 1), -1, dtype=np.int16)
+    for row, instance in enumerate(lists["inst"]):
+        target = int(lists["target_pos"][row])
+        if target < 0:
+            raise ValueError("policy training requires a target in every retained list")
+        selected[row, 0] = target
+        alternatives = np.flatnonzero((lists["label"][row] == 0) & (lists["cand"][row] > 0))
+        take = min(n_negatives, len(alternatives))
+        rng = np.random.default_rng(np.random.SeedSequence(
+            [seed, epoch, int(instance)], spawn_key=(0,)))
+        if take:
+            selected[row, 1:take + 1] = rng.choice(alternatives, take, replace=False)
+    return selected
+
+
+def policy_training_order(instances: np.ndarray, universe: np.ndarray,
+                          seed: int, epoch: int) -> np.ndarray:
+    """Filter a common full-list permutation, preserving shared relative order."""
+    instances, universe = np.asarray(instances), np.asarray(universe)
+    if len(np.unique(instances)) != len(instances) or len(np.unique(universe)) != len(universe):
+        raise ValueError("policy sampling requires unique instance IDs")
+    if not np.isin(instances, universe).all():
+        raise ValueError("retained training instances must belong to the common universe")
+    rng = np.random.default_rng(np.random.SeedSequence([seed, epoch], spawn_key=(1,)))
+    shuffled = universe[rng.permutation(len(universe))]
+    local = {int(instance): row for row, instance in enumerate(instances)}
+    return np.array([local[int(instance)] for instance in shuffled if int(instance) in local], dtype=np.int64)
+
+
 def fit_candidate_lists(
     model: MLPRanker,
     builder: RankerFeatureBuilder,
@@ -385,13 +425,20 @@ def fit_candidate_lists(
     device: str | torch.device = "cpu",
     checkpoint_path: str | Path | None = None,
     resume_checkpoint: Mapping[str, object] | None = None,
+    sampling_strategy: str = "historical",
+    training_instance_universe: np.ndarray | None = None,
 ) -> RankerTrainingResult:
     """Train directly from grouped candidate files, expanding only each minibatch."""
     for name, lists in (("train", train_lists), ("validation", val_lists)):
+        if not len(lists["inst"]):
+            raise ValueError(f"{name} candidate population is empty")
         if np.any(lists["target_pos"] < 0):
             raise ValueError(f"{name} candidate lists must have force-inserted targets")
         if np.any(np.sum(lists["label"], axis=1) != 1):
             raise ValueError(f"{name} candidate lists must have exactly one target")
+    if sampling_strategy not in ("historical", "instance_keyed"):
+        raise ValueError("unknown training sampling strategy")
+    universe = np.asarray(train_lists["inst"] if training_instance_universe is None else training_instance_universe)
     set_seed(seed)
     rng = np.random.default_rng(seed)
     device = torch.device(device)
@@ -402,6 +449,7 @@ def fit_candidate_lists(
     stale_epochs = 0
     best_state: dict[str, torch.Tensor] | None = None
     history: list[dict[str, float]] = []
+    optimizer_steps = 0
     if resume_checkpoint is not None:
         best_gauc = float(resume_checkpoint["val_gauc_macro"])
         best_ndcg = float(resume_checkpoint["val_ndcg10_macro"])
@@ -420,8 +468,12 @@ def fit_candidate_lists(
 
     for epoch in range(best_epoch + 1, max_epochs + 1):
         model.train()
-        cols = _sample_list_columns(train_lists, n_negatives, rng)
-        order = rng.permutation(n_lists)
+        if sampling_strategy == "instance_keyed":
+            cols = policy_training_columns(train_lists, n_negatives, seed, epoch)
+            order = policy_training_order(train_lists["inst"], universe, seed, epoch)
+        else:
+            cols = _sample_list_columns(train_lists, n_negatives, rng)
+            order = rng.permutation(n_lists)
         total_loss, total_rows = 0.0, 0
         for start in tqdm(range(0, n_lists, list_batch_size), desc=f"Train epoch {epoch}/{max_epochs}", unit="batch", leave=False, mininterval=5):
             batch_lists = order[start : start + list_batch_size]
@@ -437,6 +489,7 @@ def fit_candidate_lists(
             loss = loss_fn(logits, labels)
             loss.backward()
             optimizer.step()
+            optimizer_steps += 1
             total_loss += float(loss.detach()) * len(pair_rows)
             total_rows += len(pair_rows)
 
@@ -465,7 +518,8 @@ def fit_candidate_lists(
             np.broadcast_to(val_inst[:, None], flat_valid.shape)[evaluated],
             np.broadcast_to(val_users[:, None], flat_valid.shape)[evaluated],
         )
-        epoch_row = {"epoch": float(epoch), "train_bce": total_loss / max(1, total_rows), **metrics}
+        epoch_row = {"epoch": float(epoch), "train_bce": total_loss / max(1, total_rows),
+                     "optimizer_steps": optimizer_steps, "train_lists": n_lists, **metrics}
         ranks = candidate_ranks(val_scores, val_lists)
         comparison = ranker_comparison(ranks, val_lists)
         epoch_row.update({
@@ -487,7 +541,9 @@ def fit_candidate_lists(
                 torch.save({"state_dict": best_state, "epoch": best_epoch,
                             "val_gauc_macro": best_gauc, "val_ndcg10_macro": best_ndcg,
                             "seed": seed, "feature_groups": model.spec.feature_groups,
-                            "model_type": type(model).__name__}, path)
+                            "model_type": type(model).__name__, "sampling_strategy": sampling_strategy,
+                            "optimizer_steps": optimizer_steps,
+                            "retrieval_score_input": "enabled" if bool(model._retrieval_score_enabled) else "masked"}, path)
                 path.with_name("validation_comparison.json").write_text(json.dumps(comparison, indent=2))
                 np.savez_compressed(path.with_name("val_ranks.npz"), inst=val_inst,
                                     user=val_users, ranks=ranks,
