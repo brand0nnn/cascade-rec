@@ -1,14 +1,14 @@
-# Exploratory analysis loop — 28/29 Oct 2026 (Val only, no training)
+# Exploratory analysis loop — 28 Oct 2026 (Val only, no training)
 
 **Final summary at the top; the log below is chronological.**
 
 **Scope:** exploratory analyses of saved Val outputs and frozen models. No Test, no training, no K₁/index selection,
 no commits. Orchestrator edits this file, `docs/decisions.md` and `docs/evaluations.md`; subagents write only their
-own scripts, tests and `results/analysis/<run-id>/`. Hard stop: no new task after 00:00; summary by 00:15.
+own scripts, tests and `results/analysis/<run-id>/`.
 
-## Final summary (23:40)
+## Final summary
 
-All four paths closed by 23:40; every result was reviewed, spot-checked against saved outputs, and pytest stayed
+All four paths are closed; every result was reviewed, spot-checked against saved outputs, and pytest stayed
 green (171 passed). Val only, no training, no Test, nothing committed, no setting selected.
 
 ### Findings, ranked by strength of evidence
@@ -32,7 +32,7 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
    A handling detail matters: with the training convention (log q = 0 for unseen) new products disappear entirely.
 4. **The forced-list ranker learned two score responses (moderate–strong; exp 4).** Its logit is U-shaped over
    retrieval rank (boost at the top and at the bottom), whereas natural rankers fall monotonically; natural training
-   *increases* reliance on the retrieval score and text cosine. This refines the overnight shortcut story: the
+   *increases* reliance on the retrieval score and text cosine. This refines the shortcut story in `docs/report_2026-10-28.md`: the
    bottom-of-list boost is the shortcut, and it takes over at K₁ = 500. All rankers rely mostly on candidate identity.
 5. **"Staleness over Val months" is mostly composition, not model decay (moderate; exp 1).** The crude Recall@200
    fall 0.089 → 0.053 comes from a rising new-product share (17% → 45%) and a growing catalogue; a real residual
@@ -76,8 +76,8 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
 |---|---|---|---|---|---|
 | 1 | Retriever staleness | exp1-staleness | `20261028-staleness-r2`, `-staleness-popularity` | **closed** after 1b | mixed: recall falls across Val mostly via mix + catalogue growth; real decline only for new products; popularity (training-window) is the driver |
 | 2 | Similar vs complementary targets | exp2-complements | `20261028-complements`, `-mechanism-r2` | **closed** after 2b | same-store lift = text similarity to the last product; retriever also has a popularity route |
-| 3 | Last-product-only baseline | exp3-lastitem | `20261028-last-item`, `-logq-serving`, `-debiased-lists`, `index_rank_eval/20261028-debiased-rank-{natural,din}` | **closed** 23:40 after 3c | **refuted, but surprising**: last-item reaches 62% overall yet beats the frozen retriever on new/tail products |
-| 4 | Ranker permutation importance | exp4-importance | `20261028-permutation-importance`, `-r2` | **closed** 23:38 | hypothesis rejected: natural training *restores* use of the retrieval signal; forced models' rank response is U-shaped |
+| 3 | Last-product-only baseline | exp3-lastitem | `20261028-last-item`, `-logq-serving`, `-debiased-lists`, `index_rank_eval/20261028-debiased-rank-{natural,din}` | **closed** after 3c | **refuted, but surprising**: last-item reaches 62% overall yet beats the frozen retriever on new/tail products |
+| 4 | Ranker permutation importance | exp4-importance | `20261028-permutation-importance`, `-r2` | **closed** | hypothesis rejected: natural training *restores* use of the retrieval signal; forced models' rank response is U-shaped |
 
 ## Hypotheses (recorded before running)
 
@@ -99,8 +99,8 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
 
 ## Log
 
-- 23:02 Progress file created; hypotheses 1–4 recorded. Launched subagents for 1–3 concurrently.
-- 23:06 **Exp 2 result** (`results/analysis/20261028-complements/`; reviewed `src/cascade/analysis/complements.py`,
+- Progress file created; hypotheses 1–4 recorded. Launched subagents for 1–3 concurrently.
+- **Exp 2 result** (`results/analysis/20261028-complements/`; reviewed `src/cascade/analysis/complements.py`,
   classifier + alignment checks; reproduces Qing Rong's same-leaf-last numbers 0.1008 / 0.0634 exactly; pytest 167
   passed). Frozen retriever Val Recall@200 (macro, 95% user-bootstrap CI) by target vs last history product:
 
@@ -121,13 +121,13 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   New vs Qing Rong: joint leaf × store split against the *last* item, depth distributions and deep-miss
   composition, ranking-given-retrieval by class. Caveat: "different leaf" is only a proxy for "complement"; same
   store with the last item covers just 3.4% of Val.
-- 23:07 **Follow-up 2b** (same subagent), hypothesis recorded before running: the same-store lift comes from
+- **Follow-up 2b** (same subagent), hypothesis recorded before running: the same-store lift comes from
   store/brand tokens in the item text. Predictions: target–last MiniLM and retriever-vector cosine is much higher
   for same-store pairs; Recall@200 rises steeply with target–last cosine; class adds little within a cosine decile.
   Run `20261028-complements-mechanism`.
-- 23:08 Exp 4 started (exp 2 finished, so the "one of 1–3 done" condition holds; ~2.8 GB free, so the subagent was
+- Exp 4 started (exp 2 finished, so the "one of 1–3 done" condition holds; ~2.8 GB free, so the subagent was
   told to keep batches small). Added the forced DIN (`20261024-din-matching-seed{0,1,2}`) as an optional fourth model.
-- 23:08 **Exp 3 result** (`results/analysis/20261028-last-item/`; reviewed `src/cascade/analysis/last_item.py`
+- **Exp 3 result** (`results/analysis/20261028-last-item/`; reviewed `src/cascade/analysis/last_item.py`
   scorers; sanity re-score of 5,000 Val instances on MPS matches the saved CUDA ranks (98.3% exact, all hits equal);
   I independently recomputed R@10 by item type and the top-10 popularity concentration from the saved ranks;
   pytest 167 passed). Val, per-user macro, paired user bootstrap vs frozen retriever:
@@ -150,12 +150,12 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   approximate indexes and larger K₁ help new/tail because they loosen a head-heavy candidate set. Leakage check: both
   scorers use only history and frozen text vectors with the shared §4.6 filtering (history items excluded); a likely
   legitimate source is near-duplicate variants (checked in 3b).
-- 23:09 **Follow-up 3b** (same subagent), hypothesis recorded before running: the head skew comes partly from
+- **Follow-up 3b** (same subagent), hypothesis recorded before running: the head skew comes partly from
   serving with the raw score (logQ-corrected training lets the raw score absorb popularity), so subtracting
   β·log q at serving time (β ∈ {0, 0.25, 0.5, 1}; β = 0 must reproduce the frozen ranks) shifts recall toward
   new/tail without training. Probe only, no β selection. Also checks the near-duplicate explanation for last-item's
   new-product hits. Run `20261028-logq-serving`.
-- 23:10 **Exp 1 result** (`results/analysis/20261028-staleness-r2/`, the run to cite; `-staleness` is the first,
+- **Exp 1 result** (`results/analysis/20261028-staleness-r2/`, the run to cite; `-staleness` is the first,
   saved-ranks-only pass). Reviewed `src/cascade/analysis/staleness.py` (Val only, alignment and timestamp checks;
   inference-only re-score reproduces saved ranks, 100% hit agreement); pytest 167 passed.
   Crude Val Recall@200 falls month by month, 0.089 (Aug 2021) → 0.053 (Jul 2022). Decomposition:
@@ -173,10 +173,10 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   **Verdict:** mixed. "Staleness over months" is mostly composition and catalogue growth, not model decay; the
   substantive signal is popularity-in-the-training-window, consistent with exp 3's popularity-heavy finding.
   Caveat: user-only bootstrap CIs are over-confident for item-level contrasts.
-- 23:11 **Follow-up 1b** (same subagent), hypothesis recorded before running: warm-target recall is explained
+- **Follow-up 1b** (same subagent), hypothesis recorded before running: warm-target recall is explained
   mainly by popularity in the retriever-training period (0 for ranker-era products), not by current popularity
   or era; item-cluster bootstrap. Run `20261028-staleness-popularity`.
-- 23:2x **Follow-up 2b result** (`results/analysis/20261028-complements-mechanism-r2/`; the first `-mechanism`
+- **Follow-up 2b result** (`results/analysis/20261028-complements-mechanism-r2/`; the first `-mechanism`
   folder had a wrong re-weighting table and is marked `SUPERSEDED.txt`; reviewed; spot re-score of 256 instances
   matches; pytest green).
   - Frozen MiniLM text similarity between target and last product orders the classes (same/same 0.82, diff
@@ -191,7 +191,7 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
     two routes: text similarity to recent products, and popularity independent of similarity — consistent with exp 3.
   **Verdict / closed:** the store effect is explained (text similarity); further splitting (crowding, history
   centroid) is second-order next to the popularity finding, so this path is closed after two results.
-- 23:15 **Follow-up 1b result** (`results/analysis/20261028-staleness-popularity/`; warm Val targets only,
+- **Follow-up 1b result** (`results/analysis/20261028-staleness-popularity/`; warm Val targets only,
   saved ranks, item-cluster bootstrap; reviewed; pytest green). Recall by the target's review count **in the
   retriever-training period**:
 
@@ -214,7 +214,7 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   tower's prior. Exp 3b tests this directly by adding −β·log q back at serving time.
   **Closed** after two results: the staleness question is answered (composition + training-window popularity), and
   the remaining mechanism check is covered by 3b.
-- 23:25 **Follow-up 3b result** (`results/analysis/20261028-logq-serving/`; β = 0 reproduces the saved ranks, 100%
+- **Follow-up 3b result** (`results/analysis/20261028-logq-serving/`; β = 0 reproduces the saved ranks, 100%
   hit agreement, R@200 0.068714; I re-computed the R@200-by-item-type cells for β = 0 and 0.25-minseen from the saved
   ranks; pytest 171 passed). Serving score u·v − β·τ·log q (no training). 26% of products (all new-in-period ones)
   have no retriever-training interaction; "train" keeps their log q = 0 (= treated as the most popular → no boost),
@@ -233,12 +233,12 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   Recall@10 falls at every β, so the gain is a candidate-pool effect, not a top-10 effect. Near-duplicate check:
   last-item's new-product @10 hits are same product line in another phone model/colour (median text cosine 0.88; 75%
   same store; 0.1% identical titles) — legitimate, not leakage. Probe only, no β selected.
-- 23:26 **Follow-up 3c** (same subagent), hypothesis recorded before running: the retriever's @10 loss does not
+- **Follow-up 3c** (same subagent), hypothesis recorded before running: the retriever's @10 loss does not
   matter in the cascade because the ranker re-orders the top 200; with natural rankers on debiased lists,
   new/tail end-to-end nDCG@10 rises and overall changes little. Candidates are selected by the debiased score but
   keep the original score as the ranker feature; β = 0 lists must reproduce the exact lists. Runs
   `20261028-debiased-lists`, `results/index_rank_eval/20261028-debiased-rank-{natural,din}`.
-- 23:38 **Exp 4 result** (`results/analysis/20261028-permutation-importance{,-r2}/`, perm seeds 0 and 1; 12
+- **Exp 4 result** (`results/analysis/20261028-permutation-importance{,-r2}/`, perm seeds 0 and 1; 12
   checkpoints incl. the optional forced DIN; 16,673 natural-hit Val lists at K₁ = 200). Reviewed: baselines
   reproduce saved ranks (100% for natural models; 99.92–99.98% for forced ones, ties from a 2e-7 relative
   score_std difference, so the subagent's own loader uses a 1e-6 tolerance, documented); permuting unused inputs
@@ -257,7 +257,7 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   **Verdict: hypothesis rejected.** Shuffling the score *hurts* the forced MLP on natural-hit lists (it does not
   help), and natural training makes both models rely **more** on the retrieval score and text cosine, not less.
   All models rely mainly on candidate identity (text embedding; item id for DIN); store-in-history is a solid third;
-  the leaf-match flag is negligible. Reconciliation with the overnight score diagnostic (Spearman −0.40 at 500
+  the leaf-match flag is negligible. Reconciliation with the score diagnostic in `docs/report_2026-10-28.md` (Spearman −0.40 at 500
   candidates over uniform Val queries): within natural-hit lists at 200, the forced MLP's logit is **U-shaped**
   over retrieval-rank deciles (+0.2 top, −0.2 middle, +0.3 bottom; within-list Spearman −0.06, 59% of lists
   negative), while natural models fall monotonically (Spearman +0.22 to +0.24, ~1% negative). So the forced model
@@ -265,7 +265,7 @@ green (171 passed). Val only, no training, no Test, nothing committed, no settin
   targets sit near the top, which is why shuffling the score still hurts it there, and the bottom boost is what
   takes over at K₁ = 500. **Closed:** the question (which inputs carry the shortcut) is answered as far as
   permutation can go; correlated text inputs limit finer attribution.
-- 23:40 **Follow-up 3c result** (`results/analysis/20261028-debiased-lists/`, `results/index_rank_eval/20261028-debiased-rank-{natural,din}/`;
+- **Follow-up 3c result** (`results/analysis/20261028-debiased-lists/`, `results/index_rank_eval/20261028-debiased-rank-{natural,din}/`;
   β = 0 lists reproduce the exact lists (99.1% identical candidate sets; differences are near-ties) and the known
   end-to-end nDCG@10 to 6 decimals (MLP 0.008607, DIN 0.009824); I re-read both results.json files; pytest 171).
 

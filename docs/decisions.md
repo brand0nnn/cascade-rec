@@ -437,9 +437,9 @@ The initial suite passed 32 tests and skipped 13 because the separately remapped
 
 Fixed two future rerun hazards before merging: direct grouped/toy ranker training atomically refuses an existing run directory; CLI `--resume` is rejected before loading config/data because exact optimizer/RNG restoration and selected-artifact carryover are incomplete. Other callers of the shared run-directory helper retain its default behaviour. The internal historical fitting function, models, features, labels, metric definitions, saved checkpoints and research results are unchanged. No research retraining or final Test comparison was performed. The forced-positive policy remedy and final pipeline selection remain open research decisions.
 
-## 2026-10-28 — Overnight exploratory runs (Val only; awaiting team sign-off)
+## 2026-10-28 — Exploratory runs (Val only; awaiting team sign-off)
 
-Autonomous overnight session at Brandon's request; running log and results in `docs/overnight_report_2026-10-28.md`.
+Exploratory session at Brandon's request; running log and results in `docs/report_2026-10-28.md`.
 Everything below is **exploratory**: no Test data is loaded, nothing is committed, and no setting is selected.
 
 - **Candidate lists rebuilt locally** (`build_candidates.py`, frozen Two-tower (text) seed 0, `--k-train 200 --k-eval 500
@@ -461,7 +461,7 @@ Everything below is **exploratory**: no Test data is loaded, nothing is committe
   (< 450), so many queries end up short of K₁ after filtering; exact FAISS search with the 250 buffer leaves ~0.1% of
   queries short of K₁ (early-Val instances where many products are not yet released), which §4.6 says should be ~never.
   Import torch before faiss on macOS (libomp clash segfaults otherwise).
-- **Further overnight runs** (all Val, exploratory; details and numbers in the overnight report):
+- **Further runs** (all Val, exploratory; details and numbers in the 28 Oct report):
   natural-only seeds 0–2 (`results/ranker_mlp/20261028-natural-matching-seed{0,1,2}`); comparison with the forced-list
   MLP (`results/ranker_compare/20261028-natural-vs-forced-mlp`, new `src/cascade/eval/compare_rankers.py`); K₁ sweep
   and score diagnostic rerun with natural checkpoints (`configs/cascade/k1_sweep_natural.yaml`,
@@ -481,15 +481,15 @@ Everything below is **exploratory**: no Test data is loaded, nothing is committe
   (`20261028-din-natural-seed{0,1,2}`, `20261028-din-natural-ktrain500-seed{0,1,2}`); K₁ curves via
   `index_rank_eval.py` (`k1_counts`); final latency `20261028-latency-final`. Full-data correction to the 2026-10-21
   entry: later same-period reviews appear in 8.9% of all ranker-training lists and 13.1% of natural ones (3.7% was the
-  sample figure). **Summary and team decisions: `docs/overnight_report_2026-10-28.md`, "Morning summary".**
-- Final overnight evaluations: K₁ and index sweeps for the K_train-500 DIN (`results/index_rank_eval/20261028-k1-din-ktrain500`,
+  sample figure). **Summary and team decisions: `docs/report_2026-10-28.md`, "Summary".**
+- Final 28 Oct evaluations: K₁ and index sweeps for the K_train-500 DIN (`results/index_rank_eval/20261028-k1-din-ktrain500`,
   `.../20261028-index-rank-din-ktrain500`). Its nDCG@10 rises up to K₁ = 500 (+0.00024 vs 200). No K₁ or index is
   selected (δ not recorded).
 - **Opt-in `loss: listwise_softmax`** in `ranker_training.py` (−log softmax of the positive over each list's sampled
   columns; default BCE unchanged; test added). H9 runs: `20261028-natural-ktrain500-listwise-seed{0,1}`,
   `20261028-din-natural-ktrain500-listwise-seed0`. Exploratory.
 
-## 2026-10-28 (late) — Exploratory retrieval/ranking analysis loop (Val only, no training)
+## 2026-10-28 — Exploratory retrieval/ranking analysis loop (Val only, no training)
 
 Exploratory analyses of saved Val outputs and frozen models; no training, no Test, no K₁/index selection, no change
 to the split, filtering or metrics. New code only (`src/cascade/analysis/{staleness,complements,complements_mechanism,
@@ -522,3 +522,26 @@ and `scripts/slurm/submit_policy_study.sh` (`check` → `development` → `pilot
 verifies inputs and the frozen candidate hashes before anything is queued). No change to the study protocol,
 arms, seeds or pass rule in `docs/evaluations.md`; `targeted_study.sbatch` is unchanged. The study needs the
 original frozen candidate lists; the locally rebuilt `two_tower_text_seed0` lists fail the hash check (verified).
+- **Opt-in regenerated-candidate reference** (same day). The original frozen candidate files are unavailable to
+  Brandon (separate cluster accounts), so `ranker_policy_study.py` gained `--candidate-reference <json>` and
+  `--write-candidate-reference <out>`. With a reference, the runner checks the candidate hashes (meta, val and
+  ranker_train) and the full-training score mean/std against that record instead of the frozen 2026-10-25 study;
+  cardinalities are still checked against the reference checkpoint, and the record is copied into `study.json`
+  (`candidate_source.kind = "regenerated"`). Default (no flag) is unchanged and still refuses the rebuilt lists.
+  Record for the locally rebuilt lists: `configs/ranker/policy_candidate_reference_rebuilt.json` (score_std differs
+  from the original checkpoint by 1.5e-8, which is what tripped the 1e-8 check). Validity: all four arms are trained
+  fresh on identical lists, so A–D comparisons are unaffected; the new arm A is not byte-comparable with the
+  historical forced MLP. Verified with a local development-stage run
+  (`results/ranker_policy/policy-development-localcheck_sample`, not reportable) and its report; tests 171 passed.
+  To be confirmed with Qing Rong (owner of the protocol).
+- **Cluster scripts removed** (same day): the policy study will run on Brandon's laptop instead, so
+  `scripts/slurm/policy_study.sbatch` and `scripts/slurm/submit_policy_study.sh` were deleted. The opt-in
+  `--candidate-reference` option and `configs/ranker/policy_candidate_reference_rebuilt.json` stay: the laptop's
+  rebuilt lists still need them.
+- **Figures and a saved miss analysis** (same day): `src/cascade/analysis/retrieval_misses.py` →
+  `results/analysis/20261029-retrieval-misses` (Val target rank buckets and the share of targets without an ID-era
+  history; previously computed ad hoc in chat) and `src/cascade/analysis/plot_findings.py` →
+  `results/figures/20261029-findings/` (six figures, each with a CSV of the plotted values and `sources.json`). The
+  training-positive shares in fig. 4 are recomputed from `ranker_train.npz` with the 28 Oct report's H6 definitions
+  (new = first interaction ≥ t_ranker_train) and reproduce 83.9% / 43.1% popular exactly. Summary added to
+  `docs/evaluations.md`.

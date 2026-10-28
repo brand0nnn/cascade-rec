@@ -1,0 +1,10 @@
+{
+  "directory": "data/processed/candidates/two_tower_text_seed0",
+  "meta_sha256": "3241128fd57ad3d3fe44923e81d46e46838ba8b9826c53c9b70762919bf28094",
+  "val_sha256": "ccbf9a031c051d04d1fec892f40cca06f663401ff0f6d5a11001128fd52624e8",
+  "ranker_train_sha256": "2922cfe2caefbcc7ee542d0c94cc2863ef0506eae12f6edf85a4304c2043bd76",
+  "score_mean": -0.17960958182811737,
+  "score_std": 0.08012503385543823,
+  "kind": "regenerated",
+  "note": "Rebuilt locally on 2026-10-28 from results/retriever/two_tower_text/seed0 (exact search, M2 Pro MPS); training lists match the team's originals in content; Val natural@200 is 16,673 vs the original 16,672 (near-tie). Original frozen files unavailable."
+}

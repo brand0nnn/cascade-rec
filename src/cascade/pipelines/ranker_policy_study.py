@@ -111,14 +111,36 @@ def select_training_lists(full: Mapping[str, np.ndarray], population: str,
 
 
 def frozen_feature_builder(data: ProcessedData, full_train: Mapping[str, np.ndarray],
-                           reference_config: Path) -> RankerFeatureBuilder:
-    """Fit the original full-training contract before any supervised filtering."""
+                           reference_config: Path,
+                           expected_score_stats: tuple[float, float] | None = None) -> RankerFeatureBuilder:
+    """Fit the original full-training contract before any supervised filtering.
+
+    ``expected_score_stats`` (mean, std) replaces the reference checkpoint's score statistics; it is set only by an
+    explicit regenerated-candidate reference (see ``candidate_reference_record``). Cardinalities always come from
+    the reference checkpoint.
+    """
     builder = RankerFeatureBuilder.create(data, full_train)
     old = load_config(reference_config)["run"]
+    stats = [old["score_mean"], old["score_std"]] if expected_score_stats is None else list(expected_score_stats)
     if dict(builder.item_cardinalities) != old["feature_spec"]["cardinalities"] or not np.allclose(
-            [builder.score_mean, builder.score_std], [old["score_mean"], old["score_std"]], rtol=0, atol=1e-8):
+            [builder.score_mean, builder.score_std], stats, rtol=0, atol=1e-8):
         raise ValueError("original full-training feature contract could not be reproduced")
     return builder
+
+
+def candidate_reference_record(candidate_dir: Path, data_config: Path, note: str) -> dict:
+    """Hashes and full-training score statistics of a regenerated candidate set.
+
+    Opt-in replacement for the frozen 2026-10-25 candidate source when the original files are unavailable. The
+    four arms are still trained fresh on identical lists; only the link to historical runs changes.
+    """
+    data = ProcessedData.load(str(data_config))
+    builder = RankerFeatureBuilder.create(data, load_candidates(candidate_dir, "ranker_train"))
+    return {"directory": str(candidate_dir.relative_to(REPO_ROOT)) if candidate_dir.is_relative_to(REPO_ROOT) else str(candidate_dir),
+            "meta_sha256": digest(candidate_dir / "meta.json"), "val_sha256": digest(candidate_dir / "val.npz"),
+            "ranker_train_sha256": digest(candidate_dir / "ranker_train.npz"),
+            "score_mean": float(builder.score_mean), "score_std": float(builder.score_std),
+            "kind": "regenerated", "note": note}
 
 
 def population_support(data: ProcessedData, lists: Mapping[str, np.ndarray]) -> dict:
@@ -158,8 +180,12 @@ def _parameter_digest(model) -> str:
 
 def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = None,
         seeds: list[int] | None = None, device: str = "cpu", candidate_dir: str | None = None,
-        data_config: str | None = None) -> Path:
-    """Train selected fresh arms and export selected-checkpoint natural Val prefixes."""
+        data_config: str | None = None, candidate_reference: str | None = None) -> Path:
+    """Train selected fresh arms and export selected-checkpoint natural Val prefixes.
+
+    ``candidate_reference`` (opt-in) is a JSON record from ``candidate_reference_record``; when given, candidate
+    hashes and score statistics are checked against it instead of the frozen 2026-10-25 study.
+    """
     if not run_id or Path(run_id).name != run_id or run_id in (".", ".."):
         raise ValueError("run ID must be a single directory name")
     if stage not in STAGE_SEEDS:
@@ -194,8 +220,18 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
     if selected_device.type == "mps" and not torch.backends.mps.is_available():
         raise ValueError("MPS was requested but is unavailable")
     hashes = {str(path): digest(path) for path in required}
-    frozen = json.loads(_path(cfg["reference_comparison"]).read_text())["candidate_source"]
     cand_dir = _path(cfg["candidate_dir"])
+    if candidate_reference is None:
+        frozen = json.loads(_path(cfg["reference_comparison"]).read_text())["candidate_source"]
+        expected_score_stats = None
+    else:
+        frozen = json.loads(_path(candidate_reference).read_text())
+        if frozen.get("kind") != "regenerated":
+            raise ValueError("candidate reference must be a regenerated-candidate record")
+        if digest(cand_dir / "ranker_train.npz") != frozen["ranker_train_sha256"]:
+            raise ValueError("ranker-training candidate hash differs from the candidate reference")
+        expected_score_stats = (frozen["score_mean"], frozen["score_std"])
+        frozen = {**frozen, "reference_file": str(candidate_reference)}
     if hashes[str(cand_dir / "meta.json")] != frozen["meta_sha256"] or hashes[str(cand_dir / "val.npz")] != frozen["val_sha256"]:
         raise ValueError("candidate metadata/validation hashes differ from the frozen study")
     data = ProcessedData.load(str(_path(cfg["data_config"])))
@@ -211,7 +247,7 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
         raise ValueError("training-selector and prefix validation populations differ")
     # Critical: fit normalization/vocabularies on FULL original training lists,
     # before either development-user or natural-only selection.
-    builder = frozen_feature_builder(data, full_train, _path(cfg["reference_ranker_config"]))
+    builder = frozen_feature_builder(data, full_train, _path(cfg["reference_ranker_config"]), expected_score_stats)
     universe = np.asarray(full_train["inst"]).copy()
     chosen_users = None
     if development:
@@ -372,17 +408,35 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/ranker/policy_study.yaml")
-    parser.add_argument("--run-id", required=True)
-    parser.add_argument("--stage", required=True, choices=list(STAGE_SEEDS))
+    parser.add_argument("--run-id")
+    parser.add_argument("--stage", choices=list(STAGE_SEEDS))
     parser.add_argument("--arms", nargs="+", choices=list(ARMS))
     parser.add_argument("--seeds", nargs="+", type=int)
     parser.add_argument("--candidate-dir")
     parser.add_argument("--data-config")
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--candidate-reference",
+                        help="opt-in regenerated-candidate record (JSON) to check instead of the frozen study")
+    parser.add_argument("--write-candidate-reference", metavar="OUT",
+                        help="write a regenerated-candidate record for --candidate-dir to OUT, then exit")
+    parser.add_argument("--note", default="", help="free-text provenance note for --write-candidate-reference")
     args = parser.parse_args()
+    if args.write_candidate_reference:
+        cfg = load_config(_path(args.config))
+        out = _path(args.write_candidate_reference)
+        if out.exists():
+            raise FileExistsError(f"refusing existing candidate reference: {out}")
+        record = candidate_reference_record(_path(args.candidate_dir or cfg["candidate_dir"]),
+                                            _path(args.data_config or cfg["data_config"]), args.note)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        _write(out, record)
+        print(f"Wrote candidate reference: {out}", flush=True)
+        return
+    if not args.run_id or not args.stage:
+        parser.error("--run-id and --stage are required unless --write-candidate-reference is given")
     root = run(_path(args.config), args.run_id, stage=args.stage, arms=args.arms,
                seeds=args.seeds, device=args.device, candidate_dir=args.candidate_dir,
-               data_config=args.data_config)
+               data_config=args.data_config, candidate_reference=args.candidate_reference)
     print(f"Completed policy study: {root}", flush=True)
 
 

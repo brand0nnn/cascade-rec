@@ -1,4 +1,4 @@
-# Exploratory (2026-10-28): best overnight ranker (DIN natural, K_train=500, seeds 0-2) on the index sweep's lists. Val only.
+# Exploratory (2026-10-28): best 28 Oct ranker (DIN natural, K_train=500, seeds 0-2) on the index sweep's lists. Val only.
 candidate_dir: data/processed/candidates/two_tower_text_seed0_ktrain500   # its training lists: feature tables, score normalisation
 data_config: configs/data.yaml
 index_lists_dir: data/processed/candidates/index_sweep/20261028-index-sweep

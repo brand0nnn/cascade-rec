@@ -491,7 +491,37 @@ To replay archived validation predictions without training, original processed d
 
 Use a fresh ID; existing outputs are preserved. Config: `configs/evaluation/saved_results.yaml`. `--sample` is a development subset and must never be reported as a full-data result. Graph/profile reproduction additionally needs the original/restored processed inputs; the one-off `notebooks/complete_evaluation.py` records the completion analysis, with local input/output paths that must be adjusted for a fresh run. Do not launch retraining merely to reproduce these saved-result findings.
 
-## Exploratory analyses, 28 Oct 2026 late (Val only; no training; not reviewed by the team)
+## Exploratory ranker runs, 28 Oct 2026: training lists, K₁ and rankers (Val only; awaiting team sign-off)
+
+Brandon's runs; full log, run IDs and caveats in `docs/report_2026-10-28.md`. Figures (with the plotted values as
+CSV): `results/figures/20261029-findings/`, made by `src/cascade/analysis/plot_findings.py`. Training only on
+natural lists changes the ranker's positive/negative definition, so nothing here is adopted until the team agrees
+(CLAUDE.md §15 rule 1); the controlled confirmation is the policy study in "Authorised follow-up" below.
+
+**Proposed main topic (for team discussion):** the retriever shapes what the ranker learns. Forced training lists
+carry a shortcut (appended targets sit at the bottom of the scores); natural lists carry the retriever's popularity
+bias. This explains the RQ2 (K₁) and RQ3 (MLP vs DIN) results below.
+
+- **Natural-list training removes the shortcut** (fig. 2, 3). Matching MLP, seeds 0–2, K₁ = 200: natural 0.008607 vs
+  forced 0.006843, +0.00176 [+0.00154, +0.00199]; DIN natural 0.009824 vs forced 0.006436. Score diagnostic:
+  Spearman(score, logit) −0.40 → +0.19; forced rankers' logit is U-shaped over retrieval rank (top and bottom
+  boosted), natural rankers' falls monotonically.
+- **K₁'s effect depends on ranker training** (fig. 1). K₁ 500 − 200: forced MLP −0.00463 (0.0022, below retrieval
+  order 0.0056); natural MLP −0.00051; natural MLP with K_train 500 −0.00032; natural DIN −0.00009 (n.s.); natural DIN
+  with K_train 500 **+0.00024 [+0.00008, +0.00042]**. Recall@K₁ rises 0.030 → 0.118 from K₁ 50 to 500.
+- **DIN overtakes the MLP on natural lists** (fig. 3): +0.00122 [+0.00101, +0.00141], reversing the forced-list RQ3
+  result. K_train 500 adds ~4%, the listwise loss ~5% (fewer seeds). Best: DIN, natural, K_train 500, listwise,
+  0.010648 (seed 0).
+- **Natural lists inherit popularity bias** (fig. 4): 84% of natural training positives are popular (forced 43%);
+  natural − forced MLP is +0.00436 on popular targets but −0.00059 on new and −0.00039 on tail ones.
+- **Looser retrieval shifts towards new and tail products** (fig. 5): K₁ 500, IVF-32 and a serving-time popularity
+  correction all raise new/tail nDCG@10 and lower or keep popular; approximate search saves < 1 ms (exact search
+  ≈ 1.2 ms), while DIN ranking costs 8.8 ms at K₁ = 200 and 25 ms at K₁ = 500.
+- **Retrieval ceiling** (`results/analysis/20261029-retrieval-misses`): 92.8% of Val targets are outside the top 200;
+  the median target rank is 7,353 of 111,480, and only 11% sit at ranks 201–1,000. 65.3% of Val targets (39.8% of
+  warm-head ones) have no ID-era history, which limits any text + ID retriever.
+
+## Exploratory analyses, 28 Oct 2026 (Val only; no training; not reviewed by the team)
 
 Brandon's analysis loop; full log and tables in `docs/analysis_loop_2026-10-28.md`, results under
 `results/analysis/`. Frozen text seed-0 retriever and saved Val outputs only. These are observations, not

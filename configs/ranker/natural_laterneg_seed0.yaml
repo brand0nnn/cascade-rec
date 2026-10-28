@@ -1,4 +1,4 @@
-# Exploratory overnight run (2026-10-28, H4): natural_matching seed 0 with later same-period reviews excluded from sampled negatives.
+# Exploratory run (2026-10-28, H4): natural_matching seed 0 with later same-period reviews excluded from sampled negatives.
 model: mlp
 history_length: 50
 item_text_dim: 384

@@ -1,0 +1,10 @@
+group,diff,ci_low,ci_high,n_users,n_resamples
+New products,-0.0005945679918587743,-0.0008524437057988979,-0.00030418562472946803,52420.0,1000.0
+Tail,-0.0003896763787104889,-0.0006069392522607083,-0.00018090945531030908,37944.0,1000.0
+Popular (head),0.004362083663973238,0.003943791053096332,0.004777782675644776,75877.0,1000.0
+"training positives, forced lists, new",0.4092667585887428,,,,
+"training positives, forced lists, tail",0.1602122169505756,,,,
+"training positives, forced lists, head",0.4305210244606816,,,,
+"training positives, natural lists, new",0.1366999200886758,,,,
+"training positives, natural lists, tail",0.024128064341504912,,,,
+"training positives, natural lists, head",0.8391720155698194,,,,

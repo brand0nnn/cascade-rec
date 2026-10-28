@@ -132,6 +132,11 @@ def test_normalization_is_fitted_on_full_unfiltered_population(tmp_path, monkeyp
     expected.score_mean = -.1
     with pytest.raises(ValueError, match="contract"):
         study.frozen_feature_builder(object(), full, path)
+    # An explicit regenerated-candidate reference replaces only the score statistics, never the cardinalities.
+    assert study.frozen_feature_builder(object(), full, path, (-.1, .08)) is expected
+    expected.item_cardinalities = {"item_id": 9}
+    with pytest.raises(ValueError, match="contract"):
+        study.frozen_feature_builder(object(), full, path, (-.1, .08))
 
 
 def test_no_test_prediction_inputs_and_no_outputs_on_missing_prerequisites(tmp_path, monkeypatch):
