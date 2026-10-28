@@ -1,0 +1,30 @@
+label: validation only, exploratory
+split: val
+retriever_run: results/retriever/two_tower_text/seed0
+device: mps
+betas:
+- 0.0
+- 0.25
+- 0.5
+- 1.0
+temperature: 0.05
+score: u.v - beta * tau * log q (ranking-equivalent to u.v/tau - beta * log q)
+log_q: retriever_train_log_q (retriever-training counts / total)
+unseen_conventions:
+  train: log q = 0 for unseen (as in training)
+  minseen: unseen = min seen log q
+cutoffs:
+- 10
+- 50
+- 100
+- 200
+- 500
+batch_size: 256
+bootstrap:
+  n_resamples: 1000
+  seed: 0
+  unit: user
+  diff: beta - beta0
+near_duplicate_source: results/analysis/20261028-last-item
+hypothesis: subtracting beta*log q at serving shifts recall toward new/tail items;
+  head falls; pop concentration falls

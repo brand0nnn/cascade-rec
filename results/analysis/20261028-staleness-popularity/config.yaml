@@ -1,0 +1,24 @@
+label: validation only, exploratory
+split: val
+ranks: results/retriever/two_tower_text/seed0/val_ranks.npz
+data_config: configs/data.yaml
+population: warm Val targets (item_type != new-in-period); unscorable treated as miss
+counts:
+  cnt_rtrain: target reviews before t_ranker_train
+  cnt_ranker: target reviews in [t_ranker_train, T1)
+  cnt_t1: target reviews before T1
+buckets:
+- '0'
+- 1-4
+- 5-19
+- 20-49
+- 50-99
+- 100-299
+- 300-999
+- 1000+
+few_items_flag: n distinct items < 20
+bootstrap:
+  n_resamples: 1000
+  seed: 0
+  unit: target item (cluster)
+rescoring: none (saved ranks only)

@@ -1,0 +1,8 @@
+last_class,R@200_macro_item_type_standardised
+diff leaf & diff store,0.058796340076643805
+diff leaf / store unknown,0.0401096680506113
+"diff leaf, same store",0.2023639758411957
+leaf unknown,0.05170200862840998
+same leaf & same store,0.22874972523309572
+same leaf / store unknown,0.05891107494933535
+"same leaf, diff store",0.09136223920305522

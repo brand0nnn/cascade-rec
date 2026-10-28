@@ -488,3 +488,37 @@ Everything below is **exploratory**: no Test data is loaded, nothing is committe
 - **Opt-in `loss: listwise_softmax`** in `ranker_training.py` (−log softmax of the positive over each list's sampled
   columns; default BCE unchanged; test added). H9 runs: `20261028-natural-ktrain500-listwise-seed{0,1}`,
   `20261028-din-natural-ktrain500-listwise-seed0`. Exploratory.
+
+## 2026-10-28 (late) — Exploratory retrieval/ranking analysis loop (Val only, no training)
+
+Exploratory analyses of saved Val outputs and frozen models; no training, no Test, no K₁/index selection, no change
+to the split, filtering or metrics. New code only (`src/cascade/analysis/{staleness,complements,complements_mechanism,
+last_item}.py` and their tests); results under `results/analysis/`. Progress and numbers:
+`docs/analysis_loop_2026-10-28.md`; measured findings are summarised in `docs/evaluations.md` (exploratory section).
+- `20261028-staleness` (saved ranks) and `20261028-staleness-r2` (adds an inference-only re-score that reproduces the
+  saved ranks, plus a "frozen pool" counterfactual removing Val-released products as competitors): Val Recall@200
+  by month and product era.
+- `20261028-staleness-popularity`: warm targets by review count in the retriever-training period, item-cluster
+  bootstrap.
+- `20261028-complements`: target vs last history product (leaf × store), deep-miss composition, ranking given
+  retrieval by class. `20261028-complements-mechanism-r2`: text/retriever cosine to the last product
+  (`20261028-complements-mechanism` superseded: a re-weighting table dropped empty cells; marked `SUPERSEDED.txt`).
+- `20261028-last-item`: untrained last-product and mean-pool scorers through the shared harness (Val only); a
+  5,000-instance re-score with the frozen scorer reproduces the saved ranks first. These are analysis probes, not
+  retriever variants and not candidates for selection.
+- Added later in the loop: `20261028-logq-serving` (frozen retriever re-scored with u·v − β·τ·log q, β ∈ {0, 0.25,
+  0.5, 1}, two conventions for unseen products; β = 0 reproduces the saved ranks; probe, no β selected) and
+  `20261028-permutation-importance{,-r2}` (permutation importance for 12 frozen ranker checkpoints on natural Val
+  lists; the analysis loader uses a 1e-6 tolerance on the stored score standardisation because the forced
+  checkpoints differ from the current builder by 2e-7 relative). Follow-up 3c (`20261028-debiased-lists`,
+  `results/index_rank_eval/20261028-debiased-rank-*`, config `configs/analysis/debiased_rank_eval.yaml`) scores
+  the natural rankers on debiased candidate lists; probe only, not a retrieval change.
+
+## 2026-10-29 — Cluster scripts for the ranker policy study
+
+Added `scripts/slurm/policy_study.sbatch` (one stage per job; optional `SEEDS` so replication seeds 1 and 2 run as
+separate jobs; 10 h limit, since one 8-fit replication job could exceed the 6 h limit of `targeted_study.sbatch`)
+and `scripts/slurm/submit_policy_study.sh` (`check` → `development` → `pilot` → `replication` → `report`; `check`
+verifies inputs and the frozen candidate hashes before anything is queued). No change to the study protocol,
+arms, seeds or pass rule in `docs/evaluations.md`; `targeted_study.sbatch` is unchanged. The study needs the
+original frozen candidate lists; the locally rebuilt `two_tower_text_seed0` lists fail the hash check (verified).

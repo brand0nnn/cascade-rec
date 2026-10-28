@@ -490,3 +490,39 @@ To replay archived validation predictions without training, original processed d
 ```
 
 Use a fresh ID; existing outputs are preserved. Config: `configs/evaluation/saved_results.yaml`. `--sample` is a development subset and must never be reported as a full-data result. Graph/profile reproduction additionally needs the original/restored processed inputs; the one-off `notebooks/complete_evaluation.py` records the completion analysis, with local input/output paths that must be adjusted for a fresh run. Do not launch retraining merely to reproduce these saved-result findings.
+
+## Exploratory analyses, 28 Oct 2026 late (Val only; no training; not reviewed by the team)
+
+Brandon's analysis loop; full log and tables in `docs/analysis_loop_2026-10-28.md`, results under
+`results/analysis/`. Frozen text seed-0 retriever and saved Val outputs only. These are observations, not
+adopted changes; no setting is selected.
+
+- **The frozen retriever is popularity-heavy.** 71% of its top-10 slots go to the top-1% products (top-10
+  coverage 2.6% of the catalogue); 82% of its @200 hits are warm-head targets. Warm-target recall is governed by
+  the target's review count **in the retriever-training period**: Recall@200 rises from 0.009 (1–4 training
+  reviews) to 0.84 (1,000+), Recall@10 is ≈ 0 below 100 training reviews, and products seen 1–4 times are retrieved
+  *worse* than never-seen ones (0.009 vs 0.028; consistent with logQ training pushing rare items' raw scores
+  down — inference). (`20261028-staleness-popularity`, item-cluster bootstrap.)
+- **A zero-training "similar to the last product" scorer beats the retriever on new and tail products**
+  (`20261028-last-item`): new-in-period Recall@10 0.0110 vs 0.0009 and Recall@200 0.049 vs 0.026; warm-tail
+  Recall@200 0.050 vs 0.015; overall it reaches 62% of the retriever's Recall@200 and the two find mostly
+  different targets (14.6% hit overlap). Its new-product hits are the same product line in another phone model or
+  colour (median text cosine 0.88, 75% same store), not duplicates.
+- **Serving-time popularity correction** (`20261028-logq-serving`, probe): ranking by u·v − β·τ·log q with unseen
+  products given the rarest seen log q doubles new-in-period and tail Recall@200 at β = 0.25 (0.026 → 0.055;
+  0.015 → 0.034) for −5% overall Recall@200 (R@500 slightly up) and cuts the top-1% share of top-10 slots from 70%
+  to 10%; retriever-only Recall@10 falls. With the training convention (log q = 0 for unseen) new products vanish.
+  End to end with the natural rankers on these top-200 lists (`results/index_rank_eval/20261028-debiased-rank-{natural,din}`):
+  DIN nDCG@10 new +0.00112, tail +0.00079, head −0.00231, overall −0.00057 [−0.00078, −0.00038]; the MLP loses
+  more overall (−0.00110). A trade-off, not a free gain; no β is selected.
+- **Recall decline across Val months is mostly composition** (`20261028-staleness-r2`): 0.089 → 0.053 crude, driven
+  by the rising new-product share (17% → 45%) and catalogue growth; a residual decline remains only for
+  Val-released products (−0.015 [−0.020, −0.011] Q4−Q1 after removing Val-released competitors).
+- **Same-store targets are retrieved ~2–3× better than other targets, through text similarity**
+  (`20261028-complements`, `-mechanism-r2`): at equal MiniLM similarity to the last product the store lift
+  disappears; cross-category targets are not over-represented among deep misses (1.04×). Extends the graph and
+  warm-target sections above.
+- **Ranker input reliance** (`20261028-permutation-importance{,-r2}`, natural-hit lists): all rankers rely mainly
+  on candidate identity (text embedding; item id for DIN). Natural-list training *increases* reliance on the
+  retrieval score and text cosine. The forced MLP's response to retrieval rank is U-shaped (top and bottom deciles
+  boosted), consistent with a genuine signal plus the forced-positive shortcut at the bottom of the list.

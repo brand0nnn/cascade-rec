@@ -1,0 +1,9 @@
+era,quarter,cnt_t1,cnt_recent
+ranker-training era,Q1,12.0,12.0
+ranker-training era,Q2,10.0,10.0
+ranker-training era,Q3,10.0,10.0
+ranker-training era,Q4,10.0,10.0
+retriever era,Q1,78.0,29.0
+retriever era,Q2,83.0,31.0
+retriever era,Q3,75.0,28.0
+retriever era,Q4,81.0,30.0

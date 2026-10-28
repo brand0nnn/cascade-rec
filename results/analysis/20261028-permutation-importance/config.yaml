@@ -1,0 +1,84 @@
+scope: validation only, exploratory
+out: results/analysis/20261028-permutation-importance
+model_types:
+- forced_mlp
+- natural_mlp
+- natural_din
+- forced_din
+seeds:
+- 0
+- 1
+- 2
+repeats: 1
+batch_pairs: 8000
+device: mps
+threads: 4
+n_boot: 200
+max_lists: 0
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+k1: 200
+model_runs:
+  forced_mlp:
+  - results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching
+  - results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching
+  - results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching
+  natural_mlp:
+  - results/ranker_mlp/20261028-natural-matching-seed0
+  - results/ranker_mlp/20261028-natural-matching-seed1
+  - results/ranker_mlp/20261028-natural-matching-seed2
+  natural_din:
+  - results/ranker_din/20261028-din-natural-seed0
+  - results/ranker_din/20261028-din-natural-seed1
+  - results/ranker_din/20261028-din-natural-seed2
+  forced_din:
+  - results/ranker_din/20261024-din-matching-seed0
+  - results/ranker_din/20261024-din-matching-seed1
+  - results/ranker_din/20261024-din-matching-seed2
+groups:
+  retrieval_score:
+    level: candidate
+    inputs:
+    - numeric[0]
+  text_cosine:
+    level: candidate
+    inputs:
+    - numeric[3]
+  leaf_eq_last_leaf:
+    level: candidate
+    inputs:
+    - numeric[1]
+  store_in_history:
+    level: candidate
+    inputs:
+    - numeric[2]
+  item_text_embedding:
+    level: candidate
+    inputs:
+    - item_text
+  candidate_item_id:
+    level: candidate
+    inputs:
+    - item_id
+  candidate_attributes:
+    level: candidate
+    inputs:
+    - leaf_category
+    - top_category
+    - store
+    - price_bucket
+    - review_count_bucket
+    - rating_bucket
+    - item_age_bucket
+  history_items:
+    level: user
+    inputs:
+    - history_item_ids
+    - history_leaf_ids
+  user_context:
+    level: user
+    inputs:
+    - history_length_bucket
+    - recency_bucket
+metric: conditional per-user macro nDCG@10 over natural-hit Val lists, pessimistic
+  ties
+list_order_seed: 12345

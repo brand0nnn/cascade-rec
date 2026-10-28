@@ -1,0 +1,13 @@
+# Exploratory (2026-10-28), validation only: natural MLP (frozen, seeds 0-2) on serving-time logQ-debiased filtered top-200 Val lists.
+# Lists: results/analysis/20261028-debiased-lists (selected by u.v - beta*tau*log q, minseen; stored score = original u.v).
+candidate_dir: data/processed/candidates/two_tower_text_seed0   # ranker_train lists: feature tables and score normalisation
+data_config: configs/data.yaml
+index_lists_dir: results/analysis/20261028-debiased-lists
+index_configs: [beta0, beta0.25_minseen, beta0.5_minseen]   # first = reference
+reference: beta0
+ranker_runs:
+  - results/ranker_mlp/20261028-natural-matching-seed0
+  - results/ranker_mlp/20261028-natural-matching-seed1
+  - results/ranker_mlp/20261028-natural-matching-seed2
+score_batch_pairs: 8000
+bootstrap_resamples: 1000

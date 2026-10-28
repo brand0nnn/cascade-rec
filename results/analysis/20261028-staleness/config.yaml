@@ -1,0 +1,18 @@
+label: validation only, exploratory
+split: val
+ranks: results/retriever/two_tower_text/seed0/val_ranks.npz
+data_config: configs/data.yaml
+bootstrap:
+  n_resamples: 1000
+  seed: 0
+  unit: user (cluster, within bucket/stratum)
+recall_cutoffs:
+- 200
+- 500
+unscorable: treated as miss
+quarters: equal-duration quarters of [T1, T2)
+eras:
+  retriever era: first_ts < t_ranker_train
+  ranker-training era: t_ranker_train <= first_ts < T1
+  Val era: first_ts >= T1 (= new-in-period)
+pop_t1_bucket: target review count before T1
