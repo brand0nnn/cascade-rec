@@ -84,14 +84,16 @@ def stage_structure(source: Path, destination: Path, config: dict,
     return record
 
 
-def inspect_inputs(data_dir: Path, candidate_dir: Path, reference: dict | None = None) -> dict:
+def inspect_inputs(data_dir: Path, candidate_dir: Path, reference: dict | None = None,
+                   study_kind: str = 'ranker') -> dict:
     """Inventory and hash existing inputs; report missing prerequisites explicitly."""
     paths = [data_dir / p for p in STRUCTURE + ('item_text_emb.npy', 'item_text_emb.json')]
-    paths += [candidate_dir / p for p in CANDIDATES]
+    if study_kind == 'ranker':
+        paths += [candidate_dir / p for p in CANDIDATES]
     rows = [dict(path=str(p), exists=p.is_file(), bytes=p.stat().st_size if p.is_file() else None,
                  sha256=digest(p) if p.is_file() else None) for p in paths]
     identities = {}
-    if reference:
+    if reference and study_kind == 'ranker':
         for name, key in [('val.npz', 'val_sha256'), ('meta.json', 'meta_sha256')]:
             p = candidate_dir / name
             identities[name] = None if not p.is_file() else digest(p) == reference[key]
@@ -108,6 +110,10 @@ def main() -> None:
     ap.add_argument('--data-config', default='configs/data.yaml')
     ap.add_argument('--candidate-dir', default='data/processed/candidates/two_tower_text_seed0')
     ap.add_argument('--output', default='results/targeted_study/preflight.json')
+    ap.add_argument('--study-kind', choices=('ranker', 'retriever'), default='ranker')
+    ap.add_argument('--require-ready', action='store_true', help='Exit 2 if inputs are missing or differ')
+    ap.add_argument('--text-reference', help='For retriever jobs: check saved text-only Val references')
+    ap.add_argument('--phase', choices=('pilot', 'replication'), default='pilot')
     ap.add_argument('--stage-data', help='fresh directory for isolated structural reconstruction')
     ap.add_argument('--stage-config', help='new YAML path pointing at staged data')
     args = ap.parse_args()
@@ -125,13 +131,33 @@ def main() -> None:
         cfg_path.parent.mkdir(parents=True, exist_ok=True)
         cfg_path.write_text(yaml.safe_dump(cfg, sort_keys=False))
         data_dir = target
-    provenance = json.loads((REPO_ROOT / 'results/saved_evaluation/20261027-saved-validation/provenance.json').read_text())
-    report = inspect_inputs(data_dir, REPO_ROOT / args.candidate_dir, provenance['candidate_source'])
+    reference = None
+    extra = []
+    if args.study_kind == 'ranker':
+        from cascade.pipelines.ranker_policy_study import required_input_paths, validate_study_config
+        study_cfg = load_config(REPO_ROOT / 'configs/ranker/policy_study.yaml')
+        study_cfg.update(data_config=args.stage_config or args.data_config, candidate_dir=args.candidate_dir)
+        validate_study_config(study_cfg)
+        extra = required_input_paths(study_cfg)
+        source = REPO_ROOT / study_cfg['reference_comparison']
+        if source.is_file():
+            reference = json.loads(source.read_text())['candidate_source']
+    elif args.text_reference:
+        seeds = (0,) if args.phase == 'pilot' else (0, 1, 2)
+        extra = [REPO_ROOT / args.text_reference / f'seed{seed}' / name
+                 for seed in seeds for name in ('val_ranks.npz', 'config.yaml', 'metrics.json')]
+    report = inspect_inputs(data_dir, REPO_ROOT / args.candidate_dir, reference, args.study_kind)
+    report['missing'] = sorted(set(report['missing']) | {str(p) for p in extra if not p.is_file()})
+    report['study_kind'] = args.study_kind
+    if report['missing']:
+        report['status'] = 'not_ready'
     report['data_config'] = args.stage_config or args.data_config
     dest = REPO_ROOT / args.output
     dest.parent.mkdir(parents=True, exist_ok=True)
     write_json(dest, report)
     print(json.dumps({k: v for k, v in report.items() if k != 'inputs'}, indent=2))
+    if args.require_ready and report['status'] != 'ready':
+        raise SystemExit(2)
 
 
 if __name__ == '__main__':

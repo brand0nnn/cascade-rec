@@ -15,7 +15,7 @@ The available local evaluation is complete: **232,904 validation events / 124,41
 | Graph target/history relations and 12 joint warm-target cells | Complete on Val; descriptive, not causal |
 | Five cases | Target ranks, histories and retrieval examples complete; ranker top-three identities unavailable |
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
-| Controlled policy retraining and ID dropout | Protocol/tooling prepared; no full-data remedy result; execution readiness still to be confirmed |
+| Controlled policy retraining and ID dropout | Submission tooling updated 29 Oct; cluster input checks required; no full-data remedy result |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
 
 **Working conclusion:** retrieval misses remain the largest ceiling, while the current ranker also displaces many strong retrieved targets. New products supply about two-thirds of the MLP's net gain. The strongest located warm-target loss is concentrated among training-head, co-reviewed targets in a different leaf category from the last interaction. Test the training-score mismatch with controlled retraining before claiming a mechanism or introducing another architecture.
@@ -388,13 +388,15 @@ The original saved-results evaluation described above is complete within its ava
 
 An isolated structural reconstruction is under `data/processed/studies/20261027-targeted/`, configured by `results/targeted_study/data.yaml`. Original source tables are preserved. The local preflight report (`results/targeted_study/preflight.json`) lists remaining files; graph structure can be analysed before original embeddings/candidates are recovered.
 
-Check a recovered local copy without training:
+Check the inputs **on the cluster**, from its repository root, before reserving a GPU. These commands return exit code 2 and list missing/mismatched inputs rather than allowing training to start:
 
 ```bash
-.venv/bin/python -m cascade.pipelines.study_preflight \
-  --data-config results/targeted_study/data.yaml \
-  --candidate-dir data/processed/candidates/two_tower_text_seed0
+.venv/bin/python -m cascade.pipelines.study_preflight --study-kind ranker --require-ready
+.venv/bin/python -m cascade.pipelines.study_preflight --study-kind retriever \
+  --text-reference results/retriever/two_tower_text --require-ready
 ```
+
+The retriever check does not require ranker candidates. Ranker checks also include the historical comparison/config and frozen candidate identities. If processed inputs are elsewhere, pass `--data-config YOUR_CONFIG.yaml` (same frozen split/mappings). Supply `--candidate-dir YOUR_CANDIDATES` for ranker or `--text-reference YOUR_TEXT_RUNS` for retrieval as needed. Both checks must report `ready` for their respective jobs; this does not establish CUDA runtime or cluster allocation availability.
 
 The policy runner checks original candidate hashes and the original feature contract. A regenerated archive is not silently accepted as an exact historical reproduction; establish a separately documented baseline before changing those checks.
 
@@ -442,21 +444,47 @@ Every completed policy arm saves selected K50/100/200/500 ranks and AUCs, K200 r
 
 ### User-managed Slurm submission
 
-`scripts/slurm/targeted_study.sbatch` requests one A100 40 GB, 32 GB RAM and four CPU cores. It launches only the explicit stage; no job submits a successor or runs SSH. Use fresh IDs; completed study directories are never overwritten.
+**Run instructions updated 29 October 2026.** Sync the edited source/script files to the cluster first. Run from the repository root with the existing `.venv` and **original full processed inputs**. The script defaults to the repository's `gpu-long` / `gpu:a100-40:1`, 32 GB RAM, four CPUs and six hours. Override `--partition`, `--gres`, `--account` and `--time` on `sbatch` for **your own allocation** where required; no teammate allocation is assumed.
+
+After the prerequisite checks above succeed, submit the two independent seed-0 pilots (use fresh IDs):
 
 ```bash
-sbatch --export=ALL,STUDY_KIND=ranker,STAGE=development,RUN_ID=policy-development scripts/slurm/targeted_study.sbatch
-sbatch --export=ALL,STUDY_KIND=ranker,STAGE=pilot,RUN_ID=policy-pilot scripts/slurm/targeted_study.sbatch
-sbatch --export=ALL,STUDY_KIND=ranker,STAGE=replication,RUN_ID=policy-replication scripts/slurm/targeted_study.sbatch
-
-sbatch --export=ALL,STUDY_KIND=retriever,STAGE=pilot,RUN_ID=id-pilot scripts/slurm/targeted_study.sbatch
-# After the pilot guard is reviewed:
-sbatch --export=ALL,STUDY_KIND=retriever,STAGE=replication,RUN_ID=id-pilot scripts/slurm/targeted_study.sbatch
+mkdir -p results/logs
+sbatch --export=ALL,STUDY_KIND=ranker,STAGE=pilot,RUN_ID=policy-20261029-pilot scripts/slurm/targeted_study.sbatch
+sbatch --export=ALL,STUDY_KIND=retriever,STAGE=pilot,RUN_ID=id-20261029 scripts/slurm/targeted_study.sbatch
 ```
 
-Execute each stage after reviewing its prerequisites and the preceding stage; the examples are not an instruction to submit all jobs together. Ranker replication preserves the four-arm design regardless of an unpromising valid pilot. Retriever replication follows its stated pilot guard.
+Each job checks its inputs/CUDA, runs only the requested phase, and generates its report automatically. Neither job runs Test, SSH or another `sbatch`. Logs: `results/logs/slurm-cascade-targeted-JOBID.out`.
 
-Historical CUDA fit-plus-epoch-validation times were 12–13 minutes for text+ID and 27–32 minutes for text-only. Budget one GPU-hour per retriever fit (two for the pilot pair; six for all pairs), excluding candidate generation. This is an allowance, not a measured runtime for dropout. The longer scheduler limit provides headroom. Pilots record actual memory and runtime. Ranker duration still needs measurement.
+| Pilot result | Where to read it |
+|---|---|
+| Four-arm MLP quality, groups, rescue/demotion, expansion and A/C score response | `results/targeted_study/policy-20261029-pilot-pilot-report/report.md` |
+| ID dropout versus fresh ID control and text reference, overall/new-item guard | `results/retriever_ablation/id-20261029/pilot_comparison.json` |
+| Trained models and selected predictions | `results/ranker_policy/policy-20261029-pilot/` and `results/retriever/id_dropout/id-20261029/` |
+
+After reviewing the pilot outputs, explicitly submit seeds 1/2. Keep the full four-arm ranker comparison even when a valid pilot is negative. Retriever replication **requires** `text_reference_guard.status = "promising"`; the runner rejects replication otherwise. Keep the same retriever RUN_ID to include seed 0; ranker phases use different output roots.
+
+```bash
+sbatch --export=ALL,STUDY_KIND=ranker,STAGE=replication,RUN_ID=policy-20261029-replication scripts/slurm/targeted_study.sbatch
+# Only if the retriever pilot guard is promising:
+sbatch --export=ALL,STUDY_KIND=retriever,STAGE=replication,RUN_ID=id-20261029 scripts/slurm/targeted_study.sbatch
+```
+
+After ranker replication finishes, combine all three seeds (CPU reporting; no training):
+
+```bash
+.venv/bin/python -m cascade.eval.ranker_policy_report \
+  --studies results/ranker_policy/policy-20261029-pilot results/ranker_policy/policy-20261029-replication \
+  --output results/targeted_study/policy-20261029-all-seeds
+```
+
+Retriever replication automatically writes `results/retriever_ablation/id-20261029/replication_comparison.json`, including all three seed pairs and the text guard. Across arms/seeds the report checks recorded seed/population/dropout, training recipe, data/source/checkpoint identities and aligned Val ranks; differences are rejected rather than silently pooled.
+
+For non-default input locations, append `DATA_CONFIG=...`, `CANDIDATE_DIR=...` (ranker), or `TEXT_REFERENCE=...` (retriever) to `--export=ALL,...`. For an optional one-epoch ranker development check, submit `STUDY_KIND=ranker,STAGE=development,RUN_ID=YOUR_FRESH_ID`. Retriever development is not exposed by this wrapper: the pilot is the full-data control/treatment pair. Existing fit/report directories are never overwritten. If training completed but reporting failed, run only the relevant report command with a fresh report output; do not resubmit completed fits.
+
+Historical CUDA fit-plus-epoch-validation times were 12–13 minutes for text+ID and 27–32 minutes for text-only. Budget one GPU-hour per retriever fit (two for the pilot; six for all seed pairs), excluding candidate generation. This is an allowance, not a measured dropout runtime. Ranker runtime remains unmeasured: pilot is four fits and replication eight sequential fits; override `--time` if your measured pilot indicates six hours is insufficient.
+
+**Readiness evidence:** shell syntax and CLI imports/help passed; local preflight correctly exits 2 for the six missing ranker artifacts / two missing retriever vectors. No cluster submission, CUDA fit or new results were run locally. Submission tooling is prepared, but each cluster's real inputs and allocation must pass its checks.
 
 ### Evidence to write after execution
 
@@ -468,7 +496,7 @@ If the retriever qualifies, rebuild only training/Val candidates in a new namesp
 
 Recover the **original** `data/processed/item_text_emb.npy`, `item_text_emb.json`, and `data/processed/candidates/two_tower_text_seed0/{ranker_train.npz,val.npz,val_target_score.npz,meta.json}`. The restored structural data preserve original item/user mappings; they do not replace these missing artifacts. Check original hashes before claiming historical reproduction. User handles SSH and cluster commands; no teammate allocation is assumed available.
 
-Until recovery, target-only graph findings cannot establish candidate-slot amplification, and saved target ranks cannot identify the MLP/DIN top-three products. Complete the locked annotation before device claims. Final Test and index/cost work stay paused. The ablation runners have not produced full-data results; partial implementation safeguards are not a claim of execution readiness. Earlier implementation-review/test counts are historical, not verification of the final source snapshot.
+Until recovery, target-only graph findings cannot establish candidate-slot amplification, and saved target ranks cannot identify the MLP/DIN top-three products. Complete the locked annotation before device claims. Final Test and index/cost work stay paused. The ablation runners have not produced full-data results; the updated submission script runs blocking input checks and exports comparison reports. Cluster execution has not been verified here. Earlier implementation-review/test counts are historical, not verification of the final source snapshot.
 
 ## Evidence and reproduction
 
