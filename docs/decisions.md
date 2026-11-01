@@ -6,6 +6,24 @@ Names follow the 2026-10-20 renaming (see the last entry): **retriever-training 
 **ranker-training period** (period B), **all training data** (A ∪ B), **Two-tower (text)** (v2), **Two-tower (text + ID)**
 (v4), **sample** (toy). Commits and run files from before that date use the old names.
 
+## 2026-11-01 — Expanded graph findings and architecture proposal review
+
+- Expanded graph target evaluation and the architecture evidence review are complete. The existing authorised experiments below define the next work; this review adopts no new architecture or experiment arm.
+- Expanded target-only evaluation covers 232,904 validation events / 124,416 users. Retain verified graph cutoffs T0=1595800947930 and T1=1628643414042; the task's alternate T0 is inconsistent with the source graph. New intervals use the explicitly requested bootstrap seed 20261027, B=1000; historical tables retain seed 0. Histories are restored from the verified last-50 sequence pointers, with category/store unknowns preserved. See [evaluations.md](evaluations.md#expanded-graph-target-evaluation-1-november-2026) for all estimates and caveats.
+- The graph finds substantial losses on dense co-reviewed targets and opposite-sign outcomes with versus without store continuity within co-reviewed head targets. These associations motivate experiments; they do not establish feature causality, a GNN equivalence or a guaranteed fix.
+- Existing authorised work stays first: matching-MLP policy arms A/B/C/D and the separate ID-dropout p=0.5 control/treatment study, following the acceptance and replication rules in [evaluations.md](evaluations.md#authorised-follow-up-controlled-ablations-not-results). No full-data remedy result exists. Preserve the frozen text seed-0 candidate source and unchanged control feature/checkpoint semantics. Random score/rank mixing is not an implemented or authorised additional arm.
+- [Architecture proposals](architecture_proposals.md) now distinguish hypotheses from evidence. Graph/history inputs, a monotonic score residual, degree-gated IDs and inference-time routing/merging remain open decisions. GNN/LLM GraphRAG and multi-source retrieval merging remain outside current scope. No model code was changed by the architecture review.
+- A target-conditioned oracle uses the true target's group and separate scorers' target ranks. It is a diagnostic, not one deployable ranked list. Draft routing gains/latency claims are unverified; candidate-level mixing needs comparable scores and full-list evaluation. Final Test, index work and full-cascade timing remain paused.
+- Candidate overlays/overtakers still require original candidates and text vectors. `Same-device` remains gated by 100 locked human-reviewed titles at precision ≥0.95; 0/100 are labelled. No locked-set tuning or device features are enabled.
+
+## 2026-10-29 — Supervisor consultation: diagnostic framing and follow-up
+
+The consultation notes motivate popularity/K₁ breakdowns, complementary ranker analysis, secondary metrics and a broader case discussion. They do not establish new architecture results. Duplicate draft entries were consolidated on 1 November.
+
+- Treat forced-positive score inversion as a pipeline diagnostic and hypothesis for controlled retraining. It is a constructed-list distribution mismatch; the existing evidence does not establish leakage from held-out Test into training or isolate force-insertion as the cause of the learned response.
+- All headline ranker results use natural unforced candidate lists. The original popularity-segment K₁ sweep and archived ranker comparison remain the numerical sources; see [evaluations.md](evaluations.md#supervisor-consultation-follow-up-evidence-review-1-november-2026).
+- The 29 October consultation report, oracle CSV and 25-item discussion exist as local draft material. Their target-conditioned router estimates, inconsistent counts/metrics and broad case interpretations need verification. Hit@3/MRR@10 were requested, but no reproducible secondary-metric output was found in this review; do not mark them complete or cite the draft as an independent experiment.
+
 ## 2026-09-28 — Data
 
 - **Sources.** Interactions: official 5-core rating-only file (URL in `configs/data.yaml`). Metadata:

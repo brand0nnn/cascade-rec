@@ -2,6 +2,21 @@
 
 Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
+## Current analysis and proposed changes (1 November 2026)
+
+The saved-validation evaluation covers **232,904 events / 124,416 users**. The [expanded graph report](results/evaluation_completion/20261101-kg-expanded-final/report.md) adds witness multiplicity/age, full-window category continuity and store interactions, with paired-user intervals. These are exploratory target outcomes. Original candidate matrices/text vectors and the locked device audit still block candidate overlays and device-based evaluation.
+
+[Architecture proposals](docs/architecture_proposals.md) distinguish hypotheses from measured results. Existing score-policy A/B/C/D and ID-dropout p=0.5 studies remain the authorised follow-up; new graph features or routing/merging require a separate decision. Target-conditioned oracle estimates are not deployed router results. Final Test/index/full-cascade timing remain paused.
+
+Reproduce the graph expansion from the verified local source artifacts (it verifies historical source hashes before analysing). Unlike the training sample flag, this pipeline's development replay selects **512 users**:
+
+```bash
+.venv/bin/python -m cascade.pipelines.expand_kg_evaluation --sample
+.venv/bin/python -m cascade.pipelines.expand_kg_evaluation
+```
+
+Each invocation uses a fresh timestamped output directory; explicit `--output` destinations must not exist. Compact full-data CSVs/report/provenance are shared; the per-event expanded Parquet remains local.
+
 ## Names used everywhere
 
 Data: Amazon Reviews 2023, Cell Phones & Accessories (5-core), split by time:

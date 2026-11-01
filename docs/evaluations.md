@@ -1,6 +1,6 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **28 October 2026**. This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **1 November 2026** (expanded explanation-graph validation slices; retaining the supervisor consultation with Prof. Kan & Sahej). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
@@ -10,15 +10,16 @@ The available local evaluation is complete: **232,904 validation events / 124,41
 |---|---|
 | RQ1 retrieval comparisons and text/ID trade-off | Complete from saved evidence; existing retrieval Test exposure disclosed |
 | RQ3 rankers, uncertainty and five-way failure funnel | Complete on Val, frozen text seed-0 candidates |
-| RQ2 exact-search K sweep and expansion losses | Complete on Val; no final K selected |
-| Item/history/diversity/time groups | Complete on Val; sparse diversity contrast inconclusive |
+| RQ2 exact-search K sweep, popularity-segment curve and expansion losses | Complete on Val (`warm-head` peaks at K50, `new`/`tail` peak at K200, aggregate peaks at K100); no final K selected |
+| Item/history/diversity/time groups; secondary metrics | Core group analysis complete; Hit@3/MRR@10 completion is unverified because no reproducible secondary-metric artifact was found |
 | Graph target/history relations and 12 joint warm-target cells | Complete on Val; descriptive, not causal |
-| Five cases | Target ranks, histories and retrieval examples complete; ranker top-three identities unavailable |
+| Graph witness multiplicity/recency, full-window category continuity and store interactions | Expanded on 1 Nov across all 232,904 Val events; exploratory, with paired-user intervals |
+| Microscopic case study | Five source-bound cases complete; local 25-item consultation discussion is a draft, not a verified 25-event audit; ranker top-three identities unavailable |
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
-| Controlled policy retraining and ID dropout | Submission tooling updated 29 Oct; cluster input checks required; no full-data remedy result |
+| Controlled policy retraining (A/B/C/D: all/natural-only × enabled/masked score) and ID dropout | Submission tooling updated 29 Oct; cluster input checks required; no full-data remedy result |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
 
-**Working conclusion:** retrieval misses remain the largest ceiling, while the current ranker also displaces many strong retrieved targets. New products supply about two-thirds of the MLP's net gain. The strongest located warm-target loss is concentrated among training-head, co-reviewed targets in a different leaf category from the last interaction. Test the training-score mismatch with controlled retraining before claiming a mechanism or introducing another architecture.
+**Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md), whose new model/routing changes remain unapproved. Target-conditioned oracle estimates do not establish deployable routing gains.
 
 ## Working picture
 
@@ -187,6 +188,57 @@ Each slice has its own user denominator. Its mean difference is not its contribu
 
 Stage-1 target ranks here use the reconciled pessimistic full-catalogue convention, capped to K200 for actual members. The earlier graph report uses historical returned positions; the saved reconciliation identifies two nDCG-event differences and no top-ten hit-count change. No candidate membership was changed.
 
+### Expanded graph target evaluation (1 November 2026)
+
+The [expanded report](../results/evaluation_completion/20261101-kg-expanded-final/report.md) and its CSVs replay **232,904 events / 124,416 users**, including **156,136 warm events**, from the same verified archived predictions. Every new model difference uses **1,000 paired user-clustered bootstrap resamples, seed 20261027**, after averaging per-event metrics over training seeds 0/1/2. This explicitly requested bootstrap seed differs from the historical tables' seed 0; historical estimates/intervals above remain unchanged. All intervals are exploratory, unadjusted and conditional on those trained runs. Each slice has its own user denominator; do not infer an interaction from significance in one slice and not another.
+
+**Witness multiplicity.** Distinct other-reviewer counts use only pre-T1 edges and exclude the query user's links. The four buckets partition all warm targets:
+
+| Other reviewers | Events | Entered@200 | Retrieval nDCG@10 | MLP nDCG@10 | DIN nDCG@10 | MLP change [95% CI] | DIN change [95% CI] |
+|---|---:|---:|---:|---:|---:|---|---|
+| 0 | 115,573 | 4,191 | 0.001378 | 0.002355 | 0.002313 | +0.000977 [0.000748, 0.001227] | +0.000935 [0.000692, 0.001176] |
+| 1 | 17,836 | 1,932 | 0.005509 | 0.008250 | 0.007921 | +0.002741 [0.001636, 0.003813] | +0.002412 [0.001269, 0.003570] |
+| 2–5 | 14,643 | 3,488 | 0.019081 | 0.021691 | 0.019272 | +0.002610 [0.000474, 0.004583] | +0.000191 [-0.001923, 0.002207] |
+| 6+ | 8,084 | 4,837 | 0.106920 | 0.084446 | 0.065543 | -0.022474 [-0.027760, -0.017029] | -0.041376 [-0.046950, -0.035703] |
+
+The dense group has high retrieval coverage and loses under both rankers. Within **training-head / different known last leaf**, the 6+ group contains **6,195 events**: retrieval 0.100146, MLP 0.078015, DIN 0.059986; MLP change **-0.022132 [-0.028932, -0.015792]**, DIN change **-0.040161 [-0.047145, -0.033665]**. This localises the association further without establishing a causal score penalty or a monotonic degree effect. Raw retrieval scores are unavailable in these target archives.
+
+The separate path-count buckets contain **115,573 / 17,681 / 14,698 / 8,184** warm events for 0 / 1 / 2–5 / 6+. In the 6+ path group, MLP changes nDCG by **-0.021981 [-0.027377, -0.015657]**. All 23 nonempty head × last-leaf × degree cells, and the analogous 23 path-count cells, are saved in [warm_joint_other_reviewers.csv](../results/evaluation_completion/20261101-kg-expanded-final/warm_joint_other_reviewers.csv) and [warm_joint_witness_paths.csv](../results/evaluation_completion/20261101-kg-expanded-final/warm_joint_witness_paths.csv). Known/unknown last-leaf values are retained. Each row also gives users, natural membership, exact per-seed rescue/demotion counts, seed-mean counts and at-risk macro rates. `net_rescue_ratio = (rescued−demoted)/(rescued+demoted)` uses seed-mean raw event counts; it is undefined without churn and is not a user-macro metric contribution.
+
+**Saved-witness age and era.** The profile archive retains the lexicographically first reviewer/history-item witness, not the newest witness or an age distribution. The era below refers to its **target edge**; both witness legs strictly satisfy the snapshot cutoff. These rows therefore cannot establish that recent collaborative evidence itself protects an item.
+
+| Saved witness target edge | Events | MLP change in nDCG@10 [95% CI] |
+|---|---:|---|
+| Pre-T0 | 18,298 | -0.018049 [-0.020463, -0.015714] |
+| [T0,T1) | 22,265 | +0.011463 [0.009951, 0.013232] |
+| No witness | 192,341 | +0.001574 [0.001382, 0.001765] |
+| Less than 365 days before event | 14,497 | +0.014749 [0.012809, 0.016844] |
+| 365–729 days before event | 13,660 | -0.000720 [-0.003145, 0.001767] |
+| 730+ days before event | 12,406 | -0.022559 [-0.025321, -0.019642] |
+
+Era and age are separate overlapping partitions, not six mutually exclusive groups. The CSVs include retrieval/MLP/DIN levels, both model intervals and churn counts.
+
+**Full-window category continuity.** `same_leaf_any_history` compares the target with all non-padding items in the model-visible last 50 interactions. A known match establishes true. Without a match, any missing target/history category leaves the flag unknown; false requires a known target and a fully known nonempty window. This conservative treatment prevents missing categories from becoming evidence of novelty. “Novel category for user” means absent from that observed window, not lifetime novelty. Returning requires a known different last category; an unknown last category stays in the unknown continuity group even if an earlier match is observed.
+
+Across all validation events there are **44,157 immediate**, **61,068 returning**, **95,793 novel-in-window**, and **31,886 unknown** events. The original **28,149-event training-head / co-reviewed / different-last-leaf** problem cell partitions exactly as follows:
+
+| Continuity within problem cell | Events | Retrieval nDCG@10 | MLP nDCG@10 | DIN nDCG@10 | MLP change [95% CI] | DIN change [95% CI] |
+|---|---:|---:|---:|---:|---|---|
+| Returning category | 10,701 | 0.033141 | 0.030913 | 0.026531 | -0.002228 [-0.004934, 0.000616] | -0.006610 [-0.009533, -0.003774] |
+| Novel category for user | 13,980 | 0.030794 | 0.027112 | 0.021430 | -0.003681 [-0.006172, -0.001140] | -0.009363 [-0.011696, -0.006875] |
+| Unknown metadata | 3,468 | 0.022887 | 0.021958 | 0.015552 | -0.000929 [-0.005147, 0.003078] | -0.007335 [-0.011427, -0.003593] |
+
+The MLP point estimate is negative in both known continuity groups; its returning-category interval includes zero. DIN loses in both. These estimates do not establish a returning-versus-novel interaction. Per-event flags and IDs are saved in `expanded_target_profiles.parquet`; the all/warm/problem-cell CSVs retain supports and both intervals.
+
+**Store × co-review × training-head.** The full joint tables retain the eight Boolean cells and two nonempty unknown-store cells, separately for all events and warm targets. Among warm co-reviewed training-head targets:
+
+| Same store in history | Events | Retrieval nDCG@10 | MLP nDCG@10 | DIN nDCG@10 | MLP change [95% CI] | DIN change [95% CI] |
+|---|---:|---:|---:|---:|---|---|
+| No | 30,525 | 0.029973 | 0.023520 | 0.018519 | -0.006453 [-0.008211, -0.004790] | -0.011454 [-0.013217, -0.009806] |
+| Yes | 5,186 | 0.050207 | 0.072233 | 0.065689 | +0.022026 [0.016451, 0.027591] | +0.015481 [0.009524, 0.021227] |
+
+Same-store continuity accompanies gains even within co-reviewed head targets, while the no-store group loses. This is an exploratory conditional association, not evidence that a store feature causally protects a recommendation. Full supports, churn and intervals are in [warm_store_joint.csv](../results/evaluation_completion/20261101-kg-expanded-final/warm_store_joint.csv) and [all_store_joint.csv](../results/evaluation_completion/20261101-kg-expanded-final/all_store_joint.csv).
+
 ## Retrieval-side profile comparison
 
 Both retrievers use the same training period, three seeds and exact catalogue evaluation. Co-review below uses the earlier retriever-training cutoff, so later evidence is not attributed to the retriever.
@@ -201,6 +253,19 @@ Both retrievers use the same training period, three seeds and exact catalogue ev
 | New in validation | 0.026315 | 0.018952 | -0.007363 | [-0.008591, -0.006134] |
 
 Full nDCG/Recall values, supports and uncertainties: [retriever_target_profiles.csv](../results/evaluation_completion/20261028-final/retriever_target_profiles.csv). Marginal groups overlap and are not independent confirmations.
+
+### Expanded retriever co-review gradations (1 November 2026)
+
+The [new retriever table](../results/evaluation_completion/20261101-kg-expanded-final/retriever_gradations.csv) uses **pre-T0** witness counts, not the ranker graph. Seed-mean Text+ID-minus-Text differences use 1,000 paired-user resamples with bootstrap seed **20261027**. The following four rows partition all 232,904 validation events:
+
+| Other reviewers before T0 | Events | Text R@200 | Text+ID R@200 | R@200 change [95% CI] | Text nDCG@10 | Text+ID nDCG@10 | nDCG@10 change [95% CI] |
+|---|---:|---:|---:|---|---:|---:|---|
+| 0 | 212,022 | 0.037265 | 0.037273 | +0.000008 [-0.000869, 0.000849] | 0.001343 | 0.001214 | -0.000129 [-0.000244, -0.000015] |
+| 1 | 8,663 | 0.207662 | 0.255254 | +0.047592 [0.040887, 0.055124] | 0.014007 | 0.019692 | +0.005685 [0.003862, 0.007273] |
+| 2–5 | 7,446 | 0.396569 | 0.451804 | +0.055235 [0.047109, 0.063359] | 0.040842 | 0.053371 | +0.012529 [0.009778, 0.015286] |
+| 6+ | 4,773 | 0.718867 | 0.729307 | +0.010441 [0.000601, 0.019824] | 0.148279 | 0.164287 | +0.016008 [0.010421, 0.020868] |
+
+The Text+ID recall gain is positive in each nonzero witness bucket, with a smaller point gain at 6+ where Text already has high recall. Without a witness, the Recall@200 interval includes zero, while nDCG@10 decreases slightly. This is a target-profile association, not evidence that the retriever internally traverses these graph paths. The separate pre-T0 path-count partition contains **212,022 / 8,594 / 7,471 / 4,817** events; all Recall@200 and nDCG@10 estimates/intervals are in the same CSV.
 
 ## Five representative cases
 
@@ -228,6 +293,27 @@ Case details (all rank lists are seeds 0/1/2; target IDs make each example trace
 - Instance **1814991**, new i-Blason case `B09CTCHDL9`: history includes an older i-Blason case and iPhone 13 Pro Max cases. Retrieval 6; MLP 34/8/38; DIN 12/9/8. Same-store/category overlap does not guarantee hit preservation.
 
 The graph contains 111,480 products, 367,388 pre-T1 reviewers, 2,208,880 pre-T1 review edges (1,877,548 before the retriever cutoff), and 305,632 metadata edges. Title-parser statuses: parsed 51,678; unknown 45,905; ambiguous 9,684; universal 4,189; negated 24. The 200-title audit is split into 100 development and 100 locked titles; gold labels remain blank. Parser coverage is not precision, and no device-compatibility conclusion is established.
+
+## Supervisor consultation follow-up: evidence review (1 November 2026)
+
+The local `20261029-consult/` report, popularity CSV, oracle CSV and 25-item case discussion are **draft synthesis**, not a new independently verified evaluation run. Review found contradictions with the owning saved sources: Text+ID overall Recall@200 is **0.072370**, not 0.068089; DIN nDCG@10 is **0.006436**, not 0.006262. Retriever-training-seen targets number **80,709**, not 117,202; pre-T0 co-reviewed targets number **20,882**, not 29,894. New-in-Val and unseen-before-T0 are different sets. The previous consultation summary's subgroup Recall@10 values also disagreed with the original K-sweep CSV. Use the original source tables and expanded graph evidence above.
+
+The consultation's useful popularity/K₁ pattern is supported by the [original sweep group table](../results/ranker_k1_sweep/20261025-k1/groups.csv). These are descriptive three-seed means on natural lists; training-head in the graph is distinct from the canonical warm-head segmentation below.
+
+| Target segment | Events | Metric | K50 | K100 | K200 | K500 |
+|---|---:|---|---:|---:|---:|---:|
+| Warm-head | 109,765 | nDCG@10 | 0.015532 | 0.015044 | 0.011538 | 0.002863 |
+| Warm-head | 109,765 | Recall@10 | 0.027473 | 0.027670 | 0.023407 | 0.006533 |
+| New-in-period | 76,768 | nDCG@10 | 0.001875 | 0.002497 | 0.002820 | 0.001915 |
+| New-in-period | 76,768 | Recall@10 | 0.003845 | 0.005161 | 0.005755 | 0.003943 |
+| Warm-tail | 46,371 | nDCG@10 | 0.000623 | 0.000992 | 0.001175 | 0.001030 |
+| Warm-tail | 46,371 | Recall@10 | 0.001118 | 0.001878 | 0.002371 | 0.002269 |
+
+Warm-head nDCG peaks at K50 while its Recall@10 peaks at K100; new/tail metrics peak at K200. Aggregate nDCG still peaks at K100, without a final K selection. The [archived rank-band scores](../results/ranker_diagnostics/20261025-score-diagnostic/rank_band_scores.csv) support the observed low-score/logit pattern; they do not by themselves establish that forced-list training caused it.
+
+**Oracle and routing status.** The draft values 0.075878 / 0.007442 / 0.00756 and its latency-saving claim lack a reproducible full-list evaluation and paired-user uncertainty. Choosing a scorer from the true target's group is a target-conditioned oracle diagnostic. It cannot choose the scorer for a query before the target is known, or produce a candidate-level mixture by selecting only target ranks. Group means also cannot be weighted by event shares to recover user-macro performance. An oracle diagnostic needs aligned per-event metrics, full-population user weights, paired uncertainty and disclosure that cell choices were made on Val. A practical router additionally needs an inference-valid query gate or a calibrated candidate ordering and actual candidate matrices. No deployable routing gain is established.
+
+**Secondary metrics and cases.** Hit@3/MRR@10 can be computed from archived ranks but were not verified in a saved reproducible output here. The 25-item draft mixes five source-bound validation examples, historical score-diagnostic cases and metadata illustrations; it is not a traceable 25-event audit of ranker overtakers. Retain the five verified cases above. Future expanded cases must satisfy Step 5 and the device gate, without treating parser errors, compatibility or user intent as known.
 
 ## Evaluation protocol
 
@@ -311,11 +397,17 @@ The graph contains 111,480 products, 367,388 pre-T1 reviewers, 2,208,880 pre-T1 
 | `Co-buy` | At least one other user in the permitted training graph reviewed both candidate and a history item; exclude the current user's own links. All reviews count, matching the interaction protocol. |
 | `Same-device` | Parse canonical phone-model sets from titles. True if known sets overlap with a history item's set; false if candidate and at least one history device are known and all known sets are disjoint; otherwise unknown. Generic/universal compatibility needs an explicit parser rule, not an assumed mismatch. |
 | `Same-leaf` | Candidate's known full leaf-category path equals the last purchase's known path. |
-| `Same-store` | Candidate's known store appears in history; store is not assumed identical to brand. Report as a marginal signal only. |
+| `Same-store` | Candidate's known store appears in history; store is not assumed identical to brand. Retain the marginal signal alongside the authorised exploratory store × co-review × training-head target table. |
 | `Head item` | Top 20% of positive-count items in the permitted training graph, count descending/item-ID ascending. This training-head signal is separate from canonical pre-T2 head/tail reporting. |
 | `Text-similar` | Cosine similarity of frozen candidate MiniLM text to the mean of available history text vectors exceeds a Val-fixed threshold; do not use learned ranker scores to define it. Missing/zero-vector text is unknown. |
 
 **Definition freeze before Test.** Save the parser/rule version, training-graph cutoffs, similarity aggregation and numeric threshold, reference-pool sampling method/seed and artifact hash, and missing-value handling. Evaluation chooses the text-similarity threshold from the Val reference distribution and records its rationale before applying it to Test; it is not yet a measured value. Audit a reproducible Val title sample for device-extraction correctness as well as coverage, by cold/warm status. If device evidence is inadequate, label the device hypothesis untested; text similarity alone cannot establish compatibility.
+
+**1 November target-only expansion.** Witness degree/path bins are fixed at 0, 1, 2–5 and 6+; saved-witness target-edge age is <365 / 365–729 / 730+ days before the event, with a separate no-witness group and pre-T0 / [T0,T1) era view. Do not interpret the retained deterministic witness as the latest witness. Ranker edges must be strictly before **T1=1628643414042**; retriever edges must be strictly before the verified **T0=1595800947930**, as bound by `split.json`, the graph manifest and previous provenance. The task's alternate T0=1598016867874 is not the cutoff used to construct these profiles and is not substituted. This changes no training/evaluation split. Last-50 histories are reconstructed from the verified sequences because the requested standalone `val.npz` is absent; catalogue fields are in `products.parquet`, not `product_attributes.parquet`. New paired intervals use bootstrap seed **20261027** by explicit request; the historical protocol seed 0 remains applicable to historical tables.
+
+Full-window category matches preserve unknowns: no match with incomplete category coverage is unknown, and a “novel” label refers only to the observed window. The warm joint degree/path tables preserve unknown last-leaf cells; the store tables preserve unknown-store cells. These expansions describe target outcomes and do not complete candidate-slot amplification or identify ranker top-three overtakers. **Steps 4A/4B candidate overlays and Step 5 overtaker inspection remain blocked** until `item_text_emb.npy` and `data/processed/candidates/two_tower_text_seed0/val.npz` are restored.
+
+**Device audit gate.** Never tune regexes on `device_audit_locked.csv`. Do not enable `Same-device` in downstream evaluation tables unless `assess_device_audit` passes on **100 locked human-reviewed titles with positive-edge precision ≥0.95**. The 1 November gate is still **blocked: 0/100 reviewed**; neither audit file was edited. Development statuses are **30 unknown / 20 parsed / 19 ambiguous / 18 universal / 13 negated**, with all 100 review labels blank. Slash-separated models/variants (for example iPhone SE/5/5S and iPhone 7/8 Plus), universal claims and negation clauses need human review. Without gold labels, these are ambiguity/review patterns, not measured false-positive rates. No parser tuning or device-based evaluation was performed.
 
 **Two focused tables, for readability rather than independence.**
 1. **4A:** `Same-device` × `Same-leaf` × `Text-similar`. Eight Boolean profiles for known device/text values, plus separate unknown/missing groups that preserve the full denominator. Same/different category are proxies; they do not establish substitutes/complements.
@@ -380,7 +472,7 @@ An underperforming ranker or final pipeline is a valid result. Report the verifi
 - A fix qualifies for validation integration only with all three seeds, overall K200 paired nDCG interval lower bound >0 and no observed new-item nDCG loss versus fresh A. Highest qualifying overall mean wins; exact ties use B/C/D order. If none qualifies, A remains the reference without a claim that its policy is optimal.
 - Retriever study: fresh unregularised text+ID versus ID-residual dropout p=0.5, with shared per-item batch masks and dedicated RNG. The historical Recall@100 selector, objective and static q remain fixed. Pilot seed 0; replication seeds 1/2 requires a separate launch after the pilot guard is reviewed.
 - Retriever pilot guard: higher observed overall nDCG@10 and no observed new-item Recall@200 loss versus text-only. Report the dropout-minus-ID-control comparison separately. Repeat guardrails after replication; a point-estimate guard is not noninferiority.
-- Graph work explains relationships only. Device-title extraction requires the locked audit before quantitative device claims. Graph paths are not causal model explanations.
+- Graph work explains relationships only. Device-title extraction requires the locked audit before quantitative device claims or model-feature integration. Graph paths are not causal model explanations. The architecture review in `architecture_proposals.md` recommends completing these existing controls first; new graph features, monotonic score residuals and deployed routing/merging require a separate decision. Random score/rank mixing is not an additional authorised arm.
 
 ### Local prerequisites and completed evidence
 
@@ -508,6 +600,8 @@ The narrative above is self-contained. Compact CSV/JSON evidence is retained for
 | Original candidate identities used by the prerequisite checker | `results/saved_evaluation/20261027-saved-validation/provenance.json` |
 | Verified marginal target/history profiles | `results/explanation_graph/20261027-target-profiles-verified/` (compact tables/provenance) |
 | Joint 12-cell warm profiles, retrieval profiles, five cases and contribution reconciliation | `results/evaluation_completion/20261028-final/` (CSV/JSON) |
+| Expanded witness degree/path/age, category continuity, store intersections and retriever gradations | `results/evaluation_completion/20261101-kg-expanded-final/` (CSV, report and provenance; per-event Parquet stays local) |
+| Architecture evidence review and proposals awaiting decisions | `docs/architecture_proposals.md` |
 | Device audit samples, still unlabelled | `results/explanation_graph/20261027-base/device_audit_{development,locked}.csv` |
 | Historical checkpoints/candidate hashes and exclusions | `results/ranker_artifacts.json` |
 
@@ -518,3 +612,5 @@ To replay archived validation predictions without training, original processed d
 ```
 
 Use a fresh ID; existing outputs are preserved. Config: `configs/evaluation/saved_results.yaml`. `--sample` is a development subset and must never be reported as a full-data result. Graph/profile reproduction additionally needs the original/restored processed inputs; the one-off `notebooks/complete_evaluation.py` records the completion analysis, with local input/output paths that must be adjusted for a fresh run. Do not launch retraining merely to reproduce these saved-result findings.
+
+Replay the expanded graph evaluation from the repository root with `python -m cascade.pipelines.expand_kg_evaluation` in the project environment. It verifies historical profile/rank/structure hashes and creates a fresh timestamped directory. Its `--sample` option is a 512-user development replay, distinct from the training pipeline's 2% sample; neither sample is reportable as full data. Device audit inputs are read-only and the gate status is recorded without enabling device evaluation.
