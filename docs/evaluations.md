@@ -103,6 +103,33 @@ All 100 independent float64 query reconstructions match target ranks exactly, an
 
 Fresh output: `results/local_experiments/20261102-full-frozen-text/`; use `report-final/report.md`, `report-final/comparison.csv` (including months/groups), `report-final/cases.json` (20 fixed-before-results examples), `evaluation/benchmark.json`, `evaluation/independent_recency_check.json` and `final_audit.json`. The first report attempt stopped during example export; its partial CSV is retained under `report/`, with final findings sourced from `report-final/`. Saved scores were unaffected. Final suite: **156 passed, 4 skipped**. Full-data learned-model training remains a separate decision.
 
+### Frozen diagnosis of lost new-item signal
+
+The user selected this follow-up after the full-catalogue check. `cascade.pipelines.content_signal_diagnostic` evaluates the **saved sample content-only seeds 0/1/2**, with seven fixed probes per seed. The probe manifest, geometry samples and neighbourhood queries were written before scoring. No training, checkpoint reselection, half-life tuning or Test evaluation. Inference substitutions locate signal loss in saved functions; they do not isolate the causal effect of a loss, optimiser or training policy.
+
+| Frozen function | Overall nDCG@10 | New-in-Val nDCG@10 |
+|---|---:|---:|
+| Raw text + recency/cosine | 0.012489 | 0.013470 |
+| Initial shared projection + recency/cosine | 0.009796 | 0.010108 |
+| Trained shared projection + recency/cosine | 0.006607 | 0.007400 |
+| Trained shared projection + recency/dot | 0.001310 | 0.001172 |
+| Trained sequence/dot (original content model) | 0.001836 | 0.001112 |
+| Trained sequence/cosine | 0.002575 | 0.001396 |
+
+**The learned item space retains less of the transferable raw-text signal in the pooling control.** With recency/cosine pooling fixed, final-minus-initial projection nDCG@10 is **-0.003190 [-0.005300, -0.001180]** overall and **-0.002708 [-0.005145, -0.000342]** on new-in-Val events. Initial projection versus raw text also loses **-0.002692 [-0.004107, -0.001287]** overall. Initialisation is recreated deterministically from the recorded projection seed; both projected spaces have width 64. This is a contrast between two frozen representations inside identical pooling, not the performance of an untrained versus trained sequence model.
+
+Geometry corroborates a change in structure: mean raw top-20 neighbour preservation for fixed post-T0 probes falls from **42.3% initial to 16.6% trained**. References are pre-T0 products only, with self excluded. In the fixed pre-T0 geometry sample, centred covariance effective rank falls from **38.1 to 10.5** out of 64 dimensions. Random-pair cosine falls rather than rising, so do not describe every product vector as collapsing to one common direction. Neighbour overlap measures preservation of MiniLM structure, not known item relevance or a requirement that all training preserve it.
+
+**Dot scoring makes candidate norm a strong preference.** For the same final projected recency query, cosine-minus-dot nDCG@10 is **+0.005296 [0.003596, 0.007206]**, or **+0.006228 [0.004050, 0.008636]** for new-in-Val events. Query normalisation is a positive per-query scale and does not change ordering; candidate normalisation removes item-specific magnitude effects. Global top-1%-norm products occupy **17.0%** of dot-product recommendation slots versus **0.25%** with cosine. Dot/cosine lists cover approximately **3,398 / 15,483 distinct products**, respectively. These slot measures describe concentration, not relevance of alternatives. Norm/pre-T0-review-count Spearman is approximately **-0.05**, so simple popularity amplification is not established as the cause.
+
+**The sequence model is useful relative to a matched uniform-pooling control.** Native sequence/dot beats projected-mean/dot by **+0.001053 [0.000280, 0.001930] nDCG@10** overall. Sequence/cosine minus projected-mean/cosine is inconclusive (**+0.000182 [-0.001232, 0.001530]**). It is therefore unsupported to assign the entire raw-text gap to the transformer. Recency pooling and sequence output are different query representations, and bypassing the learned sequence changes its inference distribution.
+
+**Normalising at inference is insufficient as a new-item remedy.** Native sequence cosine improves overall nDCG@10 by **+0.000739 [0.000049, 0.001464]**, but the new-in-Val difference is **+0.000284 [-0.000293, 0.000834]**. Normalising each history item before projected recency pooling has no clear gain (**-0.000206 [-0.000659, 0.000135]** overall). Preserve these negative/inconclusive outcomes.
+
+All intervals use 1,000 paired-user draws, seed 0, unadjusted after training-seed event averaging. All 21 archives align on 4,825 events and pass availability, uniqueness and full-history filtering. Source/input/weight hashes and unchanged parameters pass. Native ranks/top-ten lists reconstruct exactly on 128 queries per seed. **159 tests passed, 4 legacy sample-embedding tests skipped.** No model was retrained. Artifacts: `results/local_experiments/20261102-sasrec-pre-t0/diagnostics/20261102-frozen-decomposition/`, including `report/`, geometry/neighbour CSVs, `audit/verification.json`, norm-slot evidence and `figures/frozen_diagnosis.png`.
+
+The next proposed controlled pilot is candidate-normalised content-SASRec training: normalise candidate vectors consistently inside BCE and final scoring, leave query magnitude/history inputs unchanged, and match the existing sampler, pairs, seeds, backbone and selector. This is **not launched**. A separate geometry-preservation intervention would need its own design. The frozen results do not establish whether BCE, optimisation or the selector caused the learned geometry change.
+
 ## Working picture (historical full-data pipeline)
 
 The two-tower retrievers improve candidate retrieval over matched-period baselines, and the matching MLP improves the final top ten. However, increasing candidate coverage eventually makes the frozen ranker's output worse. The main issue to investigate is the interaction between training-list construction, retrieval score and candidate expansion.

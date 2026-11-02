@@ -190,3 +190,41 @@ python -m cascade.pipelines.frozen_text_study --study YOUR_FRESH_STUDY --phase r
 ```
 
 Full-data model training remains a later decision. Do not select a new architecture or retrain teammates' models merely because this frozen-control check completes.
+
+## 7. Frozen diagnosis of lost new-item signal
+
+The user chose this next direction after the full-catalogue check. Use the saved **sample content-only seeds 0/1/2**, preserving every weight and the original Val population. Entry point: `cascade.pipelines.content_signal_diagnostic`. No training or checkpoint/half-life selection.
+
+Before viewing outcomes, fix these substitutions:
+
+- Recreate the initial 384→256→64 projection from its deterministic seed; compare initial versus final projected text under identical 90-day pooling and cosine scoring.
+- Pool final projected item vectors with uniform/90-day weights, under dot/cosine scoring. Separately normalise each history item before pooling. These isolate candidate norm effects and history weighting in the frozen functions.
+- Compare the original sequence output's dot order with cosine order. Compare its order with direct pooling of the same final item vectors. Bypassing the sequence model changes its inference representation/distribution; it does not identify the causal effect of training that component.
+- Measure norm/popularity associations, random-pair cosine and centred covariance effective rank in fixed 4,096-item samples before/after T0. Compare 20-neighbour preservation for fixed 256 pre-T0 / 256 post-T0 probes, with pre-T0 references only and self excluded.
+- Retain all probes, negative outcomes, new/warm and seen/unseen groups, paired-user intervals (1,000 draws, seed 0 after seed averaging), recommendation composition and the original twenty fixed query examples. Geometry/slot counts describe representations and lists, not known relevance of unobserved alternatives.
+
+Fresh output: `results/local_experiments/20261102-sasrec-pre-t0/diagnostics/20261102-frozen-decomposition/`. Freeze the probe manifest before scoring; verify source/input hashes and unchanged model parameters. Any new objective or retraining remedy follows a separate discussion informed by these findings.
+
+### Completed diagnosis
+
+All 21 new frozen probe evaluations completed on MPS across the three saved seeds. No weights, checkpoints, loss functions or selectors changed. Native target ranks and top-ten lists reconstruct exactly on 128 queries per seed; all 21 saved archives pass identity, availability, uniqueness and full-history checks. Source snapshots, input hashes and unchanged model parameters pass. Final suite: **159 passed, 4 skipped**.
+
+| Frozen function | Overall nDCG@10 | New-in-Val nDCG@10 |
+|---|---:|---:|
+| Raw text + recency/cosine | 0.012489 | 0.013470 |
+| Initial projection + recency/cosine | 0.009796 | 0.010108 |
+| Trained projection + recency/cosine | 0.006607 | 0.007400 |
+| Trained projection + recency/dot | 0.001310 | 0.001172 |
+| Trained sequence/dot | 0.001836 | 0.001112 |
+| Trained sequence/cosine | 0.002575 | 0.001396 |
+
+Findings:
+
+- **Projection changes matter.** Under identical recency/cosine pooling, final-minus-initial projection nDCG@10 is **-0.003190 [-0.005300, -0.001180]**, and **-0.002708 [-0.005145, -0.000342]** for new-in-Val targets. Initial compression already loses signal relative to raw text. Post-T0 probe overlap with raw top-20 neighbours declines from **42.3% initial to 16.6% trained**; this is preservation of MiniLM neighbourhoods, not a ground-truth relevance metric. Centred effective rank in the 64-dimensional pre-T0 space falls from approximately **38.1 to 10.5**. This is a concentration of variation; random-pair cosines do not support a claim that all item directions collapse together.
+- **Candidate magnitude changes rankings.** Holding projected recency pooling fixed, cosine-minus-dot nDCG@10 is **+0.005296 [0.003596, 0.007206]**. The top 1% of catalogue products by norm occupy **17.0% of dot slots versus 0.25% of cosine slots**. Dot lists cover approximately **3,398** distinct products versus **15,483** with cosine. Norm/review-count Spearman is only about **-0.05**, so a popularity-bias cause is not established.
+- **The sequence model contributes useful signal within its own space.** Sequence/dot beats uniform projected-mean/dot by **+0.001053 [0.000280, 0.001930] nDCG@10**. Sequence/cosine versus projected-mean/cosine is inconclusive. Thus the overall raw-text gap cannot simply be assigned to the transformer.
+- **A scoring-only fix is incomplete.** Native sequence cosine improves overall nDCG@10 by **+0.000739 [0.000049, 0.001464]**, but its new-in-Val difference **+0.000284 [-0.000293, 0.000834]** is inconclusive. Normalising history items before recency pooling also has no clear gain. These are frozen inference substitutions, not retrained model results.
+
+Artifacts: `report/report.md`, `report/paired_differences.csv`, `report/metrics.csv`, `report/composition.csv`, `report/cases.json`, `vector_geometry.csv`, `neighbour_preservation.csv`, `audit/verification.json`, `audit/candidate_norm_slots.csv` and `figures/frozen_diagnosis.png`.
+
+**Next proposed control, not launched:** train the same sample content-SASRec with `logit(q, item) = q · (e_item / max(||e_item||, 1e-12))` in BCE, native prediction/selection and shared final scoring. Keep the query vector unnormalised, history inputs unchanged and no new temperature parameter. Match sampler, seeds 0/1/2, backbone, pairs and selector against the existing control; begin with a separate one-epoch smoke. Compare both with native dot-trained scoring and its existing frozen cosine probe. This tests training/scoring consistency around candidate magnitude; it does not guarantee new-item improvement or isolate the reason projection geometry changed. A geometry-preserving objective or frozen item encoder would be a separate experiment. The present diagnostics cannot attribute the changes specifically to BCE versus checkpoint selection or optimisation.

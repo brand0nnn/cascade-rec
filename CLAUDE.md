@@ -14,6 +14,8 @@
 
 This file is the source of truth for implementing the project; the current evaluation status and authorised follow-up in `docs/evaluations.md` supersede dated progress statements here. Read it fully before writing code. If something here is ambiguous or seems wrong, **stop and ask** rather than guessing — especially anything touching the data split, evaluation protocol, or metric definitions, because those decide whether results are valid.
 
+**Frozen signal diagnosis (2 November):** the user selected sample diagnosis next. All 21 frozen probes across content seeds 0/1/2 are complete and audited; no retraining. Under identical recency/cosine pooling, the final projection loses nDCG@10 relative to its initial state. Candidate magnitude strongly concentrates dot-scored lists; cosine improves pooling, but a native sequence scoring-only change has inconclusive new-item benefit. The trained sequence improves over uniform pooling within its own dot-product space. Do not attribute the whole gap to the transformer, infer popularity bias from norm alone, or treat inference substitutions as causal objective ablations. See `plan.md` §7 and the detailed evaluation record. Next candidate-normalised training control is proposed, not launched. Latest suite: **159 passed, 4 skipped**.
+
 ---
 
 ## 1. What we are building and why
