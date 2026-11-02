@@ -1,5 +1,32 @@
 # Local experimentation plan
 
+## Current status and remaining work — 2 November 2026
+
+**The planned sample model runs are complete; the full evidence/reporting checklist is not yet complete.** Sections 2–5 retain the original programme, while §§6–8 record completed work and subsequent approved extensions. Complete the outstanding evidence below before treating this local plan as finished. New experiment ideas discussed in chat are proposals, not replacements for these tasks.
+
+| Original programme / approved extension | Status |
+|---|---|
+| Original RecBole weights, strict-negative ID/content/content+ID controls and popularity | Complete; standalone weights/mappings and audits saved |
+| E1 multiple interests; E2 metadata neighbours; E3 mean/attention rankers; E4 actual candidate fusion | Three-seed sample runs complete; no clear gain over their matched controls |
+| History truncation, uniform/fixed-recency frozen text and twenty fixed query examples | Complete for the original sample comparison |
+| Full archived-Val monthly/new-warm/category/store audit | Complete; monthly history intersections remain outstanding |
+| Full-catalogue frozen-text validation | Complete; no recommender training |
+| Frozen signal diagnosis and subsequently approved candidate-normalised training | Complete; see §§7–8, including the positive normalisation result |
+
+### Remaining work already within this plan
+
+- [ ] **Complete temporal/history reporting:** produce monthly metrics for the new local models, with support counts and history-length groups. Extend the archived full-Val monthly audit with its promised history-group breakdowns. Keep sample/full populations separate and retain partial-month/seasonality caveats.
+- [ ] **Finish local ranking failure analysis:** count retrieval misses, ranking misses, hits, rescues and demotions for mean/attention versus their unchanged retrieval order. Current local ranker tables contain levels and paired differences, not this complete funnel.
+- [ ] **Complete E4's two-source comparison:** report paired fusion-minus-content **and fusion-minus-graph** intervals at the same 200-item budget. The existing combined table uses content as its interval reference; separate constituent levels do not supply the second paired interval.
+- [ ] **Finish the score evidence required by §4:** retain aligned top-200 IDs/scores for the frozen raw controls and all 200 selected-ranker logits on each saved candidate list. Current raw-control archives preserve target ranks/top-ten IDs; ranker inputs preserve retrieval candidates/scores, but selected ranker logits were not archived. Regenerate these only from frozen selected weights, verify saved ranks/top-ten outputs, and preserve existing artifacts.
+- [ ] **Consolidate the final local comparison:** combine the original sample programme, frozen diagnosis and candidate-normalisation findings into one report with the missing analyses above, fixed recommendation examples, uncertainty and measured costs. Existing reports remain evidence; the latest normalised model currently has a separate report.
+
+### Decisions after that completion
+
+- The suggested pooling comparison on the normalised model and a geometry-preserving encoder are **additional proposed experiments**, not unfinished E1–E4 runs. Design/approve them explicitly before changing training again.
+- Nominate at most two variants for any full-data learned-model fits; this remains a separate decision under §5.
+- Ranking on a changed candidate pool, final pipeline selection, serving/cascade timing and held-out Test are later work. The sample rerankers used the original content-seed-0 pool; improved retrieval has not automatically supplied new ranking results.
+
 ## 1. Goal and working approach
 
 Create an independent local experiment track, starting from a simple baseline we understand. Test how changes to retrieval, history modelling, graph information and ranking alter recommendations, especially for future products.
