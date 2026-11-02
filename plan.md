@@ -1,30 +1,31 @@
 # Local experimentation plan
 
-## Current status and remaining work — 2 November 2026
+## Current status — local plan complete, 2 November 2026
 
-**The planned sample model runs are complete; the full evidence/reporting checklist is not yet complete.** Sections 2–5 retain the original programme, while §§6–8 record completed work and subsequent approved extensions. Complete the outstanding evidence below before treating this local plan as finished. New experiment ideas discussed in chat are proposals, not replacements for these tasks.
+**The authorised local programme and its evidence/reporting checklist are complete.** Sections 2–5 retain the original protocol; §§6–9 record completed work and approved extensions. The consolidated deliverable is `results/local_experiments/20261102-plan-completion/report-final/report.md`, with its completion audit and evidence bundle. New experiment ideas and the explicit later decisions below are outside this completed local programme.
 
 | Original programme / approved extension | Status |
 |---|---|
 | Original RecBole weights, strict-negative ID/content/content+ID controls and popularity | Complete; standalone weights/mappings and audits saved |
-| E1 multiple interests; E2 metadata neighbours; E3 mean/attention rankers; E4 actual candidate fusion | Three-seed sample runs complete; no clear gain over their matched controls |
+| E1 multiple interests; E2 metadata neighbours; E3 mean/attention rankers; E4 actual candidate fusion | Three-seed runs and complete comparisons done; fusion improves graph but not clearly content, while E1–E3 show no clear improvement over their matched controls |
 | History truncation, uniform/fixed-recency frozen text and twenty fixed query examples | Complete for the original sample comparison |
-| Full archived-Val monthly/new-warm/category/store audit | Complete; monthly history intersections remain outstanding |
+| Full archived-Val monthly/new-warm/category/store/history audit | Complete, including monthly history intersections and clipped catalogue-introduction counts |
 | Full-catalogue frozen-text validation | Complete; no recommender training |
 | Frozen signal diagnosis and subsequently approved candidate-normalised training | Complete; see §§7–8, including the positive normalisation result |
 
-### Remaining work already within this plan
+### Completed evidence checklist
 
-- [ ] **Complete temporal/history reporting:** produce monthly metrics for the new local models, with support counts and history-length groups. Extend the archived full-Val monthly audit with its promised history-group breakdowns. Keep sample/full populations separate and retain partial-month/seasonality caveats.
-- [ ] **Finish local ranking failure analysis:** count retrieval misses, ranking misses, hits, rescues and demotions for mean/attention versus their unchanged retrieval order. Current local ranker tables contain levels and paired differences, not this complete funnel.
-- [ ] **Complete E4's two-source comparison:** report paired fusion-minus-content **and fusion-minus-graph** intervals at the same 200-item budget. The existing combined table uses content as its interval reference; separate constituent levels do not supply the second paired interval.
-- [ ] **Finish the score evidence required by §4:** retain aligned top-200 IDs/scores for the frozen raw controls and all 200 selected-ranker logits on each saved candidate list. Current raw-control archives preserve target ranks/top-ten IDs; ranker inputs preserve retrieval candidates/scores, but selected ranker logits were not archived. Regenerate these only from frozen selected weights, verify saved ranks/top-ten outputs, and preserve existing artifacts.
-- [ ] **Consolidate the final local comparison:** combine the original sample programme, frozen diagnosis and candidate-normalisation findings into one report with the missing analyses above, fixed recommendation examples, uncertainty and measured costs. Existing reports remain evidence; the latest normalised model currently has a separate report.
+- [x] **Temporal/history reporting:** all ten local retrieval methods have monthly/history/new-warm metrics and paired intervals; the full archived retrieval/MLP/DIN audit has the same intersections. Support partitions reproduce all 4,825 sample / 232,904 full events, and prior full monthly nDCG estimates reproduce within 1e-12. Sample/full tables remain separate, with partial-month/seasonality caveats.
+- [x] **Local ranking failure analysis:** per-seed and subgroup retrieval misses, ranking misses, hits, rescues, demotions and retained hits, plus all event transitions. Funnel partitions and rescue/demotion identities pass exactly.
+- [x] **E4's two-source comparison:** paired fusion-minus-content **and fusion-minus-graph** intervals from actual candidate IDs/scores under a unique 200-item budget. Positive graph-only gains and inconclusive content gains are both retained.
+- [x] **Score evidence required by §4:** six sample/full frozen-control top-200 archives and twelve selected-ranker logit archives (both periods, two models, three seeds) recovered from frozen models. Every regenerated Val rank and native top-ten list reproduces exactly. Tie/display differences are explicitly recorded, and previous artifacts remain intact.
+- [x] **Consolidated local comparison:** one final report includes all experiments, the approved normalisation follow-up, uncertainty, original baseline references, temporal/support/composition/concentration tables, twenty fixed examples, figures, costs and source/hash audits. See §9.
 
 ### Decisions after that completion
 
 - The suggested pooling comparison on the normalised model and a geometry-preserving encoder are **additional proposed experiments**, not unfinished E1–E4 runs. Design/approve them explicitly before changing training again.
 - Nominate at most two variants for any full-data learned-model fits; this remains a separate decision under §5.
+- Nomination is recorded in §9: a matched native content control and candidate-normalised treatment, with frozen recency as the existing full-data reference. No full-data learned fit has been launched.
 - Ranking on a changed candidate pool, final pipeline selection, serving/cascade timing and held-out Test are later work. The sample rerankers used the original content-seed-0 pool; improved retrieval has not automatically supplied new ranking results.
 
 ## 1. Goal and working approach
@@ -287,3 +288,31 @@ python -m cascade.pipelines.unit_candidate_study --study STUDY --device mps
 ```
 
 The study must contain its matched controls and frozen diagnostic reference. Candidate export additionally uses `local_followups.candidate_outputs(..., arms=('content_unit',))` to preserve older exported lists.
+
+## 9. Final evidence and report completion
+
+Completed the five outstanding evidence tasks using only frozen selected models and saved validation artifacts. No new training, Test predictions, changes to splits, or overwriting original results.
+
+Final bundle: **`results/local_experiments/20261102-plan-completion/`**. Use **`report-final/report.md`** as the consolidated report; `report/` is the earlier review version. The final bundle contains:
+
+- `analysis/sample_monthly_history_metrics.csv`: **5,400 rows**, ten local retrieval methods × monthly/history/new-warm strata × three metrics, with paired intervals versus content. `full_monthly_history_metrics.csv`: **1,620 rows**, extending archived retrieval/MLP/DIN with the same history groups. Both support tables have 180 strata and exactly cover their populations under the stated partitions.
+- `analysis/ranker_failure_funnel.csv` and `ranker_event_transitions.parquet`: 4,568 retrieval misses and 257 natural Val hits. Retrieval order has 14 top-ten hits. Each ranker demotes 13 on average; attention rescues 9, mean 8.67. Counts are per-seed averages, not independent unique-event totals. All funnel identities pass.
+- `analysis/fusion_actual_budget_comparison.csv`: fusion-minus-graph Recall@200 **+0.004167 [0.000728, 0.007860]**, nDCG@10 **+0.000682 [0.000112, 0.001318]**. Fusion-minus-content remains inconclusive: Recall@200 **+0.001107 [-0.002628, 0.004783]**, nDCG@10 **+0.000095 [-0.000461, 0.000645]**.
+- `exports/sample_raw/`, `exports/full_raw/` and `exports/ranker_logits/`: six raw top-200 archives and twelve full-logit archives. Every regenerated Val target rank and native top-ten display is exact. Raw popularity has 12 sample / 17 full membership-versus-pessimistic-boundary differences; native headline metrics are retained. topk(200)/topk(10) tie-order differences are recorded separately. All model parameters remain unchanged.
+- `report-final/`: the full report, all twenty fixed cases with every retrieval method and both rerankers, composition including category/store HHI and dominant shares with missingness/support, catalogue-introduction and target-mix tables, costs, source comparison tables, two figures and `completion_audit.json`. Catalogue introductions are clipped to the observed Val portions of boundary months, excluding later Test-period introductions. Earlier baseline/diagnostic/normalisation/full-reference estimates are preserved and reconciled.
+
+Normalisation's overall gain is heterogeneous: nDCG@10 change versus content is **+0.003624 [0.001615, 0.005795]** for history 3–5, **+0.001987 [0.000171, 0.004270]** for 11+, and inconclusive for 1–2 / 6–10. These are exploratory unadjusted subgroup results, not universal gains. Calendar, ageing, novelty and history mix remain confounded.
+
+Latest validation: **168 passed, 4 skipped**. The four legacy skips require conventional-path sample embeddings; isolated study vectors and all completed score replays are separately verified. Figures were visually checked. `completion_audit.json` binds generated outputs and their source evidence; all seven completion checks pass.
+
+Reproduce into a fresh output name in the project environment:
+
+```bash
+python -m cascade.pipelines.local_evidence_export --output FRESH_COMPLETION --device mps
+python -m cascade.pipelines.local_plan_completion --output FRESH_COMPLETION
+python -m cascade.pipelines.local_completion_report --output FRESH_COMPLETION --report-name report-final
+```
+
+Existing frozen study paths are defaults; every export/analysis/report destination refuses existing output. Generated arrays, figures and reports remain local/ignored; code and compact findings are committed.
+
+**Later full-data nomination:** native content-SASRec control and candidate-normalised treatment, as one matched pair of learned configurations. Retain fixed-recency frozen text as the already-evaluated full-data reference. The current graph/interest/ranker evidence does not justify additional full-data fits. Execution, changed-pool ranking, final selection, serving/cascade timing and held-out Test remain explicit later decisions, not unfinished items in this local plan.
