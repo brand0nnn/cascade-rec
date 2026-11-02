@@ -1,8 +1,8 @@
 # Local experimentation plan
 
-## Current status — local plan complete, 2 November 2026
+## Current status — Phase 1 complete; Phase 2 planned, 2 November 2026
 
-**The authorised local programme and its evidence/reporting checklist are complete.** Sections 2–5 retain the original protocol; §§6–9 record completed work and approved extensions. The consolidated deliverable is `results/local_experiments/20261102-plan-completion/report-final/report.md`, with its completion audit and evidence bundle. New experiment ideas and the explicit later decisions below are outside this completed local programme.
+**Phase 1 and its evidence/reporting checklist are complete.** Sections 2–5 retain the original protocol; §§6–9 record completed work and approved extensions. Its consolidated deliverable is `results/local_experiments/20261102-plan-completion/report-final/report.md`. **Phase 2 is the planned graph/latent ranking extension in §10**, following the user's choices to prioritise new-item generalisation, include one learned graph arm and reserve a chronological tuning split. No Phase 2 implementation or training has started.
 
 | Original programme / approved extension | Status |
 |---|---|
@@ -27,6 +27,7 @@
 - Nominate at most two variants for any full-data learned-model fits; this remains a separate decision under §5.
 - Nomination is recorded in §9: a matched native content control and candidate-normalised treatment, with frozen recency as the existing full-data reference. No full-data learned fit has been launched.
 - Ranking on a changed candidate pool, final pipeline selection, serving/cascade timing and held-out Test are later work. The sample rerankers used the original content-seed-0 pool; improved retrieval has not automatically supplied new ranking results.
+- The new sample ranking study is now specified in §10. Full-data execution, final selection, serving/cascade timing and Test remain later decisions.
 
 ## 1. Goal and working approach
 
@@ -316,3 +317,59 @@ python -m cascade.pipelines.local_completion_report --output FRESH_COMPLETION --
 Existing frozen study paths are defaults; every export/analysis/report destination refuses existing output. Generated arrays, figures and reports remain local/ignored; code and compact findings are committed.
 
 **Later full-data nomination:** native content-SASRec control and candidate-normalised treatment, as one matched pair of learned configurations. Retain fixed-recency frozen text as the already-evaluated full-data reference. The current graph/interest/ranker evidence does not justify additional full-data fits. Execution, changed-pool ranking, final selection, serving/cascade timing and held-out Test remain explicit later decisions, not unfinished items in this local plan.
+
+## 10. Phase 2 — Graph- and latent-aware ranking
+
+### Goal and fixed retrieval
+
+Improve top-ten recommendations and new-item generalisation by adding relational and latent signals to ranking. Keep the strong frozen text path intact and explain which additions help which products. This is a new isolated sample study; Phase 1 and teammates' controls remain unchanged.
+
+- Use **frozen MiniLM + 90-day recency retrieval, K=200**, for all arms. Preserve the sample split, query histories, availability/full-history filters and the same pinned encoder/vectors. No target insertion or retriever training.
+- Read-only feasibility audit: this pool has **760/6,306 natural ranker-training positives**, versus 681 for normalised content seed 0 and 458 for the old pool. On Val it has **565 natural targets / 131 top-ten hits**, leaving 434 retrieved targets below ten. These are event counts, not macro accuracy or new ranker results.
+- Use a fresh study directory under `results/local_experiments/`. Save candidate IDs/scores for all ranking-training and Val queries, their hashes and the exact natural-positive exclusions. All arms share these lists.
+
+### Registered comparisons
+
+| Arm | Addition to the common residual text ranker | Main question |
+|---|---|---|
+| R0 | Frozen retrieval order; no learned correction | Does reranking add value? |
+| R1 | Text/history residual only, with common support controls | Can personalisation improve the strong starting order? |
+| R2 | Explicit graph features | Do relationships add information beyond text and degree/support? |
+| R3 | Frozen 64D BPR item/history factors | Does collaborative information help supported warm products? |
+| R4 | Graph features + BPR factors | Are relational and collaborative signals complementary? |
+| R5 | Frozen 64D PCA-text factors | Does simple inductive semantic compression help? |
+| R6 | Learned self-only graph-encoder control | Does an additional text transformation explain graph-encoder gains? |
+| R7 | One-hop, content-aware graph encoder | Does neighbour aggregation improve on R6, including new products? |
+
+Use **score = frozen retrieval score + learned residual**. Zero-initialise the final residual layer so epoch 0 reproduces the candidate pool's retrieval scores/order. Keep the common head **128 → 64 → 1**, text projection width 32 and mean history pooling. Reserve identical optional input slots, zero ablated blocks, and share head/common initial weights within seed. Give every learned arm the same degree/knownness/support controls, so added factors do not merely reveal item age or graph coverage. Do not add a simultaneous attention or loss sweep.
+
+### Graph and embedding inputs
+
+- **Freeze collaborative inputs strictly before sample T0**, for both B-period training and Val. A pre-T1 graph includes B labels and must not be used as B-training features. Query histories remain strictly prior to each query.
+- **Explicit graph features:** candidate-wise other-reviewer count, witness-path count, degree-normalised shared-reviewer strength, supported-history fraction and known category/store history relations. Use sparse pre-T0 user–item operations; exclude the query user's edges and padding/self paths. Compute features for **every candidate**, never from saved true-target profiles. Keep unknown metadata separate. No device/compatibility features.
+- **BPR64:** fresh pre-T0 interactions, one uniform pre-T0 negative excluding that user's known positives; Adam .001, batch 4096, fixed 300 epochs, seeds 0/1/2. Benchmark a smoke epoch first. Export the final factors with no Val-based latent-model selection. Freeze factors for ranking; use candidate and known-history-pooled item factors, not a dependence on user-ID lookups. Unseen item/history factors are zero with explicit masks. Apply masks after any adapter so bias cannot invent a missing embedding.
+- **PCA-text64:** fit mean/components on unweighted pre-T0 item text only, full SVD, no whitening. Freeze the transform and L2-normalise transformed vectors. Future products use the same transform without refitting; padding/missing text stays zero. This is a semantic compression control, not a collaborative model.
+- **Learned graph branch:** frozen MiniLM self features plus separate same-leaf/store neighbour means and availability flags; up to 16 deterministic pre-T0 neighbours per relation, excluding self. Reuse the existing metadata-neighbour bank and a shared **1154 → 128 → 64** encoder. R6 uses identical encoder dimensions/parameter keys with neighbour blocks disabled; common support masks remain available to both arms. R7 uses actual neighbour blocks. Train this branch jointly with the residual head; keep MiniLM frozen. New products attach through their own text and permitted metadata, without item-specific learned IDs. Describe this as a GraphSAGE-style adaptation, not a paper reproduction. Plain PyTorch/MPS suffices; no new graph framework is required.
+- Frozen 64D factor branches use the same **64 → 16** adapter and candidate/history/product/absolute-difference interactions. Fit numerical preprocessing on prefix-training candidate inputs only; freeze it for tuning/Val. Reset ranker RNG independently after factor fitting.
+
+### Training, selection and reporting
+
+- Define the chronological **80/20 inner split on all 6,306 B queries before natural-hit filtering**. Use the timestamp at sorted index `floor(0.8 * N)` as the cutoff: earlier queries fit, cutoff-and-later queries tune, keeping timestamp ties together. Record exact times/supports; do not assume 80% of the 760 positives.
+- Retain BCE with 50 uniformly sampled alternatives per positive, Adam .001, batch 32 lists, maximum 10 epochs and patience 2. Pair eligible query order and negative columns across arms within seed. Use MPS for dense fitting; CPU handles sparse features/PCA.
+- Select by **end-to-end per-user macro nDCG@10 on all inner-tuning queries**, including retrieval misses, with epoch 0 eligible. Break metric ties toward the earlier epoch. Report conditional metrics alongside. Do not use outer Val for checkpointing or hyperparameter search.
+- Reinitialise each arm/seed and refit all B natural positives for its selected fixed epoch count; epoch 0 means retain the unchanged baseline. Reuse the frozen pre-T0 banks/preprocessing and paired RNG policy. Then perform one scheduled outer-Val comparison after all configurations are fixed.
+- Run separate technical smoke checks, then all registered learned arms at seeds **0/1/2**, preserving negative and epoch-0 outcomes. Sparse support is a limitation, not a reason to drop an arm after seeing scores.
+- Headline end-to-end nDCG@10/Recall@10; fixed Recall@200 ceiling; conditional ranking metrics; seed SD; 1,000 paired-user bootstrap draws, seed 0, after seed-mean event metrics. Compare R1–R0, R2/R3/R4/R5–R1, R4–R2/R3 and R7–R6. Report new/warm, pre-T0-known/unknown, graph-support/degree, category continuity and history groups, plus rescues/demotions, list composition, fixed cases, training/export cost and parameter sizes.
+- Val has already been inspected extensively: this phase remains **exploratory**, not an untouched confirmatory test. Group differences do not prove a mechanism. A second retriever pool needs a fresh matched ranking replication; do not transfer an uncalibrated residual between raw-cosine and normalised-model score scales.
+
+### Implementation order and acceptance checks
+
+1. Export frozen candidates and the inner split/support manifest; lock the arm list before outcome inspection.
+2. Build/audit pre-T0 graph features and frozen BPR/PCA factors.
+3. Implement the common residual head and optional feature blocks; run R1–R5 with paired seeds.
+4. Implement matched R6/R7; complete their three seeds under the same protocol.
+5. Refit, score fixed outer Val, and produce one comparison report with aligned full logits, ranks/top tens, checkpoints, feature/config/source hashes and all registered outcomes. Update this plan and the evaluation record.
+
+Required checks: target relabelling cannot change features; later edges cannot alter frozen banks; query-user-only graph paths disappear; unknown values never create matches; unseen factors stay zero after adapters; new metadata nodes remain finite; epoch-0 scoring is identical to retrieval; all arms share candidates/cohorts/negatives/common initial weights; misses receive zero credit; checkpoint reloads and failure-funnel identities reproduce. Keep all existing outputs and teammate workflows intact.
+
+No Phase 2 fits have run yet. Full-data promotion, changed-pool replication, serving/cascade timing and final Test require later decisions after this sample study.
