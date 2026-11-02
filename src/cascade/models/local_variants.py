@@ -79,7 +79,8 @@ class LocalSASRecScorer(SASRecScorer):
         from cascade.models.recbole_baselines import left_to_right_pad
         sequence, length = left_to_right_pad(self.ours2rb[batch.hist])
         states = self.model.forward(sequence.to(self.device), length.to(self.device))
-        scores = states @ self.model.item_embedding.weight.T
+        candidates = self.model.candidate_vectors() if hasattr(self.model, 'candidate_vectors') else self.model.item_embedding.weight
+        scores = states @ candidates.T
         if scores.ndim == 3:
             scores = scores.amax(1)
         return self._to_ours(scores)

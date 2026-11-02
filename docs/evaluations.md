@@ -18,7 +18,7 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
 | Controlled policy retraining (A/B/C/D: all/natural-only × enabled/masked score) and ID dropout | Submission tooling updated 29 Oct; cluster input checks required; no full-data remedy result |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
-| Independent local track, root `plan.md` | Sample programme complete: 15 retriever and six natural-only ranker fits; frozen controls, actual fusion, case report and artifact audit complete |
+| Independent local track, root `plan.md` | Sample programme complete: 18 strict-pool retriever and six natural-only ranker fits, including the subsequently approved candidate-normalisation trial; frozen diagnosis, fusion, reports and audits complete |
 | Full-catalogue frozen-text check | Complete on all Val events: recency improves top-ten quality over archived retrieval but lowers Recall@200; strong new/warm trade-off |
 
 **Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md); integration into the canonical full-data pipeline remains unapproved. The separate local experiments below are authorised through root `plan.md`. Target-conditioned oracle estimates do not establish deployable routing gains.
@@ -128,7 +128,28 @@ Geometry corroborates a change in structure: mean raw top-20 neighbour preservat
 
 All intervals use 1,000 paired-user draws, seed 0, unadjusted after training-seed event averaging. All 21 archives align on 4,825 events and pass availability, uniqueness and full-history filtering. Source/input/weight hashes and unchanged parameters pass. Native ranks/top-ten lists reconstruct exactly on 128 queries per seed. **159 tests passed, 4 legacy sample-embedding tests skipped.** No model was retrained. Artifacts: `results/local_experiments/20261102-sasrec-pre-t0/diagnostics/20261102-frozen-decomposition/`, including `report/`, geometry/neighbour CSVs, `audit/verification.json`, norm-slot evidence and `figures/frozen_diagnosis.png`.
 
-The next proposed controlled pilot is candidate-normalised content-SASRec training: normalise candidate vectors consistently inside BCE and final scoring, leave query magnitude/history inputs unchanged, and match the existing sampler, pairs, seeds, backbone and selector. This is **not launched**. A separate geometry-preservation intervention would need its own design. The frozen results do not establish whether BCE, optimisation or the selector caused the learned geometry change.
+These findings motivated the candidate-normalised content-SASRec pilot subsequently approved and completed below: normalise candidate vectors consistently inside BCE and final scoring, leave query/history normalisation unchanged, and match the existing sampler, pairs, seeds, backbone and selector. A separate geometry-preservation intervention still needs its own design. The frozen results do not establish whether BCE, optimisation or the selector caused the learned geometry change.
+
+### Approved candidate-normalised training: completed sample result
+
+The user subsequently approved the matched sample training trial. Opt-in `UnitCandidateSASRec` / `content_unit` uses `q · (e / max(||e||, 1e-12))` in **BCE, native prediction/checkpoint selection and shared final retrieval**. Query magnitude and raw history inputs remain unchanged; there is no new temperature or parameter. The strict sampler, seed-specific initial backbone, first negative traces, atomic exports, mappings, pairs, native recipe and selector rule match the original content controls. No full-data learned-model fit or Test evaluation.
+
+| Method, three-seed means unless deterministic | Recall@200 | Recall@10 | nDCG@10 | New-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| Original dot-trained/scored content model | 0.056750 | 0.003862 | 0.001836 | 0.001112 |
+| Original weights, frozen cosine scoring | 0.060244 | 0.005415 | 0.002575 | 0.001396 |
+| Candidate-normalised training and scoring | **0.075097** | **0.008298** | **0.003978** | **0.002548** |
+| Frozen text + 90-day recency reference | 0.100990 | 0.022309 | 0.012489 | 0.013470 |
+
+Treatment minus original dot: overall nDCG@10 **+0.002142 [0.000814, 0.003608]**, Recall@200 **+0.018347 [0.011714, 0.024630]**. New-in-Val nDCG@10 **+0.001436 [0.000356, 0.002610]**, Recall@200 **+0.015421 [0.008113, 0.022083]**. It also beats changing the original model's scoring only: nDCG@10 **+0.001403 [0.000153, 0.002757]** overall and **+0.001152 [0.000050, 0.002325]** on new-in-Val events. These are unadjusted exploratory paired-user 95% intervals (B=1000, seed 0, event metrics averaged over seeds); the last comparison has a small positive lower bound and is not a final confirmatory result.
+
+The pipeline intervention provides evidence that consistent candidate normalisation can improve this sample model, including new-item retrieval. It does not isolate the effect of the loss from checkpoint selection or number of updates. Selected epochs **33/38/24** versus **12/14/24** and training times **77.0/86.6/58.7 s** versus **32.4/37.2/55.9 s** are retained. All fits use MPS and the same stopping rule, not equal update counts. No serving latency was measured in this trial.
+
+Geometry is partly preserved: post-T0 raw top-20 neighbour overlap averages **26.2%**, versus **16.6%** in the original trained projection and **42.3%** initially. Pre-T0 centred effective rank rises to **17.4**, versus **10.5** in the original trained projection. Geometry describes projected vectors before candidate output normalisation; neighbour comparisons use cosine. These observations do not establish geometry as a causal mediator.
+
+Frozen recency remains substantially better: treatment-minus-recency nDCG@10 **-0.008511 [-0.011727, -0.005760]** overall and **-0.010922 [-0.014650, -0.007698]** for new-in-Val events. Candidate normalisation addresses part of the observed gap; it is not a complete future-item solution or an automatic full-data launch decision.
+
+Artifacts: `results/local_experiments/20261102-sasrec-pre-t0/unit_candidate_report/`, plus selected weights under `runs/content_unit/seed<seed>/` and actual top-200 IDs/scores under `retrieved/content_unit/seed<seed>/`. Matched-input/recipe/initialisation checks, source/weight hashes, exact standalone reload on 128 queries per seed, unchanged analysis-time parameters and all saved list filters pass. Actual top-200 target membership has zero differences from pessimistic rank-based hit@200 in all seeds. Latest suite: **162 passed, 4 skipped**. Historical controls and the frozen diagnosis remain unchanged.
 
 ## Working picture (historical full-data pipeline)
 

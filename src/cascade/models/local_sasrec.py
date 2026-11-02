@@ -6,6 +6,7 @@ import hashlib
 import numpy as np
 import torch
 from torch import nn
+from torch.nn import functional as F
 from recbole.sampler import Sampler
 
 from cascade.models.recbole_baselines import SASRecBCE
@@ -89,6 +90,28 @@ class ContentSASRec(SASRecBCE):
         super().__init__(config, dataset)
         residual = self.item_embedding if seen is not None else None
         self.item_embedding = ContentItems(features, self.hidden_size, int(config['seed']), residual, seen)
+
+
+class UnitCandidateSASRec(ContentSASRec):
+    """Candidate-only unit vectors; raw history inputs and query scale are retained."""
+
+    def candidate_vectors(self,items=None):
+        vectors=self.item_embedding.weight if items is None else self.item_embedding(items)
+        return F.normalize(vectors,dim=-1,eps=1e-12)
+
+    def calculate_loss(self,interaction):
+        query=self.forward(interaction[self.ITEM_SEQ],interaction[self.ITEM_SEQ_LEN])
+        positive=(query*self.candidate_vectors(interaction[self.POS_ITEM_ID])).sum(-1)
+        negative=(query*self.candidate_vectors(interaction[self.NEG_ITEM_ID])).sum(-1)
+        return F.binary_cross_entropy_with_logits(positive,torch.ones_like(positive))+F.binary_cross_entropy_with_logits(negative,torch.zeros_like(negative))
+
+    def full_sort_predict(self,interaction):
+        query=self.forward(interaction[self.ITEM_SEQ],interaction[self.ITEM_SEQ_LEN])
+        return query@self.candidate_vectors().T
+
+    def predict(self,interaction):
+        query=self.forward(interaction[self.ITEM_SEQ],interaction[self.ITEM_SEQ_LEN])
+        return (query*self.candidate_vectors(interaction[self.ITEM_ID])).sum(-1)
 
 
 def backbone_digest(model) -> str:

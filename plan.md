@@ -227,4 +227,36 @@ Findings:
 
 Artifacts: `report/report.md`, `report/paired_differences.csv`, `report/metrics.csv`, `report/composition.csv`, `report/cases.json`, `vector_geometry.csv`, `neighbour_preservation.csv`, `audit/verification.json`, `audit/candidate_norm_slots.csv` and `figures/frozen_diagnosis.png`.
 
-**Next proposed control, not launched:** train the same sample content-SASRec with `logit(q, item) = q · (e_item / max(||e_item||, 1e-12))` in BCE, native prediction/selection and shared final scoring. Keep the query vector unnormalised, history inputs unchanged and no new temperature parameter. Match sampler, seeds 0/1/2, backbone, pairs and selector against the existing control; begin with a separate one-epoch smoke. Compare both with native dot-trained scoring and its existing frozen cosine probe. This tests training/scoring consistency around candidate magnitude; it does not guarantee new-item improvement or isolate the reason projection geometry changed. A geometry-preserving objective or frozen item encoder would be a separate experiment. The present diagnostics cannot attribute the changes specifically to BCE versus checkpoint selection or optimisation.
+**Control proposed after diagnosis (subsequently approved and completed in §8):** train the same sample content-SASRec with `logit(q, item) = q · (e_item / max(||e_item||, 1e-12))` in BCE, native prediction/selection and shared final scoring. Keep the query vector unnormalised, history inputs unchanged and no new temperature parameter. Match sampler, seeds 0/1/2, backbone, pairs and selector against the existing control; begin with a separate one-epoch smoke. Compare both with native dot-trained scoring and its existing frozen cosine probe. This tests training/scoring consistency around candidate magnitude; it does not isolate the reason projection geometry changed. A geometry-preserving objective or frozen item encoder would be a separate experiment. The frozen diagnostics cannot attribute the changes specifically to BCE versus checkpoint selection or optimisation.
+
+## 8. Approved matched candidate-normalisation pilot
+
+After the frozen diagnosis, the user explicitly chose **run the matched sample experiment**, seeds 0/1/2. The §7 proposal is now approved for the sample. Opt-in arm `content_unit` uses `UnitCandidateSASRec`, with candidate normalisation applied in BCE, native `predict`/`full_sort_predict`, and `LocalSASRecScorer`. No new parameters; initial backbone/history forward and parameter keys match the original content model. Future-item features cannot affect loss/gradients on prior-only training pairs. These properties pass targeted tests before the MPS run.
+
+The separate one-epoch smoke and all three full sample seeds completed on MPS. Outputs: `runs/content_unit/seed<seed>/`, `smoke/content_unit/seed0/`. `cascade.pipelines.unit_candidate_study` compares with the original dot-trained model and its frozen cosine probe, retaining raw recency as a reference. Matched native configs, atomic exports, mappings, initial backbones/negative traces, portable weights, temporal filters and unchanged parameters during analysis all pass. New geometry/neighbour diagnostics reuse the fixed query/item samples. No full-data learned-model training or Test evaluation.
+
+| Sample method | Recall@200 | Recall@10 | nDCG@10 | New-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| Native dot-trained/scored content model | 0.056750 | 0.003862 | 0.001836 | 0.001112 |
+| Same weights, frozen cosine scoring | 0.060244 | 0.005415 | 0.002575 | 0.001396 |
+| Candidate-normalised training/scoring | **0.075097** | **0.008298** | **0.003978** | **0.002548** |
+| Frozen raw-text recency reference | 0.100990 | 0.022309 | 0.012489 | 0.013470 |
+
+New training minus native dot: overall nDCG@10 **+0.002142 [0.000814, 0.003608]**, Recall@200 **+0.018347 [0.011714, 0.024630]**; new-in-Val nDCG@10 **+0.001436 [0.000356, 0.002610]**, Recall@200 **+0.015421 [0.008113, 0.022083]**. It also beats the frozen cosine probe: overall nDCG@10 **+0.001403 [0.000153, 0.002757]**, new-in-Val **+0.001152 [0.000050, 0.002325]**. Intervals are exploratory/unadjusted paired-user 95% intervals, B=1000, seed 0, after event-metric seed averaging. The new-item interval versus frozen cosine has a small lower bound; retain the exploratory framing.
+
+Post-T0 raw-neighbour preservation is **26.2%**, versus **16.6%** in the original trained projection and **42.3%** initially. Pre-T0 centred effective rank is approximately **17.4**, versus **10.5** in the original trained projection. These are descriptive geometry checks, not relevance/causal mediators. Training/selection normalisation is a controlled intervention on the pipeline; it does not isolate optimisation from selection or prove geometry is the mediator. Selected epochs are **33/38/24**, versus **12/14/24** originally (one-based); training took **77.0/86.6/58.7 s**, versus **32.4/37.2/55.9 s**. Do not claim equal update counts.
+
+The remaining gap to frozen recency is substantial: overall nDCG@10 **-0.008511 [-0.011727, -0.005760]**, new-in-Val **-0.010922 [-0.014650, -0.007698]**. Thus candidate normalisation is useful sample evidence, not a complete cold-item remedy or a reason to launch full-data training automatically.
+
+`unit_candidate_report/` contains the report, group metrics/CIs, geometry, runtimes, audit provenance and `candidate_audit.json`. Actual top-200 lists are saved under `retrieved/content_unit/seed<seed>/`; all are unique, available, history-free and aligned. Target membership matches pessimistic Recall@200 with zero boundary differences in all three seeds. Latest suite: **162 passed, 4 skipped**. Total strict-pool retrieval fits now 18, plus six local ranker fits; historical original-sampler fits remain separate.
+
+Reproduce with fresh output destinations (the listed destinations already exist):
+
+```bash
+python -m cascade.pipelines.local_experiments --study STUDY --phase pilot --experiment content_unit --seed 0 --device mps --technical-smoke
+python -m cascade.pipelines.local_experiments --study STUDY --phase pilot --experiment content_unit --seed 0 --device mps
+# Repeat full fits with seeds 1 and 2, then assemble the matched report:
+python -m cascade.pipelines.unit_candidate_study --study STUDY --device mps
+```
+
+The study must contain its matched controls and frozen diagnostic reference. Candidate export additionally uses `local_followups.candidate_outputs(..., arms=('content_unit',))` to preserve older exported lists.

@@ -30,7 +30,7 @@ from cascade.eval.bootstrap import paired_bootstrap
 from cascade.eval.harness import evaluate, make_batch
 from cascade.eval.saved_results import average, digest, write_json
 from cascade.models import recbole_baselines as RB
-from cascade.models.local_sasrec import ContentSASRec, PriorItemSampler, backbone_digest
+from cascade.models.local_sasrec import ContentSASRec, UnitCandidateSASRec, PriorItemSampler, backbone_digest
 from cascade.models.local_variants import LocalSASRecScorer, MultiInterestSASRec, metadata_graph_features
 from cascade.pipelines.train_baseline import pick_device
 from cascade.utils.config import REPO_ROOT, load_config
@@ -148,7 +148,7 @@ def make_local_model(cfg, dataset, root, arm):
         prior = set(data.interactions(['retriever_train'])['item'].tolist())
         seen = [token != '[PAD]' and int(token) in prior for token in dataset.field2id_token['item_id']]
         return ContentSASRec(cfg, dataset, features, seen=np.asarray(seen))
-    constructor = MultiInterestSASRec if arm == 'multiinterest' else ContentSASRec
+    constructor = {'multiinterest':MultiInterestSASRec,'content_unit':UnitCandidateSASRec}.get(arm,ContentSASRec)
     return constructor(cfg, dataset, features)
 
 
@@ -173,7 +173,7 @@ def load_local_run(root, arm, seed, device='cpu'):
 
 
 def train(root: Path, arm: str, seed: int, device: str, smoke: bool = False):
-    if arm not in ('id', 'content', 'content_id', 'graph', 'multiinterest'):
+    if arm not in ('id', 'content', 'content_unit', 'content_id', 'graph', 'multiinterest'):
         raise ValueError('unknown local arm')
     data = sample_data()
     record = check_study(root, data)
@@ -208,6 +208,8 @@ def train(root: Path, arm: str, seed: int, device: str, smoke: bool = False):
     config_record = {'arm': arm, 'seed': seed, 'sample': True, 'technical_smoke': smoke,
         'train_on': 'retriever_train', 'negative_pool': 'pre_T0_only', 'recbole': rb_cfg,
         'initial_backbone_sha256': initial_backbone, 'test_predictions_loaded': False}
+    if arm=='content_unit':
+        config_record['candidate_scoring']='query dot unit candidate (eps=1e-12); raw history inputs; no temperature'
     (run / 'config.yaml').write_text(yaml.safe_dump(config_record, sort_keys=False))
     write_json(run / 'metrics.json', {'status': 'running', 'sample': True})
     trainer = get_trainer(cfg['MODEL_TYPE'], cfg['model'])(cfg, model)
@@ -340,7 +342,7 @@ def main():
     parser.add_argument('--seed', type=int, choices=[0, 1, 2], default=0)
     parser.add_argument('--device', default='mps')
     parser.add_argument('--technical-smoke', action='store_true')
-    parser.add_argument('--experiment', choices=['content', 'content_id', 'graph', 'multiinterest'], default='content')
+    parser.add_argument('--experiment', choices=['content', 'content_unit', 'content_id', 'graph', 'multiinterest'], default='content')
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO)
     torch.set_num_threads(3)
