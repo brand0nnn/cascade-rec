@@ -1,10 +1,10 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **1 November 2026** (expanded explanation-graph validation slices; retaining the supervisor consultation with Prof. Kan & Sahej). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **2 November 2026** (independent local experiments and frozen-control full-catalogue check; retaining expanded graph evidence and the supervisor consultation review). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
-The available local evaluation is complete: **232,904 validation events / 124,416 users**, using archived predictions and restored histories. The saved-validation replay reproduced the historical comparisons and checked source identities; it is analysis verification, not independent training replication. No new model training, Test predictions, SSH or cluster jobs were used for this completion.
+The archived full-data evaluation is complete: **232,904 validation events / 124,416 users**, using archived predictions and restored histories. The saved-validation replay reproduced the historical comparisons and checked source identities; it is analysis verification, not independent training replication. That completion used no new training, Test predictions, SSH or cluster jobs. A separate, subsequently authorised sample experiment programme is also complete; its fresh MPS fits and follow-up frozen-control validation are recorded below.
 
 | Work | State |
 |---|---|
@@ -18,10 +18,92 @@ The available local evaluation is complete: **232,904 validation events / 124,41
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
 | Controlled policy retraining (A/B/C/D: all/natural-only × enabled/masked score) and ID dropout | Submission tooling updated 29 Oct; cluster input checks required; no full-data remedy result |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
+| Independent local track, root `plan.md` | Sample programme complete: 15 retriever and six natural-only ranker fits; frozen controls, actual fusion, case report and artifact audit complete |
+| Full-catalogue frozen-text check | Complete on all Val events: recency improves top-ten quality over archived retrieval but lowers Recall@200; strong new/warm trade-off |
 
-**Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md), whose new model/routing changes remain unapproved. Target-conditioned oracle estimates do not establish deployable routing gains.
+**Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md); integration into the canonical full-data pipeline remains unapproved. The separate local experiments below are authorised through root `plan.md`. Target-conditioned oracle estimates do not establish deployable routing gains.
 
-## Working picture
+## Local original RecBole sample weights (2 November 2026)
+
+Fresh original `SASRecBCE` seed-0 fits completed on Apple MPS, after a separate one-epoch functionality check. This is local development on **30,389 products / 7,619 sampled users**, evaluated on **4,825 validation events / 2,534 users**. These newly trained sample models are not comparable numerically with the full-catalogue tables below and do not recover the missing historical checkpoints. Their original sample cutoff **T0=1596679591746** is retained, distinct from full-data T0; T1/T2 are unchanged.
+
+| Training period | Selected epoch (one-based) | Training/selection seconds | Val Recall@200 | Val Recall@10 | Val nDCG@10 |
+|---|---:|---:|---:|---:|---:|
+| Retriever-training only | 8 | 24.318 | 0.024158 | 0.003393 | 0.001421 |
+| All training data | 13 | 38.729 | 0.032763 | 0.002470 | 0.001187 |
+
+These are single-seed descriptive levels, not a claimed significant comparison. The original RecBole validation Recall@100 selects the checkpoint; the table uses the shared filtered user-macro harness. The runner now defaults to validation-only evaluation, rejects existing destinations and creates fresh per-run atomic exports. No held-out Test prediction was generated or loaded.
+
+Reusable selected weights are `results/baselines/local/20261102-sasrec-retriever-sample-seed0/model.pth` and `results/baselines/local/20261102-sasrec-all-train-sample-seed0/model.pth`, approximately 8 MB each. Each run records config, ID mappings, selected checkpoint, input/source hashes and `weights_verification.json`. Both standalone states load strictly and produce exactly the selected checkpoint's CPU scores on **32 validation histories × 30,389 items**, with maximum difference **0**. RecBole ID mappings must accompany the weights. Local weights/exports remain ignored by Git; the original baseline results remain unchanged. The independent experimental track is documented in root `plan.md`.
+
+## Independent local experiments (2 November 2026)
+
+The user authorised an independent experiment track, including fresh controls with **pre-T0-only negatives** after the original RecBole catalogue-wide negative pool was explained. The strict sample pool has **20,740 products**, excluding **9,649 future products**. The original fits above remain historical references. All new learned retrievers retain the original BCE, sequence backbone, training pairs and RecBole unfiltered Recall@100 selector; final metrics use the shared full-catalogue event-time availability/full-history filters. These fresh models do not change teammates' checkpoints or constitute the full-data policy ablation.
+
+All **15 retriever fits** and **six natural-only ranker fits** completed on MPS, seeds 0/1/2. Sample evaluation covers **4,825 Val events / 2,534 users**, with **30,389 products** and the original sample split. The frozen MiniLM revision is `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`; vectors were generated with the recorded encoder library pins. Text is a crawl-time snapshot and first review is an availability proxy.
+
+### Retrieval findings
+
+| Method | Recall@200 | Recall@10 | nDCG@10 |
+|---|---:|---:|---:|
+| ID SASRec, strict pool | 0.023005 | 0.002401 | 0.001298 |
+| Content SASRec | 0.056750 | 0.003862 | 0.001836 |
+| Content + warm-item ID residual | 0.043602 | 0.004994 | 0.002225 |
+| Content + metadata neighbours | 0.053690 | 0.003040 | 0.001248 |
+| Two-interest pooling | 0.052636 | 0.003269 | 0.001727 |
+| Actual content/graph RRF, budget 200 | 0.057858 | 0.004006 | 0.001931 |
+| Pre-T0 popularity | 0.022277 | 0.002494 | 0.000842 |
+| Frozen text mean | 0.071513 | 0.013313 | 0.006961 |
+| Frozen text, fixed 90-day recency | **0.100990** | **0.022309** | **0.012489** |
+
+These are **retrieval scores/order**, including the top-ten metrics; no reranker is applied in this table. Learned entries are three-seed means; deterministic controls have no task-specific recommender training. All differences below use unadjusted paired-user 95% intervals, B=1000, seed 0, after averaging event metrics across training seeds.
+
+- Content minus matched ID: Recall@200 **+0.033746 [0.026206, 0.041296]**; nDCG@10 **+0.000538 [-0.000521, 0.001606]**. New-in-Val retrieval improves, while seen-before-T0 retrieval decreases. This is a trade-off, not a universal improvement.
+- Content+ID minus content: Recall@200 **-0.013148 [-0.020393, -0.006511]**; nDCG@10 **+0.000389 [-0.000631, 0.001379]**. The unseen-item ID residual is masked at training and inference.
+- Graph, two-interest and fusion differences versus content include zero for Recall@200 and nDCG@10. Graph also changes encoder capacity. Two-interest heads have mean cosine **0.958** despite both winning recommendation slots; distinct learned interests are not established. Fusion uses actual source candidates under a unique 200-item budget, rather than target-conditioned oracle ranks.
+- Fixed recency minus uniform frozen text: Recall@200 **+0.029476 [0.021533, 0.038459]**, nDCG@10 **+0.005527 [0.003225, 0.008073]**. The 90-day half-life was specified before these outcomes. Independent CPU float64 reconstruction on 100 fixed queries matches top-10/top-200 hits, with one rank differing by one; strictly prior histories and target exclusion pass.
+
+The sample has **3,240 new-in-Val events (67.2%)**, versus approximately 33% in full data, and a different catalogue/first-observation process. Do not compare these absolute scores with full-data tables or extrapolate the gain.
+
+### Natural-only ranking and other analyses
+
+The matched mean and candidate-conditioned semantic-attention rankers train on **458/6,306 naturally retrieved training positives**, excluding 5,848 misses, with identical content-seed-0 candidate lists, inputs, common initial weights and scoring head. No insertion, target-only feature or retrieval-score input. This attention model is DIN-inspired; it is not the historical DIN implementation.
+
+End-to-end nDCG@10 is approximately **0.000827 mean / 0.000858 attention**, versus **0.001557 retrieval order**. Neither improves clearly over retrieval. Attention-minus-mean is only about **+0.000031** under an unadjusted interval; it supplies little practical support for additional ranker complexity here. Training support is small, so this does not settle the value of DIN on the full dataset. Frozen learned-history truncation to 5/10 items is inconclusive.
+
+All 232,904 archived full-data Val events were also partitioned into **12 UTC months**, with warm/new metrics and category/store mix. Retrieval Recall@200 is **0.089171** in partial August 2021 and **0.052947** in partial July 2022; new-in-Val event share rises from **4.6% to 47.3%**. These are descriptive endpoints, not evidence of an annual causal effect. New-in-Val is fixed relative to T1, so its share also reflects elapsed time; product ageing, turnover and calendar effects remain confounded. Review timestamps lag purchases. No split was changed.
+
+Artifacts: `results/local_experiments/20261102-sasrec-pre-t0/summary-final/` contains combined metric/group/composition tables and twenty query examples fixed before outcomes. Run directories retain selected standalone weights, mappings, configs and source/input hashes. `final_audit.json` verifies portable weights/snapshots, shared initial backbones and initial negative traces, graph temporal validity, archive alignment and unique/available/history-free lists. Monthly evidence is in `results/local_experiments/20261102-full-val-calendar/`. Generated artifacts remain local/ignored. The post-sample suite passed **154 tests, with four legacy sample-embedding tests skipped**.
+
+### Full-catalogue frozen-control check
+
+After pausing, the user resumed following the recommendation to check the strongest simple control before further model training. `cascade.pipelines.frozen_text_study` completed on the restored **111,480-item catalogue / 232,904 Val events / 124,416 users**, canonical T0, identical frozen encoder revision, unchanged uniform/90-day pooling and pre-T0 popularity. This full Val population includes pilot users; it is follow-up validation, not an untouched independent holdout. No recommender training, half-life tuning or new Test evaluation.
+
+| Full-catalogue retrieval | Recall@200 | Recall@10 | nDCG@10 |
+|---|---:|---:|---:|
+| Pre-T0 popularity | 0.026985 | 0.004155 | 0.001655 |
+| Frozen text mean | 0.034183 | 0.005675 | 0.002920 |
+| Frozen text, 90-day recency | 0.054746 | **0.011506** | **0.006284** |
+| Archived two-tower text, three-seed mean | **0.068630** | 0.010550 | 0.005695 |
+
+Recency minus uniform text: **+0.020564 [0.019682, 0.021512] Recall@200**, **+0.003363 [0.003096, 0.003623] nDCG@10**. Recency minus archived two-tower text: **-0.013883 [-0.015333, -0.012485] Recall@200**, **+0.000956 [0.000318, 0.001643] Recall@10**, **+0.000589 [0.000166, 0.000992] nDCG@10**. Intervals remain unadjusted paired-user bootstrap, B=1000, seed 0. Archived entries average event metrics across existing seeds 0/1/2 before bootstrapping. Architecture, objective and encoder artifacts differ, so the archived comparison does not isolate a causal recency effect on the trained model.
+
+The novelty split explains the aggregate trade-off:
+
+| Target group | Method | Recall@200 | nDCG@10 |
+|---|---|---:|---:|
+| New in Val | Frozen recency | 0.065043 | 0.007611 |
+| New in Val | Archived two-tower text | 0.026315 | 0.000352 |
+| Warm in Val | Frozen recency | 0.050574 | 0.005606 |
+| Warm in Val | Archived two-tower text | 0.087112 | 0.008098 |
+
+For new targets, recency-minus-archive nDCG@10 is **+0.007259 [0.006751, 0.007769]**; for warm targets it is **-0.002491 [-0.002975, -0.001997]**. These are target-conditioned diagnostic groups, not an inference-time router. Merging the methods would require actual candidate identities/scores under one budget; separate target ranks cannot establish fusion gains. Results justify investigating generalisation and objective/history choices, rather than assuming a more complex retriever is better.
+
+All 100 independent float64 query reconstructions match target ranks exactly, and top-10/top-200 hits agree. The full audit verifies all 232,904 histories are strictly prior and target-free, all saved top-ten lists respect availability/full-history exclusion, and source/input/vector/rank hashes match. Encoder parameter hashes are unchanged. Catalogue encoding took **84.6 s** on MPS; complete validation evaluation took **22.1 s popularity / 40.2 s uniform / 41.4 s recency**, including batch work and metric aggregation. These are offline timings, not single-query serving latency or a complete cascade benchmark.
+
+Fresh output: `results/local_experiments/20261102-full-frozen-text/`; use `report-final/report.md`, `report-final/comparison.csv` (including months/groups), `report-final/cases.json` (20 fixed-before-results examples), `evaluation/benchmark.json`, `evaluation/independent_recency_check.json` and `final_audit.json`. The first report attempt stopped during example export; its partial CSV is retained under `report/`, with final findings sourced from `report-final/`. Saved scores were unaffected. Final suite: **156 passed, 4 skipped**. Full-data learned-model training remains a separate decision.
+
+## Working picture (historical full-data pipeline)
 
 The two-tower retrievers improve candidate retrieval over matched-period baselines, and the matching MLP improves the final top ten. However, increasing candidate coverage eventually makes the frozen ranker's output worse. The main issue to investigate is the interaction between training-list construction, retrieval score and candidate expansion.
 
