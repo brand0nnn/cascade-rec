@@ -1,6 +1,6 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **2 November 2026** (local plan and all remaining evidence tasks completed; retaining expanded graph evidence and the supervisor consultation review). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **3 November 2026** (Phase 2 graph/latent sample ranking completed; retaining Phase 1, expanded graph evidence and the supervisor consultation review). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
@@ -21,6 +21,7 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 | Independent local track, root `plan.md` | Sample programme complete: 18 strict-pool retriever and six natural-only ranker fits, including the subsequently approved candidate-normalisation trial; frozen diagnosis, fusion, reports and audits complete |
 | Full-catalogue frozen-text check | Complete on all Val events: recency improves top-ten quality over archived retrieval but lowers Recall@200; strong new/warm trade-off |
 | Local plan evidence/report closure | Complete: monthly/history tables, exact ranker funnel, both-source fusion CIs, missing scores and consolidated report; 168 tests pass / 4 legacy skips |
+| Phase 2 graph/latent residual ranking, root `plan.md` §10 | Complete: seven arms × three seeds; every fit selected epoch 0; scheduled outer-Val scores/lists exactly equal frozen recency retrieval; no graph/latent gain established |
 
 **Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md); integration into the canonical full-data pipeline remains unapproved. The separate local experiments below are authorised through root `plan.md`. Target-conditioned oracle estimates do not establish deployable routing gains.
 
@@ -167,6 +168,26 @@ The completed history breakdown qualifies the positive normalisation result. Its
 Code: `cascade.pipelines.local_evidence_export`, `local_plan_completion` and `local_completion_report`, all refusing existing phase/report destinations. Generated evidence remains local/ignored. **168 tests passed, 4 legacy conventional-path sample-embedding tests skipped.** Completion audits pass all seven checklist checks. The independent local plan is closed; this does not imply completion of the canonical full-data cascade project.
 
 For a later matched full-data training decision, nominate native content-SASRec and candidate-normalised content as the two learned configurations, retaining fixed-recency frozen text as the already-evaluated reference. Additional geometry/pooling experiments, changed-pool ranking, serving/cascade timing, final selection and held-out Test remain separate later decisions.
+
+### Phase 2: graph/latent ranking completed (3 November 2026)
+
+The user approved an independent sample ranking study in root `plan.md` §10, including one learned neighbour encoder and chronological inner tuning. Artifacts: **`results/local_experiments/20261102-graph-latent-ranking/report/`**. All R0–R7 comparisons use the same frozen MiniLM/90-day-recency top-200 lists, with no target insertion. The pre-T0 banks use the **sample cutoff 1596679591746**, not the full-data graph cutoff. BPR64 is collaborative/transductive; PCA-text64 and the content-aware metadata branch can encode future products without refitting item IDs. No device-title features are used.
+
+R1 is text residual plus common support controls; R2 adds graph scalars; R3 BPR64; R4 graph+BPR; R5 PCA-text64; R6 an additional self-only learned encoder; R7 the matched neighbour encoder. Modules/parameter keys, per-seed initial weights, candidate inputs and sampling plans match across arms. Retrieval scores enter as a skip with a zero-initialised final residual layer. Graph features cover every candidate and exclude query-user/self paths. Collaborative inputs and preprocessing remain frozen throughout B training and Val; B labels never enter the feature banks.
+
+The chronological split was fixed on all **6,306 B queries** before eligibility filtering: **5,044 prefix / 1,262 tune**, containing **619 / 141 natural positives**, at timestamp **1621231348495**. Three fixed 300-epoch BPR fits completed on MPS from **37,506 pre-T0 interactions**; PCA fit 20,740 pre-T0 item texts on CPU. All 21 ranker fits actually trained two epochs before patience stopped them, then selected **epoch 0**. Tuning nDCG@10 baseline is **0.010169**; trained epoch-1 results range **0.000891–0.006426**, epoch-2 results **0.003407–0.006943**, while BCE decreases markedly. Every full-B refit consequently used zero epochs.
+
+| Selected systems | End-to-end nDCG@10 | Recall@10 | Fixed Recall@200 | Conditional nDCG@10 | New-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|---:|
+| R0 and all selected R1–R7 arms | 0.012489 | 0.022309 | 0.100990 | 0.122542 | 0.013470 |
+
+Weights/epochs were locked before one scheduled outer-Val evaluation. Every saved score/rank/top ten is exactly retrieval; tiny floating-point aggregation noise aside, paired differences and seed variation are zero. The **4,825-event** funnel is **4,260 retrieval misses / 434 ranking misses / 131 top-ten hits**, with zero rescues/demotions. These are unchanged selected functions, **not an equivalence result for trained architectures** or evidence that graph/latent information cannot help. There were only about 40 optimiser updates per fit. Sparse support, sampled pointwise BCE, residual scale and optimisation remain plausible explanations. Nonselected trained weights/logits were not retained, limiting retrospective diagnosis. A missing BPR candidate has zero candidate factors but can still receive known-history latent context.
+
+The report retains all seeds, inner learning curves and selection replays, registered contrasts plus the factorial graph/BPR contrast, all/new/warm/history/degree/graph/category groups, conditional populations, full logits, failure transitions, list composition, twenty original fixed cases, factor/ranker costs and source/input/output hashes. Intervals use 1,000 paired-user draws, seed 0, after seed-mean event metrics. Identical selected outputs yield degenerate zero contrasts; they provide no architectural discrimination. Each model reserves **214,273 parameters** including disabled slots. BPR fits took **18.52/17.49/16.82 s**, PCA fit/export **0.178 s**, outer scoring/export **29.454 s** including checks/loading/writing; these are offline costs, not serving latency.
+
+Final suite: **192 passed, 4 legacy conventional-path embedding skips**; isolated study embeddings and score replays pass separately. `completion_audit.json` verifies 192 report-input hashes, 15 report-output hashes, all 21 model/selection locks, 1,200 group-metric rows and 2,100 paired-comparison rows.
+
+All registered sample work is complete. A fresh matched R1 BCE-versus-pairwise pilot with inner-only residual/gradient diagnostics is proposed, not run. Its exact objective and diagnostic policy need recording before fitting. Broader graph replication, changed retrieval pools, full-data fits, canonical integration, serving measurements and final Test remain separate decisions. Existing full-data A/B/C/D and ID-dropout studies retain their own status.
 
 ## Working picture (historical full-data pipeline)
 

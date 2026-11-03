@@ -372,4 +372,38 @@ Use **score = frozen retrieval score + learned residual**. Zero-initialise the f
 
 Required checks: target relabelling cannot change features; later edges cannot alter frozen banks; query-user-only graph paths disappear; unknown values never create matches; unseen factors stay zero after adapters; new metadata nodes remain finite; epoch-0 scoring is identical to retrieval; all arms share candidates/cohorts/negatives/common initial weights; misses receive zero credit; checkpoint reloads and failure-funnel identities reproduce. Keep all existing outputs and teammate workflows intact.
 
-No Phase 2 fits have run yet. Full-data promotion, changed-pool replication, serving/cascade timing and final Test require later decisions after this sample study.
+### Completed sample study — 3 November 2026
+
+All five implementation steps above are complete in **`results/local_experiments/20261102-graph-latent-ranking/`**. The study was paused after fitting, then resumed for the scheduled outer-Val evaluation and reporting. Existing Phase 1 and teammate artifacts are preserved.
+
+- Candidates and preprocessing are frozen. The chronological cutoff is **1621231348495**: **5,044 prefix / 1,262 tuning queries**, with **619 / 141 natural positives**. All-B refit eligibility is 760. The cutoff was defined before filtering for natural positives.
+- PCA-text64 was fit on **20,740 pre-T0 items** and transforms future items without refitting. Three BPR64 banks each completed the fixed **300 epochs** on **37,506 pre-T0 interactions**, with exact reload and negative-sampler audits. BPR training took **18.52 / 17.49 / 16.82 s** on MPS; PCA fit/export took **0.178 s** on CPU.
+- R1–R7 each completed seeds **0/1/2**, following separate R1/R7 technical smokes. All arms share candidates, negative plans, parameter keys/shapes and per-seed starting weights. Each model has **214,273 parameters**, including inactive reserved branches.
+- **Every fit selected epoch 0.** Each actually trained for two epochs before patience stopped it. Tuning baseline nDCG@10 is **0.010169**. Trained epoch-1 scores range **0.000891–0.006426**, epoch-2 scores **0.003407–0.006943**. BCE fell from **0.898–0.996** in epoch 1 to **0.154–0.225** in epoch 2, without improving tuning ranking. Reinitialisation therefore used zero refit epochs for every arm.
+- All 21 selected checkpoints were locked before one scheduled outer-Val comparison. Every saved score, target rank and top-ten list exactly reproduces frozen retrieval. Across **4,825 events**, there are **4,260 retrieval misses, 434 retrieved targets below ten and 131 top-ten hits**; rescues and demotions are both zero for every selected arm.
+
+| Selected systems | nDCG@10 | Recall@10 | Fixed Recall@200 | New-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| R0 and every selected R1–R7 arm | 0.012489 | 0.022309 | 0.100990 | 0.013470 |
+
+These identical outputs are a **no-change selection outcome**, not evidence that trained architectures are equivalent or that graph/latent signals cannot help. The recipe had only 619 fitting positives, 141 natural tuning positives and roughly 40 optimiser steps before stopping. The pointwise BCE objective, residual scale, limited support and optimisation are plausible explanations, not identified causes. No trained-epoch logits or nonselected trained weights were retained; the learning curves alone cannot measure how the residual changed candidate margins. For an unknown BPR candidate its candidate factor is zero, while known-history latent context can still enter the interaction block.
+
+The primary deliverable is **`report/report.md`**, with `training_history.csv`, `metrics.csv`, `paired_differences.csv`, `graph_latent_interaction.csv`, `failure_funnel.csv`, `event_transitions.parquet`, `composition.csv`, all twenty original fixed cases, ranker/factor costs and `provenance.json`. Checkpoint selection replays the earliest tuning maximum; all 21 prediction archives replay exactly; filters, split/plan/feature/factor/source/checkpoint identities and unchanged evaluation-time weights pass. The outer scoring/export job took **29.454 s** including checks/loading/writing, not serving latency. Generated evidence remains local/ignored.
+
+Reproduce into a **fresh study name**, preserving existing output directories, in the project environment:
+
+```bash
+python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase prepare --device mps
+python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase bpr --seed 0 --device mps
+# Repeat BPR seeds 1/2. Run separate --smoke fits for R1/R7, then all seven arms × three seeds:
+python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase fit --arm R1 --seed 0 --device mps
+# After every full fit is complete:
+python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase evaluate --device mps
+python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase report
+```
+
+**Proposed next local question, not executed:** can a ranking-aligned objective learn a useful residual while preserving the same frozen retrieval starting point? Begin with a fresh matched R1 BCE-versus-pairwise pilot, retaining candidates, split, 50 alternatives, seeds and epoch-zero selector. Pairwise score differences cancel a common intercept; this is a reason to test, not a promised gain. Record trained-epoch residual margins/logits and gradients on a fixed inner-only probe. Register the exact loss and diagnostic policy before fitting, and decide on broader graph/latent replication from inner evidence before viewing outer Val. Do not launch a loss sweep or reinterpret the completed BCE study as that experiment.
+
+Final verification: **192 tests passed, 4 legacy conventional-path sample-embedding tests skipped**. The study's isolated embeddings and all 21 prediction archives were verified separately. `completion_audit.json` verifies 192 report-input hashes, 15 report-output hashes, 1,200 group-metric rows, 2,100 paired-comparison rows and all registered fits/selection locks.
+
+Full-data promotion, changed-pool replication, serving/cascade timing, the proposed objective change and final Test remain later decisions. The registered Phase 2 sample checklist is complete.
