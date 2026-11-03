@@ -2,11 +2,11 @@
 
 Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
-## Current analysis and proposed changes (1 November 2026)
+## Current analysis and proposed changes (3 November 2026)
 
 The saved-validation evaluation covers **232,904 events / 124,416 users**. The [expanded graph report](results/evaluation_completion/20261101-kg-expanded-final/report.md) adds witness multiplicity/age, full-window category continuity and store interactions, with paired-user intervals. These are exploratory target outcomes. Original candidate matrices/text vectors and the locked device audit still block candidate overlays and device-based evaluation.
 
-[Architecture proposals](docs/architecture_proposals.md) distinguish hypotheses from measured results. Existing score-policy A/B/C/D and ID-dropout p=0.5 studies remain the authorised follow-up; new graph features or routing/merging require a separate decision. Target-conditioned oracle estimates are not deployed router results. Final Test/index/full-cascade timing remain paused.
+[Architecture proposals](docs/architecture_proposals.md) distinguish hypotheses from measured results. Existing full-data score-policy A/B/C/D and ID-dropout p=0.5 studies retain their own status; canonical graph integration or routing/merging require a separate decision. The independent local track below is separately authorised. Target-conditioned oracle estimates are not deployed router results. Final Test/index/full-cascade timing remain paused.
 
 Reproduce the graph expansion from the verified local source artifacts (it verifies historical source hashes before analysing). Unlike the training sample flag, this pipeline's development replay selects **512 users**:
 
@@ -16,6 +16,46 @@ Reproduce the graph expansion from the verified local source artifacts (it verif
 ```
 
 Each invocation uses a fresh timestamped output directory; explicit `--output` destinations must not exist. Compact full-data CSVs/report/provenance are shared; the per-event expanded Parquet remains local.
+
+## Independent local experiments
+
+Root [plan.md](plan.md) records our sample experiments and follow-up analyses. These are exploratory contributions alongside teammates' work, using isolated outputs and three training seeds. They preserve the original full-data pipeline and its results. The sample has **30,389 products / 7,619 users**, with **4,825 Val events / 2,534 users**; sample T0 is **1596679591746**, distinct from the full-data cutoff. Metrics below are per-user macro means over seeds 0/1/2; frozen controls are deterministic.
+
+| Sample retrieval method | Recall@200 | nDCG@10 | New-in-Val nDCG@10 |
+|---|---:|---:|---:|
+| Original local content-SASRec, dot scoring | 0.056750 | 0.001836 | 0.001112 |
+| Same weights, frozen cosine scoring | 0.060244 | 0.002575 | 0.001396 |
+| Matched candidate-normalised training/scoring | 0.075097 | 0.003978 | 0.002548 |
+| Frozen MiniLM text + fixed 90-day recency | **0.100990** | **0.012489** | **0.013470** |
+
+Candidate normalisation improves the matched learned control, including new items, but leaves a large gap to frozen text/recency. Frozen diagnostics identify projection changes and candidate-norm effects without establishing a single cause. Metadata-neighbour retrieval, multiple interests and candidate fusion do not clearly beat their stronger matched controls. See [the evaluation record](docs/evaluations.md#independent-local-experiments-2-november-2026) for paired intervals, temporal/history analyses and limitations.
+
+On **full-catalogue Val**, the frozen-recency control has nDCG@10 **0.006284** versus archived two-tower **0.005695**, but Recall@200 **0.054746 versus 0.068630**. This comparison uses different encoder/architecture artifacts and overlapping development Val; it is not a causal ablation or untouched holdout. New-item gains coexist with warm-item losses.
+
+The completed **Phase 2 ranking** study added graph scalars, frozen BPR64/PCA-text64 factors and matched learned self/neighbour encoders to a common residual ranker on frozen-recency K200 candidates. All seven arms × three seeds selected **epoch 0** after two unsuccessful trained epochs. Their selected Val scores/lists equal retrieval: no graph/latent gain was established by that short BCE recipe. This does not show that those signals cannot help. Graph/factor inputs are strictly pre-T0; all features cover every candidate, with no target insertion. Root plan §10 records the full protocol and outcome.
+
+The subsequent **objective ablation** compared fresh BCE with pairwise `softplus(negative_score - positive_score)`, keeping the same candidates, negatives, starting weights and selector. All three BCE learning curves reproduced Phase 2 exactly. Pairwise R1 passed the predeclared inner-only gate, so graph/latent variants were replicated before any outer-Val scoring. All **24 fits** and the scheduled comparison are complete. Each feature addition below is relative to R1:
+
+| Sample ranking method, same K200 pool | nDCG@10 | Recall@10 | New-in-Val nDCG@10 | Warm-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| Frozen retrieval / selected BCE text control | 0.012489 | 0.022309 | 0.013470 | 0.009736 |
+| Pairwise text residual (R1) | 0.015566 | 0.027348 | 0.020344 | 0.007234 |
+| + graph/history scalars (R2) | 0.018174 | 0.033548 | 0.022890 | 0.009333 |
+| + BPR64 (R3) | 0.016279 | 0.027682 | 0.020977 | 0.008060 |
+| + graph/history scalars and BPR64 (R4) | 0.018337 | 0.033238 | 0.023190 | 0.009350 |
+| + PCA-text64 (R5) | 0.016195 | 0.029285 | 0.020864 | 0.008098 |
+| + learned self-only encoder (R6) | 0.016336 | 0.028904 | 0.020770 | 0.007392 |
+| + learned neighbour encoder (R7) | 0.013304 | 0.024214 | 0.016372 | 0.008164 |
+
+Pairwise-minus-BCE nDCG@10 is **+0.003078 [0.000501, 0.005719]**. R2-minus-R1 is **+0.002608 [0.001028, 0.004108]**, with gains for both new and warm items versus R1. R2 combines co-review statistics and category/store-history shares; this does not isolate which relations help. BPR adds no clear gain on top of R2 (**+0.000163 [-0.000204, 0.000516]**). R7 underperforms its matched R6 control (**-0.003033 [-0.004759, -0.001200]**). PCA and the extra self-only transformation have inconclusive gains over R1. BPR alone has a small exploratory overall gain whose lower bound is near zero.
+
+These are exploratory, unadjusted paired-user 95% intervals (1,000 draws, seed 0 after event-metric seed averaging). Warm performance is not established as improved over retrieval; R2's warm point estimate remains slightly below it. All methods retain the same **Recall@200 ceiling of 0.100990**. No final system is selected from this table. See [the detailed evaluation](docs/evaluations.md#ranking-objective-ablation-and-graphlatent-replication-3-november-2026) and root plan §11 for supports, contrasts, failure funnels and reproducibility.
+
+![Inner tuning curves and descriptive residual diagnostics for the matched objective pilot](docs/figures/20261103-ranking-objective.png)
+
+Every inner epoch now retains its weights and tuning/probe predictions. A common score shift cannot change ordering; these diagnostics separate it from candidate-dependent residuals. The loss comparison changes the objective and its gradients, rather than identifying a calibration mechanism. **207 tests pass, with 4 legacy conventional-path embedding skips**; isolated study embeddings and all score replays pass separately.
+
+Bulk local weights, vectors, checkpoints and generated reports remain ignored under `results/local_experiments/`; compact findings are documented here and in `docs/evaluations.md`. No new Test predictions were evaluated in this local track.
 
 ## Names used everywhere
 
@@ -33,7 +73,7 @@ Data: Amazon Reviews 2023, Cell Phones & Accessories (5-core), split by time:
 |---|---|
 | Two-tower (text) (`two_tower_text`) | Main retriever: each product is described by its text (title, categories, store) |
 | Two-tower (text + ID) (`two_tower_text_id`) | Same, plus a learned vector per product seen in the retriever-training period |
-| sample (`--sample`) | A fixed ~2% of users from the same data, for quick debugging; never reported |
+| sample (`--sample`) | A fixed ~2% of users for development/local exploration; label sample evidence explicitly and never present it as full-data performance |
 
 ## Setup
 

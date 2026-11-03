@@ -402,8 +402,63 @@ python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase evalu
 python -m cascade.pipelines.graph_latent_study --study FRESH_STUDY --phase report
 ```
 
-**Proposed next local question, not executed:** can a ranking-aligned objective learn a useful residual while preserving the same frozen retrieval starting point? Begin with a fresh matched R1 BCE-versus-pairwise pilot, retaining candidates, split, 50 alternatives, seeds and epoch-zero selector. Pairwise score differences cancel a common intercept; this is a reason to test, not a promised gain. Record trained-epoch residual margins/logits and gradients on a fixed inner-only probe. Register the exact loss and diagnostic policy before fitting, and decide on broader graph/latent replication from inner evidence before viewing outer Val. Do not launch a loss sweep or reinterpret the completed BCE study as that experiment.
+**Question proposed after Phase 2, subsequently approved and completed in §11:** can a ranking-aligned objective learn a useful residual while preserving the same frozen retrieval starting point? Begin with a fresh matched R1 BCE-versus-pairwise pilot, retaining candidates, split, 50 alternatives, seeds and epoch-zero selector. Pairwise score differences cancel a common intercept; this is a reason to test, not a promised gain. Record trained-epoch residual margins/logits and gradients on a fixed inner-only probe. Register the exact loss and diagnostic policy before fitting, and decide on broader graph/latent replication from inner evidence before viewing outer Val. Do not launch a loss sweep or reinterpret the completed BCE study as that experiment.
 
 Final verification: **192 tests passed, 4 legacy conventional-path sample-embedding tests skipped**. The study's isolated embeddings and all 21 prediction archives were verified separately. `completion_audit.json` verifies 192 report-input hashes, 15 report-output hashes, 1,200 group-metric rows, 2,100 paired-comparison rows and all registered fits/selection locks.
 
-Full-data promotion, changed-pool replication, serving/cascade timing, the proposed objective change and final Test remain later decisions. The registered Phase 2 sample checklist is complete.
+Full-data promotion, changed-pool replication, serving/cascade timing and final Test remain later decisions. The registered Phase 2 sample checklist is complete.
+
+## 11. Approved objective ablation and conditional graph replication
+
+On 3 November the user authorised continuing ablation/evaluation and updating the README and Markdown records. Fresh study: **`20261103-ranking-objective`**, referencing the immutable Phase 2 candidates/features/factors. Register the following before fitting:
+
+- **Pilot:** R1 with original pointwise BCE versus **mean `softplus(score_negative - score_positive)`** over the same 50 alternatives; no temperature or extra weighting. Seeds 0/1/2, identical starting weights, row/negative plans, Adam .001, batches of 32 lists, maximum 10 epochs, patience 2. Separate one-epoch technical smokes for both losses. Keep the original chronological split, epoch-zero eligibility, end-to-end user-macro tuning nDCG@10 and earlier-tie selector. Reinitialise/refit all B natural positives for the selected epoch count.
+- **Diagnostics:** save every inner-epoch checkpoint and all tuning logits, including epoch 0. Freeze a probe of the earliest 32 natural prefix and 32 natural tuning queries by timestamp/instance ID. Save probe logits, residual distributions, positive-versus-negative margins, top-ten boundary margins and per-module gradient norms. Diagnostics do not select checkpoints or tune hyperparameters. Retain exact curves from the fresh BCE control and compare with the original R1 fits. Record unavailable/inactive gradients separately from measured nonzero values.
+- **Expansion gate, inner-only:** run pairwise R2–R7 at all three seeds only if R1 pairwise mean selected tuning nDCG@10 exceeds retrieval, at least two seeds individually exceed retrieval, and mean selected tuning nDCG@10 for targets introduced at/after T0 does not fall below retrieval. This is an exploratory point-estimate gate, not a confidence/noninferiority claim. If it fails, retain/report the six pilot fits without expanding. Save the decision before any outer-Val prediction.
+- **Reporting:** lock the complete realised arm/seed set, selected epochs and refit weights before one outer-Val comparison. Retain all pilot arms regardless of outcome; if expanded, compare graph/factor additions against pairwise R1, R7–R6, R4–R2/R3 and the factorial graph/BPR contrast. Report all/new/warm/pre-T0-known/unknown/history/graph/category groups, paired-user 1,000-draw intervals (seed 0 after event-metric seed averaging), failure funnels, list composition, twenty fixed cases, training curves/diagnostics and offline costs. No Val-driven objective choice, second loss sweep, new retrieval pool, full-data fit or Test evaluation.
+- **Integrity:** bind parent inputs, copied sampling plans, source snapshots, split/probe cohorts and retained checkpoint/logit files with hashes. Verify loss shift invariance, candidate/label alignment, gradient flow, epoch-zero retrieval equivalence, paired initial states/negatives, earliest-max selection, selected-state reloads, unchanged evaluation-time weights and exact saved-score replay. Preserve all older outputs. Existing pipeline defaults and frozen Phase 2 source files remain unchanged.
+
+### Completed objective study — 3 November 2026
+
+All registered work is complete on MPS: two technical smokes, six matched pilot fits and eighteen conditionally registered feature fits. The three fresh BCE learning curves exactly reproduce Phase 2 and select epoch 0. Pairwise R1 selects epochs **5/9/2**; its mean selected inner nDCG@10 is **0.017324 versus 0.010169** for retrieval, with all three seeds improving. Targets introduced at/after T0 have mean inner nDCG **0.024287 versus 0.007983**. The gate was independently replayed from saved inner predictions and fixed before expansion/outer evaluation; this inner cold group differs from new-in-Val reporting.
+
+All twenty-four selected epochs/refit weights were locked before the scheduled outer-Val comparison. Fixed Recall@200 remains **0.100990** for every method. No retriever or factor model was retrained.
+
+| Selected method | nDCG@10 | Recall@10 | New-in-Val nDCG@10 | Warm-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| Retrieval / BCE R1 | 0.012489 | 0.022309 | 0.013470 | 0.009736 |
+| Pairwise R1, text residual | 0.015566 | 0.027348 | 0.020344 | 0.007234 |
+| Pairwise R2, graph/history scalars | 0.018174 | 0.033548 | 0.022890 | 0.009333 |
+| Pairwise R3, BPR64 | 0.016279 | 0.027682 | 0.020977 | 0.008060 |
+| Pairwise R4, graph/history + BPR64 | 0.018337 | 0.033238 | 0.023190 | 0.009350 |
+| Pairwise R5, PCA-text64 | 0.016195 | 0.029285 | 0.020864 | 0.008098 |
+| Pairwise R6, self-only encoder | 0.016336 | 0.028904 | 0.020770 | 0.007392 |
+| Pairwise R7, neighbour encoder | 0.013304 | 0.024214 | 0.016372 | 0.008164 |
+
+Registered end-to-end nDCG@10 differences, with exploratory/unadjusted paired-user 95% intervals:
+
+- **Objective:** pairwise R1 minus BCE R1 **+0.003078 [0.000501, 0.005719]**; new-in-Val **+0.006874 [0.003580, 0.010510]**. Warm difference **-0.002502 [-0.006700, 0.001523]** is inconclusive. This is the objective's total training/selection/refit recipe effect, not proof of a calibration cause or equal update counts.
+- **Graph/history family:** R2−R1 **+0.002608 [0.001028, 0.004108]**; new **+0.002546 [0.000541, 0.004580]**, warm **+0.002099 [0.000238, 0.004063]**. R2 includes co-review counts/strength and category/store-history shares; no individual relation is isolated. Warm R2 remains slightly below retrieval in point estimate.
+- **BPR:** R3−R1 **+0.000712 [0.000004, 0.001390]**, a small result with a near-zero lower bound and inconclusive new/warm effects. R4−R2 **+0.000163 [-0.000204, 0.000516]**; adding BPR to graph/history has no clear benefit. Factorial interaction **-0.000549 [-0.001348, 0.000259]** establishes no complementarity.
+- **Compression/extra transform:** R5−R1 **+0.000629 [-0.000394, 0.001639]**, R6−R1 **+0.000770 [-0.000465, 0.001950]**; both inconclusive.
+- **Neighbour encoder:** R7−R6 **-0.003033 [-0.004759, -0.001200]** overall and **-0.004398 [-0.006660, -0.002171]** new-in-Val. Warm differences are inconclusive; do not generalise the loss to every group or infer oversmoothing as its cause.
+
+The R2 funnel averages **99.33 rescues / 53 demotions / 177.33 top-ten hits** per seed, versus retrieval's 131 hits. R4 averages 99.67 / 51.33 / 179.33. All retain **4,260 retrieval misses**. These are means of event counts across seeds, not counts of unique rescued events or relevance judgements about unobserved alternatives.
+
+All **152 inner checkpoints/prediction sets**, including epoch zero, remain saved with **552 retained artifact hashes**. Diagnostics show active text/head gradients and intentionally inactive reserved branches. Pairwise final-bias gradients are near numerical zero, while query-mean shifts can still emerge through the network. A common offset alone cannot change ranking. Fixed chronological 32+32 natural-query probes are descriptive, not representative; candidate-dependent margins/spread are saved separately. Retention/diagnostic work adds offline fitting overhead, so timings are not directly comparable with lean Phase 2 fits.
+
+Use **`results/local_experiments/20261103-ranking-objective/report/report.md`**, its metric/contrast/funnel/composition/case/diagnostic/cost tables, visually checked `objective_diagnostics.png` and source-bound provenance. `completion_audit.json` verifies **761 report-input hashes / 18 report-output hashes**, all checkpoint locks, gate replays and score/funnel identities. Suite: **207 passed, 4 legacy conventional-path embedding skips**; isolated study inputs and all real prediction replays pass separately. A compact figure is shared in `docs/figures/20261103-ranking-objective.png`; bulk artifacts remain local/ignored.
+
+Reproduce with a fresh output name and the immutable parent study available:
+
+```bash
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase prepare
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase smoke --device mps
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase pilot --device mps
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase decide
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase expand --device mps
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase evaluate --device mps
+python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase report
+```
+
+The simpler pairwise R2 is a useful candidate for further robustness work; its near-tie with R4 does not select a final system. A later decomposition should separate category/store-history inputs from co-review inputs to identify which family helps. Temporal replication, full-data fits, a new candidate pool, canonical integration, serving cost and Test remain separate decisions. No additional architecture/loss sweep follows automatically from these reused-Val outcomes.

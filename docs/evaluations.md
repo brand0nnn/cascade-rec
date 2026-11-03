@@ -1,6 +1,6 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **3 November 2026** (Phase 2 graph/latent sample ranking completed; retaining Phase 1, expanded graph evidence and the supervisor consultation review). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **3 November 2026** (matched ranking-objective ablation and graph/latent replication completed; retaining Phase 1/2, expanded graph evidence and the supervisor consultation review). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
@@ -22,6 +22,7 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 | Full-catalogue frozen-text check | Complete on all Val events: recency improves top-ten quality over archived retrieval but lowers Recall@200; strong new/warm trade-off |
 | Local plan evidence/report closure | Complete: monthly/history tables, exact ranker funnel, both-source fusion CIs, missing scores and consolidated report; 168 tests pass / 4 legacy skips |
 | Phase 2 graph/latent residual ranking, root `plan.md` §10 | Complete: seven arms × three seeds; every fit selected epoch 0; scheduled outer-Val scores/lists exactly equal frozen recency retrieval; no graph/latent gain established |
+| Ranking objective ablation and conditional feature replication, root `plan.md` §11 | Complete: 24 fits; pairwise text beats matched BCE; explicit graph/history inputs add value; extra BPR over graph is inconclusive; neighbour encoder loses to its self-only control; 207 tests pass / 4 legacy skips |
 
 **Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md); integration into the canonical full-data pipeline remains unapproved. The separate local experiments below are authorised through root `plan.md`. Target-conditioned oracle estimates do not establish deployable routing gains.
 
@@ -187,7 +188,37 @@ The report retains all seeds, inner learning curves and selection replays, regis
 
 Final suite: **192 passed, 4 legacy conventional-path embedding skips**; isolated study embeddings and score replays pass separately. `completion_audit.json` verifies 192 report-input hashes, 15 report-output hashes, all 21 model/selection locks, 1,200 group-metric rows and 2,100 paired-comparison rows.
 
-All registered sample work is complete. A fresh matched R1 BCE-versus-pairwise pilot with inner-only residual/gradient diagnostics is proposed, not run. Its exact objective and diagnostic policy need recording before fitting. Broader graph replication, changed retrieval pools, full-data fits, canonical integration, serving measurements and final Test remain separate decisions. Existing full-data A/B/C/D and ID-dropout studies retain their own status.
+The registered Phase 2 work is complete. The subsequently authorised objective pilot and conditional graph/latent replication are completed below. Further temporal replication, changed retrieval pools, full-data fits, canonical integration, serving measurements and final Test remain separate decisions. Existing full-data A/B/C/D and ID-dropout studies retain their own status.
+
+### Ranking objective ablation and graph/latent replication (3 November 2026)
+
+The user authorised continued ablation/evaluation and README/Markdown updates. This supersedes the objective-proposal status at Phase 2 closure. Fresh study **`results/local_experiments/20261103-ranking-objective/`**, report **`report/report.md`**, root plan §11. All inputs retain Phase 2's fixed frozen-text/90-day-recency K200 lists, pre-T0 graph/factor banks and chronological 619-positive prefix / 141-positive tuning holdout. No target insertion, retriever/factor refitting, full-data fits or Test predictions.
+
+Fresh R1 **pointwise BCE versus mean pairwise `softplus(negative-positive)`** shares seeds, initial weights, fifty sampled alternatives, Adam .001, batch 32, maximum ten epochs, patience two and the epoch-zero/earlier-tie end-to-end inner selector. All three BCE learning curves exactly reproduce the parent and select zero. Pairwise selects epochs **5/9/2**. Before any outer-Val scoring, its registered gate passed on all three seeds: mean selected inner nDCG **0.017324 versus 0.010169**, and post-T0-introduced targets **0.024287 versus 0.007983**. These inner cold targets differ from new-in-Val targets. Consequently pairwise R2–R7 were each replicated at all three seeds; all **24 selected epochs/refit weights** were then locked for the scheduled outer report.
+
+| Method | nDCG@10 | Recall@10 | New-in-Val nDCG@10 | Warm-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| R0 / selected BCE R1 | 0.012489 | 0.022309 | 0.013470 | 0.009736 |
+| Pairwise text R1 | 0.015566 | 0.027348 | 0.020344 | 0.007234 |
+| Graph/history R2 | 0.018174 | 0.033548 | 0.022890 | 0.009333 |
+| BPR64 R3 | 0.016279 | 0.027682 | 0.020977 | 0.008060 |
+| Graph/history+BPR64 R4 | 0.018337 | 0.033238 | 0.023190 | 0.009350 |
+| PCA-text64 R5 | 0.016195 | 0.029285 | 0.020864 | 0.008098 |
+| Self-only encoder R6 | 0.016336 | 0.028904 | 0.020770 | 0.007392 |
+| Neighbour encoder R7 | 0.013304 | 0.024214 | 0.016372 | 0.008164 |
+
+All values are per-user macro, learned methods averaged across seeds 0/1/2; every method has the same **Recall@200 ceiling 0.100990**, on 565 natural targets among 4,825 Val events. Registered differences use 1,000 paired-user draws, seed 0 after event-metric seed averaging; intervals are exploratory/unadjusted on reused Val.
+
+- **Objective:** pairwise−BCE nDCG **+0.003078 [0.000501, 0.005719]**, new-in-Val **+0.006874 [0.003580, 0.010510]**. Warm **-0.002502 [-0.006700, 0.001523]** is an inconclusive loss. This compares the whole objective/training/selection/refit recipe; selected epoch counts differ and it does not isolate calibration.
+- **Explicit graph/history family:** R2−R1 **+0.002608 [0.001028, 0.004108]**, new **+0.002546 [0.000541, 0.004580]**, warm **+0.002099 [0.000238, 0.004063]**. It combines co-review statistics with category/store-history shares; the gain cannot be assigned to co-review alone. Warm R2 remains slightly below retrieval in point estimate, so warm restoration is not established.
+- **Latents/compression:** BPR-only R3−R1 **+0.000712 [0.000004, 0.001390]** has a near-zero lower bound; its new/warm intervals cross zero. Extra BPR on graph/history, R4−R2 **+0.000163 [-0.000204, 0.000516]**, is inconclusive. The interaction **-0.000549 [-0.001348, 0.000259]** establishes no complementarity. PCA R5 and extra self-only R6 also have inconclusive gains over R1.
+- **Neighbour aggregation:** R7−R6 **-0.003033 [-0.004759, -0.001200]** overall and **-0.004398 [-0.006660, -0.002171]** new-in-Val; warm effects are inconclusive. This does not prove oversmoothing or failure for every subgroup.
+
+Mean per-seed R2 funnel: **99.33 rescues, 53 demotions, 78 retained hits**, yielding **177.33 top-ten hits** versus retrieval's 131; R4 yields 179.33. Every method retains 4,260 retrieval misses. These are averages of event counts, not unique-event totals. The twenty original fixed queries, list composition and all group/conditional tables remain in the report.
+
+Every inner epoch now saves weights and full tuning logits: **152 retained epoch sets**, including epoch zero, plus fixed chronological 32-prefix/32-tune natural-query probes and per-module gradient records. Text/head gradients are active, deliberately unused branches remain inactive, and residual decomposition distinguishes per-query mean from candidate-dependent spread/margins. Pairwise also produces mean score shifts through the network; a common shift alone cannot change ranking. These descriptive probes cannot identify a calibration mechanism or represent the whole population. The [checked diagnostic figure](figures/20261103-ranking-objective.png) is also in the README. Fit times include checkpoint/prediction retention and diagnostics and are not directly comparable with lean Phase 2 timings; outer evaluation/export took **30.601 s**, not serving latency.
+
+Final verification: **207 tests pass / 4 legacy conventional-path embedding skips**. The completion audit and an independent read-only audit verify **761 report-input hashes, 18 report-output hashes, 552 retained artifact hashes**, all 24 checkpoint locks, gate/metric/probe replays and funnel identities. Independent all/new/warm nDCG reconstruction agrees within 1e-16. Original studies remain unchanged. Nominate simpler pairwise R2 for further robustness analysis, without declaring a final deployed system; category/store versus co-review decomposition and temporal/full-data replication remain future work. No automatic additional sweep, changed-pool integration or Test launch.
 
 ## Working picture (historical full-data pipeline)
 
