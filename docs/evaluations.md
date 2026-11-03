@@ -1,6 +1,6 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **3 November 2026** (matched ranking-objective ablation and graph/latent replication completed; retaining Phase 1/2, expanded graph evidence and the supervisor consultation review). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **3 November 2026** (graph-family completion and frozen encoder diagnostics finished; experiment execution paused for assessment; retaining prior local/full-data evidence). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
@@ -23,6 +23,7 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 | Local plan evidence/report closure | Complete: monthly/history tables, exact ranker funnel, both-source fusion CIs, missing scores and consolidated report; 168 tests pass / 4 legacy skips |
 | Phase 2 graph/latent residual ranking, root `plan.md` §10 | Complete: seven arms × three seeds; every fit selected epoch 0; scheduled outer-Val scores/lists exactly equal frozen recency retrieval; no graph/latent gain established |
 | Ranking objective ablation and conditional feature replication, root `plan.md` §11 | Complete: 24 fits; pairwise text beats matched BCE; explicit graph/history inputs add value; extra BPR over graph is inconclusive; neighbour encoder loses to its self-only control; 207 tests pass / 4 legacy skips |
+| Final graph-family decomposition and frozen encoder diagnosis, root `plan.md` §12 | Complete: 12 matched fits, six exact controls, 12 frozen checkpoint loads/full-prefix score sets; 226 tests pass / 4 legacy skips. Execution paused for deeper assessment |
 
 **Working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md); integration into the canonical full-data pipeline remains unapproved. The separate local experiments below are authorised through root `plan.md`. Target-conditioned oracle estimates do not establish deployable routing gains.
 
@@ -219,6 +220,33 @@ Mean per-seed R2 funnel: **99.33 rescues, 53 demotions, 78 retained hits**, yiel
 Every inner epoch now saves weights and full tuning logits: **152 retained epoch sets**, including epoch zero, plus fixed chronological 32-prefix/32-tune natural-query probes and per-module gradient records. Text/head gradients are active, deliberately unused branches remain inactive, and residual decomposition distinguishes per-query mean from candidate-dependent spread/margins. Pairwise also produces mean score shifts through the network; a common shift alone cannot change ranking. These descriptive probes cannot identify a calibration mechanism or represent the whole population. The [checked diagnostic figure](figures/20261103-ranking-objective.png) is also in the README. Fit times include checkpoint/prediction retention and diagnostics and are not directly comparable with lean Phase 2 timings; outer evaluation/export took **30.601 s**, not serving latency.
 
 Final verification: **207 tests pass / 4 legacy conventional-path embedding skips**. The completion audit and an independent read-only audit verify **761 report-input hashes, 18 report-output hashes, 552 retained artifact hashes**, all 24 checkpoint locks, gate/metric/probe replays and funnel identities. Independent all/new/warm nDCG reconstruction agrees within 1e-16. Original studies remain unchanged. Nominate simpler pairwise R2 for further robustness analysis, without declaring a final deployed system; category/store versus co-review decomposition and temporal/full-data replication remain future work. No automatic additional sweep, changed-pool integration or Test launch.
+
+### Graph-family completion and frozen encoder diagnostics (3 November 2026)
+
+The user approved a final bounded graph study and then a stop for deeper assessment. Fresh bundle **`results/local_experiments/20261103-graph-family-decomposition/`**: read **`report/report.md`** and **`encoder_diagnostic/report.md`**. Two technical smokes and all **12 fixed factorial fits** completed on MPS. Existing text/basic matching/nine support controls, frozen K200 lists, split, pairwise loss, negatives, parameter shapes and per-seed initial weights remain fixed. G0 masks all six optional columns; GM enables category/store-history fractions; GC enables four co-review features; GMC enables both, always masking after standardisation.
+
+| Arm | Overall nDCG@10 | Recall@10 | New-in-Val nDCG@10 | Warm-in-Val nDCG@10 |
+|---|---:|---:|---:|---:|
+| G0 | 0.015566 | 0.027348 | 0.020344 | 0.007234 |
+| GM | 0.016444 | 0.030213 | 0.020946 | 0.008222 |
+| GC | 0.017728 | 0.032578 | 0.022505 | 0.009181 |
+| GMC | 0.018174 | 0.033548 | 0.022890 | 0.009333 |
+
+All six G0/GMC controls reproduce the earlier R1/R2 selected epochs and inner ranking curves, with losses within rtol=1e-6/atol=1e-8; final logits/ranks/top tens also match exactly. All twelve refit weights were locked before the one outer comparison. Coverage remains **Recall@200 0.100990**, on 565 natural targets / 4,825 Val events. Learned metrics average seeds 0/1/2; intervals below use 1,000 paired-user draws, seed0 after event-metric seed averaging, and are exploratory/unadjusted on reused Val.
+
+- GC−G0 overall **+0.002162 [0.000851, 0.003486]**, new **+0.002161 [0.000329, 0.003990]**, warm **+0.001947 [0.000340, 0.003613]**.
+- GM−G0 overall **+0.000877 [0.000033, 0.001793]** has a near-zero lower bound; new/warm intervals cross zero. GC−GM is **+0.001284 [0.000277, 0.002243]** overall and positive for new items; its warm difference is inconclusive.
+- GMC−GC **+0.000446 [-0.000282, 0.001193]** provides no clear extra metadata gain. The interaction **-0.000431 [-0.001357, 0.000462]** establishes no complementarity. GMC−GM **+0.001730 [0.000729, 0.002682]** and GMC−G0 **+0.002608 [0.001028, 0.004108]** are retained alongside all other outcomes.
+
+This isolates additional families under the fixed recipe, not individual co-review features or all metadata/graph information. New items have no pre-T0 review edges; their improved outcomes do not imply otherwise. Mean top-ten hits are **149.33 / 160.33 / 176.00 / 177.33** for G0/GM/GC/GMC, retaining 4,260 retrieval misses. GC averages 98.67 rescues / 53.67 demotions; GMC 99.33 / 53.00. Counts are per-seed means, not unique-event totals. Warm GMC remains slightly below retrieval's 0.009736 in point estimate.
+
+Frozen R6/R7 diagnostics completed **12 saved-checkpoint loads** at epoch2 and the original selected epochs, scoring all **5,044 prefix queries** and reusing **1,262 tuning-query** and final Val predictions. At matched epoch2, mean prefix/tune nDCG is **0.031686/0.014638 R6**, **0.032823/0.016024 R7**. Selected inner states give **0.035038/0.017119 R6**, **0.038007/0.018435 R7**. Final full-B-refit Val remains **0.016336 R6 / 0.013304 R7**. The neighbour branch learns on inner cohorts; the loss on later refitted models does not isolate refitting, time transfer, oversmoothing or optimisation as its cause. Prefix/tune metrics and final Val also use different populations and, for the final refits, different weights.
+
+All full-prefix logits, target margins, residuals, input-block norms/cosines, layer changes, active gradients and subgroup funnels are retained. Unavailable neighbour cosines stay missing. Weight-block norms are not feature importance. The metadata-unavailable Val contrast has only 30 events / two natural targets and cannot establish encoder equivalence. The [checked family figure](figures/20261103-graph-family-decomposition.png) is shared in the README.
+
+Final suite **226 passed / 4 legacy conventional-path embedding skips**. Completion and independent audits verify **75 retained inner epoch sets / 273 retained artifact hashes**, twelve final and twelve frozen-prefix replays, six control reproductions, all locks and funnels. Family-report provenance binds **836 inputs / 18 outputs**; diagnostic provenance binds **280 inputs / 23 outputs**. All 21 all/new/warm paired/factorial nDCG intervals were independently reproduced. No Test predictions, new GNN fit or full-data training occurred; old studies remain unchanged.
+
+**Stopping point:** graph work and the documentation/commit handoff are complete. Experiment execution is paused for the deeper assessment. Do not start another model, feature sweep, temporal replication, changed-pool integration or Test evaluation automatically.
 
 ## Working picture (historical full-data pipeline)
 

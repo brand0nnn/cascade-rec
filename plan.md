@@ -462,3 +462,52 @@ python -m cascade.pipelines.ranking_objective_study --study FRESH_STUDY --phase 
 ```
 
 The simpler pairwise R2 is a useful candidate for further robustness work; its near-tie with R4 does not select a final system. A later decomposition should separate category/store-history inputs from co-review inputs to identify which family helps. Temporal replication, full-data fits, a new candidate pool, canonical integration, serving cost and Test remain separate decisions. No additional architecture/loss sweep follows automatically from these reused-Val outcomes.
+
+## 12. Approved graph completion, then stop for assessment
+
+The user approved implementing the bounded graph plan: twelve matched sample fits plus frozen R6/R7 diagnostics, then documentation/commit and no further experiment execution. Fresh output: **`20261103-graph-family-decomposition`**. Register before fitting:
+
+- G0 disables the six optional graph/history columns; GM enables only `same_leaf_history_fraction` / `same_store_history_fraction`; GC enables only `log_other_reviewers`, `log_witness_paths`, `normalised_path_strength`, `supported_history_fraction`; GMC enables all six. Every arm uses the same existing R2 model and zeroes disabled columns **after standardisation**. Existing text/basic matching/nine common support controls remain present.
+- Seeds 0/1/2, existing candidates/split/paired negative plans, pairwise softplus, Adam .001, batch32, max10/patience2, epoch-zero earliest-tie end-to-end inner selector and all-B fixed-epoch refit. Separate one-epoch GM/GC smokes, then all twelve full fits without pruning.
+- Fresh G0/GMC must reproduce previous pairwise R1/R2 selected epochs and inner ranking curves before outer evaluation; loss comparison uses rtol=1e-6/atol=1e-8. Lock all twelve selected refit weights before the single outer report. Register all six pairwise arm comparisons and interaction GMC−GM−GC+G0.
+- Reuse saved R6/R7 epoch2 and selected-inner checkpoints: score full prefix cohorts, reuse saved tuning scores and final Val predictions, and inspect residual/margin distributions, graph-input blocks, layer norms and gradient records. No new GNN fit or changed selection; diagnostic associations do not identify a causal mechanism.
+- Preserve all inner checkpoint/logit/probe/gradient records; verify masks, initial states, candidates/negatives, epoch-zero equivalence, selected-state reloads, scores/ranks/top tens and funnels. Use existing all/new/warm/history/category/graph groups, conditional populations, fixed coverage, seed SD and 1,000 paired-user draws with seed0 after event-metric seed averaging.
+- Deliver source-bound reports, checked comparison figure, README/CLAUDE/plan/evaluation/decision updates and a commit. Keep bulk arrays local/ignored. Then stop all experiment jobs for the deeper assessment; no automatic model sweep, temporal replication, full-data fitting, new candidate pool or Test evaluation.
+
+### Completed graph handoff — 3 November 2026
+
+Both technical smokes and all **12 full fits** completed on MPS. G0/GMC reproduce all six previous R1/R2 selectors, inner ranking curves and losses within the registered tolerance; their final Val logits/ranks/top tens also match exactly. All twelve selected epochs/refit weights were locked before one scheduled outer comparison. Fixed Recall@200 remains **0.100990**.
+
+| Arm | Selected epochs 0/1/2 | Overall nDCG@10 | Recall@10 | New-in-Val nDCG@10 | Warm-in-Val nDCG@10 |
+|---|---|---:|---:|---:|---:|
+| G0 | 5 / 9 / 2 | 0.015566 | 0.027348 | 0.020344 | 0.007234 |
+| GM | 2 / 9 / 2 | 0.016444 | 0.030213 | 0.020946 | 0.008222 |
+| GC | 2 / 2 / 2 | 0.017728 | 0.032578 | 0.022505 | 0.009181 |
+| GMC | 2 / 2 / 2 | 0.018174 | 0.033548 | 0.022890 | 0.009333 |
+
+All six registered overall nDCG@10 contrasts, with exploratory/unadjusted paired-user 95% intervals:
+
+- GM−G0 **+0.000877 [0.000033, 0.001793]**; GC−G0 **+0.002162 [0.000851, 0.003486]**; GMC−G0 **+0.002608 [0.001028, 0.004108]**.
+- GC−GM **+0.001284 [0.000277, 0.002243]**; GMC−GM **+0.001730 [0.000729, 0.002682]**; GMC−GC **+0.000446 [-0.000282, 0.001193]**.
+- Interaction GMC−GM−GC+G0 **-0.000431 [-0.001357, 0.000462]**: no complementarity established. Metadata-history adds no clear gain beyond co-review. GC improves new **+0.002161 [0.000329, 0.003990]** and warm **+0.001947 [0.000340, 0.003613]** versus G0. GM's new/warm intervals include zero; its overall lower bound is near zero. All arms retain existing matching/support controls, so this is not removal of all metadata/graph information or isolation of a single co-review feature. New products still have no pre-T0 review edges.
+
+Mean-per-seed top-ten hits are **149.33 / 160.33 / 176.00 / 177.33** for G0/GM/GC/GMC. GC averages **98.67 rescues / 53.67 demotions**; GMC **99.33 / 53.00**. All keep **4,260 retrieval misses**. These are per-seed means, not unique rescued-event totals.
+
+The frozen encoder diagnostic completed **12 checkpoint loads**: epoch2 and selected inner states for R6/R7 at all three seeds, scoring all 5,044 prefix queries and reusing 1,262 tuning-query predictions plus saved final Val predictions. Mean prefix/tune nDCG@10:
+
+| Encoder | Inner checkpoint | Prefix | Tune |
+|---|---|---:|---:|
+| R6 self-only | Epoch 2 | 0.031686 | 0.014638 |
+| R7 neighbour | Epoch 2 | 0.032823 | 0.016024 |
+| R6 self-only | Selected | 0.035038 | 0.017119 |
+| R7 neighbour | Selected | 0.038007 | 0.018435 |
+
+Saved full-B-refit Val remains **0.016336 R6 / 0.013304 R7**. The neighbour branch learns on the inner cohorts; this does not identify why the final refit performs worse. Inner states and full-B refits are different weights/populations/update exposure. Full residual/margin distributions, input-block norms/cosines, initial-to-trained layer changes, active gradients and subgroup funnels are retained. No encoder training or reselection occurred, and no oversmoothing/optimisation cause is established.
+
+Deliverables: **`results/local_experiments/20261103-graph-family-decomposition/report/report.md`**, **`encoder_diagnostic/report.md`**, all group/conditional/contrast/funnel/composition/case/cost tables and a checked shared figure in `docs/figures/20261103-graph-family-decomposition.png`. The outer score/export job took **12.309 s** and the frozen diagnostic **27.742 s**, including offline checks/loading/writes; neither is serving latency.
+
+Final suite **226 passed / 4 legacy conventional-path embedding skips**. The completion audit verifies **75 retained inner epoch sets / 273 retained artifact hashes**, all twelve final-score and twelve frozen-prefix replays, six exact control reproductions, initial states/masks/plans/locks and funnel identities. Report provenance binds **836 inputs / 18 outputs**; encoder diagnostics bind **280 inputs / 23 outputs**. Existing studies and teammate workflows are unchanged; bulk artifacts remain local/ignored.
+
+Reproduce only into a fresh study directory, with the immutable parents present, using `cascade.pipelines.graph_family_study` phases **prepare → smoke → fit → preflight → evaluate → diagnose → report**, with `--device mps` for fitting/evaluation/diagnosis. Existing destinations are refused. The retained diagnostics use saved checkpoints, not new fitting.
+
+**Completion stop:** graph experiment work is finished. After the documentation/commit handoff, stop execution and leave the evidence for our deeper assessment. No additional sweep, temporal replication, candidate-pool change, full-data fit, canonical integration or Test evaluation is started.

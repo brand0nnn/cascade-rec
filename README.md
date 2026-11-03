@@ -53,7 +53,24 @@ These are exploratory, unadjusted paired-user 95% intervals (1,000 draws, seed 0
 
 ![Inner tuning curves and descriptive residual diagnostics for the matched objective pilot](docs/figures/20261103-ranking-objective.png)
 
-Every inner epoch now retains its weights and tuning/probe predictions. A common score shift cannot change ordering; these diagnostics separate it from candidate-dependent residuals. The loss comparison changes the objective and its gradients, rather than identifying a calibration mechanism. **207 tests pass, with 4 legacy conventional-path embedding skips**; isolated study embeddings and all score replays pass separately.
+Every inner epoch now retains its weights and tuning/probe predictions. A common score shift cannot change ordering; these diagnostics separate it from candidate-dependent residuals. The loss comparison changes the objective and its gradients, rather than identifying a calibration mechanism. The objective-study suite passed **207 tests, with 4 legacy conventional-path embedding skips**; isolated study embeddings and all score replays pass separately.
+
+The final **graph-family decomposition** completed twelve matched fits. Every arm retains text/basic matching/common support controls; the switches affect only the six additional graph/history columns:
+
+| Arm | Additional family | Overall nDCG@10 | New-in-Val | Warm-in-Val |
+|---|---|---:|---:|---:|
+| G0 | Neither | 0.015566 | 0.020344 | 0.007234 |
+| GM | Category/store-history fractions | 0.016444 | 0.020946 | 0.008222 |
+| GC | Co-review features | 0.017728 | 0.022505 | 0.009181 |
+| GMC | Both | 0.018174 | 0.022890 | 0.009333 |
+
+GC−G0 is **+0.002162 [0.000851, 0.003486]** overall, with positive new/warm intervals. GC−GM is **+0.001284 [0.000277, 0.002243]** overall. Adding metadata-history fractions on top of co-review, GMC−GC, is inconclusive: **+0.000446 [-0.000282, 0.001193]**; the factorial interaction also includes zero. GM alone has a small overall gain with a near-zero lower bound and inconclusive new/warm effects. These are additional-family recipe effects on exploratory sample Val; they do not isolate individual co-review inputs or imply that new items have pre-T0 review edges. G0/GMC exactly reproduce the earlier R1/R2 controls, including final logits.
+
+![Graph-family comparison with individual training seeds](docs/figures/20261103-graph-family-decomposition.png)
+
+Frozen R6/R7 diagnostics also completed twelve saved-checkpoint loads over all **5,044 prefix queries**, reusing tuning/Val predictions without training. The neighbour model fits the inner cohorts but retains its poorer final Val result; inner checkpoints and full-B refits are different weights, so this does not isolate a cause. Input geometry, gradients, margins and residuals are saved for the deeper assessment.
+
+**Graph work is complete and experiment execution is paused for assessment.** Latest suite: **226 passed, 4 legacy skips**; control, score, checkpoint and provenance audits pass. See root plan §12 and [the graph completion record](docs/evaluations.md#graph-family-completion-and-frozen-encoder-diagnostics-3-november-2026). No additional model, full-data fit or Test evaluation follows automatically.
 
 Bulk local weights, vectors, checkpoints and generated reports remain ignored under `results/local_experiments/`; compact findings are documented here and in `docs/evaluations.md`. No new Test predictions were evaluated in this local track.
 
