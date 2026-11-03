@@ -1,8 +1,8 @@
 # Local experimentation plan
 
-## Current status — Phase 1 complete; Phase 2 planned, 2 November 2026
+## Current status — registered studies complete, 4 November 2026
 
-**Phase 1 and its evidence/reporting checklist are complete.** Sections 2–5 retain the original protocol; §§6–9 record completed work and approved extensions. Its consolidated deliverable is `results/local_experiments/20261102-plan-completion/report-final/report.md`. **Phase 2 is the planned graph/latent ranking extension in §10**, following the user's choices to prioritise new-item generalisation, include one learned graph arm and reserve a chronological tuning split. No Phase 2 implementation or training has started.
+**The registered sample programme, graph/objective follow-ups and full-data replication are complete.** Sections 2–12 retain their protocols and outcomes; §13 records the subsequently authorised full-data study. Its compact deliverable is `results/full_data_replication/20261103-promising/`, with bulk local evidence in `results/local_experiments/20261103-full-promising-ranking/`. BCE leads full-Val overall quality, while pairwise text leads new-item quality; the sample priority order does not transfer uniformly. Read `docs/evaluations.md` for the current assessment. No additional experiment, canonical integration or final Test is launched automatically.
 
 | Original programme / approved extension | Status |
 |---|---|
@@ -12,6 +12,8 @@
 | Full archived-Val monthly/new-warm/category/store/history audit | Complete, including monthly history intersections and clipped catalogue-introduction counts |
 | Full-catalogue frozen-text validation | Complete; no recommender training |
 | Frozen signal diagnosis and subsequently approved candidate-normalised training | Complete; see §§7–8, including the positive normalisation result |
+| Phase 2 graph/latent ranking, objective ablation and graph-family decomposition | Complete; see §§10–12, including unsuccessful trained BCE sample epochs and the later pairwise gains |
+| Full-data promising-ranker replication | Complete; twelve fits, full-Val scoring, monthly/history/subgroups, primary/secondary/historical contrasts, checked figure and independent audit; see §13 |
 
 ### Completed evidence checklist
 
@@ -511,3 +513,30 @@ Final suite **226 passed / 4 legacy conventional-path embedding skips**. The com
 Reproduce only into a fresh study directory, with the immutable parents present, using `cascade.pipelines.graph_family_study` phases **prepare → smoke → fit → preflight → evaluate → diagnose → report**, with `--device mps` for fitting/evaluation/diagnosis. Existing destinations are refused. The retained diagnostics use saved checkpoints, not new fitting.
 
 **Completion stop:** graph experiment work is finished. After the documentation/commit handoff, stop execution and leave the evidence for our deeper assessment. No additional sweep, temporal replication, candidate-pool change, full-data fit, canonical integration or Test evaluation is started.
+
+## 13. Authorised full-data replication — 3 November 2026
+
+After the deeper assessment, the user explicitly requested full-data testing of the most promising methods, integration of the findings and a commit. This resumes execution for this bounded isolated study and supersedes §12's stop for that scope. Register `configs/ranker/full_promising.yaml` before fitting:
+
+- Frozen MiniLM/90-day-recency natural K200 retrieval; fresh BCE text and pairwise text/co-review/combined category-store+co-review rankers, all seeds 0/1/2. Preserve the historical teammate models and all sample studies. Do not add BPR, PCA, neighbour encoders or new retrieval sweeps.
+- Canonical full-data T0/T1/T2, full catalogue and complete B/Val populations; strictly pre-T0 graph, unchanged 50-history/full-history availability filters, no target insertion. Chronological 80/20 B split defined before natural-hit filtering. Fit feature normalisation on all prefix candidate slots. Pair negatives and starting weights across arms. Same Adam .001, batch32, fifty alternatives, max10/patience2, epoch-zero earlier-tie all-inner-query user-macro nDCG selector; all-B refit for the selected fixed epoch count.
+- Scale sparse graph extraction in batches, verify against the original builder, and keep bulk arrays on disk. First run the complete new path on the existing sample in a separate technical-smoke directory; do not present it as a new sample finding. Run tests before experiment batches.
+- Lock all twelve selected epochs/refit weights before one full-Val comparison. Report overall/new/warm, monthly/history groups, conditional quality, fixed candidate ceiling, seed SD, paired-user intervals, exact rescues/demotions and offline costs. Reused Val remains exploratory; monthly slices do not constitute independent temporal retraining. Warm paired differences are a guardrail report, not equivalence without a margin.
+- Add aligned historical context against archived MLP K200, the observed MLP K100 validation maximum and all-training SASRec, including paired new/warm uncertainty. These different-pipeline comparisons are exploratory context rather than matched causal interventions or a final K selection; they do not change any fit or selector.
+- Complete exact score/checkpoint/filter/selection/provenance audits; add compact results and checked figures to README, evaluations, plan and decisions, then commit. Full-data validation is authorised; final held-out Test, canonical integration, index/serving studies and historical score-policy/dropout experiments retain their separate status.
+
+### Completed full-data study — 4 November 2026
+
+All twelve fits and one scheduled outer-Val comparison completed. Full B contains **315,114 queries / 20,675 natural positives**; chronological prefix/tune support is **252,091 / 63,023 queries** and **16,818 / 3,857 natural positives**. All **232,904 Val events / 124,416 users** are retained; **14,916 targets** enter the common K200 lists. The graph contains 1,877,548 strictly pre-T0 edges. All selected epochs/weights were locked before outer scoring.
+
+| Method | Selected epochs | nDCG@10 | New | Warm |
+|---|---|---:|---:|---:|
+| Retrieval | — | 0.006284 | 0.007611 | 0.005606 |
+| BCE text/common | 10/6/6 | 0.008115 | 0.008697 | 0.007846 |
+| Pairwise text/common | 2/3/3 | 0.007767 | 0.009152 | 0.007103 |
+| Pairwise co-review | 10/8/5 | 0.008065 | 0.008873 | 0.007571 |
+| Pairwise combined | 10/6/5 | 0.007930 | 0.008261 | 0.007707 |
+
+BCE's full-data learning and overall lead qualify the sample's objective finding; pairwise retains a new-item advantage. Co-review shifts its incremental benefit to warm products while losing new-item quality; extra metadata loses overall/new quality. The co-review-versus-BCE overall difference is inconclusive. BCE improves the frozen retrieval control by 29.1% in nDCG, but no new arm establishes superiority over the archived MLP K100 validation maximum. This is reused-Val exploratory evidence, with unadjusted user-bootstrap intervals conditional on these runs. Full primary and explicitly secondary/historical comparisons are in `docs/evaluations.md` and `results/full_data_replication/20261103-promising/`; no final system or causal mechanism is selected.
+
+The separate sample path reproduced all twelve first-epoch ranking controls. Independent full audit: **548,018 candidate lists**, **96 feature-reference queries**, **104 inner score replays**, **12 outer replays / selected locks**, **675 metric reconstructions**, **18 independent main nDCG intervals**; all pass. Final suite **229 passed / 4 legacy skips**. Compact evidence and the checked figure are shared; bulk features/candidates/weights/logits remain ignored. The registered work is complete. No further training, changed-pool integration or held-out Test evaluation follows automatically.

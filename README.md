@@ -2,7 +2,43 @@
 
 Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
-## Current analysis and proposed changes (3 November 2026)
+## Full-data replication results (4 November 2026)
+
+After assessing the sample studies, twelve fresh ranker fits completed on the **111,480-product catalogue**, with **232,904 validation events / 124,416 users**. All methods share frozen MiniLM/90-day-recency natural K200 candidates, strictly pre-T0 graph inputs, chronological B tuning and paired initial states/negatives across seeds 0/1/2. Selected weights were locked before full-Val scoring. This is exploratory evidence on reused Val; no held-out Test prediction was generated.
+
+| Full-data method | nDCG@10 | Recall@10 | New nDCG@10 | Warm nDCG@10 |
+|---|---:|---:|---:|---:|
+| Frozen recency retrieval | 0.006284 | 0.011506 | 0.007611 | 0.005606 |
+| BCE text/common control | **0.008115** | **0.015399** | 0.008697 | **0.007846** |
+| Pairwise text/common control | 0.007767 | 0.014865 | **0.009152** | 0.007103 |
+| Pairwise + co-review | 0.008065 | 0.015290 | 0.008873 | 0.007571 |
+| Pairwise + co-review/category/store-history | 0.007930 | 0.015129 | 0.008261 | 0.007707 |
+
+The sample's overall objective advantage **does not replicate**: pairwise-minus-BCE nDCG@10 is **−0.000347 [−0.000497, −0.000188]**. Pairwise still helps new products versus BCE (**+0.000455 [0.000191, 0.000704]**) while losing on warm products. Co-review improves the pairwise control overall (**+0.000298 [0.000161, 0.000439]**) through warm gains, with a new-item loss. Extra category/store-history fractions reduce overall/new quality versus co-review. BCE now selects trained epochs **10/6/6**, rather than the sample's epoch zero; this qualifies the earlier sample diagnosis without isolating data quantity as its cause.
+
+Every method retains **Recall@200 0.054746** and **217,988 raw retrieval misses**. Controls already contain text/basic category-store matching and nine support features; the optional switches are additional families. Intervals are unadjusted paired-user 95% bootstrap intervals conditional on these three fits and candidates. No final production system is selected.
+
+In secondary exploratory comparisons, BCE improves retrieval by **+0.001831 [0.001519, 0.002117]**, or **29.1%**, with positive new/warm intervals. Co-review does not clearly beat BCE (**−0.000049 [−0.000208, 0.000103]**). BCE beats the archived K200 MLP empirically, but not the historical K100 validation maximum: **0.008115 versus 0.008363**, difference **−0.000248 [−0.000655, 0.000169]**, inconclusive. These historical comparisons use different pipelines and do not isolate a mechanism or select a final K.
+
+![Full-data quality, subgroup trade-offs, paired uncertainty and monthly outcomes](docs/figures/20261103-full-promising-ranking.png)
+
+Read [the full evaluation](docs/evaluations.md#full-data-promising-ranker-replication-4-november-2026), [compact report and tables](results/full_data_replication/20261103-promising/report.md), and [historical pipeline context](results/full_data_replication/20261103-promising/historical_context.md). The canonical historical policy/dropout studies, final Test and index/serving work retain their separate status.
+
+To reproduce in the project Python environment, use fresh study/output names and the immutable frozen-text parent:
+
+```bash
+python -m cascade.pipelines.full_data_ranking --study YOUR_FRESH_ID --phase prepare --device mps
+python -m cascade.pipelines.full_data_ranking --study YOUR_FRESH_ID --phase fit --method bce_text --seed 0 --device mps
+# Fit all four configured methods at seeds 0/1/2 before evaluation.
+python -m cascade.pipelines.full_data_ranking --study YOUR_FRESH_ID --phase evaluate --device mps
+python -m cascade.pipelines.full_data_ranking --study YOUR_FRESH_ID --phase report
+python -m cascade.pipelines.full_data_ranking_audit --study YOUR_FRESH_ID
+python -m cascade.pipelines.full_data_ranking_publish --study YOUR_FRESH_ID --destination results/full_data_replication/YOUR_FRESH_ID
+```
+
+The runner rejects existing fit/report destinations and source/input drift. A separate sample end-to-end check reproduced all twelve first-epoch controls before full fitting. Final checks: **229 tests passed / 4 legacy embedding skips**; all **104 inner score sets**, twelve outer outputs, twelve model locks, **675 metric rows** and eighteen main nDCG intervals independently replay. Bulk arrays/weights/logits remain local/ignored; compact numerical evidence and source hashes are shared.
+
+## Historical pipeline analysis and proposed changes
 
 The saved-validation evaluation covers **232,904 events / 124,416 users**. The [expanded graph report](results/evaluation_completion/20261101-kg-expanded-final/report.md) adds witness multiplicity/age, full-window category continuity and store interactions, with paired-user intervals. These are exploratory target outcomes. Original candidate matrices/text vectors and the locked device audit still block candidate overlays and device-based evaluation.
 

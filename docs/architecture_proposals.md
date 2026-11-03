@@ -1,6 +1,8 @@
 # Architecture proposals: evidence, priorities and open decisions
 
-Updated **1 November 2026** after checking the proposal against the implementation and archived validation evidence.
+Updated **4 November 2026** with the full-data follow-up; the original 1 November proposal review is retained below.
+
+**4 November full-data follow-up:** after the deeper assessment, the user authorised the isolated replication in root plan §13. Twelve full-data fits are complete: BCE text/common control nDCG@10 **0.008115**, pairwise text **0.007767**, pairwise co-review **0.008065**, combined **0.007930**, on the same frozen-recency K200 pool. Pairwise remains stronger on new targets versus BCE but loses overall/warm; co-review's incremental gain shifts toward warm targets, and additional metadata loses overall/new quality. This qualifies the sample-based priority order below. Read [the governing full-data evidence](evaluations.md#full-data-promising-ranker-replication-4-november-2026). Historical proposal-only restrictions were superseded for that isolated study, without selecting canonical integration, routing/merging or a final Test system. No further experiment follows automatically.
 
 **Status:** discussion and recommendations. This document does not approve model changes or replace [evaluations.md](evaluations.md), which governs evaluation and authorised follow-up. The frozen reference remains **Two-tower (text), seed 0 → matching MLP**, with DIN as the existing comparison. No new architecture has been implemented or trained by this review.
 

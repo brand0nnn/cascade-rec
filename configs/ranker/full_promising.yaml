@@ -1,0 +1,28 @@
+# Registered after sample assessment, before full-data fitting.
+study: 20261103-full-promising-ranking
+data_config: results/targeted_study/data.yaml
+frozen_study: 20261102-full-frozen-text
+methods: [bce_text, pairwise_text, pairwise_coreview, pairwise_combined]
+seeds: [0, 1, 2]
+k1: 200
+half_life_days: 90
+inner_fraction: 0.8
+max_epochs: 10
+patience: 2
+batch_lists: 32
+negative_alternatives: 50
+learning_rate: 0.001
+bootstrap_resamples: 1000
+bootstrap_seed: 0
+selector: chronological_inner_all_query_user_macro_ndcg10
+epoch_zero_eligible: true
+tie_break: earlier_epoch
+test_predictions_loaded: false
+primary_contrasts:
+  - [retrieval, pairwise_text]
+  - [bce_text, pairwise_text]
+  - [pairwise_text, pairwise_coreview]
+  - [pairwise_coreview, pairwise_combined]
+  - [retrieval, pairwise_coreview]
+  - [retrieval, pairwise_combined]
+interpretation: exploratory_full_population_replication_on_previously_used_validation

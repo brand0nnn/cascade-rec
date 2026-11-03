@@ -2,6 +2,18 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-04 — Complete the full-data replication and qualify the sample conclusions
+
+All twelve registered fits and full-Val scoring completed on the unchanged canonical split and frozen-recency natural K200 pool. BCE text/common control nDCG@10 is **0.008115**, pairwise text **0.007767**, pairwise co-review **0.008065**, combined **0.007930**, versus retrieval **0.006284**. Pairwise loses to BCE overall/warm while improving new items. Co-review improves its pairwise control overall/warm but loses new-item quality; additional category/store-history fractions lose overall/new quality versus co-review. Full BCE selects trained epochs 10/6/6 rather than the sample's epoch zero; different populations and update exposure prevent assigning this to data quantity alone.
+
+Missing arm-pair comparisons are explicitly secondary, not registered primary hypotheses. BCE-minus-retrieval is **+0.001831 [0.001519, 0.002117]**; co-review-minus-BCE is inconclusive. Aligned historical context shows a gain over archived MLP K200/SASRec but no established superiority over archived MLP K100's observed validation maximum. All intervals remain exploratory/unadjusted on reused Val, conditional on the existing seeds/candidates. No final architecture or candidate count is selected from these results.
+
+Share the compact report/CSV/config/environment/source/provenance/audit bundle and checked figure; keep bulk arrays, logits and weights local. All 548,018 candidate lists, 104 retained inner score sets, twelve outer outputs/locks, 675 metric rows and eighteen main nDCG intervals independently pass. Final unit suite: **229 passed / 4 legacy embedding skips**. Update README/CLAUDE/plan/evaluations/proposals and commit. This completes the bounded request; no automatic further training, changed-pool integration, serving/index work or held-out Test launch.
+
+## 2026-11-03 — Resume for bounded full-data replication
+
+After reviewing the completed evaluations, the user requested full-data testing of the most promising methods, adding results and committing. This authorises root plan §13: matched BCE text and pairwise text/co-review/combined residual rankers, three seeds, frozen-recency natural K200 candidates, canonical full-data split, chronological B tuning and fixed-epoch refits. It supersedes the previous experiment pause for this study. Full Val is reused exploratory evidence; held-out Test and the independent historical policy/dropout/index studies retain their separate status. Preserve every original study and teammate checkpoint. Register the configuration before fitting and lock every selected weight before outer scoring; include negative outcomes and warm-item guardrails.
+
 Names follow the 2026-10-20 renaming (see the last entry): **retriever-training period** (formerly period A),
 **ranker-training period** (period B), **all training data** (A ∪ B), **Two-tower (text)** (v2), **Two-tower (text + ID)**
 (v4), **sample** (toy). Commits and run files from before that date use the old names.

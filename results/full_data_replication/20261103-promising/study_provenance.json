@@ -1,0 +1,143 @@
+{
+  "sample": false,
+  "config": {
+    "study": "20261103-full-promising-ranking",
+    "data_config": "results/targeted_study/data.yaml",
+    "frozen_study": "20261102-full-frozen-text",
+    "methods": [
+      "bce_text",
+      "pairwise_text",
+      "pairwise_coreview",
+      "pairwise_combined"
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "k1": 200,
+    "half_life_days": 90,
+    "inner_fraction": 0.8,
+    "max_epochs": 10,
+    "patience": 2,
+    "batch_lists": 32,
+    "negative_alternatives": 50,
+    "learning_rate": 0.001,
+    "bootstrap_resamples": 1000,
+    "bootstrap_seed": 0,
+    "selector": "chronological_inner_all_query_user_macro_ndcg10",
+    "epoch_zero_eligible": true,
+    "tie_break": "earlier_epoch",
+    "test_predictions_loaded": false,
+    "primary_contrasts": [
+      [
+        "retrieval",
+        "pairwise_text"
+      ],
+      [
+        "bce_text",
+        "pairwise_text"
+      ],
+      [
+        "pairwise_text",
+        "pairwise_coreview"
+      ],
+      [
+        "pairwise_coreview",
+        "pairwise_combined"
+      ],
+      [
+        "retrieval",
+        "pairwise_coreview"
+      ],
+      [
+        "retrieval",
+        "pairwise_combined"
+      ]
+    ],
+    "interpretation": "exploratory_full_population_replication_on_previously_used_validation"
+  },
+  "split": {
+    "t_ranker_train": 1595800947930,
+    "t1": 1628643414042,
+    "t2": 1658002729837,
+    "ranker_train_fraction": 0.15,
+    "interactions_per_period": {
+      "retriever_train": 1877548,
+      "ranker_train": 331332,
+      "val": 239437,
+      "test": 304468
+    }
+  },
+  "git_hash": "036de302a9a5cf105102633e9059dea40b99aa48-dirty",
+  "source_sha256": {
+    "src/cascade/pipelines/full_data_ranking.py": "b37a707e3dd7c17c1d53a10e1792c34793775db489546e1416013de95cbc94a0",
+    "src/cascade/data/batched_graph_features.py": "1f182dbc7705459b9a88de5b8d877c648549c5dac743023159780e8045107221",
+    "src/cascade/data/local_graph_features.py": "433b726c01a1183f7c4f3ab16cadd17747a9176dacbcb6e150be5f71e65a9b97",
+    "src/cascade/models/graph_latent_ranker.py": "6bf8d2af0461c1dcbcbbc952a295bbced840c76e9f68d0d9f7cb997d8797bf05",
+    "src/cascade/pipelines/graph_latent_study.py": "a4f47351db9c46b1359dd6a13b1e087581c4c036a7fa8451c439f316ebcbfd7e",
+    "src/cascade/pipelines/ranking_objective_study.py": "f29110d101929c8226ff80390390b98a102a471a4b62e59c6a319e32bca3d3e5",
+    "src/cascade/pipelines/local_evidence_export.py": "c15a6a72453a89f742c42877c0e8839aab365758c4553c417a9268c216d19c31",
+    "src/cascade/pipelines/local_followups.py": "e45c79fcf69c4e1f59ceb058689f616f75d9ee69eb4fc93dcffcbdce28a8646c",
+    "src/cascade/pipelines/local_rankers.py": "1674395fa3a82730d8d7f9ae789d7093ed7b9dac58cd017c5d6d1fefe756dd5b",
+    "src/cascade/eval/harness.py": "9583d821365a2778280c21ac41686ef8fea9eea48883a8f5b1c14f9a75becb5f",
+    "src/cascade/eval/metrics.py": "11e92706861bd2b176b850797708d232892898fcbb33d43b2c6d5b718df1cad8",
+    "src/cascade/eval/bootstrap.py": "7d62479921ae9c02f6a56b3410b0a0ffcd3294b6f2e0befc8100816b0b47a20c",
+    "src/cascade/data/instances.py": "adb5019ee65b7ed7f31d810a0a735e4443b4c448424a41a6bdc3742469255fad"
+  },
+  "input_sha256": {
+    "data/processed/studies/20261027-targeted/items.parquet": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c",
+    "data/processed/studies/20261027-targeted/item_segments.parquet": "5c51f83f64edd8fd22dc3e7941d795de245333fafa21f6e7ea7ee13a50568424",
+    "data/processed/studies/20261027-targeted/instances.parquet": "6ce91c5ef0fec3fce4bf817dc29ec892b4dcf28dc6c87fe6686ac4502867c39b",
+    "data/processed/studies/20261027-targeted/sequences.npz": "b982ba4931f1a605196e39543a090c18f827cc0f80de967d76a6afd36c4b7c06",
+    "data/processed/studies/20261027-targeted/split.json": "82ad93379ffe8ab826b41a19104673264064f6a5b31928fb8db297f66bceeebc",
+    "results/local_experiments/20261102-full-frozen-text/item_text_emb.npy": "e494249a6692773e334cf2d3ae61ab37820125c1a08d0a52d765073b9ea73554",
+    "configs/ranker/full_promising.yaml": "5913ae5d4fe1852bc680906e3b2fd181102b1e118c37aa4b793005e6aae2b84f"
+  },
+  "protocol_sha256": "ea75c73dce7ad4196864561d580ce9f219054e2836361438db54ed750a8c2b56",
+  "text_path": "results/local_experiments/20261102-full-frozen-text/item_text_emb.npy",
+  "device": "mps",
+  "test_predictions_loaded": false,
+  "inner_split": {
+    "timestamp_ms": 1621702301175,
+    "prefix_queries": 252091,
+    "tune_queries": 63023,
+    "prefix_natural": 16818,
+    "tune_natural": 3857,
+    "all_B_natural": 20675,
+    "val_natural": 14916
+  },
+  "artifact_sha256": {
+    "candidates/ranker_train/history.npy": "6ddcd03a53c7ef9b54df8ad08543db418f548f3bfb11cf11fcba37ae7a1d83a5",
+    "candidates/ranker_train/score.npy": "447ce0500c0cad5795a082e7f9d5bd7d12ced862bc04bd74b3ecd72739576772",
+    "candidates/ranker_train/cand.npy": "5108b7ede3bfb305a6d44c11f7dd5092fa10418bcee385dea904c96daf433c83",
+    "candidates/ranker_train/inst.npy": "08733539dddb5038680ad582a9b536a365ab34074eaa574cf3f6fa02534180d3",
+    "candidates/ranker_train/top10.npy": "cc1fa2fcb3e524726c610d75a4e9f28cb7490db4bebe6a1a738c7e758969620c",
+    "candidates/ranker_train/retrieval_rank.npy": "f18229cb0a137e84f620ff982448d624d6b74eca4eb87f5601184546eb9937c3",
+    "candidates/ranker_train/user.npy": "87b64e1a1916e8cffb5ea1347ba08cea2f9197d84a3ec89ca6ad36eff0d77352",
+    "candidates/ranker_train/target.npy": "ad77e94377c659fa2d6977f94f3f2eb065e949603be64c0c2e0f506d7638b731",
+    "candidates/val/history.npy": "c7a4d84f7f0bc2f782ca745966e14f7a8428bdd93fd59f0ae87a1c0ec6f32962",
+    "candidates/val/score.npy": "72861c0495a417ff7769ceade2f4ebec70a242316333129b7db74f308f1ae959",
+    "candidates/val/cand.npy": "9695e53e19f9e86d34203e1ab02950087d4e57b899599f505382c29a247e3d47",
+    "candidates/val/inst.npy": "973f9df57366a63b24de3d45dd9f105b8717ecf071c887ce1889082098659de1",
+    "candidates/val/top10.npy": "082cf6da0449ad58277d6137cd361075a9dc9c2fd5e53ad3a90f66caa35faaa2",
+    "candidates/val/retrieval_rank.npy": "fb1a82f66cad025283b724f506ec7488d60fd9fa19573b29b70bbdd16b0e59df",
+    "candidates/val/user.npy": "c19a52b90a0019fae639f3ca4d74ff4a2b519b231d6f7ea67d85d995663babdd",
+    "candidates/val/target.npy": "b4db8f8dc00986a8064a0030dacc263fd92f2d384a6956b0e1d790fb3b249f45",
+    "features/manifest.json": "8ffcc964eae3b643007285d0c7b40027fb45ad6df168d61f6ae9f0061ec5edd2",
+    "features/ranker_train/graph.npy": "62fcae72e3a509f2781e7e5b7dbfb7f13701f02ee741801dcdafe0946523114d",
+    "features/ranker_train/common.npy": "afef15ae711fb06dd5a1733504aca5cd21b41d05e9b244b8e2209a8156f7ea12",
+    "features/val/graph.npy": "3d69247f4ac332a5cddeaa2d6402483878e03fa92c4fc07f185be8ab33bdf652",
+    "features/val/common.npy": "00a6cb47b07478f24ac1026f57415143d814bfda861a307852697bac0788dc33",
+    "plans/seed1_refit.npz": "48ad31813468d492ef7b3c103ac6fce22df4394445d6c53bc0a60c033fe71d11",
+    "plans/seed2_inner.npz": "f82150b4c5e476cf8e3bd9ccc5db0b82531673ee2e15b86e44592e7b1145ab6b",
+    "plans/seed0_refit.npz": "5ad2de84b5868828dc66169209cd43cae18b2ec5467988f6731b2132ba0ab039",
+    "plans/seed1_inner.npz": "1c9046b63d4591f638954d6df838640957903e2f05e905d32cf6ad5c1c42d713",
+    "plans/seed0_inner.npz": "a362b3f5a7fae3473b1c4b6bb56e6d3070923b40a566aceb8faec8bcdf636e9e",
+    "plans/seed2_refit.npz": "9b72d8d728368a19c7659c69f8b494106aa1ed1d19b988b15f0794e96d2a8b11",
+    "split/tune.npy": "66437e21234ee7dce1f9ea34a7405627c3543106f34eb8b7d58fcb3100a49209",
+    "split/prefix.npy": "4e178777c34daade027c62e805fca87bf5f1ea3b3410ed0b81d22cca5b1b32cf",
+    "metadata/leaf.npy": "be450eb6174a286021be10f5f7025d010c93c8691b490681d584a23adea38b93",
+    "metadata/store.npy": "77e3fc753be9cd3193536a326deb6beb1113e0b41b016f3d548ffb547dfc5341"
+  }
+}
