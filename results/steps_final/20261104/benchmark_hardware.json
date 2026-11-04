@@ -1,0 +1,8 @@
+{
+  "cpu": "Apple M4 Pro",
+  "model": "Mac16,8",
+  "memory_bytes": 25769803776,
+  "memory_gib": 24,
+  "source": "read-only sysctl machine metadata collected immediately after timing",
+  "note": "supplements unavailable hardware fields in original timing completion; no benchmark rerun"
+}

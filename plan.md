@@ -2,7 +2,7 @@
 
 ## Current status — registered studies complete, 4 November 2026
 
-**The registered sample programme, full-data replication and objective/co-review factorial are complete.** Sections 2–12 retain their historical protocols and outcomes; §§13–14 record the subsequently authorised full-data studies. Compact deliverables are `results/full_data_replication/20261103-promising/` and `results/full_data_replication/20261104-objective-coreview/`; bulk evidence remains under `results/local_experiments/`. BCE+co-review leads overall quality within the matched factorial, while pairwise text leads new-item quality. Co-review improves warm quality and loses new-item quality under both objectives; direct objective and novelty interactions are inconclusive. Read `docs/evaluations.md` for the current assessment. No additional experiment, canonical integration or final Test is launched automatically.
+**The registered sample programme, full-data replication and objective/co-review factorial are complete.** Sections 2–12 retain their historical protocols and outcomes; §§13–14 record the subsequently authorised full-data studies. Compact deliverables are `results/full_data_replication/20261103-promising/` and `results/full_data_replication/20261104-objective-coreview/`; bulk evidence remains under `results/local_experiments/`. BCE+co-review leads overall quality within the matched factorial, while pairwise text leads new-item quality. Co-review improves warm quality and loses new-item quality under both objectives; direct objective and novelty interactions are inconclusive. Read `docs/evaluations.md` for the current assessment. The subsequently authorised §15 evaluation items are now complete, including locked Test; the user deferred narrative reporting. No further training, graph refresh, canonical integration or Test-driven tuning follows automatically.
 
 | Original programme / approved extension | Status |
 |---|---|
@@ -15,6 +15,7 @@
 | Phase 2 graph/latent ranking, objective ablation and graph-family decomposition | Complete; see §§10–12, including unsuccessful trained BCE sample epochs and the later pairwise gains |
 | Full-data promising-ranker replication | Complete; twelve fits, full-Val scoring, monthly/history/subgroups, primary/secondary/historical contrasts, checked figure and independent audit; see §13 |
 | Objective x co-review factorial | Complete; three new BCE+co-review fits, nine frozen controls, direct objective/novelty interactions, checked figure and independent audit; see §14 |
+| STePS evaluation items | Complete: full locked Test, popularity/composition, frozen-model K sweep and bounded FAISS/latency, with audits and checked figures. Narrative report deferred by the user; see §15 |
 
 ### Completed evidence checklist
 
@@ -567,4 +568,101 @@ BCE graph gain is **+0.000295 [0.000169, 0.000425]**, or **3.6%**, with new **�
 
 Compact evidence, the exact numerical-analysis source snapshot and hash-bound publication are under `results/full_data_replication/20261104-objective-coreview/`. The checked figure is `docs/figures/20261104-objective-coreview.png`; `docs/evaluations.md` records interpretation and reproduction. **233 tests pass / 4 legacy skips**. Independent checks reproduce 33 new inner score sets, three new outer outputs, all twelve locks, 675 metric rows, eighteen main intervals and the joint novelty interval. The source snapshot precedes a plot-label formatting adjustment; numerical outputs remain unchanged.
 
-**Completion:** the bounded extension is complete. Val reuse and conditional, unadjusted intervals limit inference. No additional graph retrieval, learned encoder, canonical integration, serving/index study or held-out Test is launched automatically.
+**Completion:** the bounded extension is complete. Val reuse and conditional, unadjusted intervals limit inference. Follow §15 below for the STePS evaluation tidy-up and completion programme.
+
+## 15. STePS evaluation tidy-up and completion plan — 4 November 2026
+
+This section provides a self-contained execution specification for agents and teammates preparing the final evaluation tables and figures for the CP4285 report and STePS poster.
+
+### 15.1 Governing experimental principle (retiring force-inserted ranker claims)
+
+- **Do not use historical force-inserted ranker runs (`20261024-feature-ladder`, `20261024-shortlist-repeat`, `20261025-rq3` MLP/DIN comparison, `ranker_k1_sweep`, or the post-hoc KG evaluation `20261101-kg-expanded-final` on those checkpoints) as primary scientific answers for RQ2 or RQ3.** In those historical runs, `87.69%` (`276,321 / 315,114`) of ranker-training lists had a missed target artificially appended at column 201 (`results/saved_evaluation/20261027-final-validation/saved_diagnostic_report.md`). The constructed training task has reversed raw retrieval-score AUC (`0.080` vs. `0.629` on natural validation hits). The saved MLP also shows inverse score associations (`Spearman about -0.40`) and deteriorates as K grows. These diagnostics establish a serious train/evaluation mismatch, but do not isolate its causal contribution to every historical failure.
+- **Retain the score-inversion audit solely as a 1-box methodological post-mortem** illustrating the mismatch introduced by force-inserting retrieval misses into Stage-2 training.
+- **Do not launch a new full-data GraphSAGE / GNN pipeline.** Inductive neighbour aggregation (`self + neighbour`) has already been evaluated in both stages under strict pre-$T_0$ controls:
+  - **Retrieval (`content + metadata neighbours`, §6):** reduced `Recall@200` (`0.053690` vs. `0.056750` content-only) and `nDCG@10` (`0.001248` vs. `0.001836`).
+  - **Ranking (`R7: learned neighbour encoder` vs. `R6: learned self-only encoder`, §§11–12):** fit inner prefix/tuning cohorts (`0.0380` / `0.0184` vs. `0.0350` / `0.0171`), but lost `-0.003033 [-0.004759, -0.001200]` `nDCG@10` on outer Val (`0.013304` vs. `0.016336`), far below explicit co-review scalars (`GC` `0.017728`, `R2` `0.018174`).
+  - Frame `E2` (retrieval neighbour aggregation), `R6` vs. `R7` (ranker self vs. neighbour encoder), and `G0/GM/GC/GMC` (§12) + full-data `Objective x Co-Review` (§§13–14) as the project's controlled graph investigation: **in high-turnover chronological splits (`33%` Val / `44%` Test new items with zero pre-$T_0$ review edges), explicit co-review relational scalars performed better than the tested learned-neighbour recipes on the sample. This does not establish oversmoothing, universal graph-model superiority, or the cause of the final-refit loss.**
+
+### 15.2 Headline thesis and canonical four-pillar narrative
+
+> **Headline Thesis:** *In time-evolving product catalogues with high item turnover, representation, objective and graph-feature choices expose measurable trade-offs between **warm items** and **new items**. Candidate-normalised representations and explicit relational features are promising in our tested comparisons.*
+
+1. **Pillar 1 — RQ1 Retriever Design & Representation Geometry (`results/rq1/summary.md`, §§6–8):**
+   - Collaborative baselines (`Popularity`, `ItemKNN`, `BPR-MF`, `SASRec`) score $\approx 0$ on new-in-period items.
+   - `Two-tower (text)` unlocks cold items (`Recall@200` `0.0686` overall, `0.0263` new-in-period); adding learned item IDs (`Two-tower (text + ID)`) improves warm co-reviewed items (`+5.4%` overall `Recall@200` to `0.0724`) at a `-28%` loss on new items (`0.0190`).
+   - The tested dot-product-trained projection changes pretrained MiniLM neighbourhoods, and its scoring favours high-norm items (`17.0%` of top-10 slots go to top-1%-norm items); L2 candidate normalisation (`content_unit`, §8) more than doubles sample `nDCG@10` (`0.001836` $\rightarrow$ `0.003978`), while training-free `Frozen MiniLM + 90-day recency` (§6) reaches `0.006284` full-Val `nDCG@10` (`Recall@200` `0.054746`) by heavily boosting new-in-Val items (`0.007611` vs. `0.000352`).
+2. **Pillar 2 — RQ3 Ranker Objectives & Graph Design on Natural Hits (§§11–14):**
+   - On full-catalogue natural $K=200$ candidates (`232,904` Val events / `124,416` users), **`BCE + Co-Review` (`bce_coreview`)** has the highest overall point estimate in the matched full-data factorial (`nDCG@10` **`0.008409`**, `Recall@10` **`0.015845`**, `+33.8%` over retrieval `0.006284`, rescuing `2,505.7` targets vs. `1,515.7` demotions).
+   - **Loss-objective recipe (`BCE` vs. `Pairwise`) shows a warm/new trade-off:** `Pairwise` softplus wins on **new items** (`0.009152` vs. `0.008697` `BCE`), while `BCE` wins on **warm items** (`0.007846` vs. `0.007103`) and overall (`0.008115` vs. `0.007767`) on full-data natural-positive support (`20,675` positives vs. `458` on the 2% sample).
+   - **Explicit co-review graph features (`+3.6%` BCE / `+3.8%` pairwise overall)** consistently shift recommendations toward warm items (`+0.000538` BCE, `+0.000468` Pairwise) with a small new-item trade-off (`-0.000354` BCE, `-0.000279` Pairwise) and an inconclusive objective interaction (`+0.000003 [-0.000159, 0.000163]`). Extra category/store-history fractions (`pairwise_combined`) degrade overall (`-0.000135`) and new-item (`-0.000612`) quality.
+3. **Pillar 3 — RQ2 Candidate Count $K$, FAISS Indexing & Cascade Latency (Phases 2 & 3 below):**
+   - Replaces the invalidated force-inserted $K$-sweep with natural-hit ranker scaling across $K \in \{10, 50, 100, 200\}$ and benchmarks `Flat` vs. `IVF` vs. `HNSW` recall, end-to-end `nDCG@10`, and per-request latency.
+4. **Pillar 4 — Methodological Callout (`saved_diagnostic_report.md`):**
+   - Summarizes the force-insertion score-inversion mechanism as a concise design lesson.
+
+### 15.3 Zero-retraining execution plan (Test prioritised)
+
+The user approved the amendments discussed in chat: no delivery schedule; complete Validation saved-score checks, then evaluate locked Test before the bounded efficiency study. The latest instruction defers the narrative report: finish the items and retain numerical tables, figures and audits first. Use fresh bulk study `results/local_experiments/20261104-steps-final/` and compact publication `results/steps_final/20261104/`. The runner is `python -m cascade.pipelines.steps_final` with phases `prepare`, `validation`, `test`, `report`, `benchmark`, `publish`. Old frozen source files and studies remain immutable.
+
+All four phases reuse immutable locked artifacts under `results/local_experiments/20261102-full-frozen-text/`, `results/local_experiments/20261103-full-promising-ranking/`, and `results/local_experiments/20261104-objective-coreview/`. Write new compact outputs under a fresh directory (`results/steps_final/` or a fresh study under `results/local_experiments/`); never overwrite existing study directories.
+
+#### Phase 1 — Complete RQ3 baselines & beyond-accuracy composition on full Val ($K=200$)
+
+- **Inputs:**
+  - Candidate IDs and retrieval scores: `results/local_experiments/20261103-full-promising-ranking/candidates/val/` (`232,904 × 200`).
+  - Locked outer-Val per-candidate score archives (seeds 0/1/2): `results/local_experiments/20261103-full-promising-ranking/evaluation/` (`bce_text`, `pairwise_text`, `pairwise_coreview`, `pairwise_combined`) and `results/local_experiments/20261104-objective-coreview/evaluation/` (`bce_coreview`).
+- **Tasks:**
+  1. **Add `R0: Popularity order` on the valid $K=200$ pool:** Sort the exact 200 retrieved candidates per query by strictly pre-$T_0$ positive review counts (using pessimistic tie-breaking for target ranks and stable candidate-ID tie-breaking for top-10 slot display). Compute overall, `New`, and `Warm` user-macro `nDCG@10`, `Recall@10`, conditional `nDCG@10`, five-way funnel counts, and paired-user 95% bootstrap intervals (`B=1000, seed=0`) against `Retrieval` and `bce_coreview`.
+  2. **Compute Slide 10 "Beyond Accuracy" metrics across all full-Val methods (`Popularity order`, `Retrieval order`, `bce_text`, `pairwise_text`, `pairwise_coreview`, `pairwise_combined`, `bce_coreview`):**
+     - Catalogue coverage (distinct products appearing in top-10 across all `232,904` Val queries).
+     - Top-10 popularity concentration (mean pre-$T_0$ review count of recommended top-10 items, pre-$T_0$ head-item slot share, and unseen-after-$T_0$ slot share).
+     - Top-10 category and store concentration (unique known leaf categories/stores per top-10 list and user-macro Herfindahl index, excluding unknown metadata slots with support recorded).
+- **Outputs:** `results/steps_final/20261104/val_comparison.csv`, `results/steps_final/20261104/val_beyond_accuracy.csv`.
+
+#### Phase 2 — RQ2 inference-budget sensitivity for K200-trained models ($K \in \{10, 50, 100, 200\}$) from saved logits
+
+- **Inputs:** Saved `232,904 × 200` outer-Val candidate matrices (stored in exact retrieval rank order `1..200`) and the saved `232,904 × 200` logit matrices for `bce_text`, `bce_coreview`, `pairwise_text`, and `pairwise_coreview` (seeds 0/1/2).
+- **Tasks:**
+  1. This tests frozen models trained at K200, not independently trained or optimised per-K systems. Verify saved logits against fresh scoring and per-candidate score invariance. For each budget $K \in \{10, 50, 100, 200\}$, restrict each query's candidate pool and saved model logits to the first $K$ retrieval positions (`[:, :K]`).
+  2. Compute candidate ceiling `Recall@K`, end-to-end user-macro `nDCG@10` and `Recall@10` (overall, `New`, and `Warm`), conditional `nDCG@10`, and five-way failure funnels per seed and seed-mean.
+  3. Compute the additive $K$-expansion decomposition (`50 → 100` and `100 → 200`): separate `new-target entry nDCG gain` (targets entering in slots `K_prev+1 .. K_next`) from `existing-target competition change` (targets already in `1..K_prev` displaced or promoted when `K_prev+1 .. K_next` candidates are added), with paired-user 95% bootstrap intervals (`B=1000, seed=0`). Keep zero contributions for other events and the common full-population user weights so entry plus competition equals the observed change.
+- **Outputs:** `results/steps_final/20261104/rq2_k_sweep.csv`, `results/steps_final/20261104/rq2_expansion_decomposition.csv`, and figure `docs/figures/steps_rq2_k_sweep.png`.
+
+#### Phase 3 — RQ2 FAISS search settings (`Flat` vs. `IVF` vs. `HNSW`) & per-request cascade latency
+
+- **Inputs:**
+  - Full-catalogue L2-normalised MiniLM vectors: `results/local_experiments/20261102-full-frozen-text/item_text_emb.npy` (`111,480 × 384`).
+  - Locked checkpoints and feature builders from `20261103-full-promising-ranking` (`bce_text`) and `20261104-objective-coreview` (`bce_coreview`).
+- **Tasks:**
+  1. Build FAISS indexes over the `111,480` product vectors:
+     - `Flat`: `IndexFlatIP`, K200, inner-product reference.
+     - `IVF`: `IndexIVFFlat` (`nlist=256`, trained on pre-$T_0$ items only, `nprobe=16`) at $K=200$.
+     - `HNSW`: `IndexHNSWFlat` (`M=32`, `efConstruction=200`, `efSearch=max(256, fetched results)`) at $K=200$.
+     - Account for post-retrieval availability and full prior-history exclusions by starting with 400 hits and doubling until 200 eligible candidates or the full catalogue is exhausted. The local index contract requires HNSW efSearch >= fetched results; report the effective value instead of the infeasible proposed efSearch64. Verify Flat against archived exact retrieval, disclose numeric ties, and label quality as a fixed benchmark-subset estimate.
+  2. On a deterministic 1,000-query validation benchmark (after 50 warm-up queries, single-thread CPU, recording hardware/thread settings), measure per-query median and p95 latency (ms) for:
+     - **Stage 1 Retrieval:** query recency pooling + FAISS search + availability/history filtering.
+     - **Stage 2 Ranking:** feature extraction + scoring + top-10 sorting for `Popularity order`, `Retrieval order`, `bce_text`, and `bce_coreview`.
+     - **End-to-End Total Latency:** Stage 1 + Stage 2.
+  3. Record resulting candidate `Recall@K` and end-to-end `bce_coreview` `nDCG@10` across the index settings.
+- **Outputs:** `results/steps_final/20261104/benchmark_latency_summary.csv` and Pareto figure `docs/figures/steps_rq2_faiss_latency.png`.
+
+#### Phase 4 — Single locked held-out `Test` evaluation (`297,390` cases) & final consolidation
+
+- **Prerequisites:** Complete and verify Phases 1–2 on Validation first; Test does not wait for FAISS. Retain K200 regardless of the sensitivity plot. Lock the final system list before touching `Test`: `F0: Popularity order`, `F1: Frozen 90d Recency Retrieval`, `F2: BCE Text Control`, `F3: Pairwise Text Control`, `F4: Pairwise + Co-Review`, and `F5: BCE + Co-Review`.
+- **Tasks:**
+  1. Generate natural $K=200$ Test candidate lists (`297,390` Test events from 16 Jul 2022) using `Frozen MiniLM + 90-day recency` with strict event-time availability and full prior-history exclusions.
+  2. Extract Test features using the same strictly pre-$T_0$ graph and locked prefix feature scalers from `20261103-full-promising-ranking`. No graph refresh, training, target insertion or Test-driven model/K selection. Define new-in-Test relative to T2; catalogue eligibility and permitted histories still follow each query timestamp.
+  3. Score the locked 3-seed checkpoints from `20261103-full-promising-ranking` and `20261104-objective-coreview` once on `Test` (no tuning, no epoch re-selection). Compute overall, `New`, and `Warm` user-macro `nDCG@10`, `Recall@10`, `Recall@200`, five-way funnels, and paired-user 95% bootstrap intervals (`B=1000, seed=0`).
+  4. Save the numerical tables, checked figures and source/output hashes (`completion_audit.json`); update completion status and commit. **Do not write the narrative report yet**, per the user’s latest instruction.
+
+### Completed evaluation items — 4 November 2026
+
+- [x] Full-Val popularity ordering and composition (catalogue coverage, pre-T0 popularity/head/unseen slot shares, known leaf/store HHI and support).
+- [x] Full-Val K10/50/100/200 inference sensitivity of K200-trained models, with additive entry/competition contributions and paired intervals. Fifteen full-K exports and sixty sliced forward checks pass.
+- [x] Locked full Test: 297,390 events / 112,081 users, six systems / twelve previously trained checkpoints, unchanged K200, pre-T0 graph and prefix scalers. No retraining or Test-driven changes. Twelve rank/top-ten replays, 54 metric reconstructions and 27 independent nDCG intervals pass; all candidate/history rows and 24 independent feature references pass.
+- [x] Fixed 1,000-query Validation Flat/IVF/HNSW benchmark, 50 disjoint warm-ups per index, single-thread CPU, per-request feature/scoring/filtering/sorting costs. Apple M4 Pro / 24 GiB. Full-probe IVF and common-only feature references pass. Flat has 21 float32-near-tied boundary exchanges across 19 queries (scores within 2e-6); these are retained explicitly.
+- [x] Four checked figures, compact CSV/JSON evidence, phase source snapshots and publication hashes saved under `results/steps_final/20261104/`; bulk arrays remain under `results/local_experiments/20261104-steps-final/`.
+- [x] 243 tests passed / 4 legacy skips.
+- [ ] Narrative report — deliberately deferred by the user; no new report document created.
+
+The `report` CLI phase writes numerical tables and independent checks only. Historical RQ1 Test summaries were previously exposed; this is a locked follow-up, not globally blind project-wide Test. No further experimental sweep, graph refresh, retraining or canonical integration is started.

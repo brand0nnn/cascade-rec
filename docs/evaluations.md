@@ -2,6 +2,8 @@
 
 Updated **4 November 2026** (the objective x co-review factorial is complete; the earlier full-data replication, sample studies and historical pipeline findings are retained). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
+**Latest execution status:** the user authorised root plan §15 and subsequently deferred narrative reporting. The full Test, popularity/composition, frozen-model K sensitivity and bounded FAISS/latency items are complete, with numerical evidence and checked figures in [results/steps_final/20261104](../results/steps_final/20261104/). 243 tests pass / 4 skips; the independent Test audit reconstructs twelve exports, 54 metrics and 27 intervals. Earlier Test/index deferrals and forced-list tables below are historical; final synthesis is intentionally pending.
+
 ## Current progress
 
 The archived full-data evaluation is complete: **232,904 validation events / 124,416 users**, using archived predictions and restored histories. The saved-validation replay reproduced the historical comparisons and checked source identities; it is analysis verification, not independent training replication. That completion used no new training, Test predictions, SSH or cluster jobs. The separate sample programme and subsequently authorised twelve-fit full-data ranking replication are also complete; their fresh MPS fits and outcomes are recorded below.

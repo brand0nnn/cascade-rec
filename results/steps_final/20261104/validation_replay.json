@@ -1,0 +1,187 @@
+{
+  "status": "pass",
+  "full_outer_replays": 15,
+  "slice_replays": 60,
+  "checks": [
+    {
+      "method": "bce_text",
+      "seed": 0,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "4c46a0fb4952f8f0008bb510c0eb00877ac8dc62f0e9ed58e2fb72e0452654a5"
+    },
+    {
+      "method": "bce_text",
+      "seed": 1,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "d9de1e227ddc330a5b26982f02c771cad4e03f796afc260d412ee7a2b7fcaf77"
+    },
+    {
+      "method": "bce_text",
+      "seed": 2,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "9e0bb1d3a1798605be3baae644a68b6baac9fdb1c45e7d27b0ec72d0b795845a"
+    },
+    {
+      "method": "pairwise_text",
+      "seed": 0,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "cb9be07b445c7254a617f7396131658361eafb96ce98ec6496356f4eb8f79aba"
+    },
+    {
+      "method": "pairwise_text",
+      "seed": 1,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "6d23f072e36781370c7d6b575058286799150d09869c1ba9c77d69c1a53daa29"
+    },
+    {
+      "method": "pairwise_text",
+      "seed": 2,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "b1331f9937444964c8b26341224db3d49d48c0ca0f73fd044682cf436081ab73"
+    },
+    {
+      "method": "pairwise_coreview",
+      "seed": 0,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "22d6e27e0db16c8fc2b66d17c8e4f16172f4dc68a4406eb19dde1d6710433f5d"
+    },
+    {
+      "method": "pairwise_coreview",
+      "seed": 1,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "99c218a05ac98f3802050b2e88b02f9bd2f80fe963bf9bf94df98b9e61d19e98"
+    },
+    {
+      "method": "pairwise_coreview",
+      "seed": 2,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "0b9e14a29d89002ad9d8f3a4ed7d2b0a374bb35bf3f297ae720d19c73efaa194"
+    },
+    {
+      "method": "bce_coreview",
+      "seed": 0,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "a62c7a14a69675911ce10c63dc41a5c376c051f8c1a7952d8dcc85b6133abf75"
+    },
+    {
+      "method": "bce_coreview",
+      "seed": 1,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "a6eb9c36b1456e22a86e6859205471239df6b85c654ae4f675cd304f69f844cc"
+    },
+    {
+      "method": "bce_coreview",
+      "seed": 2,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "8100573cfcfe022254387df0bf0f27b24df0e3791ca9fd70555282dbd9dc7054"
+    },
+    {
+      "method": "pairwise_combined",
+      "seed": 0,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "7392a67e4bb3bc002c43baf4e09fc5acc776c18536b453d1213c867b1c58a834"
+    },
+    {
+      "method": "pairwise_combined",
+      "seed": 1,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "43fd63b7f99e78ad5f19030c02a40878f7dbfaa9fd84d2a6e5f1fd1557354c54"
+    },
+    {
+      "method": "pairwise_combined",
+      "seed": 2,
+      "queries": 24,
+      "slice_errors": {
+        "10": 0.0,
+        "50": 0.0,
+        "100": 0.0,
+        "200": 0.0
+      },
+      "saved_logits_sha256": "c0bb376cbd04bee6423913853997f7c84819ddf59e5852054ce1173708d7ec56"
+    }
+  ]
+}

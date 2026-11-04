@@ -1,0 +1,6 @@
+{
+  "status": "pass",
+  "additive_event_partitions": 10,
+  "denominator": "each group full user population, with zero contribution outside entry/competition cohort",
+  "interpretation": "inference-only sensitivity of K200-trained models"
+}

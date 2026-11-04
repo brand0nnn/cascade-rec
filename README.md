@@ -2,6 +2,8 @@
 
 Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
+**Latest execution status (4 November 2026):** root plan §15 items are complete: locked full Test, popularity/composition, inference K sensitivity and bounded FAISS/cascade timing. [Numerical tables and audit metadata](results/steps_final/20261104/) and four checked figures are saved; **243 tests pass / 4 legacy skips**. The user deferred the narrative report. Earlier Test/index deferrals below are historical.
+
 ## Objective x co-review: completed controlled comparison
 
 Three new full-data BCE+co-review fits complete the factorial alongside nine immutable controls, on **232,904 Val events / 124,416 users** and the same frozen K200 candidates. The switches affect four additional co-review features; basic matching/common support inputs remain present.
