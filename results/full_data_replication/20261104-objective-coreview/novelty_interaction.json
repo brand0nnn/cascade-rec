@@ -1,0 +1,10 @@
+{
+  "contrast": "interaction_new_in_val-interaction_warm_in_val",
+  "diff": 0.00014599326588171343,
+  "ci_low": -0.00016153076643716396,
+  "ci_high": 0.000510935058424806,
+  "n_users": 124416,
+  "n_resamples": 1000,
+  "bootstrap": "joint user-cluster draws with separate group user-macro means",
+  "interpretation": "groups have different qualifying populations; descriptive effect contrast"
+}

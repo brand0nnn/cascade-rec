@@ -1,0 +1,124 @@
+{
+  "sample": false,
+  "config": {
+    "study": "20261104-objective-coreview",
+    "parent": "20261103-full-promising-ranking",
+    "sample_parent": "20261103-full-promising-ranking-smoke",
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "new_method": "bce_coreview",
+    "objective": "bce",
+    "feature_mask": "pairwise_coreview",
+    "max_epochs": 10,
+    "patience": 2,
+    "batch_lists": 32,
+    "negative_alternatives": 50,
+    "learning_rate": 0.001,
+    "bootstrap_resamples": 1000,
+    "bootstrap_seed": 0,
+    "cells": [
+      "bce_text",
+      "bce_coreview",
+      "pairwise_text",
+      "pairwise_coreview"
+    ],
+    "primary_contrasts": [
+      [
+        "bce_text",
+        "bce_coreview"
+      ],
+      [
+        "pairwise_text",
+        "pairwise_coreview"
+      ],
+      [
+        "pairwise_coreview",
+        "bce_coreview"
+      ],
+      [
+        "bce_text",
+        "pairwise_text"
+      ],
+      [
+        "retrieval",
+        "bce_coreview"
+      ]
+    ],
+    "interaction": "(pairwise_coreview-pairwise_text)-(bce_coreview-bce_text)",
+    "novelty_contrast": "interaction_new_in_val-interaction_warm_in_val",
+    "selector": "chronological_inner_all_query_user_macro_ndcg10",
+    "epoch_zero_eligible": true,
+    "tie_break": "earlier_epoch",
+    "test_predictions_loaded": false,
+    "interpretation": "exploratory_completion_of_previously_inspected_full_validation_factorial"
+  },
+  "parent": "results/local_experiments/20261103-full-promising-ranking",
+  "split": {
+    "t_ranker_train": 1595800947930,
+    "t1": 1628643414042,
+    "t2": 1658002729837,
+    "ranker_train_fraction": 0.15,
+    "interactions_per_period": {
+      "retriever_train": 1877548,
+      "ranker_train": 331332,
+      "val": 239437,
+      "test": 304468
+    }
+  },
+  "input_sha256": {
+    "configs/ranker/objective_coreview.yaml": "78149921fb850031702517a9f1ac1314a4285731255899e09e87b239e2b2e931",
+    "results/local_experiments/20261103-full-promising-ranking/study.json": "b24f83aab3e2ac72fd052ccc21581aec11f8753ba7ae17d3f3c5c22612794d43",
+    "results/local_experiments/20261103-full-promising-ranking/protocol.json": "ea75c73dce7ad4196864561d580ce9f219054e2836361438db54ed750a8c2b56",
+    "results/local_experiments/20261103-full-promising-ranking/completion_audit.json": "83635d453389491a7f710a98c0154f886a7cd44f5657617fd9e50d76a410aa7b",
+    "results/local_experiments/20261103-full-promising-ranking/selection_lock.json": "4934141a2eeaf978dac65cf62884be4d4852f476c07765e63bf24115d68a219a",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed0/metrics.json": "7b34c66c007abd6fb5c41b648380d7803992bc9cef2760801228d52c03a398ea",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed0/model.pth": "bbc5da66e975fd96a73efa245206a8da4076c52e1ec73effe202676cf0b3d09e",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed0/val_ranks.npz": "3133e311fcb3305473467b1f0f920315befaa191f104bb40bbd91fb0251030be",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed1/metrics.json": "e8cb557aabbbb283e1b18b9221fbe00813695e5d9c37734de4d604617721cefe",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed1/model.pth": "81ad4454f23aa96facd39e54aef5a80bb2bc0ef833e9e9f9218b4cb48fb99a1c",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed1/val_ranks.npz": "86faab79016fc29306c29b980cd4b4a44bc712296cc1768ed06c066e8f998770",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed2/metrics.json": "a30854fcab7a1804eaf6f20234f2f972bd5629240a85e388a3a3acefe2a0d333",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed2/model.pth": "8f4c249ee73294773af149badda41508b87b3c619a24fa0388bf12f0e4c768e8",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed2/val_ranks.npz": "0f7156fb405125d097b5b987ff1c63a6960fdc2b4bb7271d04efed278a1e4b3f",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed0/metrics.json": "8b40cc86170abcb6bb833347aadabe4d2a8f4f7e331f348256afb78e73749af0",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed0/model.pth": "3d1f12938ef62e0add5ea832044448bcb704b7a497c060fcf28981bf49da1cba",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed0/val_ranks.npz": "573e3d4ec4a9bab13f776190056c4ba1c325a82e1ac42935af0c3c3d19026ccc",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed1/metrics.json": "595bc4d2af73de9b5ea9dd4158cac65c8572817db172519e44f6239ea461fee9",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed1/model.pth": "39f2ab610c9fd8298ed4de2c12058b37a2828fafb1e7b8d2f0d2e7bb86a681f7",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed1/val_ranks.npz": "e43324cc88e70aaa45567a60940a88daa92e58ea532b990bc47a815b3859cde9",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed2/metrics.json": "92683520cb8df7e418e17ad63266e2900753bc3621a739a6be2fa2e91e9e10e9",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed2/model.pth": "44890475454382477df4976405fbdb0f23b14a7af74d4817475a4938c2ce8f3b",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed2/val_ranks.npz": "810cba86875aaee62286a212ce3a958e7f8b5a22882dd8614db0f7f51e65e5b9",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed0/metrics.json": "f91f10e1a54f735f90c885c84725296a76a1fa9be6a662c56f41c145b6053d54",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed0/model.pth": "25ced8872eaef5f2042984834141e0c790c356c6f3db7778d35b61483767fc39",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed0/val_ranks.npz": "b2d7317adbd2ec1cea34960faff56fb2410fde91800d77fd9fcc74acbf21f1b5",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed1/metrics.json": "be9933ddc48745eea5920556fefffc446d1ae79a3ccb74fc6d0d54a1c4a80cf7",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed1/model.pth": "26ebdb5d4c4f3c648cd8629fb2844410867855fbc9f762d232ec1f2f50b484eb",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed1/val_ranks.npz": "7a7c8c05d491a2b88f86ed5197bc06aa3fad65f05a9bb2262ab83f87705be0a8",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed2/metrics.json": "3932f9b49d189574a4913024b3e72f14fd2db78f7f35e4ea2f2d9b9cbe78eb3f",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed2/model.pth": "cb2d86cf786fd5fcfb9f4ece98b63d5b090b3f28b9b9d5adb8881d078a6aecbc",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed2/val_ranks.npz": "9e212b9e5f4f46327cff9c9dc473ad1fbeb3c990c802a69456b57c4f72d84b6d"
+  },
+  "protocol_sha256": "6d7ce6716ff43e2422e94aad3b61d1e0a55b57721ce974092b159d6d878e31e2",
+  "source_sha256": {
+    "src/cascade/pipelines/full_data_ranking.py": "b37a707e3dd7c17c1d53a10e1792c34793775db489546e1416013de95cbc94a0",
+    "src/cascade/data/batched_graph_features.py": "1f182dbc7705459b9a88de5b8d877c648549c5dac743023159780e8045107221",
+    "src/cascade/data/local_graph_features.py": "433b726c01a1183f7c4f3ab16cadd17747a9176dacbcb6e150be5f71e65a9b97",
+    "src/cascade/models/graph_latent_ranker.py": "6bf8d2af0461c1dcbcbbc952a295bbced840c76e9f68d0d9f7cb997d8797bf05",
+    "src/cascade/pipelines/graph_latent_study.py": "a4f47351db9c46b1359dd6a13b1e087581c4c036a7fa8451c439f316ebcbfd7e",
+    "src/cascade/pipelines/ranking_objective_study.py": "f29110d101929c8226ff80390390b98a102a471a4b62e59c6a319e32bca3d3e5",
+    "src/cascade/pipelines/local_evidence_export.py": "c15a6a72453a89f742c42877c0e8839aab365758c4553c417a9268c216d19c31",
+    "src/cascade/pipelines/local_followups.py": "e45c79fcf69c4e1f59ceb058689f616f75d9ee69eb4fc93dcffcbdce28a8646c",
+    "src/cascade/pipelines/local_rankers.py": "1674395fa3a82730d8d7f9ae789d7093ed7b9dac58cd017c5d6d1fefe756dd5b",
+    "src/cascade/eval/harness.py": "9583d821365a2778280c21ac41686ef8fea9eea48883a8f5b1c14f9a75becb5f",
+    "src/cascade/eval/metrics.py": "11e92706861bd2b176b850797708d232892898fcbb33d43b2c6d5b718df1cad8",
+    "src/cascade/eval/bootstrap.py": "7d62479921ae9c02f6a56b3410b0a0ffcd3294b6f2e0befc8100816b0b47a20c",
+    "src/cascade/data/instances.py": "adb5019ee65b7ed7f31d810a0a735e4443b4c448424a41a6bdc3742469255fad",
+    "src/cascade/pipelines/objective_coreview.py": "7b734c5ff5be97ae9e896f1524fb1801c0e6b236dfecde0b6b246f980ad8f43a"
+  },
+  "git_hash": "628e56ad3774521058b92b3766f6b6636aae9799-dirty",
+  "test_predictions_loaded": false
+}

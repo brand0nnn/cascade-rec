@@ -1,0 +1,38 @@
+{
+  "files_sha256": {
+    "completion_audit.json": "d33a7bdc04764f7f9be98d59b4e0034ad4fd17b67e5737924eea5914df86bdb9",
+    "graph_feature_shifts.csv": "aaa495c4043ec46f02d054fa1501dec05e6269870c499bfa8938628eb899be0d",
+    "analysis_metrics.csv": "95cbd268dba5c4ff609d9a0cb406b6bda59c57fa60a86be74657c1ecd8c80e98",
+    "analysis_funnels.csv": "a87c24aa77ca12a82bbd22811efca373d738a13081b44e6eeef75854076c4d96",
+    "graph_completion.json": "5307f6b2c801ab1389ff4f7e259963ae64c65c912461a9722f0f60a1e240dc16",
+    "k_funnels_completion.json": "b9f74ebfa2a5c45578bce3bbb5d18812ed36b2cdbc378d1e9023fcac410f2bf9",
+    "analysis_seed_metrics.csv": "65a76a48bdcf55cad958a8b0a793fad0a06f5da976f59c6d1f783706ad7297a2",
+    "steps_restoration.py": "5076a01d0230cd3e3eac7bea068e9714f3782848d5e73968f16e91c50b827a4c",
+    "graph_feature_checks.json": "1893488d508135c2b114b9486943c939c5160993ef831785a12d38f5833a648a",
+    "indices_quality.csv": "ef341717f98c25c6323a4e893fef36f79426801c72a36c938b9fb27555235c6a",
+    "indices_exact_boundary_checks.csv": "a22037f0ffbf52f74c3f027ec4561f50238c7319d82f031c9a23742da7731f03",
+    "indices_benchmark_source.py": "8723d7a8a09683b6506ef509c676f12c3c3157f01fadabbb1ea4adac012c1c0d",
+    "k_funnels_per_seed.csv": "2795c921f6a0a0f5f99c0356b1804c073a2fa3e33334979c4029e96efd6951e4",
+    "indices_completion.json": "29950a0d9a2b085640e291ca74115de00f0ba73811f083ef8be3b6bc8442f49c",
+    "k_funnels_analysis_source.py": "1ce3f198bb5d657d6c36652b3137f4913b2c8531c60da167aa9d5c3849af6776",
+    "analysis_paired_differences.csv": "e9eded772c0efd172140f5ad737fab44c3da0d5ac1ffac87d40bae2a2148d040",
+    "indices_seed_quality.csv": "50f179246038d67d5124aa68dd465a12396b7a963ad6c6b46f96391113cc9c50",
+    "analysis_target_support.csv": "80050689fe9643bd2d70b89821923ed39aa95dcdf8b4da266fa1476389bcc809",
+    "indices_latency_summary.csv": "0b15069a8c958d89c902a75c35f91e6fa4e91d809778d1c95259e2291dc2d7a3",
+    "snapshot_graph_features.py": "09da5f54c9a4038adfd34e0207d0302c2a1da7246dc9f9a7eda4cd81d49c342e",
+    "protocol.json": "fcb973268985865adfe617bb75b705d3dcb0e5af177e78cd42a6452476961e4c",
+    "analysis_analysis_source.py": "1ce3f198bb5d657d6c36652b3137f4913b2c8531c60da167aa9d5c3849af6776",
+    "analysis_completion.json": "2ca15670ea842b20eb94d41e583e59a4b8a404bdd1c3009ab42b85f0af371d1b",
+    "data_dictionary.json": "dc0fe1b91d75e5cf5192b8d781bba757ff2d3217365fb27cbabf34d1471bb309",
+    "publication_source.py": "036b8f80011dd99871539771c4839f508d4bb0dcd69b53d4e0ff358f64c502bf",
+    "indices_settings.csv": "c53e68bb5e61be4f2c44f105702ea9290b86cf36e99f5ef3e94f7235a0beeef2"
+  },
+  "figures_sha256": {
+    "docs/figures/restoration_flat_budgets.png": "6f8ab3904cee36e8a7b828a37b3205dd6dcf6c70444fefbd2a952a6184e337d6",
+    "docs/figures/restoration_graph_refresh.png": "fada1f25221c7d46532d3f4d2712ba00faec794964edb690ab18515be2a8de51",
+    "docs/figures/restoration_ann_tradeoffs.png": "93789414e78beba76ab4dea317f392f80ba9ac51366325dd4fd2801aec1064e1"
+  },
+  "source_sha256": "036b8f80011dd99871539771c4839f508d4bb0dcd69b53d4e0ff358f64c502bf",
+  "narrative_report_written": false,
+  "baseline_preserved": true
+}

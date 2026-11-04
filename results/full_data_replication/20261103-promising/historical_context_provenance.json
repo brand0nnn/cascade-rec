@@ -1,0 +1,31 @@
+{
+  "input_sha256": {
+    "results/ranker_k1_sweep/20261025-k1/seed0_ranks.npz": "75f6869a7880d20cdd2a8248436a67f8e614b9935f86df9338db051af641e460",
+    "results/baselines/sasrec/all_train/seed0/val_ranks.npz": "08c37eb88e0b94cb7a6c9938efcb35ddc525bf5ea5b806673e940b0f5a8ec904",
+    "results/ranker_k1_sweep/20261025-k1/seed1_ranks.npz": "dff0b29b6c0e15ca1b6dd93e0ee260ab25d7a56b69ec16a2eeddb184ff6ad598",
+    "results/baselines/sasrec/all_train/seed1/val_ranks.npz": "773cce86b2c3950aa6024432626ec0b7ad7b37de4c872e37a78061f74dcb778a",
+    "results/ranker_k1_sweep/20261025-k1/seed2_ranks.npz": "e7ea2de0d3982dca22867d6912b5712b5e4cf005be985b3607310ae9818e201e",
+    "results/baselines/sasrec/all_train/seed2/val_ranks.npz": "84fae82b12cef60814694a4594d40e984e9e69333bd314bc7c77fb1664582481",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed0/val_ranks.npz": "3133e311fcb3305473467b1f0f920315befaa191f104bb40bbd91fb0251030be",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed1/val_ranks.npz": "86faab79016fc29306c29b980cd4b4a44bc712296cc1768ed06c066e8f998770",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed2/val_ranks.npz": "0f7156fb405125d097b5b987ff1c63a6960fdc2b4bb7271d04efed278a1e4b3f",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed0/val_ranks.npz": "573e3d4ec4a9bab13f776190056c4ba1c325a82e1ac42935af0c3c3d19026ccc",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed1/val_ranks.npz": "e43324cc88e70aaa45567a60940a88daa92e58ea532b990bc47a815b3859cde9",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed2/val_ranks.npz": "810cba86875aaee62286a212ce3a958e7f8b5a22882dd8614db0f7f51e65e5b9",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed0/val_ranks.npz": "b2d7317adbd2ec1cea34960faff56fb2410fde91800d77fd9fcc74acbf21f1b5",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed1/val_ranks.npz": "7a7c8c05d491a2b88f86ed5197bc06aa3fad65f05a9bb2262ab83f87705be0a8",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed2/val_ranks.npz": "9e212b9e5f4f46327cff9c9dc473ad1fbeb3c990c802a69456b57c4f72d84b6d",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_combined/seed0/val_ranks.npz": "cda3b68679c111321776de00391c4eddf6cf231356508b4545c0232f3c06e616",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_combined/seed1/val_ranks.npz": "e53e28fd49ec43f5611f2a6bec270b4598d31aa622748d4540018475488ad454",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_combined/seed2/val_ranks.npz": "10428bac2062d25a3a187f501266c9cfaea55de1d734e4366c3a6ab4ba74e061",
+    "results/local_experiments/20261103-full-promising-ranking/candidates/val/retrieval_rank.npy": "fb1a82f66cad025283b724f506ec7488d60fd9fa19573b29b70bbdd16b0e59df"
+  },
+  "source_sha256": "adb198d81c65d3260122ed47477a15567fcbf60f41d4da68bf4ad14b292c58ab",
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "historical_context_metrics.csv": "2642b40d3835cfdc0d3fa8ccde0b290ee6a9e5a0cc00b7dd9e8bfa2a059139c2",
+    "historical_context_differences.csv": "d8048959bab1dcb89fa76f32ef054eba354367448cfc168b63fe02dfa8c7c2e8",
+    "secondary_differences.csv": "9152eb98b8688316c7189afa4ae23e04a060735046c93ca19bfcba758a2ed729",
+    "historical_context.md": "d75f8eab982e8f6d3de45a7f42a27a38ffd1a35fcb42ef5af5d61f560829571d"
+  }
+}

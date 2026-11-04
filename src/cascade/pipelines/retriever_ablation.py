@@ -92,25 +92,58 @@ def summarize_pairs(run_id: str, phase: str, data_config: str = "configs/data.ya
     data = ProcessedData.load(data_config, sample)
     seeds = (0,) if phase == "pilot" else (0, 1, 2)
     controls, treatments, checks = [], [], []
+    shared_identity = None
     for seed in seeds:
         paths = [fit_path(run_id, arm, seed, sample) for arm in ARMS]
         metrics = [json.loads((p / "metrics.json").read_text()) for p in paths]
         if any(m.get("status") != "complete" or m.get("test_predictions_loaded") for m in metrics):
             raise ValueError("Pair must contain completed validation-only runs")
+        recipes = []
+        for arm, path, recorded in zip(ARMS, paths, metrics):
+            config = train_retriever.load_config(path / "config.yaml")
+            expected_dropout = 0.0 if arm == "control" else 0.5
+            if (recorded.get("seed") != seed or config.get("seed") != seed
+                    or recorded.get("sample") != sample or config.get("sample") != sample
+                    or recorded.get("id_dropout") != expected_dropout
+                    or config.get("id_dropout") != expected_dropout
+                    or recorded.get("evaluation_splits") != ["val"]
+                    or not recorded.get("input_sha256") or not recorded.get("source_sha256")):
+                raise ValueError(f"Unexpected seed, population, treatment or provenance: {path}")
+            if recorded.get("checkpoint_sha256") != train_retriever.file_sha256(path / "model.pth"):
+                raise ValueError(f"Checkpoint identity changed: {path}")
+            recipes.append({k: v for k, v in config.items() if k not in ("name", "id_dropout", "seed", "run_id")})
+            identity = {k: recorded[k] for k in ("input_sha256", "source_sha256", "data_config_sha256")}
+            if shared_identity is None:
+                shared_identity = identity
+            if identity != shared_identity:
+                raise ValueError("Training inputs or source code differ across arms/seeds")
+        if recipes[0] != recipes[1]:
+            raise ValueError(f"Training recipes differ within seed {seed}")
+        if checks and recipes[0] != checks[0]["training_recipe"]:
+            raise ValueError("Training recipes differ across seeds")
         for key in ("initial_state_sha256", "input_sha256", "selector"):
             if metrics[0][key] != metrics[1][key]:
                 raise ValueError(f"Matched-arm provenance mismatch for seed {seed}: {key}")
         controls.append(aligned_ranks(paths[0], data)[0])
         treatments.append(aligned_ranks(paths[1], data)[0])
-        checks.append({"seed": seed, "initial_state_sha256": metrics[0]["initial_state_sha256"], "matched": True})
+        checks.append({"seed": seed, "initial_state_sha256": metrics[0]["initial_state_sha256"],
+                       "training_recipe": recipes[0], "matched": True,
+                       "val_rank_sha256": {arm: train_retriever.file_sha256(path / "val_ranks.npz")
+                                           for arm, path in zip(ARMS, paths)}})
     result = {
         "phase": phase, "seeds": list(seeds), "paired_provenance": checks,
+        "shared_provenance": shared_identity,
         "dropout_minus_control": compare_ranks(data, np.stack(controls), np.stack(treatments), n_resamples),
         "test_predictions_loaded": False,
         "interpretation": "Exploratory validation comparison. User intervals condition on the trained seed mean; no noninferiority claim.",
         "text_reference_guard": {"status": "not_checked", "reason": "Supply --text-reference for the same-seed text-only reference."},
     }
     if text_reference is not None:
+        for seed in seeds:
+            path = Path(text_reference) / f"seed{seed}"
+            config = train_retriever.load_config(path / "config.yaml")
+            if config.get("seed") != seed or config.get("sample", False) != sample or config.get("item_tower") != "text":
+                raise ValueError(f"Text reference seed/population/model mismatch: {path}")
         refs = [aligned_ranks(Path(text_reference) / f"seed{seed}", data)[0] for seed in seeds]
         comparison = compare_ranks(data, np.stack(refs), np.stack(treatments), n_resamples)
         result["dropout_minus_text"] = comparison
@@ -189,6 +222,10 @@ def main(run_id: str, phase: str = "pilot", arm: str = "both", seed: int | None 
         return run_probe(probe_run_dir, output / "probe", data_config, device, sample, n_resamples)
     if probe_run_dir:
         raise ValueError("Use --probe-only to separate the frozen probe from training jobs")
+    if phase == "replication" and not sample:
+        pilot_path = output / "pilot_comparison.json"
+        if not pilot_path.is_file() or json.loads(pilot_path.read_text())["text_reference_guard"]["status"] != "promising":
+            raise ValueError("Replication requires a completed promising pilot comparison against text-only")
     seeds = (seed,) if seed is not None else PHASE_SEEDS[phase]
     arms = tuple(ARMS) if arm == "both" else (arm,)
     planned = [fit_path(run_id, a, s, sample) for s in seeds for a in arms]

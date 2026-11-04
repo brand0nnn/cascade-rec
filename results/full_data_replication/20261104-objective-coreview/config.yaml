@@ -1,0 +1,28 @@
+study: 20261104-objective-coreview
+parent: 20261103-full-promising-ranking
+sample_parent: 20261103-full-promising-ranking-smoke
+seeds: [0, 1, 2]
+new_method: bce_coreview
+objective: bce
+feature_mask: pairwise_coreview
+max_epochs: 10
+patience: 2
+batch_lists: 32
+negative_alternatives: 50
+learning_rate: 0.001
+bootstrap_resamples: 1000
+bootstrap_seed: 0
+cells: [bce_text, bce_coreview, pairwise_text, pairwise_coreview]
+primary_contrasts:
+  - [bce_text, bce_coreview]
+  - [pairwise_text, pairwise_coreview]
+  - [pairwise_coreview, bce_coreview]
+  - [bce_text, pairwise_text]
+  - [retrieval, bce_coreview]
+interaction: (pairwise_coreview-pairwise_text)-(bce_coreview-bce_text)
+novelty_contrast: interaction_new_in_val-interaction_warm_in_val
+selector: chronological_inner_all_query_user_macro_ndcg10
+epoch_zero_eligible: true
+tie_break: earlier_epoch
+test_predictions_loaded: false
+interpretation: exploratory_completion_of_previously_inspected_full_validation_factorial

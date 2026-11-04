@@ -1,0 +1,139 @@
+{
+  "T0": {
+    "strict_before_ms": 1595800947930,
+    "review_edges": 1877548,
+    "max_review_timestamp": 1595800834936,
+    "query_user_excluded": true,
+    "self_history_paths_excluded": true,
+    "labels_read": false,
+    "history_limit": 50,
+    "canonical_split_unchanged": true,
+    "common_names": [
+      "candidate_log_degree",
+      "candidate_graph_known",
+      "history_graph_fraction",
+      "candidate_leaf_known",
+      "history_leaf_fraction_known",
+      "candidate_store_known",
+      "history_store_fraction_known",
+      "leaf_neighbor_available",
+      "store_neighbor_available"
+    ],
+    "graph_names": [
+      "log_other_reviewers",
+      "log_witness_paths",
+      "normalised_path_strength",
+      "same_leaf_history_fraction",
+      "same_store_history_fraction",
+      "supported_history_fraction"
+    ]
+  },
+  "controls": [
+    {
+      "method": "bce_text",
+      "seed": 0,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "bce_text",
+      "seed": 1,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "bce_text",
+      "seed": 2,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "pairwise_text",
+      "seed": 0,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "pairwise_text",
+      "seed": 1,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "pairwise_text",
+      "seed": 2,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "pairwise_coreview",
+      "seed": 0,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "pairwise_coreview",
+      "seed": 1,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "pairwise_coreview",
+      "seed": 2,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "bce_coreview",
+      "seed": 0,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "bce_coreview",
+      "seed": 1,
+      "queries": 48,
+      "max_logit_error": 0.0
+    },
+    {
+      "method": "bce_coreview",
+      "seed": 2,
+      "queries": 48,
+      "max_logit_error": 0.0
+    }
+  ],
+  "T1": {
+    "strict_before_ms": 1628643414042,
+    "review_edges": 2208880,
+    "max_review_timestamp": 1628643402825,
+    "query_user_excluded": true,
+    "self_history_paths_excluded": true,
+    "labels_read": false,
+    "history_limit": 50,
+    "canonical_split_unchanged": true,
+    "common_names": [
+      "candidate_log_degree",
+      "candidate_graph_known",
+      "history_graph_fraction",
+      "candidate_leaf_known",
+      "history_leaf_fraction_known",
+      "candidate_store_known",
+      "history_store_fraction_known",
+      "leaf_neighbor_available",
+      "store_neighbor_available"
+    ],
+    "graph_names": [
+      "log_other_reviewers",
+      "log_witness_paths",
+      "normalised_path_strength",
+      "same_leaf_history_fraction",
+      "same_store_history_fraction",
+      "supported_history_fraction"
+    ]
+  },
+  "reference_queries": 48,
+  "reference_max_abs_error": {
+    "common": 0.0,
+    "graph": 3.725290298461914e-09
+  }
+}

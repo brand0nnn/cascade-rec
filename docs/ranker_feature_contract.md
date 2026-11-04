@@ -56,3 +56,11 @@ A fresh ladder ID does not change that reference. Adjust analysis references exp
 summarises an entirely fresh rerun. Checkpoint selection remains conditional per-user macro nDCG@10; GAUC is secondary.
 
 Validation records both nDCG and the five outcomes. A rescue moves a retrieved target from rank 11–200 to rank 1–10; a demotion moves it from rank 1–10 to rank 11–200. Missing targets stay retrieval misses. All saved rank comparisons use pessimistic score ties and exclude padding.
+
+## Architecture review boundary (1 November 2026)
+
+The current supported groups remain `retrieval`, `matching`, `attributes`, `statistics`; `graph` is proposed, not implemented. See [architecture_proposals.md](architecture_proposals.md) for candidate features, exact count semantics and open decisions. The selected matching model also uses learned history ID/category embeddings and projected text; the four numeric columns are only part of its input.
+
+Preserve the existing feature/normalisation/checkpoint contract in policy arms A/B/C/D. Historical numeric last-leaf equality directly compares mapped IDs (including equal OOV IDs), and store-in-history uses rare-store/OOV mapping. The explanation graph instead compares known raw metadata and preserves unknowns. Graph flags therefore cannot silently replace those control inputs. A future correction or graph group needs a separate explicit intervention, candidate-wide feature computation, causal training/validation snapshots and checkpoint/config versioning. The target-only profile archive cannot be fed in as a positive-only feature cache.
+
+Device features remain disabled pending the locked audit gate. Graph features, a monotonic score residual and candidate routing are not approved by this documentation review.
