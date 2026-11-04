@@ -73,3 +73,6 @@ __pycache__/
 
 # Independent local experiments: vectors, caches, checkpoints and generated reports.
 /results/local_experiments/
+
+# Candidate-list copies in analysis runs are too large for GitHub (keep local)
+/results/analysis/**/val.npz
