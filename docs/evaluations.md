@@ -1,6 +1,6 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **4 November 2026** (the authorised full-data replication completed after the sample assessment; prior sample and historical pipeline findings retained). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **4 November 2026** (the objective x co-review factorial is complete; the earlier full-data replication, sample studies and historical pipeline findings are retained). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
@@ -8,6 +8,7 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 
 | Work | State |
 |---|---|
+| Objective x co-review factorial, root plan §14 | Complete: three new BCE+co-review fits plus nine frozen controls. Co-review improves overall/warm and loses new-item quality under both objectives; direct objective and novelty interaction intervals include zero |
 | Full-data replication of promising rankers, root plan §13 | Complete: twelve fresh fits and full-Val scoring; BCE leads overall, pairwise text leads new-item quality, and co-review trades new-item quality for warm-item gains. See the full-data section below |
 | RQ1 retrieval comparisons and text/ID trade-off | Complete from saved evidence; existing retrieval Test exposure disclosed |
 | RQ3 rankers, uncertainty and five-way failure funnel | Complete on Val, frozen text seed-0 candidates |
@@ -27,6 +28,37 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 | Final graph-family decomposition and frozen encoder diagnosis, root `plan.md` §12 | Complete: 12 matched fits, six exact controls, 12 frozen checkpoint loads/full-prefix score sets; 226 tests pass / 4 legacy skips. Execution paused for deeper assessment |
 
 **Historical pipeline working conclusion:** retrieval misses remain the largest ceiling, while reranking also displaces strong retrieved targets. Forced-positive training and the inverted score response motivate the authorised policy experiment; controlled retraining is still needed for a causal claim. New products supply about two-thirds of MLP's net gain. The expanded graph localises substantial losses to dense co-reviewed targets and shows gains for same-store co-reviewed head targets. These target associations motivate [architecture proposals](architecture_proposals.md); integration into the canonical full-data pipeline remains unapproved. The separate sample and full-data residual-ranker experiments below are authorised through root `plan.md`. Target-conditioned oracle estimates do not establish deployable routing gains.
+
+## Objective x co-review factorial completion (4 November 2026)
+
+The user authorised completing the missing cell after discussing the original controlled-comparison design. Root plan §14 / `configs/ranker/objective_coreview.yaml` register the question: **does the incremental value of co-review depend on training objective, and does that interaction differ for new versus warm products?** Three fresh BCE+co-review fits reuse all §13 candidates, features, prefix scalers, split, negative plans and initial parameters. The nine existing BCE-off/pairwise-off/pairwise-on fits remain unchanged. All twelve factorial weights were locked before scoring the new cell. The new study is `results/local_experiments/20261104-objective-coreview/`; [compact evidence](../results/full_data_replication/20261104-objective-coreview/report.md) includes all four cells and their direct contrasts.
+
+This is the same **111,480-product / 232,904-event / 124,416-user** full-Val population. The graph remains strictly pre-T0 and all methods retain basic metadata matching plus nine common support/degree features. “Co-review off/on” switches only the four additional relational columns, after standardisation. BCE, Adam .001, batch32, fifty alternatives, max10/patience2, epoch-zero earliest-tie chronological inner selector and selected-fixed-epoch all-B refit match the parent. New selected epochs are **8/9/8**. No graph retrieval, new graph encoder, candidate-source change or Test prediction was introduced.
+
+| Objective | Additional co-review | Overall nDCG@10 | Recall@10 | New nDCG@10 | Warm nDCG@10 |
+|---|---|---:|---:|---:|---:|
+| BCE | Off | 0.008115 | 0.015399 | 0.008697 | 0.007846 |
+| BCE | On | **0.008409** | **0.015845** | 0.008342 | **0.008384** |
+| Pairwise | Off | 0.007767 | 0.014865 | **0.009152** | 0.007103 |
+| Pairwise | On | 0.008065 | 0.015290 | 0.008873 | 0.007571 |
+
+**Co-review helps BCE overall, with a novelty trade-off.** BCE-on minus BCE-off nDCG is **+0.000295 [0.000169, 0.000425]**, approximately **3.6%** relative. New-item quality changes by **−0.000354 [−0.000542, −0.000166]**; warm quality by **+0.000538 [0.000375, 0.000706]**. The pattern matches the pairwise graph gain: overall **+0.000298 [0.000161, 0.000439]**, new **−0.000279 [−0.000498, −0.000039]**, warm **+0.000468 [0.000308, 0.000623]**. Thus additional co-review evidence has a supported incremental benefit under both recipes, accompanied by a supported new-item loss. This is a family intervention beyond existing degree/knownness controls, not proof of a particular graph mechanism.
+
+**The objective-dependence hypothesis is inconclusive.** The direct interaction is `(PW_on−PW_off)−(BCE_on−BCE_off)`; positive values favour a larger incremental graph gain under pairwise. Its overall estimate is **+0.000003 [−0.000159, 0.000163]**, new **+0.000076 [−0.000201, 0.000374]**, warm **−0.000070 [−0.000268, 0.000132]**. These intervals do not establish an objective-dependent gain or equivalence between gains. Do not infer an interaction from significance in one cell and not another.
+
+The direct **new-minus-warm difference in that interaction** is **+0.000146 [−0.000162, 0.000511]**, also inconclusive. It jointly resamples the union of users and preserves each novelty group's own qualifying-user macro denominator, including the covariance from users in both groups. This describes effects in different target populations rather than a causal novelty intervention.
+
+BCE+co-review exceeds pairwise+co-review overall by **+0.000344 [0.000184, 0.000509]**, while losing on new items. Against frozen retrieval its overall gain is **+0.002126 [0.001819, 0.002414]**. It has the highest overall point estimate within this matched factorial; pairwise without co-review retains the highest new-item point estimate. This study does not select a final system or establish superiority over every historical pipeline.
+
+All four cells retain **Recall@200 0.054746** and **217,988 raw retrieval misses**. BCE+co-review averages **2,505.67 rescues / 1,515.67 demotions / 1,621.33 retained hits**, giving **4,127 top-ten target events**, versus BCE-off's **4,015** and retrieval's **3,137**. Counts are per-seed raw-event means, not user-macro contributions or ensemble outputs. Monthly/history tables and conditional metrics preserve their supports.
+
+Intervals use 1,000 paired-user draws, seed0, after event-metric averaging across the three seeds. They remain exploratory/unadjusted on reused Val and conditional on these runs/candidates. Old cells were already inspected before this completion; the new fit is not untouched holdout confirmation. The selector rule is matched while selected update counts differ, so the objective contrast covers the objective/selection/refit recipe. New targets have no pre-T0 review edges; the observed loss does not establish how individual graph inputs or competing candidates caused it.
+
+The separate sample technical path reproduced the original off-feature BCE first-epoch control. Final checks: **233 tests pass / 4 legacy embedding skips**; **33 new inner score sets**, three new outer outputs, all twelve locked factorial states, **675 metric rows**, eighteen main nDCG intervals and the joint-user novelty interval independently pass. The shared numerical-analysis source snapshot preserves the exact code used to generate the tables before plot-label formatting. Bulk arrays/logits/weights remain local. The registered work is complete; graph retrieval, new GNNs, index/serving work, canonical integration and final Test remain separate decisions.
+
+![Objective-by-co-review means and direct interaction intervals](figures/20261104-objective-coreview.png)
+
+Reproduce with `cascade.pipelines.objective_coreview`: **prepare → fit (seeds 0/1/2) → evaluate → report → audit → publish**. Use a fresh study name and the immutable §13 parent; `--sample` applies to a separate technical preparation, and `--control` adds the sample off-feature reproduction. Fitting/evaluation use `--device mps`; reporting/auditing use CPU. `--phase publish --preview` renders the figure before the first compact publication. Existing fit/report/publication destinations are refused.
 
 ## Full-data promising-ranker replication (4 November 2026)
 

@@ -2,7 +2,7 @@
 
 ## Current status — registered studies complete, 4 November 2026
 
-**The registered sample programme, graph/objective follow-ups and full-data replication are complete.** Sections 2–12 retain their protocols and outcomes; §13 records the subsequently authorised full-data study. Its compact deliverable is `results/full_data_replication/20261103-promising/`, with bulk local evidence in `results/local_experiments/20261103-full-promising-ranking/`. BCE leads full-Val overall quality, while pairwise text leads new-item quality; the sample priority order does not transfer uniformly. Read `docs/evaluations.md` for the current assessment. No additional experiment, canonical integration or final Test is launched automatically.
+**The registered sample programme, full-data replication and objective/co-review factorial are complete.** Sections 2–12 retain their historical protocols and outcomes; §§13–14 record the subsequently authorised full-data studies. Compact deliverables are `results/full_data_replication/20261103-promising/` and `results/full_data_replication/20261104-objective-coreview/`; bulk evidence remains under `results/local_experiments/`. BCE+co-review leads overall quality within the matched factorial, while pairwise text leads new-item quality. Co-review improves warm quality and loses new-item quality under both objectives; direct objective and novelty interactions are inconclusive. Read `docs/evaluations.md` for the current assessment. No additional experiment, canonical integration or final Test is launched automatically.
 
 | Original programme / approved extension | Status |
 |---|---|
@@ -14,6 +14,7 @@
 | Frozen signal diagnosis and subsequently approved candidate-normalised training | Complete; see §§7–8, including the positive normalisation result |
 | Phase 2 graph/latent ranking, objective ablation and graph-family decomposition | Complete; see §§10–12, including unsuccessful trained BCE sample epochs and the later pairwise gains |
 | Full-data promising-ranker replication | Complete; twelve fits, full-Val scoring, monthly/history/subgroups, primary/secondary/historical contrasts, checked figure and independent audit; see §13 |
+| Objective x co-review factorial | Complete; three new BCE+co-review fits, nine frozen controls, direct objective/novelty interactions, checked figure and independent audit; see §14 |
 
 ### Completed evidence checklist
 
@@ -540,3 +541,30 @@ All twelve fits and one scheduled outer-Val comparison completed. Full B contain
 BCE's full-data learning and overall lead qualify the sample's objective finding; pairwise retains a new-item advantage. Co-review shifts its incremental benefit to warm products while losing new-item quality; extra metadata loses overall/new quality. The co-review-versus-BCE overall difference is inconclusive. BCE improves the frozen retrieval control by 29.1% in nDCG, but no new arm establishes superiority over the archived MLP K100 validation maximum. This is reused-Val exploratory evidence, with unadjusted user-bootstrap intervals conditional on these runs. Full primary and explicitly secondary/historical comparisons are in `docs/evaluations.md` and `results/full_data_replication/20261103-promising/`; no final system or causal mechanism is selected.
 
 The separate sample path reproduced all twelve first-epoch ranking controls. Independent full audit: **548,018 candidate lists**, **96 feature-reference queries**, **104 inner score replays**, **12 outer replays / selected locks**, **675 metric reconstructions**, **18 independent main nDCG intervals**; all pass. Final suite **229 passed / 4 legacy skips**. Compact evidence and the checked figure are shared; bulk features/candidates/weights/logits remain ignored. The registered work is complete. No further training, changed-pool integration or held-out Test evaluation follows automatically.
+
+## 14. Approved objective x co-review completion — 4 November 2026
+
+The user supplied the original design, confirmed the controlled-comparison framing, and instructed proceeding with the missing BCE+co-review cell. This supersedes §13's completion stop only for this bounded extension. Register `configs/ranker/objective_coreview.yaml` before fitting:
+
+- Reuse the exact full-data K200 candidates, pre-T0 features, prefix scalers, chronological split, paired negatives and three old cells from §13. Fit only BCE+four optional co-review columns, seeds 0/1/2. Keep basic matching/nine common controls and zero the optional metadata-history fractions after standardisation. The existing parent remains immutable.
+- Same starting parameters, BCE, Adam .001, batch32, fifty alternatives, max10/patience2, earliest-tie epoch-zero inner user-macro selector and selected-fixed-epoch all-B refit. First complete a separate sample technical path, including an off-feature BCE control reproducing its old first-epoch curve. No new objective, graph snapshot or candidate-source sweep.
+- Lock all twelve factorial cell/seed selections before scoring the three new full-Val outputs. Primary differences: BCE graph gain, pairwise graph gain, BCE-on versus pairwise-on, objective difference with co-review off, and new cell versus retrieval. Direct interaction is `(PW_on-PW_off)-(BCE_on-BCE_off)`; report all/new/warm user-paired intervals rather than comparing significance across cells.
+- Test interaction_new minus interaction_warm using joint user-cluster resampling over the union of users, preserving each group's own qualifying-user macro denominator and covariance. This is a descriptive contrast between novelty populations, not a causal novelty intervention. Use B=1000, seed0 after averaging event metrics over training seeds. Retain monthly/history groups, fixed coverage, conditional metrics and funnels.
+- Preserve all new inner checkpoints/logits, verify exact scoring/selection/initialisation/negative-plan controls, and share audited compact results plus a checked interaction figure. Update the project records and commit. Reused Val remains exploratory/unadjusted, and objective comparisons include selection/update-count differences. Graph retrieval, new GNNs, canonical integration, serving/index studies and final Test remain later decisions.
+
+### Completed factorial study — 4 November 2026
+
+Three new BCE+co-review seeds selected epochs **8/9/8**. All twelve cell/seed selections were locked before scoring the new cell on the same **232,904 Val events / 124,416 users**. The sample off-feature control reproduces the original BCE first epoch; all nine full-data controls remain immutable.
+
+| Objective | Co-review | Overall nDCG@10 | New | Warm |
+|---|---|---:|---:|---:|
+| BCE | Off | 0.008115 | 0.008697 | 0.007846 |
+| BCE | On | **0.008409** | 0.008342 | **0.008384** |
+| Pairwise | Off | 0.007767 | **0.009152** | 0.007103 |
+| Pairwise | On | 0.008065 | 0.008873 | 0.007571 |
+
+BCE graph gain is **+0.000295 [0.000169, 0.000425]**, or **3.6%**, with new **−0.000354 [−0.000542, −0.000166]** and warm **+0.000538 [0.000375, 0.000706]**. The pairwise graph gain has the same directional trade-off. Direct objective interaction is **+0.000003 [−0.000159, 0.000163]** overall; the jointly resampled new-minus-warm interaction is **+0.000146 [−0.000162, 0.000511]**. Neither establishes objective dependence or equivalence. Fixed Recall@200 remains **0.054746**; all methods retain **217,988 retrieval misses**.
+
+Compact evidence, the exact numerical-analysis source snapshot and hash-bound publication are under `results/full_data_replication/20261104-objective-coreview/`. The checked figure is `docs/figures/20261104-objective-coreview.png`; `docs/evaluations.md` records interpretation and reproduction. **233 tests pass / 4 legacy skips**. Independent checks reproduce 33 new inner score sets, three new outer outputs, all twelve locks, 675 metric rows, eighteen main intervals and the joint novelty interval. The source snapshot precedes a plot-label formatting adjustment; numerical outputs remain unchanged.
+
+**Completion:** the bounded extension is complete. Val reuse and conditional, unadjusted intervals limit inference. No additional graph retrieval, learned encoder, canonical integration, serving/index study or held-out Test is launched automatically.

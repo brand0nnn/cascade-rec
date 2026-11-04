@@ -2,6 +2,25 @@
 
 Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
+## Objective x co-review: completed controlled comparison
+
+Three new full-data BCE+co-review fits complete the factorial alongside nine immutable controls, on **232,904 Val events / 124,416 users** and the same frozen K200 candidates. The switches affect four additional co-review features; basic matching/common support inputs remain present.
+
+| Objective | Co-review | nDCG@10 | New | Warm |
+|---|---|---:|---:|---:|
+| BCE | Off | 0.008115 | 0.008697 | 0.007846 |
+| BCE | On | **0.008409** | 0.008342 | **0.008384** |
+| Pairwise | Off | 0.007767 | **0.009152** | 0.007103 |
+| Pairwise | On | 0.008065 | 0.008873 | 0.007571 |
+
+Co-review improves BCE overall by **+0.000295 [0.000169, 0.000425]**, or **3.6%**, but lowers new-item quality while improving warm items. The same trade-off appears under pairwise. The direct difference between their graph gains is **+0.000003 [−0.000159, 0.000163]**: objective dependence is inconclusive. Its new-minus-warm contrast is also inconclusive (**+0.000146 [−0.000162, 0.000511]**), using joint user-cluster resampling. These reused-Val intervals are exploratory/unadjusted and conditional on the trained seeds; no equivalence or final system is established.
+
+![Means by objective and additional co-review features, with direct interaction intervals](docs/figures/20261104-objective-coreview.png)
+
+[Detailed assessment](docs/evaluations.md#objective-x-co-review-factorial-completion-4-november-2026), [compact report/tables](results/full_data_replication/20261104-objective-coreview/report.md), root plan §14 and `configs/ranker/objective_coreview.yaml` record the protocol. Run `python -m cascade.pipelines.objective_coreview --phase prepare`, then `--phase fit --seed 0/1/2 --device mps`, `evaluate`, `report`, `audit`, and `publish` in the project environment. Fitting reads the immutable full-data parent; no candidate/feature regeneration or old-control retraining is required. Use a fresh study name for a rerun and a separate `--sample` technical preparation; existing destinations are refused.
+
+The sample off-feature control reproduces the old BCE first epoch. **233 tests pass / 4 legacy skips**; all 33 new inner score sets, three outer outputs, twelve factorial locks, 675 metric rows, eighteen main intervals and the joint novelty interval pass independent checks. Graph retrieval, new graph encoders, index/serving work and held-out Test remain later decisions.
+
 ## Full-data replication results (4 November 2026)
 
 After assessing the sample studies, twelve fresh ranker fits completed on the **111,480-product catalogue**, with **232,904 validation events / 124,416 users**. All methods share frozen MiniLM/90-day-recency natural K200 candidates, strictly pre-T0 graph inputs, chronological B tuning and paired initial states/negatives across seeds 0/1/2. Selected weights were locked before full-Val scoring. This is exploratory evidence on reused Val; no held-out Test prediction was generated.

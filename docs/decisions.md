@@ -2,6 +2,16 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-04 — Close the objective x co-review factorial
+
+Three fresh BCE+co-review seeds complete root plan §14 using the exact immutable parent inputs and nine locked control fits. Selected epochs are 8/9/8. Full-Val nDCG@10 is **0.008409**, compared with BCE-off **0.008115**: graph gain **+0.000295 [0.000169, 0.000425]**. Warm gains accompany new-item losses under both objectives. The direct interaction `(PW_on−PW_off)−(BCE_on−BCE_off)` is **+0.000003 [−0.000159, 0.000163]**; the joint-user new-minus-warm interaction is **+0.000146 [−0.000162, 0.000511]**. Neither establishes objective dependence or equivalence. Preserve the whole training/selection/refit-recipe interpretation and exploratory/unadjusted reused-Val limitations.
+
+All new checkpoints/logits remain local; compact four-cell/group/funnel/contrast/source/provenance evidence and the checked interaction figure are shared. The exact numerical-analysis source snapshot is retained separately from a later label-formatting adjustment. The sample off-control reproduces the earlier BCE first epoch. Final checks: **233 passed / 4 legacy skips**, with 33 inner/three outer score replays, twelve factorial locks, 675 reconstructed metric rows, eighteen direct/main intervals and one jointly resampled novelty interval independently passing. Commit the results and documentation. This completes the authorised extension; no automatic graph retrieval, new encoder, canonical integration, serving/index work or Test launch.
+
+## 2026-11-04 — Complete the controlled objective x co-review question
+
+Following discussion of the original design, the user authorised proceeding with the missing BCE+co-review comparison. Root plan §14 registers three new full-data fits; the nine existing BCE-off/pairwise-off/pairwise-on controls, candidates, graph, feature normalisation, split, initialisation and negative plans remain immutable. The question is when additional relational evidence helps, including objective and novelty interactions, rather than requiring a new model to win overall. Direct paired-user factorial and joint-user new-minus-warm interaction intervals are registered before fitting. Final Test, graph retrieval and further architectures remain separate decisions.
+
 ## 2026-11-04 — Complete the full-data replication and qualify the sample conclusions
 
 All twelve registered fits and full-Val scoring completed on the unchanged canonical split and frozen-recency natural K200 pool. BCE text/common control nDCG@10 is **0.008115**, pairwise text **0.007767**, pairwise co-review **0.008065**, combined **0.007930**, versus retrieval **0.006284**. Pairwise loses to BCE overall/warm while improving new items. Co-review improves its pairwise control overall/warm but loses new-item quality; additional category/store-history fractions lose overall/new quality versus co-review. Full BCE selects trained epochs 10/6/6 rather than the sample's epoch zero; different populations and update exposure prevent assigning this to data quantity alone.
