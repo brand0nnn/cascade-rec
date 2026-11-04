@@ -1,0 +1,145 @@
+{
+  "study": "20261104-steps-restoration",
+  "baseline_commit": "dbbdf7e",
+  "methods": [
+    "bce_text",
+    "pairwise_text",
+    "pairwise_coreview",
+    "bce_coreview"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "graph_snapshots": {
+    "control": 1595800947930,
+    "refresh": 1628643414042
+  },
+  "test_events": 297390,
+  "test_k": 200,
+  "graph_refresh": "all graph-derived common and optional co-review inputs; same masks and prefix scalers",
+  "fixed": "candidates/checkpoints/scalers/histories/event-time availability and full-history filtering",
+  "primary_graph_contrasts": "T1 minus T0 per method; coreview minus text per objective/snapshot; change in incremental coreview gain",
+  "groups": [
+    "all",
+    "new",
+    "warm"
+  ],
+  "bootstrap_resamples": 1000,
+  "bootstrap_seed": 0,
+  "interpretation": "exploratory after Test exposure; conditional unadjusted user intervals; no untouched-Test claim",
+  "benchmark_grid": [
+    {
+      "setting": "flat_k50",
+      "kind": "flat",
+      "k": 50
+    },
+    {
+      "setting": "flat_k100",
+      "kind": "flat",
+      "k": 100
+    },
+    {
+      "setting": "flat_k200",
+      "kind": "flat",
+      "k": 200
+    },
+    {
+      "setting": "flat_k500",
+      "kind": "flat",
+      "k": 500
+    },
+    {
+      "setting": "ivf_preT0_p4",
+      "kind": "ivf",
+      "k": 200,
+      "training": "preT0",
+      "nprobe": 4
+    },
+    {
+      "setting": "ivf_preT0_p16",
+      "kind": "ivf",
+      "k": 200,
+      "training": "preT0",
+      "nprobe": 16
+    },
+    {
+      "setting": "ivf_preT0_p32",
+      "kind": "ivf",
+      "k": 200,
+      "training": "preT0",
+      "nprobe": 32
+    },
+    {
+      "setting": "ivf_catalogue_p4",
+      "kind": "ivf",
+      "k": 200,
+      "training": "catalogue",
+      "nprobe": 4
+    },
+    {
+      "setting": "ivf_catalogue_p16",
+      "kind": "ivf",
+      "k": 200,
+      "training": "catalogue",
+      "nprobe": 16
+    },
+    {
+      "setting": "ivf_catalogue_p32",
+      "kind": "ivf",
+      "k": 200,
+      "training": "catalogue",
+      "nprobe": 32
+    },
+    {
+      "setting": "hnsw_ef32",
+      "kind": "hnsw",
+      "k": 200,
+      "efSearch": 32
+    },
+    {
+      "setting": "hnsw_ef64",
+      "kind": "hnsw",
+      "k": 200,
+      "efSearch": 64
+    },
+    {
+      "setting": "hnsw_ef128",
+      "kind": "hnsw",
+      "k": 200,
+      "efSearch": 128
+    },
+    {
+      "setting": "hnsw_adaptive",
+      "kind": "hnsw",
+      "k": 200,
+      "efSearch": "adaptive"
+    }
+  ],
+  "benchmark_queries": 1000,
+  "benchmark_warmup": 50,
+  "benchmark_cohort": "exact baseline instance IDs and order; native FAISS, no implicit efSearch increase for fixed settings",
+  "benchmark_graph": "preT0 only",
+  "benchmark_quality": "three frozen seeds",
+  "benchmark_timing": "one resident seed0 model; one CPU thread",
+  "fetch": "start 2*K, double to enough eligible candidates or catalogue exhausted; never target-aware",
+  "k500": "benchmark-only inference extension; no full-data training or K reselection",
+  "training_performed": false,
+  "t2_graph": false,
+  "narrative_report_written": false,
+  "source_sha256": {
+    "src/cascade/pipelines/steps_restoration.py": "5076a01d0230cd3e3eac7bea068e9714f3782848d5e73968f16e91c50b827a4c",
+    "src/cascade/data/snapshot_graph_features.py": "09da5f54c9a4038adfd34e0207d0302c2a1da7246dc9f9a7eda4cd81d49c342e",
+    "src/cascade/pipelines/steps_final_analysis.py": "c72aee96ed8e70445ce6090c74163b92c1903db43ad05f378b50a5cfc433e571",
+    "src/cascade/pipelines/steps_final_benchmark.py": "a5842bf006fde0ebb06e655b44031db3d301a85a3bdfa56424b431903deb87ee"
+  },
+  "input_sha256": {
+    "results/local_experiments/20261104-steps-final/protocol.json": "7e1bb2067416f97e3543683217a839e74a94744730d70b6fa5395782ca3757d6",
+    "results/local_experiments/20261104-steps-final/completion_audit.json": "22cbfe1274e66ae8d703dc4945b8ea08539557fcac37e884dc7ba455316e8c3f",
+    "results/local_experiments/20261104-steps-final/test/completion.json": "442a3b7870efbae8ba55b8b6b6970c5712fb5bf9f0872edfd6947b84d97bf47e",
+    "results/local_experiments/20261104-steps-final/benchmark/completion.json": "dc47552411d6169041b7232cf01a2a064fd1b325ca74fa803d05d10c2b2ab431",
+    "results/local_experiments/20261103-full-promising-ranking/features/manifest.json": "8ffcc964eae3b643007285d0c7b40027fb45ad6df168d61f6ae9f0061ec5edd2",
+    "results/steps_final/20261104/publication_manifest.json": "48c4cc1d5bbe1f5999cd06403c4e54b8df6ae487d2d6fbe8ee1f77af8364d525"
+  }
+}

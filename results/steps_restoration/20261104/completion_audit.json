@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "rank_top_replays": 24,
+  "metric_reconstructions": 72,
+  "interval_reconstructions": 30,
+  "funnel_partitions": 72,
+  "benchmark_rank_replays": 84,
+  "benchmark_metrics": 504,
+  "latency_summaries": 56,
+  "fixed_ef_queries_verified": 3000,
+  "source_sha256": "1ce3f198bb5d657d6c36652b3137f4913b2c8531c60da167aa9d5c3849af6776",
+  "protocol_sha256": "fcb973268985865adfe617bb75b705d3dcb0e5af177e78cd42a6452476961e4c",
+  "training_performed": false,
+  "narrative_report_written": false,
+  "baseline_preserved": true,
+  "test_exposed_before_followup": true
+}

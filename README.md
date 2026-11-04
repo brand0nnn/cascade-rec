@@ -2,6 +2,8 @@
 
 Start with [docs/evaluations.md](docs/evaluations.md) for all evaluation findings, current progress, limitations and follow-up commands. `CLAUDE.md` covers implementation conventions; `docs/decisions.md` preserves historical decisions.
 
+**Restoration execution status (4 November 2026):** root plan §16 is complete: full-Test T1 graph refresh, all 14 restored FAISS/budget settings and per-seed K funnels. [Tables, audit metadata and source snapshots](results/steps_restoration/20261104/) plus three checked figures are saved separately from the unchanged §15 run. 252 tests pass / 4 skips; the narrative report remains deferred.
+
 **Latest execution status (4 November 2026):** root plan §15 items are complete: locked full Test, popularity/composition, inference K sensitivity and bounded FAISS/cascade timing. [Numerical tables and audit metadata](results/steps_final/20261104/) and four checked figures are saved; **243 tests pass / 4 legacy skips**. The user deferred the narrative report. Earlier Test/index deferrals below are historical.
 
 ## Objective x co-review: completed controlled comparison

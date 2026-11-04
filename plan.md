@@ -666,3 +666,27 @@ All four phases reuse immutable locked artifacts under `results/local_experiment
 - [ ] Narrative report — deliberately deferred by the user; no new report document created.
 
 The `report` CLI phase writes numerical tables and independent checks only. Historical RQ1 Test summaries were previously exposed; this is a locked follow-up, not globally blind project-wide Test. No further experimental sweep, graph refresh, retraining or canonical integration is started.
+
+## 16. Approved restoration of omitted §15 variants — 4 November 2026
+
+The user explicitly authorised restoring §15 only, with frozen models and no narrative report. Register fresh `20261104-steps-restoration` separately from immutable `dbbdf7e` evidence.
+
+- Full Test: compare strictly pre-T1 against pre-T0 graph inputs for all four learned methods × seeds0/1/2, reusing the exact 297,390 K200 candidate lists and old T0 predictions. Refresh graph-derived common and optional co-review inputs; keep prefix scalers, masks, checkpoints, metadata and event-time/full-history rules fixed. No canonical split changes, T2 graph, retraining or model/K selection.
+- Record T1−T0 contrasts, incremental co-review gains under each snapshot/objective and their changes, overall/new/warm paired-user intervals (1000 draws, seed0 after event-seed means), per-seed metrics/funnels, target graph support and standardised feature shifts. This is exploratory after Test exposure.
+- Restore the fixed 1000-query/50-warm-up Validation benchmark: Flat K50/100/200/500; IVF nlist256 with nprobe4/16/32 under both pre-T0 and explicitly catalogue-aware full-catalogue centroid training; HNSW M32/efConstruction200 with native efSearch32/64/128 plus the existing adaptive strong control. Fixed low values are not silently raised; the old wrapper guard remains unchanged. Keep all index-comparison graph inputs at T0.
+- Match the original cohort/order, one CPU thread and resident seed0 request timings; use three frozen seeds for learned quality. Include adaptive exclusion-aware fetch, matching-K Flat overlap, target coverage, quality, latency median/p95, shortfalls, build cost and index size. K500 is benchmark-only inference.
+- Complete per-seed funnels at every existing K from saved Val logits; match their means and metric values to §15.
+- Check T1 boundary exclusion, query-user/self/history exclusion, fast/reference features, T0 replays, parameter/scaler/candidate immutability, ranks/funnels/intervals, native HNSW settings and numerical ties. Preserve exact phase sources and output hashes; save tables/figures under `results/steps_restoration/20261104/`, bulk arrays under `results/local_experiments/20261104-steps-restoration/`. Commit after checks pass. No narrative report or revision of earlier results/claims.
+
+Runner: `python -m cascade.pipelines.steps_restoration` phases **prepare → graph → analyse / funnels / indices → audit → publish**; graph inference uses MPS, indexing/timing uses CPU. Existing destinations are refused.
+
+### Completed restoration items — 4 November 2026
+
+- [x] Twelve fresh T1 full-Test exports; pre-T0 controls and all previous results preserved. Graph edge counts and strict timestamp boundaries, 48 reference queries per snapshot, original scalers/checkpoints/candidates and unchanged non-graph inputs checked.
+- [x] All 14 registered native-FAISS/budget settings completed on the original cohort. Fixed ef32/64/128 verified across 3,000 queries; ef32 has 30 short pools, retained in coverage/quality rather than silently refilled with higher effort.
+- [x] All 156 per-seed K-funnel rows reproduce the previous 60 mean rows. Prefix membership handles boundary ties directly.
+- [x] Independent audit: 24 rank/top-ten replays, 72 metrics, 30 nDCG intervals, 72 funnel partitions, 84 learned benchmark rank replays, 504 benchmark metrics and 56 latency summaries pass.
+- [x] 252 tests passed / 4 legacy skips; three checked figures, compact CSV/JSON data, exact phase source snapshots and publication hashes saved under `results/steps_restoration/20261104/`. Bulk data remain ignored/local.
+- [ ] Narrative report — deliberately deferred. No retraining, T2 graph, architecture expansion, earlier-result overwrite or untouched-Test claim.
+
+Use `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1` for CPU commands. The native HNSW trials bypass the unchanged wrapper guard; that guard is a repository API constraint, not a universal FAISS limitation. No further experimental jobs follow this completion automatically.
