@@ -43,7 +43,13 @@ SOURCES = {
     "popularity_buckets": "results/analysis/20261028-staleness-popularity/a_by_rtrain_bucket.csv",
     "last_item": "results/analysis/20261028-last-item/comparison_last_item.csv",
     "train_lists": "data/processed/candidates/two_tower_text_seed0/ranker_train.npz",
+    "policy_metrics": "results/targeted_study/policy-report-20261029/metrics.csv",
+    "policy_comparisons": "results/targeted_study/policy-report-20261029/comparisons.csv",
+    "policy_score": "results/targeted_study/policy-report-20261029/score_diagnostics.csv",
 }
+# Policy-study arms: (label, colour, hatched = retrieval score masked).
+ARMS = {"A": ("A  all lists, score on", FORCED, False), "B": ("B  all lists, score masked", FORCED, True),
+        "C": ("C  natural lists, score on", NATURAL, False), "D": ("D  natural lists, score masked", NATURAL, True)}
 
 
 def _load(key: str):
@@ -297,15 +303,102 @@ def fig_retriever_popularity(out: Path) -> None:
           "results/analysis/20261028-staleness-popularity, results/analysis/20261028-last-item.")
 
 
+def fig_policy_study(out: Path) -> None:
+    metrics, comps, score = _load("policy_metrics"), _load("policy_comparisons"), _load("policy_score")
+    overall = metrics[(metrics.axis == "overall") & (metrics.group == "all")]
+    fig, ((ax_a, ax_k), (ax_g, ax_s)) = plt.subplots(2, 2, figsize=(11, 7.6))
+    rows = []
+
+    # (a) K1 = 200 quality per arm: bar = seed mean, dots = seeds.
+    at200 = overall[overall.k1 == 200]
+    for x, (arm, (label, colour, masked)) in enumerate(ARMS.items()):
+        values = at200[at200.arm == arm].sort_values("seed").ndcg10.to_numpy()
+        ax_a.bar(x, values.mean(), width=0.62, color=colour, alpha=0.45 if masked else 1, hatch="//" if masked else None,
+                 edgecolor=SURFACE if not masked else colour, linewidth=0)
+        ax_a.scatter([x - 0.12, x, x + 0.12], values, s=14, color=INK, zorder=3)
+        ax_a.text(x, values.max() + 0.0003, f"{values.mean():.4f}", ha="center", fontsize=8.5, color=INK)
+        rows += [{"panel": "a", "arm": arm, "seed": s, "k1": 200, "value": v} for s, v in zip((0, 1, 2), values)]
+    ax_a.set(xticks=range(4), xticklabels=["A\nall · on", "B\nall · masked", "C\nnatural · on", "D\nnatural · masked"],
+             ylim=(0, 0.0105), ylabel="End-to-end nDCG@10 at K₁ = 200")
+    ax_a.grid(axis="x", visible=False)
+    ax_a.set_title("(a) Natural lists win, with or without the score")
+
+    # (b) K1 sweep per arm, seed mean.
+    for arm, (label, colour, masked) in ARMS.items():
+        curve = overall[overall.arm == arm].groupby("k1").ndcg10.mean().reindex(K1S)
+        ax_k.plot(K1S, curve, color=colour, linestyle="--" if masked else "-", marker="o", markersize=4.5)
+        ax_k.annotate(arm, (K1S[-1], curve.iloc[-1]), textcoords="offset points", xytext=(7, 0), va="center",
+                      fontsize=9, fontweight="bold", color=INK)
+        rows += [{"panel": "b", "arm": arm, "k1": k, "value": v} for k, v in curve.items()]
+    ax_k.set(xscale="log", xticks=K1S, xticklabels=[str(k) for k in K1S], xlim=(42, 640), ylim=(0, 0.0105),
+             xlabel="K₁ (candidates passed to the ranker)", ylabel="End-to-end nDCG@10")
+    ax_k.minorticks_off()
+    ax_k.set_title("(b) Only all-list training collapses as K₁ grows")
+
+    # (c) C - A by product group, paired user-bootstrap 95% CI.
+    groups = [("overall", "all", "All products"), ("item_type", "new-in-period", "New products"),
+              ("item_type", "warm-tail", "Tail"), ("item_type", "warm-head", "Popular (head)")]
+    ca = comps[comps.comparison == "C-A"]
+    for y, (axis, group, label) in zip(range(len(groups))[::-1], groups):
+        r = ca[(ca.axis == axis) & (ca.group == group)].iloc[0]
+        ax_g.errorbar(r["diff"], y, xerr=[[r["diff"] - r.ci_low], [r.ci_high - r["diff"]]], fmt="o", color=NATURAL,
+                      markersize=7, capsize=3, linewidth=2)
+        ax_g.text(r["diff"], y + 0.2, f"{r['diff']:+.5f}".replace("-", "−"), va="bottom", ha="center",
+                  fontsize=8.5, color=INK)
+        rows.append({"panel": "c", "arm": "C-A", "group": label, "value": r["diff"], "ci_low": r.ci_low,
+                     "ci_high": r.ci_high})
+    ax_g.axvline(0, color=INK_2, linewidth=1)
+    ax_g.set(yticks=range(len(groups))[::-1], yticklabels=[g[2] for g in groups], ylim=(-0.6, 3.6),
+             xlim=(-0.0016, 0.0062), xlabel="C − A: change in nDCG@10 (95% CI; right = natural lists better)")
+    ax_g.grid(axis="y", visible=False)
+    ax_g.set_title("(c) The gain is on popular products; new products lose")
+
+    # (d) Shortcut: share of top-10 slots taken by retrieval ranks 201-500 when ranking 500 candidates.
+    measured = score[score.status == "measured"]
+    for x, arm in enumerate(("A", "C")):
+        values = measured[measured.arm == arm].sort_values("seed").added_top10_share.to_numpy() * 100
+        label, colour, _ = ARMS[arm]
+        ax_s.bar(x, values.mean(), width=0.55, color=colour)
+        ax_s.scatter([x - 0.1, x, x + 0.1], values, s=14, color=INK, zorder=3)
+        ax_s.text(x, values.max() + 3, f"{values.mean():.0f}%", ha="center", fontsize=9.5, color=INK)
+        rows += [{"panel": "d", "arm": arm, "seed": s, "k1": 500, "value": v} for s, v in zip((0, 1, 2), values)]
+    ax_s.axhline(60, color=GREY, linewidth=1, linestyle="--")
+    ax_s.text(1.45, 61.5, "60% = if retrieval\nrank were ignored", fontsize=8, color=INK_2, ha="right", va="bottom")
+    ax_s.set(xticks=[0, 1], xticklabels=["A\nall lists", "C\nnatural lists"], xlim=(-0.6, 1.6), ylim=(0, 108),
+             ylabel="Top-10 slots from retrieval ranks 201–500 (%)")
+    ax_s.grid(axis="x", visible=False)
+    ax_s.set_title("(d) The shortcut: all-list training fills the top 10\nfrom the retriever's weakest candidates")
+
+    handles = [plt.Rectangle((0, 0), 1, 1, color=FORCED), plt.Rectangle((0, 0), 1, 1, color=NATURAL),
+               plt.Rectangle((0, 0), 1, 1, facecolor=GREY, alpha=0.45, hatch="//", edgecolor=GREY, linewidth=0)]
+    fig.legend(handles, ["trained on all lists (missed purchases added)", "trained on natural lists only",
+                         "retrieval score masked"], loc="upper left", bbox_to_anchor=(0.01, 0.995), ncol=3,
+               fontsize=8.5)
+    fig.suptitle("Controlled policy study: same MLP, same starting weights, only the training lists and score input change",
+                 x=0.01, ha="left", fontsize=12, fontweight="bold", y=1.03)
+    fig.tight_layout(rect=(0, 0, 1, 0.965), h_pad=2.2, w_pad=2.5)
+    _save(fig, out, "fig7_policy_study", pd.DataFrame(rows),
+          "Val only, exploratory. MLP ranker, seeds 0–2; within a seed all four arms share initial parameters. "
+          "(a, b) per-user macro nDCG@10, bars/lines = seed mean, dots = seeds. (c) paired user bootstrap (1,000 "
+          "resamples). (d) 1,000 uniform Val queries ranked over 500 retrieved candidates; arms B/D not measured "
+          "(score masked by construction). Source: results/targeted_study/policy-report-20261029.")
+
+
+FIGURES = {"k1": fig_k1, "rank_response": fig_rank_response, "rankers": fig_rankers, "new_products": fig_new_products,
+           "looser_retrieval": fig_looser_retrieval, "retriever_popularity": fig_retriever_popularity,
+           "policy": fig_policy_study}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default="results/figures/20261029-findings")
+    ap.add_argument("--figures", nargs="+", choices=list(FIGURES), default=list(FIGURES))
     args = ap.parse_args()
     out = REPO_ROOT / args.out
     out.mkdir(parents=True, exist_ok=False)
     _style()
-    for draw in (fig_k1, fig_rank_response, fig_rankers, fig_new_products, fig_looser_retrieval, fig_retriever_popularity):
-        draw(out)
+    for name in args.figures:
+        FIGURES[name](out)
     (out / "sources.json").write_text(json.dumps({"label": "validation only, exploratory", "git_hash": git_hash(),
                                                   "sources": SOURCES}, indent=2))
     print(f"wrote figures to {out}")

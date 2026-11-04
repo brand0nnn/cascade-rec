@@ -545,3 +545,10 @@ original frozen candidate lists; the locally rebuilt `two_tower_text_seed0` list
   training-positive shares in fig. 4 are recomputed from `ranker_train.npz` with the 28 Oct report's H6 definitions
   (new = first interaction ≥ t_ranker_train) and reproduce 83.9% / 43.1% popular exactly. Summary added to
   `docs/evaluations.md`.
+- **Policy study run on the laptop** (same day): pilot `results/ranker_policy/policy-pilot-20261029` and
+  replication `results/ranker_policy/policy-replication-20261029` (MPS, `--candidate-reference` as above), report
+  `results/targeted_study/policy-report-20261029`. Pre-registered rule applied unchanged: no fix qualifies (C and D
+  lose new-in-period nDCG vs A), so A remains the reference. Results in `docs/evaluations.md`.
+- **Policy-study figure** (same day): `plot_findings.py` gained `fig_policy_study` and a `--figures` selector
+  (default still draws all); `results/figures/20261029-policy-study/fig7_policy_study.png` (+ CSV, `sources.json`),
+  drawn only from `results/targeted_study/policy-report-20261029`.

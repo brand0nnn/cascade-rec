@@ -15,7 +15,7 @@ The available local evaluation is complete: **232,904 validation events / 124,41
 | Graph target/history relations and 12 joint warm-target cells | Complete on Val; descriptive, not causal |
 | Five cases | Target ranks, histories and retrieval examples complete; ranker top-three identities unavailable |
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
-| Controlled policy retraining and ID dropout | Protocol/tooling prepared; no full-data remedy result; execution readiness still to be confirmed |
+| Controlled policy retraining and ID dropout | Policy study complete on Val (29 Oct; no fix qualifies under the pass rule, see "Controlled ranker-policy study"); ID dropout not run |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
 
 **Working conclusion:** retrieval misses remain the largest ceiling, while the current ranker also displaces many strong retrieved targets. New products supply about two-thirds of the MLP's net gain. The strongest located warm-target loss is concentrated among training-head, co-reviewed targets in a different leaf category from the last interaction. Test the training-score mismatch with controlled retraining before claiming a mechanism or introducing another architecture.
@@ -556,3 +556,48 @@ adopted changes; no setting is selected.
   on candidate identity (text embedding; item id for DIN). Natural-list training *increases* reliance on the
   retrieval score and text cosine. The forced MLP's response to retrieval rank is U-shaped (top and bottom deciles
   boosted), consistent with a genuine signal plus the forced-positive shortcut at the bottom of the list.
+
+## Controlled ranker-policy study, 29 Oct 2026 (Val only, exploratory; awaiting team review)
+
+Protocol as in "Authorised follow-up" above; run on Brandon's laptop (MPS) on the locally rebuilt candidate lists
+with the opt-in `--candidate-reference configs/ranker/policy_candidate_reference_rebuilt.json` (see
+`docs/decisions.md`, 2026-10-29). Runs: `results/ranker_policy/policy-pilot-20261029` (seed 0),
+`results/ranker_policy/policy-replication-20261029` (seeds 1–2); report
+`results/targeted_study/policy-report-20261029`. All 12 fits complete; all arms of a seed share the same initial
+parameters; no Test predictions loaded. Arms: A all lists / score on, B all lists / score masked, C natural-only /
+score on, D natural-only / score masked (MLP, selected matching features). Natural-only training keeps 38,793 of
+315,114 lists (12.3%; forced fraction 87.7%), so C/D take ~8× fewer optimizer steps per epoch.
+
+| Arm | K₁ = 200 nDCG@10 (mean ± seed SD) | K₁ 200 → 500 change |
+|---|---|---|
+| A all / on | 0.006756 ± 0.000168 | −0.00440 |
+| B all / masked | 0.003923 ± 0.000419 | −0.00236 |
+| **C natural / on** | **0.008625 ± 0.000290** | −0.00056 |
+| D natural / masked | 0.007813 ± 0.000326 | −0.00084 |
+
+Paired user bootstrap (1,000 resamples, 124,416 users), K₁ = 200:
+
+| Comparison | Overall | New-in-period | Warm-tail | Warm-head |
+|---|---|---|---|---|
+| C − A | **+0.00187 [0.00163, 0.00210]** | **−0.00089 [−0.00115, −0.00063]** | −0.00046 [−0.00066, −0.00028] | +0.00466 [0.00428, 0.00506] |
+| D − A | +0.00106 [0.00082, 0.00126] | −0.00070 [−0.00097, −0.00044] | −0.00049 [−0.00069, −0.00029] | +0.00294 [0.00255, 0.00336] |
+| B − A | −0.00283 [−0.00304, −0.00263] | −0.00018 (ns) | −0.00012 (ns) | −0.00552 [−0.00593, −0.00514] |
+| D − C | −0.00081 [−0.00096, −0.00067] | +0.00018 [0.00006, 0.00030] | −0.00002 (ns) | −0.00172 [−0.00199, −0.00146] |
+
+- **Pass rule: no fix qualifies; A stays the integration reference** (`qualified_fixes: []`). C and D clear the
+  overall CI bound but lose on new-in-period products versus A, as anticipated. This is the pre-registered rule's
+  outcome, not evidence that the forced policy is optimal.
+- **Controlled replication of the 28 Oct natural-vs-forced finding:** C − A (+0.00187) matches the earlier
+  natural − forced MLP difference (+0.00176) under identical initialisation and common sampling; the per-group
+  pattern (head gain, new/tail loss) also reproduces.
+- **Masking the score does not remove the forced-list problem:** B is the worst arm (−42% vs A), and natural-only
+  training helps with or without the score (D − B ≈ +0.0039). Consistent with the shortcut also being carried by
+  other inputs; this does not by itself identify which.
+- **Score response on the common uniform cohort** (1,000 queries per run): A's score/logit Spearman is −0.38 to
+  −0.41 and 92–96% of its top-10 slots go to added (rank 201–500) candidates; C's Spearman is +0.14 to +0.18 with
+  35–40% added-candidate share. Lowering only the score input raises A's logit (+2.4 to +2.7 at z = −1 vs 0) and
+  slightly lowers C's (−0.16 to −0.21). A probe, partly off-distribution; not an isolated causal effect.
+- **K₁ expansion 200 → 500:** all arms gain similar nDCG from newly retrieved targets (+0.0014 to +0.0018), but A
+  loses −0.0062 on targets already in the top 200 (competition) versus −0.0020 for C.
+- Open for the team: the pass rule's new-item condition decides the outcome; whether to accept the new/tail cost
+  (or pair natural lists with a new-product remedy, e.g. the serving-time popularity correction) is a team decision.
