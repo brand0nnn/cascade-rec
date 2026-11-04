@@ -67,3 +67,9 @@ __pycache__/
 !/results/evaluation_completion/20261101-kg-expanded-final/*.csv
 !/results/evaluation_completion/20261101-kg-expanded-final/*.json
 !/results/evaluation_completion/20261101-kg-expanded-final/report.md
+
+# Fresh local baseline fits, exports and token mappings stay local.
+/results/baselines/local/
+
+# Independent local experiments: vectors, caches, checkpoints and generated reports.
+/results/local_experiments/

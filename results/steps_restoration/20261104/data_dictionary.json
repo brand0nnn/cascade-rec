@@ -1,0 +1,17 @@
+{
+  "report": "deferred; no narrative report written",
+  "interpretation": "exploratory follow-up after prior Test exposure; baseline dbbdf7e preserved",
+  "graph": "T1 refresh includes all graph-derived common and optional co-review inputs; frozen scalers and weights",
+  "contrasts": "snapshot_refresh = T1\u2212T0; incremental_coreview = coreview\u2212text within snapshot/objective; refresh_changes_coreview_gain = difference of those gains",
+  "groups": "new Test target first_ts>=T2; warm complement; no Test edges in either graph",
+  "intervals": "1000 paired-user draws, seed0 after event-seed averaging; unadjusted conditional on trained models",
+  "feature_shifts": "standardised values using original prefix means/stds, valid candidate slots only",
+  "benchmark": "same fixed 1000 Validation queries and 50 warm-ups per setting; preT0 graph throughout",
+  "catalogue_training": "IVF centroid fitting on unlabelled full-catalogue vectors, explicitly catalogue-aware; no future review labels",
+  "HNSW": "native FAISS calls bypass unchanged repository guard; fixed32/64/128 never silently increased; adaptive control retained",
+  "shortfalls": "short native candidate pools remain in target-coverage/quality metrics and settings.csv; no fallback increases fixed efSearch",
+  "K500": "benchmark-only frozen-model inference, not a retrained model or full-data K selection",
+  "quality_timing": "three-model-seed metric mean versus one resident seed0 request; startup excluded; hardware/thread metadata retained",
+  "exact_boundary_tolerance": 2e-06,
+  "k_funnels": "156 per-seed rows reproduce all 60 previous mean rows; membership uses actual prefix, including ties"
+}

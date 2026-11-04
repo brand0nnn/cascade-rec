@@ -1,0 +1,13 @@
+group,support,events,target_events,user_macro_share
+all,supported_T0,297390,50751,0.2191802616161065
+all,supported_T1,297390,94431,0.41095197755706725
+all,newly_supported,297390,43680,0.19177171594096085
+all,unsupported_both,297390,202959,0.5890480224429328
+new,supported_T0,131996,0,0.0
+new,supported_T1,131996,0,0.0
+new,newly_supported,131996,0,0.0
+new,unsupported_both,131996,131996,1.0
+warm,supported_T0,165394,50751,0.2996484198698267
+warm,supported_T1,165394,94431,0.5650753437815846
+warm,newly_supported,165394,43680,0.26542692391175804
+warm,unsupported_both,165394,70963,0.43492465621841525

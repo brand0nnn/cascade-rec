@@ -1,0 +1,13 @@
+group,reference,candidate,analysis,diff,ci_low,ci_high,n_users,n_resamples
+all,retrieval,bce_text,"secondary exploratory contrast, not registered primary",0.001830946351141667,0.0015186450927521828,0.002116548070725789,124416,1000
+all,pairwise_text,pairwise_combined,"secondary exploratory contrast, not registered primary",0.00016282506282062374,1.8460802852603964e-05,0.0003090324715312743,124416,1000
+all,bce_text,pairwise_coreview,"secondary exploratory contrast, not registered primary",-4.938811919645951e-05,-0.0002080932705647394,0.00010300344579543841,124416,1000
+all,bce_text,pairwise_combined,"secondary exploratory contrast, not registered primary",-0.00018437965469657961,-0.00033988531603738984,-2.6760996353560618e-05,124416,1000
+new_in_val,retrieval,bce_text,"secondary exploratory contrast, not registered primary",0.0010858623121560642,0.0005699836936303794,0.001587582071733967,52420,1000
+new_in_val,pairwise_text,pairwise_combined,"secondary exploratory contrast, not registered primary",-0.0008908775501620353,-0.0011132471947431302,-0.0006541355773872526,52420,1000
+new_in_val,bce_text,pairwise_coreview,"secondary exploratory contrast, not registered primary",0.00017598947232342024,-8.513496223549551e-05,0.00045232497427748783,52420,1000
+new_in_val,bce_text,pairwise_combined,"secondary exploratory contrast, not registered primary",-0.0004360154191205828,-0.0007252692687094699,-0.0001723894017165489,52420,1000
+warm_in_val,retrieval,bce_text,"secondary exploratory contrast, not registered primary",0.0022395193414527564,0.001867987812112364,0.002598649117971395,96764,1000
+warm_in_val,pairwise_text,pairwise_combined,"secondary exploratory contrast, not registered primary",0.000603534767110677,0.0004368814869809974,0.000762202598303171,96764,1000
+warm_in_val,bce_text,pairwise_coreview,"secondary exploratory contrast, not registered primary",-0.00027478114961014235,-0.0004644565959229404,-9.802632172591071e-05,96764,1000
+warm_in_val,bce_text,pairwise_combined,"secondary exploratory contrast, not registered primary",-0.00013913017115241242,-0.00033556613076040194,3.518806066994814e-05,96764,1000

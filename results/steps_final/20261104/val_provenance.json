@@ -1,0 +1,34 @@
+{
+  "source_sha256": "c72aee96ed8e70445ce6090c74163b92c1903db43ad05f378b50a5cfc433e571",
+  "input_logits_sha256": {
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed0/logits.npy": "4c46a0fb4952f8f0008bb510c0eb00877ac8dc62f0e9ed58e2fb72e0452654a5",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed1/logits.npy": "d9de1e227ddc330a5b26982f02c771cad4e03f796afc260d412ee7a2b7fcaf77",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed2/logits.npy": "9e0bb1d3a1798605be3baae644a68b6baac9fdb1c45e7d27b0ec72d0b795845a",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed0/logits.npy": "cb9be07b445c7254a617f7396131658361eafb96ce98ec6496356f4eb8f79aba",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed1/logits.npy": "6d23f072e36781370c7d6b575058286799150d09869c1ba9c77d69c1a53daa29",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_text/seed2/logits.npy": "b1331f9937444964c8b26341224db3d49d48c0ca0f73fd044682cf436081ab73",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed0/logits.npy": "22d6e27e0db16c8fc2b66d17c8e4f16172f4dc68a4406eb19dde1d6710433f5d",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed1/logits.npy": "99c218a05ac98f3802050b2e88b02f9bd2f80fe963bf9bf94df98b9e61d19e98",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_coreview/seed2/logits.npy": "0b9e14a29d89002ad9d8f3a4ed7d2b0a374bb35bf3f297ae720d19c73efaa194",
+    "results/local_experiments/20261104-objective-coreview/evaluation/seed0/logits.npy": "a62c7a14a69675911ce10c63dc41a5c376c051f8c1a7952d8dcc85b6133abf75",
+    "results/local_experiments/20261104-objective-coreview/evaluation/seed1/logits.npy": "a6eb9c36b1456e22a86e6859205471239df6b85c654ae4f675cd304f69f844cc",
+    "results/local_experiments/20261104-objective-coreview/evaluation/seed2/logits.npy": "8100573cfcfe022254387df0bf0f27b24df0e3791ca9fd70555282dbd9dc7054",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_combined/seed0/logits.npy": "7392a67e4bb3bc002c43baf4e09fc5acc776c18536b453d1213c867b1c58a834",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_combined/seed1/logits.npy": "43fd63b7f99e78ad5f19030c02a40878f7dbfaa9fd84d2a6e5f1fd1557354c54",
+    "results/local_experiments/20261103-full-promising-ranking/evaluation/pairwise_combined/seed2/logits.npy": "c0bb376cbd04bee6423913853997f7c84819ddf59e5852054ce1173708d7ec56"
+  },
+  "protocol_sha256": "7e1bb2067416f97e3543683217a839e74a94744730d70b6fa5395782ca3757d6",
+  "test_predictions_loaded": false,
+  "training_performed": false,
+  "output_sha256": {
+    "analysis_source.py": "c72aee96ed8e70445ce6090c74163b92c1903db43ad05f378b50a5cfc433e571",
+    "expansion_decomposition.csv": "d201ca4803a6d6f47c195bf3a8e0ac6016a7cdab366e4373654d510d5f39da1a",
+    "k_sweep.csv": "f8a2a0722342a47f1fe15847610ee3d2b7f1fc890fb8c9605780d6a1319fc330",
+    "paired_differences.csv": "8b6bd912450ff8fb5eeadc6b39df54174f343792098787542df9c6b720ada715",
+    "beyond_accuracy.csv": "c35f33a42e812edda02c26fc72eaaa70ed5a203770ba8462f4a6ee83d8e72ed8",
+    "comparison.csv": "4b7173e9f4bb1a97d64fc7d9685506003cd81aa0c1d22a60717e45498068b2a4",
+    "metric_vectors.npz": "db1c045f6e07f2b34fc33f46db840c674856a6de1b963a2fab24175a3248268d",
+    "expansion_check.json": "db9b2ba1904b013c58adec32b7632f241d56b249584bdd1facea433f0245ca43",
+    "failure_funnel.csv": "8c12e5aa6a9abf9848dacdcc8441ebbefc60337058e760d85f12990eab59094a"
+  }
+}

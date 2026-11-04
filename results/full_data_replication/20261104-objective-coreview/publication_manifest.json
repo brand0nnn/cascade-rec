@@ -1,0 +1,20 @@
+{
+  "source_sha256": "c39cc492f618f03c96a42aa05d2505cfae165ddf2dac511a1809c02bfa7cd725",
+  "files_sha256": {
+    "completion_audit.json": "2ce302f68cb3098aaefb4f07e0266dceba67564f82a8634c20a2129bd428ec52",
+    "analysis_source.py": "795423f74003566c982c10e03edafe11a385fa75250d14744e4e1e03f2b4449b",
+    "novelty_interaction.json": "b09d7997626aeaeeff7b40350e8f553e341250d66d1184e4cb34299e5a57cf61",
+    "study.json": "ecde3c71d40b344fa776d1b86c72884c16adfe45dde1f7dec91a3712c49aaee9",
+    "provenance.json": "6c26be486e6e127a64ae8058036ea332c95ef3e0f9366dde1652e09bded1a97f",
+    "interactions.csv": "232b5a28854f1f2391ccfd7457884fd6df0edbda01e19bb6b856b1ec36f9c63c",
+    "report.md": "2718780a395c0f2996771289bdd1e37dc533817a37bfa33beedf1a6eecaaae40",
+    "paired_differences.csv": "49b0eace81b017d9f29787b65d2beb2795c6ae6e4564b8fb55a9e24a5a6ba7b0",
+    "metrics.csv": "bb2382530d75a4c25b0e70ca8bf09ffbe63c069443ec284461921f5a95773fcb",
+    "config.yaml": "78149921fb850031702517a9f1ac1314a4285731255899e09e87b239e2b2e931",
+    "selection_lock.json": "1ea59d8ca9602a45d940834fc82945a11940ae83809a6950bb0d8b3ea3801cbe",
+    "protocol.json": "6d7ce6716ff43e2422e94aad3b61d1e0a55b57721ce974092b159d6d878e31e2",
+    "failure_funnel.csv": "dc224ce3169c825096244de84fa63705849b9c3c0d95b016ce0993c721a5ec92"
+  },
+  "figure_sha256": "5b0f42feecfa22db179fe922c42bb666e328d3be1ab2db6a1404e9a45c7b14f2",
+  "test_predictions_loaded": false
+}
