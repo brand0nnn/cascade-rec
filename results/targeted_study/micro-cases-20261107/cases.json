@@ -1,0 +1,4001 @@
+[
+  {
+    "category": "c_rescues_head",
+    "inst": 115352,
+    "user": 15988,
+    "date": "2021-11-13",
+    "eligible_pool": 1606,
+    "history": [
+      {
+        "item": 56309,
+        "asin": "B07D3XSY1M",
+        "title": "Car Phone Holder Truck Bracket Magnetic, GPS Holder - Adjustable 360 Degree Rotation from Dashboard Universal ",
+        "store": "Nextstors",
+        "leaf": "Cradles",
+        "segment": "tail",
+        "first_seen": "2018-06-23"
+      },
+      {
+        "item": 25210,
+        "asin": "B00Z7S7RSI",
+        "title": "Otterbox Defender, Rugged Protection Case for iPhone 6/6S, Black",
+        "store": "OtterBox",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2018-09-26"
+      },
+      {
+        "item": 45560,
+        "asin": "B071R1DQBK",
+        "title": "Car Phone Holder & Truck Bracket Magnetic, GPS Holder - 360 Degree Rotation from Dashboard Universal Car Mount",
+        "store": "Nextstors",
+        "leaf": "Cradles",
+        "segment": "head",
+        "first_seen": "2017-07-09"
+      },
+      {
+        "item": 61809,
+        "asin": "B07J9ZB5X9",
+        "title": "volport 3M Sticky Adhesive Replacement Compatible with Socket Mount Base, 10 Pack VHB Sticker Pads for Car Mag",
+        "store": "volport",
+        "leaf": "Cradles",
+        "segment": "head",
+        "first_seen": "2018-12-04"
+      },
+      {
+        "item": 110284,
+        "asin": "B0C55MYGPV",
+        "title": "OtterBox Defender Series SCREENLESS Edition for Samsung Galaxy S8 - Frustration Free Packaging - Arabesque (Ro",
+        "store": "OtterBox",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2017-04-14"
+      }
+    ],
+    "target": {
+      "item": 47037,
+      "asin": "B073R68TSH",
+      "title": "Beam Electronics Car Phone Holder Mount, Phone Car Air Vent Mount Holder Cradle Compatible for iPhone 12 11 Pr",
+      "store": "Beam Electronics",
+      "leaf": "Cradles",
+      "segment": "head",
+      "first_seen": "2017-07-13"
+    },
+    "retrieval_rank": 25,
+    "full_catalogue_rank": 25.0,
+    "saved_ranks": {
+      "A": 120,
+      "C": 7,
+      "MLP": 58,
+      "DIN": 10
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 110931,
+          "asin": "B0C7CVF2QD",
+          "title": "iOttie Velox Magnetic Car Mount Air Vent Phone Holder. Compatible with MagSafe iPhones including iPhone 12, iP",
+          "store": "iOttie",
+          "leaf": "Cradles",
+          "segment": "tail",
+          "first_seen": "2021-10-19",
+          "retrieval_rank": 96
+        },
+        {
+          "item": 78098,
+          "asin": "B086D8ZZZM",
+          "title": "Lanhiem Samsung Galaxy S8 Case, IP68 Waterproof Dustproof Shockproof Case with Built-in Screen Protector, Full",
+          "store": "Lanhiem",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2018-09-18",
+          "retrieval_rank": 170
+        },
+        {
+          "item": 43220,
+          "asin": "B06XDYV3CQ",
+          "title": "OtterBox Samsung Galaxy S8 Symmetry Series Case - PRICKLY PEAR (ROSMARINE/MOUNTAIN RANGE GREEN), ultra-sleek, ",
+          "store": "OtterBox",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2017-05-26",
+          "retrieval_rank": 168
+        }
+      ],
+      "C": [
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 184
+        },
+        {
+          "item": 109131,
+          "asin": "B0BZL5WQML",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed For Samsung Galaxy S20 / S20 5G (6.2\")(Case Friend",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-02-26",
+          "retrieval_rank": 154
+        },
+        {
+          "item": 77907,
+          "asin": "B085W5XVV6",
+          "title": "CyvenSmart USB C Type Charging Cable Fast Charge, [3Pack 10 ft] Android Phone Type C Charger Cable,10 Foot USB",
+          "store": "CyvenSmart",
+          "leaf": "Automobile Chargers",
+          "segment": "head",
+          "first_seen": "2019-04-22",
+          "retrieval_rank": 70
+        }
+      ],
+      "DIN": [
+        {
+          "item": 110117,
+          "asin": "B0C4F5XC8L",
+          "title": "Misxi [2 Pack] Waterproof Black Hard Case with Tempered Glass Compatible with Apple Watch Series 8 Series 7 41",
+          "store": "Misxi",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-11-10",
+          "retrieval_rank": 125
+        },
+        {
+          "item": 109131,
+          "asin": "B0BZL5WQML",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed For Samsung Galaxy S20 / S20 5G (6.2\")(Case Friend",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-02-26",
+          "retrieval_rank": 154
+        },
+        {
+          "item": 43220,
+          "asin": "B06XDYV3CQ",
+          "title": "OtterBox Samsung Galaxy S8 Symmetry Series Case - PRICKLY PEAR (ROSMARINE/MOUNTAIN RANGE GREEN), ultra-sleek, ",
+          "store": "OtterBox",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2017-05-26",
+          "retrieval_rank": 168
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "c_rescues_head",
+    "inst": 744152,
+    "user": 102914,
+    "date": "2022-05-10",
+    "eligible_pool": 1606,
+    "history": [
+      {
+        "item": 7396,
+        "asin": "B009TBTING",
+        "title": "DGQ Wax Melt Molds - 100 Packs Clear Empty Plastic Wax Melt Clamshells for Wickless Wax Melt Candles",
+        "store": "DGQ",
+        "leaf": "Stylus Pens",
+        "segment": "head",
+        "first_seen": "2012-12-30"
+      },
+      {
+        "item": 93040,
+        "asin": "B09G6VBPPM",
+        "title": "Guuboly Crystal Clear Designed for iPhone 12 Case, iPhone 12 Pro Case Clear Soft Slim Fit Transparent Silicone",
+        "store": "Guuboly",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2021-02-27"
+      },
+      {
+        "item": 76635,
+        "asin": "B0836NGQ7S",
+        "title": "YINVA Air Vent Phone Hoder,Premium Car Vent Phone Holder,Phone Holder for Car,Gravity Phone Holder Compatible ",
+        "store": "YINVA",
+        "leaf": "Cradles",
+        "segment": "tail",
+        "first_seen": "2020-02-08"
+      },
+      {
+        "item": 93252,
+        "asin": "B09GVFXZC5",
+        "title": "USB C Car Charger, d\u00e9 Dual 20W USB-C Fast Charging Car Charger, 40W(20W+20W) for iPhone 14 Pro Max/iPhone 14/1",
+        "store": "DE",
+        "leaf": "Automobile Chargers",
+        "segment": "tail",
+        "first_seen": "2021-04-18"
+      },
+      {
+        "item": 98032,
+        "asin": "B09XV62M7V",
+        "title": "BMBEAR Stretchy Solo Loop Bands Compatible with Apple Watch 40mm 38mm 44mm 42mm 41mm 45mm 49mm Ultra Braided E",
+        "store": "BMBEAR",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2020-09-16"
+      }
+    ],
+    "target": {
+      "item": 98269,
+      "asin": "B09YLZXLWN",
+      "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ult",
+      "store": "JULK",
+      "leaf": "Smartwatch Cases",
+      "segment": "head",
+      "first_seen": "2017-10-12"
+    },
+    "retrieval_rank": 1,
+    "full_catalogue_rank": 1.0,
+    "saved_ranks": {
+      "A": 20,
+      "C": 6,
+      "MLP": 11,
+      "DIN": 100
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 4
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 52
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 68
+        }
+      ],
+      "C": [
+        {
+          "item": 109742,
+          "asin": "B0C33S7FMB",
+          "title": "COKOEYE 2-Pack 10W Wireless Max Fast Phone Charger Pad,for iPhone 14/14 Plus/14 Pro/14 ProMax/13 Series/12/11/",
+          "store": "COKOEYE",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-12-02",
+          "retrieval_rank": 50
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 52
+        },
+        {
+          "item": 109915,
+          "asin": "B0C3M1RJNB",
+          "title": "Power Theory Designed for iPhone 14 Screen Protector Tempered Glass, Also for iPhone 13/iPhone 13 Pro [Case Fr",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-10-07",
+          "retrieval_rank": 141
+        }
+      ],
+      "DIN": [
+        {
+          "item": 110117,
+          "asin": "B0C4F5XC8L",
+          "title": "Misxi [2 Pack] Waterproof Black Hard Case with Tempered Glass Compatible with Apple Watch Series 8 Series 7 41",
+          "store": "Misxi",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-11-10",
+          "retrieval_rank": 77
+        },
+        {
+          "item": 109742,
+          "asin": "B0C33S7FMB",
+          "title": "COKOEYE 2-Pack 10W Wireless Max Fast Phone Charger Pad,for iPhone 14/14 Plus/14 Pro/14 ProMax/13 Series/12/11/",
+          "store": "COKOEYE",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-12-02",
+          "retrieval_rank": 50
+        },
+        {
+          "item": 92123,
+          "asin": "B09CSSP9C1",
+          "title": "Ailun Glass Screen Protector for iPhone 14/13/13 Pro [6.1 Inch] Display 3 Pack Tempered Glass, Case Friendly",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2021-09-25",
+          "retrieval_rank": 111
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "c_rescues_head",
+    "inst": 839329,
+    "user": 116058,
+    "date": "2021-08-18",
+    "eligible_pool": 1606,
+    "history": [
+      {
+        "item": 27338,
+        "asin": "B01415QHYW",
+        "title": "amFilm Screen Protector 4.7\u201c for Apple iPhone 8, iPhone 7, iPhone 6S and iPhone 6, Tempered Glass 4.7\u201c, 2 Pack",
+        "store": "amFilm",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2015-08-28"
+      },
+      {
+        "item": 63699,
+        "asin": "B07L8BL2Z7",
+        "title": "Vofolen Case for iPhone 6 Case iPhone 6S Case Wallet Cover Impact Resistant Protective Shell Shockproof Rubber",
+        "store": "Vofolen",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2015-06-23"
+      },
+      {
+        "item": 50824,
+        "asin": "B076HGCBRW",
+        "title": "DesignSkin iPhone X Case, [Slider] [Sliding Card Holder Slot] Extreme Heavy Duty 3-Layer Bumper Protection Sho",
+        "store": "Design Skin",
+        "leaf": "iPhone Accessories",
+        "segment": "head",
+        "first_seen": "2017-12-01"
+      },
+      {
+        "item": 58890,
+        "asin": "B07G8SKRR1",
+        "title": "Incipio Stashback Wallet Case for iPhone Xs (5.8\") with Heavy Duty Credit Card Compartment - Black",
+        "store": "Incipio",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2018-10-22"
+      }
+    ],
+    "target": {
+      "item": 110113,
+      "asin": "B0C4F1WFLL",
+      "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+      "store": "Misxi",
+      "leaf": "Smartwatch Screen Protectors",
+      "segment": "head",
+      "first_seen": "2019-09-22"
+    },
+    "retrieval_rank": 138,
+    "full_catalogue_rank": 138.0,
+    "saved_ranks": {
+      "A": 18,
+      "C": 3,
+      "MLP": 13,
+      "DIN": 5
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 6
+        },
+        {
+          "item": 63835,
+          "asin": "B07LCV3VR3",
+          "title": "TETHYS Glass Screen Protector Designed For iPhone 11 / iPhone XR (6.1\") [Edge to Edge Coverage] Full Protectio",
+          "store": "TETHYS",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-11-01",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 39503,
+          "asin": "B01LXZDPDR",
+          "title": "Ailun Screen Protector Compatible for iPhone 8 plus,7 Plus,6s Plus,6 Plus, 5.5 Inch 3Pack Case Friendly Temper",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2016-10-29",
+          "retrieval_rank": 25
+        }
+      ],
+      "C": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 6
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 106
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 138
+        }
+      ],
+      "DIN": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 6
+        },
+        {
+          "item": 84478,
+          "asin": "B08M16J6K8",
+          "title": "amFilm Glass Screen Protector Compatible for iPhone 12, iPhone 12 Pro Display with Easy Installation Tray, Gla",
+          "store": "amFilm",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-09",
+          "retrieval_rank": 139
+        },
+        {
+          "item": 110378,
+          "asin": "B0C5J9PH5R",
+          "title": "Arae Compatible with iPhone 12 Case and iPhone 12 Pro Case Wallet Flip Cover with Card Holder and Wrist Strap ",
+          "store": "Arae",
+          "leaf": "Flip Cases",
+          "segment": "head",
+          "first_seen": "2016-01-25",
+          "retrieval_rank": 14
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "c_rescues_head",
+    "inst": 1401471,
+    "user": 193825,
+    "date": "2021-09-21",
+    "eligible_pool": 1606,
+    "history": [
+      {
+        "item": 97802,
+        "asin": "B09X327QKD",
+        "title": "Compatible for Fitbit Alta HR Charger,KingAcc 1-Pack 3.3ft/1m Replacement USB Charging Cable Cradle Dock Adapt",
+        "store": "KingAcc",
+        "leaf": "Smartwatch Cables & Chargers",
+        "segment": "head",
+        "first_seen": "2017-06-09"
+      },
+      {
+        "item": 69943,
+        "asin": "B07THL8PP1",
+        "title": "Anker 10W Max, 2 Pack 313 Wireless Charger (Pad), Qi-Certified Wireless Charging 7.5W for iPhone 14/14 Pro/14 ",
+        "store": "Anker",
+        "leaf": "Wireless Chargers",
+        "segment": "head",
+        "first_seen": "2019-10-18"
+      },
+      {
+        "item": 75527,
+        "asin": "B081CF76BS",
+        "title": "TOPGO Socket Car Mount for Phone Holder Cute Bear Style Silicone Grip Stand with Phone line Clasp for Collapsi",
+        "store": "TOPGO",
+        "leaf": "Cradles",
+        "segment": "head",
+        "first_seen": "2019-10-20"
+      },
+      {
+        "item": 74724,
+        "asin": "B07Z4Q77BW",
+        "title": "uCOLOR Case for iPhone 11 Pro Max Japanese Wave Thin Slim Hybrid Case Hard PC with Soft TPU Bumper Anti-Scratc",
+        "store": "uCOLOR",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2020-01-25"
+      }
+    ],
+    "target": {
+      "item": 98269,
+      "asin": "B09YLZXLWN",
+      "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ult",
+      "store": "JULK",
+      "leaf": "Smartwatch Cases",
+      "segment": "head",
+      "first_seen": "2017-10-12"
+    },
+    "retrieval_rank": 15,
+    "full_catalogue_rank": 15.0,
+    "saved_ranks": {
+      "A": 17,
+      "C": 9,
+      "MLP": 9,
+      "DIN": 44
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 2
+        },
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple",
+          "store": "Mkeke",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-12-09",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 108206,
+          "asin": "B0BW8D4VC2",
+          "title": "Anker 313 Wireless Charger (Pad), Qi-Certified 10W Max for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, AirPods ",
+          "store": "Anker",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2019-08-01",
+          "retrieval_rank": 21
+        }
+      ],
+      "C": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 2
+        },
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple",
+          "store": "Mkeke",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-12-09",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 90784,
+          "asin": "B097SDCVG9",
+          "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fas",
+          "store": "Anker",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-11-05",
+          "retrieval_rank": 23
+        }
+      ],
+      "DIN": [
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 163
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 17
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 2
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "c_rescues_head",
+    "inst": 1765191,
+    "user": 244393,
+    "date": "2022-04-04",
+    "eligible_pool": 1606,
+    "history": [
+      {
+        "item": 18525,
+        "asin": "B00NID59Y8",
+        "title": "S5 Case, Galaxy S5 Case, Speedtek Smile Pattern Premium PU Leather Wallet Flip Protective Skin Case with Magne",
+        "store": "UrSpeedtekLive",
+        "leaf": "Maintenance, Upkeep & Repairs",
+        "segment": "tail",
+        "first_seen": "2015-01-04"
+      },
+      {
+        "item": 17229,
+        "asin": "B00MHFE6U6",
+        "title": "OMIU PU leather Rhombus Design Camellia Pendant Wallet Folio Case with Screen Protector, Stylus and Cleaning C",
+        "store": "OMIU",
+        "leaf": "Cases, Holsters & Sleeves",
+        "segment": "tail",
+        "first_seen": "2014-09-20"
+      },
+      {
+        "item": 32034,
+        "asin": "B01BXTVZ96",
+        "title": "Galaxy S5 Case, S5 Case, Samsung Galaxy S5 Case, Uncle.Y Wallet Flip PU Leather Case Folio Protector Cover Cas",
+        "store": "Uncle.Y",
+        "leaf": "Samsung Galaxy S 5 Cases",
+        "segment": "head",
+        "first_seen": "2016-04-29"
+      },
+      {
+        "item": 106468,
+        "asin": "B0BPTC9W8S",
+        "title": "Kitoo Defender Designed for iPhone 7/8 iPhone SE 2020 / SE 2022 [Eco-Friendly] Shockproof Case with Kickstand,",
+        "store": "Kitoo",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2019-05-21"
+      }
+    ],
+    "target": {
+      "item": 60188,
+      "asin": "B07H2V5YLH",
+      "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+      "store": "Ailun",
+      "leaf": "Screen Protectors",
+      "segment": "head",
+      "first_seen": "2018-10-28"
+    },
+    "retrieval_rank": 9,
+    "full_catalogue_rank": 9.0,
+    "saved_ranks": {
+      "A": 43,
+      "C": 2,
+      "MLP": 58,
+      "DIN": 15
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 56372,
+          "asin": "B07D5GG16Q",
+          "title": "YOUMAKER Galaxy S9 Case,Metallic Purple with Built-in Screen Protector Heavy Duty Protection Shockproof Slim F",
+          "store": "YOUMAKER",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2018-06-06",
+          "retrieval_rank": 176
+        },
+        {
+          "item": 107733,
+          "asin": "B0BTWYF8X2",
+          "title": "Cutebe [3 in 1 Crystal Phone Case for iPhone 13(2021)/iPhone 14(2022) 6.1\", Cute Protective Cover with 9H Temp",
+          "store": "Cutebe",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-10-20",
+          "retrieval_rank": 143
+        },
+        {
+          "item": 75717,
+          "asin": "B081R3DZNZ",
+          "title": "ArmorSuit MilitaryShield Screen Protector Compatible with Fitbit Versa 2 (6 Pack) Max Coverage Anti-Bubble HD ",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-12-16",
+          "retrieval_rank": 136
+        }
+      ],
+      "C": [
+        {
+          "item": 109131,
+          "asin": "B0BZL5WQML",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed For Samsung Galaxy S20 / S20 5G (6.2\")(Case Friend",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-02-26",
+          "retrieval_rank": 54
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 9
+        },
+        {
+          "item": 105437,
+          "asin": "B0BM9DVXDN",
+          "title": "[2+3 Pack] L\u03dfK Designed for Samsung Galaxy S10, 2 Pcs Flexible TPU Screen Protector + 3 Pcs Camera Lens Protec",
+          "store": "L K",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-05-03",
+          "retrieval_rank": 141
+        }
+      ],
+      "DIN": [
+        {
+          "item": 107733,
+          "asin": "B0BTWYF8X2",
+          "title": "Cutebe [3 in 1 Crystal Phone Case for iPhone 13(2021)/iPhone 14(2022) 6.1\", Cute Protective Cover with 9H Temp",
+          "store": "Cutebe",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-10-20",
+          "retrieval_rank": 143
+        },
+        {
+          "item": 90840,
+          "asin": "B098371J93",
+          "title": "BELONGME [2 Pack] Compatible for Apple Watch Series 7 SE 6 5 4 Screen Protector Case 45mm 44mm 41mm 40mm, Wate",
+          "store": "BELONGME",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-08-17",
+          "retrieval_rank": 182
+        },
+        {
+          "item": 110117,
+          "asin": "B0C4F5XC8L",
+          "title": "Misxi [2 Pack] Waterproof Black Hard Case with Tempered Glass Compatible with Apple Watch Series 8 Series 7 41",
+          "store": "Misxi",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-11-10",
+          "retrieval_rank": 108
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "c_rescues_head",
+    "inst": 2314482,
+    "user": 320349,
+    "date": "2021-09-23",
+    "eligible_pool": 1606,
+    "history": [
+      {
+        "item": 88388,
+        "asin": "B08Z4JTDVN",
+        "title": "Google Pixel 4a - Unlocked Android Smartphone - 128 GB of Storage - Up to 24 Hour Battery - Barely Blue",
+        "store": "Google",
+        "leaf": "Cell Phones",
+        "segment": "head",
+        "first_seen": "2020-08-20"
+      },
+      {
+        "item": 74739,
+        "asin": "B07Z4WMV5W",
+        "title": "LG V50 ThinQ Smartphone LMV450PM, 5G, 128GB, Aurora Black - Sprint CDMA and GSM Unlocked",
+        "store": "LG",
+        "leaf": "Cell Phones",
+        "segment": "tail",
+        "first_seen": "2020-06-19"
+      },
+      {
+        "item": 75127,
+        "asin": "B07ZPSG8P5",
+        "title": "Bastmei for OnePlus 7T Case Extremely Light Ultra Thin, Super Slim Hard PC Cover Case for OnePlus 7T (Gravel G",
+        "store": "Bastmei",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2021-01-16"
+      },
+      {
+        "item": 70239,
+        "asin": "B07TTJTDQ9",
+        "title": "Google - Pixel 3a XL with 64GB Memory Cell Phone (Unlocked) - Just Black (Renewed)",
+        "store": "Amazon Renewed",
+        "leaf": "Single Ear Bluetooth Headsets",
+        "segment": "tail",
+        "first_seen": "2019-10-10"
+      },
+      {
+        "item": 84089,
+        "asin": "B08LGCBXP2",
+        "title": "Watdpro 20mm Nylon Sport Quick Release Bands Compatible with Samsung Galaxy Watch 42mm/Active2 44mm 40mm/Gear ",
+        "store": "Watdpro",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2021-01-06"
+      }
+    ],
+    "target": {
+      "item": 101156,
+      "asin": "B0B86Z99SL",
+      "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+      "store": "TOZO",
+      "leaf": "Wireless Chargers",
+      "segment": "head",
+      "first_seen": "2018-09-12"
+    },
+    "retrieval_rank": 194,
+    "full_catalogue_rank": 194.0,
+    "saved_ranks": {
+      "A": 22,
+      "C": 8,
+      "MLP": 22,
+      "DIN": 45
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 88389,
+          "asin": "B08Z4K5L2F",
+          "title": "Google Pixel 4a with 5G - Android Phone - New Unlocked Smartphone with Night Sight and Ultrawide Lens - Just B",
+          "store": "Google",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2020-11-25",
+          "retrieval_rank": 110
+        },
+        {
+          "item": 82096,
+          "asin": "B08GL32TW5",
+          "title": "OnePlus 7T HD1907, 8GB RAM + 128GB Memory, GSM 4G LTE Unlocked for AT&T T-Mobile, Single Sim, US Model (Glacie",
+          "store": "Amazon Renewed",
+          "leaf": "Cell Phones",
+          "segment": "tail",
+          "first_seen": "2020-10-26",
+          "retrieval_rank": 128
+        },
+        {
+          "item": 82390,
+          "asin": "B08H85VZNX",
+          "title": "Google Pixel 4a Smartphone, 128GB Storage & Unlocked Cellular - Just Black (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "Cell Phones",
+          "segment": "tail",
+          "first_seen": "2021-02-28",
+          "retrieval_rank": 24
+        }
+      ],
+      "C": [
+        {
+          "item": 87981,
+          "asin": "B08XRDVWQ2",
+          "title": "BLU G90 Pro | 2021 | 3-Day Battery | Unlocked | 6.5\u201d Full HD+ Display | 128GB | 48 MP Quad Camera | US Version",
+          "store": "BLU",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2019-09-01",
+          "retrieval_rank": 106
+        },
+        {
+          "item": 82390,
+          "asin": "B08H85VZNX",
+          "title": "Google Pixel 4a Smartphone, 128GB Storage & Unlocked Cellular - Just Black (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "Cell Phones",
+          "segment": "tail",
+          "first_seen": "2021-02-28",
+          "retrieval_rank": 24
+        },
+        {
+          "item": 86281,
+          "asin": "B08R61G69Q",
+          "title": "Google Pixel 4a with 5G, 6.2\", 128GB, 6GB RAM, Unlocked Cellular - Just Black (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "Cell Phones",
+          "segment": "tail",
+          "first_seen": "2021-07-08",
+          "retrieval_rank": 41
+        }
+      ],
+      "DIN": [
+        {
+          "item": 88389,
+          "asin": "B08Z4K5L2F",
+          "title": "Google Pixel 4a with 5G - Android Phone - New Unlocked Smartphone with Night Sight and Ultrawide Lens - Just B",
+          "store": "Google",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2020-11-25",
+          "retrieval_rank": 110
+        },
+        {
+          "item": 100282,
+          "asin": "B0B5TNX6QB",
+          "title": "Wireless Charger, NorSway 3 in 1 Wireless Charging Station, 15W Fast Charging Dock for iPhone 14/14 Pro Max/3/",
+          "store": "NorSway",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-08-15",
+          "retrieval_rank": 178
+        },
+        {
+          "item": 78265,
+          "asin": "B086W91WCC",
+          "title": "OMOTON [4 Pack] Screen Protector for Google Pixel 4a (Not Fit for 4a 5G), Scratch Resistant/Easy-Install/Bubbl",
+          "store": "OMOTON",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-08-09",
+          "retrieval_rank": 75
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "a_keeps_new",
+    "inst": 1493183,
+    "user": 206528,
+    "date": "2021-10-14",
+    "eligible_pool": 387,
+    "history": [
+      {
+        "item": 20645,
+        "asin": "B00PV0C246",
+        "title": "iPhone 6 Case, by Ravierri - Slim Fit & Crystal Clear Screen Protector - Custom-Designed Skin to Cover The App",
+        "store": "Ravierri",
+        "leaf": "Accessories",
+        "segment": "head",
+        "first_seen": "2015-03-04"
+      },
+      {
+        "item": 84011,
+        "asin": "B08L9DJQM9",
+        "title": "6 Pack Screen Protector For Apple Watch Series 6/SE/5/4 44mm, 3D Curved Full Coverage HD Ultra Bubble Free Wat",
+        "store": "bminen",
+        "leaf": "",
+        "segment": "head",
+        "first_seen": "2021-03-22"
+      },
+      {
+        "item": 91200,
+        "asin": "B0999GFHKQ",
+        "title": "Lerobo 3 Pack Sport Bands Compatible with Apple Watch 41mm 40mm 38mm, Soft Silicone Sport Strap Breathable Rep",
+        "store": "Lerobo",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2021-04-15"
+      },
+      {
+        "item": 80657,
+        "asin": "B08CVRQTW5",
+        "title": "DiMiK for Samsung Galaxy Note 20 Ultra Case, Ultra Slim Fit Camera Protection Soft Silicone Matte Finish Flexi",
+        "store": "DiMiK",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2020-08-23"
+      },
+      {
+        "item": 78224,
+        "asin": "B086RM3DQS",
+        "title": "Apple iPhone 8, US Version, 256GB, Space Gray - T-Mobile (Renewed)",
+        "store": "Amazon Renewed",
+        "leaf": "Wireless Trade-In",
+        "segment": "head",
+        "first_seen": "2018-02-28"
+      }
+    ],
+    "target": {
+      "item": 92132,
+      "asin": "B09CTB3M1T",
+      "title": "Ailun Glass Screen Protector for iPhone 14 Plus/iPhone 13 Pro Max [6.7 Inch Display], 3 Pack Case Friendly Tem",
+      "store": "Ailun",
+      "leaf": "Screen Protectors",
+      "segment": "head",
+      "first_seen": "2021-09-20"
+    },
+    "retrieval_rank": 54,
+    "full_catalogue_rank": 54.0,
+    "saved_ranks": {
+      "A": 8,
+      "C": 14,
+      "MLP": 11,
+      "DIN": 6
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 84003,
+          "asin": "B08L97BW9J",
+          "title": "Apple iPhone XR, US Version, 64GB, Black - AT&T (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "",
+          "segment": "head",
+          "first_seen": "2019-05-20",
+          "retrieval_rank": 84
+        },
+        {
+          "item": 92414,
+          "asin": "B09DKGN3Q8",
+          "title": "Wireless Charger,ESTAVEL 3 in 1 Fast Wireless Charging Station Compatible with iPhone 13/12/11 Pro/XS/XR/8, Ap",
+          "store": "ESTAVEL",
+          "leaf": "Charging Stations",
+          "segment": "tail",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 106
+        },
+        {
+          "item": 91656,
+          "asin": "B09BMQH55C",
+          "title": "Mkeke Compatible for iPhone 13 Screen Protector/iPhone 13 Pro Glass Screen Protector Tempered 6.1 inch 3-Pack",
+          "store": "Mkeke",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2021-09-23",
+          "retrieval_rank": 74
+        }
+      ],
+      "C": [
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 25
+        },
+        {
+          "item": 84003,
+          "asin": "B08L97BW9J",
+          "title": "Apple iPhone XR, US Version, 64GB, Black - AT&T (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "",
+          "segment": "head",
+          "first_seen": "2019-05-20",
+          "retrieval_rank": 84
+        },
+        {
+          "item": 109915,
+          "asin": "B0C3M1RJNB",
+          "title": "Power Theory Designed for iPhone 14 Screen Protector Tempered Glass, Also for iPhone 13/iPhone 13 Pro [Case Fr",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-10-07",
+          "retrieval_rank": 52
+        }
+      ],
+      "DIN": [
+        {
+          "item": 92414,
+          "asin": "B09DKGN3Q8",
+          "title": "Wireless Charger,ESTAVEL 3 in 1 Fast Wireless Charging Station Compatible with iPhone 13/12/11 Pro/XS/XR/8, Ap",
+          "store": "ESTAVEL",
+          "leaf": "Charging Stations",
+          "segment": "tail",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 106
+        },
+        {
+          "item": 84003,
+          "asin": "B08L97BW9J",
+          "title": "Apple iPhone XR, US Version, 64GB, Black - AT&T (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "",
+          "segment": "head",
+          "first_seen": "2019-05-20",
+          "retrieval_rank": 84
+        },
+        {
+          "item": 90703,
+          "asin": "B097LRJ9PD",
+          "title": "Qinmay Compatible for iPhone 8 Case, iPhone 7 Case with Tempered Glass Screen Protector [2 Pack] [Shockproof] ",
+          "store": "Qinmay",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-10-10",
+          "retrieval_rank": 163
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "a_keeps_new",
+    "inst": 1826546,
+    "user": 252872,
+    "date": "2022-04-12",
+    "eligible_pool": 387,
+    "history": [
+      {
+        "item": 90784,
+        "asin": "B097SDCVG9",
+        "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fas",
+        "store": "Anker",
+        "leaf": "Wireless Chargers",
+        "segment": "head",
+        "first_seen": "2018-11-05"
+      },
+      {
+        "item": 60703,
+        "asin": "B07H9F2VN3",
+        "title": "Moment Case for iPhone Xs Max - 6ft Drop Protection and Strap Attachment",
+        "store": "Moment",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2018-12-16"
+      },
+      {
+        "item": 57338,
+        "asin": "B07DYTWW54",
+        "title": "Moment Wide Lens - 18mm Attachment Lens for iPhone Pixel Galaxy OnePlus Phones",
+        "store": "Moment",
+        "leaf": "Lens Attachments",
+        "segment": "head",
+        "first_seen": "2018-08-30"
+      },
+      {
+        "item": 108924,
+        "asin": "B0BYSMMHW1",
+        "title": "Anker Portable Charger, USB-C Power Bank 20000mAh with 20W Power Delivery, 525 Power Bank (PowerCore Essential",
+        "store": "Anker",
+        "leaf": "Portable Power Banks",
+        "segment": "head",
+        "first_seen": "2021-03-24"
+      },
+      {
+        "item": 100224,
+        "asin": "B0B5NLPBT2",
+        "title": "KISEN [5 in 1] for iPhone 13 Pro Max Case, with 2 Pack Tempered Glass Screen Protector + 2 Pack Camera Lens Pr",
+        "store": "KISEN",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2021-06-14"
+      }
+    ],
+    "target": {
+      "item": 93229,
+      "asin": "B09GRTJ32G",
+      "title": "Anker Wireless Charging Stand, PowerWave 2-in-1 Magnetic Stand Lite with USB-C Cable, for iPhone 14/14 Pro/14 ",
+      "store": "Anker",
+      "leaf": "Wireless Chargers",
+      "segment": "head",
+      "first_seen": "2021-10-14"
+    },
+    "retrieval_rank": 108,
+    "full_catalogue_rank": 108.0,
+    "saved_ranks": {
+      "A": 5,
+      "C": 24,
+      "MLP": 18,
+      "DIN": 1
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 110931,
+          "asin": "B0C7CVF2QD",
+          "title": "iOttie Velox Magnetic Car Mount Air Vent Phone Holder. Compatible with MagSafe iPhones including iPhone 12, iP",
+          "store": "iOttie",
+          "leaf": "Cradles",
+          "segment": "tail",
+          "first_seen": "2021-10-19",
+          "retrieval_rank": 196
+        },
+        {
+          "item": 98200,
+          "asin": "B09YCZ6MDF",
+          "title": "Anker Magnetic Wireless Charger, 5ft USB-C Cable with Detachable USB-A Connector, PowerWave Magnetic Pad Slim ",
+          "store": "Anker",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2021-07-16",
+          "retrieval_rank": 79
+        },
+        {
+          "item": 105191,
+          "asin": "B0BLN4FT19",
+          "title": "GRECAZO Magnetic Slim Case Fit for iPhone 13 Pro Phone Case 6.1\"(2021) Ultra-Thin Lightweight Durable Frameles",
+          "store": "GRECAZO",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2022-02-13",
+          "retrieval_rank": 175
+        }
+      ],
+      "C": [
+        {
+          "item": 109915,
+          "asin": "B0C3M1RJNB",
+          "title": "Power Theory Designed for iPhone 14 Screen Protector Tempered Glass, Also for iPhone 13/iPhone 13 Pro [Case Fr",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-10-07",
+          "retrieval_rank": 36
+        },
+        {
+          "item": 94298,
+          "asin": "B09KLNCYC1",
+          "title": "xiwxi \ud835\udc14\ud835\udc29\ud835\udc20\ud835\udc2b\ud835\udc1a\ud835\udc1d\ud835\udc1e\ud835\udc1d 15W Fast Magnetic Wireless Charger Compatible with MagSafe Charger, Wireless Charging Pad for i",
+          "store": "xiwxi",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2022-02-10",
+          "retrieval_rank": 105
+        },
+        {
+          "item": 94495,
+          "asin": "B09KZYF9BD",
+          "title": "xiwxi \ud835\udc14\ud835\udc29\ud835\udc20\ud835\udc2b\ud835\udc1a\ud835\udc1d\ud835\udc1e\ud835\udc1d 15W Fast Magnetic Wireless Charger Compatible with MagSafe Charger, Wireless Charging Pad for i",
+          "store": "xiwxi",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2022-01-01",
+          "retrieval_rank": 106
+        }
+      ],
+      "DIN": [
+        {
+          "item": 93229,
+          "asin": "B09GRTJ32G",
+          "title": "Anker Wireless Charging Stand, PowerWave 2-in-1 Magnetic Stand Lite with USB-C Cable, for iPhone 14/14 Pro/14 ",
+          "store": "Anker",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2021-10-14",
+          "retrieval_rank": 108
+        },
+        {
+          "item": 84266,
+          "asin": "B08LPPD3NL",
+          "title": "Magnetic Wireless Charger, Anker Wireless Charger with 5ft Built in USB-C Cable, PowerWave Magnetic Pad, 7.5W ",
+          "store": "Anker",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2020-12-13",
+          "retrieval_rank": 117
+        },
+        {
+          "item": 109742,
+          "asin": "B0C33S7FMB",
+          "title": "COKOEYE 2-Pack 10W Wireless Max Fast Phone Charger Pad,for iPhone 14/14 Plus/14 Pro/14 ProMax/13 Series/12/11/",
+          "store": "COKOEYE",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-12-02",
+          "retrieval_rank": 139
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": true,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "a_keeps_new",
+    "inst": 1894052,
+    "user": 262302,
+    "date": "2022-02-02",
+    "eligible_pool": 387,
+    "history": [
+      {
+        "item": 7365,
+        "asin": "B009SP8X02",
+        "title": "LG Venice (Boost Mobile)",
+        "store": "LG",
+        "leaf": "Carrier Branded Wireless Trade-In",
+        "segment": "head",
+        "first_seen": "2012-11-26"
+      },
+      {
+        "item": 28490,
+        "asin": "B015Q34L1Y",
+        "title": "OMOTON RCA 10 Viking Pro Screen Protector, [3-Pack] PET Film Screen Protector for RCA 10 Viking Pro 10.1 inch ",
+        "store": "OMOTON",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2015-12-12"
+      },
+      {
+        "item": 61246,
+        "asin": "B07HMFBL5H",
+        "title": "Moto G6 Play with Alexa Push-to-Talk \u2013 32 GB \u2013 Unlocked (AT&T/Sprint/T-Mobile/Verizon) \u2013 Deep Indigo \u2013 Prime E",
+        "store": "Motorola",
+        "leaf": "Cell Phones",
+        "segment": "head",
+        "first_seen": "2018-06-30"
+      },
+      {
+        "item": 55358,
+        "asin": "B07C6WTGL2",
+        "title": "Moto G6 Rugged Case, Poetic Revolution [360 Degree Protection] Full-Body Rugged Heavy Duty Case with [Built-in",
+        "store": "Poetic",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2018-07-04"
+      },
+      {
+        "item": 78872,
+        "asin": "B088CYWT5H",
+        "title": "USB C Car Charger, 3.4A Fast Charging Car Adapter+3ft Type C Cable for Samsung Galaxy S23 S22 S21 S20 S10 Note",
+        "store": "ANDHOT",
+        "leaf": "Automobile Chargers",
+        "segment": "head",
+        "first_seen": "2020-09-07"
+      }
+    ],
+    "target": {
+      "item": 95717,
+      "asin": "B09NX6CSPP",
+      "title": "Motorola One 5G Ace 2021 (128GB, 6GB) 6.7\", Snapdragon 750G, 5000mAh Battery, US 5G / Global 4G LTE Fully Unlo",
+      "store": "Amazon Renewed",
+      "leaf": "Cell Phones",
+      "segment": "tail",
+      "first_seen": "2022-02-02"
+    },
+    "retrieval_rank": 97,
+    "full_catalogue_rank": 97.0,
+    "saved_ranks": {
+      "A": 6,
+      "C": 35,
+      "MLP": 3,
+      "DIN": 7
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 89100,
+          "asin": "B092BYTXM3",
+          "title": "Moto G Stylus 5G | 2021 | 2-Day battery | Unlocked | Made for US by Motorola | 6/256GB | 48MP Camera | Cosmic ",
+          "store": "Motorola",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2021-06-23",
+          "retrieval_rank": 181
+        },
+        {
+          "item": 75134,
+          "asin": "B07ZQ2FCWT",
+          "title": "USB Type C Charger for Moto G Pure/G Play 2023/G Power 2021/G Stylus 5G 2022/G 5G 2022/G Fast/Z3 Play/G7/G8/Z4",
+          "store": "ANDHOT",
+          "leaf": "Wall Chargers",
+          "segment": "head",
+          "first_seen": "2019-01-05",
+          "retrieval_rank": 128
+        },
+        {
+          "item": 105035,
+          "asin": "B0BL9TKSBL",
+          "title": "Moto G Power | 2022 | 3-Day Battery | Unlocked | Made for US by Motorola | 4/64GB | 50 MP Camera | Dark Grove",
+          "store": "Motorola",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2021-01-18",
+          "retrieval_rank": 178
+        }
+      ],
+      "C": [
+        {
+          "item": 100888,
+          "asin": "B0B7FJXP3M",
+          "title": "Moto G fast | 2020 | Unlocked | Made for US by Motorola | 3/32GB | 16MP Camera | White",
+          "store": "Motorola",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2020-05-15",
+          "retrieval_rank": 92
+        },
+        {
+          "item": 91654,
+          "asin": "B09BLMNBT8",
+          "title": "Amytor Designed for Motorola Moto G Power 2021 Case [2 x Tempered Glass Screen Protector][ Military Grade ] 17",
+          "store": "Amytor",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2020-12-26",
+          "retrieval_rank": 185
+        },
+        {
+          "item": 105035,
+          "asin": "B0BL9TKSBL",
+          "title": "Moto G Power | 2022 | 3-Day Battery | Unlocked | Made for US by Motorola | 4/64GB | 50 MP Camera | Dark Grove",
+          "store": "Motorola",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2021-01-18",
+          "retrieval_rank": 178
+        }
+      ],
+      "DIN": [
+        {
+          "item": 89100,
+          "asin": "B092BYTXM3",
+          "title": "Moto G Stylus 5G | 2021 | 2-Day battery | Unlocked | Made for US by Motorola | 6/256GB | 48MP Camera | Cosmic ",
+          "store": "Motorola",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2021-06-23",
+          "retrieval_rank": 181
+        },
+        {
+          "item": 105035,
+          "asin": "B0BL9TKSBL",
+          "title": "Moto G Power | 2022 | 3-Day Battery | Unlocked | Made for US by Motorola | 4/64GB | 50 MP Camera | Dark Grove",
+          "store": "Motorola",
+          "leaf": "Cell Phones",
+          "segment": "head",
+          "first_seen": "2021-01-18",
+          "retrieval_rank": 178
+        },
+        {
+          "item": 91654,
+          "asin": "B09BLMNBT8",
+          "title": "Amytor Designed for Motorola Moto G Power 2021 Case [2 x Tempered Glass Screen Protector][ Military Grade ] 17",
+          "store": "Amytor",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2020-12-26",
+          "retrieval_rank": 185
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "a_keeps_new",
+    "inst": 2149363,
+    "user": 297487,
+    "date": "2022-06-20",
+    "eligible_pool": 387,
+    "history": [
+      {
+        "item": 29169,
+        "asin": "B016VE70HO",
+        "title": "Texel WebGrip Security Tether Support 2 Pack Black/Black (00-90001-02)",
+        "store": "Texel",
+        "leaf": "Cradles",
+        "segment": "tail",
+        "first_seen": "2016-02-01"
+      },
+      {
+        "item": 54129,
+        "asin": "B07B43RQ13",
+        "title": "BlackRapid Tether Tab with Adhesive Pad \u2014 2 Pack",
+        "store": "BlackRapid",
+        "leaf": "Accessories",
+        "segment": "tail",
+        "first_seen": "2018-09-12"
+      },
+      {
+        "item": 88076,
+        "asin": "B08XZQBD3R",
+        "title": "BlueParrott M300-XT Noise Cancelling Hands-free Mono Bluetooth Headset for Mobile Phones with up to 14 Hours o",
+        "store": "BlueParrott",
+        "leaf": "Single Ear Bluetooth Headsets",
+        "segment": "head",
+        "first_seen": "2021-05-19"
+      },
+      {
+        "item": 110907,
+        "asin": "B0C786CPSM",
+        "title": "Poly Voyager 5200 Wireless Headset (Plantronics) - Single-Ear Bluetooth Headset w/Noise-Canceling Mic - Ergono",
+        "store": "Plantronics",
+        "leaf": "Single Ear Bluetooth Headsets",
+        "segment": "head",
+        "first_seen": "2016-08-24"
+      },
+      {
+        "item": 110854,
+        "asin": "B0C6Z8PWQF",
+        "title": "New bee Bluetooth Headset 24Hrs Talktime CVC8.0 Dual Mic Noise Cancelling Bluetooth Earpiece V5.2 Wireless Hea",
+        "store": "New bee",
+        "leaf": "Single Ear Bluetooth Headsets",
+        "segment": "head",
+        "first_seen": "2021-06-28"
+      }
+    ],
+    "target": {
+      "item": 97574,
+      "asin": "B09WH42TXB",
+      "title": "Ngsod Bluetooth Headset - Wireless Headset with Microphone 90 Days Standby/110 Hours Talktime, Bluetooth Earpi",
+      "store": "Ngsod",
+      "leaf": "Single Ear Bluetooth Headsets",
+      "segment": "tail",
+      "first_seen": "2022-05-20"
+    },
+    "retrieval_rank": 92,
+    "full_catalogue_rank": 92.0,
+    "saved_ranks": {
+      "A": 6,
+      "C": 15,
+      "MLP": 8,
+      "DIN": 9
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 6344,
+          "asin": "B0092KJ9BU",
+          "title": "Poly Voyager Legend Wireless Headset (Plantronics) - Single-Ear Bluetooth w/Noise-Canceling Mic - Voice Contro",
+          "store": "Plantronics",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2012-09-21",
+          "retrieval_rank": 8
+        },
+        {
+          "item": 82793,
+          "asin": "B08HYDP59S",
+          "title": "New bee Bluetooth Earpiece V5.0 Wireless Handsfree Headset 24 Hrs Driving Headset 60 Days Standby Time with No",
+          "store": "New bee",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2018-08-30",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 85053,
+          "asin": "B08NCZ43SG",
+          "title": "Bluetooth Earpiece New bee V5.0 HD Stereo Ultralight Handsfree Bluetooth Headset with Microphone 12Hrs Talktim",
+          "store": "New bee",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "tail",
+          "first_seen": "2021-01-08",
+          "retrieval_rank": 55
+        }
+      ],
+      "C": [
+        {
+          "item": 82793,
+          "asin": "B08HYDP59S",
+          "title": "New bee Bluetooth Earpiece V5.0 Wireless Handsfree Headset 24 Hrs Driving Headset 60 Days Standby Time with No",
+          "store": "New bee",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2018-08-30",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 85053,
+          "asin": "B08NCZ43SG",
+          "title": "Bluetooth Earpiece New bee V5.0 HD Stereo Ultralight Handsfree Bluetooth Headset with Microphone 12Hrs Talktim",
+          "store": "New bee",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "tail",
+          "first_seen": "2021-01-08",
+          "retrieval_rank": 55
+        },
+        {
+          "item": 89122,
+          "asin": "B092DFWB3N",
+          "title": "ICOMTOFIT Bluetooth Headset, Wireless Bluetooth Earpiece V5.0 Hands-Free Earphones with Built-in Mic for Drivi",
+          "store": "ICOMTOFIT",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2019-01-05",
+          "retrieval_rank": 14
+        }
+      ],
+      "DIN": [
+        {
+          "item": 82793,
+          "asin": "B08HYDP59S",
+          "title": "New bee Bluetooth Earpiece V5.0 Wireless Handsfree Headset 24 Hrs Driving Headset 60 Days Standby Time with No",
+          "store": "New bee",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2018-08-30",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 87207,
+          "asin": "B08TBQ3KJD",
+          "title": "Trucker Bluetooth Headset, V5.0 Noise Cancelling Wireless Headset with Microphone, On Ear Hands-Free Bluetooth",
+          "store": "Arama",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "tail",
+          "first_seen": "2021-05-13",
+          "retrieval_rank": 182
+        },
+        {
+          "item": 89122,
+          "asin": "B092DFWB3N",
+          "title": "ICOMTOFIT Bluetooth Headset, Wireless Bluetooth Earpiece V5.0 Hands-Free Earphones with Built-in Mic for Drivi",
+          "store": "ICOMTOFIT",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2019-01-05",
+          "retrieval_rank": 14
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "a_keeps_new",
+    "inst": 2529398,
+    "user": 350158,
+    "date": "2022-07-05",
+    "eligible_pool": 387,
+    "history": [
+      {
+        "item": 77385,
+        "asin": "B084TBCZ8Y",
+        "title": "USB Charger, Anker Elite Dual Port 24W Wall Charger, PowerPort 2 with PowerIQ and Foldable Plug, for iPhone 11",
+        "store": "Anker",
+        "leaf": "Wall Chargers",
+        "segment": "head",
+        "first_seen": "2017-05-18"
+      },
+      {
+        "item": 84719,
+        "asin": "B08ML52F7J",
+        "title": "Maledan Bands Replacement Compatible with Fitbit Charge 2, 3-Pack, Small Gray/Blue/Black",
+        "store": "Maledan",
+        "leaf": "",
+        "segment": "head",
+        "first_seen": "2017-02-24"
+      },
+      {
+        "item": 54564,
+        "asin": "B07BGZG6MB",
+        "title": "QIBOX Screen Protector Compatible with Fitbit Versa & Versa Lite (Not for Versa 2), 3-Pack Waterproof Tempered",
+        "store": "QIBOX",
+        "leaf": "Smartwatch Screen Protectors",
+        "segment": "head",
+        "first_seen": "2018-04-12"
+      },
+      {
+        "item": 99481,
+        "asin": "B0B3CLZQGX",
+        "title": "Intoval Wireless Charger, 3 in 1 Charger for iPhone/iWatch/Airpods, Qi-Certified Charging Station for iPhone 1",
+        "store": "Intoval",
+        "leaf": "Wireless Chargers",
+        "segment": "head",
+        "first_seen": "2019-10-30"
+      },
+      {
+        "item": 109157,
+        "asin": "B0BZPD3B4S",
+        "title": "mocodi Stretchy-Solo-Loop-Bands for Apple-Watch-Ultra-Band 49mm 44mm 45mm 41mm 40mm 38mm 42mm for Women Men,Ny",
+        "store": "mocodi",
+        "leaf": "Smartwatch Bands",
+        "segment": "tail",
+        "first_seen": "2021-09-26"
+      }
+    ],
+    "target": {
+      "item": 98692,
+      "asin": "B09ZY6QW7V",
+      "title": "Wireless Charger for Multiple Apple Device, 3 in 1 Fast Charging Station/Stand Compatible for iPhone 14/13/12/",
+      "store": "Fanisic",
+      "leaf": "Charging Stations",
+      "segment": "head",
+      "first_seen": "2021-09-18"
+    },
+    "retrieval_rank": 194,
+    "full_catalogue_rank": 194.0,
+    "saved_ranks": {
+      "A": 1,
+      "C": 99,
+      "MLP": 1,
+      "DIN": 2
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 98692,
+          "asin": "B09ZY6QW7V",
+          "title": "Wireless Charger for Multiple Apple Device, 3 in 1 Fast Charging Station/Stand Compatible for iPhone 14/13/12/",
+          "store": "Fanisic",
+          "leaf": "Charging Stations",
+          "segment": "head",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 194
+        },
+        {
+          "item": 88400,
+          "asin": "B08Z7KC6W5",
+          "title": "WAITIEE Wireless Charging Station 4 in 1,Charging Dock Station Compatible with Apple iWatch SE 7 6 5 4 3 2, Ai",
+          "store": "WAITIEE",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2021-04-06",
+          "retrieval_rank": 158
+        },
+        {
+          "item": 110843,
+          "asin": "B0C6Y4XHB6",
+          "title": "Wireless Charger 3 in 1 for iPhone/iWatch/Airpods Devices, Safe Charging Station for Apple Watch 8/7/6/SE/5/4/",
+          "store": "Opinta",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2022-04-15",
+          "retrieval_rank": 146
+        }
+      ],
+      "C": [
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 34
+        },
+        {
+          "item": 110117,
+          "asin": "B0C4F5XC8L",
+          "title": "Misxi [2 Pack] Waterproof Black Hard Case with Tempered Glass Compatible with Apple Watch Series 8 Series 7 41",
+          "store": "Misxi",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-11-10",
+          "retrieval_rank": 9
+        },
+        {
+          "item": 108206,
+          "asin": "B0BW8D4VC2",
+          "title": "Anker 313 Wireless Charger (Pad), Qi-Certified 10W Max for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, AirPods ",
+          "store": "Anker",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2019-08-01",
+          "retrieval_rank": 18
+        }
+      ],
+      "DIN": [
+        {
+          "item": 110843,
+          "asin": "B0C6Y4XHB6",
+          "title": "Wireless Charger 3 in 1 for iPhone/iWatch/Airpods Devices, Safe Charging Station for Apple Watch 8/7/6/SE/5/4/",
+          "store": "Opinta",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2022-04-15",
+          "retrieval_rank": 146
+        },
+        {
+          "item": 98692,
+          "asin": "B09ZY6QW7V",
+          "title": "Wireless Charger for Multiple Apple Device, 3 in 1 Fast Charging Station/Stand Compatible for iPhone 14/13/12/",
+          "store": "Fanisic",
+          "leaf": "Charging Stations",
+          "segment": "head",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 194
+        },
+        {
+          "item": 100282,
+          "asin": "B0B5TNX6QB",
+          "title": "Wireless Charger, NorSway 3 in 1 Wireless Charging Station, 15W Fast Charging Dock for iPhone 14/14 Pro Max/3/",
+          "store": "NorSway",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-08-15",
+          "retrieval_rank": 180
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "a_keeps_new",
+    "inst": 2652233,
+    "user": 367113,
+    "date": "2021-12-10",
+    "eligible_pool": 387,
+    "history": [
+      {
+        "item": 25299,
+        "asin": "B00Z7SUZFU",
+        "title": "OtterBox IPhone 8 PLUS & IPhone 7 PLUS (ONLY) Defender Series Case - BLACK, Rugged & Durable, with Port Protec",
+        "store": "OtterBox",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2017-12-09"
+      },
+      {
+        "item": 50361,
+        "asin": "B075ZW5Q1Y",
+        "title": "iPhone 8 Plus Waterproof Case, Punkcase [StudStar Series] [Slim Fit] [IP68 Certified] [Shockproof] [Dirtproof]",
+        "store": "PunkCase",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2018-03-27"
+      },
+      {
+        "item": 63456,
+        "asin": "B07L15RRVY",
+        "title": "USB Wall Charger by TALK WORKS | 27W/5.4A | Dual USB Port (Type C / A) with Power Delivery (PD) 5ft Lightning ",
+        "store": "TALK WORKS",
+        "leaf": "Wall Chargers",
+        "segment": "tail",
+        "first_seen": "2019-02-14"
+      },
+      {
+        "item": 66116,
+        "asin": "B07P9S6R9Y",
+        "title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Ma",
+        "store": "yootech",
+        "leaf": "Wireless Chargers",
+        "segment": "head",
+        "first_seen": "2018-03-31"
+      }
+    ],
+    "target": {
+      "item": 95431,
+      "asin": "B09NCXVBYH",
+      "title": "OtterBox iPhone 13 Pro Max & iPhone 12 Pro Max Commuter Series Case - BLACK, slim & tough, pocket-friendly, wi",
+      "store": "OtterBox",
+      "leaf": "Basic Cases",
+      "segment": "head",
+      "first_seen": "2021-09-21"
+    },
+    "retrieval_rank": 199,
+    "full_catalogue_rank": 199.0,
+    "saved_ranks": {
+      "A": 3,
+      "C": 78,
+      "MLP": 3,
+      "DIN": 3
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 93251,
+          "asin": "B09GVFWX2C",
+          "title": "Wireless Charger, 3 in 1 Wireless Charging Station Compatible with iPhone 14/13/12/11 Pro Max/XS MAX/XR/XS/X/8",
+          "store": "Fuvuan",
+          "leaf": "Charging Stations",
+          "segment": "head",
+          "first_seen": "2021-11-15",
+          "retrieval_rank": 121
+        },
+        {
+          "item": 92848,
+          "asin": "B09FPXVK9F",
+          "title": "14Pack Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm 49mm, Soft Silicone Sport Replacement St",
+          "store": "QUANFUN",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-08-17",
+          "retrieval_rank": 145
+        },
+        {
+          "item": 95431,
+          "asin": "B09NCXVBYH",
+          "title": "OtterBox iPhone 13 Pro Max & iPhone 12 Pro Max Commuter Series Case - BLACK, slim & tough, pocket-friendly, wi",
+          "store": "OtterBox",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2021-09-21",
+          "retrieval_rank": 199
+        }
+      ],
+      "C": [
+        {
+          "item": 109742,
+          "asin": "B0C33S7FMB",
+          "title": "COKOEYE 2-Pack 10W Wireless Max Fast Phone Charger Pad,for iPhone 14/14 Plus/14 Pro/14 ProMax/13 Series/12/11/",
+          "store": "COKOEYE",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-12-02",
+          "retrieval_rank": 97
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 43
+        },
+        {
+          "item": 109915,
+          "asin": "B0C3M1RJNB",
+          "title": "Power Theory Designed for iPhone 14 Screen Protector Tempered Glass, Also for iPhone 13/iPhone 13 Pro [Case Fr",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-10-07",
+          "retrieval_rank": 68
+        }
+      ],
+      "DIN": [
+        {
+          "item": 92334,
+          "asin": "B09DCRSBC9",
+          "title": "XBO Compatible for iPhone 13 pro max Case with Stand, Heavy-Duty Military Grade Shockproof Phone Cover with Ad",
+          "store": "XBO",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-09-25",
+          "retrieval_rank": 171
+        },
+        {
+          "item": 109917,
+          "asin": "B0C3M3ZV5F",
+          "title": "Power Theory Privacy Screen Protector for iPhone 14 Plus, iPhone 13 Pro Max Tempered Glass Anti Spy protection",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 142
+        },
+        {
+          "item": 95431,
+          "asin": "B09NCXVBYH",
+          "title": "OtterBox iPhone 13 Pro Max & iPhone 12 Pro Max Commuter Series Case - BLACK, slim & tough, pocket-friendly, wi",
+          "store": "OtterBox",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2021-09-21",
+          "retrieval_rank": 199
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": true,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "din_rescues_new",
+    "inst": 2028,
+    "user": 279,
+    "date": "2021-10-19",
+    "eligible_pool": 342,
+    "history": [
+      {
+        "item": 1407,
+        "asin": "B003XDU0E2",
+        "title": "Seidio SURFACE Case and Holster Combo for Apple iPhone 4 and 4S (All Carriers) - Black",
+        "store": "Seidio",
+        "leaf": "Holsters",
+        "segment": "head",
+        "first_seen": "2010-08-26"
+      },
+      {
+        "item": 6334,
+        "asin": "B0091WDAA0",
+        "title": "AT&T Compatible Micro SIM Card (Net10)",
+        "store": "Net10",
+        "leaf": "SIM Cards",
+        "segment": "tail",
+        "first_seen": "2013-04-21"
+      },
+      {
+        "item": 60973,
+        "asin": "B07HF5R98G",
+        "title": "KADES Compatible for Apple Watch Band Genuine Leather Replacement Strap with Retro Crazy Horse Texture Compati",
+        "store": "KADES",
+        "leaf": "",
+        "segment": "tail",
+        "first_seen": "2019-01-19"
+      },
+      {
+        "item": 57839,
+        "asin": "B07FGG7FGV",
+        "title": "LK 6 Pack Screen Protector Compatible for Apple Watch 40mm Series 6 SE Series 5 Series 4 and Apple Watch 38mm ",
+        "store": "LK",
+        "leaf": "Smartwatch Screen Protectors",
+        "segment": "head",
+        "first_seen": "2018-07-23"
+      }
+    ],
+    "target": {
+      "item": 92123,
+      "asin": "B09CSSP9C1",
+      "title": "Ailun Glass Screen Protector for iPhone 14/13/13 Pro [6.1 Inch] Display 3 Pack Tempered Glass, Case Friendly",
+      "store": "Ailun",
+      "leaf": "Screen Protectors",
+      "segment": "head",
+      "first_seen": "2021-09-25"
+    },
+    "retrieval_rank": 197,
+    "full_catalogue_rank": 197.0,
+    "saved_ranks": {
+      "A": 29,
+      "C": 26,
+      "MLP": 13,
+      "DIN": 7
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 92158,
+          "asin": "B09CWKD4FN",
+          "title": "DSAAplus Compatible With Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm 49mm Stainless Steel Metal Cowboy Chai",
+          "store": "DSAAplus",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-10-16",
+          "retrieval_rank": 192
+        },
+        {
+          "item": 68312,
+          "asin": "B07RLZP5XX",
+          "title": "LK 6 Pack Designed for Apple Watch Screen Protector 44mm, Apple Watch SE/Series 6 5 4 44mm & Series 8 7 45mm- ",
+          "store": "LK",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-06-06",
+          "retrieval_rank": 2
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 30
+        }
+      ],
+      "C": [
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 23
+        },
+        {
+          "item": 98269,
+          "asin": "B09YLZXLWN",
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ult",
+          "store": "JULK",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2017-10-12",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 30
+        }
+      ],
+      "DIN": [
+        {
+          "item": 92414,
+          "asin": "B09DKGN3Q8",
+          "title": "Wireless Charger,ESTAVEL 3 in 1 Fast Wireless Charging Station Compatible with iPhone 13/12/11 Pro/XS/XR/8, Ap",
+          "store": "ESTAVEL",
+          "leaf": "Charging Stations",
+          "segment": "tail",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 123
+        },
+        {
+          "item": 92158,
+          "asin": "B09CWKD4FN",
+          "title": "DSAAplus Compatible With Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm 49mm Stainless Steel Metal Cowboy Chai",
+          "store": "DSAAplus",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-10-16",
+          "retrieval_rank": 192
+        },
+        {
+          "item": 92574,
+          "asin": "B09DYR569J",
+          "title": "amFilm Glass Screen Protector Compatible with iPhone 13 Mini 5.4\" Display, 2021, With Easy Installation Tray -",
+          "store": "amFilm",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2021-09-26",
+          "retrieval_rank": 168
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "din_rescues_new",
+    "inst": 79041,
+    "user": 10920,
+    "date": "2021-11-12",
+    "eligible_pool": 342,
+    "history": [
+      {
+        "item": 98269,
+        "asin": "B09YLZXLWN",
+        "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ult",
+        "store": "JULK",
+        "leaf": "Smartwatch Cases",
+        "segment": "head",
+        "first_seen": "2017-10-12"
+      },
+      {
+        "item": 90969,
+        "asin": "B098JMPMQH",
+        "title": "LeYi Compatible for iPhone 10 Case, iPhone X Case with Tempered Glass Screen Protector [2Pack] for Women Men, ",
+        "store": "LeYi",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2020-08-16"
+      },
+      {
+        "item": 87511,
+        "asin": "B08VGBDZY1",
+        "title": "Vesmatity Cell Phone Ring Holder Finger Kickstand 360\u00b0 Foldable Swivel Phone Stand Metal Back Ring Grip Foldab",
+        "store": "VESMATITY",
+        "leaf": "Stands",
+        "segment": "head",
+        "first_seen": "2021-03-18"
+      },
+      {
+        "item": 94387,
+        "asin": "B09KRVKQW9",
+        "title": "COCASES 4 Pack Phone Tether Tab, Phone Strap Replacement Part for Cell Phone, Safety Lanyard Patch (Black x4)",
+        "store": "COCASES",
+        "leaf": "Lanyards & Wrist Straps",
+        "segment": "head",
+        "first_seen": "2020-08-14"
+      },
+      {
+        "item": 89725,
+        "asin": "B094G5Z1JC",
+        "title": "NewWays Compatible for Apple Watch Band 45mm 44mm 42mm Series7 SE 6 5 4 3, Jewelry Bracelet for iWatch Band Wo",
+        "store": "NewWays",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2020-10-10"
+      }
+    ],
+    "target": {
+      "item": 92411,
+      "asin": "B09DKF2W7Y",
+      "title": "Secbolt Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm iWatch SE Series 8/7/6/5/4/3/2/1,",
+      "store": "Secbolt",
+      "leaf": "Smartwatch Bands",
+      "segment": "tail",
+      "first_seen": "2021-09-13"
+    },
+    "retrieval_rank": 29,
+    "full_catalogue_rank": 29.0,
+    "saved_ranks": {
+      "A": 20,
+      "C": 20,
+      "MLP": 18,
+      "DIN": 5
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 81129,
+          "asin": "B08DKM82B9",
+          "title": "NewWays Compatible for Apple Watch Band Series 8 Series 7 41mm 40mm SE Series 6 5 4 3 38mm, Sparkling Bling Di",
+          "store": "NewWays",
+          "leaf": "Smartwatch Bands",
+          "segment": "head",
+          "first_seen": "2019-11-01",
+          "retrieval_rank": 128
+        },
+        {
+          "item": 90171,
+          "asin": "B0963HK63B",
+          "title": "Secbolt Band Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm iWatch Series 8/7/6/5/4/3/2/1, Top",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "head",
+          "first_seen": "2019-12-21",
+          "retrieval_rank": 41
+        },
+        {
+          "item": 90357,
+          "asin": "B096KDHC9R",
+          "title": "Secbolt Carved Flower Bling Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm iWatch Series",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "head",
+          "first_seen": "2019-04-12",
+          "retrieval_rank": 69
+        }
+      ],
+      "C": [
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 30
+        },
+        {
+          "item": 90268,
+          "asin": "B096DDMPLW",
+          "title": "Secbolt Band Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm Women, Slim Resin Bracelet for iWa",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-07-01",
+          "retrieval_rank": 14
+        },
+        {
+          "item": 90134,
+          "asin": "B095YFBXQK",
+          "title": "Secbolt Bling Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm iWatch Series 8/7/6/5/4/3/2",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "head",
+          "first_seen": "2018-10-12",
+          "retrieval_rank": 11
+        }
+      ],
+      "DIN": [
+        {
+          "item": 110117,
+          "asin": "B0C4F5XC8L",
+          "title": "Misxi [2 Pack] Waterproof Black Hard Case with Tempered Glass Compatible with Apple Watch Series 8 Series 7 41",
+          "store": "Misxi",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-11-10",
+          "retrieval_rank": 56
+        },
+        {
+          "item": 90268,
+          "asin": "B096DDMPLW",
+          "title": "Secbolt Band Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm Women, Slim Resin Bracelet for iWa",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-07-01",
+          "retrieval_rank": 14
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 30
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "din_rescues_new",
+    "inst": 1087835,
+    "user": 150384,
+    "date": "2021-08-21",
+    "eligible_pool": 342,
+    "history": [
+      {
+        "item": 72408,
+        "asin": "B07WQV3C7K",
+        "title": "BELONGME Compatible with iPhone 11 Case - [Anti-Yellowing, Scratch Resistant] Shockproof Protective Phone Case",
+        "store": "BELONGME",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2019-09-24"
+      },
+      {
+        "item": 85294,
+        "asin": "B08NVPZPNQ",
+        "title": "USB C Charger, 20W PD Wall Charger",
+        "store": "JAHMAI",
+        "leaf": "Wall Chargers",
+        "segment": "tail",
+        "first_seen": "2021-01-26"
+      }
+    ],
+    "target": {
+      "item": 90840,
+      "asin": "B098371J93",
+      "title": "BELONGME [2 Pack] Compatible for Apple Watch Series 7 SE 6 5 4 Screen Protector Case 45mm 44mm 41mm 40mm, Wate",
+      "store": "BELONGME",
+      "leaf": "Smartwatch Cases",
+      "segment": "tail",
+      "first_seen": "2021-08-17"
+    },
+    "retrieval_rank": 26,
+    "full_catalogue_rank": 26.0,
+    "saved_ranks": {
+      "A": 7,
+      "C": 38,
+      "MLP": 39,
+      "DIN": 2
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 2
+        },
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple",
+          "store": "Mkeke",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-12-09",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 18
+        }
+      ],
+      "C": [
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 18
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 2
+        },
+        {
+          "item": 81073,
+          "asin": "B08DGNGDFR",
+          "title": "Ailun Glass Screen Protector for iPhone 12/12 Pro 2020 6.1 Inch 3 Pack Case Friendly Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-08",
+          "retrieval_rank": 66
+        }
+      ],
+      "DIN": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 2
+        },
+        {
+          "item": 90840,
+          "asin": "B098371J93",
+          "title": "BELONGME [2 Pack] Compatible for Apple Watch Series 7 SE 6 5 4 Screen Protector Case 45mm 44mm 41mm 40mm, Wate",
+          "store": "BELONGME",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-08-17",
+          "retrieval_rank": 26
+        },
+        {
+          "item": 81069,
+          "asin": "B08DG7JN5C",
+          "title": "Ailun Glass Screen Protector for iPhone 12 pro Max 2020 6.7 Inch 3 Pack Case Friendly Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-10-30",
+          "retrieval_rank": 111
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": true,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "din_rescues_new",
+    "inst": 1511872,
+    "user": 209143,
+    "date": "2021-12-02",
+    "eligible_pool": 342,
+    "history": [
+      {
+        "item": 80344,
+        "asin": "B08C7K7H4V",
+        "title": "OMOTON Cell Phone Stand, Adjustable Angle Height Desk Phone Dock Holder for iPhone SE 2/11 / 11 Pro/XS Max/XR,",
+        "store": "OMOTON",
+        "leaf": "Stands",
+        "segment": "head",
+        "first_seen": "2020-08-03"
+      },
+      {
+        "item": 81928,
+        "asin": "B08G86V64D",
+        "title": "SURPHY Silicone Case Compatible with iPhone 12 Mini Case 5.4 inches, Liquid Silicone Phone Case (with Microfib",
+        "store": "SURPHY",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2020-11-26"
+      },
+      {
+        "item": 109938,
+        "asin": "B0C3QTNPMX",
+        "title": "TORRAS Slim Fit Compatible for iPhone 12 Mini Case, Ultra-Thin Lightweight Full Protection Hard PC for iPhone ",
+        "store": "TORRAS",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2020-10-21"
+      },
+      {
+        "item": 82957,
+        "asin": "B08J9VXM33",
+        "title": "amFilm Glass Screen Protector Compatible with iPhone 12 Mini 5.4\" Display, 2020, with Easy Installation Tray, ",
+        "store": "amFilm",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2020-11-03"
+      },
+      {
+        "item": 110667,
+        "asin": "B0C6G29XBT",
+        "title": "Elando Crystal Clear Phone Case Compatible with iPhone 12/12 Pro, Non-Yellowing Shockproof Protective Phone Ca",
+        "store": "Elando",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2021-03-08"
+      }
+    ],
+    "target": {
+      "item": 93042,
+      "asin": "B09G73C7Y3",
+      "title": "TORRAS Slim Fit for iPhone 13 Pro Case 6.1 Inch, Never Yellowing, Ultra Thin for iPhone 13 Pro Phone Case Supe",
+      "store": "TORRAS",
+      "leaf": "Basic Cases",
+      "segment": "head",
+      "first_seen": "2021-09-13"
+    },
+    "retrieval_rank": 148,
+    "full_catalogue_rank": 148.0,
+    "saved_ranks": {
+      "A": 26,
+      "C": 24,
+      "MLP": 14,
+      "DIN": 1
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 90877,
+          "asin": "B0987QLP9D",
+          "title": "TORRAS Slim Fit 360 Compatible for iPhone 12 Pro Case/iPhone 12 Case with 9H Anti-Scratch Screen Protector [Fu",
+          "store": "TORRAS",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-08-05",
+          "retrieval_rank": 158
+        },
+        {
+          "item": 92577,
+          "asin": "B09DYRWVB1",
+          "title": "amFilm Glass Screen Protector Compatible with iPhone 13 Pro Max, iPhone 14 Plus, with Easy Installation Tray -",
+          "store": "amFilm",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-09-25",
+          "retrieval_rank": 44
+        },
+        {
+          "item": 84478,
+          "asin": "B08M16J6K8",
+          "title": "amFilm Glass Screen Protector Compatible for iPhone 12, iPhone 12 Pro Display with Easy Installation Tray, Gla",
+          "store": "amFilm",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-09",
+          "retrieval_rank": 187
+        }
+      ],
+      "C": [
+        {
+          "item": 80756,
+          "asin": "B08CZ3PTMH",
+          "title": "TORRAS Slim Fit Compatible for iPhone 12 Case [Specifically for iPhone 12], [Ultra-Thin] [Silky Smooth Touch] ",
+          "store": "TORRAS",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2020-10-16",
+          "retrieval_rank": 81
+        },
+        {
+          "item": 83758,
+          "asin": "B08L1T8BYY",
+          "title": "TORRAS Crystal Clear Compatible for iPhone 12 Mini Case, [Long Lasting Clarity] Slim Yet Durable Soft Silicone",
+          "store": "TORRAS",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2020-10-15",
+          "retrieval_rank": 63
+        },
+        {
+          "item": 109915,
+          "asin": "B0C3M1RJNB",
+          "title": "Power Theory Designed for iPhone 14 Screen Protector Tempered Glass, Also for iPhone 13/iPhone 13 Pro [Case Fr",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-10-07",
+          "retrieval_rank": 54
+        }
+      ],
+      "DIN": [
+        {
+          "item": 93042,
+          "asin": "B09G73C7Y3",
+          "title": "TORRAS Slim Fit for iPhone 13 Pro Case 6.1 Inch, Never Yellowing, Ultra Thin for iPhone 13 Pro Phone Case Supe",
+          "store": "TORRAS",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2021-09-13",
+          "retrieval_rank": 148
+        },
+        {
+          "item": 90877,
+          "asin": "B0987QLP9D",
+          "title": "TORRAS Slim Fit 360 Compatible for iPhone 12 Pro Case/iPhone 12 Case with 9H Anti-Scratch Screen Protector [Fu",
+          "store": "TORRAS",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-08-05",
+          "retrieval_rank": 158
+        },
+        {
+          "item": 92574,
+          "asin": "B09DYR569J",
+          "title": "amFilm Glass Screen Protector Compatible with iPhone 13 Mini 5.4\" Display, 2021, With Easy Installation Tray -",
+          "store": "amFilm",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2021-09-26",
+          "retrieval_rank": 200
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": true,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "din_rescues_new",
+    "inst": 1953700,
+    "user": 270448,
+    "date": "2021-10-03",
+    "eligible_pool": 342,
+    "history": [
+      {
+        "item": 59862,
+        "asin": "B07GWJGS7X",
+        "title": "TORRAS Slim Fit Compatible for iPhone Xs Max Case Ultra-Thin Lightweight Full Protection Hard PC XS Max Phone ",
+        "store": "TORRAS",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2018-09-25"
+      },
+      {
+        "item": 82952,
+        "asin": "B08J8DVRWP",
+        "title": "Car Phone Mount, Vansky 3-in-1 Cell Phone Holder Car Air Vent Holder Dashboard Mount Windshield Mount for iPho",
+        "store": "Vansky",
+        "leaf": "Cradles",
+        "segment": "head",
+        "first_seen": "2017-04-15"
+      },
+      {
+        "item": 51308,
+        "asin": "B0772J6SR6",
+        "title": "TORRAS Crystal Clear Compatible for iPhone Xs Case/iPhone X Case [10X Anti-Yellowing] [2X Anti-Scratch] Thin S",
+        "store": "TORRAS",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2017-11-27"
+      },
+      {
+        "item": 74374,
+        "asin": "B07YNCDBSS",
+        "title": "Design Your Own iPhone Case, Personalized Photo Phone case for Apple iPhone 11 Custom Case (iPhone 11 Only)",
+        "store": "MUNDAZE",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2020-05-19"
+      },
+      {
+        "item": 90708,
+        "asin": "B097MBC1P8",
+        "title": "Apple iPhone 11 Pro Max, US Version, 512GB, Silver - Unlocked (Renewed)",
+        "store": "Amazon Renewed",
+        "leaf": "Wireless Trade-In",
+        "segment": "head",
+        "first_seen": "2019-12-19"
+      }
+    ],
+    "target": {
+      "item": 99907,
+      "asin": "B0B4SB9BS6",
+      "title": "TORRAS Slim Fit Thin for iPhone 13 Pro Max Case, Ultra-Thin 13 Pro Max Case Black, Lightweight Hard PC Cover w",
+      "store": "TORRAS",
+      "leaf": "Basic Cases",
+      "segment": "head",
+      "first_seen": "2021-09-16"
+    },
+    "retrieval_rank": 182,
+    "full_catalogue_rank": 182.0,
+    "saved_ranks": {
+      "A": 36,
+      "C": 32,
+      "MLP": 40,
+      "DIN": 4
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 15
+        },
+        {
+          "item": 60097,
+          "asin": "B07H1DHJBV",
+          "title": "Ailun Screen Protector for iPhone 11 Pro Max/iPhone Xs Max 3 Pack 6.5 Inch 2019/2018 Release Case Friendly Tem",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-09-26",
+          "retrieval_rank": 8
+        },
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple",
+          "store": "Mkeke",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-12-09",
+          "retrieval_rank": 5
+        }
+      ],
+      "C": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 15
+        },
+        {
+          "item": 81196,
+          "asin": "B08DQGH9T1",
+          "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 12 Pro Max (2020) [6.7 inch] [Case ",
+          "store": "Spigen",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-09",
+          "retrieval_rank": 68
+        },
+        {
+          "item": 80667,
+          "asin": "B08CVSZ39M",
+          "title": "TORRAS Slim Fit Designed for iPhone 12 Pro Max Case 6.7 inch Ultra Thin Sturdy Yet Protective Phone Case 2020 ",
+          "store": "TORRAS",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2020-10-22",
+          "retrieval_rank": 171
+        }
+      ],
+      "DIN": [
+        {
+          "item": 81196,
+          "asin": "B08DQGH9T1",
+          "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 12 Pro Max (2020) [6.7 inch] [Case ",
+          "store": "Spigen",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-09",
+          "retrieval_rank": 68
+        },
+        {
+          "item": 89290,
+          "asin": "B092YW14VS",
+          "title": "Spigen Rugged Band Designed for Apple Watch Band for Apple Watch Ultra (49mm), Series 8/7 (45mm), Series SE2/6",
+          "store": "Spigen",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-08-04",
+          "retrieval_rank": 181
+        },
+        {
+          "item": 96156,
+          "asin": "B09PZQ8MNG",
+          "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 11 / iPhone XR [6.1 inch] [Case Fri",
+          "store": "Spigen",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-11-05",
+          "retrieval_rank": 6
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": true,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "din_rescues_new",
+    "inst": 2358524,
+    "user": 326500,
+    "date": "2022-05-12",
+    "eligible_pool": 342,
+    "history": [
+      {
+        "item": 9418,
+        "asin": "B00CA9D6VY",
+        "title": "Bundle: 2 Items - Dock Charger for HTC One M7, Clear Case for HTC One M7",
+        "store": "Hyperion EA",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2013-04-19"
+      },
+      {
+        "item": 70781,
+        "asin": "B07VBZCK6T",
+        "title": "Tranesca Aluminum Watch Stand for Multiple Brand smartwatches - Stand only (Compatible with Michael Kors, Arma",
+        "store": "Tranesca",
+        "leaf": "Smartwatch Cables & Chargers",
+        "segment": "head",
+        "first_seen": "2019-09-28"
+      },
+      {
+        "item": 91602,
+        "asin": "B09BHPGYT3",
+        "title": "SPIDERCASE iPhone 13 Pro Max Clear Case, Military Grade Drop Protection, Slim Thin Cover, 6.7 inch 2021",
+        "store": "SPIDERCASE",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2021-09-13"
+      }
+    ],
+    "target": {
+      "item": 92132,
+      "asin": "B09CTB3M1T",
+      "title": "Ailun Glass Screen Protector for iPhone 14 Plus/iPhone 13 Pro Max [6.7 Inch Display], 3 Pack Case Friendly Tem",
+      "store": "Ailun",
+      "leaf": "Screen Protectors",
+      "segment": "head",
+      "first_seen": "2021-09-20"
+    },
+    "retrieval_rank": 133,
+    "full_catalogue_rank": 133.0,
+    "saved_ranks": {
+      "A": 23,
+      "C": 11,
+      "MLP": 15,
+      "DIN": 8
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 108023,
+          "asin": "B0BVNW9NGT",
+          "title": "Tranesca 8 Pack 41mm Case with Built-in HD Clear Ultra-Thin TPU Screen Protector Cover Compatible with Apple W",
+          "store": "Tranesca",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2020-10-25",
+          "retrieval_rank": 41
+        },
+        {
+          "item": 110755,
+          "asin": "B0C6MBDVLS",
+          "title": "Tranesca 4 Pack 40mm Case Compatible with iwatch Series 6 / SE/Series 5/ Series 4 Screen Protector Overall Pro",
+          "store": "Tranesca",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2019-02-11",
+          "retrieval_rank": 91
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 5
+        }
+      ],
+      "C": [
+        {
+          "item": 110755,
+          "asin": "B0C6MBDVLS",
+          "title": "Tranesca 4 Pack 40mm Case Compatible with iwatch Series 6 / SE/Series 5/ Series 4 Screen Protector Overall Pro",
+          "store": "Tranesca",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2019-02-11",
+          "retrieval_rank": 91
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 99
+        },
+        {
+          "item": 108023,
+          "asin": "B0BVNW9NGT",
+          "title": "Tranesca 8 Pack 41mm Case with Built-in HD Clear Ultra-Thin TPU Screen Protector Cover Compatible with Apple W",
+          "store": "Tranesca",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2020-10-25",
+          "retrieval_rank": 41
+        }
+      ],
+      "DIN": [
+        {
+          "item": 108023,
+          "asin": "B0BVNW9NGT",
+          "title": "Tranesca 8 Pack 41mm Case with Built-in HD Clear Ultra-Thin TPU Screen Protector Cover Compatible with Apple W",
+          "store": "Tranesca",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2020-10-25",
+          "retrieval_rank": 41
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-10-28",
+          "retrieval_rank": 5
+        },
+        {
+          "item": 110117,
+          "asin": "B0C4F5XC8L",
+          "title": "Misxi [2 Pack] Waterproof Black Hard Case with Tempered Glass Compatible with Apple Watch Series 8 Series 7 41",
+          "store": "Misxi",
+          "leaf": "Smartwatch Cases",
+          "segment": "tail",
+          "first_seen": "2021-11-10",
+          "retrieval_rank": 55
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "retrieval_miss",
+    "inst": 62668,
+    "user": 8684,
+    "date": "2021-12-29",
+    "eligible_pool": 204329,
+    "history": [
+      {
+        "item": 102968,
+        "asin": "B0BF7BYV3F",
+        "title": "STG Sport Band Compatible with Apple Watch 38mm 40mm 41mm 42mm 44mm 45mm 49mm, Soft Silicone Slim Thin Narrow ",
+        "store": "STG Sport",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2020-08-30"
+      },
+      {
+        "item": 93304,
+        "asin": "B09GYV8C3D",
+        "title": "Fitlink Metal Band Compatible for Apple Watch Series 8 7 6 5 4 3 2 1 SE Apple Watch Ultra, Stainless Steel Wat",
+        "store": "Fitlink",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2019-12-12"
+      },
+      {
+        "item": 90557,
+        "asin": "B0972JNDHP",
+        "title": "Maledan 6 Pack Bands Compatible for Apple Watch Band 45mm 41mm 40mm 38mm 44mm 42mm 49mm Women Men, Breathable ",
+        "store": "Maledan",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2021-08-21"
+      },
+      {
+        "item": 83432,
+        "asin": "B08K8N5RTK",
+        "title": "[2-Pack] Julk Hard Case for Apple Watch Series 6 / SE / Series 5 / Series 4 40mm, iWatch PC Overall Protective",
+        "store": "JULK",
+        "leaf": "Smartwatch Screen Protectors",
+        "segment": "tail",
+        "first_seen": "2021-01-15"
+      },
+      {
+        "item": 80843,
+        "asin": "B08D3HGCTX",
+        "title": "Secbolt Bling Bands Compatible with Apple Watch Band 38mm 40mm 41mm iWatch SE Series 8 7 6 5 4 3 2 1 Women Dre",
+        "store": "Secbolt",
+        "leaf": "Smartwatch Bands",
+        "segment": "head",
+        "first_seen": "2017-09-09"
+      }
+    ],
+    "target": {
+      "item": 90909,
+      "asin": "B0989YPRST",
+      "title": "Rubinom Compatible with Apple Watch Band 40mm 38mm 44mm 42mm Women Men,\u30103 Pack\u3011 Soft Sport Silicone Breathable",
+      "store": "Rubinom",
+      "leaf": "Smartwatch Bands",
+      "segment": "tail",
+      "first_seen": "2021-07-21"
+    },
+    "retrieval_rank": null,
+    "full_catalogue_rank": 1402.0,
+    "saved_ranks": {
+      "A": null,
+      "C": null,
+      "MLP": null,
+      "DIN": null
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 74831,
+          "asin": "B07Z8PQHHW",
+          "title": "Secbolt Bling Case Compatible with Apple Watch 44mm, Full Cover Bumper Screen Protector for iWatch SE Series 6",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-11-04",
+          "retrieval_rank": 164
+        },
+        {
+          "item": 89592,
+          "asin": "B0946DXPTZ",
+          "title": "Yolovie Compatible for Apple Watch Case 38mm 40mm 42mm 44mm Bling Crystal Diamonds Rhinestone Bumper Cover for",
+          "store": "Yolovie",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2019-06-14",
+          "retrieval_rank": 193
+        },
+        {
+          "item": 98269,
+          "asin": "B09YLZXLWN",
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ult",
+          "store": "JULK",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2017-10-12",
+          "retrieval_rank": 1
+        }
+      ],
+      "C": [
+        {
+          "item": 98269,
+          "asin": "B09YLZXLWN",
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ult",
+          "store": "JULK",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2017-10-12",
+          "retrieval_rank": 1
+        },
+        {
+          "item": 90268,
+          "asin": "B096DDMPLW",
+          "title": "Secbolt Band Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm Women, Slim Resin Bracelet for iWa",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-07-01",
+          "retrieval_rank": 10
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 34
+        }
+      ],
+      "DIN": [
+        {
+          "item": 89592,
+          "asin": "B0946DXPTZ",
+          "title": "Yolovie Compatible for Apple Watch Case 38mm 40mm 42mm 44mm Bling Crystal Diamonds Rhinestone Bumper Cover for",
+          "store": "Yolovie",
+          "leaf": "Smartwatch Cases",
+          "segment": "head",
+          "first_seen": "2019-06-14",
+          "retrieval_rank": 193
+        },
+        {
+          "item": 110063,
+          "asin": "B0C46Q89SN",
+          "title": "OYODSS Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm 49mm, Soft Silicone Sport Wristban",
+          "store": "OYODSS",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-11-28",
+          "retrieval_rank": 195
+        },
+        {
+          "item": 90268,
+          "asin": "B096DDMPLW",
+          "title": "Secbolt Band Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm Women, Slim Resin Bracelet for iWa",
+          "store": "Secbolt",
+          "leaf": "Smartwatch Bands",
+          "segment": "tail",
+          "first_seen": "2021-07-01",
+          "retrieval_rank": 10
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "retrieval_miss",
+    "inst": 220467,
+    "user": 30501,
+    "date": "2022-02-09",
+    "eligible_pool": 204329,
+    "history": [
+      {
+        "item": 92686,
+        "asin": "B09F939CGZ",
+        "title": "luolnh Gold Glitter Sparkle Case Compatible with iPhone 13 Case Marble Design Shockproof Slim Soft Silicone TP",
+        "store": "luolnh",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2021-11-13"
+      },
+      {
+        "item": 92407,
+        "asin": "B09DKBM3H8",
+        "title": "Lamcase Compatible with iPhone 13 Case, Heavy Duty Shockproof Hybrid Hard PC Soft TPU Rubber Three Layer Rugge",
+        "store": "Lamcase",
+        "leaf": "Basic Cases",
+        "segment": "tail",
+        "first_seen": "2021-10-17"
+      }
+    ],
+    "target": {
+      "item": 93470,
+      "asin": "B09HC4MM6B",
+      "title": "5 Pack Sport Loop Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm Women Men, Soft Nylon B",
+      "store": "GSUNG",
+      "leaf": "Smartwatch Bands",
+      "segment": "tail",
+      "first_seen": "2021-11-11"
+    },
+    "retrieval_rank": null,
+    "full_catalogue_rank": 28699.0,
+    "saved_ranks": {
+      "A": null,
+      "C": null,
+      "MLP": null,
+      "DIN": null
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 80552,
+          "asin": "B08CQJ5D6S",
+          "title": "wzjgzdly Butterfly Bling Clear Case Compatible with iPhone 11, Glitter Case for Women Cute Slim Soft Slip Resi",
+          "store": "wzjgzdly",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-01-27",
+          "retrieval_rank": 180
+        },
+        {
+          "item": 73531,
+          "asin": "B07XPT3GMB",
+          "title": "ULAK Compatible with iPhone 11 Case, Clear Heavy Duty Protection Shockproof Rugged Cover Designed Flexible Sof",
+          "store": "ULAK",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2019-10-22",
+          "retrieval_rank": 195
+        },
+        {
+          "item": 106768,
+          "asin": "B0BR1WK5Z4",
+          "title": "VOMODI Compatible for iPhone 12 Case,with Screen Protector 2Pcs,Heavy Duty Shockproof Bumper,with Magnetic Sta",
+          "store": "VOMODI",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-10-10",
+          "retrieval_rank": 184
+        }
+      ],
+      "C": [
+        {
+          "item": 109915,
+          "asin": "B0C3M1RJNB",
+          "title": "Power Theory Designed for iPhone 14 Screen Protector Tempered Glass, Also for iPhone 13/iPhone 13 Pro [Case Fr",
+          "store": "Power Theory",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-10-07",
+          "retrieval_rank": 142
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 133
+        },
+        {
+          "item": 81073,
+          "asin": "B08DGNGDFR",
+          "title": "Ailun Glass Screen Protector for iPhone 12/12 Pro 2020 6.1 Inch 3 Pack Case Friendly Tempered Glass",
+          "store": "Ailun",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-08",
+          "retrieval_rank": 49
+        }
+      ],
+      "DIN": [
+        {
+          "item": 80552,
+          "asin": "B08CQJ5D6S",
+          "title": "wzjgzdly Butterfly Bling Clear Case Compatible with iPhone 11, Glitter Case for Women Cute Slim Soft Slip Resi",
+          "store": "wzjgzdly",
+          "leaf": "Basic Cases",
+          "segment": "tail",
+          "first_seen": "2021-01-27",
+          "retrieval_rank": 180
+        },
+        {
+          "item": 100822,
+          "asin": "B0B77XGWJ7",
+          "title": "COOLQO Compatible for iPhone 11 Case, with [2 x Tempered Glass Screen Protector] Clear Glitter Sparkle 360 Ful",
+          "store": "COOLQO",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2019-10-18",
+          "retrieval_rank": 183
+        },
+        {
+          "item": 92320,
+          "asin": "B09DCBW5PQ",
+          "title": "Riisoyu [3+3 Pack] Compatible with iPhone 13 Pro Max Clear Screen Protector, 3 Pack Tempered Glass Film & 3 Pa",
+          "store": "Riisoyu",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-09-25",
+          "retrieval_rank": 176
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "retrieval_miss",
+    "inst": 822841,
+    "user": 113756,
+    "date": "2021-08-27",
+    "eligible_pool": 204329,
+    "history": [
+      {
+        "item": 78243,
+        "asin": "B086V1XBP4",
+        "title": "Compatible with Fitbit Versa 2 Charger,KingAcc 1-Pack 3.3ft Replacement USB Charging Cable Cord Charger Cradle",
+        "store": "KingAcc",
+        "leaf": "Smartwatch Cables & Chargers",
+        "segment": "tail",
+        "first_seen": "2020-08-11"
+      }
+    ],
+    "target": {
+      "item": 109593,
+      "asin": "B0C2HPVNV8",
+      "title": "JETech Screen Protector for iPhone 11 Pro, iPhone Xs and iPhone X 5.8-Inch, Tempered Glass Film, 2-Pack",
+      "store": "JETech",
+      "leaf": "Screen Protectors",
+      "segment": "head",
+      "first_seen": "2017-10-13"
+    },
+    "retrieval_rank": null,
+    "full_catalogue_rank": 649.0,
+    "saved_ranks": {
+      "A": null,
+      "C": null,
+      "MLP": null,
+      "DIN": null
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 84688,
+          "asin": "B08MF92JRF",
+          "title": "[4 Pack] Compatible for Fitbit Versa 3 / Fitbit Sense Screen Protector Tempered Glass, YMHML Waterproof 9H Har",
+          "store": "YMHML",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-01-02",
+          "retrieval_rank": 199
+        },
+        {
+          "item": 62680,
+          "asin": "B07K75Z1L2",
+          "title": "ArmorSuit MilitaryShield Screen Protector Designed for Fitbit Charge 4 or 3 / SE Screen Protector (6 Pack) Max",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-12-27",
+          "retrieval_rank": 170
+        },
+        {
+          "item": 83504,
+          "asin": "B08KFTKNSS",
+          "title": "Maledan Compatible with Fitbit Sense & Versa 3 Charger Replacement USB Charging Cable Dock Stand for Sense 2/S",
+          "store": "Maledan",
+          "leaf": "Smartwatch Cables & Chargers",
+          "segment": "head",
+          "first_seen": "2020-12-16",
+          "retrieval_rank": 195
+        }
+      ],
+      "C": [
+        {
+          "item": 97802,
+          "asin": "B09X327QKD",
+          "title": "Compatible for Fitbit Alta HR Charger,KingAcc 1-Pack 3.3ft/1m Replacement USB Charging Cable Cradle Dock Adapt",
+          "store": "KingAcc",
+          "leaf": "Smartwatch Cables & Chargers",
+          "segment": "head",
+          "first_seen": "2017-06-09",
+          "retrieval_rank": 138
+        },
+        {
+          "item": 89122,
+          "asin": "B092DFWB3N",
+          "title": "ICOMTOFIT Bluetooth Headset, Wireless Bluetooth Earpiece V5.0 Hands-Free Earphones with Built-in Mic for Drivi",
+          "store": "ICOMTOFIT",
+          "leaf": "Single Ear Bluetooth Headsets",
+          "segment": "head",
+          "first_seen": "2019-01-05",
+          "retrieval_rank": 164
+        },
+        {
+          "item": 73060,
+          "asin": "B07X8VCJN8",
+          "title": "Compatible with Fitbit Flex Charger, Savcappan Replacement USB Charging Cable Cord Charger Cradle Dock Adapter",
+          "store": "KingAcc",
+          "leaf": "Smartwatch Cables & Chargers",
+          "segment": "tail",
+          "first_seen": "2017-09-01",
+          "retrieval_rank": 73
+        }
+      ],
+      "DIN": [
+        {
+          "item": 62680,
+          "asin": "B07K75Z1L2",
+          "title": "ArmorSuit MilitaryShield Screen Protector Designed for Fitbit Charge 4 or 3 / SE Screen Protector (6 Pack) Max",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2018-12-27",
+          "retrieval_rank": 170
+        },
+        {
+          "item": 84688,
+          "asin": "B08MF92JRF",
+          "title": "[4 Pack] Compatible for Fitbit Versa 3 / Fitbit Sense Screen Protector Tempered Glass, YMHML Waterproof 9H Har",
+          "store": "YMHML",
+          "leaf": "Screen Protectors",
+          "segment": "tail",
+          "first_seen": "2021-01-02",
+          "retrieval_rank": 199
+        },
+        {
+          "item": 68223,
+          "asin": "B07RJCXT56",
+          "title": "NANW Charger Compatible with Fitbit Versa/Versa Lite Edition Smartwatch, 90\u00b0 Foldable Charge Stand Dock Replac",
+          "store": "NANW",
+          "leaf": "Smartwatch Cables & Chargers",
+          "segment": "tail",
+          "first_seen": "2019-06-08",
+          "retrieval_rank": 188
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "retrieval_miss",
+    "inst": 1324929,
+    "user": 183232,
+    "date": "2022-06-13",
+    "eligible_pool": 204329,
+    "history": [
+      {
+        "item": 67781,
+        "asin": "B07QYNGXC7",
+        "title": "Samsung Adaptive Fast Charger Kit-LaoFas Fast Charging Adapter Travel Charger Compatible with Samsung Galaxy S",
+        "store": "LaoFas",
+        "leaf": "Wall Chargers",
+        "segment": "tail",
+        "first_seen": "2019-06-14"
+      },
+      {
+        "item": 52515,
+        "asin": "B0788LC13S",
+        "title": "Quick charge 3.0 Car Charger Dual USB Port with 5Ft Micro USB Cable Compatible for Samsung Galaxy J7,S7 Edge/S",
+        "store": "TPLTECH",
+        "leaf": "Automobile Chargers",
+        "segment": "tail",
+        "first_seen": "2018-08-01"
+      },
+      {
+        "item": 65369,
+        "asin": "B07NPD5T5H",
+        "title": "Adaptive Fast Charging USB Wall Charger Adapter Compatible Samsung Galaxy S21 S20 S10 S6 S7 S8 S9 / Edge/Plus/",
+        "store": "Alimu",
+        "leaf": "Wall Chargers",
+        "segment": "head",
+        "first_seen": "2019-03-18"
+      },
+      {
+        "item": 88378,
+        "asin": "B08Z3PZF5N",
+        "title": "TORRAS Shockproof Galaxy S21 Case (Only), [Military Grade Drop Tested] Translucent Matte Hard Back with Soft E",
+        "store": "TORRAS",
+        "leaf": "Basic Cases",
+        "segment": "head",
+        "first_seen": "2021-01-16"
+      },
+      {
+        "item": 87790,
+        "asin": "B08X3LH6D4",
+        "title": "Adaptive Fast Charging Block USB Wall Charger, Swadaws 2-Pack Travel Quick Charger Adapter Compatible with Sam",
+        "store": "Swadaws",
+        "leaf": "Wall Chargers",
+        "segment": "tail",
+        "first_seen": "2021-03-25"
+      }
+    ],
+    "target": {
+      "item": 107617,
+      "asin": "B0BTP1DMXK",
+      "title": "45W Samsung Super Fast Charger Type C Android Phone Charger USB C Fast Charging 10 FT Cable for Samsung Galaxy",
+      "store": "Duloch",
+      "leaf": "Wall Chargers",
+      "segment": "tail",
+      "first_seen": "2022-02-27"
+    },
+    "retrieval_rank": null,
+    "full_catalogue_rank": 2692.0,
+    "saved_ranks": {
+      "A": null,
+      "C": null,
+      "MLP": null,
+      "DIN": null
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 111185,
+          "asin": "B0C9M9QQSJ",
+          "title": "USB C Cable 10ft 3 Pack USB C Charger Cable, USB A to USB C Charging Cable USB Type C Fast Charge Cord Compati",
+          "store": "Puxnoin",
+          "leaf": "Wall Chargers",
+          "segment": "tail",
+          "first_seen": "2021-09-08",
+          "retrieval_rank": 193
+        },
+        {
+          "item": 91093,
+          "asin": "B098X8FV9S",
+          "title": "Cluvox USB C Car Charger, Dual 18W Fast Charging Compatible for Samsung Galaxy S21 Plus/Ultra/S20 FE/Plus/Ultr",
+          "store": "Cluvox",
+          "leaf": "Automobile Chargers",
+          "segment": "tail",
+          "first_seen": "2021-07-02",
+          "retrieval_rank": 191
+        },
+        {
+          "item": 87133,
+          "asin": "B08T6WNHF6",
+          "title": "ArmorSuit 2 Pack MilitaryShield Screen Protector Designed for Samsung Galaxy S21 Ultra 6.8-INCH Case Friendly ",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2021-02-02",
+          "retrieval_rank": 108
+        }
+      ],
+      "C": [
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 45
+        },
+        {
+          "item": 89342,
+          "asin": "B0933JJCNK",
+          "title": "Samsung Galaxy S21 5G, US Version, 128GB, Phantom Gray for AT&T (Renewed)",
+          "store": "Amazon Renewed",
+          "leaf": "Cell Phones",
+          "segment": "tail",
+          "first_seen": "2021-07-07",
+          "retrieval_rank": 151
+        },
+        {
+          "item": 109131,
+          "asin": "B0BZL5WQML",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed For Samsung Galaxy S20 / S20 5G (6.2\")(Case Friend",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-02-26",
+          "retrieval_rank": 4
+        }
+      ],
+      "DIN": [
+        {
+          "item": 91093,
+          "asin": "B098X8FV9S",
+          "title": "Cluvox USB C Car Charger, Dual 18W Fast Charging Compatible for Samsung Galaxy S21 Plus/Ultra/S20 FE/Plus/Ultr",
+          "store": "Cluvox",
+          "leaf": "Automobile Chargers",
+          "segment": "tail",
+          "first_seen": "2021-07-02",
+          "retrieval_rank": 191
+        },
+        {
+          "item": 87133,
+          "asin": "B08T6WNHF6",
+          "title": "ArmorSuit 2 Pack MilitaryShield Screen Protector Designed for Samsung Galaxy S21 Ultra 6.8-INCH Case Friendly ",
+          "store": "ArmorSuit",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2021-02-02",
+          "retrieval_rank": 108
+        },
+        {
+          "item": 111185,
+          "asin": "B0C9M9QQSJ",
+          "title": "USB C Cable 10ft 3 Pack USB C Charger Cable, USB A to USB C Charging Cable USB Type C Fast Charge Cord Compati",
+          "store": "Puxnoin",
+          "leaf": "Wall Chargers",
+          "segment": "tail",
+          "first_seen": "2021-09-08",
+          "retrieval_rank": 193
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  },
+  {
+    "category": "retrieval_miss",
+    "inst": 1490157,
+    "user": 206091,
+    "date": "2022-01-05",
+    "eligible_pool": 204329,
+    "history": [
+      {
+        "item": 23972,
+        "asin": "B00WLW5AC8",
+        "title": "Note 2 Screen Protector, JETech Premium Tempered Glass Screen Protector Film for Samsung Galaxy Note 2",
+        "store": "JETech",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2015-06-04"
+      },
+      {
+        "item": 32917,
+        "asin": "B01D2N202W",
+        "title": "Bike Mount, Timibis Universal Cell phone Bicycle Rack Handlebar & Motorcycle Holder Cradle for iphone 7 7+ 6s ",
+        "store": "Timibis",
+        "leaf": "Cradles",
+        "segment": "tail",
+        "first_seen": "2016-11-05"
+      },
+      {
+        "item": 77907,
+        "asin": "B085W5XVV6",
+        "title": "CyvenSmart USB C Type Charging Cable Fast Charge, [3Pack 10 ft] Android Phone Type C Charger Cable,10 Foot USB",
+        "store": "CyvenSmart",
+        "leaf": "Automobile Chargers",
+        "segment": "head",
+        "first_seen": "2019-04-22"
+      },
+      {
+        "item": 109998,
+        "asin": "B0C3XBNHXQ",
+        "title": "IQShield Screen Protector Compatible with Fitbit Luxe (6-Pack) Anti-Bubble Clear Film",
+        "store": "IQShield",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2016-03-02"
+      },
+      {
+        "item": 71417,
+        "asin": "B07VS85ZHB",
+        "title": "Samsung Fast Charger with USB Type C Cable Compatible Samsung Galaxy S23 Ultra/S23/S23+/S22/S22 Ultra/S22+/S21",
+        "store": "zoyuzan",
+        "leaf": "Wall Chargers",
+        "segment": "head",
+        "first_seen": "2019-09-02"
+      }
+    ],
+    "target": {
+      "item": 79540,
+      "asin": "B089M8S6RD",
+      "title": "Samsung SM-R820NZKAXAR Galaxy Watch Active2 44mm (Black) - (Renewed)",
+      "store": "Amazon Renewed",
+      "leaf": "Smartwatch Bands",
+      "segment": "tail",
+      "first_seen": "2022-01-05"
+    },
+    "retrieval_rank": null,
+    "full_catalogue_rank": 6251.0,
+    "saved_ranks": {
+      "A": null,
+      "C": null,
+      "MLP": null,
+      "DIN": null
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 91093,
+          "asin": "B098X8FV9S",
+          "title": "Cluvox USB C Car Charger, Dual 18W Fast Charging Compatible for Samsung Galaxy S21 Plus/Ultra/S20 FE/Plus/Ultr",
+          "store": "Cluvox",
+          "leaf": "Automobile Chargers",
+          "segment": "tail",
+          "first_seen": "2021-07-02",
+          "retrieval_rank": 198
+        },
+        {
+          "item": 71528,
+          "asin": "B07VW3K8X7",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy Z Flip 3 (2-Pack) Anti-Bubble Clear Film",
+          "store": "IQShield",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2016-06-27",
+          "retrieval_rank": 54
+        },
+        {
+          "item": 91956,
+          "asin": "B09CDB5X99",
+          "title": "Wireless Charger, 15W Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Min",
+          "store": "COO",
+          "leaf": "Wireless Chargers",
+          "segment": "tail",
+          "first_seen": "2021-11-08",
+          "retrieval_rank": 1
+        }
+      ],
+      "C": [
+        {
+          "item": 71528,
+          "asin": "B07VW3K8X7",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy Z Flip 3 (2-Pack) Anti-Bubble Clear Film",
+          "store": "IQShield",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2016-06-27",
+          "retrieval_rank": 54
+        },
+        {
+          "item": 110477,
+          "asin": "B0C5W4TCMM",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy S8 (2-Pack)(Case Friendly)(Not Glass) Anti-Bubble Cle",
+          "store": "IQShield",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2015-04-19",
+          "retrieval_rank": 4
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control",
+          "store": "TOZO",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-09-12",
+          "retrieval_rank": 98
+        }
+      ],
+      "DIN": [
+        {
+          "item": 110477,
+          "asin": "B0C5W4TCMM",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy S8 (2-Pack)(Case Friendly)(Not Glass) Anti-Bubble Cle",
+          "store": "IQShield",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2015-04-19",
+          "retrieval_rank": 4
+        },
+        {
+          "item": 91093,
+          "asin": "B098X8FV9S",
+          "title": "Cluvox USB C Car Charger, Dual 18W Fast Charging Compatible for Samsung Galaxy S21 Plus/Ultra/S20 FE/Plus/Ultr",
+          "store": "Cluvox",
+          "leaf": "Automobile Chargers",
+          "segment": "tail",
+          "first_seen": "2021-07-02",
+          "retrieval_rank": 198
+        },
+        {
+          "item": 71528,
+          "asin": "B07VW3K8X7",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy Z Flip 3 (2-Pack) Anti-Bubble Clear Film",
+          "store": "IQShield",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2016-06-27",
+          "retrieval_rank": 54
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": false
+    }
+  },
+  {
+    "category": "retrieval_miss",
+    "inst": 2374459,
+    "user": 328733,
+    "date": "2021-09-29",
+    "eligible_pool": 204329,
+    "history": [
+      {
+        "item": 45286,
+        "asin": "B071GVJ3B1",
+        "title": "BLU Advance A5 -Unlocked Dual Sim Smartphone -Black",
+        "store": "BLU",
+        "leaf": "Cell Phones",
+        "segment": "tail",
+        "first_seen": "2017-09-22"
+      },
+      {
+        "item": 48668,
+        "asin": "B0752WHY2B",
+        "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 8 Plus [5.5 inch] [Case Friendly] -",
+        "store": "Spigen",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2017-09-21"
+      },
+      {
+        "item": 59891,
+        "asin": "B07GX24RDC",
+        "title": "Spigen Tempered Glass Screen Protector Designed for Apple iPhone Xs Max (6.5 inch) (2 Pack) - Maximum Protecti",
+        "store": "Spigen",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2018-09-19"
+      },
+      {
+        "item": 56117,
+        "asin": "B07CXZ7K51",
+        "title": "LK 6 Pack Screen Protector Compatible with Apple Watch 45mm Series 7 /Apple Watch 44mm Series 6, Model NO.KO47",
+        "store": "LK",
+        "leaf": "Smartwatch Screen Protectors",
+        "segment": "head",
+        "first_seen": "2018-06-12"
+      },
+      {
+        "item": 83007,
+        "asin": "B08JCXZDC8",
+        "title": "yootech Screen Protector Compatible with iPhone 12 pro Max 2020 6.7 Inch Case Friendly Tempered Glass 4-Pack",
+        "store": "yootech",
+        "leaf": "Screen Protectors",
+        "segment": "head",
+        "first_seen": "2020-10-25"
+      }
+    ],
+    "target": {
+      "item": 91810,
+      "asin": "B09C1MJYCN",
+      "title": "TOZO Compatible for iPhone 14 Plus Screen Protector Compatible for iPhone 13 Pro Max Screen Protector 6.7 inch",
+      "store": "TOZO",
+      "leaf": "Screen Protectors",
+      "segment": "head",
+      "first_seen": "2021-09-21"
+    },
+    "retrieval_rank": null,
+    "full_catalogue_rank": 1338.0,
+    "saved_ranks": {
+      "A": null,
+      "C": null,
+      "MLP": null,
+      "DIN": null
+    },
+    "top3": {
+      "A": [
+        {
+          "item": 80006,
+          "asin": "B08BH7YK55",
+          "title": "Spigen Ultra Hybrid [Anti-Yellowing PC Back] Designed for iPhone 12 Pro Max Case (2020) - Crystal Clear",
+          "store": "Spigen",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2020-10-30",
+          "retrieval_rank": 153
+        },
+        {
+          "item": 81196,
+          "asin": "B08DQGH9T1",
+          "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 12 Pro Max (2020) [6.7 inch] [Case ",
+          "store": "Spigen",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-09",
+          "retrieval_rank": 59
+        },
+        {
+          "item": 109195,
+          "asin": "B0BZT4P292",
+          "title": "OtterBox IPhone 13 Pro Max & IPhone 12 Pro Max Symmetry Series Case - BLACK, Ultra-Sleek, Wireless Charging Co",
+          "store": "OtterBox",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2021-09-24",
+          "retrieval_rank": 181
+        }
+      ],
+      "C": [
+        {
+          "item": 81196,
+          "asin": "B08DQGH9T1",
+          "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 12 Pro Max (2020) [6.7 inch] [Case ",
+          "store": "Spigen",
+          "leaf": "Screen Protectors",
+          "segment": "head",
+          "first_seen": "2020-11-09",
+          "retrieval_rank": 59
+        },
+        {
+          "item": 110113,
+          "asin": "B0C4F1WFLL",
+          "title": "Misxi 2 Pack Hard PC Case with Tempered Glass Screen Protector Compatible with Apple Watch Series 8 Series 7 4",
+          "store": "Misxi",
+          "leaf": "Smartwatch Screen Protectors",
+          "segment": "head",
+          "first_seen": "2019-09-22",
+          "retrieval_rank": 113
+        },
+        {
+          "item": 66116,
+          "asin": "B07P9S6R9Y",
+          "title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Ma",
+          "store": "yootech",
+          "leaf": "Wireless Chargers",
+          "segment": "head",
+          "first_seen": "2018-03-31",
+          "retrieval_rank": 3
+        }
+      ],
+      "DIN": [
+        {
+          "item": 80006,
+          "asin": "B08BH7YK55",
+          "title": "Spigen Ultra Hybrid [Anti-Yellowing PC Back] Designed for iPhone 12 Pro Max Case (2020) - Crystal Clear",
+          "store": "Spigen",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2020-10-30",
+          "retrieval_rank": 153
+        },
+        {
+          "item": 109195,
+          "asin": "B0BZT4P292",
+          "title": "OtterBox IPhone 13 Pro Max & IPhone 12 Pro Max Symmetry Series Case - BLACK, Ultra-Sleek, Wireless Charging Co",
+          "store": "OtterBox",
+          "leaf": "Basic Cases",
+          "segment": "head",
+          "first_seen": "2021-09-24",
+          "retrieval_rank": 181
+        },
+        {
+          "item": 92414,
+          "asin": "B09DKGN3Q8",
+          "title": "Wireless Charger,ESTAVEL 3 in 1 Fast Wireless Charging Station Compatible with iPhone 13/12/11 Pro/XS/XR/8, Ap",
+          "store": "ESTAVEL",
+          "leaf": "Charging Stations",
+          "segment": "tail",
+          "first_seen": "2021-09-18",
+          "retrieval_rank": 109
+        }
+      ]
+    },
+    "flags": {
+      "target_store_in_history": false,
+      "target_leaf_in_history": true
+    }
+  }
+]

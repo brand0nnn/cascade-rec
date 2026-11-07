@@ -1,0 +1,9 @@
+pair,group,both,only_first,only_second,either
+policy_A vs policy_C,all,2117,1408,1794,5319
+policy_A vs policy_C,warm-head,1823,932,1606,4361
+policy_A vs policy_C,warm-tail,48,89,42,179
+policy_A vs policy_C,new-in-period,246,387,146,779
+R2_mlp vs R3_din,all,2022,1417,1195,4634
+R2_mlp vs R3_din,warm-head,1547,1218,779,3544
+R2_mlp vs R3_din,warm-tail,75,49,74,198
+R2_mlp vs R3_din,new-in-period,400,150,342,892

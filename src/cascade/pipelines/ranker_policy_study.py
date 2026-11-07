@@ -34,8 +34,21 @@ ARMS = {
     "B": {"training_population": "all", "retrieval_score_input": "masked"},
     "C": {"training_population": "natural_only", "retrieval_score_input": "enabled"},
     "D": {"training_population": "natural_only", "retrieval_score_input": "masked"},
+    # Extension arms (2026-11-07). E: keep forced lists but replace each forced
+    # target's retrieval score with a uniformly drawn same-list candidate score.
+    # F: natural-only with a longer schedule. G/H: natural plus a fixed 10%/30%
+    # subsample of forced lists.
+    "E": {"training_population": "all_score_imputed", "retrieval_score_input": "enabled"},
+    "F": {"training_population": "natural_only", "retrieval_score_input": "enabled",
+          "max_epochs": 100, "patience": 10},
+    "G": {"training_population": "natural_plus_forced_10", "retrieval_score_input": "enabled"},
+    "H": {"training_population": "natural_plus_forced_30", "retrieval_score_input": "enabled"},
 }
-STAGE_SEEDS = {"development": [0], "pilot": [0], "replication": [1, 2]}
+FACTORIAL_ARMS = ["A", "B", "C", "D"]
+EXTENSION_ARMS = ["E", "F", "G", "H"]
+STAGE_SEEDS = {"development": [0], "pilot": [0], "replication": [1, 2],
+               "extension_development": [0], "extension": [0, 1, 2]}
+FORCED_FRACTIONS = {"natural_plus_forced_10": 0.1, "natural_plus_forced_30": 0.3}
 
 
 def digest(path: Path) -> str:
@@ -98,16 +111,42 @@ def required_input_paths(cfg: Mapping) -> list[Path]:
 def select_training_lists(full: Mapping[str, np.ndarray], population: str,
                           users: np.ndarray | None = None) -> dict[str, np.ndarray]:
     """Filter complete supervised lists, preserving target labels and padding."""
-    if population not in ("all", "natural_only"):
+    if population not in ("all", "natural_only", "all_score_imputed", *FORCED_FRACTIONS):
         raise ValueError("unknown supervised training population")
+    forced = np.asarray(full["forced"], dtype=bool)
     mask = np.ones(len(full["inst"]), dtype=bool)
     if users is not None:
         mask &= np.isin(full["user"], users)
     if population == "natural_only":
-        mask &= ~np.asarray(full["forced"], dtype=bool)
+        mask &= ~forced
+    if population in FORCED_FRACTIONS:
+        # Fixed, seed-independent subsample over the full original universe.
+        keep = np.random.default_rng(20261107).random(len(forced)) < FORCED_FRACTIONS[population]
+        mask &= ~forced | keep
     if not mask.any():
         raise ValueError(f"empty {population} training population")
-    return {key: np.asarray(value)[mask] for key, value in full.items()}
+    out = {key: np.asarray(value)[mask] for key, value in full.items()}
+    if population == "all_score_imputed":
+        out["score"] = impute_forced_target_scores(out)
+    return out
+
+
+def impute_forced_target_scores(lists: Mapping[str, np.ndarray]) -> np.ndarray:
+    """Replace forced targets' scores with a same-list retrieved candidate's score.
+
+    Deterministic per instance ID, so it does not depend on training seed or on
+    which users are selected. Natural lists are unchanged.
+    """
+    score = np.asarray(lists["score"]).copy()
+    rows = np.flatnonzero(np.asarray(lists["forced"], dtype=bool))
+    for row in rows:
+        pos = int(lists["target_pos"][row])
+        valid = np.flatnonzero((np.asarray(lists["cand"][row]) > 0) & (np.arange(score.shape[1]) != pos))
+        if not len(valid):
+            raise ValueError("forced list has no retrieved alternative to impute from")
+        rng = np.random.default_rng(np.random.SeedSequence([20261107, int(lists["inst"][row])]))
+        score[row, pos] = score[row, valid[rng.integers(len(valid))]]
+    return score
 
 
 def frozen_feature_builder(data: ProcessedData, full_train: Mapping[str, np.ndarray],
@@ -189,11 +228,15 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
     if not run_id or Path(run_id).name != run_id or run_id in (".", ".."):
         raise ValueError("run ID must be a single directory name")
     if stage not in STAGE_SEEDS:
-        raise ValueError("stage must be development, pilot or replication")
-    arms = list(ARMS) if arms is None else arms
+        raise ValueError(f"stage must be one of {list(STAGE_SEEDS)}")
+    extension = stage.startswith("extension")
+    if arms is None:
+        arms = (["A", "C"] + EXTENSION_ARMS) if extension else FACTORIAL_ARMS.copy()
     seeds = STAGE_SEEDS[stage].copy() if seeds is None else seeds
     if not arms or len(set(arms)) != len(arms) or any(arm not in ARMS for arm in arms):
-        raise ValueError("arms must be a unique nonempty subset of A/B/C/D")
+        raise ValueError(f"arms must be a unique nonempty subset of {list(ARMS)}")
+    if not extension and any(arm in EXTENSION_ARMS for arm in arms):
+        raise ValueError("extension arms run only in extension stages")
     if not seeds or len(set(seeds)) != len(seeds) or any(s not in STAGE_SEEDS[stage] for s in seeds):
         raise ValueError(f"{stage} seeds must be a unique subset of {STAGE_SEEDS[stage]}")
     cfg = load_config(config_path)
@@ -202,7 +245,7 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
     if data_config is not None:
         cfg["data_config"] = data_config
     ranker_cfg = validate_study_config(cfg)
-    development = stage == "development"
+    development = stage in ("development", "extension_development")
     root = REPO_ROOT / "results/ranker_policy" / (run_id + ("_sample" if development else ""))
     if root.exists():
         raise FileExistsError(f"refusing existing study: {root}")
@@ -316,7 +359,7 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
                         raise RuntimeError(f"source changed during policy study: {path}")
                 arm_cfg = {**ranker_cfg, **ARMS[arm], "seed": seed, "policy_arm": arm,
                            "sampling_strategy": "instance_keyed", "development_sample": development,
-                           "max_epochs": 1 if development else 30,
+                           "max_epochs": 1 if development else ARMS[arm].get("max_epochs", 30),
                            "run": {"candidate_dir": str(cand_dir), "seed": seed,
                                    "feature_spec": asdict(spec), "score_mean": builder.score_mean,
                                    "score_std": builder.score_std, "normalization_population": "full original training"}}
@@ -332,7 +375,7 @@ def run(config_path: Path, run_id: str, *, stage: str, arms: list[str] | None = 
                 support["batches_per_epoch"] = int(np.ceil(support["n_lists"] / 40))
                 save_run(directory, {"status": "running", "development_sample": development}, arm_cfg)
                 result = fit_candidate_lists(model, builder, training[arm], val, n_negatives=50,
-                    batch_size=2048, learning_rate=0.001, max_epochs=arm_cfg["max_epochs"], patience=3,
+                    batch_size=2048, learning_rate=0.001, max_epochs=arm_cfg["max_epochs"], patience=ARMS[arm].get("patience", 3),
                     seed=seed, device=device, checkpoint_path=directory / "model.pt",
                     sampling_strategy="instance_keyed", training_instance_universe=universe)
                 ranks, aucs = score_prefixes(model, builder, natural_val, cfg["candidate_counts"],
