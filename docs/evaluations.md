@@ -1,6 +1,6 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **28 October 2026**. This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **6 November 2026**. This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
 
 ## Current progress
 
@@ -15,10 +15,73 @@ The available local evaluation is complete: **232,904 validation events / 124,41
 | Graph target/history relations and 12 joint warm-target cells | Complete on Val; descriptive, not causal |
 | Five cases | Target ranks, histories and retrieval examples complete; ranker top-three identities unavailable |
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
-| Controlled policy retraining and ID dropout | Submission tooling updated 29 Oct; cluster input checks required; no full-data remedy result |
+| Controlled policy retraining and ID dropout | Full-data A/B/C/D seed-0 pilot and report complete (job 1080925); natural-only improves overall but loses new/tail quality; seeds 1/2 and ID dropout remain unrun |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
 
-**Working conclusion:** retrieval misses remain the largest ceiling, while the current ranker also displaces many strong retrieved targets. New products supply about two-thirds of the MLP's net gain. The strongest located warm-target loss is concentrated among training-head, co-reviewed targets in a different leaf category from the last interaction. Test the training-score mismatch with controlled retraining before claiming a mechanism or introducing another architecture.
+**Working conclusion:** retrieval misses remain the largest ceiling, while the current ranker also displaces many strong retrieved targets. Historical matching-MLP gains are concentrated in new products. The new seed-0 controlled pilot improves overall nDCG with natural-only training but loses new/tail quality; score masking alone is worse. This is a trade-off, not a qualified remedy. Complete seeds 1/2 before integrating a policy or making a training-mechanism claim. The strongest located historical warm-target loss is concentrated among training-head, co-reviewed targets in a different leaf category from the last interaction.
+
+### 2 November: meeting follow-up and development execution
+
+The supplied meeting summary prioritises natural-list performance and head/tail/new-item trade-offs. Keep forced-list effects as pipeline diagnostics; the summary alone does not establish that held-out Test labels entered training. The existing A/B/C/D study is the immediate next experiment. Reuse the completed segment/funnel analysis, then extend representative cases to 20–30 systematically selected items. An oracle comparison is a diagnostic upper bound, pending an explicit choice of the two systems; DIN here is a ranker, not a retriever. Randomising candidate positions alone does not remove score/item-distribution differences associated with force-added targets. No new model or label policy was introduced.
+
+Local execution on source commit `7e10c06`:
+
+- `.venv/bin/python -m pytest -q`: **140 passed**.
+- Ranker preflight: **ready**, no missing inputs; `val.npz` and `meta.json` match the frozen candidate identities. Record: `results/targeted_study/policy-20261102-preflight.json`. This supersedes the older missing-local-input inventory below for this checkout only; the cluster still needs its own check.
+- `policy-20261102-development_sample`: all four arms completed, seed 0, one epoch, fixed 2% full-data user sample, CPU. Validation has 4,775 events / 2,553 users; A/B train on 6,224 lists and C/D on 730 natural-hit lists. All arms have the same initial-parameter hash. K200 checkpoint macro nDCG reproduces exactly in all four arms; C has one target-rank difference with no headline metric difference, retained in its anchor diagnostics.
+- The report completed at `results/targeted_study/policy-20261102-development-report/report.md`, including group metrics, training support, funnel, expansion and score diagnostics. These are **development checks, not research results**; do not select a policy from their scores. No Test predictions were loaded. Original candidates and historical results were preserved.
+- This session exposes neither CUDA nor MPS. Full-data pilot/replication have not run; cluster submission remains user-managed. The existing Slurm wrapper passes `bash -n`.
+
+Next, on the cluster after syncing this source and checking its original inputs, run from the repository root:
+
+```bash
+.venv/bin/python -m cascade.pipelines.study_preflight --study-kind ranker --require-ready \
+  --output results/targeted_study/policy-20261102-cluster-preflight.json
+mkdir -p results/logs
+sbatch --export=ALL,STUDY_KIND=ranker,STAGE=pilot,RUN_ID=policy-20261102-pilot scripts/slurm/targeted_study.sbatch
+```
+
+Use a fresh RUN_ID if that directory already exists on the cluster. The pilot trains A/B/C/D seed 0 and automatically writes `results/targeted_study/policy-20261102-pilot-pilot-report/report.md`. Review validity and runtime, then complete seeds 1/2 for all valid arms under the fixed protocol below. Final Test stays paused.
+
+### 6 November: cluster pilot launched through xlogin
+
+The user explicitly authorised SSH via `xlogin`, superseding the earlier user-managed-SSH restriction for this work. An isolated checkout of source commit `7e10c06` is at `/home/t/tjingyen/cp4285-policy-20261106/cascade-rec`. All 13 copied processed-input/candidate files match local SHA-256 hashes; the pinned environment was installed with Python 3.11.18 and PyTorch 2.5.1+cu124. No training recipe, split, filtering or metric was changed.
+
+- **Active Slurm job: `1080925`**, running on `xgpi17`, NVIDIA H100 NVL. Requested one `h100-47` GPU, four CPUs, 32 GB host RAM, six hours in `gpu-long`. NVIDIA reports 95,830 MiB. A pending A100 request (`1080918`) was cancelled before execution; a generic-GPU attempt (`1080920`, `xgpe2`) failed its CUDA check before any model training. Its outputs are not research evidence.
+- The active job passed **127 tests, with 13 sample-data-dependent skips**. The full local suite previously passed all 140. CUDA is confirmed usable on the H100.
+- GPU development run `policy-20261106-gpu-development_sample` completed all four arms and reporting. Copied report: `results/targeted_study/policy-20261106-gpu-development-development-report/report.md`. These remain development-only checks, not full-data research findings.
+- Full pilot `policy-20261106-pilot` passed preflight and entered arm A epoch 1 at approximately **00:13 SGT on 6 November**. At this observation its status was `running`, with no completed arms. No full-pilot result or policy selection is claimed yet. Seeds 1/2 were not submitted; Test remains paused.
+- The wrapper `/home/t/tjingyen/cp4285-policy-20261106/run-pilot.sh` runs tests, GPU development/reporting, then the pilot/reporting sequentially with failure stopping the job. It does not submit another job. Environment versions and input hashes are recorded beside the checkout. Preflight's static `cluster_execution` string predates this authorised SSH execution; the actual job history is recorded here.
+
+Inspect the active job and log:
+
+```bash
+ssh xlogin 'squeue -j 1080925'
+ssh xlogin 'tail -n 40 /home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/logs/slurm-cascade-policy-pilot-1080925.out'
+```
+
+On successful completion, the full report will be at `/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/targeted_study/policy-20261106-pilot-pilot-report/report.md`. Check all four arms and output identities, review runtime, then launch the separate seeds-1/2 phase on this same source/input snapshot. Do not rerun completed fits or infer a three-seed remedy from the pilot alone.
+
+### 6 November: full-data seed-0 pilot complete
+
+Slurm job `1080925` completed with exit code `0:0` in **1:16:49**. All four arms and reporting finished on the H100. Checkpoints, selected natural-Val prefix predictions and provenance were copied locally to `results/ranker_policy/policy-20261106-pilot/`; the report and CSV evidence are at `results/targeted_study/policy-20261106-pilot-pilot-report/`. All **26 declared arm-artifact hashes** match after transfer. K200 selected-checkpoint nDCG reproduces exactly in every arm, with zero changed target ranks. No Test predictions were loaded.
+
+Full Val: 232,904 events / 124,416 users. Same natural frozen-retriever K200 lists and user-macro aggregation throughout:
+
+| Arm | Training population / score input | nDCG@10 | Recall@10 | New nDCG@10 | Warm-head nDCG@10 | Warm-tail nDCG@10 |
+|---|---|---:|---:|---:|---:|---:|
+| A | All lists (forced when missed), score enabled | 0.007076 | 0.014252 | 0.003541 | 0.011637 | 0.001244 |
+| B | All lists, score masked | 0.004216 | 0.009691 | 0.002404 | 0.006649 | 0.001029 |
+| C | Natural-hit-only, score enabled | 0.008617 | 0.016233 | 0.002104 | 0.015925 | 0.000891 |
+| D | Natural-hit-only, score masked | 0.007780 | 0.014961 | 0.002496 | 0.014043 | 0.000735 |
+
+**Measured pilot trade-off:** C versus fresh A improves overall nDCG by **0.001541** (21.8%), paired-user 95% CI **[0.001244, 0.001819]**, while new-item nDCG falls by **0.001436**, CI **[-0.001769, -0.001106]** (40.6% relative loss). Warm-head improves by 0.004287, CI [0.003747, 0.004791]; warm-tail falls by 0.000353, CI [-0.000612, -0.000097]. B-A is -0.002860, CI [-0.003147, -0.002591]; masking score alone is not a remedy in this pilot. D-C is -0.000837, CI [-0.001053, -0.000609]. These are exploratory user-sampling intervals conditional on one trained seed, not training-seed replication.
+
+**Expansion and score response:** A drops from K200 nDCG 0.007076 to K500 0.002400; C drops from 0.008617 to 0.007863. A's added-position-201–500 top-ten slot share on the common 1,000-event diagnostic cohort is 93.7%, versus C's 37.6%. Mean score/logit Spearman changes from -0.401 to +0.156. In the fixed-feature score probe, mean logit(z=-1) minus logit(z=0) changes from +2.672 to -0.207. These accompany the recipe change, but are not a unique causal explanation; interventions may be off the natural feature distribution. C still loses quality under K expansion.
+
+**Support and interpretation:** A/B use 315,114 training lists (158,634 users); C/D use 38,793 lists (32,829 users). New-in-ranker-period target lists fall from 118,392 to 5,303. Natural-only changes supervised support and optimizer exposure as well as removing forced targets. The matched within-seed initialization checks pass. Selected epochs A/B/C/D are 11/15/5/8, respectively. Do not present C-A as an isolated contamination effect.
+
+**Decision:** no policy qualifies for integration. All three seeds are required, and C/D also show a new-item loss against A in this pilot. Keep the reference unchanged. Next is seeds 1/2 for **all four valid arms**, without pruning negative arms or introducing another model. Replication has not been submitted in this status check; final Test remains paused.
 
 ## Working picture
 
@@ -494,9 +557,9 @@ If the retriever qualifies, rebuild only training/Val candidates in a new namesp
 
 ## Exact remaining inputs and handoff
 
-Recover the **original** `data/processed/item_text_emb.npy`, `item_text_emb.json`, and `data/processed/candidates/two_tower_text_seed0/{ranker_train.npz,val.npz,val_target_score.npz,meta.json}`. The restored structural data preserve original item/user mappings; they do not replace these missing artifacts. Check original hashes before claiming historical reproduction. User handles SSH and cluster commands; no teammate allocation is assumed available.
+As of 2 November, this checkout contains `data/processed/item_text_emb.npy`, `item_text_emb.json`, and `data/processed/candidates/two_tower_text_seed0/{ranker_train.npz,val.npz,val_target_score.npz,meta.json}`. Ranker preflight and the four-arm development run pass; checked validation/metadata hashes match the frozen source. The earlier missing-file diagnosis is historical. Verify these original inputs independently on the cluster before full fits. User handles SSH and cluster commands; no teammate allocation is assumed available.
 
-Until recovery, target-only graph findings cannot establish candidate-slot amplification, and saved target ranks cannot identify the MLP/DIN top-three products. Complete the locked annotation before device claims. Final Test and index/cost work stay paused. The ablation runners have not produced full-data results; the updated submission script runs blocking input checks and exports comparison reports. Cluster execution has not been verified here. Earlier implementation-review/test counts are historical, not verification of the final source snapshot.
+Candidate-slot amplification and the original MLP/DIN top-three products still require their respective candidate-level analyses/replay; recovering inputs alone does not complete them. Complete the locked annotation before device claims. Final Test and index/cost work stay paused. The ablation runners have not produced full-data results; the updated submission script runs blocking input checks and exports comparison reports. Cluster execution has not been verified here. The 2 November test/development evidence above verifies the current source; older implementation-review/test counts remain historical.
 
 ## Evidence and reproduction
 
@@ -518,3 +581,79 @@ To replay archived validation predictions without training, original processed d
 ```
 
 Use a fresh ID; existing outputs are preserved. Config: `configs/evaluation/saved_results.yaml`. `--sample` is a development subset and must never be reported as a full-data result. Graph/profile reproduction additionally needs the original/restored processed inputs; the one-off `notebooks/complete_evaluation.py` records the completion analysis, with local input/output paths that must be adjusted for a fresh run. Do not launch retraining merely to reproduce these saved-result findings.
+
+### 7 November: seeds 1/2 replication submitted
+
+The user authorised submission. Slurm job `1089445` (`STAGE=replication`, `RUN_ID=policy-20261107-replication`) was submitted on the same checkout/inputs as the pilot, with the pilot's resources (gpu-long, h100-47, 4 CPU, 32G, 6h). It covers all four arms × seeds 1/2 (eight fits). At submission it was pending (Priority). No result is claimed; Test remains paused. After completion, run the all-seeds report with `--studies results/ranker_policy/policy-20261106-pilot results/ranker_policy/policy-20261107-replication`.
+
+### 7 November: E3 candidate-count curve per policy arm (pilot seed 0, no training)
+
+Report `results/targeted_study/e3-20261107-pilot-kcurve/` (`cascade.eval.ranker_policy_extension_report`, 1,000 user resamples). Overall macro nDCG@10 at K50/100/200/500 and paired gap of each K versus that arm's best observed K:
+
+| Arm | K50 | K100 | K200 | K500 | Best | K200−best CI | K500−best CI |
+|---|---:|---:|---:|---:|---:|---|---|
+| A | 0.008026 | 0.008370 | 0.007076 | 0.002400 | 100 | [-0.001524, -0.001053] | [-0.006317, -0.005631] |
+| B | 0.006598 | 0.006023 | 0.004216 | 0.001711 | 50 | [-0.002683, -0.002052] | [-0.005227, -0.004540] |
+| C | 0.008406 | 0.008684 | 0.008617 | 0.007863 | 100 | [-0.000234, +0.000113] | [-0.001031, -0.000579] |
+| D | 0.007677 | 0.007932 | 0.007780 | 0.006937 | 100 | [-0.000326, +0.000035] | [-0.001245, -0.000731] |
+
+Under natural-only training (C/D) the K200 interval versus K100 includes zero and the K500 loss is about 7× smaller than A's. C's 200→500 competition loss is −0.0021 versus A's −0.0065 with similar new-target gain (+0.0013 / +0.0018). The earlier RQ2 conclusion that larger K₁ strongly hurts is therefore largely conditional on the forced-positive training recipe. Single seed; interval excludes training-seed variance; no K₁ selection is made here (no δ recorded).
+
+### 7 November: extension arms authorised (pre-registered before any outcome)
+
+The user authorised additional controlled arms after seeing the seed-0 pilot. They are therefore **post-hoc and exploratory**; any qualification is not confirmatory. Same frozen candidates, feature contract, normalisation, initialisation per seed, BCE/50 negatives, selector and K prefixes as A–D:
+
+- **E (score imputation):** all lists; each forced target's retrieval score replaced by the score of a uniformly drawn retrieved candidate from the same list (RNG keyed by instance ID, seed-independent). Natural lists and all other cells unchanged (verified: 276,320 cell changes over 276,321 forced lists; mean forced-target score −0.342 → −0.180, natural targets −0.154). Tests whether removing the score shortcut while keeping forced supervision recovers new-item quality.
+- **F (longer natural-only schedule):** C with max 100 epochs and patience 10. Tests whether C's new-item loss is an exposure artefact (C stopped at epoch 5 with 4,850 selected steps versus A's 86,658).
+- **G / H (partial forced lists):** natural lists plus a fixed 10% / 30% subsample of forced lists (RNG 20261107 over the full universe): 66,578 / 121,948 lists. Tests an intermediate point on the overall-versus-new-item trade-off.
+- Fresh A and C controls are retrained inside each extension run; seeds 0/1/2 run as three independent jobs. Report with `cascade.eval.ranker_policy_extension_report`; the same guard (3 seeds, overall K200 CI lower bound > 0, no new-item loss versus A) is applied, labelled exploratory.
+- Development check `ext-20261107-localdev_sample` (2% users, 1 epoch, CPU) completed all six arms with identical initial parameters. Development values are not reported.
+- Cluster execution (7 Nov, user-authorised via xlogin): separate checkout `/home/t/tjingyen/cp4285-ext-20261107/cascade-rec` (copied from the pilot checkout so job 1089445's source-hash guard is untouched), plus the three changed files (SHA-256 in `staging/sha256.txt`). A cluster-side driver (`staging/ext_driver.sh`, log `driver.log`) waits for the copy, verifies hashes and that `cascade` imports from the new checkout, then submits `scripts/slurm/policy_extension.sbatch` for seeds 0/1/2 as `ext-20261107-s{0,1,2}`. Check `driver.log` for job IDs; if the import assertion fails no job is submitted. Afterwards: `python -m cascade.eval.ranker_policy_extension_report --studies results/ranker_policy/ext-20261107-s0 results/ranker_policy/ext-20261107-s1 results/ranker_policy/ext-20261107-s2 --output results/targeted_study/ext-20261107-all-seeds`.
+- Correction (7 Nov 15:40 SGT): the full checkout copy was too slow (many small `.venv`/data files), so the driver was disabled (its checksum file replaced so it exits before submitting; original hashes kept in `staging/sha256.ok`). The extension instead runs from `/home/t/tjingyen/cp4285-ext-20261107/fast/cascade-rec`: code/results copied, `data` symlinked read-only to the pilot checkout, the pilot checkout's Python environment used via `PY=...` with `PYTHONPATH` pointing at the new `src` (verified `cascade` imports from the new checkout). Submitted Slurm jobs `1089821/1089822/1089823` = seeds 0/1/2 (`ext-20261107-s{0,1,2}`). Outputs land in that checkout's `results/ranker_policy/`.
+- Jobs 1089821–23 failed at import within 5 s (no run directories created): the lightweight copy's `--exclude data` also dropped `src/cascade/data`. Re-synced with root-anchored excludes; `diff -r` against the pilot `src/` and `configs/` now shows only the two intended files. Resubmitted as **1090001/1090002/1090003** (seeds 0/1/2, same RUN_IDs).
+
+### 7 November: A–D replicated over three seeds
+
+Replication job `1089445` completed (exit 0, 1:47:06; 8 fits). Reports were generated on the cluster as CPU job `1090722` (login-node memory cap too small) and copied back: `results/targeted_study/policy-all-seeds-20261107/` (factorial) and `results/targeted_study/e3-20261107-all-seeds/` (K-curve). The local copy of the replication archive was incomplete at report time because of SSH drops; the reports read the complete cluster copy.
+
+K200 macro nDCG@10, mean over seeds 0/1/2 (seed SD): A 0.006887 (0.000316), B 0.004200 (0.000269), C 0.008572 (0.000124), D 0.007625 (0.000421). Seed-mean paired user-bootstrap differences:
+
+| Comparison | Overall | New-in-period | Warm-head | Warm-tail |
+|---|---|---|---|---|
+| C−A | +0.001685 [0.001445, 0.001920] | −0.000757 [−0.001030, −0.000489] | +0.004222 [0.003809, 0.004643] | −0.000469 [−0.000674, −0.000263] |
+| B−A | −0.002687 [−0.002896, −0.002478] | −0.000599 [−0.000863, −0.000364] | −0.004939 | −0.000170 [−0.000370, 0.000010] |
+| D−C | −0.000946 [−0.001106, −0.000787] | +0.000124 [−0.000016, 0.000262] | −0.002026 | −0.000005 |
+
+C beats A in every seed (overall 0.008617/0.008431/0.008667 versus 0.007076/0.007063/0.006522) and has the lowest seed SD. The pilot's new-item loss also replicates but is smaller in the mean (−0.000757, about −24% relative, versus −40.6% at seed 0). Seed-to-seed new-item values overlap (A 0.0028–0.0035; C 0.0021–0.0026). **No arm qualifies** under the pre-registered guard because of the new-item loss; A remains the integration reference without a claim that it is optimal.
+
+Three-seed K-curve: C's best observed K is 100 (0.008609). K200 versus K100 is −0.000037 [−0.000194, 0.000118]; K500 versus K100 is −0.000686 [−0.000870, −0.000477]. A's K500 loss versus its best K is −0.005971, so C's is about 8.7× smaller. The large-K collapse is largely tied to the forced-positive recipe, replicated over seeds.
+
+### 7 November: meso secondary metrics and per-event oracles (saved predictions, no training)
+
+`scripts/analysis_meso_oracle.py` → `results/targeted_study/meso-oracle-20261107/`. K200 natural Val, user-macro, seed-mean (policy A/B/C and R2/R3 three seeds; D seed 0; R1 deterministic). Oracle = per event and seed, the better target rank of two same-seed systems; an upper bound for a perfect per-event selector, not an achievable system.
+
+| System | nDCG@10 | Hit@3 | MRR | Head nDCG | Tail nDCG | New nDCG |
+|---|---:|---:|---:|---:|---:|---:|
+| R1 retrieval order | 0.005642 | 0.004818 | 0.005390 | 0.011290 | 0.000166 | 0.000361 |
+| A (forced, MLP) | 0.006887 | 0.005415 | 0.006130 | 0.011438 | 0.001316 | 0.003147 |
+| C (natural-only) | 0.008572 | 0.007328 | 0.007676 | 0.015660 | 0.000847 | 0.002390 |
+| R3 DIN (forced) | 0.006436 | 0.004708 | 0.005799 | 0.009865 | 0.001398 | 0.004074 |
+| Oracle(A, C) | 0.011497 | 0.010005 | 0.009987 | 0.019907 | 0.001755 | 0.004511 |
+| Oracle(MLP, DIN) | 0.009728 | 0.007775 | 0.008401 | 0.015513 | 0.001980 | 0.005210 |
+
+- C−A Hit@3 +35% versus nDCG@10 +24%: natural-only gains are concentrated at the very top.
+- Oracle(A, C) exceeds C by +0.002925 [0.002782, 0.003069] (+34%); oracle(MLP, DIN) exceeds MLP by +0.002885 [0.002757, 0.003021] (+42%). Seed-0 top-ten hits overlap only 2,117 of 5,319 (A/C) and 2,022 of 4,634 (MLP/DIN): the systems succeed on substantially different events.
+- DIN−MLP: new-in-period +0.001254 [0.001013, 0.001501] (+44%), warm-head −0.001673 [−0.001961, −0.001345]. Learned rankers raise new-item nDCG 6.6–11× over retrieval order, whose new/tail values are near zero.
+- An achievable router would need a selector using pre-event information only (for example candidate item-age); none is trained or claimed here.
+
+### 7 November: 24 micro cases (seed 0)
+
+`scripts/analysis_micro_cases.py` → `results/targeted_study/micro-cases-20261107/{cases.md,cases.json}`. Four prespecified categories, 6 events each drawn with RNG 0 from all eligible natural-K200 events: C rescues warm-head target missed by A (pool 1,606); A keeps new-in-period target missed by C (387); DIN rescues new target missed by MLP (342); retrieval miss at K500 (204,329). Ranker top-3 products were recomputed from the saved A/C/DIN seed-0 checkpoints; all recomputed target ranks equal the saved ranks. Illustrative only: six cases per category do not estimate prevalence.
+
+Observed patterns (to be quantified before being stated as general):
+- **C concentrates on a few bestsellers.** Across the 24 lists, C's 72 top-3 slots contain 38 distinct products versus 59 for A and 52 for DIN; one smartwatch case appears 9 times and one wireless charger 7 times. C's warm-head rescues are mostly purchases of those same products, with the target's leaf category in the recent history in only 1 of 6 cases. This suggests the head gain partly reflects popularity concentration (a diversity cost), not personal relevance.
+- **A/DIN keep new items through brand and model continuity.** Examples: TORRAS iPhone 12 case → TORRAS iPhone 13 case (DIN rank 1 and 4); Moto G6 owner → Motorola One 5G; three single-ear headsets → another headset; Anker → Anker stand; BELONGME iPhone case → BELONGME watch protector. Target store appears in the five-item history in 3/6 DIN-rescue cases versus 0/6 C-rescue cases.
+- **Many new-in-period targets are iPhone 13 launch accessories** (first seen 13–25 Sep 2021), shortly after Val start (11 Aug 2021): the new-item segment is partly a product-launch wave.
+- **A/DIN top-3 come from deep retrieval positions** (median retrieval rank 107 / 140.5 versus 53 for C), consistent at micro level with the low-score preference.
+- **Retrieval misses are often device or category switches** (iPhone case buyer → Apple Watch band; Fitbit accessories → iPhone screen protector; renewed Samsung watch), with full-catalogue ranks of 649–28,699. No ranker can recover them.
+- Next check: full-validation top-10 catalogue coverage and popularity concentration per arm, to test the diversity hypothesis.

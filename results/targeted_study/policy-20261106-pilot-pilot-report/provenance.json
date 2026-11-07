@@ -1,0 +1,83 @@
+{
+  "sources": {
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/study.json": "81e3889b9e413c0091ad4c6305508f45e846a47e97726288cf6d92c40722eb0c",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/status.json": "8523af0f6718257dba41ae02eb4d0c9104cc0a9c60cc7416dff82bade2ed3899",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/provenance.json": "e4186f1b42f4928ca8007a0f59abc408ad696a684adf13e25bc23ef46c16251a",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/validation_groups.parquet": "31f3378a291d4386da0e99eac97df6d05a944de76f24c98fb67c20b96d77925e",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/model.pt": "43719dcdc4fdc96136c924f9cac2885c185b5a8e96d6108c25aeb41bbee74989",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/config.yaml": "0bde71a1fd2e12044628a339615fddd82f93fe8b75a3ae03c98c949f77694fbe",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/metrics.json": "680c0c18423271620640c31bf617e2bd67c04cfd4d1a397ba31892bc7d0e3801",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/val_ranks.npz": "752b848432831732813fd004cce20122f136842419ebfef3a5cfd3ea5980ada6",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/prefix_ranks.npz": "2586e093729c8967e801a900ed8a206bf0ea8430cbb0c914aded5373db29e80f",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/score_diagnostics.json": "100e2af1c31485a3c9fe425219d2130626bc538165b0c0707d5aa6731e34742c",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_A_seed0/score_diagnostics.npz": "279b85b3ecf9c1071f1cfcaf740d9f46f82d89a3629210a7ce43a91f28184daa",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_B_seed0/model.pt": "4a48008dbb0bd76810d29e8adae157d9d277542bfa9555930c7d177892a50465",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_B_seed0/config.yaml": "3c667c80b7ed0f508ad08b91e366dbc3b600550f1b29bc00b52d29d6a79ede15",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_B_seed0/metrics.json": "1f017de9bc61a79bb5d6d8e2593a9f6f2e331c1763a4a98d9bb23bcdf82ee309",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_B_seed0/val_ranks.npz": "46d2139f80f314b364b022fd29dc84a677b50b1cdfa7ad1e81d2dc7edf26d978",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_B_seed0/prefix_ranks.npz": "bec4e00033d12fb5cceb6fbd25438a5f6ce471a717cf412def2bd83ba2c4b0b5",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_B_seed0/score_diagnostics.json": "b8aac00518c7c268ea3f9e02454c838a073f3b20d4799ba846b5398b0cad93cb",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/model.pt": "eb4026f72ff540bf0a482e836010e9411b0fc3ec31c8d02598f3096249a87b44",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/config.yaml": "babe22c2548a03b273cc3fe821bed4da224ef6c914a841342a11f019f2971f09",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/metrics.json": "66d0eddb3c6a35cd8c2bfd32c966729422b9861b372eb82543db242f35f9b05a",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/val_ranks.npz": "6269b4e4dc4d2843dd4b82a41d5cd0f18460ec4916a510cb9ee54e54880e3817",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/prefix_ranks.npz": "954b7edb7f875c3713ccc2f91843339c2b437c30a7158b2bc41c5e59c9908513",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/score_diagnostics.json": "dfca64880bdb453d5078f9eddeb79d7f5b338cd9ce112fb104413097e7291864",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_C_seed0/score_diagnostics.npz": "64368d64f0c40209fee16052bc7ece7c363e16fe2816e9d8c7a39869d0c348e5",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_D_seed0/model.pt": "031517ffeeb7a517de383f95917cdac0d462c733f9e77aa4839814d63e3447e6",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_D_seed0/config.yaml": "e7fb1941cd7f4e55d01861f3d575ef495eb7bf565527afb6b9786f2f822625b0",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_D_seed0/metrics.json": "217294cc81b8c838b421bf1f6a47cf6dba31cd14d1ab655df3acd73369fc9a45",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_D_seed0/val_ranks.npz": "b324b039be33d0ba5249fa7edae8eacf36fbb36a6bfba8cf5722b353cf3a9d31",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_D_seed0/prefix_ranks.npz": "e3f0e1af3b681b919d06e8126271ee2f4bcf385bdec8d262723e0cdb343007f7",
+    "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_policy/policy-20261106-pilot/arm_D_seed0/score_diagnostics.json": "b8aac00518c7c268ea3f9e02454c838a073f3b20d4799ba846b5398b0cad93cb"
+  },
+  "candidate_source": {
+    "directory": "data/processed/candidates/two_tower_text_seed0",
+    "meta_sha256": "afa071462a4c9c81a0160f8d8584143b5d16240451a6961600a9fd4dbf328b17",
+    "val_sha256": "307b28fb9213017c6f999e6d26562a37d0afa52982cc847342a91d78bf93de7b"
+  },
+  "study_provenance": {
+    "input_sha256": {
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/sequences.npz": "b982ba4931f1a605196e39543a090c18f827cc0f80de967d76a6afd36c4b7c06",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/items.parquet": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/item_segments.parquet": "5c51f83f64edd8fd22dc3e7941d795de245333fafa21f6e7ea7ee13a50568424",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/instances.parquet": "6ce91c5ef0fec3fce4bf817dc29ec892b4dcf28dc6c87fe6686ac4502867c39b",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/interactions.parquet": "5bfea16773bff2f22bec12272f51e75a7d89faac7f2e9a4dd1ea41b3962863ea",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/split.json": "70575c4cb2168b86a48eb182b0b7228688356f2c7024f8cf4d39d8b7d4e9a447",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/item_text_emb.npy": "2c1f9e3ad4b5251a2b44f0efc5159e1621130fd87789361f53e6360e2d740828",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/candidates/two_tower_text_seed0/ranker_train.npz": "a75fa22cbcbee6d3a8483eff8f6d27b248c14a0de48474708874941ba8ed62f7",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/candidates/two_tower_text_seed0/val.npz": "307b28fb9213017c6f999e6d26562a37d0afa52982cc847342a91d78bf93de7b",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/candidates/two_tower_text_seed0/val_target_score.npz": "7c74a9cd0f5d2e77e04895908bf3ac9d9a1757729084bcb0c9358a0d77b50045",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/data/processed/candidates/two_tower_text_seed0/meta.json": "afa071462a4c9c81a0160f8d8584143b5d16240451a6961600a9fd4dbf328b17",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/configs/data.yaml": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/configs/ranker/ladder_1_matching.yaml": "35d0d39441de98f45f61af996e749167a93cf2835789495093b0f2baa95fe121",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_comparison/20261025-rq3/comparison.json": "c087f64b47099fc7da517b588001f1869173a5d83dd0f844d1e05392b6341ee4",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/config.yaml": "f35b5c94054c7f1cee800bcb909a42a91d535c2018f432f87060751b156b9aad"
+    },
+    "source_sha256": {
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/pipelines/ranker_policy_study.py": "c310c40b793cd25f09c61b2fec26554110c8b18328d4232e94fc26ae9950edf5",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/pipelines/ranker_training.py": "b21dd64863f70296905d9522b0b451d5d1d548ecab76b36f4b129b2e922a33d3",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/pipelines/ranker_k1_sweep.py": "97d544045dd1e4671b43e36a1a7f26480a66c882f9314c27dd0d3f2e5a1bb1f5",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/models/ranker_mlp.py": "d7cc63235d826f1c3851073d5e1df1eabfadfa84006221614c5f26abd906b9b3",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/data/ranker_features.py": "f64458313f59f045e65c9eefb071a1ced9bd2d396a124f2a3560c4afde9bdd22",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/data/instances.py": "adb5019ee65b7ed7f31d810a0a735e4443b4c448424a41a6bdc3742469255fad",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/pipelines/build_candidates.py": "cfb84259538d471812643b54a914db9a3cebff268a09c3e039a61cb4ed94b4ca",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/eval/ranker.py": "fe7c0e360104c250647a3494c5032f6a2b7e0299bb4d972d155355af64628197",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/eval/metrics.py": "11e92706861bd2b176b850797708d232892898fcbb33d43b2c6d5b718df1cad8",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/eval/ranker_meso.py": "ceb6270cc735541ed35ca71d49107f4912c71f615e949b0c7b24c03af98aa1a4",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/eval/bootstrap.py": "7d62479921ae9c02f6a56b3410b0a0ffcd3294b6f2e0befc8100816b0b47a20c",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/eval/policy_score_diagnostics.py": "b7f21702b1667a45cf9ef731c2c232d6ad47f6db9bde5cdd95f036f21cfca91b",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/requirements.txt": "783682d31b9d0f688864749ca8e6c8d43d86a81db31e53433875331b7246c361",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/src/cascade/utils/seed.py": "0946e45be2a03b8d22707b08272dc3242b153801a2f10e27c4ffb471c574d820",
+      "/home/t/tjingyen/cp4285-policy-20261106/cascade-rec/configs/ranker/policy_study.yaml": "2704c48bfbaaea38c86c4089709ffa9146fc0e545dd03b7bc248ad69aff27794"
+    }
+  },
+  "diagnostic_cohort_identity_sha256": "635249913363060ce8ea2108317bf00bdce7802b834d18673ae2eed04ea6b26f",
+  "analysis_source_sha256": {
+    "ranker_policy_report.py": "32a595183d6b6c067449f9d96398b94476894b9f4a1de18dd060187c365712da",
+    "metrics.py": "11e92706861bd2b176b850797708d232892898fcbb33d43b2c6d5b718df1cad8",
+    "bootstrap.py": "7d62479921ae9c02f6a56b3410b0a0ffcd3294b6f2e0befc8100816b0b47a20c"
+  },
+  "development_sample": false,
+  "test_predictions_loaded": false
+}

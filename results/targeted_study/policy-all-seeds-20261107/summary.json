@@ -1,0 +1,10 @@
+{
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "integration_policy": "A",
+  "qualified_fixes": [],
+  "interpretation": "exploratory user intervals conditional on trained runs; no final Test selection"
+}
