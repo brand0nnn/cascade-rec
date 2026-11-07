@@ -124,6 +124,13 @@ class RankerFeatureBuilder:
             data.instances.set_index("inst"), score_mean, score_std,
         )
 
+    def _last_item_cosine(self, cand_text: np.ndarray, last_items: np.ndarray) -> np.ndarray:
+        """Opt-in extra column: cosine(candidate text, the user's most recent product's text)."""
+        last_text = np.asarray(self.text[last_items], dtype=np.float32)
+        num = (cand_text * last_text).sum(axis=1)
+        den = np.linalg.norm(cand_text, axis=1) * np.linalg.norm(last_text, axis=1)
+        return np.divide(num, den, out=np.zeros(len(num), dtype=np.float32), where=den > 0)
+
     def build(self, lists: Mapping[str, np.ndarray], list_rows: np.ndarray, candidate_cols: np.ndarray, *, score_only: bool = False) -> dict[str, np.ndarray]:
         """Build aligned features for selected (list-row, candidate-column) pairs."""
         list_rows = np.asarray(list_rows, dtype=np.int64)
@@ -199,7 +206,9 @@ class RankerFeatureBuilder:
             "history_leaf_ids": hist_leaf,
             "numeric": np.column_stack(((scores - self.score_mean) / self.score_std,
                                          (self.leaf_lut[item] == last_leaf).astype(np.float32),
-                                         hist_store_match, cosine)).astype(np.float32),
+                                         hist_store_match, cosine)
+                                        + ((self._last_item_cosine(cand_text, last_items),)
+                                           if getattr(self, "last_item_cosine", False) else ())).astype(np.float32),
             "item_text": cand_text,
         }
         return categorical

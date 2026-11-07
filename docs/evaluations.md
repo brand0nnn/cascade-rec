@@ -1190,3 +1190,65 @@ Observed patterns (to be quantified before being stated as general):
 The micro-case concentration pattern holds on full Val: natural-only training raises accuracy while recommending more bestsellers, fewer new products and about 35% fewer distinct products than forced A. Brandon's 28 October analysis also found 71% top-1% share for retrieval. Natural-list DIN composition was not measured here (its checkpoints are not local). Popularity and accuracy co-move across these four systems; this is descriptive, not a causal popularity effect.
 
 Poster figures (`scripts/poster_figures_20261107.py` → `results/figures/poster_20261107/`): fig1 K-curve A vs C; fig2 winners/losers grid by item group; fig3 accuracy versus bestseller and new-product share; fig4 MLP/DIN under forced versus natural lists (natural-list values from `docs/report_2026-10-28.md`).
+
+#### 7 November: last-item hybrid retrieval, launch titles and brand loyalty (saved ranks, no training)
+
+`scripts/analysis_last_item_hybrid.py` → `results/targeted_study/last-item-hybrid-20261107/`. Inputs: Brandon's saved full-catalogue Val ranks for the frozen two-tower and the untrained last-item scorer (`results/analysis/20261028-last-item/aligned_val_ranks.npz`), seed-0 ranker ranks. User-macro, 1,000-resample paired user bootstrap. A hybrid pool of 200 = top-a two-tower + top-(200−a) last-item; a target counts only if it lies within either source's allotted top-a/top-(200−a). Deduplication would let a real pool reach deeper, so hybrid recall is a **lower bound**.
+
+| Pool (two-tower + last-item) | Recall@200 | vs two-tower 200 | Head | Tail | New |
+|---|---:|---|---:|---:|---:|
+| 200 + 0 (current) | 0.0687 | — | 0.1180 | 0.0153 | 0.0261 |
+| 180 + 20 | 0.0744 | +0.0056 [0.0052, 0.0062] | 0.1186 (ns) | 0.0257 | 0.0369 |
+| 150 + 50 | 0.0746 | +0.0059 [0.0051, 0.0066] | 0.1136 | 0.0318 | 0.0418 |
+| 100 + 100 | 0.0707 | +0.0020 [0.0011, 0.0030] | 0.1013 | 0.0388 | 0.0454 |
+
+- Twenty last-item slots raise overall Recall@200 by ≥8% with no detectable head loss, tail +68% and new +41%. 150+50 maximises overall (+8.5%) with new +60% and a small head cost (−0.0044).
+- Retrieval-only top 10 (no ranker), 7+3 slots: Recall@10 0.0128 vs 0.0104 (+22%, CI [0.0020, 0.0027]); head unchanged (CI includes zero), new 0.0060 vs 0.0009. Rankers are trained only on two-tower pools; end-to-end ranking of a hybrid pool requires new candidate lists and retraining (not done).
+- **Launch waves verified from titles:** 1,995 of 8,475 Val-new products (24%) mention iPhone 13 and 1,014 mention S22. In the week of 20 Sep 2021, 186 of 346 new products mention iPhone 13; in the week of 21 Feb 2022, 194 of 330 mention S22. iPhone 13 announced 14 Sep, on sale 24 Sep 2021 (Apple newsroom); Galaxy S22 Unpacked 9 Feb, on sale 25 Feb 2022 in most regions.
+- **Brand loyalty:** only 9.0% of Val purchases are from a store already in the user's history, yet they carry most top-10 hits (rankers' Recall@10 6.4–7.1% versus 0.9–1.1% for new-store purchases). On same-store purchases the untrained last-item order reaches Recall@10 0.0906, above every learned ranker (natural MLP 0.0707, forced 0.0646, DIN 0.0639) and far above two-tower order (0.0262). For same-store **new** products: last-item 0.0842, DIN 0.0459, forced MLP 0.0393, natural MLP 0.0289. Learned rankers dominate new-store purchases. Seed 0; descriptive, not causal.
+
+#### 7 November: extension arms E–H, three seeds (jobs 1090001–1090003)
+
+All 18 fits completed (exit 0, 1:17–1:23 each on H100). Report `results/targeted_study/ext-20261107-all-seeds/` (CPU job 1091436 on the cluster). Fresh A/C controls inside the same runs. K200 seed-mean nDCG@10 and paired user-bootstrap differences versus fresh A:
+
+| Arm | Recipe | nDCG@10 | vs A overall | vs A new-in-period | K500 |
+|---|---|---:|---|---|---:|
+| A | all lists, forced | 0.006902 | — | — | 0.002307 |
+| C | natural only | 0.008519 | +0.001617 [0.001386, 0.001839] | −0.000817 [−0.001071, −0.000548] | 0.007934 |
+| E | forced kept, forced-target score imputed | 0.004882 | −0.002020 [−0.002235, −0.001820] | +0.000172 [−0.000061, 0.000404] | 0.001847 |
+| F | natural only, max 100 epochs, patience 10 | identical to C | identical | identical | identical |
+| G | natural + 10% forced | 0.008167 | +0.001265 [0.001072, 0.001442] | −0.000237 [−0.000470, 0.000003] | 0.005500 |
+| H | natural + 30% forced | 0.007816 | +0.000914 [0.000751, 0.001074] | −0.000080 [−0.000253, 0.000100] | 0.003886 |
+
+- **F = C exactly:** in every seed F selected the same epoch (9/4/6) after 7–10 further epochs without improvement. C's new-item loss is not an under-training artefact.
+- **E fails:** imputing a typical score onto forced targets removes the score shortcut but leaves overall quality below A (and below B-like levels); new-item quality is unchanged within noise. Forced positives appear harmful beyond their score; which other inputs carry it is not identified.
+- **G/H form a dose-response:** adding forced lists back trades overall quality for new-item quality and reintroduces the K500 collapse in proportion (K500 0.0079 → 0.0055 → 0.0039 → 0.0023 for 0/10/30/100% forced). H shows no detectable new-item loss versus A (CI includes zero) with +13% overall, but its point estimate is negative, so under the pre-registered guard nothing qualifies (`qualified: []`). These arms were added after the pilot; exploratory.
+
+#### 7 November: list-merge router (saved seed-0 top-10 lists, no training)
+
+`scripts/analysis_list_merge.py` → `results/targeted_study/list-merge-20261107/`. Final top 10 = first k of natural MLP, then fill from forced-list DIN (deduplicated); no target information used. nDCG@10×100 (overall / new / tail / head): natural 0.862 / 0.211 / 0.089 / 1.593; natural8+din2 0.845 / 0.237 / 0.100 / 1.534 (overall −0.00017 [−0.00025, −0.00009]); natural7+din3 0.835 / 0.250 / 0.108 / 1.501. A history-length router (natural for ≤5 prior purchases, else DIN) loses more overall (−0.00081). Merging is a tunable dial (two DIN slots: −2% overall, +12% new and tail), not a free gain. Natural-list DIN checkpoints are not local; with them the dial may be better.
+
+#### 7 November: hybrid-pool and last-item-feature study submitted
+
+User-authorised follow-up to the findings doc's experiments 2 and 3. Validation only; exploratory (designed after the meso/micro results).
+- **Hybrid lists** (`scripts/build_hybrid_candidates.py`): per instance, top-180 two-tower + top-20 last-item (cosine of frozen item vectors to the most recent product), deduplicated, both after §4.6 filtering; every candidate keeps its two-tower score and lists are sorted by it. A 3,000-list local check reproduced the original top-180 exactly, gave 20 last-item additions per list and no duplicates. Output `data/processed/candidates/hybrid_tt180_li20_seed0/` (ranker_train forced as usual; val unforced plus target scores).
+- **Last-item feature:** optional fifth numeric column cos(candidate text, last product text), via `RankerFeatureSpec.extra_numeric` (default 0, so existing checkpoints and the four-column contract are unchanged; 287 tests pass). The ranker already had same-store-in-history and mean-history cosine inputs.
+- **Study** (`scripts/run_hybrid_study.py`): natural-only training, retrieval+matching features, the policy-study recipe; arms mlp_tt (control), mlp_hyb, mlp_tt_li, din_tt (control), din_hyb; normalisation fitted on the original full training lists. Local 2%-user, one-epoch check completed for the three original-pool arms.
+- Cluster: build job `1091477`, then seeds 0/1/2 as `1091478`–`1091480` (`afterok` dependency), checkout `/home/t/tjingyen/cp4285-ext-20261107/fast/cascade-rec`, outputs `results/hybrid_study/hybrid-20261107-s{0,1,2}/`. No result yet.
+
+#### 7 November: hybrid-pool and last-item-feature results (3 seeds)
+
+Jobs 1091477 (build, 13 min) and 1091478–1091480 (5 arms each, 16–19 min) completed with exit 0. Hybrid Val Recall@200 (micro) 0.0804 vs 0.0716 for the original pool; 3,068 Val targets are found only through the 20 last-item slots. Ranks copied to `results/hybrid_study/` (checkpoints remain on the cluster); analysis `results/targeted_study/hybrid-study-20261107/`. End-to-end K₁=200 nDCG@10, seed means; user-bootstrap 95% CIs on seed-mean per-event values.
+
+| Arm | nDCG@10 | Popular | Niche | New | Recall@10 | Hit@3 |
+|---|---:|---:|---:|---:|---:|---:|
+| MLP natural, original pool | 0.00852 | 0.01566 | 0.00081 | 0.00228 | 0.01584 | 0.00730 |
+| MLP natural + last-item feature | 0.00865 | 0.01582 | 0.00088 | 0.00245 | 0.01615 | 0.00731 |
+| MLP natural, hybrid pool | 0.00981 | 0.01598 | 0.00253 | 0.00470 | 0.01833 | 0.00825 |
+| DIN natural, original pool | 0.00994 | 0.01793 | 0.00095 | 0.00303 | 0.01837 | 0.00857 |
+| DIN natural, hybrid pool | **0.01072** | 0.01662 | 0.00295 | 0.00630 | 0.02010 | 0.00911 |
+
+- **Hybrid pool removes the MLP trade-off:** +0.00129 [0.00110, 0.00149] overall (+15%), new +0.00242 [0.00213, 0.00270] (+106%), niche +0.00172 (×3), popular +0.00032 [−0.00001, 0.00063] (no loss).
+- **DIN control reproduces Brandon's natural DIN** (0.00994 vs 0.00982). DIN on the hybrid pool: +0.00078 [0.00058, 0.00097] overall, new ×2.1, niche ×3.1, popular −0.00131 [−0.00162, −0.00099] (−7%).
+- **Last-item feature alone is small:** +0.00013 [0.00002, 0.00024] overall (+1.5%), new +0.00017 [0.00008, 0.00026]. Candidate supply matters far more than adding the signal as an input.
+- **Versus the original forced-list MLP (A, 3 seeds from the policy runs, same 232,904 events):** MLP hybrid +0.00293 [0.00267, 0.00320] (+42%); DIN hybrid +0.00383 [0.00357, 0.00410] (+55%); both positive in popular, niche and new groups (lowest CI bound: MLP hybrid niche +0.00086). Both pass the pre-registered numerical guard (3 seeds, overall CI > 0, no new-item loss). Caveats: designed after seeing earlier results (exploratory, not confirmatory); a pipeline change (retrieval pool and training population), not a ranker-only fix; A comes from separate runs evaluated on the same events; Val only, Test untouched.

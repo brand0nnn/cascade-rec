@@ -22,6 +22,8 @@ class RankerFeatureSpec:
     history_length: int = 50
     item_text_dim: int = 384
     feature_groups: tuple[str, ...] = FEATURE_GROUPS
+    # Extra numeric matching columns appended after the historical four (default 0 keeps old checkpoints valid).
+    extra_numeric: int = 0
 
     def __post_init__(self) -> None:
         # Dropping retrieval (the score input) is an opt-in exploratory setting; it needs matching for inputs.
@@ -100,9 +102,9 @@ class MLPRanker(nn.Module):
         self.text_projection = (
             nn.Linear(spec.item_text_dim, 32) if spec.item_text_dim and self.use_matching else None
         )
-        self.numeric_dim = 4
+        self.numeric_dim = 4 + int(spec.extra_numeric)
         self.numeric_indices = tuple(
-            i for i in range(4) if (i == 0 and "retrieval" in groups) or (i > 0 and self.use_matching)
+            i for i in range(self.numeric_dim) if (i == 0 and "retrieval" in groups) or (i > 0 and self.use_matching)
         )
         input_dim = (
             sum(self.embedding_dims[n] for n in self.active_categorical_names)

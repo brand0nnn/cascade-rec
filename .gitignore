@@ -76,3 +76,7 @@ __pycache__/
 
 # Candidate-list copies in analysis runs are too large for GitHub (keep local)
 /results/analysis/**/val.npz
+
+# Hybrid study per-event rank archives (large; kept local/cluster)
+/results/hybrid_study/**/*.npz
+/results/hybrid_study/localdev-*/

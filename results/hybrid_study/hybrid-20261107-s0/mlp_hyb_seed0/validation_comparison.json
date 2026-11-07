@@ -1,0 +1,54 @@
+{
+  "n_lists": 232904,
+  "n_retrieved": 18727,
+  "retrieval_order": {
+    "ndcg@10": {
+      "macro": 0.005642032180527272,
+      "micro": 0.006099589239054023
+    },
+    "recall@10": {
+      "macro": 0.010446287825913704,
+      "micro": 0.011219214783773572
+    },
+    "conditional_ndcg@10": {
+      "macro": 0.07376710800177298,
+      "micro": 0.07585938656125585
+    }
+  },
+  "ranker": {
+    "ndcg@10": {
+      "macro": 0.009496265091635796,
+      "micro": 0.0102449025299804
+    },
+    "recall@10": {
+      "macro": 0.01781215271012335,
+      "micro": 0.01914952083261773
+    },
+    "conditional_ndcg@10": {
+      "macro": 0.12630738684603948,
+      "micro": 0.12741382916871657
+    }
+  },
+  "outcomes": {
+    "retrieval_miss": {
+      "count": 214177,
+      "fraction_of_all_lists": 0.9195934805756878
+    },
+    "unrescued": {
+      "count": 12712,
+      "fraction_of_all_lists": 0.054580427987496995
+    },
+    "demoted": {
+      "count": 1555,
+      "fraction_of_all_lists": 0.0066765706041974375
+    },
+    "retained": {
+      "count": 1058,
+      "fraction_of_all_lists": 0.0045426441795761345
+    },
+    "rescued": {
+      "count": 3402,
+      "fraction_of_all_lists": 0.014606876653041596
+    }
+  }
+}
