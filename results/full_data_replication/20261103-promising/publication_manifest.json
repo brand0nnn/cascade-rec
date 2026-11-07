@@ -1,0 +1,27 @@
+{
+  "local_study": "results/local_experiments/20261103-full-promising-ranking",
+  "source_sha256": "adb198d81c65d3260122ed47477a15567fcbf60f41d4da68bf4ad14b292c58ab",
+  "audit_sha256": "83635d453389491a7f710a98c0154f886a7cd44f5657617fd9e50d76a410aa7b",
+  "shared_sha256": {
+    "completion_audit.json": "83635d453389491a7f710a98c0154f886a7cd44f5657617fd9e50d76a410aa7b",
+    "historical_context_metrics.csv": "2642b40d3835cfdc0d3fa8ccde0b290ee6a9e5a0cc00b7dd9e8bfa2a059139c2",
+    "provenance.json": "5a7cae43eaae19f64ca50f36e4910e660f9f67ece4a6415ae0e8e8b8afb456a1",
+    "git_hash.txt": "b5e0a126a70a9012617b780b4f6c40b1956330de83c57c7ef4b268ac8fd73495",
+    "report.md": "5c7debb5e934da1c6dd1ca8448ee5117c694cdcb9533244363f193e772decfa4",
+    "secondary_differences.csv": "9152eb98b8688316c7189afa4ae23e04a060735046c93ca19bfcba758a2ed729",
+    "paired_differences.csv": "7302cb46675a266915a7bb907d168abb762cc610241116d08df9039bdae20a3a",
+    "historical_context.md": "d75f8eab982e8f6d3de45a7f42a27a38ffd1a35fcb42ef5af5d61f560829571d",
+    "metrics.csv": "19732f6a3bc78ac053d62131baef23165c018eda88f8fbe1d42cc30277e14691",
+    "config.yaml": "5913ae5d4fe1852bc680906e3b2fd181102b1e118c37aa4b793005e6aae2b84f",
+    "selection_lock.json": "4934141a2eeaf978dac65cf62884be4d4852f476c07765e63bf24115d68a219a",
+    "protocol.json": "ea75c73dce7ad4196864561d580ce9f219054e2836361438db54ed750a8c2b56",
+    "historical_context_differences.csv": "d8048959bab1dcb89fa76f32ef054eba354367448cfc168b63fe02dfa8c7c2e8",
+    "study_provenance.json": "d712778e2e9fe18ac166249f83999d42feeb2b4681c2ed6d299c2a447e6b4582",
+    "fits.csv": "d0cb106ce435a0e2928fc9b10be50071f6c065894c001304623c3877d234965a",
+    "environment.json": "2eebaaec22bd574b5624a7e6e1850f074dd4453345d79192a08ef2921c50ffa7",
+    "historical_context_provenance.json": "22221ef29092956970823f15b0326eaae10def2b1e812ee0b7480dd9d533eefa",
+    "failure_funnel.csv": "d1c34f999eaaff5df7c75e8a7aef994f5d81690f05ac216a384b67fc4ff8052e"
+  },
+  "figure_sha256": "b183cd4bfb4bcdf56c685cb6049625586dc1c909291e79a2657fa8c7df9a0725",
+  "test_predictions_loaded": false
+}

@@ -1,0 +1,28 @@
+{
+  "source_sha256": "c72aee96ed8e70445ce6090c74163b92c1903db43ad05f378b50a5cfc433e571",
+  "input_logits_sha256": {
+    "results/local_experiments/20261104-steps-final/test/evaluation/bce_text/seed0/logits.npy": "48be84a5ac26c5c113f7d85526ad135a8dc6ae8784695b3baab68083bfa4914d",
+    "results/local_experiments/20261104-steps-final/test/evaluation/bce_text/seed1/logits.npy": "5e72e5f175494ce3caf2f3d17cb0e49230a8eee9be9e72da91ddb31a57491e5b",
+    "results/local_experiments/20261104-steps-final/test/evaluation/bce_text/seed2/logits.npy": "1a62d210e271a735c4359529534fe79f2a82f8b47c55a5c006047fa9f75f53f0",
+    "results/local_experiments/20261104-steps-final/test/evaluation/pairwise_text/seed0/logits.npy": "6a5b5df832f01efe4a6d65af7b232ccb2667f819af45faa7e4d32f7009f5e6a6",
+    "results/local_experiments/20261104-steps-final/test/evaluation/pairwise_text/seed1/logits.npy": "acfd392e8b2f0d26f9aa5449d489cf6ced940d95c22c0b25d3318ff127e454d1",
+    "results/local_experiments/20261104-steps-final/test/evaluation/pairwise_text/seed2/logits.npy": "95f990df9abd3b357366d1a7fd39d4a57b61e434f274487abeda695a99ebf316",
+    "results/local_experiments/20261104-steps-final/test/evaluation/pairwise_coreview/seed0/logits.npy": "289307c354699e6561f365ddea48d9840104566159bc0c67532b571337a10d73",
+    "results/local_experiments/20261104-steps-final/test/evaluation/pairwise_coreview/seed1/logits.npy": "b843e81f2d502e987a992329f244e8ef69937050ffba8059a2f51f9ce175f40b",
+    "results/local_experiments/20261104-steps-final/test/evaluation/pairwise_coreview/seed2/logits.npy": "058d7cfe7ac3bf3d86274e07538a5905be0891349eac19b25d3624912ff138ff",
+    "results/local_experiments/20261104-steps-final/test/evaluation/bce_coreview/seed0/logits.npy": "f9c3b24c7aa91f0255777b4fb1e0a9d67be6f99627a75c2c13f05f4890e397ce",
+    "results/local_experiments/20261104-steps-final/test/evaluation/bce_coreview/seed1/logits.npy": "527986271e91e9d9cb98c461dcade3c6d5ec9a79a8896f351aa8a00cbe194aaa",
+    "results/local_experiments/20261104-steps-final/test/evaluation/bce_coreview/seed2/logits.npy": "f2d20290ccab31e1fe65afb0e18fb4f373bf17952d5bc556ca22f9e88370928f"
+  },
+  "protocol_sha256": "7e1bb2067416f97e3543683217a839e74a94744730d70b6fa5395782ca3757d6",
+  "test_predictions_loaded": true,
+  "training_performed": false,
+  "output_sha256": {
+    "analysis_source.py": "c72aee96ed8e70445ce6090c74163b92c1903db43ad05f378b50a5cfc433e571",
+    "paired_differences.csv": "466e18e14ea4a7e74359684aed68af1d5d983d59d724fcccd3735f74fc32e330",
+    "beyond_accuracy.csv": "3a228dbd9b56d2df1420005736c95e7a2f72ae57ee6769bdcfd97ba999381bd9",
+    "comparison.csv": "22d3aacc665b1db5bc0d72bfe58b773fb141af5026450da7cbaa57545748179e",
+    "metric_vectors.npz": "e9f8ec7a6da0d87a14845cb989a5acdaa2df38d24010fe950c017150b19e93be",
+    "failure_funnel.csv": "b2b21399a3334468666f8ae706e207f8fa0f3142f2723215168701ae2b44772a"
+  }
+}

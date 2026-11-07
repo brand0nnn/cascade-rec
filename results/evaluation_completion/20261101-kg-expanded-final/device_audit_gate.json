@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "minimum_precision": 0.95,
+  "required_locked_titles": 100,
+  "reviewed_locked_titles": 0,
+  "reason": "Locked human device audit is incomplete; no quantitative device claims."
+}

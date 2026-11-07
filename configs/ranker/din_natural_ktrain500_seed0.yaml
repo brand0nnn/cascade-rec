@@ -1,0 +1,31 @@
+# Exploratory (2026-10-28, H8): DIN on natural lists built at K_train = 500 (use --candidate-dir ..._ktrain500). Val k1 200.
+model: din
+history_length: 50
+item_text_dim: 384
+hidden_dims:
+- 256
+- 128
+- 64
+dropout: 0.1
+loss: binary_cross_entropy
+optimizer: adam
+learning_rate: 0.001
+batch_size: 2048
+max_epochs: 30
+early_stopping:
+  metric: ndcg@10_macro
+  patience: 3
+negative_sampling:
+  negatives_per_list: 50
+  strategy: uniform_without_replacement
+seed: 0
+experiment: din_natural_ktrain500
+feature_groups:
+- retrieval
+- matching
+k1: 200
+attention_hidden_dims:
+- 64
+- 32
+attention_use_softmax: false
+train_population: natural  # train only on lists where retrieval found the target (no forced positives)

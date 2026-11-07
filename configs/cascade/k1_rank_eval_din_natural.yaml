@@ -1,0 +1,14 @@
+# Exploratory (2026-10-28): K1 sweep (exact search) for DIN trained on natural lists, seeds 0-2. Val only.
+# Uses index_rank_eval with nested prefixes of the shared exact top-500 Val lists.
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+data_config: configs/data.yaml
+index_lists_dir: data/processed/candidates
+index_configs: [two_tower_text_seed0]
+k1_counts: [50, 100, 200, 500]
+reference: two_tower_text_seed0@200
+ranker_runs:
+  - results/ranker_din/20261028-din-natural-seed0
+  - results/ranker_din/20261028-din-natural-seed1
+  - results/ranker_din/20261028-din-natural-seed2
+score_batch_pairs: 8000
+bootstrap_resamples: 1000

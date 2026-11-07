@@ -23,3 +23,17 @@ def new_in_period(target_first_ts: np.ndarray, split: str, split_info: dict) -> 
     On Test this equals the ``cold`` segment; on Val it marks products released during Val.
     """
     return target_first_ts >= split_start(split, split_info)
+
+
+def segment_masks(target_segment: np.ndarray, is_new: np.ndarray, hist_len: np.ndarray) -> dict[str, np.ndarray]:
+    """Boolean instance masks for every §4.7 segment, keyed as in the harness output (``item_cold`` … ``hist_11+``).
+
+    ``target_segment``: cold/tail/head label of each instance's target; ``is_new``: from ``new_in_period``.
+    """
+    hb = hist_bucket(hist_len)
+    return {
+        **{f"item_{s}": target_segment == s for s in ITEM_SEGMENTS},
+        "item_new_in_period": is_new,
+        "item_not_new": ~is_new,
+        **{f"hist_{h}": hb == h for h in HIST_BUCKETS},
+    }

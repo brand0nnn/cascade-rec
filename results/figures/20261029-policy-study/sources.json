@@ -1,0 +1,22 @@
+{
+  "label": "validation only, exploratory",
+  "git_hash": "381264b116cd247bbe2e45cf57e1fbac21fd3990-dirty",
+  "sources": {
+    "k1_forced_mlp": "results/ranker_k1_sweep/20261025-k1/summary.csv",
+    "k1_natural_mlp": "results/ranker_k1_sweep/20261028-k1-natural/summary.csv",
+    "k1_natural_mlp_k500": "results/index_rank_eval/20261028-k1-ktrain500-r2/results.json",
+    "k1_natural_din": "results/index_rank_eval/20261028-k1-din-natural/results.json",
+    "k1_natural_din_k500": "results/index_rank_eval/20261028-k1-din-ktrain500/results.json",
+    "mlp_compare": "results/ranker_compare/20261028-natural-vs-forced-mlp/comparison.json",
+    "din_compare": "results/ranker_compare/20261028-din-natural-vs-din-forced/comparison.json",
+    "rank_response": "results/analysis/20261028-permutation-importance-r2/results.json",
+    "ivf_din_k500": "results/index_rank_eval/20261028-index-rank-din-ktrain500/results.json",
+    "debias_din": "results/index_rank_eval/20261028-debiased-rank-din/results.json",
+    "popularity_buckets": "results/analysis/20261028-staleness-popularity/a_by_rtrain_bucket.csv",
+    "last_item": "results/analysis/20261028-last-item/comparison_last_item.csv",
+    "train_lists": "data/processed/candidates/two_tower_text_seed0/ranker_train.npz",
+    "policy_metrics": "results/targeted_study/policy-report-20261029/metrics.csv",
+    "policy_comparisons": "results/targeted_study/policy-report-20261029/comparisons.csv",
+    "policy_score": "results/targeted_study/policy-report-20261029/score_diagnostics.csv"
+  }
+}

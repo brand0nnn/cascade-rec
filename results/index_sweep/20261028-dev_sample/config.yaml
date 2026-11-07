@@ -1,0 +1,43 @@
+retriever_run: results/retriever/two_tower_text/seed0
+data_config: configs/data.yaml
+split: val
+k1: 200
+buffer: 250
+recall_cutoffs:
+- 10
+- 50
+- 100
+- 200
+query_batch_size: 4096
+ef_search_policy: at_least_requested
+hnsw:
+  m: 32
+  ef_construction: 200
+ivf:
+  nlist: 1024
+  seed: 0
+indexes:
+- name: exact
+  kind: exact
+- name: hnsw_ef200
+  kind: hnsw
+  ef_search: 200
+- name: hnsw_ef800
+  kind: hnsw
+  ef_search: 800
+- name: ivf_nprobe4
+  kind: ivf
+  nprobe: 4
+- name: ivf_nprobe32
+  kind: ivf
+  nprobe: 32
+reference_candidates: data/processed/candidates/two_tower_text_seed0
+save_candidates: true
+candidates_out: data/processed/candidates/index_sweep
+development:
+  user_fraction: 0.02
+  random_seed: 0
+run_id: 20261028-dev_sample
+sample: true
+device: cpu
+config_path: configs/cascade/index_sweep.yaml

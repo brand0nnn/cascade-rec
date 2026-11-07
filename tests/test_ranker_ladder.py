@@ -82,3 +82,25 @@ def test_score_only_uses_float32_before_normalization():
     output = RankerFeatureBuilder.build(builder, lists, r, c, score_only=True)
     expected = (lists['score'][r, c].astype(np.float32) - builder.score_mean) / builder.score_std
     np.testing.assert_array_equal(output['numeric'][:, 0], expected)
+
+
+def test_matching_without_retrieval_ignores_the_score_input():
+    """Opt-in exploratory setting: dropping the retrieval group removes only numeric column 0."""
+    model = MLPRanker(make_spec(('matching',)), dropout=0).eval()
+    a = batch(); b = {k: v.clone() for k, v in a.items()}
+    b['numeric'][:, 0] = 99.0
+    torch.testing.assert_close(model(a), model(b))
+    with_score = MLPRanker(make_spec(('retrieval', 'matching')), dropout=0)
+    assert model.mlp[0].in_features == with_score.mlp[0].in_features - 1
+    with pytest.raises(ValueError):
+        make_spec(('attributes',))
+
+
+def test_listwise_softmax_loss_matches_manual_and_skips_padding():
+    """Opt-in exploratory loss: −log softmax of column 0 over each list's valid sampled columns."""
+    from cascade.pipelines.ranker_training import listwise_softmax_loss
+    valid = np.array([[True, True, True], [True, True, False]])
+    logits = torch.tensor([2.0, 0.0, 1.0, 0.5, 1.5])
+    expected = -(torch.log_softmax(torch.tensor([2.0, 0.0, 1.0]), 0)[0]
+                 + torch.log_softmax(torch.tensor([0.5, 1.5]), 0)[0]) / 2
+    torch.testing.assert_close(listwise_softmax_loss(logits, valid), expected)

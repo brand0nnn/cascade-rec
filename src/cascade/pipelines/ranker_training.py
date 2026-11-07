@@ -361,19 +361,102 @@ def _cardinalities(train_features: FeatureArrays) -> dict[str, int]:
     }
 
 
-def _sample_list_columns(lists: Mapping[str, np.ndarray], n_negatives: int, rng: np.random.Generator) -> np.ndarray:
-    """Return positive + uniformly sampled negative candidate columns per list."""
+def later_review_cells(lists: Mapping[str, np.ndarray], data: ProcessedData, chunk: int = 200_000) -> np.ndarray:
+    """[n_lists, n_cols] bool: the candidate is an item the same user reviews later, before T1.
+
+    "Later" means an interaction of the list's user with timestamp strictly after the
+    instance's timestamp and strictly before ``data.split['t1']``. Only interactions with
+    ``ts < T1`` are read, so Val/Test interactions never enter the mask. These cells are
+    unobserved-but-actually-positive items labelled 0 (docs/decisions.md 2026-10-21, item 2);
+    the mask is used only to keep them out of sampled training negatives, never as labels.
+    """
+    cand = np.asarray(lists["cand"])
+    n_lists = len(cand)
+    later = np.zeros(cand.shape, dtype=bool)
+    if n_lists == 0:
+        return later
+    t1 = int(data.split["t1"])
+    inst_table = data.instances
+    inst_ids = inst_table["inst"].to_numpy()
+    list_inst = np.asarray(lists["inst"], dtype=np.int64)
+    pos = np.searchsorted(inst_ids, list_inst)
+    pos = np.minimum(pos, len(inst_ids) - 1)
+    if not np.array_equal(inst_ids[pos], list_inst):
+        raise ValueError("candidate-list instance ids are missing from data.instances")
+    inst_ts = inst_table["ts"].to_numpy()[pos].astype(np.int64)
+    inst_user = inst_table["user"].to_numpy()[pos].astype(np.int64)
+    if not np.array_equal(inst_user, np.asarray(lists["user"], dtype=np.int64)):
+        raise ValueError("candidate-list users disagree with data.instances")
+    if np.any(inst_ts >= t1):
+        raise ValueError("later-review exclusion is for training lists only (instance ts must be < T1)")
+
+    # Training-period interactions only (ts < T1), in the CSR order (user, ts) used by ProcessedData.
+    seq_user = np.repeat(np.arange(len(data.user_ptr) - 1, dtype=np.int64), np.diff(data.user_ptr))
+    keep = data.seq_ts < t1
+    seq_user, seq_ts, seq_item = seq_user[keep], data.seq_ts[keep].astype(np.int64), data.seq_item[keep]
+    ts_min = int(min(seq_ts.min(initial=t1), inst_ts.min()))
+    span = t1 - ts_min + 1
+    if (len(data.user_ptr) + 1) * span >= 2**62:
+        raise OverflowError("(user, timestamp) key does not fit in int64")
+    key = seq_user * span + (seq_ts - ts_min)  # sorted: users ascending, ts ascending within user
+    if np.any(np.diff(key) < 0):
+        raise ValueError("user sequences are not sorted by (user, timestamp)")
+    start = np.searchsorted(key, inst_user * span + (inst_ts - ts_min), side="right")  # strictly after t
+    end = np.searchsorted(key, inst_user * span + (t1 - ts_min), side="left")  # strictly before T1
+    counts = np.maximum(end - start, 0)
+    total = int(counts.sum())
+    if total == 0:
+        return later
+    pair_list = np.repeat(np.arange(n_lists), counts)
+    offsets = np.cumsum(counts) - counts
+    pair_idx = np.arange(total) - np.repeat(offsets, counts) + np.repeat(start, counts)
+    pair_item = seq_item[pair_idx].astype(cand.dtype)
+    for lo in range(0, total, chunk):
+        rows = pair_list[lo : lo + chunk]
+        hit_pair, hit_col = np.nonzero(cand[rows] == pair_item[lo : lo + chunk, None])
+        later[rows[hit_pair], hit_col] = True
+    return later
+
+
+def _sample_list_columns(
+    lists: Mapping[str, np.ndarray],
+    n_negatives: int,
+    rng: np.random.Generator,
+    eligible: np.ndarray | None = None,
+) -> np.ndarray:
+    """Return positive + uniformly sampled negative candidate columns per list.
+
+    ``eligible`` (optional [n_lists, n_cols] bool, True = may be sampled as a negative) further
+    restricts the label-0, non-padding columns. ``None`` keeps the original sampler and RNG draws.
+    """
     cand = lists["cand"]
     labels = lists["label"]
+    if eligible is not None and eligible.shape != cand.shape:
+        raise ValueError("eligible mask must have the candidate-list shape")
     selected = np.full((len(cand), n_negatives + 1), -1, dtype=np.int16)
     selected[:, 0] = np.asarray(lists["target_pos"], dtype=np.int16)
     for row in range(len(cand)):
-        valid_neg = np.flatnonzero((labels[row] == 0) & (cand[row] > 0))
+        valid = (labels[row] == 0) & (cand[row] > 0)
+        if eligible is not None:
+            valid &= eligible[row]
+        valid_neg = np.flatnonzero(valid)
         if not len(valid_neg):
             continue
         take = min(n_negatives, len(valid_neg))
         selected[row, 1 : take + 1] = rng.choice(valid_neg, size=take, replace=False)
     return selected
+
+
+def listwise_softmax_loss(logits: torch.Tensor, valid: np.ndarray) -> torch.Tensor:
+    """Mean −log softmax probability of the positive (column 0) within each list's sampled columns.
+
+    ``logits`` are the flattened scores of the ``valid`` cells of a [lists, 1 + negatives] column matrix, in
+    row-major order (as built in ``fit_candidate_lists``); padding cells are excluded from the softmax.
+    """
+    mask = torch.as_tensor(valid, device=logits.device)
+    matrix = torch.full(mask.shape, float("-inf"), device=logits.device, dtype=logits.dtype)
+    matrix[mask] = logits
+    return -torch.log_softmax(matrix, dim=1)[:, 0].mean()
 
 
 def policy_training_columns(lists: Mapping[str, np.ndarray], n_negatives: int,
@@ -425,10 +508,19 @@ def fit_candidate_lists(
     device: str | torch.device = "cpu",
     checkpoint_path: str | Path | None = None,
     resume_checkpoint: Mapping[str, object] | None = None,
+    negative_eligible: np.ndarray | None = None,
+    loss: str = "binary_cross_entropy",
     sampling_strategy: str = "historical",
     training_instance_universe: np.ndarray | None = None,
 ) -> RankerTrainingResult:
-    """Train directly from grouped candidate files, expanding only each minibatch."""
+    """Train directly from grouped candidate files, expanding only each minibatch.
+
+    ``negative_eligible`` (optional [n_lists, n_cols] bool) restricts which label-0 columns may be
+    sampled as negatives; labels and validation are unaffected. ``loss`` is pointwise BCE (default) or the
+    opt-in exploratory ``listwise_softmax`` over each list's positive and sampled negatives.
+    """
+    if loss not in ("binary_cross_entropy", "listwise_softmax"):
+        raise ValueError(f"unknown ranker loss: {loss}")
     for name, lists in (("train", train_lists), ("validation", val_lists)):
         if not len(lists["inst"]):
             raise ValueError(f"{name} candidate population is empty")
@@ -438,6 +530,8 @@ def fit_candidate_lists(
             raise ValueError(f"{name} candidate lists must have exactly one target")
     if sampling_strategy not in ("historical", "instance_keyed"):
         raise ValueError("unknown training sampling strategy")
+    if sampling_strategy == "instance_keyed" and negative_eligible is not None:
+        raise ValueError("negative_eligible is only supported with historical sampling")
     universe = np.asarray(train_lists["inst"] if training_instance_universe is None else training_instance_universe)
     set_seed(seed)
     rng = np.random.default_rng(seed)
@@ -472,7 +566,7 @@ def fit_candidate_lists(
             cols = policy_training_columns(train_lists, n_negatives, seed, epoch)
             order = policy_training_order(train_lists["inst"], universe, seed, epoch)
         else:
-            cols = _sample_list_columns(train_lists, n_negatives, rng)
+            cols = _sample_list_columns(train_lists, n_negatives, rng, negative_eligible)
             order = rng.permutation(n_lists)
         total_loss, total_rows = 0.0, 0
         for start in tqdm(range(0, n_lists, list_batch_size), desc=f"Train epoch {epoch}/{max_epochs}", unit="batch", leave=False, mininterval=5):
@@ -486,11 +580,14 @@ def fit_candidate_lists(
             labels = torch.as_tensor(train_lists["label"][pair_rows, pair_cols], dtype=torch.float32, device=device)
             optimizer.zero_grad(set_to_none=True)
             logits = model(batch)
-            loss = loss_fn(logits, labels)
-            loss.backward()
+            if loss == "listwise_softmax":
+                batch_loss = listwise_softmax_loss(logits, valid)
+            else:
+                batch_loss = loss_fn(logits, labels)
+            batch_loss.backward()
             optimizer.step()
             optimizer_steps += 1
-            total_loss += float(loss.detach()) * len(pair_rows)
+            total_loss += float(batch_loss.detach()) * len(pair_rows)
             total_rows += len(pair_rows)
 
         # Validation uses every non-padding candidate from the top-200 list, plus forced targets.
@@ -594,6 +691,13 @@ def main() -> None:
         if cfg.get("early_stopping", {}).get("metric", "ndcg@10_macro") != "ndcg@10_macro":
             raise ValueError("grouped training selects conditional macro ndcg@10 only")
         builder = RankerFeatureBuilder.create(data, train_lists)
+        n_train_lists_all = None
+        if cfg.get("train_population", "all") == "natural":
+            # Keep only lists whose target the retriever found itself (no force-appended positive).
+            # Filtered after the builder so score standardisation matches the earlier runs.
+            n_train_lists_all = int(len(train_lists["inst"]))
+            keep = ~np.asarray(train_lists["forced"], dtype=bool)
+            train_lists = {k: v[keep] for k, v in train_lists.items()}
         set_seed(int(cfg.get("seed", 0)))
         spec = RankerFeatureSpec(
             cardinalities=builder.item_cardinalities,
@@ -603,6 +707,19 @@ def main() -> None:
         )
         model = create_ranker(spec, cfg)
         negatives = cfg.get("negative_sampling", {})
+        negative_eligible, later_stats = None, None
+        if negatives.get("exclude_later_reviews", False):
+            # Opt-in: never sample the user's later reviews (ts in (t, T1)) as negatives; labels unchanged.
+            later = later_review_cells(train_lists, data) & (np.asarray(train_lists["label"]) == 0)
+            negative_eligible = ~later
+            later_lists = later.any(axis=1)
+            later_stats = {
+                "excluded_cells": int(later.sum()),
+                "lists_with_exclusion": int(later_lists.sum()),
+                "lists_with_exclusion_fraction": float(later_lists.mean()) if len(later_lists) else 0.0,
+                "n_lists": int(len(later_lists)),
+            }
+            print(json.dumps({"exclude_later_reviews": later_stats}), flush=True)
         run_dir = make_run_dir(f"ranker_{cfg.get('model', 'mlp')}", args.run_id, exist_ok=False)
         save_run(run_dir, {"status": "running", "development_sample": args.sample}, cfg)
         result = fit_candidate_lists(
@@ -614,6 +731,8 @@ def main() -> None:
             patience=int(cfg.get("early_stopping", {}).get("patience", 3)),
             seed=int(cfg.get("seed", 0)), device=args.device,
             checkpoint_path=run_dir / "model.pt",
+            negative_eligible=negative_eligible,
+            loss=str(cfg.get("loss", "binary_cross_entropy")),
         )
         metrics = {
             "model": cfg.get("model", "mlp"),
@@ -626,12 +745,16 @@ def main() -> None:
             "history": result.history,
             "validation_comparison": (json.loads((run_dir / "validation_comparison.json").read_text())
                                       if (run_dir / "validation_comparison.json").exists() else None),
+            "train_population": cfg.get("train_population", "all"),
+            "n_train_lists_all": n_train_lists_all,
             "n_train_lists": int(len(train_lists["inst"])),
             "n_val_lists": int(len(val_lists["inst"])),
             "train_forced_fraction": float(train_lists["forced"].mean()),
             "val_forced_fraction": float(val_lists["forced"].mean()),
             "val_conditional_lists": int((~val_lists["forced"]).sum()),
         }
+        if later_stats is not None:  # keys only appear for opt-in runs, so default metrics.json is unchanged
+            metrics["later_review_exclusion"] = later_stats
         cfg = {**cfg, "run": {"candidate_dir": str(args.candidate_dir),
                                "resume_checkpoint": args.resume,
                                "seed": int(cfg.get("seed", 0)), "git_hash": git_hash(),

@@ -1,0 +1,4 @@
+index,build_seconds,bytes_serialized,exact_pool_overlap_mean,short_pools,mean_fetch,quality_population
+flat,0.02948516698961612,171233325,1.0,0,420.4,"fixed 1000 validation events, not full Val or Test"
+ivf,0.2263225839997176,172520523,0.94622,0,420.0,"fixed 1000 validation events, not full Val or Test"
+hnsw,35.066759083012585,201582466,0.9941199999999999,0,420.8,"fixed 1000 validation events, not full Val or Test"

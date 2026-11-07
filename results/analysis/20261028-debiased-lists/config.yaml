@@ -1,0 +1,20 @@
+label: validation only, exploratory
+split: val
+retriever_run: results/retriever/two_tower_text/seed0
+reference: data/processed/candidates/index_sweep/20261028-index-sweep/exact
+k1: 200
+variants:
+  beta0:
+    beta: 0.0
+    unseen: train
+  beta0.25_minseen:
+    beta: 0.25
+    unseen: minseen
+  beta0.5_minseen:
+    beta: 0.5
+    unseen: minseen
+selection_score: u.v - beta * tau * log q
+stored_score: u.v (original retrieval score, float16)
+temperature: 0.05
+device: mps
+batch_size: 256

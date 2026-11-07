@@ -1,0 +1,27 @@
+label: validation only, exploratory
+split: val
+retriever_run: results/retriever/two_tower_text/seed0
+device: mps
+cutoffs:
+- 10
+- 50
+- 100
+- 200
+- 500
+compare_cutoffs:
+- 10
+- 200
+- 500
+sanity_max_instances: 5000
+sanity_subset_seed: 0
+batch_size: 512
+bootstrap:
+  n_resamples: 1000
+  seed: 0
+  unit: user
+  diff: scorer - frozen
+scorers:
+  last_item: u = v_last (frozen item tower, no training)
+  mean_pool: u = normalize(masked mean of history v), untrained
+hypothesis: last-item reaches >= 80% of frozen Val Recall@200 and the gap does not
+  grow much with history length

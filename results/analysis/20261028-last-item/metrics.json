@@ -1,0 +1,24 @@
+{
+  "label": "validation only, exploratory",
+  "sanity": {
+    "n": 5000,
+    "exact_rank_agreement": 0.9826,
+    "abs_rank_diff_max": 2.0,
+    "abs_rank_diff_median": 0.0,
+    "hit@10_agreement": 1.0,
+    "hit@50_agreement": 1.0,
+    "hit@100_agreement": 1.0,
+    "hit@200_agreement": 1.0,
+    "hit@500_agreement": 1.0
+  },
+  "hits200_venn": {
+    "frozen_only": 13926,
+    "last_only": 7124,
+    "mean_only": 3215,
+    "frozen_last": 1821,
+    "frozen_mean": 316,
+    "last_mean": 2125,
+    "all_three": 609,
+    "none": 203768
+  }
+}

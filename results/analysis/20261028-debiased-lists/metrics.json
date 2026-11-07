@@ -1,0 +1,52 @@
+{
+  "label": "validation only, exploratory",
+  "n_instances": 232904,
+  "k1": 200,
+  "log_q_info": {
+    "n_items": 111480,
+    "n_seen_in_retriever_train": 82237,
+    "n_unseen": 29243,
+    "log_q_seen_min": -14.445477485656738,
+    "log_q_seen_max": -5.770084381103516,
+    "log_q_seen_median": -12.248252868652344
+  },
+  "variants": {
+    "beta0": {
+      "beta": 0.0,
+      "unseen": "train",
+      "short_rows": 0,
+      "recall@k1_micro": 0.0715874351664205,
+      "mean_raw_score": -0.15976008772850037,
+      "mean_raw_score_last_slot": -0.1876106560230255,
+      "overlap_with_reference": 0.9999098518995493,
+      "check_vs_reference": {
+        "identical_ordered_lists_share": 0.3666746814138014,
+        "identical_candidate_sets_share": 0.9909962903170405,
+        "slot_agreement": 0.98954251537114,
+        "score_equal_where_slot_agrees": 0.9984957374418473,
+        "score_max_abs_diff_where_slot_agrees": 0.000244140625,
+        "target_pos_equal_share": 0.9996736852952289
+      }
+    },
+    "beta0.25_minseen": {
+      "beta": 0.25,
+      "unseen": "minseen",
+      "short_rows": 0,
+      "recall@k1_micro": 0.06933328753477828,
+      "mean_raw_score": -0.17539991438388824,
+      "mean_raw_score_last_slot": -0.19931304454803467,
+      "overlap_with_reference": 0.5399173642412535
+    },
+    "beta0.5_minseen": {
+      "beta": 0.5,
+      "unseen": "minseen",
+      "short_rows": 0,
+      "recall@k1_micro": 0.056821694775529834,
+      "mean_raw_score": -0.1947803646326065,
+      "mean_raw_score_last_slot": -0.21904444694519043,
+      "overlap_with_reference": 0.32443764756385485
+    }
+  },
+  "elapsed_s": 202.21396207809448,
+  "git_hash": "b9f9f27216446f7ed00484cf890a2d82aaab26a8-dirty"
+}

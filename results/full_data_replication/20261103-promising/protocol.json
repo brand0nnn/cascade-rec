@@ -1,0 +1,67 @@
+{
+  "study": "20261103-full-promising-ranking",
+  "data_config": "results/targeted_study/data.yaml",
+  "frozen_study": "20261102-full-frozen-text",
+  "methods": [
+    "bce_text",
+    "pairwise_text",
+    "pairwise_coreview",
+    "pairwise_combined"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "k1": 200,
+  "half_life_days": 90,
+  "inner_fraction": 0.8,
+  "max_epochs": 10,
+  "patience": 2,
+  "batch_lists": 32,
+  "negative_alternatives": 50,
+  "learning_rate": 0.001,
+  "bootstrap_resamples": 1000,
+  "bootstrap_seed": 0,
+  "selector": "chronological_inner_all_query_user_macro_ndcg10",
+  "epoch_zero_eligible": true,
+  "tie_break": "earlier_epoch",
+  "test_predictions_loaded": false,
+  "primary_contrasts": [
+    [
+      "retrieval",
+      "pairwise_text"
+    ],
+    [
+      "bce_text",
+      "pairwise_text"
+    ],
+    [
+      "pairwise_text",
+      "pairwise_coreview"
+    ],
+    [
+      "pairwise_coreview",
+      "pairwise_combined"
+    ],
+    [
+      "retrieval",
+      "pairwise_coreview"
+    ],
+    [
+      "retrieval",
+      "pairwise_combined"
+    ]
+  ],
+  "interpretation": "exploratory_full_population_replication_on_previously_used_validation",
+  "sample": false,
+  "technical_smoke": false,
+  "feature_cutoff": 1595800947930,
+  "graph_mask_after_standardisation": true,
+  "feature_scaler": "all chronological prefix candidate slots, before natural-hit filtering",
+  "refit": "all B natural positives, fixed selected epochs, identical initial state",
+  "negative_policy": "50 uniform real non-target candidates, shared rows/columns within seed",
+  "outer_val": "once after all twelve selected weights/epochs locked; exploratory reused population",
+  "warm_guard": "report paired warm-minus-retrieval interval; no equivalence claim without margin",
+  "stop": "scheduled report, audit, documentation and commit; no automatic additional study"
+}

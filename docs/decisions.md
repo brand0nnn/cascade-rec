@@ -2,9 +2,64 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-04 — Close the objective x co-review factorial
+
+Three fresh BCE+co-review seeds complete root plan §14 using the exact immutable parent inputs and nine locked control fits. Selected epochs are 8/9/8. Full-Val nDCG@10 is **0.008409**, compared with BCE-off **0.008115**: graph gain **+0.000295 [0.000169, 0.000425]**. Warm gains accompany new-item losses under both objectives. The direct interaction `(PW_on−PW_off)−(BCE_on−BCE_off)` is **+0.000003 [−0.000159, 0.000163]**; the joint-user new-minus-warm interaction is **+0.000146 [−0.000162, 0.000511]**. Neither establishes objective dependence or equivalence. Preserve the whole training/selection/refit-recipe interpretation and exploratory/unadjusted reused-Val limitations.
+
+All new checkpoints/logits remain local; compact four-cell/group/funnel/contrast/source/provenance evidence and the checked interaction figure are shared. The exact numerical-analysis source snapshot is retained separately from a later label-formatting adjustment. The sample off-control reproduces the earlier BCE first epoch. Final checks: **233 passed / 4 legacy skips**, with 33 inner/three outer score replays, twelve factorial locks, 675 reconstructed metric rows, eighteen direct/main intervals and one jointly resampled novelty interval independently passing. Commit the results and documentation. This completes the authorised extension; no automatic graph retrieval, new encoder, canonical integration, serving/index work or Test launch.
+
+## 2026-11-04 — Complete the controlled objective x co-review question
+
+Following discussion of the original design, the user authorised proceeding with the missing BCE+co-review comparison. Root plan §14 registers three new full-data fits; the nine existing BCE-off/pairwise-off/pairwise-on controls, candidates, graph, feature normalisation, split, initialisation and negative plans remain immutable. The question is when additional relational evidence helps, including objective and novelty interactions, rather than requiring a new model to win overall. Direct paired-user factorial and joint-user new-minus-warm interaction intervals are registered before fitting. Final Test, graph retrieval and further architectures remain separate decisions.
+
+## 2026-11-04 — Complete the full-data replication and qualify the sample conclusions
+
+All twelve registered fits and full-Val scoring completed on the unchanged canonical split and frozen-recency natural K200 pool. BCE text/common control nDCG@10 is **0.008115**, pairwise text **0.007767**, pairwise co-review **0.008065**, combined **0.007930**, versus retrieval **0.006284**. Pairwise loses to BCE overall/warm while improving new items. Co-review improves its pairwise control overall/warm but loses new-item quality; additional category/store-history fractions lose overall/new quality versus co-review. Full BCE selects trained epochs 10/6/6 rather than the sample's epoch zero; different populations and update exposure prevent assigning this to data quantity alone.
+
+Missing arm-pair comparisons are explicitly secondary, not registered primary hypotheses. BCE-minus-retrieval is **+0.001831 [0.001519, 0.002117]**; co-review-minus-BCE is inconclusive. Aligned historical context shows a gain over archived MLP K200/SASRec but no established superiority over archived MLP K100's observed validation maximum. All intervals remain exploratory/unadjusted on reused Val, conditional on the existing seeds/candidates. No final architecture or candidate count is selected from these results.
+
+Share the compact report/CSV/config/environment/source/provenance/audit bundle and checked figure; keep bulk arrays, logits and weights local. All 548,018 candidate lists, 104 retained inner score sets, twelve outer outputs/locks, 675 metric rows and eighteen main nDCG intervals independently pass. Final unit suite: **229 passed / 4 legacy embedding skips**. Update README/CLAUDE/plan/evaluations/proposals and commit. This completes the bounded request; no automatic further training, changed-pool integration, serving/index work or held-out Test launch.
+
+## 2026-11-03 — Resume for bounded full-data replication
+
+After reviewing the completed evaluations, the user requested full-data testing of the most promising methods, adding results and committing. This authorises root plan §13: matched BCE text and pairwise text/co-review/combined residual rankers, three seeds, frozen-recency natural K200 candidates, canonical full-data split, chronological B tuning and fixed-epoch refits. It supersedes the previous experiment pause for this study. Full Val is reused exploratory evidence; held-out Test and the independent historical policy/dropout/index studies retain their separate status. Preserve every original study and teammate checkpoint. Register the configuration before fitting and lock every selected weight before outer scoring; include negative outcomes and warm-item guardrails.
+
 Names follow the 2026-10-20 renaming (see the last entry): **retriever-training period** (formerly period A),
 **ranker-training period** (period B), **all training data** (A ∪ B), **Two-tower (text)** (v2), **Two-tower (text + ID)**
 (v4), **sample** (toy). Commits and run files from before that date use the old names.
+
+## 2026-11-02 — Independent local experiments and future-item controls
+
+The user authorised an independent local track in root `plan.md`, starting from the original RecBole baseline, using MPS and pausing at consequential choices. This extends the historical narrowed scope for separate local experiments; it does not replace teammates' controls or open final Test evaluation.
+
+- After the sampler problem was explained, the user selected **option 1: pre-T0-only negatives** for fresh matched ID/content controls. The original RecBole vocabulary includes future products. Exposing their text as negatives would test a known-catalogue setting. Keep the original fits as historical references; match fresh BCE, training pairs, backbone, selector and final evaluation. Sample pool: 20,740 allowed / 9,649 excluded items. Initial shared backbones and initial negative traces match within seed.
+- The local programme completed ID/content/content+ID/graph/two-interest retrievers at seeds 0/1/2; mean/semantic-attention rankers at seeds 0/1/2; actual unique-budget RRF; frozen history and fixed 90-day text controls; popularity; twenty fixed examples; and a full archived-Val monthly audit. All learned sample fits use MPS. Natural rankers use only 458 retrieved training positives, with no insertion or retrieval-score input. These are new models, not reproductions of the historical DIN or two-tower architecture.
+- Frozen text with recency weighting is the strongest sample control. This is a pretrained MiniLM encoder with **no task-specific recommender training**, not an untrained language model. The 90-day half-life was specified before outcomes. Graph/two-interest/fusion/ranker variants do not supply a clear gain over their controls. Preserve negative results. See [evaluations.md](evaluations.md#independent-local-experiments-2-november-2026).
+- The sample catalogue/availability process and 67.2% new-in-Val target share differ from full data. No numerical extrapolation or claim that graph relations/attention caused an effect. Graph also changes capacity; the two interest heads are similar. Natural-only ranking changes both policy and support relative to historical training; this is not the teammates' controlled policy ablation.
+- The user paused, then resumed after the recommendation to check frozen text on the full catalogue. Proceed with the same pinned encoder and fixed uniform/90-day pooling, all original Val events and canonical full split, against pre-T0 popularity and archived retrieval references. Encoding/inference does not retrain a recommender. Preserve a benchmark and independent float64 check. No half-life search, learned full-data fit, candidate router or Test launch follows automatically.
+- Full frozen-control validation completed: recency improves nDCG@10 relative to archived three-seed two-tower retrieval (**+0.000589 [0.000166, 0.000992]**) while reducing Recall@200 (**-0.013883 [-0.015333, -0.012485]**). Strong new-item gains coexist with warm-item losses. Preserve this trade-off; do not select a target-conditioned router or claim causal superiority of recency within the trained model. The full Val population overlaps the pilot users. Full audits and independent rank reconstruction pass; no recommender training or Test evaluation. Details and final artifact pointers are in the evaluation record.
+- The user then chose **diagnose why training loses new-item signal on the sample**. Complete 21 frozen, predeclared projection/pooling/norm probes across saved content seeds 0/1/2, with no retraining. Final-versus-initial projection loses transfer quality under identical recency/cosine pooling; candidate magnitude strongly affects dot-product lists. Native sequence scoring normalisation improves overall quality but does not clearly improve new-item quality, and the sequence model beats uniform pooling in its own dot space. These locate effects in frozen functions, not the causal role of BCE/optimisation/selection. Do not call the transformer alone the cause, interpret lower effective rank as all directions becoming identical, or equate norm effects with popularity bias. The next candidate-normalised training pilot is a proposal requiring a new go-ahead. See the evaluation record and root plan §7 for evidence and exact limits.
+- After that diagnosis the user explicitly approved **matched sample candidate-normalised training**, seeds 0/1/2 after a separate smoke. Normalise only the candidate vectors in BCE, native selection/prediction and shared scoring; leave the query magnitude, history inputs, seed/negative policy, pairs, backbone, selector and original controls unchanged. No temperature parameter. `content_unit` is opt-in with unchanged checkpoint keys. Compare against dot-trained native scoring and its existing frozen cosine probe, with raw recency as a reference. Full-data learned fits and Test remain paused. Root plan §8 records progress.
+- Candidate-normalised sample training completed on MPS. Overall nDCG@10 **0.003978**, compared with original **0.001836** and frozen cosine **0.002575**; new-in-Val **0.002548**, compared with **0.001112 / 0.001396**. Paired intervals support improvements, with all matched-input and output audits passing. Frozen recency still leads by a substantial margin. This is a pipeline intervention including training/selection, not an equal-update loss-only comparison or proof of a geometry-mediated mechanism. Keep all seeds and selected epochs; do not replace canonical full-data controls or start full-data training automatically. Details are in the evaluation record and root plan §8.
+- The user requested **complete all plan.md work** after the status audit identified five unfinished evidence tasks. Those are now complete without training: monthly/history intersections on both populations; exact local ranker failure/rescue/demotion analysis; fusion-versus-both-source CIs using actual 200-item lists; frozen recovery of six raw candidate / twelve ranker-logit archives with exact Val replay; and one consolidated report with twenty fixed examples, composition/concentration, monthly catalogue introductions, costs and audits. Use `results/local_experiments/20261102-plan-completion/report-final/`; root plan §9 records closure. Fusion beats graph but not clearly content. Rankers demote 13 original top-ten targets on average while rescuing 9 attention / 8.67 mean. Source/support/funnel checks pass; 168 tests pass with four legacy skips. Nominate native content versus candidate-normalised content as the later matched full-data pair, retaining frozen recency as reference. No new architecture, full-data fit, changed-pool ranking, serving study or Test launch is implied by closing the local plan.
+
+## 2026-11-01 — Expanded graph findings and architecture proposal review
+
+- Expanded graph target evaluation and the architecture evidence review are complete. The existing authorised experiments below define the next work; this review adopts no new architecture or experiment arm.
+- Expanded target-only evaluation covers 232,904 validation events / 124,416 users. Retain verified graph cutoffs T0=1595800947930 and T1=1628643414042; the task's alternate T0 is inconsistent with the source graph. New intervals use the explicitly requested bootstrap seed 20261027, B=1000; historical tables retain seed 0. Histories are restored from the verified last-50 sequence pointers, with category/store unknowns preserved. See [evaluations.md](evaluations.md#expanded-graph-target-evaluation-1-november-2026) for all estimates and caveats.
+- The graph finds substantial losses on dense co-reviewed targets and opposite-sign outcomes with versus without store continuity within co-reviewed head targets. These associations motivate experiments; they do not establish feature causality, a GNN equivalence or a guaranteed fix.
+- Existing authorised work stays first: matching-MLP policy arms A/B/C/D and the separate ID-dropout p=0.5 control/treatment study, following the acceptance and replication rules in [evaluations.md](evaluations.md#authorised-follow-up-controlled-ablations-not-results). No full-data remedy result exists. Preserve the frozen text seed-0 candidate source and unchanged control feature/checkpoint semantics. Random score/rank mixing is not an implemented or authorised additional arm.
+- [Architecture proposals](architecture_proposals.md) now distinguish hypotheses from evidence. Graph/history inputs, a monotonic score residual, degree-gated IDs and inference-time routing/merging remain open decisions. GNN/LLM GraphRAG and multi-source retrieval merging remain outside current scope. No model code was changed by the architecture review.
+- A target-conditioned oracle uses the true target's group and separate scorers' target ranks. It is a diagnostic, not one deployable ranked list. Draft routing gains/latency claims are unverified; candidate-level mixing needs comparable scores and full-list evaluation. Final Test, index work and full-cascade timing remain paused.
+- Candidate overlays/overtakers still require original candidates and text vectors. `Same-device` remains gated by 100 locked human-reviewed titles at precision ≥0.95; 0/100 are labelled. No locked-set tuning or device features are enabled.
+
+## 2026-10-29 — Supervisor consultation: diagnostic framing and follow-up
+
+The consultation notes motivate popularity/K₁ breakdowns, complementary ranker analysis, secondary metrics and a broader case discussion. They do not establish new architecture results. Duplicate draft entries were consolidated on 1 November.
+
+- Treat forced-positive score inversion as a pipeline diagnostic and hypothesis for controlled retraining. It is a constructed-list distribution mismatch; the existing evidence does not establish leakage from held-out Test into training or isolate force-insertion as the cause of the learned response.
+- All headline ranker results use natural unforced candidate lists. The original popularity-segment K₁ sweep and archived ranker comparison remain the numerical sources; see [evaluations.md](evaluations.md#supervisor-consultation-follow-up-evidence-review-1-november-2026).
+- The 29 October consultation report, oracle CSV and 25-item discussion exist as local draft material. Their target-conditioned router estimates, inconsistent counts/metrics and broad case interpretations need verification. Hit@3/MRR@10 were requested, but no reproducible secondary-metric output was found in this review; do not mark them complete or cite the draft as an independent experiment.
 
 ## 2026-09-28 — Data
 
@@ -436,3 +491,142 @@ The user explicitly authorised a final review, current test run and merging PR #
 The initial suite passed 32 tests and skipped 13 because the separately remapped sample data was absent. Built those existing sample fixtures from cached raw inputs and reused full-data text embeddings by item mapping; this only creates ignored sample files, without changing full-data experiments. Added 16 deterministic DIN checks and five run-safety checks. The final command `.venv/bin/python -m pytest -q -ra` passes **66 tests with no skips**.
 
 Fixed two future rerun hazards before merging: direct grouped/toy ranker training atomically refuses an existing run directory; CLI `--resume` is rejected before loading config/data because exact optimizer/RNG restoration and selected-artifact carryover are incomplete. Other callers of the shared run-directory helper retain its default behaviour. The internal historical fitting function, models, features, labels, metric definitions, saved checkpoints and research results are unchanged. No research retraining or final Test comparison was performed. The forced-positive policy remedy and final pipeline selection remain open research decisions.
+
+## 2026-10-28 — Exploratory runs (Val only; awaiting team sign-off)
+
+Exploratory session at Brandon's request; running log and results in `docs/report_2026-10-28.md`.
+Everything below is **exploratory**: no Test data is loaded, nothing is committed, and no setting is selected.
+
+- **Candidate lists rebuilt locally** (`build_candidates.py`, frozen Two-tower (text) seed 0, `--k-train 200 --k-eval 500
+  --splits ranker_train val`), because the team's copy lived only on one laptop. Training lists match the team's
+  exactly (315,114; 276,321 forced; 38,793 natural). Val natural@200 is 16,673 vs 16,672, and 58 of the natural Val
+  target positions differ by near-tied scores (float differences across machines). Paired comparisons with the
+  team's runs use each run's own saved ranks over the same 232,904 Val instances.
+- **Natural-only ranker training** (`train_population: natural`, opt-in; default unchanged): drop ranker-training
+  lists whose target was force-appended. Filtered after `RankerFeatureBuilder.create`, so vocabularies and score
+  standardisation are identical to the forced-list runs; only the training population changes. This changes the
+  positive/negative definition (§15 rule 1), so it is a candidate remedy for the 2026-10-24 forced-positive issue, not
+  an adopted policy. Configs `configs/ranker/natural_matching_seed{0,1,2}.yaml` (matching-only MLP recipe otherwise).
+- **FAISS index sweep (retrieval half)**: `src/cascade/pipelines/index_sweep.py`, `configs/cascade/index_sweep.yaml`.
+  FAISS 1.15.1 does **not** raise HNSW efSearch to the number of results requested (verified on synthetic and real
+  data). Because filtered search asks for K₁ + buffer = 450 results and §8 requires efSearch ≥ results requested, the
+  sweep uses `efSearch_effective = max(efSearch, 450)` and reports both. **Consequence:** the "efSearch = 200" point
+  runs at 450, so the two HNSW points are effectively 450 vs 800. A genuine efSearch = 200 point needs a team decision
+  (break the §8 rule, or use a smaller buffer for HNSW). Also: with IVF nprobe = 4, the 4 probed cells hold ~436 items
+  (< 450), so many queries end up short of K₁ after filtering; exact FAISS search with the 250 buffer leaves ~0.1% of
+  queries short of K₁ (early-Val instances where many products are not yet released), which §4.6 says should be ~never.
+  Import torch before faiss on macOS (libomp clash segfaults otherwise).
+- **Further runs** (all Val, exploratory; details and numbers in the 28 Oct report):
+  natural-only seeds 0–2 (`results/ranker_mlp/20261028-natural-matching-seed{0,1,2}`); comparison with the forced-list
+  MLP (`results/ranker_compare/20261028-natural-vs-forced-mlp`, new `src/cascade/eval/compare_rankers.py`); K₁ sweep
+  and score diagnostic rerun with natural checkpoints (`configs/cascade/k1_sweep_natural.yaml`,
+  `configs/ranker/diagnostics_natural.yaml`, `configs/ranker/comparison_natural.yaml`; the saved "recommended_k1"
+  is the historical heuristic, not a selection); full index sweep and the natural MLP on its lists
+  (`src/cascade/pipelines/index_rank_eval.py`); §5 latency (`src/cascade/pipelines/latency.py`; first run provisional
+  because the machine was not idle).
+- **`feature_groups: [matching]` (no retrieval-score input)** is now accepted by `ranker_mlp.py` as an opt-in
+  exploratory setting (numeric column 0 dropped; default and saved checkpoints unchanged; test added). Used for
+  `configs/ranker/{natural,forced}_noscore_seed0.yaml`.
+- **Phase 2 runs (exploratory, Val):** no-score MLPs (`20261028-{natural,forced}-noscore-seed0`; forced one stopped
+  after 3 epochs, `STOPPED.md`); opt-in `negative_sampling.exclude_later_reviews` (`later_review_cells` in
+  `ranker_training.py`; flag off reproduces the old sampler exactly, tested) and `20261028-natural-laterneg-seed0`;
+  K_train = 500 lists via the new opt-in `build_candidates.py --out-dir`
+  (`data/processed/candidates/two_tower_text_seed0_ktrain500/`; on the 28 Oct merge `--out-dir` was replaced by the
+  equivalent `--output-name two_tower_text_seed0_ktrain500 --k-train 500`) and MLP/DIN runs on them; DIN on natural lists
+  (`20261028-din-natural-seed{0,1,2}`, `20261028-din-natural-ktrain500-seed{0,1,2}`); K₁ curves via
+  `index_rank_eval.py` (`k1_counts`); final latency `20261028-latency-final`. Full-data correction to the 2026-10-21
+  entry: later same-period reviews appear in 8.9% of all ranker-training lists and 13.1% of natural ones (3.7% was the
+  sample figure). **Summary and team decisions: `docs/report_2026-10-28.md`, "Summary".**
+- Final 28 Oct evaluations: K₁ and index sweeps for the K_train-500 DIN (`results/index_rank_eval/20261028-k1-din-ktrain500`,
+  `.../20261028-index-rank-din-ktrain500`). Its nDCG@10 rises up to K₁ = 500 (+0.00024 vs 200). No K₁ or index is
+  selected (δ not recorded).
+- **Opt-in `loss: listwise_softmax`** in `ranker_training.py` (−log softmax of the positive over each list's sampled
+  columns; default BCE unchanged; test added). H9 runs: `20261028-natural-ktrain500-listwise-seed{0,1}`,
+  `20261028-din-natural-ktrain500-listwise-seed0`. Exploratory.
+
+## 2026-10-28 — Exploratory retrieval/ranking analysis loop (Val only, no training)
+
+Exploratory analyses of saved Val outputs and frozen models; no training, no Test, no K₁/index selection, no change
+to the split, filtering or metrics. New code only (`src/cascade/analysis/{staleness,complements,complements_mechanism,
+last_item}.py` and their tests); results under `results/analysis/`. Progress and numbers:
+`docs/analysis_loop_2026-10-28.md`; measured findings are summarised in `docs/evaluations.md` (exploratory section).
+- `20261028-staleness` (saved ranks) and `20261028-staleness-r2` (adds an inference-only re-score that reproduces the
+  saved ranks, plus a "frozen pool" counterfactual removing Val-released products as competitors): Val Recall@200
+  by month and product era.
+- `20261028-staleness-popularity`: warm targets by review count in the retriever-training period, item-cluster
+  bootstrap.
+- `20261028-complements`: target vs last history product (leaf × store), deep-miss composition, ranking given
+  retrieval by class. `20261028-complements-mechanism-r2`: text/retriever cosine to the last product
+  (`20261028-complements-mechanism` superseded: a re-weighting table dropped empty cells; marked `SUPERSEDED.txt`).
+- `20261028-last-item`: untrained last-product and mean-pool scorers through the shared harness (Val only); a
+  5,000-instance re-score with the frozen scorer reproduces the saved ranks first. These are analysis probes, not
+  retriever variants and not candidates for selection.
+- Added later in the loop: `20261028-logq-serving` (frozen retriever re-scored with u·v − β·τ·log q, β ∈ {0, 0.25,
+  0.5, 1}, two conventions for unseen products; β = 0 reproduces the saved ranks; probe, no β selected) and
+  `20261028-permutation-importance{,-r2}` (permutation importance for 12 frozen ranker checkpoints on natural Val
+  lists; the analysis loader uses a 1e-6 tolerance on the stored score standardisation because the forced
+  checkpoints differ from the current builder by 2e-7 relative). Follow-up 3c (`20261028-debiased-lists`,
+  `results/index_rank_eval/20261028-debiased-rank-*`, config `configs/analysis/debiased_rank_eval.yaml`) scores
+  the natural rankers on debiased candidate lists; probe only, not a retrieval change.
+
+## 2026-10-29 — Cluster scripts for the ranker policy study
+
+Added `scripts/slurm/policy_study.sbatch` (one stage per job; optional `SEEDS` so replication seeds 1 and 2 run as
+separate jobs; 10 h limit, since one 8-fit replication job could exceed the 6 h limit of `targeted_study.sbatch`)
+and `scripts/slurm/submit_policy_study.sh` (`check` → `development` → `pilot` → `replication` → `report`; `check`
+verifies inputs and the frozen candidate hashes before anything is queued). No change to the study protocol,
+arms, seeds or pass rule in `docs/evaluations.md`; `targeted_study.sbatch` is unchanged. The study needs the
+original frozen candidate lists; the locally rebuilt `two_tower_text_seed0` lists fail the hash check (verified).
+- **Opt-in regenerated-candidate reference** (same day). The original frozen candidate files are unavailable to
+  Brandon (separate cluster accounts), so `ranker_policy_study.py` gained `--candidate-reference <json>` and
+  `--write-candidate-reference <out>`. With a reference, the runner checks the candidate hashes (meta, val and
+  ranker_train) and the full-training score mean/std against that record instead of the frozen 2026-10-25 study;
+  cardinalities are still checked against the reference checkpoint, and the record is copied into `study.json`
+  (`candidate_source.kind = "regenerated"`). Default (no flag) is unchanged and still refuses the rebuilt lists.
+  Record for the locally rebuilt lists: `configs/ranker/policy_candidate_reference_rebuilt.json` (score_std differs
+  from the original checkpoint by 1.5e-8, which is what tripped the 1e-8 check). Validity: all four arms are trained
+  fresh on identical lists, so A–D comparisons are unaffected; the new arm A is not byte-comparable with the
+  historical forced MLP. Verified with a local development-stage run
+  (`results/ranker_policy/policy-development-localcheck_sample`, not reportable) and its report; tests 171 passed.
+  To be confirmed with Qing Rong (owner of the protocol).
+- **Cluster scripts removed** (same day): the policy study will run on Brandon's laptop instead, so
+  `scripts/slurm/policy_study.sbatch` and `scripts/slurm/submit_policy_study.sh` were deleted. The opt-in
+  `--candidate-reference` option and `configs/ranker/policy_candidate_reference_rebuilt.json` stay: the laptop's
+  rebuilt lists still need them.
+- **Figures and a saved miss analysis** (same day): `src/cascade/analysis/retrieval_misses.py` →
+  `results/analysis/20261029-retrieval-misses` (Val target rank buckets and the share of targets without an ID-era
+  history; previously computed ad hoc in chat) and `src/cascade/analysis/plot_findings.py` →
+  `results/figures/20261029-findings/` (six figures, each with a CSV of the plotted values and `sources.json`). The
+  training-positive shares in fig. 4 are recomputed from `ranker_train.npz` with the 28 Oct report's H6 definitions
+  (new = first interaction ≥ t_ranker_train) and reproduce 83.9% / 43.1% popular exactly. Summary added to
+  `docs/evaluations.md`.
+- **Policy study run on the laptop** (same day): pilot `results/ranker_policy/policy-pilot-20261029` and
+  replication `results/ranker_policy/policy-replication-20261029` (MPS, `--candidate-reference` as above), report
+  `results/targeted_study/policy-report-20261029`. Pre-registered rule applied unchanged: no fix qualifies (C and D
+  lose new-in-period nDCG vs A), so A remains the reference. Results in `docs/evaluations.md`.
+- **Policy-study figure** (same day): `plot_findings.py` gained `fig_policy_study` and a `--figures` selector
+  (default still draws all); `results/figures/20261029-policy-study/fig7_policy_study.png` (+ CSV, `sources.json`),
+  drawn only from `results/targeted_study/policy-report-20261029`.
+
+## 2026-11-03 — Complete the independent graph/latent ranking sample study
+
+The user authorised extending root `plan.md` with graph/latent ranking, chose new-item generalisation, one learned graph arm and chronological tuning, then instructed implementation. Execution paused on request after the 21 fits finished; the subsequent “continue work” authorised the scheduled validation/reporting. This decision applies to the isolated sample study, not canonical full-data integration.
+
+- Preserve the frozen MiniLM/90-day-recency K200 pool, natural positives, pre-T0 banks and prefix-fitted preprocessing. R1–R7 share initial parameters and sampling plans within seeds 0/1/2. Tune on the chronological B holdout with epoch 0 eligible; lock every selected epoch/weight before one outer-Val report.
+- Three fixed BPR64 fits, PCA-text64, all seven ranker arms and their scheduled reporting completed. Each ranker fit trained two epochs but selected epoch 0. Every selected Val logit/rank/top ten equals frozen retrieval: nDCG@10 **0.012489**, Recall@10 **0.022309**, Recall@200 **0.100990**. Retain all failed training curves and identical outcomes; do not pick a different checkpoint on outer Val to obtain a gain.
+- The outcome limits this short BCE recipe. It does not isolate an objective/scale cause or establish that graph/latent features lack useful information. Nonselected trained weights/logits were not retained. A fresh matched R1 objective pilot with inner-only diagnostics is proposed in §10, not executed or silently added to the completed study.
+- Source-of-truth findings are in `docs/evaluations.md`; local evidence is `results/local_experiments/20261102-graph-latent-ranking/report/`. Keep bulk weights/arrays/reports local/ignored. Full-data training, changed-pool replication, canonical integration, serving timing and final Test remain separate decisions.
+
+## 2026-11-03 — Continue with a matched objective ablation and conditional feature replication
+
+The user explicitly authorised continued ablation/evaluation and README/Markdown updates. Registered root plan §11 before fitting: fresh R1 BCE versus mean pairwise softplus of negative-minus-positive scores, same candidates/sampling/initial states/selector, seeds 0/1/2, and full retention of inner checkpoints/logits/probe/gradient diagnostics. A predeclared inner-only gate required a higher mean selected nDCG, at least two improving seeds and no mean post-T0-target nDCG loss before expanding to pairwise R2–R7. The gate passed on three seeds and was independently replayed before any new outer predictions; all 24 final epochs/weights were locked before outer evaluation.
+
+All three BCE curves exactly reproduce Phase 2 and select epoch zero. Pairwise R1 reaches Val nDCG@10 **0.015566** versus retrieval/BCE **0.012489**; R2 with graph/history scalars reaches **0.018174**. Both objective and scalar-family differences have positive exploratory paired-user intervals. R2 combines co-review and category/store-history information; no individual relation is isolated. Extra BPR over R2 is inconclusive; neighbour R7 loses to self-only R6 overall/new. Warm R2 remains slightly below retrieval in point estimate. A common score shift alone cannot change ranking, and the objective contrast does not prove a calibration mechanism.
+
+Keep all outcomes and retained trained epochs, the unchanged parent studies and teammates' workflows. Update README, CLAUDE, plan, proposals and the evaluation record, sharing one compact checked diagnostic figure; bulk local outputs stay ignored. Final suite **207 passed / 4 legacy skips**; all real score/probe/gate/weight replays and completion hashes pass. No full-data fit, candidate-pool change, canonical integration, serving study or Test evaluation. A later category/store-versus-co-review decomposition should register its own matched arms before execution rather than extending this completed study after seeing Val.
+
+## 2026-11-03 — Finish the graph study and stop experiment execution
+
+The user approved the fixed four-arm metadata/co-review decomposition and frozen encoder diagnosis, explicitly requiring a pause after completion. Registered root plan §12 before fitting; all twelve full fits and two technical smokes completed. G0/GMC reproduce the old controls, including final logits; all weights were locked before outer evaluation. GC improves overall/new/warm versus G0, GC beats GM overall/new, and extra metadata over GC plus the factorial interaction remain inconclusive. Existing matching/support features remain present; no individual co-review feature or causal mechanism is isolated.
+
+The frozen R6/R7 diagnosis used twelve saved epoch2/selected checkpoints over all prefix queries and reused tuning/Val scores. Stronger inner neighbour scores coexist with poorer final-refit Val scores; different weights/populations prevent identifying the cause. Preserve all checkpoint, margin, residual, geometry and gradient evidence for the deeper assessment. Final suite **226 passed / 4 legacy skips** and completion/independent audits pass. Update the project records and checked comparison figure, commit, then **stop experiment execution**. No new GNN, automatic follow-up fit, temporal replication, full-data training or Test evaluation is authorised by this completion handoff.

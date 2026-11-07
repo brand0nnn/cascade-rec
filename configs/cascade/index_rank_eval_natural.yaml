@@ -1,0 +1,11 @@
+# Exploratory (2026-10-28): natural-only MLP (frozen, seeds 0-2) on the index sweep's filtered top-200 Val lists.
+candidate_dir: data/processed/candidates/two_tower_text_seed0   # ranker_train lists: feature tables and score normalisation
+data_config: configs/data.yaml
+index_lists_dir: data/processed/candidates/index_sweep/20261028-index-sweep
+index_configs: [exact, hnsw_ef200, hnsw_ef800, ivf_nprobe4, ivf_nprobe32]   # first = reference
+ranker_runs:
+  - results/ranker_mlp/20261028-natural-matching-seed0
+  - results/ranker_mlp/20261028-natural-matching-seed1
+  - results/ranker_mlp/20261028-natural-matching-seed2
+score_batch_pairs: 8000
+bootstrap_resamples: 1000

@@ -1,0 +1,12 @@
+{
+  "study_sha256": "b24f83aab3e2ac72fd052ccc21581aec11f8753ba7ae17d3f3c5c22612794d43",
+  "selection_lock_sha256": "4934141a2eeaf978dac65cf62884be4d4852f476c07765e63bf24115d68a219a",
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "report.md": "5c7debb5e934da1c6dd1ca8448ee5117c694cdcb9533244363f193e772decfa4",
+    "paired_differences.csv": "7302cb46675a266915a7bb907d168abb762cc610241116d08df9039bdae20a3a",
+    "metrics.csv": "19732f6a3bc78ac053d62131baef23165c018eda88f8fbe1d42cc30277e14691",
+    "fits.csv": "d0cb106ce435a0e2928fc9b10be50071f6c065894c001304623c3877d234965a",
+    "failure_funnel.csv": "d1c34f999eaaff5df7c75e8a7aef994f5d81690f05ac216a384b67fc4ff8052e"
+  }
+}

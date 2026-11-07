@@ -1,0 +1,15 @@
+{
+  "status": "pass",
+  "source_sha256": "1ce3f198bb5d657d6c36652b3137f4913b2c8531c60da167aa9d5c3849af6776",
+  "graph_completion_sha256": "5307f6b2c801ab1389ff4f7e259963ae64c65c912461a9722f0f60a1e240dc16",
+  "protocol_sha256": "fcb973268985865adfe617bb75b705d3dcb0e5af177e78cd42a6452476961e4c",
+  "interpretation": "exploratory follow-up after Test exposure; no retraining or narrative report",
+  "output_sha256": {
+    "analysis_source.py": "1ce3f198bb5d657d6c36652b3137f4913b2c8531c60da167aa9d5c3849af6776",
+    "target_support.csv": "80050689fe9643bd2d70b89821923ed39aa95dcdf8b4da266fa1476389bcc809",
+    "paired_differences.csv": "e9eded772c0efd172140f5ad737fab44c3da0d5ac1ffac87d40bae2a2148d040",
+    "metrics.csv": "95cbd268dba5c4ff609d9a0cb406b6bda59c57fa60a86be74657c1ecd8c80e98",
+    "funnels.csv": "a87c24aa77ca12a82bbd22811efca373d738a13081b44e6eeef75854076c4d96",
+    "seed_metrics.csv": "65a76a48bdcf55cad958a8b0a793fad0a06f5da976f59c6d1f783706ad7297a2"
+  }
+}

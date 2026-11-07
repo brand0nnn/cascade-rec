@@ -1,0 +1,28 @@
+# Exploratory run (2026-10-28, H4): natural_matching seed 0 with later same-period reviews excluded from sampled negatives.
+model: mlp
+history_length: 50
+item_text_dim: 384
+hidden_dims:
+- 256
+- 128
+- 64
+dropout: 0.1
+loss: binary_cross_entropy
+optimizer: adam
+learning_rate: 0.001
+batch_size: 2048
+max_epochs: 30
+early_stopping:
+  metric: ndcg@10_macro
+  patience: 3
+negative_sampling:
+  negatives_per_list: 50
+  strategy: uniform_without_replacement
+  exclude_later_reviews: true  # user's later reviews in (t, T1) are never sampled as negatives; labels unchanged
+seed: 0
+experiment: natural_laterneg
+feature_groups:
+- retrieval
+- matching
+k1: 200
+train_population: natural  # train only on lists where retrieval found the target (no forced positives)

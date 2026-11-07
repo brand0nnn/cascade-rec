@@ -1,0 +1,35 @@
+# Exploratory (2026-10-28): final idle-machine rerun of the latency protocol, MLP natural + DIN natural (seed 0).
+# §5 latency protocol: end-to-end single-query CPU latency of the cascade on Val (user tower, FAISS search + §4.6
+# filtering, ranker scoring of K1 candidates, total). Run on an IDLE machine; the load average is recorded.
+# Run: .venv/bin/python -m cascade.pipelines.latency --config configs/cascade/latency.yaml --run-id <id> [--sample]
+retriever_run: results/retriever/two_tower_text/seed0   # frozen retriever (2026-10-21)
+data_config: configs/data.yaml
+split: val                                               # Val only; Test is never loaded by this pipeline
+candidate_dir: data/processed/candidates/two_tower_text_seed0   # ranker feature contract + exact reference lists
+buffer: 250                                              # §4.6: FAISS is asked for K1 + buffer, then filtered to K1
+# Index configs: must match configs/cascade/index_sweep.yaml (checked at start-up).
+index_sweep_config: configs/cascade/index_sweep.yaml
+ef_search_policy: at_least_requested                     # efSearch used = max(efSearch, K1 + buffer), as in the sweep
+hnsw: {m: 32, ef_construction: 200}
+ivf: {nlist: 1024, seed: 0}
+indexes:
+  - {name: exact, kind: exact}
+  - {name: hnsw_ef200, kind: hnsw, ef_search: 200}
+  - {name: hnsw_ef800, kind: hnsw, ef_search: 800}
+  - {name: ivf_nprobe4, kind: ivf, nprobe: 4}
+  - {name: ivf_nprobe32, kind: ivf, nprobe: 32}
+k1:
+  exact: [50, 100, 200, 500]                             # RQ2 sweep 1
+  approximate: [200]                                     # RQ2 sweep 2
+ranker_runs:                                             # frozen checkpoints (MLP or DIN); one job per index x K1 x run
+  - results/ranker_mlp/20261028-natural-matching-seed0
+  - results/ranker_din/20261028-din-natural-seed0
+threads: 1
+queries: 1000
+warmup_queries: 50
+random_seed: 0                                           # instance sample and job order
+development:                                             # --sample: fixed Val user subset of the full data; timings invalid
+  user_fraction: 0.02
+  random_seed: 0
+  queries: 20
+  warmup_queries: 5

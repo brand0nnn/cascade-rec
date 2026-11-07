@@ -1,0 +1,1017 @@
+{
+  "scope": "validation only",
+  "split": "val",
+  "development_sample": true,
+  "retriever_run": "results/retriever/two_tower_text/seed0",
+  "retriever_seed": 0,
+  "candidate_dir": "data/processed/candidates/two_tower_text_seed0",
+  "rankers": {
+    "results/ranker_mlp/20261028-natural-matching-seed0": {
+      "model": "mlp",
+      "seed": 0,
+      "feature_groups": [
+        "retrieval",
+        "matching"
+      ],
+      "best_epoch": 3,
+      "n_parameters": 3649185
+    }
+  },
+  "n_val_instances": 4775,
+  "protocol": {
+    "n_queries": 20,
+    "n_warmup": 5,
+    "random_seed": 0,
+    "buffer": 250,
+    "query_unit": "one Val instance through the full cascade, issued one at a time",
+    "final_list": 10,
+    "phases": [
+      "user_history",
+      "user_forward",
+      "faiss_search",
+      "filter",
+      "rank_prepare",
+      "rank_score",
+      "rank_order"
+    ],
+    "components": {
+      "user_tower": [
+        "user_history",
+        "user_forward"
+      ],
+      "retrieval": [
+        "faiss_search",
+        "filter"
+      ],
+      "ranker": [
+        "rank_prepare",
+        "rank_score",
+        "rank_order"
+      ],
+      "total": [
+        "user_history",
+        "user_forward",
+        "faiss_search",
+        "filter",
+        "rank_prepare",
+        "rank_score",
+        "rank_order"
+      ]
+    },
+    "excludes": [
+      "disk I/O",
+      "checkpoint loading",
+      "index building (see index_builds)",
+      "one-time feature-table creation"
+    ]
+  },
+  "index_builds": {
+    "exact": {
+      "build_seconds": 0.005262166989268735,
+      "n_items": 111480
+    },
+    "hnsw": {
+      "build_seconds": 21.04780387500068,
+      "n_items": 111480
+    },
+    "ivf": {
+      "build_seconds": 2.283741834020475,
+      "n_items": 111480
+    }
+  },
+  "job_order": [
+    "exact_k200__20261028-natural-matching-seed0",
+    "hnsw_ef200_k200__20261028-natural-matching-seed0",
+    "exact_k500__20261028-natural-matching-seed0",
+    "ivf_nprobe4_k200__20261028-natural-matching-seed0",
+    "hnsw_ef800_k200__20261028-natural-matching-seed0",
+    "exact_k50__20261028-natural-matching-seed0",
+    "exact_k100__20261028-natural-matching-seed0",
+    "ivf_nprobe32_k200__20261028-natural-matching-seed0"
+  ],
+  "jobs": {
+    "exact_k200__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 200,
+      "n_requested": 450,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.0234585,
+            "p95": 0.028752100000000003,
+            "mean": 0.02330835,
+            "min": 0.017625,
+            "max": 0.028792,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.7234585,
+            "p95": 0.8978892500000002,
+            "mean": 0.76003545,
+            "min": 0.659833,
+            "max": 1.191083,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 1.2079995000000001,
+            "p95": 1.3274940500000003,
+            "mean": 1.23361875,
+            "min": 1.119333,
+            "max": 1.713708,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.0669585,
+            "p95": 0.09994970000000003,
+            "mean": 0.0728,
+            "min": 0.054042,
+            "max": 0.137792,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 1.3041455,
+            "p95": 1.4558518,
+            "mean": 1.3106874999999998,
+            "min": 1.070625,
+            "max": 1.456209,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.9349375,
+            "p95": 1.0927666500000002,
+            "mean": 0.9497665999999999,
+            "min": 0.840125,
+            "max": 1.107333,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.0164585,
+            "p95": 0.019052400000000008,
+            "mean": 0.01732295,
+            "min": 0.015,
+            "max": 0.031125,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.74775,
+            "p95": 0.9201899000000001,
+            "mean": 0.7833438,
+            "min": 0.677625,
+            "max": 1.2198749999999998,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 1.2809789999999999,
+            "p95": 1.3950541500000004,
+            "mean": 1.30641875,
+            "min": 1.1855419999999999,
+            "max": 1.778458,
+            "n": 20
+          },
+          "ranker": {
+            "median": 2.2638335,
+            "p95": 2.5405205000000004,
+            "mean": 2.27777705,
+            "min": 1.982416,
+            "max": 2.5607080000000004,
+            "n": 20
+          },
+          "total": {
+            "median": 4.3427505,
+            "p95": 4.803693450000001,
+            "mean": 4.3675396,
+            "min": 3.902666,
+            "max": 5.086042,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 200.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 0.99975,
+        "target_in_candidates": 0.2,
+        "target_in_top10": 0.05
+      }
+    },
+    "hnsw_ef200_k200__20261028-natural-matching-seed0": {
+      "index": "hnsw_ef200",
+      "kind": "hnsw",
+      "k1": 200,
+      "n_requested": 450,
+      "ef_search_configured": 200,
+      "ef_search_effective": 450,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.0101665,
+            "p95": 0.02036185,
+            "mean": 0.011749950000000002,
+            "min": 0.008792,
+            "max": 0.021708,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.732479,
+            "p95": 0.9445649000000002,
+            "mean": 0.76380415,
+            "min": 0.633542,
+            "max": 1.132625,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 0.7905835000000001,
+            "p95": 1.067375,
+            "mean": 0.8165793000000001,
+            "min": 0.667875,
+            "max": 1.0745,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.0613955,
+            "p95": 0.1057396,
+            "mean": 0.06852485,
+            "min": 0.046958,
+            "max": 0.112667,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 1.2558955,
+            "p95": 1.4809750000000002,
+            "mean": 1.2649312499999998,
+            "min": 0.979375,
+            "max": 1.839125,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.978417,
+            "p95": 1.2500083499999999,
+            "mean": 1.01479805,
+            "min": 0.827375,
+            "max": 1.300042,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.016583,
+            "p95": 0.0268649,
+            "mean": 0.018579099999999998,
+            "min": 0.015166,
+            "max": 0.02825,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.7434375,
+            "p95": 0.9561479000000002,
+            "mean": 0.7755541,
+            "min": 0.642625,
+            "max": 1.146583,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 0.8515005,
+            "p95": 1.14791875,
+            "mean": 0.8851041500000001,
+            "min": 0.734375,
+            "max": 1.1535,
+            "n": 20
+          },
+          "ranker": {
+            "median": 2.247125,
+            "p95": 2.71788895,
+            "mean": 2.2983084,
+            "min": 1.890959,
+            "max": 3.02375,
+            "n": 20
+          },
+          "total": {
+            "median": 3.8446665,
+            "p95": 4.50761395,
+            "mean": 3.95896665,
+            "min": 3.342,
+            "max": 4.604,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 200.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 0.9315,
+        "target_in_candidates": 0.2,
+        "target_in_top10": 0.05
+      }
+    },
+    "exact_k500__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 500,
+      "n_requested": 750,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.013,
+            "p95": 0.017585100000000003,
+            "mean": 0.013077100000000003,
+            "min": 0.009167,
+            "max": 0.017625,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.7296045,
+            "p95": 1.0618360500000001,
+            "mean": 0.819623,
+            "min": 0.671917,
+            "max": 1.18775,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 1.457979,
+            "p95": 1.5456833,
+            "mean": 1.4481769999999998,
+            "min": 1.322166,
+            "max": 1.599041,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.0798545,
+            "p95": 0.10647945000000003,
+            "mean": 0.0842042,
+            "min": 0.06675,
+            "max": 0.148041,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 2.4704375,
+            "p95": 2.7493896,
+            "mean": 2.4214583000000003,
+            "min": 1.998125,
+            "max": 2.882667,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 2.2846460000000004,
+            "p95": 2.7302601000000006,
+            "mean": 2.3814333,
+            "min": 2.038583,
+            "max": 3.854625,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.0423125,
+            "p95": 0.04628335,
+            "mean": 0.04179595,
+            "min": 0.037916,
+            "max": 0.046917,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.7418754999999999,
+            "p95": 1.07907565,
+            "mean": 0.8327000999999999,
+            "min": 0.6813750000000001,
+            "max": 1.197667,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 1.5393124999999999,
+            "p95": 1.6259089500000001,
+            "mean": 1.5323812,
+            "min": 1.397291,
+            "max": 1.696208,
+            "n": 20
+          },
+          "ranker": {
+            "median": 4.8470625,
+            "p95": 5.634975,
+            "mean": 4.844687550000001,
+            "min": 4.0747919999999995,
+            "max": 6.320875,
+            "n": 20
+          },
+          "total": {
+            "median": 7.176875,
+            "p95": 8.1895872,
+            "mean": 7.209768849999999,
+            "min": 6.322209,
+            "max": 8.648042,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 498.55,
+        "short_of_k1": 2,
+        "mean_overlap_with_reference": 0.9971,
+        "target_in_candidates": 0.25,
+        "target_in_top10": 0.05
+      }
+    },
+    "ivf_nprobe4_k200__20261028-natural-matching-seed0": {
+      "index": "ivf_nprobe4",
+      "kind": "ivf",
+      "k1": 200,
+      "n_requested": 450,
+      "nlist": 1024,
+      "nprobe": 4,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.009166500000000001,
+            "p95": 0.012537200000000002,
+            "mean": 0.0094333,
+            "min": 0.007667,
+            "max": 0.014042,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.625729,
+            "p95": 0.7088521,
+            "mean": 0.64042285,
+            "min": 0.586333,
+            "max": 0.717917,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 0.0789375,
+            "p95": 0.104,
+            "mean": 0.0812918,
+            "min": 0.056625,
+            "max": 0.111125,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.0482085,
+            "p95": 0.06987230000000003,
+            "mean": 0.051606200000000005,
+            "min": 0.040708,
+            "max": 0.092792,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 1.0508125,
+            "p95": 1.3205913500000002,
+            "mean": 1.0978145,
+            "min": 0.892541,
+            "max": 1.703125,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.8611880000000001,
+            "p95": 1.0681167,
+            "mean": 0.8904668000000001,
+            "min": 0.697209,
+            "max": 1.129709,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.0147505,
+            "p95": 0.017379150000000003,
+            "mean": 0.015120850000000002,
+            "min": 0.012625,
+            "max": 0.017458,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.6345415000000001,
+            "p95": 0.7226627999999999,
+            "mean": 0.6498561500000001,
+            "min": 0.594333,
+            "max": 0.727333,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 0.1250205,
+            "p95": 0.1668045,
+            "mean": 0.132898,
+            "min": 0.10045899999999999,
+            "max": 0.167042,
+            "n": 20
+          },
+          "ranker": {
+            "median": 1.9553125000000002,
+            "p95": 2.3441601,
+            "mean": 2.00340215,
+            "min": 1.602708,
+            "max": 2.7137499999999997,
+            "n": 20
+          },
+          "total": {
+            "median": 2.7300625000000003,
+            "p95": 3.1732723,
+            "mean": 2.7861562999999996,
+            "min": 2.336083,
+            "max": 3.514917,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 196.75,
+        "short_of_k1": 3,
+        "mean_overlap_with_reference": 0.35625,
+        "target_in_candidates": 0.15,
+        "target_in_top10": 0.05
+      }
+    },
+    "hnsw_ef800_k200__20261028-natural-matching-seed0": {
+      "index": "hnsw_ef800",
+      "kind": "hnsw",
+      "k1": 200,
+      "n_requested": 450,
+      "ef_search_configured": 800,
+      "ef_search_effective": 800,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.009291500000000001,
+            "p95": 0.010245850000000003,
+            "mean": 0.009321,
+            "min": 0.007958,
+            "max": 0.012542,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.685521,
+            "p95": 0.7903934000000001,
+            "mean": 0.6953581,
+            "min": 0.60625,
+            "max": 0.915041,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 1.3766455,
+            "p95": 1.58100065,
+            "mean": 1.3763563499999998,
+            "min": 1.167375,
+            "max": 1.657792,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.0527505,
+            "p95": 0.06590625000000003,
+            "mean": 0.05550624999999999,
+            "min": 0.044084,
+            "max": 0.106875,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 1.0918335,
+            "p95": 1.2786586500000001,
+            "mean": 1.12055015,
+            "min": 1.001709,
+            "max": 1.309375,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.919937,
+            "p95": 1.0609524000000004,
+            "mean": 0.9403998,
+            "min": 0.799583,
+            "max": 1.546125,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.015542,
+            "p95": 0.017368750000000002,
+            "mean": 0.015866699999999997,
+            "min": 0.014416,
+            "max": 0.019625,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.6943545,
+            "p95": 0.7991354000000002,
+            "mean": 0.7046791,
+            "min": 0.614208,
+            "max": 0.927583,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 1.429937,
+            "p95": 1.68551315,
+            "mean": 1.4318626,
+            "min": 1.211459,
+            "max": 1.717417,
+            "n": 20
+          },
+          "ranker": {
+            "median": 2.0662494999999996,
+            "p95": 2.3170538499999997,
+            "mean": 2.0768166499999996,
+            "min": 1.8355,
+            "max": 2.670375,
+            "n": 20
+          },
+          "total": {
+            "median": 4.142875,
+            "p95": 4.67048095,
+            "mean": 4.213358349999999,
+            "min": 3.809334,
+            "max": 4.749292,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 200.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 0.96775,
+        "target_in_candidates": 0.2,
+        "target_in_top10": 0.05
+      }
+    },
+    "exact_k50__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 50,
+      "n_requested": 300,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.0091255,
+            "p95": 0.01305415,
+            "mean": 0.009783450000000003,
+            "min": 0.008084,
+            "max": 0.014083,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.789167,
+            "p95": 0.9942851000000001,
+            "mean": 0.81807495,
+            "min": 0.685458,
+            "max": 1.10025,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 1.103104,
+            "p95": 1.3112041500000002,
+            "mean": 1.1479604499999998,
+            "min": 1.033375,
+            "max": 1.455208,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.06743750000000001,
+            "p95": 0.14303125,
+            "mean": 0.0791395,
+            "min": 0.050416,
+            "max": 0.153125,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 0.7938125,
+            "p95": 0.9904024,
+            "mean": 0.8123834499999999,
+            "min": 0.696625,
+            "max": 1.021,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.512479,
+            "p95": 0.61617645,
+            "mean": 0.5059437,
+            "min": 0.410583,
+            "max": 0.63775,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.0074164999999999995,
+            "p95": 0.010443750000000003,
+            "mean": 0.007785449999999999,
+            "min": 0.005917,
+            "max": 0.014125,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.799917,
+            "p95": 1.0036979000000001,
+            "mean": 0.8278583999999999,
+            "min": 0.693625,
+            "max": 1.114333,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 1.180458,
+            "p95": 1.4495791500000001,
+            "mean": 1.22709995,
+            "min": 1.095041,
+            "max": 1.515208,
+            "n": 20
+          },
+          "ranker": {
+            "median": 1.323667,
+            "p95": 1.6148749999999998,
+            "mean": 1.3261125999999996,
+            "min": 1.1382500000000002,
+            "max": 1.667125,
+            "n": 20
+          },
+          "total": {
+            "median": 3.2848334999999995,
+            "p95": 3.9669767500000006,
+            "mean": 3.3810709500000002,
+            "min": 2.981209,
+            "max": 4.1145830000000005,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 50.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 1.0,
+        "target_in_candidates": 0.05,
+        "target_in_top10": 0.0
+      }
+    },
+    "exact_k100__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 100,
+      "n_requested": 350,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.0098955,
+            "p95": 0.013093100000000002,
+            "mean": 0.0104645,
+            "min": 0.008667,
+            "max": 0.014083,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.6803125000000001,
+            "p95": 0.8589441,
+            "mean": 0.7014125999999998,
+            "min": 0.637667,
+            "max": 0.883209,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 1.1433125,
+            "p95": 1.2114285,
+            "mean": 1.15404375,
+            "min": 1.086584,
+            "max": 1.389791,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.076104,
+            "p95": 0.1222104,
+            "mean": 0.07866885,
+            "min": 0.052375,
+            "max": 0.123833,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 0.9754579999999999,
+            "p95": 1.22742705,
+            "mean": 0.9918394499999998,
+            "min": 0.830291,
+            "max": 1.292541,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.6049165,
+            "p95": 0.7459868500000003,
+            "mean": 0.6244479000000001,
+            "min": 0.51325,
+            "max": 1.108333,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.010042,
+            "p95": 0.012479150000000001,
+            "mean": 0.010391599999999999,
+            "min": 0.008875,
+            "max": 0.014458,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.6897085000000001,
+            "p95": 0.8727917,
+            "mean": 0.7118771000000002,
+            "min": 0.649209,
+            "max": 0.892584,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 1.2312919999999998,
+            "p95": 1.2886827,
+            "mean": 1.2327126000000004,
+            "min": 1.150875,
+            "max": 1.457625,
+            "n": 20
+          },
+          "ranker": {
+            "median": 1.5975205,
+            "p95": 1.9208972500000001,
+            "mean": 1.62667895,
+            "min": 1.3942080000000001,
+            "max": 2.1081659999999998,
+            "n": 20
+          },
+          "total": {
+            "median": 3.5437494999999997,
+            "p95": 3.8847812499999996,
+            "mean": 3.5712686499999995,
+            "min": 3.233417,
+            "max": 4.111,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 100.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 1.0,
+        "target_in_candidates": 0.05,
+        "target_in_top10": 0.0
+      }
+    },
+    "ivf_nprobe32_k200__20261028-natural-matching-seed0": {
+      "index": "ivf_nprobe32",
+      "kind": "ivf",
+      "k1": 200,
+      "n_requested": 450,
+      "nlist": 1024,
+      "nprobe": 32,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.0115625,
+            "p95": 0.016452400000000002,
+            "mean": 0.01217915,
+            "min": 0.008459,
+            "max": 0.017125,
+            "n": 20
+          },
+          "user_forward": {
+            "median": 0.7696455,
+            "p95": 0.9684607500000001,
+            "mean": 0.7714646000000001,
+            "min": 0.602,
+            "max": 1.156917,
+            "n": 20
+          },
+          "faiss_search": {
+            "median": 0.1938335,
+            "p95": 0.23778335,
+            "mean": 0.19869165,
+            "min": 0.151875,
+            "max": 0.243167,
+            "n": 20
+          },
+          "filter": {
+            "median": 0.0664995,
+            "p95": 0.10160835000000001,
+            "mean": 0.07055199999999999,
+            "min": 0.046375,
+            "max": 0.117917,
+            "n": 20
+          },
+          "rank_prepare": {
+            "median": 1.2701875,
+            "p95": 1.5260771,
+            "mean": 1.2413917,
+            "min": 0.883833,
+            "max": 1.646292,
+            "n": 20
+          },
+          "rank_score": {
+            "median": 0.9955215,
+            "p95": 1.32168815,
+            "mean": 1.02953965,
+            "min": 0.780417,
+            "max": 1.432917,
+            "n": 20
+          },
+          "rank_order": {
+            "median": 0.0198745,
+            "p95": 0.023817,
+            "mean": 0.0194187,
+            "min": 0.015,
+            "max": 0.024292,
+            "n": 20
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.7818125,
+            "p95": 0.9835687500000002,
+            "mean": 0.78364375,
+            "min": 0.610541,
+            "max": 1.16775,
+            "n": 20
+          },
+          "retrieval": {
+            "median": 0.278396,
+            "p95": 0.33459970000000006,
+            "mean": 0.26924365,
+            "min": 0.199917,
+            "max": 0.337292,
+            "n": 20
+          },
+          "ranker": {
+            "median": 2.2965204999999997,
+            "p95": 2.81300415,
+            "mean": 2.2903500500000002,
+            "min": 1.67925,
+            "max": 2.8225830000000003,
+            "n": 20
+          },
+          "total": {
+            "median": 3.338583,
+            "p95": 3.9309000000000003,
+            "mean": 3.3432374499999993,
+            "min": 2.4897080000000003,
+            "max": 4.233,
+            "n": 20
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 200.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 0.7790000000000001,
+        "target_in_candidates": 0.1,
+        "target_in_top10": 0.05
+      }
+    }
+  },
+  "runtime": {
+    "cpu": "Apple M2 Pro",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.4",
+    "torch_version": "2.5.1",
+    "faiss_version": "1.15.1",
+    "numpy_version": "1.26.4",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "faiss_threads": 1,
+    "threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "filepath": "/Users/brandonkang/nus/cp4285/project/.venv/lib/python3.11/site-packages/torch/lib/libomp.dylib",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libopenblas",
+        "filepath": "/Users/brandonkang/nus/cp4285/project/.venv/lib/python3.11/site-packages/numpy/.dylibs/libopenblas64_.0.dylib",
+        "version": "0.3.23.dev",
+        "threading_layer": "pthreads",
+        "architecture": "armv8"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "filepath": "/Users/brandonkang/nus/cp4285/project/.venv/lib/python3.11/site-packages/faiss/.dylibs/libomp.dylib",
+        "version": null
+      }
+    ],
+    "cpu_count": 10,
+    "loadavg_before": [
+      3.48,
+      3.68,
+      3.16
+    ],
+    "loadavg_after": [
+      3.48,
+      3.68,
+      3.16
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "label": "validation only, exploratory",
+  "beta0_check": {
+    "n": 232904,
+    "exact_rank_agreement_vs_saved": 0.9807474324185071,
+    "abs_rank_diff_max": 8.0,
+    "hit@10_agreement_vs_saved": 1.0,
+    "hit@50_agreement_vs_saved": 1.0,
+    "hit@100_agreement_vs_saved": 1.0,
+    "hit@200_agreement_vs_saved": 1.0,
+    "hit@500_agreement_vs_saved": 1.0,
+    "recall@200_macro_beta0": 0.06871385894573473,
+    "recall@200_macro_saved": 0.06871385894573473
+  },
+  "log_q_info": {
+    "n_items": 111480,
+    "n_seen_in_retriever_train": 82237,
+    "n_unseen": 29243,
+    "log_q_seen_min": -14.445477485656738,
+    "log_q_seen_max": -5.770084381103516,
+    "log_q_seen_median": -12.248252868652344
+  }
+}

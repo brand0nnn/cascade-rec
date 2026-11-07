@@ -1,0 +1,32 @@
+{
+  "narrative_report": "deferred by user; this publication contains tables, figures, sources and checks only",
+  "groups": {
+    "val_new": "target first_ts >= T1",
+    "test_new": "target first_ts >= T2",
+    "warm": "complement of new within the corresponding period"
+  },
+  "accuracy": "user-macro; retrieval misses receive zero; seed means are separate-model metric averages, not ensembles",
+  "uncertainty": "1000 paired-user draws, seed0 after event-metric seed averaging; unadjusted, conditional on fixed trained runs",
+  "composition": {
+    "head": "top ceil(1%) of pre-T0 reviewed products by count; item-ID ties",
+    "unseen_preT0_slot_share": "recommended first_ts >= T0; differs from new-in-period",
+    "catalogue_products": "distinct recommended IDs per seed; full catalogue denominator for coverage",
+    "hhi": "known leaf/store slots only; support columns record known slots and supported lists"
+  },
+  "k_sweep": "inference sensitivity of K200-trained models, not per-K optimised models",
+  "expansion": "event contributions retain zeroes outside entry/competition cohorts and common full-group user weights",
+  "benchmark": {
+    "population": "1000 fixed Validation events; not full Val/Test",
+    "quality": "three trained seeds",
+    "timing": "one resident seed0 model, single-thread CPU",
+    "excluded": "index/graph construction, checkpoint loading, precomputed text encoding",
+    "flat_boundary_exchange_queries": 19,
+    "flat_boundary_item_exchanges": 21,
+    "boundary_tolerance": 2e-06,
+    "common_only_feature_max_error": 0.0,
+    "compact_metadata": "native library paths reduced to basenames; raw phase completion SHA retained"
+  },
+  "test_protocol": "fixed K200, original prefix scalers/pre-T0 graph/checkpoints; no retraining, graph refresh or Test-driven changes",
+  "prior_test_exposure": "historical RQ1 retrieval Test summaries already visible elsewhere in the project",
+  "validation_reused": true
+}

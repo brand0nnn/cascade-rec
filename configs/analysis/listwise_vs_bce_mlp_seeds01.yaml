@@ -1,0 +1,9 @@
+# Exploratory (2026-10-28, H9): listwise vs BCE, MLP natural K_train=500, seeds 0-1. Val only.
+run_id: 20261028-listwise-vs-bce-mlp-seeds01
+groups:
+  bce:
+    - results/ranker_mlp/20261028-natural-ktrain500-seed0
+    - results/ranker_mlp/20261028-natural-ktrain500-seed1
+  listwise:
+    - results/ranker_mlp/20261028-natural-ktrain500-listwise-seed0
+    - results/ranker_mlp/20261028-natural-ktrain500-listwise-seed1

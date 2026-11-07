@@ -1,0 +1,11 @@
+# Exploratory (2026-10-28): DIN natural lists vs the team's forced-list DIN, seeds 0-2. Val only.
+run_id: 20261028-din-natural-vs-din-forced
+groups:
+  din_forced:
+    - results/ranker_din/20261024-din-matching-seed0
+    - results/ranker_din/20261024-din-matching-seed1
+    - results/ranker_din/20261024-din-matching-seed2
+  din_natural:
+    - results/ranker_din/20261028-din-natural-seed0
+    - results/ranker_din/20261028-din-natural-seed1
+    - results/ranker_din/20261028-din-natural-seed2

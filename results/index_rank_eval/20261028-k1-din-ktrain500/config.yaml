@@ -1,0 +1,17 @@
+candidate_dir: data/processed/candidates/two_tower_text_seed0_ktrain500
+data_config: configs/data.yaml
+index_lists_dir: data/processed/candidates
+index_configs:
+- two_tower_text_seed0
+k1_counts:
+- 50
+- 100
+- 200
+- 500
+reference: two_tower_text_seed0@200
+ranker_runs:
+- results/ranker_din/20261028-din-natural-ktrain500-seed0
+- results/ranker_din/20261028-din-natural-ktrain500-seed1
+- results/ranker_din/20261028-din-natural-ktrain500-seed2
+score_batch_pairs: 8000
+bootstrap_resamples: 1000

@@ -1,0 +1,10 @@
+{
+  "scope": "validation only, exploratory",
+  "git_hash": "b9f9f27216446f7ed00484cf890a2d82aaab26a8-dirty",
+  "reference": "beta0",
+  "ranker_seeds": [
+    0,
+    1,
+    2
+  ]
+}

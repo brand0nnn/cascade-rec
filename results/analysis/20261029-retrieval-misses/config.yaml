@@ -1,0 +1,12 @@
+label: validation only, exploratory
+split: val
+ranks: results/retriever/two_tower_text/seed0/val_ranks.npz
+data_config: configs/data.yaml
+rank_edges:
+- '200'
+- '500'
+- '1000'
+- '2000'
+- '5000'
+- '20000'
+- inf

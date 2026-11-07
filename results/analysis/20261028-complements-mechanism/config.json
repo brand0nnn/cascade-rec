@@ -1,0 +1,18 @@
+{
+  "label": "validation only, exploratory",
+  "split": "val",
+  "data_config": "configs/data.yaml",
+  "retriever_run": "results/retriever/two_tower_text/seed0",
+  "retriever_ranks": "results/retriever/two_tower_text/seed0/val_ranks.npz",
+  "text_embeddings": "data/processed/item_text_emb.npy (row = item id)",
+  "pair": "target vs LAST prior history item",
+  "deciles": "computed over all Val instances",
+  "bootstrap": "Poisson user bootstrap, 1000 resamples, seed 0",
+  "rank_check_n": 256,
+  "text_norm_min_max": [
+    0.9999998807907104,
+    1.0000001192092896
+  ],
+  "rank_check_match_fraction": 0.984375,
+  "text_vs_retriever_cos_spearman": 0.48108859610904137
+}

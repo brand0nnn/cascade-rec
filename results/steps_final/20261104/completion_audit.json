@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "outer_rank_replays": 12,
+  "metric_reconstructions": 54,
+  "interval_reconstructions": 27,
+  "test_candidate_history_checks": 297390,
+  "independent_feature_queries": 24,
+  "protocol_sha256": "7e1bb2067416f97e3543683217a839e74a94744730d70b6fa5395782ca3757d6",
+  "test_completion_sha256": "442a3b7870efbae8ba55b8b6b6970c5712fb5bf9f0872edfd6947b84d97bf47e",
+  "source_sha256": "c72aee96ed8e70445ce6090c74163b92c1903db43ad05f378b50a5cfc433e571",
+  "test_tuning": false,
+  "training_performed": false
+}

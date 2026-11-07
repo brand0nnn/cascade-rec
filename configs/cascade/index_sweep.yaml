@@ -1,0 +1,29 @@
+# RQ2 sweep 2 (CLAUDE.md §8, §10): FAISS index settings at K1 = 200 on Val, frozen retriever, retrieval half only.
+# Run: .venv/bin/python -m cascade.pipelines.index_sweep --config configs/cascade/index_sweep.yaml --run-id <id> [--sample]
+retriever_run: results/retriever/two_tower_text/seed0   # frozen retriever (2026-10-21)
+data_config: configs/data.yaml
+split: val                                               # Val only; Test is never loaded by this pipeline
+k1: 200
+buffer: 250                                              # §4.6: max_hist_len (50) + 200; FAISS is asked for k1 + buffer
+recall_cutoffs: [10, 50, 100, 200]                       # retrieval-order Recall@K within the filtered top-K1
+query_batch_size: 4096
+# §8: "efSearch must be >= the number of results requested". FAISS 1.15 does NOT raise efSearch to k by itself
+# (verified: efSearch=200 with k=450 returns different, lower-recall results than efSearch=450), so the sweep
+# searches with efSearch_effective = max(efSearch, k1 + buffer) and reports both values.
+ef_search_policy: at_least_requested
+hnsw: {m: 32, ef_construction: 200}
+ivf: {nlist: 1024, seed: 0}
+indexes:                                                 # exact must come first (reference for recall vs exact)
+  - {name: exact, kind: exact}
+  - {name: hnsw_ef200, kind: hnsw, ef_search: 200}
+  - {name: hnsw_ef800, kind: hnsw, ef_search: 800}
+  - {name: ivf_nprobe4, kind: ivf, nprobe: 4}
+  - {name: ivf_nprobe32, kind: ivf, nprobe: 32}
+# Exact top-500 Val lists built by build_candidates.py from the same retriever (torch exact search): cross-check.
+reference_candidates: data/processed/candidates/two_tower_text_seed0
+# Filtered top-K1 lists per index config, as load_candidates-compatible <dir>/<config>/val.npz (gitignored data/).
+save_candidates: true
+candidates_out: data/processed/candidates/index_sweep
+development:                                             # --sample: fixed user subset of the full data (debug only)
+  user_fraction: 0.02
+  random_seed: 0

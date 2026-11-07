@@ -1,0 +1,21 @@
+{
+  "label": "validation only, exploratory",
+  "split": "val",
+  "data_config": "configs/data.yaml",
+  "retriever_ranks": "results/retriever/two_tower_text/seed0/val_ranks.npz",
+  "mlp_ranks": "results/ranker_mlp/20261028-natural-matching-seed0/val_ranks.npz",
+  "bootstrap_resamples": 1000,
+  "bootstrap_seed": 0,
+  "deep_miss_rank": 5000,
+  "rank_buckets": [
+    "<=200",
+    "201-1K",
+    "1K-5K",
+    "5K-20K",
+    ">20K"
+  ],
+  "history": "last 50 prior items (ProcessedData.histories, most recent last)",
+  "metadata": "items.leaf_cat (full category path; '' = missing), items.store",
+  "pre_t1_count": "target interactions in retriever_train + ranker_train (descriptive only)",
+  "mlp_retrieval_membership_agreement": 0.9999957063854635
+}

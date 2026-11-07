@@ -1,0 +1,1017 @@
+{
+  "scope": "validation only",
+  "split": "val",
+  "development_sample": false,
+  "retriever_run": "results/retriever/two_tower_text/seed0",
+  "retriever_seed": 0,
+  "candidate_dir": "data/processed/candidates/two_tower_text_seed0",
+  "rankers": {
+    "results/ranker_mlp/20261028-natural-matching-seed0": {
+      "model": "mlp",
+      "seed": 0,
+      "feature_groups": [
+        "retrieval",
+        "matching"
+      ],
+      "best_epoch": 3,
+      "n_parameters": 3649185
+    }
+  },
+  "n_val_instances": 232904,
+  "protocol": {
+    "n_queries": 1000,
+    "n_warmup": 50,
+    "random_seed": 0,
+    "buffer": 250,
+    "query_unit": "one Val instance through the full cascade, issued one at a time",
+    "final_list": 10,
+    "phases": [
+      "user_history",
+      "user_forward",
+      "faiss_search",
+      "filter",
+      "rank_prepare",
+      "rank_score",
+      "rank_order"
+    ],
+    "components": {
+      "user_tower": [
+        "user_history",
+        "user_forward"
+      ],
+      "retrieval": [
+        "faiss_search",
+        "filter"
+      ],
+      "ranker": [
+        "rank_prepare",
+        "rank_score",
+        "rank_order"
+      ],
+      "total": [
+        "user_history",
+        "user_forward",
+        "faiss_search",
+        "filter",
+        "rank_prepare",
+        "rank_score",
+        "rank_order"
+      ]
+    },
+    "excludes": [
+      "disk I/O",
+      "checkpoint loading",
+      "index building (see index_builds)",
+      "one-time feature-table creation"
+    ]
+  },
+  "index_builds": {
+    "exact": {
+      "build_seconds": 0.006986082997173071,
+      "n_items": 111480
+    },
+    "hnsw": {
+      "build_seconds": 19.50617245901958,
+      "n_items": 111480
+    },
+    "ivf": {
+      "build_seconds": 2.3294167080020998,
+      "n_items": 111480
+    }
+  },
+  "job_order": [
+    "exact_k200__20261028-natural-matching-seed0",
+    "hnsw_ef200_k200__20261028-natural-matching-seed0",
+    "exact_k500__20261028-natural-matching-seed0",
+    "ivf_nprobe4_k200__20261028-natural-matching-seed0",
+    "hnsw_ef800_k200__20261028-natural-matching-seed0",
+    "exact_k50__20261028-natural-matching-seed0",
+    "exact_k100__20261028-natural-matching-seed0",
+    "ivf_nprobe32_k200__20261028-natural-matching-seed0"
+  ],
+  "jobs": {
+    "exact_k200__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 200,
+      "n_requested": 450,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.0094795,
+            "p95": 0.015462149999999996,
+            "mean": 0.010796306999999998,
+            "min": 0.008167,
+            "max": 0.029291,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.6582505,
+            "p95": 0.72777355,
+            "mean": 0.6674296569999999,
+            "min": 0.606333,
+            "max": 1.055916,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 1.198917,
+            "p95": 1.2989705,
+            "mean": 1.203122893,
+            "min": 0.991209,
+            "max": 1.515583,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.076271,
+            "p95": 0.09654105,
+            "mean": 0.07819386399999999,
+            "min": 0.059542,
+            "max": 0.160916,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 1.2060620000000002,
+            "p95": 1.3560874999999997,
+            "mean": 1.217342754,
+            "min": 1.024916,
+            "max": 2.76125,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.924854,
+            "p95": 1.1140955,
+            "mean": 0.9522862089999999,
+            "min": 0.817083,
+            "max": 1.533208,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.015708,
+            "p95": 0.017083,
+            "mean": 0.015979406,
+            "min": 0.014417,
+            "max": 0.033916,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.6690834999999999,
+            "p95": 0.738667,
+            "mean": 0.678225964,
+            "min": 0.6148750000000001,
+            "max": 1.078416,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 1.277625,
+            "p95": 1.37740655,
+            "mean": 1.2813167570000001,
+            "min": 1.066167,
+            "max": 1.6310829999999998,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 2.1574375000000003,
+            "p95": 2.4520923,
+            "mean": 2.185608369,
+            "min": 1.8804159999999999,
+            "max": 4.053916,
+            "n": 1000
+          },
+          "total": {
+            "median": 4.114021,
+            "p95": 4.467139550000001,
+            "mean": 4.145151090000001,
+            "min": 3.7154580000000004,
+            "max": 5.928416,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 199.98,
+        "short_of_k1": 1,
+        "mean_overlap_with_reference": 0.99988,
+        "target_in_candidates": 0.07,
+        "target_in_top10": 0.02
+      }
+    },
+    "hnsw_ef200_k200__20261028-natural-matching-seed0": {
+      "index": "hnsw_ef200",
+      "kind": "hnsw",
+      "k1": 200,
+      "n_requested": 450,
+      "ef_search_configured": 200,
+      "ef_search_effective": 450,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.008458,
+            "p95": 0.008792,
+            "mean": 0.008606162999999998,
+            "min": 0.007917,
+            "max": 0.025958,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.5909584999999999,
+            "p95": 0.62100835,
+            "mean": 0.595308245,
+            "min": 0.572667,
+            "max": 0.792125,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 0.6108750000000001,
+            "p95": 0.7514708499999999,
+            "mean": 0.6207670949999999,
+            "min": 0.474875,
+            "max": 0.923709,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.0447295,
+            "p95": 0.059794049999999994,
+            "mean": 0.047131410000000006,
+            "min": 0.0395,
+            "max": 0.096125,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 0.9507915,
+            "p95": 1.04096425,
+            "mean": 0.959100186,
+            "min": 0.886792,
+            "max": 1.354958,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.7963960000000001,
+            "p95": 0.8853544499999999,
+            "mean": 0.8053601380000001,
+            "min": 0.743,
+            "max": 1.233833,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.014583,
+            "p95": 0.015083,
+            "mean": 0.014731803000000002,
+            "min": 0.013791,
+            "max": 0.035375,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.599521,
+            "p95": 0.62992115,
+            "mean": 0.603914408,
+            "min": 0.581458,
+            "max": 0.818083,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 0.6563125000000001,
+            "p95": 0.80494825,
+            "mean": 0.667898505,
+            "min": 0.515375,
+            "max": 0.970917,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 1.763104,
+            "p95": 1.9221149,
+            "mean": 1.779192127,
+            "min": 1.64875,
+            "max": 2.609792,
+            "n": 1000
+          },
+          "total": {
+            "median": 3.0282295,
+            "p95": 3.2801708499999997,
+            "mean": 3.05100504,
+            "min": 2.8129999999999997,
+            "max": 4.269542,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 199.986,
+        "short_of_k1": 1,
+        "mean_overlap_with_reference": 0.93789,
+        "target_in_candidates": 0.066,
+        "target_in_top10": 0.019
+      }
+    },
+    "exact_k500__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 500,
+      "n_requested": 750,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.009334,
+            "p95": 0.012461049999999998,
+            "mean": 0.009834371,
+            "min": 0.008416,
+            "max": 0.026375,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.67925,
+            "p95": 0.7540975999999999,
+            "mean": 0.684539507,
+            "min": 0.611041,
+            "max": 1.126583,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 1.418188,
+            "p95": 1.65697115,
+            "mean": 1.433959073,
+            "min": 1.102333,
+            "max": 2.109917,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.079229,
+            "p95": 0.10310179999999998,
+            "mean": 0.08233721199999999,
+            "min": 0.061208,
+            "max": 0.169166,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 2.2944579999999997,
+            "p95": 2.5877443999999996,
+            "mean": 2.2811568259999997,
+            "min": 1.7735,
+            "max": 3.51675,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 2.068479,
+            "p95": 2.57080655,
+            "mean": 2.160047955,
+            "min": 1.516167,
+            "max": 3.745708,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.03675,
+            "p95": 0.0423351,
+            "mean": 0.03758072299999999,
+            "min": 0.023667,
+            "max": 0.084292,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.6897705000000001,
+            "p95": 0.7645702,
+            "mean": 0.6943738779999999,
+            "min": 0.619833,
+            "max": 1.152958,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 1.498729,
+            "p95": 1.7587351,
+            "mean": 1.516296285,
+            "min": 1.184708,
+            "max": 2.220542,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 4.4014375,
+            "p95": 5.126924999999999,
+            "mean": 4.478785503999999,
+            "min": 3.3424590000000003,
+            "max": 6.240959,
+            "n": 1000
+          },
+          "total": {
+            "median": 6.611729,
+            "p95": 7.5311711500000005,
+            "mean": 6.689455667,
+            "min": 5.509542000000001,
+            "max": 9.150792000000001,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 498.541,
+        "short_of_k1": 52,
+        "mean_overlap_with_reference": 0.997066,
+        "target_in_candidates": 0.116,
+        "target_in_top10": 0.019
+      }
+    },
+    "ivf_nprobe4_k200__20261028-natural-matching-seed0": {
+      "index": "ivf_nprobe4",
+      "kind": "ivf",
+      "k1": 200,
+      "n_requested": 450,
+      "nlist": 1024,
+      "nprobe": 4,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.007917,
+            "p95": 0.011127099999999997,
+            "mean": 0.008301594999999998,
+            "min": 0.007375,
+            "max": 0.027709,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.587396,
+            "p95": 0.6733580499999999,
+            "mean": 0.599954344,
+            "min": 0.549666,
+            "max": 1.352,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 0.0643125,
+            "p95": 0.08038125,
+            "mean": 0.06565589,
+            "min": 0.051458,
+            "max": 0.143,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.042917,
+            "p95": 0.05867114999999999,
+            "mean": 0.045287224,
+            "min": 0.035875,
+            "max": 0.1045,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 0.9278545,
+            "p95": 1.09167645,
+            "mean": 0.9453801700000002,
+            "min": 0.692375,
+            "max": 2.432875,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.7913125,
+            "p95": 1.0728875,
+            "mean": 0.820282375,
+            "min": 0.473708,
+            "max": 1.407166,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.014167,
+            "p95": 0.017921149999999997,
+            "mean": 0.01439912,
+            "min": 0.009458,
+            "max": 0.077042,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.5958125000000001,
+            "p95": 0.6813958499999999,
+            "mean": 0.6082559389999999,
+            "min": 0.561375,
+            "max": 1.359834,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 0.1082085,
+            "p95": 0.1327941,
+            "mean": 0.110943114,
+            "min": 0.091375,
+            "max": 0.2475,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 1.7353129999999999,
+            "p95": 2.1476559,
+            "mean": 1.780061665,
+            "min": 1.201667,
+            "max": 3.551625,
+            "n": 1000
+          },
+          "total": {
+            "median": 2.4418960000000003,
+            "p95": 2.9140542000000003,
+            "mean": 2.499260718,
+            "min": 1.8810000000000002,
+            "max": 4.321458999999999,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 194.475,
+        "short_of_k1": 233,
+        "mean_overlap_with_reference": 0.30885,
+        "target_in_candidates": 0.033,
+        "target_in_top10": 0.009
+      }
+    },
+    "hnsw_ef800_k200__20261028-natural-matching-seed0": {
+      "index": "hnsw_ef800",
+      "kind": "hnsw",
+      "k1": 200,
+      "n_requested": 450,
+      "ef_search_configured": 800,
+      "ef_search_effective": 800,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.008666,
+            "p95": 0.009125,
+            "mean": 0.008845918,
+            "min": 0.008166,
+            "max": 0.028375,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.594125,
+            "p95": 0.6400901999999999,
+            "mean": 0.6002709159999999,
+            "min": 0.561167,
+            "max": 0.820375,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 1.231271,
+            "p95": 1.4172226,
+            "mean": 1.240005375,
+            "min": 0.999333,
+            "max": 1.605667,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.0465835,
+            "p95": 0.06092944999999999,
+            "mean": 0.048880167,
+            "min": 0.040875,
+            "max": 0.095625,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 0.986291,
+            "p95": 1.065708,
+            "mean": 0.9893979930000001,
+            "min": 0.883083,
+            "max": 1.460458,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.841875,
+            "p95": 0.9168770999999999,
+            "mean": 0.8500492839999999,
+            "min": 0.791125,
+            "max": 1.471834,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.014833,
+            "p95": 0.015375,
+            "mean": 0.014978303,
+            "min": 0.014084,
+            "max": 0.02825,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.6028545,
+            "p95": 0.6489288499999999,
+            "mean": 0.609116834,
+            "min": 0.570167,
+            "max": 0.830542,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 1.279458,
+            "p95": 1.46637915,
+            "mean": 1.288885542,
+            "min": 1.0402500000000001,
+            "max": 1.650375,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 1.843396,
+            "p95": 1.9819455,
+            "mean": 1.85442558,
+            "min": 1.692416,
+            "max": 2.8274999999999997,
+            "n": 1000
+          },
+          "total": {
+            "median": 3.7367295,
+            "p95": 4.010425,
+            "mean": 3.752427956,
+            "min": 3.353292,
+            "max": 4.932084,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 199.984,
+        "short_of_k1": 1,
+        "mean_overlap_with_reference": 0.97583,
+        "target_in_candidates": 0.067,
+        "target_in_top10": 0.019
+      }
+    },
+    "exact_k50__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 50,
+      "n_requested": 300,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.008375,
+            "p95": 0.009002049999999998,
+            "mean": 0.008450637,
+            "min": 0.007542,
+            "max": 0.022042,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.618458,
+            "p95": 0.6535452,
+            "mean": 0.6187313710000001,
+            "min": 0.575458,
+            "max": 0.70875,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 1.0658750000000001,
+            "p95": 1.1391854,
+            "mean": 1.069009799,
+            "min": 0.928833,
+            "max": 1.230417,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.0660835,
+            "p95": 0.08509644999999999,
+            "mean": 0.066116084,
+            "min": 0.046375,
+            "max": 0.129584,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 0.652041,
+            "p95": 0.7092931,
+            "mean": 0.6463397870000002,
+            "min": 0.561833,
+            "max": 0.792125,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.316813,
+            "p95": 0.33904615,
+            "mean": 0.315485632,
+            "min": 0.286459,
+            "max": 0.360208,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.006208,
+            "p95": 0.006917,
+            "mean": 0.006279502000000002,
+            "min": 0.005333,
+            "max": 0.018708,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.626938,
+            "p95": 0.66223395,
+            "mean": 0.627182008,
+            "min": 0.5832080000000001,
+            "max": 0.717333,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 1.131646,
+            "p95": 1.2166292,
+            "mean": 1.135125883,
+            "min": 0.989958,
+            "max": 1.300083,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 0.977625,
+            "p95": 1.0485225999999999,
+            "mean": 0.968104921,
+            "min": 0.855208,
+            "max": 1.142416,
+            "n": 1000
+          },
+          "total": {
+            "median": 2.737625,
+            "p95": 2.8992086500000003,
+            "mean": 2.730412812,
+            "min": 2.4942920000000006,
+            "max": 3.029125,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 50.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 0.9998600000000001,
+        "target_in_candidates": 0.026,
+        "target_in_top10": 0.016
+      }
+    },
+    "exact_k100__20261028-natural-matching-seed0": {
+      "index": "exact",
+      "kind": "exact",
+      "k1": 100,
+      "n_requested": 350,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.008667,
+            "p95": 0.009542,
+            "mean": 0.008846489999999999,
+            "min": 0.007542,
+            "max": 0.029209,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.629375,
+            "p95": 0.68167115,
+            "mean": 0.633186059,
+            "min": 0.58575,
+            "max": 0.934291,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 1.107521,
+            "p95": 1.1877143,
+            "mean": 1.1102067979999999,
+            "min": 0.974791,
+            "max": 1.38125,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.06993750000000001,
+            "p95": 0.08810689999999997,
+            "mean": 0.07034499,
+            "min": 0.047584,
+            "max": 0.152916,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 0.8104165000000001,
+            "p95": 0.8932732499999999,
+            "mean": 0.806627836,
+            "min": 0.684667,
+            "max": 1.173208,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.5145,
+            "p95": 0.62056075,
+            "mean": 0.527723123,
+            "min": 0.418125,
+            "max": 1.634625,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.0091045,
+            "p95": 0.010083,
+            "mean": 0.009265480999999997,
+            "min": 0.008041,
+            "max": 0.030625,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.638208,
+            "p95": 0.6906059499999999,
+            "mean": 0.6420325490000001,
+            "min": 0.5938749999999999,
+            "max": 0.9635,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 1.1768125,
+            "p95": 1.2632205,
+            "mean": 1.180551788,
+            "min": 1.022375,
+            "max": 1.469875,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 1.3363960000000001,
+            "p95": 1.4861402499999998,
+            "mean": 1.34361644,
+            "min": 1.1527500000000002,
+            "max": 2.682,
+            "n": 1000
+          },
+          "total": {
+            "median": 3.1724375,
+            "p95": 3.3722086499999997,
+            "mean": 3.166200777,
+            "min": 2.8111249999999997,
+            "max": 4.779166999999999,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 100.0,
+        "short_of_k1": 0,
+        "mean_overlap_with_reference": 0.99994,
+        "target_in_candidates": 0.044,
+        "target_in_top10": 0.017
+      }
+    },
+    "ivf_nprobe32_k200__20261028-natural-matching-seed0": {
+      "index": "ivf_nprobe32",
+      "kind": "ivf",
+      "k1": 200,
+      "n_requested": 450,
+      "nlist": 1024,
+      "nprobe": 32,
+      "ranker_run": "results/ranker_mlp/20261028-natural-matching-seed0",
+      "timing": {
+        "phases": {
+          "user_history": {
+            "median": 0.007834,
+            "p95": 0.008208,
+            "mean": 0.007936605999999999,
+            "min": 0.007291,
+            "max": 0.021417,
+            "n": 1000
+          },
+          "user_forward": {
+            "median": 0.571542,
+            "p95": 0.6033455,
+            "mean": 0.576855073,
+            "min": 0.558083,
+            "max": 0.88625,
+            "n": 1000
+          },
+          "faiss_search": {
+            "median": 0.14725,
+            "p95": 0.162833,
+            "mean": 0.147723525,
+            "min": 0.124167,
+            "max": 0.200375,
+            "n": 1000
+          },
+          "filter": {
+            "median": 0.0420835,
+            "p95": 0.05632324999999997,
+            "mean": 0.044373895000000003,
+            "min": 0.036542,
+            "max": 0.093042,
+            "n": 1000
+          },
+          "rank_prepare": {
+            "median": 0.9203335,
+            "p95": 0.9947024,
+            "mean": 0.9241546150000001,
+            "min": 0.786833,
+            "max": 1.715375,
+            "n": 1000
+          },
+          "rank_score": {
+            "median": 0.821292,
+            "p95": 0.9038875,
+            "mean": 0.833371627,
+            "min": 0.624667,
+            "max": 1.159208,
+            "n": 1000
+          },
+          "rank_order": {
+            "median": 0.014041,
+            "p95": 0.01454105,
+            "mean": 0.014196375,
+            "min": 0.011916,
+            "max": 0.031083,
+            "n": 1000
+          }
+        },
+        "components": {
+          "user_tower": {
+            "median": 0.5794585000000001,
+            "p95": 0.6123875,
+            "mean": 0.5847916790000001,
+            "min": 0.5665,
+            "max": 0.907667,
+            "n": 1000
+          },
+          "retrieval": {
+            "median": 0.19029200000000002,
+            "p95": 0.21380865,
+            "mean": 0.19209742,
+            "min": 0.166625,
+            "max": 0.292333,
+            "n": 1000
+          },
+          "ranker": {
+            "median": 1.7562495,
+            "p95": 1.8772627999999996,
+            "mean": 1.771722617,
+            "min": 1.423416,
+            "max": 2.8978750000000004,
+            "n": 1000
+          },
+          "total": {
+            "median": 2.5298955000000003,
+            "p95": 2.6717999999999997,
+            "mean": 2.548611716,
+            "min": 2.2115,
+            "max": 3.6921250000000003,
+            "n": 1000
+          }
+        }
+      },
+      "sanity": {
+        "mean_candidates": 199.944,
+        "short_of_k1": 2,
+        "mean_overlap_with_reference": 0.7433500000000001,
+        "target_in_candidates": 0.061,
+        "target_in_top10": 0.022
+      }
+    }
+  },
+  "runtime": {
+    "cpu": "Apple M2 Pro",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.4",
+    "torch_version": "2.5.1",
+    "faiss_version": "1.15.1",
+    "numpy_version": "1.26.4",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "faiss_threads": 1,
+    "threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "filepath": "/Users/brandonkang/nus/cp4285/project/.venv/lib/python3.11/site-packages/torch/lib/libomp.dylib",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libopenblas",
+        "filepath": "/Users/brandonkang/nus/cp4285/project/.venv/lib/python3.11/site-packages/numpy/.dylibs/libopenblas64_.0.dylib",
+        "version": "0.3.23.dev",
+        "threading_layer": "pthreads",
+        "architecture": "armv8"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "filepath": "/Users/brandonkang/nus/cp4285/project/.venv/lib/python3.11/site-packages/faiss/.dylibs/libomp.dylib",
+        "version": null
+      }
+    ],
+    "cpu_count": 10,
+    "loadavg_before": [
+      1.58,
+      2.02,
+      2.47
+    ],
+    "loadavg_after": [
+      1.8,
+      2.03,
+      2.46
+    ]
+  }
+}
