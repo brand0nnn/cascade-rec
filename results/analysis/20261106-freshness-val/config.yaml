@@ -1,0 +1,38 @@
+label: Val only, exploratory
+study: results/local_experiments/20261106-freshness-val
+parent: results/local_experiments/20261103-full-promising-ranking
+factorial: results/local_experiments/20261104-objective-coreview
+methods:
+- bce_text
+- pairwise_text
+- pairwise_coreview
+- bce_coreview
+seeds:
+- 0
+- 1
+- 2
+arms:
+  T0: all reviews strictly before T0 (saved parent features)
+  T1: all reviews strictly before T1
+  monthly: all reviews strictly before the UTC month start of each query
+split:
+  t0: 1595800947930
+  t1: 1628643414042
+fixed: candidates, histories, checkpoints, prefix scalers, post-standardisation masks
+scored_rows: natural K200 hits only (misses keep rank inf)
+device: cpu
+metrics:
+- ndcg10
+- recall10
+- hr3
+- mrr10
+aggregation: seed-mean event metric, then per-user macro over all Val events
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user
+groups:
+  new: target first_ts >= T1
+  warm: otherwise
+test_opened: false
+selection: none

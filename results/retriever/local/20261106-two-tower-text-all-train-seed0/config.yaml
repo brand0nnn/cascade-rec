@@ -1,0 +1,24 @@
+name: two_tower_text_all_train
+user_tower: transformer
+item_tower: text
+logq: true
+temperature: 0.05
+lr: 0.001
+batch_size: 256
+max_inbatch: 4096
+epochs: 50
+patience: 5
+early_stop_val_subset: 20000
+eval_batch_size: 512
+training_periods:
+- retriever_train
+- ranker_train
+logq_periods:
+- retriever_train
+- ranker_train
+seed: 0
+sample: false
+technical_smoke: false
+run_id: local/20261106-two-tower-text-all-train-seed0
+evaluation_splits:
+- val

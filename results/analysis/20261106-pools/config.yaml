@@ -1,0 +1,13 @@
+# Step A0 candidate pools (Val only, exploratory). Fixed rules; nothing selected.
+k: 200
+rrf_k: 60
+splits: [ranker_train, val]
+P1: results/local_experiments/20261103-full-promising-ranking/candidates (frozen MiniLM + 90-day recency, natural top 200)
+P2: results/retriever/two_tower_text/seed0 regenerated float32, exact search, §4.6 filters, natural top 200
+P3: round-robin interleave recency r1, two-tower r1, recency r2, ... skip duplicates until 200 unique; score = sum over sources containing the item (within their 200) of 1/(60 + rank)
+retrieval_rank: pessimistic target rank by stored score within the pool (inf if absent)
+oracle: per event better of P1/P2 by nDCG@10 (ties -> recency); candidate oracle: target in either top 200
+bootstrap: {resamples: 1000, seed: 0, unit: user}
+data: 20261102-full-frozen-text checked inputs (data/processed)
+test_loaded: false
+source_sha256: ed3c40a95e2188c291d4574e314b5ccd63d531cb5d745ad38b39c2b68f1df13f

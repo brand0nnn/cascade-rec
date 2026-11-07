@@ -1,0 +1,66 @@
+{
+  "label": "Val only, exploratory",
+  "rows_per_split": 10000,
+  "seed": 0,
+  "ranker_train": {
+    "P1_recency": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0,
+      "history_matches_harness": true
+    },
+    "P2_two_tower_regen": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0,
+      "history_matches_harness": true
+    },
+    "P3_fused_rrf": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0,
+      "history_matches_harness": true
+    },
+    "two_tower_saved_natural200": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0
+    },
+    "full_history_events_checked": 53752
+  },
+  "val": {
+    "P1_recency": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0,
+      "history_matches_harness": true
+    },
+    "P2_two_tower_regen": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0,
+      "history_matches_harness": true
+    },
+    "P3_fused_rrf": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0,
+      "history_matches_harness": true
+    },
+    "two_tower_saved_natural200": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0
+    },
+    "full_history_events_checked": 60680
+  },
+  "passed": true
+}

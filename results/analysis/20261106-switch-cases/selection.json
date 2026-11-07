@@ -1,0 +1,3209 @@
+{
+  "label": "Val only, exploratory; model-assisted coding, needs human review",
+  "config_sha256": "5815f70110964f9076bf5983e3776edc89f2909d3b71c01ccc360f848d04f9f9",
+  "val_events": 232904,
+  "recency_inst_sha256": "973f9df57366a63b24de3d45dd9f105b8717ecf071c887ce1889082098659de1",
+  "recency_rank_sha256": "9b434199fa665bdf0dba1728e0483f4cc1bf6840a407b7945ee2b03576d7acba",
+  "two_tower_sha256": "ccbf9a031c051d04d1fec892f40cca06f663401ff0f6d5a11001128fd52624e8",
+  "in_recency_200": 14916,
+  "in_two_tower_200": 16673,
+  "in_both_200": 2796,
+  "double_miss": 204111,
+  "double_miss_new": 69185,
+  "double_miss_warm_0_before_t1": 0,
+  "two_tower_rank_check": {
+    "events_in_500": 28574,
+    "target_rank_equals_pos_plus_1": 28432,
+    "in_tt200_by_pos": 16673,
+    "in_tt200_by_full_rank": 16672
+  },
+  "buckets": {
+    "F1_new_target": {
+      "eligible": 69185,
+      "eligible_after_dedup": 69185,
+      "chosen": [
+        47323,
+        114423,
+        209154,
+        741481,
+        840982,
+        1411999,
+        1756859,
+        2347616
+      ]
+    },
+    "F2_warm_ge50": {
+      "eligible": 47470,
+      "eligible_after_dedup": 47470,
+      "chosen": [
+        764303,
+        1491415,
+        1532879,
+        1732724,
+        1837606,
+        1997091,
+        2244325,
+        2572126
+      ]
+    },
+    "F3_warm_1to49": {
+      "eligible": 87456,
+      "eligible_after_dedup": 87456,
+      "chosen": [
+        62142,
+        219280,
+        244763,
+        482717,
+        825873,
+        1488653,
+        2323078,
+        2369503
+      ]
+    }
+  },
+  "test_opened": false,
+  "cases": [
+    {
+      "bucket": "F1_new_target",
+      "inst": 47323,
+      "user": 6540,
+      "hist_len": 2,
+      "history_last5": [
+        {
+          "item": 96763,
+          "asin": "B09SG2Q3HC",
+          "title": "QHOHQ [3 Pack] Tempered Glass Camera Lens Protector for iPhone 13 Pro 6.1\" \uff06 iPhone 13 Pro Max 6.7\", 9H Hardness, Ultra HD, Anti-Scratch, Easy to Install, Case Friendly [Does not Affect Night Shots]",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Lens Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Lens Protectors",
+          "store": "QHOHQ",
+          "price": 7.99,
+          "date": "2021-11-01"
+        },
+        {
+          "item": 91941,
+          "asin": "B09CCL5D9L",
+          "title": "FYY Compatible with iPhone 13 Case, [Kickstand Feature] Luxury PU Leather Wallet Case Flip Folio Cover with [Card Slots] and [Note Pockets] Case for iPhone 13 5G 6.1\" Canvas Green",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+          "store": "FYY",
+          "price": 14.57,
+          "date": "2021-11-04"
+        }
+      ],
+      "target": {
+        "item": 96477,
+        "asin": "B09QSM4Q17",
+        "title": "Zsuoop Metal Stainless Steel Band Compatible with Apple Watch Bands 38mm 40mm 41mm 42mm 44mm 45mm With Screen Protector Case,Magnetic Adjustable strap for iWatch Series 8/7/6/5/4/SE/3/2/1 Women Men",
+        "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "store": "Zsuoop",
+        "price": 12.99,
+        "date": "2021-12-11",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 58142,
+      "recency_top3": [
+        {
+          "item": 91216,
+          "asin": "B099DQP6S8",
+          "title": "QHOHQ 3 Pack Screen Protector for iPhone 13 Pro 6.1 Inch with 3 Pack Tempered Glass Camera Lens Protector, Ultra HD, 9H Hardness, Scratch Resistant - Case Friendly [Not fit iPhone 13 Pro Max 6.7\"]",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "QHOHQ",
+          "price": 9.99
+        },
+        {
+          "item": 91214,
+          "asin": "B099DNGHBM",
+          "title": "QHOHQ 3 Pack Screen Protector for iPhone 13 Pro Max 6.7\" with 3 Pack Tempered Glass Camera Lens Protector, Ultra HD, 9H Hardness, Scratch Resistant, Easy Install - Case Friendly",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "QHOHQ",
+          "price": 8.79
+        },
+        {
+          "item": 91939,
+          "asin": "B09CCGSJ29",
+          "title": "FYY Compatible with iPhone 13 Pro Max Case, [Kickstand Feature] Luxury PU Leather Wallet Case Flip Folio Cover with [Card Slots] and [Note Pockets] Case for iPhone 13 Pro Max 5G 6.7\" Fish Scale Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+          "store": "FYY",
+          "price": 14.57
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 39503,
+          "asin": "B01LXZDPDR",
+          "title": "Ailun Screen Protector Compatible for iPhone 8 plus,7 Plus,6s Plus,6 Plus, 5.5 Inch 3Pack Case Friendly Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 6.99
+        },
+        {
+          "item": 110984,
+          "asin": "B0C7Q5MMH9",
+          "title": "JETech Screen Protector for iPhone 11 6.1-Inch with Camera Lens Protector, Tempered Glass Film, 2-Pack Each",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "JETech",
+          "price": 8.99
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 98024,
+          "asin": "B09XTWQPJ7",
+          "title": "baozai Compatible with Apple Watch Band with Case, Stainless Steel Band with Glass Screen Protector Case for iWatch Series 8/7/6/5/4/3/2/1/SE/Ultra",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "store": "baozai",
+          "price": 17.98,
+          "date": "2021-12-11",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 114423,
+      "user": 15860,
+      "hist_len": 1,
+      "history_last5": [
+        {
+          "item": 67398,
+          "asin": "B07QKSYGY4",
+          "title": "OTOFLY Compatible with iPhone XR Case 6.1 inch,[Silky and Soft Touch Series] Premium Soft Liquid Silicone Rubber Full-Body Protective Bumper Case for iPhone XR (Purple)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "OTOFLY",
+          "price": 13.97,
+          "date": "2021-10-31"
+        }
+      ],
+      "target": {
+        "item": 92064,
+        "asin": "B09CMJMB7W",
+        "title": "Ailun Glass Screen Protector for iPhone 13 mini [5.4 Inch] Display 2021 3 Pack Tempered Glass",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "store": "Ailun",
+        "price": 6.88,
+        "date": "2021-12-23",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 3109,
+      "recency_top3": [
+        {
+          "item": 96371,
+          "asin": "B09QJWJSL6",
+          "title": "OTOFLY Compatible with iPhone 12 Mini Case 5.4 inch(2020),[Silky and Soft Touch Series] Premium Soft Liquid Silicone Rubber Full-Body Protective Bumper Case Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "OTOFLY",
+          "price": 12.99
+        },
+        {
+          "item": 62352,
+          "asin": "B07JW6Y2B2",
+          "title": "OTOFLY Liquid Silicone Gel Rubber Full Body Protection Shockproof Case for iPhone Xs/iPhone X\uff0cAnti-Scratch&Fingerprint Basic-Cases\uff0cCompatible with iPhone X/iPhone Xs 5.8 inch (2018), (Space Gray)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "OTOFLY",
+          "price": 13.99
+        },
+        {
+          "item": 91443,
+          "asin": "B09B2S3KN3",
+          "title": "OTOFLY Compatible with iPhone 13 Mini Case,Liquid Silicone Slim Protective Shockproof Phone Case Cover with Anti-Scratch Microfiber Lining, 5.4 inch (Teal)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "OTOFLY",
+          "price": 12.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mkeke",
+          "price": 11.99
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 63835,
+          "asin": "B07LCV3VR3",
+          "title": "TETHYS Glass Screen Protector Designed For iPhone 11 / iPhone XR (6.1\") [Edge to Edge Coverage] Full Protection Durable Tempered Glass Compatible iPhone XR/11 [Guidance Frame Include] - Pack of 3",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "TETHYS",
+          "price": 15.99
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 104935,
+          "asin": "B0BL1WXV7P",
+          "title": "LUPA Legacy iPhone 13 Pro Wallet Case - Case with Card Holder - [Slim + Durable] for Women and Men - iPhone 13 Pro Flip Cell Phone case - Faux Leather - Folio Cover - Burgundy",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Flip Cases",
+          "store": "LUPA Legacy",
+          "price": 23.99,
+          "date": "2022-01-13",
+          "same_timestamp": false
+        },
+        {
+          "item": 91919,
+          "asin": "B09C8C651H",
+          "title": "SPARIN Screen Protector for iPhone 13, 3 Pack 9H Tempered Glass and 2 Pack Camera Lens Protector for iPhone 6.1 Inch 2021, Alignment Tool, Bubble Free",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "SPARIN",
+          "price": null,
+          "date": "2022-01-13",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "down"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 209154,
+      "user": 28955,
+      "hist_len": 3,
+      "history_last5": [
+        {
+          "item": 37204,
+          "asin": "B01IWHCNSO",
+          "title": "Speck Products CandyShell Clear Case for Moto Z Force Droid Smartphone, Beaming Orchid Purple Clear",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Speck",
+          "price": 22.57,
+          "date": "2017-04-08"
+        },
+        {
+          "item": 105282,
+          "asin": "B0BLTWVZXD",
+          "title": "Speck Products CandyShell Grip iPhone XR Case, Ultraviolet Purple/Ruby Red",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Speck",
+          "price": null,
+          "date": "2019-02-04"
+        },
+        {
+          "item": 95637,
+          "asin": "B09NQMZPDF",
+          "title": "ORIbox Case Compatible with iPhone 12 Case & Glass Screen Protector for iPhone 12 and iPhone 12 Pro, 3 Packs Anti-Scratch Eye-Protection HD Clear Tempered Glass Screen Protector",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ORIbox",
+          "price": 17.55,
+          "date": "2020-11-03"
+        }
+      ],
+      "target": {
+        "item": 95149,
+        "asin": "B09MS51HKB",
+        "title": "Bands Compatible with Apple Watch 38mm 40mm 41mm 42mm 44mm 45mm, 6 Pack Replacement Soft Silicone Sport Accessory Strap for iWatch Series 7/6/5/4/3/2/1 SE Women Men",
+        "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "store": "Distore",
+        "price": 9.99,
+        "date": "2022-01-15",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 18912,
+      "recency_top3": [
+        {
+          "item": 106305,
+          "asin": "B0BPBQJQ7D",
+          "title": "ORIbox Glass Screen Protector for iPhone 12 mini, 3 Packs Anti-Scratch Eye-Protection HD Clear Tempered Glass Screen Protector",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ORIbox",
+          "price": 6.65
+        },
+        {
+          "item": 97965,
+          "asin": "B09XMTZDZ8",
+          "title": "ORIbox Case Compatible with iPhone 12 pro Case, Compatible with iPhone 12 Case, with 4 Corners Shockproof Protection",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ORIbox",
+          "price": 7.73
+        },
+        {
+          "item": 76056,
+          "asin": "B082BCMLKF",
+          "title": "ORIbox Case Compatible with iPhone 12/12 pro Case, Super Thin Mobile Phone Cover Case with Matte Finish Coating Grip",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ORIbox",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mkeke",
+          "price": 11.99
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 66116,
+          "asin": "B07P9S6R9Y",
+          "title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "yootech",
+          "price": 15.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 741481,
+      "user": 102546,
+      "hist_len": 5,
+      "history_last5": [
+        {
+          "item": 17230,
+          "asin": "B00MHHTBL8",
+          "title": "New Waterproof Shockproof Dirtproof Snowproof Protection Case Cover for Apple iPhone 5 (Teal)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "RedPepper",
+          "price": null,
+          "date": "2015-03-20"
+        },
+        {
+          "item": 54724,
+          "asin": "B07BLJJCXL",
+          "title": "iPhone 5/5S SE Case, EXSEK Hybrid Impact Ultra Slim 3 Color Shockproof Case [Anti-Slip] [Extra Front Raised Lip] Scratch Resistant Soft Gel Bumper Rugged Case for iPhone 5/5S (Wine Red)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "EXSEK",
+          "price": 5.99,
+          "date": "2019-06-30"
+        },
+        {
+          "item": 69055,
+          "asin": "B07SG37KL1",
+          "title": "HOMEMO Glass Screen Protector for iPhone 11/iPhone XR 6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "HOMEMO",
+          "price": 5.89,
+          "date": "2019-08-07"
+        },
+        {
+          "item": 73043,
+          "asin": "B07X8LK9WZ",
+          "title": "Elecshion (Full-Coverage) Privacy Screen Protector for iPhone 11 and iPhone XR(2 Pack), Anti-spy Tempered Glass Screen Protector for iPhone 11/XR(6.1 ''), Bubble Free, (Case Friendly)",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Elecshion",
+          "price": 8.49,
+          "date": "2022-03-18"
+        },
+        {
+          "item": 51000,
+          "asin": "B076NQM7GM",
+          "title": "USB Wall Charger, KENHAO 3-Pack 2.1A/5V Dual Port USB Plug Power Adapter Charging Block Cube Charger Brick Box for iPhone 13/12/11/XR/XS/X/8/7/6 Plus 5/SE/4, iPad, Samsung, Moto, Android Phone",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "KENHAO",
+          "price": null,
+          "date": "2022-05-17"
+        }
+      ],
+      "target": {
+        "item": 91768,
+        "asin": "B09BYWWRCC",
+        "title": "Caefax Compatible with iPhone 13 Case (2021), Crystal Clear Militrary Grade Protective Non-Yellowing Slim Thin with Double Shockproof Air Bags",
+        "path": "",
+        "leaf_cat": "",
+        "store": "Caefax",
+        "price": null,
+        "date": "2022-05-17",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 6515,
+      "recency_top3": [
+        {
+          "item": 69997,
+          "asin": "B07TK6MPNB",
+          "title": "USB Wall Charger, LUOATIP 3-Pack 2.1A/5V Dual Port USB Cube Power Adapter Charger Plug Block Charging Box Brick for iPhone 13 12 11 Pro Max SE XS XR X 8 7 6 6S Plus, Samsung, LG, Moto, Android Phones",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "LUOATIP",
+          "price": 8.99
+        },
+        {
+          "item": 75932,
+          "asin": "B0823Z1JFX",
+          "title": "USB Wall Charger, Power-7 5-Pack 2.1Amp Dual Port USB Cube Power Adapter Charger Plug Block Charging Box Brick for iPhone SE 11 Pro Max XS XR X 8 7 6S 6 Plus, Samsung, LG, Moto, Android Phones",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "power-7",
+          "price": null
+        },
+        {
+          "item": 96362,
+          "asin": "B09QHT1W2F",
+          "title": "USB Wall Charger, Charger Block, 3-Pack Charging Cube 1A/5V One-Port Charging Block Charger Box for iPhone 14 13 12 11 Pro Max, SE,XR/XS/X,8/7/6, iPad, Samsung Galaxy S22 S21 A13,Note 20, LG, Pixel 6",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "VIFIGEN",
+          "price": 8.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mkeke",
+          "price": 11.99
+        },
+        {
+          "item": 63835,
+          "asin": "B07LCV3VR3",
+          "title": "TETHYS Glass Screen Protector Designed For iPhone 11 / iPhone XR (6.1\") [Edge to Edge Coverage] Full Protection Durable Tempered Glass Compatible iPhone XR/11 [Guidance Frame Include] - Pack of 3",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "TETHYS",
+          "price": 15.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "unknown",
+      "top_category_jump": "unknown",
+      "second_level_jump": "unknown",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "unknown",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 840982,
+      "user": 116293,
+      "hist_len": 7,
+      "history_last5": [
+        {
+          "item": 40201,
+          "asin": "B01M2VQE89",
+          "title": "iFuntecky CO-GPX-ARM-NV Caseology Parallax for Google Pixel Case (2016) - Award Winning Design - Navy Blue, 7 Pack",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Alcoco",
+          "price": null,
+          "date": "2018-09-07"
+        },
+        {
+          "item": 72602,
+          "asin": "B07WVW4DS9",
+          "title": "Motorola G6 \u2013 32 GB \u2013 Unlocked (AT&T/Sprint/T-Mobile/Verizon) \u2013 Black - (U.S. Warranty) - PAAE0000US",
+          "path": "Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Unlocked Wireless Trade-In",
+          "leaf_cat": "Cell Phones & Accessories > Wireless Trade-In Buy Box Widget > Unlocked Wireless Trade-In",
+          "store": "Motorola",
+          "price": 239.99,
+          "date": "2019-02-10"
+        },
+        {
+          "item": 69275,
+          "asin": "B07SQ5MQ6K",
+          "title": "Anker USB C Power Bank, PowerCore Essential 20000 PD (18W) Power Bank, High Cell Capacity 20000mAh Portable Charger Battery Pack for iPhone 12/Mini/Pro/Max Pro/11/X, Samsung (PD Charger Not Included)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+          "store": "Anker",
+          "price": 64.95,
+          "date": "2021-02-01"
+        },
+        {
+          "item": 74622,
+          "asin": "B07YZKKWTZ",
+          "title": "Wepro Screen Protector Case Compatible with Fitbit Versa 2 Smartwatch, 3-Pack Soft TPU Full Cover Cases for Fitbit Versa 2 Watch, Black/Silver/Gold,",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "Wepro",
+          "price": 8.99,
+          "date": "2021-07-24"
+        },
+        {
+          "item": 61627,
+          "asin": "B07J2KMP4X",
+          "title": "Google Wireless Charger Pixel 3, Pixel 3XL - White",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations",
+          "store": "Google",
+          "price": 24.89,
+          "date": "2021-07-24"
+        }
+      ],
+      "target": {
+        "item": 110646,
+        "asin": "B0C6DG5LZK",
+        "title": "[2+2 Pack] for Google Pixel 6 Pro Screen Protector, 9H Tempered Glass, Ultrasonic Fingerprint Compatible, 3D Curved, HD Clear Scratch Resistant for Google Pixel 6 Pro 5G Glass Screen Protector",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "store": "Arshek",
+        "price": 11.99,
+        "date": "2022-05-12",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 1615,
+      "recency_top3": [
+        {
+          "item": 73427,
+          "asin": "B07XKSV8PH",
+          "title": "3 Pack Screen Protector Compatible Fitbit Versa 2 Case, GHIJKL Ultra-Thin Slim Soft TPU Protective Case All-Around Full Cover Bumper Shell for Fitbit Versa 2 Smartwatch, Black, Silver, Blue",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "store": "GHIJKL",
+          "price": 8.99
+        },
+        {
+          "item": 76482,
+          "asin": "B082ZXW3B1",
+          "title": "Yolovie (3+1 Pack) Screen Protectors Charger (with Case On) Compatible with Fitbit Versa 2 Case Smart Watch TPU Bumper Shell Protector and Replacement Charging (Clear Silver Black)",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "store": "Yolovie",
+          "price": null
+        },
+        {
+          "item": 69882,
+          "asin": "B07TDJZTVR",
+          "title": "Goton Compatible Fitbit Charge 4/3 / 3SE Screen Protector, (3 Packs) Soft TPU Shockproof Full Cover Case Screen Protector for Fitbit Charge 4 / Charge 3 / Charge 3 SE \uff08Black & Clear & Silver\uff09",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Goton",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 50195,
+          "asin": "B075WW69PS",
+          "title": "amFilm Glass Screen Protector for Google Pixel 2 XL, Tempered Glass, 3D Curved",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 11.99
+        },
+        {
+          "item": 76865,
+          "asin": "B083L8D1V5",
+          "title": "OMOTON [3 Pack Screen Protector for Google Pixel 4XL/ 4 XL Tempered Glass/Easy Installation with Alignment Frame/Only Cover Display Area",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "OMOTON",
+          "price": null
+        },
+        {
+          "item": 103368,
+          "asin": "B0BG63SQ8R",
+          "title": "LK 3 Pack Screen Protector Compatible for Google Pixel 3a [Not Fit for Google Pixel 3a XL], HD Transparent, Easy Frame Installation, Tempered Glass, Bubble Free, Anti-Scratch",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "LK",
+          "price": 8.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "down"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 1411999,
+      "user": 195268,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 55148,
+          "asin": "B07C1JWMKG",
+          "title": "BLU Studio X8 HD Case, Tough Hybrid + Dual Layer Shockproof Drop Protection Metallic Brushed Case Cover + Screen Protector for Studio X8 HD (S530) (VGC Black + SP)",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs",
+          "store": "New Frontier Wireless Accessory",
+          "price": 9.99,
+          "date": "2018-12-09"
+        },
+        {
+          "item": 62299,
+          "asin": "B07JR975TF",
+          "title": "BLU Studio X8 HD - 5.0\" GSM Unlocked Smartphone -Black",
+          "path": "Cell Phones & Accessories > Cell Phones",
+          "leaf_cat": "Cell Phones & Accessories > Cell Phones",
+          "store": "BLU",
+          "price": null,
+          "date": "2018-12-09"
+        },
+        {
+          "item": 63352,
+          "asin": "B07KX6L1V4",
+          "title": "(2 Pack) Supershieldz Designed for T-Mobile (Revvl 2) Tempered Glass Screen Protector, Anti Scratch, Bubble Free",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Supershieldz",
+          "price": 7.99,
+          "date": "2020-03-25"
+        },
+        {
+          "item": 85282,
+          "asin": "B08NVBKKDR",
+          "title": "CABINAHOME Car Cell Phone Mount Dashboard Cell Phone Clip Automobile Cradles Car Holder Mount Stand Suitable for 3 to 7 inch Smartphones (Upgrade)",
+          "path": "",
+          "leaf_cat": "",
+          "store": "CABINAHOME",
+          "price": null,
+          "date": "2021-04-30"
+        }
+      ],
+      "target": {
+        "item": 111000,
+        "asin": "B0C7QS1G9P",
+        "title": "Red2Fire for iPhone 13 Case, [360 Full Body] [Heavy Duty Protection] with Built-in Screen Protector Tough Rugged 12 FT Dropproof Shockproof Dust-Proof Bumper Case for iPhone 13 6.1 inch Black",
+        "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "store": "Red2Fire",
+        "price": 12.79,
+        "date": "2021-12-23",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 22751,
+      "recency_top3": [
+        {
+          "item": 31027,
+          "asin": "B01AAKH98U",
+          "title": "Car mount Cell Phone Holder for Car, Clip Gps Display Desk Stand Smartphone for Iphone Samsung and Other Smartphones up to 5.7 Inc Lg Google Nexus Nokia Sony Motorola Htc Blackberry",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "Kraiovim",
+          "price": null
+        },
+        {
+          "item": 80518,
+          "asin": "B08CMRP1XW",
+          "title": "JunDa Car Phone Mount 360 Degree Rotation Dashboard Cell Phone Holder for Car Clip Mount Stand Suitable for 4 to 7 inch Smartphones\u2026",
+          "path": "",
+          "leaf_cat": "",
+          "store": "DaJun",
+          "price": null
+        },
+        {
+          "item": 87171,
+          "asin": "B08T98JWHW",
+          "title": "CHDFKKD Car Phone Mount, Cell Phone Holder for Car 360 Degree Rotation Car Dashboard Clip Mount Stand Suitable for 4 to 7 inch Smartphones (Black)",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "CHDFKKD",
+          "price": 10.89
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 82793,
+          "asin": "B08HYDP59S",
+          "title": "New bee Bluetooth Earpiece V5.0 Wireless Handsfree Headset 24 Hrs Driving Headset 60 Days Standby Time with Noise Cancelling Mic Headsetcase for iPhone Android Samsung Laptop Truck Driver, Gold",
+          "path": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "store": "New bee",
+          "price": 16.99
+        },
+        {
+          "item": 81313,
+          "asin": "B08DY47RSX",
+          "title": "Bluetooth Earpiece V5.0 Wireless Handsfree Headset with Microphone Noise Cancelling 16 Hrs Talking 450 Hrs Standby Compatible with iPhone Android Samsung Cell Phone PC Laptop for Driver Trucker, Black",
+          "path": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "store": "ZEEYU",
+          "price": null
+        },
+        {
+          "item": 59999,
+          "asin": "B07GYY6VTD",
+          "title": "Moto G6 with Alexa Hands-Free \u2013 32 GB \u2013 Unlocked (AT&T/Sprint/T-Mobile/Verizon) \u2013 Oyster Blush - Prime Exclusive Phone",
+          "path": "Cell Phones & Accessories > Cell Phones",
+          "leaf_cat": "Cell Phones & Accessories > Cell Phones",
+          "store": "Motorola",
+          "price": null
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "unknown",
+      "top_category_jump": "unknown",
+      "second_level_jump": "unknown",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 1756859,
+      "user": 243219,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 27210,
+          "asin": "B013V34L0C",
+          "title": "Tektide Case Compatible for Moto G Pure, [Invisible Armor] Xtreme Slim, Clear, Soft, Lightweight, Shock Absorbing TPU Bumper/Back Cover",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Tektide",
+          "price": 6.99,
+          "date": "2016-08-02"
+        },
+        {
+          "item": 78126,
+          "asin": "B086HJYR1S",
+          "title": "AmazonBasics 4.8 Amp 24W Dual USB Car Charger for Apple and Android Devices, Black and Red, 4-Pack",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+          "store": "Amazon Basics",
+          "price": 29.28,
+          "date": "2018-06-14"
+        },
+        {
+          "item": 41224,
+          "asin": "B01MSX6VDU",
+          "title": "Plinrise Animal Desk Phone Stand, Update Dinosaur Stripe Silicone Office Phone Holder, Creative Phone Tablet Stand Mounts, Size:1.3\" X 3.1\" X 2.8\" (Stand 4Pcs)",
+          "path": "Cell Phones & Accessories > Accessories > Stands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stands",
+          "store": "Z PLINRISE",
+          "price": null,
+          "date": "2019-01-06"
+        },
+        {
+          "item": 40043,
+          "asin": "B01M1CE14W",
+          "title": "Google Pixel XL Case, Cruzerlite Bugdroid Circuit TPU Case for Google Pixel XL - Retail Packaging - Teal",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CruzerLite",
+          "price": null,
+          "date": "2019-08-29"
+        }
+      ],
+      "target": {
+        "item": 87840,
+        "asin": "B08XBB6J47",
+        "title": "Caseology Vault Compatible with Google Pixel 5a Case 5G (2021) - Urban Gray",
+        "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "store": "Caseology",
+        "price": 13.99,
+        "date": "2022-04-19",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 1087,
+      "recency_top3": [
+        {
+          "item": 40042,
+          "asin": "B01M1CDY54",
+          "title": "Google Pixel XL Case, Cruzerlite Bugdroid Circuit TPU Case for Google Pixel XL - Retail Packaging - Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CruzerLite",
+          "price": null
+        },
+        {
+          "item": 39385,
+          "asin": "B01LX403GH",
+          "title": "CruzerLite Google Pixel XL Case, Bugdroid Circuit TPU Case for Google Pixel XL - Retail Packaging - Blue",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CruzerLite",
+          "price": null
+        },
+        {
+          "item": 41751,
+          "asin": "B01N1G0KP0",
+          "title": "Google Pixel XL Case, Cruzerlite Androidified A2 (TPU and Carbon) case for Google Pixel XL - Blue",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CruzerLite",
+          "price": 8.9
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 50195,
+          "asin": "B075WW69PS",
+          "title": "amFilm Glass Screen Protector for Google Pixel 2 XL, Tempered Glass, 3D Curved",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 11.99
+        },
+        {
+          "item": 76865,
+          "asin": "B083L8D1V5",
+          "title": "OMOTON [3 Pack Screen Protector for Google Pixel 4XL/ 4 XL Tempered Glass/Easy Installation with Alignment Frame/Only Cover Display Area",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "OMOTON",
+          "price": null
+        },
+        {
+          "item": 47575,
+          "asin": "B0746ZT1Y3",
+          "title": "Spigen Rugged Armor Designed for Google Pixel 2 XL Case (2017) - Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Spigen",
+          "price": 12.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "no",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F1_new_target",
+      "inst": 2347616,
+      "user": 324948,
+      "hist_len": 5,
+      "history_last5": [
+        {
+          "item": 54486,
+          "asin": "B07BF4RGKP",
+          "title": "L K (3 Pack) Screen Protector for iPhone 7, iPhone 8 (4.7 inch) Tempered Glass (Easy Installation Tray) Case Friendly, 9H Hardness HD Clear, Bubble Free",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "L K",
+          "price": null,
+          "date": "2018-08-05"
+        },
+        {
+          "item": 45382,
+          "asin": "B071JT43BY",
+          "title": "Raptic Shield, iPhone SE 2022 case, Military Grade Drop Tested iPhone 7 8 Case, Shockproof Protective Clear Case, Durable Aluminum Frame Case for iPhone SE 2022/8/7, Rose Gold",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "X-Doria",
+          "price": null,
+          "date": "2018-08-05"
+        },
+        {
+          "item": 64211,
+          "asin": "B07MBQDT57",
+          "title": "Purity Glass Screen Protector for iPhone 8 Plus / 7 Plus (3-Pack) [w/Installation Frame] Tempered Glass Screen Protector Compatible with Apple iPhone 8 Plus, iPhone 7 Plus [Case Friendly] (3 Pack)",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Purity",
+          "price": 6.99,
+          "date": "2019-05-27"
+        },
+        {
+          "item": 108766,
+          "asin": "B0BY4735QB",
+          "title": "VICSEED Universal Phone Mount for Car [Solid & Durable] Car Phone Holder Mount Dashboard Windshield Air Vent Long Arm Strong Suction Cell Phone Holder Car for iPhone 14 13 12 Pro Max All Mobile Phones",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "VICSEED",
+          "price": 28.97,
+          "date": "2020-10-02"
+        },
+        {
+          "item": 101156,
+          "asin": "B0B86Z99SL",
+          "title": "TOZO W3 Mini Wireless Charger 10W Thinnest Fast Charging Pad with Aviation Aluminum Computer Numerical Control Technology Sleep-Friendly Sliver (NO AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "TOZO",
+          "price": 13.99,
+          "date": "2020-12-18"
+        }
+      ],
+      "target": {
+        "item": 103139,
+        "asin": "B0BFL6HYPB",
+        "title": "Geoumy Magnetic Band Compatible with Apple Watch 38mm 40mm 41mm 42mm 44mm 45mm 49mm, Stainless Steel Mesh Milanese Strap, Metal Wristband for iWatch SE Series 8 7 6 5 4 3 2 1 for Women Men",
+        "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "store": "Geoumy",
+        "price": 10.99,
+        "date": "2022-03-07",
+        "new_in_val": true,
+        "reviews_before_t1": 0
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 10874,
+      "recency_top3": [
+        {
+          "item": 84186,
+          "asin": "B08LL1LLJ5",
+          "title": "TOZO W8 Wireless Car Charger Auto-attraction Magnets Fast Charging Air Vent Mount Compatible for iPhone 12/12 Mini/12 Pro/ 12 Pro Max NO AC Adapter (Compatible with Mag-Safe Charger Magnetic Charging)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Charging Stations",
+          "store": "TOZO",
+          "price": 12.99
+        },
+        {
+          "item": 87299,
+          "asin": "B08TQFF4D9",
+          "title": "Wireless Car Charger, 15W/10W Fast Charging Car Mount, Air Vent Cell Phone Holder for Car, Universal Car Phone Holder Cradle Compatible with iPhone 13/12/11, Samsung S21/S20/S10, and More, Black",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "Clin",
+          "price": null
+        },
+        {
+          "item": 56672,
+          "asin": "B07DDCWKGT",
+          "title": "andobil Wireless Car Charger Mount, 1 Sec Auto-Clamping Fast Charging Phone Holder for Car Windshield Dashboard Air Vent, Compatible with iPhone Xs/Xs Max/XR/X/8,Samsung Galaxy S10/S10e/S9/S9+/S8 Etc",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+          "store": "andobil",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mkeke",
+          "price": 11.99
+        },
+        {
+          "item": 66116,
+          "asin": "B07P9S6R9Y",
+          "title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "yootech",
+          "price": 15.99
+        },
+        {
+          "item": 91956,
+          "asin": "B09CDB5X99",
+          "title": "Wireless Charger, 15W Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "COO",
+          "price": null
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 764303,
+      "user": 105662,
+      "hist_len": 5,
+      "history_last5": [
+        {
+          "item": 61439,
+          "asin": "B07HRKNQJH",
+          "title": "[2 Pack] Galaxy Note 8 Tempered Glass Screen Protector, Loopilops [HD Clear][Anti-Bubble][Anti-Scratch][Anti-Fingerprint] Tempered Glass Screen Protector Samsung Galaxy Note 8 [Case Friendly]",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ELYAN",
+          "price": null,
+          "date": "2018-11-21"
+        },
+        {
+          "item": 47822,
+          "asin": "B074G1W2RC",
+          "title": "amFilm Glass Screen Protector for Samsung Galaxy Note 8, Full Screen Coverage, 3D Curved Tempered Glass, Dot Matrix with Easy Installation Tray (Black)",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 8.99,
+          "date": "2019-01-11"
+        },
+        {
+          "item": 111287,
+          "asin": "B0CBRHYBCH",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy Watch 3 (45mm)(6-Pack) Anti-Bubble Clear Film",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "store": "IQShield",
+          "price": 9.95,
+          "date": "2020-02-20"
+        },
+        {
+          "item": 47577,
+          "asin": "B07471C38C",
+          "title": "Spigen Rugged Armor Designed for Google Pixel 2 Case (2017) - Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Spigen",
+          "price": null,
+          "date": "2020-03-01"
+        },
+        {
+          "item": 91607,
+          "asin": "B09BJ1CQC3",
+          "title": "Aliruke Google Pixel 6 Pro Case, Google Pixel 6 XL Case with Finger Ring Holder Kickstand, Military Grade Stand Cover Phone Cases Compatible for Google Pixel6 Pro, Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Aliruke",
+          "price": null,
+          "date": "2022-02-01"
+        }
+      ],
+      "target": {
+        "item": 76089,
+        "asin": "B082DVBVMK",
+        "title": "Pofesun 2Pack 30W Fast Charger 3.0 Dual USB Wall Charger, QC 3.0 Charging Block Fast Charging Power Adapter Compatible for Galaxy S21 S20 S10 S9 S8 Note 10 9 iPhone iPad LG Pixel Tablets-Black",
+        "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+        "store": "Pofesun",
+        "price": 12.49,
+        "date": "2022-04-04",
+        "new_in_val": false,
+        "reviews_before_t1": 72
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 6148,
+      "recency_top3": [
+        {
+          "item": 91473,
+          "asin": "B09B3MQRT6",
+          "title": "Aliruke Google Pixel 6 Case, Google Pixel6 Case with Finger Ring Holder Kickstand, Military Grade Stand Cover Phone Cases Compatible for Google Pixel 6, Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Aliruke",
+          "price": 9.9
+        },
+        {
+          "item": 94260,
+          "asin": "B09KGJ7X77",
+          "title": "Pixel 6 Pro Case, Google Pixel 6 Pro Case with 3D Curved HD Screen Protector, Androgate Military-Grade Ring Holder Kickstand 15ft Drop Tested Shockproof Cover Case for Pixel 6 Pro Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Androgate",
+          "price": 9.9
+        },
+        {
+          "item": 91408,
+          "asin": "B099ZTCR29",
+          "title": "Wallet Case for Google Pixel 6 Pro Case with Card Holder Slot with Stand Kickstand Ring Slim Heavy Duty Defender Armor Military Grade Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Kingshark",
+          "price": 25.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 50195,
+          "asin": "B075WW69PS",
+          "title": "amFilm Glass Screen Protector for Google Pixel 2 XL, Tempered Glass, 3D Curved",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 11.99
+        },
+        {
+          "item": 76865,
+          "asin": "B083L8D1V5",
+          "title": "OMOTON [3 Pack Screen Protector for Google Pixel 4XL/ 4 XL Tempered Glass/Easy Installation with Alignment Frame/Only Cover Display Area",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "OMOTON",
+          "price": null
+        },
+        {
+          "item": 110338,
+          "asin": "B0C5CZRMJC",
+          "title": "IQShield Screen Protector Compatible with Google Pixel 3a XL 6 inch (2-Pack)(Case Friendly) Anti-Bubble Clear Film",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "IQShield",
+          "price": 9.95
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 1491415,
+      "user": 206272,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 54870,
+          "asin": "B07BQQ7C8W",
+          "title": "Mr.Shield [3-PACK] Designed For Samsung Galaxy J7 [Newest 2017] [Tempered Glass] Screen Protector [Japan Glass With 9H Hardness] with Lifetime Replacement",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mr.Shield",
+          "price": 6.95,
+          "date": "2018-11-20"
+        },
+        {
+          "item": 77406,
+          "asin": "B084TMLSY8",
+          "title": "Lamicall Phone Holder Bed Gooseneck Mount Cell Phone Clamp Clip for Desk, Flexible Lazy Long Arm Headboard Bedside, Overhead Mount Stand, Compatible with Phone 12 Mini 11 Pro Xs Max XR X 8 7 6 Plus",
+          "path": "Cell Phones & Accessories > Accessories > Stands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stands",
+          "store": "Lamicall",
+          "price": 26.99,
+          "date": "2020-11-14"
+        },
+        {
+          "item": 92386,
+          "asin": "B09DH6J6FX",
+          "title": "Case-Mate Elastic Strap Phone Grip - Finger & Hand Phone Holder, Mobile & Tablet Phone Strap - For iPhone 14 Pro Max/ 13 Pro Max/ 12 Pro Max/ 11/ S23 Ultra/ Pixel 7, 3M Supreme Adhesive - Pink Glitter",
+          "path": "Cell Phones & Accessories > Accessories > Grips",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Grips",
+          "store": "Case-Mate",
+          "price": null,
+          "date": "2020-11-23"
+        },
+        {
+          "item": 79484,
+          "asin": "B089GL13D8",
+          "title": "USB C Female to USB Male Adapter (4-Pack),Type C to USB A Charger Cable Adapter for iPhone 11 12 13 14 Pro Max,Samsung Galaxy S23 S22 S21 S20 Ultra,Google Pixel 4 3 2,Apple iWatch Watch Series 7 8 SE",
+          "path": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "store": "QianLink",
+          "price": 6.99,
+          "date": "2021-12-17"
+        }
+      ],
+      "target": {
+        "item": 64791,
+        "asin": "B07MVH52FG",
+        "title": "JXMOX USB Type C Adapter, (4-Pack) Micro USB Female to USB C Male Convert Connector Fast Charging Compatible with Samsung Galaxy S10 S9 S8 Plus,Note 9 8,LG V35 V30 G7,Nexus 6P 5X,Moto Z2 Z3(Red)",
+        "path": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+        "store": "JXMOX",
+        "price": 7.99,
+        "date": "2021-12-21",
+        "new_in_val": false,
+        "reviews_before_t1": 200
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": 224,
+      "two_tower_full_rank": 224,
+      "recency_top3": [
+        {
+          "item": 104225,
+          "asin": "B0BJ66RGZN",
+          "title": "USB C Female to USB Male Adapter 4-Pack,JXMOX Type C to USB A Charger Cable Adapter for iPhone 11 12 13 14 Pro Max,Samsung Galaxy Note 10 S22 S21 S20 Ultra,Google Pixel 5 4 3 2 XL,iPad Air 4 5 Mini 6",
+          "path": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "store": "JXMOX",
+          "price": 6.99
+        },
+        {
+          "item": 88700,
+          "asin": "B0915YC2M4",
+          "title": "USB C Female to USB Male Adapter (8 Pack),Type C to USB A Charger Cable Adapter for iPhone 11 12 13 Pro Max,Samsung Galaxy Note 10 S20 Plus 20 S20+ 20+ Ultra,Google Pixel 5 4 4a 3 3A 2 XL",
+          "path": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "store": "IIABC",
+          "price": 5.99
+        },
+        {
+          "item": 91547,
+          "asin": "B09BBHNRH9",
+          "title": "USB C Female to USB Male Adapter (4-Pack),Type C Charging Cord Connect USB A Charger for iPhone 14 13 12 11 Pro Max,iPad Pro Air 4 5 Mini 6,Samsung Galaxy S20 S21 S22 Plus,Google Pixel 5 4 XL(White)",
+          "path": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Cables & Adapters > OTG Adapters",
+          "store": "QianLink",
+          "price": 5.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 53306,
+          "asin": "B0794SCYM8",
+          "title": "AMINY Bluetooth Headset,Wireless Bluetooth Earpiece Compatible with iPhone/Android Cell Phones,Auriculares Bluetooth Earpiece 28 Hrs Talking Time V5.3 Wireless Headset,Button Depress Version",
+          "path": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "store": "AMINY",
+          "price": 29.99
+        },
+        {
+          "item": 91956,
+          "asin": "B09CDB5X99",
+          "title": "Wireless Charger, 15W Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "COO",
+          "price": null
+        },
+        {
+          "item": 92881,
+          "asin": "B09FSRQJQM",
+          "title": "P&LLL Bluetooth Mini Single Earbud Wireless Invisible Pro Headset 8Hrs Playtime Noise Smallest in-Ear Noise Cell Phone with Hands-Free Earpiece for iPhone Samsung Android Car Mic Earphone",
+          "path": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Single Ear Bluetooth Headsets",
+          "store": "P&LLL",
+          "price": 25.55
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "no",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 1532879,
+      "user": 212050,
+      "hist_len": 7,
+      "history_last5": [
+        {
+          "item": 58532,
+          "asin": "B07G14SFKB",
+          "title": "Casetego Compatible with Galaxy S8 Plus Case,Floral Three Layer Heavy Duty Hybrid Sturdy Shockproof Full Body Protective Cover Case for Samsung Galaxy S8 Plus,Blue Flower",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Casetego",
+          "price": 12.99,
+          "date": "2019-12-15"
+        },
+        {
+          "item": 56233,
+          "asin": "B07D2DTJ1B",
+          "title": "EZCO 4-Pack Screen Protector Compatible with Fitbit Versa & Versa Lite (Not for Versa 2), Waterproof Tempered Glass Screen Protector Cover Saver for Versa Smart Watch Scratch Resist Anti-Bubble",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "store": "EZCO",
+          "price": null,
+          "date": "2020-09-23"
+        },
+        {
+          "item": 55890,
+          "asin": "B07CQBCJRW",
+          "title": "QIBOX Charger Compatible with Fitbit Versa/Versa Lite (Not for Versa 2/3), Replacement USB Charging Cable Dock Stand for Versa/Versa Lite/Versa SE Smartwatch, 2-Pack 3Ft Sturdy Power Charging Cord",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "store": "QIBOX",
+          "price": null,
+          "date": "2020-10-07"
+        },
+        {
+          "item": 57427,
+          "asin": "B07F2C6JL1",
+          "title": "LK Screen Protector Compatible with Samsung Galaxy S8 Plus Tempered Glass, Case Friendly, Alignment Frame Easy Installation, 3D Curved Full Coverage",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "LK",
+          "price": null,
+          "date": "2020-10-07"
+        },
+        {
+          "item": 88312,
+          "asin": "B08YVXNMY6",
+          "title": "ICEDIO for iPhone 12 Pro Max Case with Screen Protector,Clear with Fashion Leopard Patterns for Girls Women,Shockproof Slim Fit TPU Cover Protective Phone Case for iPhone 12 Pro Max 6.7\"",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ICEDIO",
+          "price": 15.89,
+          "date": "2021-06-13"
+        }
+      ],
+      "target": {
+        "item": 109020,
+        "asin": "B0BZ3LP5P4",
+        "title": "OHCBOOGIE Stretchy Solo Loop Strap Compatible with Apple Watch Bands 38mm 40mm 42mm 44mm 45mm 49mm 49mm ,Adjustable Stretch Braided Sport Elastics Weave Nylon Women Men Wristband Compatible with iWatch Series 8/7/6/5/4/3/2/1 SE Ultra",
+        "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "store": "OHCBOOGIE",
+        "price": 9.99,
+        "date": "2022-01-12",
+        "new_in_val": false,
+        "reviews_before_t1": 133
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 31102,
+      "recency_top3": [
+        {
+          "item": 89469,
+          "asin": "B093JXPKS5",
+          "title": "ICEDIO iPhone 11 Pro Case with Screen Protector,Clear with Cute Flower Garden Patterns for Girls Women,Shockproof Slim Fit TPU Cover Protective Phone Case for Apple iPhone 11 Pro 5.8 Inch",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ICEDIO",
+          "price": 12.98
+        },
+        {
+          "item": 88487,
+          "asin": "B08ZJRKWQD",
+          "title": "ICEDIO iPhone Xs Max Case with Screen Protector,Clear with Fashion Floral Designs for Girls Women,Shockproof Slim Fit TPU Cover Protective Phone Case for iPhone Xs Max Beautiful Blossoms",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ICEDIO",
+          "price": 14.99
+        },
+        {
+          "item": 107972,
+          "asin": "B0BVJY2WXN",
+          "title": "ICEDIO iPhone 13 Case with Screen Protector,Slim Fit Crystal Clear Cover with Fashionable Designs for Girls Women,Protective Phone Case for iPhone 13 6.1\" Leopard Patterns",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ICEDIO",
+          "price": 15.66
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 110477,
+          "asin": "B0C5W4TCMM",
+          "title": "IQShield Screen Protector Compatible with Samsung Galaxy S8 (2-Pack)(Case Friendly)(Not Glass) Anti-Bubble Clear Film",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "IQShield",
+          "price": 9.95
+        },
+        {
+          "item": 109967,
+          "asin": "B0C3TFVNJ1",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed for Samsung Galaxy S22 Ultra 6.8\" Case Friendly (2022 Release) Anti-Bubble HD Clear Film - Made in USA",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ArmorSuit",
+          "price": 9.95
+        },
+        {
+          "item": 39503,
+          "asin": "B01LXZDPDR",
+          "title": "Ailun Screen Protector Compatible for iPhone 8 plus,7 Plus,6s Plus,6 Plus, 5.5 Inch 3Pack Case Friendly Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 6.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 1732724,
+      "user": 239866,
+      "hist_len": 2,
+      "history_last5": [
+        {
+          "item": 30442,
+          "asin": "B0195WOHUC",
+          "title": "Gocomcom Honbay Belt Clip Holster for Otterbox Defender Case for Samsung Galaxy Note 9 / N960U Black+ Fishbone Cable Winder",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Gocomcom",
+          "price": null,
+          "date": "2017-05-04"
+        },
+        {
+          "item": 11866,
+          "asin": "B00FA892IS",
+          "title": "Bike Mount, GreatShield Clip-Grip [Upgrade Version - Elastic Secure Strap] Handlebar Bike Mount Holder for iPhones, Samsung Galaxy, LG, BlackBerry, HTC Smartphones, GPS Devices and More",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "GreatShield",
+          "price": null,
+          "date": "2017-05-04"
+        }
+      ],
+      "target": {
+        "item": 91243,
+        "asin": "B099J3K1LJ",
+        "title": "Cell Phone Clip on Stand Holder - with Grip Flexible Long Arm Gooseneck Bracket Mount Clamp for iPhone X/8/7/6/6s/5 Samsung S8/S7, used for bed, desktop, Black",
+        "path": "Cell Phones & Accessories > Accessories > Stands",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Stands",
+        "store": "MAGIPEA",
+        "price": 12.7,
+        "date": "2021-10-06",
+        "new_in_val": false,
+        "reviews_before_t1": 287
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": 323,
+      "two_tower_full_rank": 323,
+      "recency_top3": [
+        {
+          "item": 29981,
+          "asin": "B0186EJTGC",
+          "title": "Handstands Clip Belt Holster for Smartphones",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Gadget Grips",
+          "price": null
+        },
+        {
+          "item": 54833,
+          "asin": "B07BNZW793",
+          "title": "Phone Belt Clip, Lovphone Universal Holder with Quick Mount for iPhone 14/13/12/11,14/13/12/11 Pro,14/13/12/11 Pro Max,XR,XS Max,X,7,8 & Samsung Galaxy S23/S22/S21 Ultra, Plus",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "LOVPHONE",
+          "price": 9.99
+        },
+        {
+          "item": 20601,
+          "asin": "B00PRSBQSK",
+          "title": "Honbay Samsung Galaxy Note 4 N9100 Replacement Belt Clip for Otterbox Defender Case",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Gocomcom",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 83838,
+          "asin": "B08L51PB1X",
+          "title": "amFilm Screen Protector for Samsung Galaxy Note 9, Full Screen Coverage Screen Protector, 3D Curved Tempered Glass, Dot Matrix with Easy Installation Tray (Black), 2 Pack",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 9.99
+        },
+        {
+          "item": 85598,
+          "asin": "B08PCJK5WK",
+          "title": "SUPCASE Unicorn Beetle PRO Series Phone Case for Samsung Galaxy Note 9, Full-Body Rugged Holster Case with Built-in Screen Protector for Samsung Galaxy Note 9 2018 (Pink)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "SUPCASE",
+          "price": 21.99
+        },
+        {
+          "item": 88527,
+          "asin": "B08ZN3Z5TD",
+          "title": "amFilm (3 Pack) Glass Screen Protector for Samsung Galaxy Note 9, Full Screen Coverage Screen Protector, 3D Curved Tempered Glass, Dot Matrix with Easy Installation Tray",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 12.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 1837606,
+      "user": 254445,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 56372,
+          "asin": "B07D5GG16Q",
+          "title": "YOUMAKER Galaxy S9 Case,Metallic Purple with Built-in Screen Protector Heavy Duty Protection Shockproof Slim Fit Full Body Case Cover for Samsung Galaxy S9 5.8 inch - Purple/Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "YOUMAKER",
+          "price": null,
+          "date": "2018-12-08"
+        },
+        {
+          "item": 85544,
+          "asin": "B08P7SXB1W",
+          "title": "SUPCASE Unicorn Beetle Pro Series Case Designed for Galaxy S9, with Built-in Screen Protector Full-Body Rugged Holster Case for Galaxy S9 (2018 Release) (Royal Blue)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "SUPCASE",
+          "price": 22.99,
+          "date": "2018-12-08"
+        },
+        {
+          "item": 53927,
+          "asin": "B079Y8B54J",
+          "title": "Macally Windshield Phone Mount for Car Magnetic - Suction Cup Window Mount Phone Holder with 12\" Long Gooseneck Arm & Super Strong Magnet Mount for Cell Phone, iPhone, Smartphone",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "Macally",
+          "price": 17.99,
+          "date": "2018-12-08"
+        },
+        {
+          "item": 103623,
+          "asin": "B0BGN5KZQ6",
+          "title": "Fotopro UFO2 Flexible Tripod, 12\" Phone Camera Tripod with Smartphone Mount and Bluetooth Remote Shutter, 360 Ball Head Tripod for iPhone, Samsung, Huawei(White)",
+          "path": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "store": "Fotopro",
+          "price": 29.99,
+          "date": "2019-04-03"
+        }
+      ],
+      "target": {
+        "item": 51352,
+        "asin": "B0773F8S74",
+        "title": "Magnetic Mount, WizGear Stick On (2 Pack) Dashboard Magnetic Car Mount Holder, for Cell Phones and Mini Tablets with Fast Swift-snap Technology, Magnetic Cell Phone Mount",
+        "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+        "store": "WixGear",
+        "price": 14.89,
+        "date": "2021-12-23",
+        "new_in_val": false,
+        "reviews_before_t1": 672
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 524,
+      "recency_top3": [
+        {
+          "item": 42434,
+          "asin": "B01N9SA3QH",
+          "title": "Flexible Cell Phone Tripod and Bluetooth Remote Control Camera Shutter - for iPhone, Samsung Galaxy and Many More - Octopus Style Mount - Universal Phone Holder - Solution for Smartphone Photography",
+          "path": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "store": "CamKix",
+          "price": 13.99
+        },
+        {
+          "item": 47008,
+          "asin": "B073Q29CN2",
+          "title": "Phone Tripod,PEYOU 50\" Aluminum Camera Tripod + Wireless Remote Shutter + 360\u00b0Rotation Smartphone Holder Mount Compatible for iPhone Xs Max XR X 8 7 6 Plus,for Samsung Galaxy Note 9 8 S10 S9 S8 Plus",
+          "path": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "store": "PEYOU",
+          "price": null
+        },
+        {
+          "item": 46575,
+          "asin": "B072QD19XS",
+          "title": "42inch Remote Controller Shutter + Portable Camera Tripod Stand Holder Adjustable Rotatable Retractable Aluminum Tripods Smartphones Mount for iPhone X XS 8 7 7 11 Pro Max Samsung S9 S8 S10 OnePlus",
+          "path": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "store": "Dogxiong",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 91956,
+          "asin": "B09CDB5X99",
+          "title": "Wireless Charger, 15W Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "COO",
+          "price": null
+        },
+        {
+          "item": 109967,
+          "asin": "B0C3TFVNJ1",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed for Samsung Galaxy S22 Ultra 6.8\" Case Friendly (2022 Release) Anti-Bubble HD Clear Film - Made in USA",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ArmorSuit",
+          "price": 9.95
+        },
+        {
+          "item": 90784,
+          "asin": "B097SDCVG9",
+          "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fast-Charging Galaxy S20, S10 (No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "Anker",
+          "price": 35.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "down"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 1997091,
+      "user": 276426,
+      "hist_len": 3,
+      "history_last5": [
+        {
+          "item": 91923,
+          "asin": "B09C8GRJW6",
+          "title": "Goton 3 in 1 Accessories for Samsung Galaxy Watch 4 Classic 42mm, 1 Rugged TPU Armor Bumper Case Cover +2 Tempered Glass Screen Protector Films + 1 Bezel Ring for Galaxy Watch4 Classic 42mm Black",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "Goton",
+          "price": 11.99,
+          "date": "2022-03-18"
+        },
+        {
+          "item": 110534,
+          "asin": "B0C61JFJJ2",
+          "title": "LYWHL 2 Pack for Samsung Galaxy S9 / S8 Screen Protector, [Case Friendly] Tempered Glass HD Clear 9H Hardness 3D Curved Film ONLY for Galaxy S9 / Galaxy S8, Anti-Scratch Bubble Free",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "LYWHL",
+          "price": 8.88,
+          "date": "2022-03-18"
+        },
+        {
+          "item": 96001,
+          "asin": "B09PG5QLMB",
+          "title": "Leather Bands Compatible with Samsung Galaxy Watch 5 pro Band 45mm Galaxy Watch 5 Band 40mm 44mm Galaxy Watch 4 Band 2021 Galaxy Watch 4 Classic Band 42mm 46mm Men Women",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "store": "HATALKIN",
+          "price": 16.88,
+          "date": "2022-03-18"
+        }
+      ],
+      "target": {
+        "item": 67115,
+        "asin": "B07Q78V8BC",
+        "title": "SURBUID Galaxy S10 Plus Privacy Screen Protector, Tempered Glass [Not for Galaxy S10] [Does Not Support Fingerprint Unlock] [Edge Glue] Case Friendly 3D Touch Screen Protector for Galaxy S10 Plus",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "store": "SURBUID",
+        "price": 9.99,
+        "date": "2022-06-20",
+        "new_in_val": false,
+        "reviews_before_t1": 67
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 4606,
+      "recency_top3": [
+        {
+          "item": 93453,
+          "asin": "B09HBXFQ8V",
+          "title": "Goton 3 in 1 Accessories for Samsung Galaxy Watch 3 41mm, 1 Rugged TPU Armor Bumper Case +2 Tempered Glass Screen Protector Films + 1 Bezel Ring for Galaxy Watch 3 41mm(Black,41mm)",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "Goton",
+          "price": 11.99
+        },
+        {
+          "item": 108737,
+          "asin": "B0BY1G76ZZ",
+          "title": "Goton for Samsung Galaxy Watch 5 & 4 40mm Screen Protector Case, Bling Crystal Diamonds Hard PC Protective Bumper Cover with Tempered Glass Film Accessories for Galaxy Watch 5 & 4",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Goton",
+          "price": 7.99
+        },
+        {
+          "item": 95421,
+          "asin": "B09NCWN1T1",
+          "title": "Goton [3 Pack] Bling Case Compatible with Samsung Galaxy Watch 4 Screen Protector 40mm Accessories, Crystal Diamond Protective Cover with Tempered Glass Film for Watch4 40 mm Black+Pink+White",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "Goton",
+          "price": 14.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 58544,
+          "asin": "B07G1Z1SDS",
+          "title": "(2 Pack) Supershieldz Designed for Samsung Galaxy Watch 3 (41mm) / Galaxy Watch 4 Classic (42mm) / Galaxy Watch (42mm) Tempered Glass Screen Protector, Anti Scratch, Bubble Free",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Supershieldz",
+          "price": 7.99
+        },
+        {
+          "item": 39217,
+          "asin": "B01LW1U5XX",
+          "title": "OMOTON Tempered Glass Screen Protector Compatible Samsung Galaxy Watch 46mm (2018) & Gear S3 [3 Pack]",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "store": "OMOTON",
+          "price": 6.99
+        },
+        {
+          "item": 59253,
+          "asin": "B07GGSK3V6",
+          "title": "Diruite 4-Pack for Samsung Galaxy Watch 46mm (2018) / Gear S3 Screen Protector Tempered Glass, [2.5D 9H Hardness] [Anti-Scratch] (DO NOT Fit for Galaxy Watch 4 Classic 46mm)",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "store": "Diruite",
+          "price": 7.99
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 65319,
+          "asin": "B07NKZQV9Z",
+          "title": "S10 Plus Case,Galaxy S10 Plus Case Carbon Fiber,DUEDUE Dual Layer Slim Hybrid Shock Absorbing Cover Hard PC Bumper Rugged Back Case for Samsung Galaxy S10 Plus/S10+ 6.4'' for Men and Boys(2019), Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "DUEDUE",
+          "price": null,
+          "date": "2022-06-20",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 2244325,
+      "user": 310605,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 7024,
+          "asin": "B009IFU5P8",
+          "title": "Rose Pink White Zebra Combo Hard Soft High Impact iPhone 4 4S Armor Case Skin Gel with Free Screen Protector",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "UIYTRAESTING",
+          "price": null,
+          "date": "2013-09-09"
+        },
+        {
+          "item": 5602,
+          "asin": "B008CBWA66",
+          "title": "ZuGadgets Magenta Leather Flip Wallet Case Holder Cover Pouch with Credit & ID Card Slot for Samsung Galaxy S III S3 i9300 / SC-06D + Free Screen Protector (7484-5)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "ZuGadgets (Samsung Galaxy S3)",
+          "price": null,
+          "date": "2013-09-09"
+        },
+        {
+          "item": 93975,
+          "asin": "B09JP5SGHF",
+          "title": "TOPGO Cup Holder Phone Mount for car, [Upgraded 3.0] Cup Holder Phone Holder [Ultra-Sturdy & Non-Shaking] Cell Phone Automobile Cradles for iPhone 14, Samsung and More Smartphone(Black)",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "TOPGO",
+          "price": 23.99,
+          "date": "2020-07-14"
+        },
+        {
+          "item": 105471,
+          "asin": "B0BMFFC7NZ",
+          "title": "Wall Charger, USB Charger Adapter, 3.1A/3Pack Muti Port Fast Charging Station Power Charge Base Block Plug for iPhone 14 13 12 Pro/SE/11Pro Max/X/8/7 Plus, Samsung S21/S10/S9/S8, Kindle Fire USB Plug",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "AILKIN",
+          "price": 13.99,
+          "date": "2021-05-11"
+        }
+      ],
+      "target": {
+        "item": 81013,
+        "asin": "B08DCMM8WC",
+        "title": "Stylus Pens for Touch Screens, StylusHome 10 Pack High Precision Capacitive Stylus for iPad iPhone Tablets Samsung Galaxy All Universal Touch Screen Devices",
+        "path": "Cell Phones & Accessories > Accessories > Stylus Pens",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Stylus Pens",
+        "store": "STYLUSHOME",
+        "price": 6.99,
+        "date": "2022-06-26",
+        "new_in_val": false,
+        "reviews_before_t1": 134
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 9086,
+      "recency_top3": [
+        {
+          "item": 106690,
+          "asin": "B0BQMNJ819",
+          "title": "USB Charger Plug,Wall Charger,Charging Block,5-Pack 2.1A/5V Portable Power Cube Charger Adapter Compatible for iPhone 14/13/12/11 Pro Max/Xs Max/XR/X/8/7/6S/6 Plus,Samsung Galaxy S23 S22 S21,LG,Moto",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "CIQILY",
+          "price": 12.99
+        },
+        {
+          "item": 89209,
+          "asin": "B092PVHK7T",
+          "title": "USB Wall Charger,Charging Block,3Pack 2.1A 2 Port Wall Plug Travel Power Adapter Fast Charger Box Compatible with iPhone 14/13/12 Mini/11 Pro Max/SE/Xs Max/XR/X/8/7/6 Plus,Samsung Galaxy S21 S20 Ultra",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "CIQILY",
+          "price": 10.99
+        },
+        {
+          "item": 90678,
+          "asin": "B097GYK6GM",
+          "title": "USB Wall Charger,Charger Adapter Charger Block,Double Wall Charger Plug 3Pack 2.1A Dual Port Cube USB Power Adapter Compatible for iPhone 14/13/12/8/7/6 Plus/X,iPad,Samsung Galaxy S5 S6 S7 Edge,Kindle",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "CIQILY",
+          "price": 10.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 91956,
+          "asin": "B09CDB5X99",
+          "title": "Wireless Charger, 15W Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "COO",
+          "price": null
+        },
+        {
+          "item": 66116,
+          "asin": "B07P9S6R9Y",
+          "title": "Yootech Wireless Charger,10W Max Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "yootech",
+          "price": 15.99
+        },
+        {
+          "item": 85039,
+          "asin": "B08NCJSX5Q",
+          "title": "THREEKEY 2 Pack Wireless Charger,10W Wireless Charging Pad Compatible with iPhone iPhone 14/14 Pro/14 Plus/14 Pro Max/13/13 Mini 13 Pro/13 Pro Max/Samsung Note,Galaxy Series",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "THREEKEY",
+          "price": 18.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "down"
+    },
+    {
+      "bucket": "F2_warm_ge50",
+      "inst": 2572126,
+      "user": 356052,
+      "hist_len": 16,
+      "history_last5": [
+        {
+          "item": 100492,
+          "asin": "B0B6BR68Z1",
+          "title": "EGV 3 Pack Screen Protector for iPhone 14 Plus/iPhone 13 Pro Max 6.7-inch, 9H Hardness iPhone14 Plus Tempered Glass Film With Align Frame, Protective Glass Cover Screen, Bubble Free",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "EGV",
+          "price": 2.99,
+          "date": "2020-11-15"
+        },
+        {
+          "item": 106027,
+          "asin": "B0BNMYCR38",
+          "title": "[2 Pack] Penom Compatible for Apple Watch Ultra Case 49mm Bumper Cover, Soft TPU Shockproof Protective Scratch-Resistant Frame for iWatch Series 8 Ultra 49 MM [No Screen Protector]- Clear",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "Penom",
+          "price": 8.99,
+          "date": "2020-11-20"
+        },
+        {
+          "item": 99542,
+          "asin": "B0B3L97JKZ",
+          "title": "Stretchy Solo Loop Nylon Bands Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm 49mm, Braided Elastic Wristbands Women Men Straps for iWatch Series Ultra/8/7/6/5/4/3/2/1/SE",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "store": "CCnutri",
+          "price": 10.99,
+          "date": "2021-11-08"
+        },
+        {
+          "item": 58169,
+          "asin": "B07FPVF2M6",
+          "title": "elago W2 Charger Stand Compatible with Apple Watch Series Ultra/8/SE2/7/6/SE/5/4/3/2/1 (49mm, 45mm, 44mm, 42mm, 41mm, 40mm, 38mm), Durable Silicone, Compatible with Nightstand Mode (Red)",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "store": "elago",
+          "price": 10.99,
+          "date": "2022-01-12"
+        },
+        {
+          "item": 88102,
+          "asin": "B08Y5L9RL3",
+          "title": "Aliruke Moto One 5G Ace/Moto G 5G Case with Tempered Glass Screen Protector and Grip Ring Kickstand, Military Grade Cover Magnetic Finger Loop Stand Phone Cases for Motorola Moto One 5G Ace, Red",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Aliruke",
+          "price": null,
+          "date": "2022-04-08"
+        }
+      ],
+      "target": {
+        "item": 109967,
+        "asin": "B0C3TFVNJ1",
+        "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed for Samsung Galaxy S22 Ultra 6.8\" Case Friendly (2022 Release) Anti-Bubble HD Clear Film - Made in USA",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "store": "ArmorSuit",
+        "price": 9.95,
+        "date": "2022-05-20",
+        "new_in_val": false,
+        "reviews_before_t1": 937
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 889,
+      "recency_top3": [
+        {
+          "item": 88105,
+          "asin": "B08Y5NM256",
+          "title": "Aliruke Moto One 5G Ace/Moto G 5G Case with Tempered Glass Screen Protector and Grip Ring Kickstand, Military Grade Cover Magnetic Finger Loop Stand Phone Cases for Motorola Moto One 5G Ace, Blue",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Aliruke",
+          "price": null
+        },
+        {
+          "item": 83775,
+          "asin": "B08L37S9CV",
+          "title": "Aliruke Case for Moto One 5G/Moto One 5G UW/Moto G 5G Plus Case with Tempered Glass Screen Protector,Military Grade Cover Grip Ring Kickstand Protective Phone Cases for Motorola Moto One 5G UW, Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Aliruke",
+          "price": 9.9
+        },
+        {
+          "item": 82861,
+          "asin": "B08J3TBYPK",
+          "title": "Aliruke Case for Moto One 5G/Moto One 5G UW/Moto G 5G Plus Case with Tempered Glass Screen Protector,Slim Shockproof TPU Bumper Cover Flexible Protective Phone Cases for Motorola Moto One 5G UW, Red",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Aliruke",
+          "price": 8.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mkeke",
+          "price": 11.99
+        },
+        {
+          "item": 96156,
+          "asin": "B09PZQ8MNG",
+          "title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 11 / iPhone XR [6.1 inch] [Case Friendly] - 2 Pack",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Spigen",
+          "price": 15.99
+        },
+        {
+          "item": 91956,
+          "asin": "B09CDB5X99",
+          "title": "Wireless Charger, 15W Fast Wireless Charging Pad Compatible with iPhone 14/14 Plus/14 Pro/14 Pro Max/13/13 Mini/SE 2022/12/11/X/8,Samsung Galaxy S22/S21/S20,AirPods Pro 2(No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "COO",
+          "price": null
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 62142,
+      "user": 8618,
+      "hist_len": 3,
+      "history_last5": [
+        {
+          "item": 55395,
+          "asin": "B07C7MZLT3",
+          "title": "BlastCase iPod Shuffle USB Charger SYNC Cable 3rd, 4th and 5th (Length May Vary)",
+          "path": "",
+          "leaf_cat": "",
+          "store": "Generic",
+          "price": null,
+          "date": "2015-02-26"
+        },
+        {
+          "item": 109478,
+          "asin": "B0C23JZ6HP",
+          "title": "for Applewatch Charger Apple i Watch Charger,Long Apple Watch Charging USB C 2 Pack 6Ft 2-in-1 iPhone and iWatch Cable for Apple Watch Series 8/7/6/SE/5/4, Type-C Travel Block for iPhone 14/13/12/11",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "store": "TUMABER",
+          "price": 24.99,
+          "date": "2021-01-06"
+        },
+        {
+          "item": 38033,
+          "asin": "B01KBQ6I3A",
+          "title": "Mr Shield [Tempered Glass] Screen Protector For iPhone 6 / iPhone 6S / iPhone 7 / iPhone 8 [3-Pack] Screen Protector",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mr.Shield",
+          "price": 5.95,
+          "date": "2021-07-11"
+        }
+      ],
+      "target": {
+        "item": 87662,
+        "asin": "B08W33NH74",
+        "title": "NTG Shockproof Designed for iPhone SE 2022 Case/iPhone SE 2020 Case, Heavy-Duty Tough Rugged Lightweight Slim Protective Case for iPhone SE/8/7-Black",
+        "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+        "store": "NTG",
+        "price": 7.99,
+        "date": "2022-01-24",
+        "new_in_val": false,
+        "reviews_before_t1": 12
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 4557,
+      "recency_top3": [
+        {
+          "item": 52901,
+          "asin": "B078PHL9QX",
+          "title": "Mr.Shield [5-PACK] Designed For iPhone 6 / iPhone 6S [Tempered Glass] Screen Protector with Lifetime Replacement",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mr.Shield",
+          "price": 6.99
+        },
+        {
+          "item": 74453,
+          "asin": "B07YSPFX5F",
+          "title": "Mr.Shield [3-PACK] Designed For iPhone 6 Plus/iPhone 6S Plus [Tempered Glass] Screen Protector with Lifetime Replacement",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mr.Shield",
+          "price": 6.95
+        },
+        {
+          "item": 52888,
+          "asin": "B078PB1M2M",
+          "title": "Mr.Shield [5-PACK] Designed For iPhone 8 / iPhone 7 [Tempered Glass] Screen Protector with Lifetime Replacement",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mr.Shield",
+          "price": 6.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 27338,
+          "asin": "B01415QHYW",
+          "title": "amFilm Screen Protector 4.7\u201c for Apple iPhone 8, iPhone 7, iPhone 6S and iPhone 6, Tempered Glass 4.7\u201c, 2 Pack",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "amFilm",
+          "price": 6.98
+        },
+        {
+          "item": 39503,
+          "asin": "B01LXZDPDR",
+          "title": "Ailun Screen Protector Compatible for iPhone 8 plus,7 Plus,6s Plus,6 Plus, 5.5 Inch 3Pack Case Friendly Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 6.99
+        },
+        {
+          "item": 98269,
+          "asin": "B09YLZXLWN",
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ultra-Thin Protective Cover for iWatch, Transparent",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "JULK",
+          "price": 8.88
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 94145,
+          "asin": "B09K43WQKM",
+          "title": "NTG [1st Generation Designed for iPhone 11 Case, Heavy-Duty Tough Rugged Lightweight Slim Shockproof Protective Case for iPhone 11 6.1 Inch, Grey",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "NTG",
+          "price": 13.99,
+          "date": "2022-01-24",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 219280,
+      "user": 30338,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 4557,
+          "asin": "B007ACZ9S4",
+          "title": "Krusell Luna 3XL Leather Universal Phone Case for iPhone SE/5s/5, 4s/4, and Smartphones w/ 4.3/4.88-in Screens",
+          "path": "Cell Phones & Accessories > Accessories",
+          "leaf_cat": "Cell Phones & Accessories > Accessories",
+          "store": "Krusell",
+          "price": 8.62,
+          "date": "2013-01-03"
+        },
+        {
+          "item": 6597,
+          "asin": "B0098QJM56",
+          "title": "Armor Suit 2 Pack Screen Protector Designed for Samsung Galaxy 5.1 Inch Max Coverage MilitaryShield HD Clear Film - Made in USA",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ArmorSuit",
+          "price": null,
+          "date": "2013-01-03"
+        },
+        {
+          "item": 67928,
+          "asin": "B07R5467KM",
+          "title": "5-Pack TruGlide Mesh Fiber Stylus with Microfiber Knit Tip for All Capacitive Touch Screen Tablets, iPad, and Smartphone (Black with Gold Clip, Blue, Green, Pink, and Purple with Silver Clip), Lynktec",
+          "path": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "store": "Lynktec",
+          "price": null,
+          "date": "2013-12-10"
+        },
+        {
+          "item": 2654,
+          "asin": "B004ZL9IZI",
+          "title": "LG LG500G Tracfone with Double Minutes for Life",
+          "path": "Cell Phones & Accessories > TracFone",
+          "leaf_cat": "Cell Phones & Accessories > TracFone",
+          "store": "LG",
+          "price": null,
+          "date": "2013-12-18"
+        }
+      ],
+      "target": {
+        "item": 86969,
+        "asin": "B08SQJRT55",
+        "title": "Gentlestache Leather Cell Phone Holster for Belt,Phone Case Leather, Belt Cell Phone Holder, Leather Phone Pouch, Leather Phone Sheath ,iPhone 12, 12 Pro Max,11 Pro Max, XS Max, 8 Plus, Galaxy S20",
+        "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+        "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+        "store": "Gentlestache",
+        "price": 22.99,
+        "date": "2021-08-19",
+        "new_in_val": false,
+        "reviews_before_t1": 3
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 9005,
+      "recency_top3": [
+        {
+          "item": 2655,
+          "asin": "B004ZL9JFC",
+          "title": "Tracfone LG LG800G with Double Minutes for Life!!",
+          "path": "Cell Phones & Accessories > TracFone",
+          "leaf_cat": "Cell Phones & Accessories > TracFone",
+          "store": "LG",
+          "price": null
+        },
+        {
+          "item": 65204,
+          "asin": "B07N8HRXFN",
+          "title": "Truglide Duo Stylus Pen with Fiber Mesh Tip and Ballpoint Pen for iPad, iPhone, Tablet, Smartphone, and Touchscreen Devices (Blue)",
+          "path": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "store": "Lynktec",
+          "price": null
+        },
+        {
+          "item": 5575,
+          "asin": "B008BL8FI4",
+          "title": "LG 505C Prepaid Phone With Triple Minutes (Tracfone)",
+          "path": "Cell Phones & Accessories > TracFone",
+          "leaf_cat": "Cell Phones & Accessories > TracFone",
+          "store": "LG",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 17533,
+          "asin": "B00MU042H0",
+          "title": "LG 840G Prepaid Phone with Triple Minutes (Tracfone) (White)",
+          "path": "Cell Phones & Accessories > Cell Phones",
+          "leaf_cat": "Cell Phones & Accessories > Cell Phones",
+          "store": "LG",
+          "price": 129.99
+        },
+        {
+          "item": 50821,
+          "asin": "B076HFJJZP",
+          "title": "Bargains Depot (2 Pcs) [New Upgraded][0.18-inch Small Tip Series] 2-in-1 Stylus/Styli 5.5-inch L with 10 Replacement Rubber Tips -Black/Pink",
+          "path": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "store": "Bargains Depot",
+          "price": 8.99
+        },
+        {
+          "item": 50830,
+          "asin": "B076HHRX7C",
+          "title": "Bargains Depot Capacitive Stylus/Styli 2-in-1 Universal Stylus Pens for All Touch Screen Tablets/Cell Phones with 20 Extra Replaceable Soft Rubber Tips (4 Pieces, Black/Red/Silver/Blue)",
+          "path": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stylus Pens",
+          "store": "Bargains Depot",
+          "price": 10.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 244763,
+      "user": 33864,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 78959,
+          "asin": "B088GTNGSX",
+          "title": "Anker PowerCore 13000 Portable Charger - Compact 13000mAh 2-Port Ultra Portable Phone Charger Power Bank with PowerIQ and VoltageBoost Technology for iPhone, iPad, Samsung Galaxy (Black)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+          "store": "Anker",
+          "price": 29.99,
+          "date": "2016-08-08"
+        },
+        {
+          "item": 45312,
+          "asin": "B071HGGQXX",
+          "title": "PowerBear Micro USB Cable 6ft [2 Pack] Gold Connectors & Braided Nylon | Android Charger Cable",
+          "path": "Cell Phones & Accessories > Accessories > Cables & Adapters",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Cables & Adapters",
+          "store": "PowerBear",
+          "price": null,
+          "date": "2018-02-28"
+        },
+        {
+          "item": 57174,
+          "asin": "B07DRK4PK1",
+          "title": "Camere Lens Protector (iPhone 11 Mini)",
+          "path": "",
+          "leaf_cat": "",
+          "store": "UniqueMeINGLE",
+          "price": null,
+          "date": "2018-12-16"
+        },
+        {
+          "item": 86893,
+          "asin": "B08SKYXK69",
+          "title": "ASDAWN BL-T39 for LG G7 Battery Replacement, for LG G7 ThinQ Battery G710 LMG710VM Verizon LMQ610 Q7 Plus ThinQ G710EM G710N EAC63958401 with Repair Tools + Installation Instruction",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "store": "ASDAWN",
+          "price": 16.96,
+          "date": "2021-08-22"
+        }
+      ],
+      "target": {
+        "item": 76674,
+        "asin": "B083968PLS",
+        "title": "[430mAh] Battery for Samsung Gear S3 Frontier(SM-R760) and Gear S3 Classic, (2023 New Version) Upgrade Replacement Battery for SM-R770, BR760, R765, EB-BR760ABE, GH43-04699A with DIY Repair Tool Kits",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+        "store": "SHENMZ",
+        "price": 12.95,
+        "date": "2021-12-26",
+        "new_in_val": false,
+        "reviews_before_t1": 23
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 18564,
+      "recency_top3": [
+        {
+          "item": 57164,
+          "asin": "B07DRD72J1",
+          "title": "3900mAh BL-T39 for LG G7 Battery Replacement, Battery for LG G7 ThinQ G710 G710EM G710N LMG710VM Verizon LMQ610 Q7 Plus with Full Repair Tools",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "store": "SHENMZ",
+          "price": null
+        },
+        {
+          "item": 86892,
+          "asin": "B08SKWSNHL",
+          "title": "ASDAWN BL-T37 for LG Stylo 4 Battery Replacement, for LG V40 ThinQ LM-V405UA and LG Stylo 4 Q710 Q710AL Q710TS Q710MS Q710CS Q710US EAC63958201 with Repair Tool Parts + Installation Instruction",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "store": "ASDAWN",
+          "price": 15.96
+        },
+        {
+          "item": 87830,
+          "asin": "B08X7DQ899",
+          "title": "ASDAWN BL-T32 for LG G6 Battery Replacement, for LG G6 LS993 VS998 H870 H871 H872 EAC63438701 with Repair Tool Kit + Installation Instruction",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Replacement Parts > Batteries",
+          "store": "ASDAWN",
+          "price": 16.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 90784,
+          "asin": "B097SDCVG9",
+          "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fast-Charging Galaxy S20, S10 (No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "Anker",
+          "price": 35.99
+        },
+        {
+          "item": 52801,
+          "asin": "B078MVT3GJ",
+          "title": "Spigen Rugged Armor Designed for LG G7 ThinQ Case (2018) - Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Spigen",
+          "price": null
+        },
+        {
+          "item": 47249,
+          "asin": "B073WWKM76",
+          "title": "LG G6 \u2013 32 GB \u2013 Unlocked (AT&T/T-Mobile/Verizon) \u2013 Black \u2013 Prime Exclusive",
+          "path": "Cell Phones & Accessories > Cell Phones",
+          "leaf_cat": "Cell Phones & Accessories > Cell Phones",
+          "store": "LG",
+          "price": 65.15
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 89217,
+          "asin": "B092QLPV1V",
+          "title": "NEWDERY 2 in 1 Wireless Charger Stand Station for Samsung Galaxy Watch and Buds, Fit for Galaxy Watch 3, Active 2, 1/Gear S3, Galaxy Buds/Buds +/Live/Pro-Black",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cables & Chargers",
+          "store": "NEWDERY",
+          "price": null,
+          "date": "2022-01-03",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "no",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 482717,
+      "user": 66746,
+      "hist_len": 2,
+      "history_last5": [
+        {
+          "item": 109862,
+          "asin": "B0C3DLS7RJ",
+          "title": "CASEKOO Crystal Clear for iPhone 14 Case & iPhone 13 Case, [Not Yellowing] [Military Grade Drop Protection] Shockproof Protective Phone Case 6.1 inch 2022 Purple",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CASEKOO",
+          "price": 18.99,
+          "date": "2021-12-12"
+        },
+        {
+          "item": 109096,
+          "asin": "B0BZGSJZZF",
+          "title": "omee Stretchy Solo Loop Compatible with Apple Watch Band 38mm 40mm 41mm 42mm 44mm 45mm 49mm, Breathable Trail Loop+Alpine Loop+Ocean Band for iWatch Serie 8 Ultra 7 6 SE 5 4 3 2 1, 8 Pack",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "store": "omee",
+          "price": 15.99,
+          "date": "2021-12-12"
+        }
+      ],
+      "target": {
+        "item": 58936,
+        "asin": "B07G9MXXTL",
+        "title": "EloBeth Decorative Rings Loops Compatible with Apple Watch Bands Charms Series 8/7 41mm 45mm/Series 6/SE2/SE/5/4 44mm 40mm/Series 3/2/1 42mm 38mm Watchband Decorative Charms Accessories (No Band)",
+        "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+        "store": "EloBeth",
+        "price": 12.99,
+        "date": "2021-12-12",
+        "new_in_val": false,
+        "reviews_before_t1": 27
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 28427,
+      "recency_top3": [
+        {
+          "item": 109955,
+          "asin": "B0C3RBV749",
+          "title": "CASEKOO Crystal Clear Designed for iPhone 11 Pro Max Case, [Not Yellowing] [Military Grade Drop Tested] Shockproof Protective Phone Cases Slim Thin Cover (6.5 inch) 2019, Clear",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CASEKOO",
+          "price": 15.99
+        },
+        {
+          "item": 93530,
+          "asin": "B09HKLCFDQ",
+          "title": "CASEKOO iPhone 13 Mini Clear case, [Not Yellowing] [Military Drop Protection] Shockproof Protective Phone Case Slim Cover 5.4 inch 2021, Clear",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "CASEKOO",
+          "price": 16.99
+        },
+        {
+          "item": 101487,
+          "asin": "B0B8VMNPQK",
+          "title": "FRESHCLOUD Stretchy Solo Loop Compatible with Apple Watch Band 45mm 44mm 42mm 41mm 40mm 38mm, Sports Watch Bands for iWatch Series 8 7 6 5 for Women Men, Silicone No Buckles and Clasps - Wine Red\u2026",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "store": "FRESHCLOUD",
+          "price": 8.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 98269,
+          "asin": "B09YLZXLWN",
+          "title": "[2 Pack] Julk 49mm Case Compatible for 2022 New Apple Watch Ultra Screen Protector, [Full Coverage] HD TPU Ultra-Thin Protective Cover for iWatch, Transparent",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Cases",
+          "store": "JULK",
+          "price": 8.88
+        },
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 61450,
+          "asin": "B07HRN9J19",
+          "title": "Mkeke Compatible with iPhone 11 Screen Protector for iPhone XR Screen Protector, Tempered Glass Film for Apple iPhone 11 and iPhone XR, 3-Pack Clear",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Mkeke",
+          "price": 11.99
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 101281,
+          "asin": "B0B8D65JR4",
+          "title": "Cuteey 12 Pack Case for Apple Watch Series 8 7 45mm Tempered Glass Screen Protector, All Round Full Hard PC Leopard Pattern Cover Bumper for iWatch 8 7 Accessories",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Screen Protectors",
+          "store": "Cuteey",
+          "price": 16.99,
+          "date": "2021-12-12",
+          "same_timestamp": false
+        },
+        {
+          "item": 94540,
+          "asin": "B09L61Z5YG",
+          "title": "[8 PACK] Bands Compatible with Apple Watch Bands 45mm 44mm 42mm 41mm 40mm 38mm for Women Men, Replacement Strap with Classic Buckle for iWatch Series SE 8 7 6 5 4 3 2 1",
+          "path": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Smartwatch Accessories > Smartwatch Bands",
+          "store": "Vancle",
+          "price": 15.99,
+          "date": "2021-12-31",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "no",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "similar"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 825873,
+      "user": 114172,
+      "hist_len": 3,
+      "history_last5": [
+        {
+          "item": 15901,
+          "asin": "B00KSTC3WG",
+          "title": "ALLPOWERS153; 10000mAh Solar Battery Charger with iSolar153; Technology for iPhone, iPad Air mini, iPod, Samsung, Android Smart Phones and Tablets, Gopro Camera and other 5V USB devices (Black)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Solar Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Solar Chargers",
+          "store": "ALLPOWERS",
+          "price": null,
+          "date": "2014-07-25"
+        },
+        {
+          "item": 68902,
+          "asin": "B07S8TTH34",
+          "title": "SharingMoment Premium Smartphone Holder/Vertical and Horizontal Tripod Mount Adapter Rotatable Bracket with 1/4 inch Screw/Adjustable Clip for iPhone, Android Cell Phone, Selfie Stick, Camera Stand",
+          "path": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Photo & Video Accessories > Tripods",
+          "store": "SharingMoment",
+          "price": 7.99,
+          "date": "2021-11-07"
+        },
+        {
+          "item": 38973,
+          "asin": "B01LLAGV6Y",
+          "title": "Efanr Universal Outdoor Tactical Holster Military Molle Hip Waist Belt Bag Wallet Pouch Purse Phone Case with Zipper Compatible with Samsung Galaxy S7 S6 LG HTC and More Smartphones (Khaki)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Efanr",
+          "price": null,
+          "date": "2021-11-07"
+        }
+      ],
+      "target": {
+        "item": 75327,
+        "asin": "B0811KZ7TL",
+        "title": "TITACUTE 2 Pack Anti Dust Plugs for iPhone 13 Pro Max 14 12 Mini Dust Cover 8 Pin Dust Plug + Mini Storage Box iPhone Charging Port Plugs for iPhone 11 XS XR X 8 Plus SE 2020 2022 iPad Mini Air Green",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Anti-Dust Plugs",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Anti-Dust Plugs",
+        "store": "TITACUTE",
+        "price": 6.69,
+        "date": "2021-11-07",
+        "new_in_val": false,
+        "reviews_before_t1": 16
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 39246,
+      "recency_top3": [
+        {
+          "item": 38974,
+          "asin": "B01LLAGW8G",
+          "title": "Efanr\u00ae Universal Outdoor Tactical Holster Military Molle Hip Waist Belt Bag Wallet Pouch Purse Phone Case with Zipper for iPhone 7 6s Plus 5S Samsung Galaxy S7 S6 LG HTC and More (Black)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Efanr",
+          "price": 3.44
+        },
+        {
+          "item": 48508,
+          "asin": "B074Z69Y15",
+          "title": "Efanr Cell Phone Belt Clip Holster, Multipurpose Large Capacity Nylon Tactical Carrying Pouch Belt Loop Waist Bag Money Pocket, Universal Comaptible with Samsung HTC LG and More Smartphones",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Efanr",
+          "price": null
+        },
+        {
+          "item": 25552,
+          "asin": "B00ZOP24VY",
+          "title": "Cell Phone Holder, Dealgadgets Universal Gooseneck Cell Phone Clip Holder Lazy Bracket Flexible Long Arms for iPhone 6 plus/6/5s/5/4S/4,Samsung Galaxy, HTC, Nokia, LG GPS Devices with Clean Cloth, Great for Bedroom, Office, Bathroom, Kitchen,Car etc.(Black)",
+          "path": "Cell Phones & Accessories > Accessories",
+          "leaf_cat": "Cell Phones & Accessories > Accessories",
+          "store": "DEALGADGETS",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 83246,
+          "asin": "B08JX444KV",
+          "title": "Anker Car Charger, 36W Metal Dual USB Car Phone Charger Adapter, PowerDrive III 2-Port 36W Alloy for iPhone 14 13 12 11 Pro Max mini X XR XS, iPad Pro mini, Galaxy S20/ S20+/ S10/ S10e/ S10+ and More",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+          "store": "Anker",
+          "price": 16.99
+        },
+        {
+          "item": 108922,
+          "asin": "B0BYS7ZYJ1",
+          "title": "Lamicall Cell Phone Stand, Desk Phone Holder Cradle, Compatible with Phone 13 12 Mini 11 Pro Xs Max XR X 8 7 6 Plus SE, Smartphones Dock, Office Desktop Accessories - Green",
+          "path": "Cell Phones & Accessories > Accessories > Stands",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Stands",
+          "store": "Lamicall",
+          "price": 10.99
+        },
+        {
+          "item": 107761,
+          "asin": "B0BTYHPVNN",
+          "title": "Aibocn Power Bank 10,000mAh Phone Portable Charger with Flashlight (2 Pack)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Portable Power Banks",
+          "store": "Aibocn",
+          "price": 19.99
+        }
+      ],
+      "later_30d_before_t2": [
+        {
+          "item": 48009,
+          "asin": "B074M3RBMR",
+          "title": "X-EDITION USB Wall Charger, 4-Pack 2.1A Dual Port USB Wall Plug Power Adapter Charging Block Charger Box Cube Compatible with iPhone 13 12 11 Pro Max Mini XS XR X 8 7 6 Plus, Pad, Samsung, LG, Android",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "X-EDITION",
+          "price": 14.99,
+          "date": "2021-11-07",
+          "same_timestamp": false
+        }
+      ],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "yes",
+      "top_category_jump": "no",
+      "second_level_jump": "yes",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 1488653,
+      "user": 205879,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 110404,
+          "asin": "B0C5M298NG",
+          "title": "Nite Ize Original Steelie Magnetic Phone Socket Plus - Additional Magnet for Larger Phones Using Steelie Phone Mounting Systems, Grey",
+          "path": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Automobile Accessories > Cradles",
+          "store": "Nite Ize",
+          "price": 18.89,
+          "date": "2019-01-24"
+        },
+        {
+          "item": 63311,
+          "asin": "B07KVYY8ZN",
+          "title": "SUPCASE Full-Body Rugged Holster Case for Google Pixel 3 XL, with Built-in Screen Protector for Google Pixel 3 XL 2018 Release, Unicorn Beetle PRO Series - Retail Package (Blue)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "SUPCASE",
+          "price": null,
+          "date": "2019-10-13"
+        },
+        {
+          "item": 81077,
+          "asin": "B08DHCBVGX",
+          "title": "GOBUKEE [3GLASSES] for LG Wing 5G Screen Protector [2 Tempered Glass Main Screen Protector + 1 Tempered Glass Small Screen Protector] 3D Full Coverage Scratch Resistant Bubble Free for LG Wing 5G",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "GOBUKEE",
+          "price": 12.99,
+          "date": "2021-03-04"
+        },
+        {
+          "item": 84611,
+          "asin": "B08M99SWN1",
+          "title": "[ 2+2 Pack ] UniqueMe 2 Pack TPU Soft Screen Protector + 2 Pack Camera Lens Protector Tempered Glass for LG Wing 5G,[Anhydrous adsorption] Flexible Film HD TPU Clear Anti-Scratch Film",
+          "path": "",
+          "leaf_cat": "",
+          "store": "UniqueMe",
+          "price": null,
+          "date": "2021-04-18"
+        }
+      ],
+      "target": {
+        "item": 86927,
+        "asin": "B08SM5W937",
+        "title": "Otium Cigarette Lighter Splitter, Type-C 20W PD Fast USB C Car Charger & Dual QC 3.0 180W 2-Socket Car Adapter for iPhone 12/11/11 Pro/X/8/7, Samsung, Google Pixel, GPS Dash Cam\u2026",
+        "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Automobile Chargers",
+        "store": "Otium",
+        "price": null,
+        "date": "2021-08-15",
+        "new_in_val": false,
+        "reviews_before_t1": 9
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 7166,
+      "recency_top3": [
+        {
+          "item": 85054,
+          "asin": "B08NCZ4BJ7",
+          "title": "[ 3+2 Pack ] UniqueMe TPU Soft Screen Protector + Camera Lens Protector Tempered Glass for LG Wing 5G Screen Protector\u3010Easy to Install \u3011.",
+          "path": "",
+          "leaf_cat": "",
+          "store": "UniqueMe",
+          "price": null
+        },
+        {
+          "item": 83751,
+          "asin": "B08KZZGYBL",
+          "title": "[2 Pack] UniqueMe Screen Protector for LG Wing 5G Tempered Glass, 3D Full Coverage Film HD [Easy Installation] Edge to Edge Protection",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "UniqueMe",
+          "price": null
+        },
+        {
+          "item": 84872,
+          "asin": "B08MW1L6RC",
+          "title": "(2 Pack) LG Wing 5G Screen Protector Tempered Glass, Case Friendly Anti Scratch 9H Hardness Bubble-Free Shield High Definition Full Adhesive Clear Screen Protector for LG Wing 5G 6.8 inch",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "SURBUID",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 62725,
+          "asin": "B07K84Q6YR",
+          "title": "LK 3 PACK Screen Protector designed for Google Pixel 3 XL Tempered Glass High Clear, Case Friendly, Come with Installation Tray",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "LK",
+          "price": 10.99
+        },
+        {
+          "item": 90784,
+          "asin": "B097SDCVG9",
+          "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fast-Charging Galaxy S20, S10 (No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "Anker",
+          "price": 35.99
+        },
+        {
+          "item": 109131,
+          "asin": "B0BZL5WQML",
+          "title": "[2 Pack] ArmorSuit MilitaryShield Screen Protector Designed For Samsung Galaxy S20 / S20 5G (6.2\")(Case Friendly) Ultrasonic Fingerprint Compatible Anti-Bubble HD Clear Film",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "ArmorSuit",
+          "price": 9.97
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "unknown",
+      "top_category_jump": "unknown",
+      "second_level_jump": "unknown",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "yes",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 2323078,
+      "user": 321554,
+      "hist_len": 5,
+      "history_last5": [
+        {
+          "item": 29096,
+          "asin": "B016PE2ZTS",
+          "title": "(6 Pack) Supershieldz Designed for Motorola (Droid Turbo 2) Screen Protector, High Definition Clear Shield (PET)",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Supershieldz",
+          "price": null,
+          "date": "2018-02-12"
+        },
+        {
+          "item": 28287,
+          "asin": "B015H2DQPQ",
+          "title": "LK Case for Droid Turbo 2, [Shock Absorption] Hybrid Dual Layer Armor Defender Protective Case Cover for Verizon Motorola Droid Turbo 2 (Blue)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "LK",
+          "price": null,
+          "date": "2018-02-12"
+        },
+        {
+          "item": 66276,
+          "asin": "B07PG8PRV6",
+          "title": "Casetego Compatible with iPhone 6S Plus Case,iPhone 6 Plus Case,Floral Three Layer Heavy Duty Hybrid Sturdy Shockproof Protective Cover Case for Apple iPhone 6S Plus/6 Plus,Mandala",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Casetego",
+          "price": null,
+          "date": "2019-08-21"
+        },
+        {
+          "item": 87505,
+          "asin": "B08VF35FBZ",
+          "title": "iPad Pro Charger, USB C Fast Charger, 20W ipad Charger with 10 FT USB C Cable Apple Certified Compatible with iPad Pro 12.9/11 inch 2021/2020/2018, iPad Air 4th Gen/iPad Mini 6th Gen, Pixel, Galaxy",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wall Chargers",
+          "store": "IOSYS",
+          "price": null,
+          "date": "2021-07-05"
+        },
+        {
+          "item": 81791,
+          "asin": "B08FXM1WK4",
+          "title": "[3 Pack] BAZO Tempered Glass Camera Lens Protector Compatible for iPhone 12 Pro Max 6.7\" 5G, [Case Friendly] HD Clear 9H Hardness Back Camera Protector",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "BAZO",
+          "price": null,
+          "date": "2022-02-05"
+        }
+      ],
+      "target": {
+        "item": 88355,
+        "asin": "B08YYXPWQ8",
+        "title": "Uniwit [2 Pack] Camera Len Protector for iPhone 14 Pro/iPhone 14 Pro Max- Screen Protector Tempered Glass, Case Friendly No-Bubble HD Clear Anti-Scratch Camera Lens Screen Protector",
+        "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+        "store": "Uniwit",
+        "price": 5.99,
+        "date": "2022-06-09",
+        "new_in_val": false,
+        "reviews_before_t1": 3
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 8249,
+      "recency_top3": [
+        {
+          "item": 81792,
+          "asin": "B08FXN1GZ7",
+          "title": "[2+2 Pack] BAZO Tempered Glass Screen Protector and Camera Lens Protector Compatible for iPhone 12 Pro (6.1 inch), [Easy Installation Frame] [Anti-Scratch] [Bubble Free] [Case Friendly] 9H Hardness HD Clear Film",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "BAZO",
+          "price": null
+        },
+        {
+          "item": 84436,
+          "asin": "B08LYW2Y1Y",
+          "title": "[2+2 Pack] BAZO Compatible for iPhone 12 Pro Max 6.7 Inch - Privacy Screen Protector and Camera Lens Protector with Easy Installation Frame - Anti Glare 9H Hardness Tempered Glass Film [Case Friendly]",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "BAZO",
+          "price": null
+        },
+        {
+          "item": 81787,
+          "asin": "B08FXKF5TL",
+          "title": "BAZO [2+2 Pack] Compatible for iPhone 12 (6.1 inch) - Tempered Glass Screen Protector + Camera Lens Protector with Easy Installation Frame - Anti-Scratch - Case Friendly - 9H Hardness - HD Clear Film",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "BAZO",
+          "price": null
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 60188,
+          "asin": "B07H2V5YLH",
+          "title": "Ailun Glass Screen Protector Compatible for iPhone 11/XR,6.1 Inch 3 Pack Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 60097,
+          "asin": "B07H1DHJBV",
+          "title": "Ailun Screen Protector for iPhone 11 Pro Max/iPhone Xs Max 3 Pack 6.5 Inch 2019/2018 Release Case Friendly Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 7.98
+        },
+        {
+          "item": 39503,
+          "asin": "B01LXZDPDR",
+          "title": "Ailun Screen Protector Compatible for iPhone 8 plus,7 Plus,6s Plus,6 Plus, 5.5 Inch 3Pack Case Friendly Tempered Glass",
+          "path": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Maintenance, Upkeep & Repairs > Screen Protectors",
+          "store": "Ailun",
+          "price": 6.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "no",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "unknown"
+    },
+    {
+      "bucket": "F3_warm_1to49",
+      "inst": 2369503,
+      "user": 328032,
+      "hist_len": 4,
+      "history_last5": [
+        {
+          "item": 75540,
+          "asin": "B081D65SFZ",
+          "title": "DeBin Case for Galaxy S23, S22, S21, S20, S10, S9, A10e, A01, Note 10, Cell Phone Belt Clip Holster Pouch Carrying Holder Cover (Fits Samsung Phone with Otterbox Commuter Case) Small Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "De-Bin",
+          "price": 11.99,
+          "date": "2016-08-02"
+        },
+        {
+          "item": 34598,
+          "asin": "B01FECC17S",
+          "title": "Galaxy S7 Edge (ONLY) Case with Holster, Aduro Shell & Holster COMBO Case Super Slim Shell Case w/Built-In Kickstand + Swivel Belt Clip Holster for Samsung Galaxy S7 Edge",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Aduro",
+          "price": null,
+          "date": "2017-02-10"
+        },
+        {
+          "item": 34869,
+          "asin": "B01FRDHSP4",
+          "title": "Verizon Shell Holster Combo Case for Samsung Galaxy S7 Edge with Kickstand View and Belt Clip - Black - Retail Package",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Basic Cases",
+          "store": "Verizon",
+          "price": 12.99,
+          "date": "2018-03-30"
+        },
+        {
+          "item": 65596,
+          "asin": "B07NVRRQWV",
+          "title": "Encased Galaxy S10e Belt Case with Kickstand (2019 Slimline Series) Ultra Thin Cover w/Rotating Holster Clip (for Samsung Galaxy S10 E) Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Encased",
+          "price": 17.99,
+          "date": "2020-08-30"
+        }
+      ],
+      "target": {
+        "item": 82547,
+        "asin": "B08HL3ZXH5",
+        "title": "Case for Galaxy Z Flip Phone, Nakedcellphone Black Vegan Leather Vertical Pouch [with Belt Loop, Metal Clip, Magnetic Closure] for Samsung Z Flip 4 5G, Z Flip3 (SM-F700, SM-F707, SM-F711, SM-F721)",
+        "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+        "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+        "store": "Nakedcellphone",
+        "price": 14.95,
+        "date": "2021-10-01",
+        "new_in_val": false,
+        "reviews_before_t1": 5
+      },
+      "recency_rank": null,
+      "two_tower_rank_500": null,
+      "two_tower_full_rank": 18881,
+      "recency_top3": [
+        {
+          "item": 65603,
+          "asin": "B07NVT9R91",
+          "title": "Encased Galaxy S10 Plus Belt Case with Kickstand (2019 Slimline Series) Ultra Thin Cover w/Rotating Holster Clip (for Samsung Galaxy S10+) Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Encased",
+          "price": 16.99
+        },
+        {
+          "item": 65599,
+          "asin": "B07NVSWR5T",
+          "title": "Encased Belt Case with Kickstand for Galaxy S10 (2019 Slimline Series) Ultra Thin Cover w/Rotating Holster Clip (Compatible with Samsung S10) Black",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Encased",
+          "price": null
+        },
+        {
+          "item": 54801,
+          "asin": "B07BN5FDZB",
+          "title": "Encased Belt Case for Samsung Galaxy S9 Holster Clip with Metal Kickstand (Slimline Series, Black)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Encased",
+          "price": 14.99
+        }
+      ],
+      "two_tower_top3": [
+        {
+          "item": 89104,
+          "asin": "B092CS724P",
+          "title": "Aduro Cell Phone Holsters for Samsung Galaxy S10 E Case Protector Includes Belt-Clip & Built-in Kickstand",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Aduro",
+          "price": 11.99
+        },
+        {
+          "item": 90784,
+          "asin": "B097SDCVG9",
+          "title": "Anker 2 Pack 313 Wireless Charger (Stand), Qi-Certified for iPhone 14/14 Pro/14 Pro Max/13/13 Pro Max, 10W Fast-Charging Galaxy S20, S10 (No AC Adapter)",
+          "path": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "leaf_cat": "Cell Phones & Accessories > Accessories > Chargers & Power Adapters > Wireless Chargers",
+          "store": "Anker",
+          "price": 35.99
+        },
+        {
+          "item": 65604,
+          "asin": "B07NVTWR24",
+          "title": "Encased Galaxy S10 Belt Clip Case (2019 DuraClip) Slim Grip Cover w/Holster for Samsung S10 (Black)",
+          "path": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "leaf_cat": "Cell Phones & Accessories > Cases, Holsters & Sleeves > Holsters",
+          "store": "Encased",
+          "price": 14.99
+        }
+      ],
+      "later_30d_before_t2": [],
+      "later_truncated_at_t2": false,
+      "leaf_category_jump": "no",
+      "top_category_jump": "no",
+      "second_level_jump": "no",
+      "store_change": "yes",
+      "leaf_unseen_in_history": "no",
+      "price_jump": "similar"
+    }
+  ]
+}

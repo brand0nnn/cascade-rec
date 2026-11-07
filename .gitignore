@@ -80,3 +80,5 @@ __pycache__/
 # Hybrid study per-event rank archives (large; kept local/cluster)
 /results/hybrid_study/**/*.npz
 /results/hybrid_study/localdev-*/
+# Pinned environment for regenerating the frozen MiniLM encoder (local only)
+/.venv-encoder/

@@ -1,0 +1,10 @@
+{
+  "q_definition": "all interactions before T1 (retriever_train + ranker_train); fresh_two_tower wrapper",
+  "target_definition": "sequence targets excluding each user's first item",
+  "interaction_count": 44125,
+  "target_count": 36776,
+  "excluded_first_events": 7349,
+  "marginal_l1_difference": 0.2558145557424136,
+  "items_in_q_without_training_target": 3122,
+  "limit": "Sequence-window batches and position subsampling further approximate the negative marginal."
+}

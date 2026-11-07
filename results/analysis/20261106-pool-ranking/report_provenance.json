@@ -1,0 +1,16 @@
+{
+  "pools": [
+    "P3",
+    "P2"
+  ],
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "interim_P3t.md": "4af5a5afc672801c102a2335904c7ba0a9701ef76f698d1dc6250819e33f4f4b",
+    "tables.md": "06f3eb97c0f3bd8cbc415fd5929a0518a6e45298b0c29b81c3b38aa7853b17ab",
+    "paired_differences.csv": "db3041b6b0fa6c8bbd897428ae65974688ff2f985823140ff4f589998384e068",
+    "metrics.csv": "eba6eb61600a4462af4981d08348cf674f556a456042976033628da6e5ff6614",
+    "inner_curves.csv": "6e1cf3906d05c62cad4bc37fb35d68aed258e45bbc2e5789c71c09ce436c7fa5",
+    "fits.csv": "3d664ad3f354d3b5ad9e79abc2c8ab82da57ebae6921ea614c5af21f6ad761e2",
+    "funnel.csv": "1f694620460269468ab54ac5ba03cf81fb13a4ad48722249c0b018d7eaf53ecd"
+  }
+}

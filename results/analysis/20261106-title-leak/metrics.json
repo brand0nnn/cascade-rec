@@ -1,0 +1,127 @@
+{
+ "label": "Val only, exploratory; title mentions only, not compatibility claims; no training",
+ "config_sha256": "0f2118a6280876e152c5820fa64b373df892761c8553394a4a37fb2e0b448d72",
+ "sanity": {
+  "iphone|13": {
+   "external": "2021-09 (iPhone 13)",
+   "proxy_primary": "2013-05-01",
+   "proxy_q10": "2016-10-13",
+   "proxy_primary_any_variant": "2013-05-01",
+   "proxy_q10_any_variant": "2016-10-13",
+   "items_le3_naming_key": 1060
+  },
+  "iphone|14": {
+   "external": "2022-09 (iPhone 14)",
+   "proxy_primary": "2014-06-26",
+   "proxy_q10": "2016-09-29",
+   "proxy_primary_any_variant": "2014-06-26",
+   "proxy_q10_any_variant": "2016-09-29",
+   "items_le3_naming_key": 533
+  },
+  "galaxy_s|s22": {
+   "external": "2022-02 (Galaxy S22)",
+   "proxy_primary": "2014-04-15",
+   "proxy_q10": "2018-01-29",
+   "proxy_primary_any_variant": "2011-06-23",
+   "proxy_q10_any_variant": "2018-01-29",
+   "items_le3_naming_key": 235
+  },
+  "pixel|6": {
+   "external": "2021-10 (Pixel 6)",
+   "proxy_primary": "2012-09-21",
+   "proxy_q10": "2019-10-14",
+   "proxy_primary_any_variant": "2012-09-21",
+   "proxy_q10_any_variant": "2019-10-14",
+   "items_le3_naming_key": 144
+  }
+ },
+ "keys_total": 518,
+ "keys_with_primary_proxy": 351,
+ "future_shares": {
+  "primary": {
+   "items_pre_t2": 103084,
+   "items_naming_future_model_at_own_first_ts": 908,
+   "share_items_own": 0.008808350471460169,
+   "items_with_key_naming_future_at_own_first_ts_share_of_key_items": 0.013978478070107917,
+   "recency_top10_slots": 2329040,
+   "recency_future_slots": 20687,
+   "share_recency_future_slots": 0.008882200391577645,
+   "recency_events_with_ge1_future_slot": 13452,
+   "two_tower_top10_slots": 2329040,
+   "two_tower_future_slots": 224,
+   "share_two_tower_future_slots": 9.617696561673479e-05,
+   "targets_future": 2688,
+   "share_targets_future": 0.011541235874008175,
+   "targets_future_among_p1_k200_hits": 105,
+   "p1_k200_hits": 14916,
+   "share_targets_future_among_hits": 0.007039420756234915,
+   "share_targets_future_among_misses": 0.011849276106941666,
+   "targets_future_among_p1_top10_hits": 24,
+   "p1_top10_hits": 3137
+  },
+  "q10": {
+   "items_pre_t2": 103084,
+   "items_naming_future_model_at_own_first_ts": 4892,
+   "share_items_own": 0.04745644328896822,
+   "items_with_key_naming_future_at_own_first_ts_share_of_key_items": 0.07531135982265191,
+   "recency_top10_slots": 2329040,
+   "recency_future_slots": 35510,
+   "share_recency_future_slots": 0.015246625218974342,
+   "recency_events_with_ge1_future_slot": 20831,
+   "two_tower_top10_slots": 2329040,
+   "two_tower_future_slots": 1282,
+   "share_two_tower_future_slots": 0.0005504413835743482,
+   "targets_future": 4864,
+   "share_targets_future": 0.020884141105348128,
+   "targets_future_among_p1_k200_hits": 207,
+   "p1_k200_hits": 14916,
+   "share_targets_future_among_hits": 0.013877715205148834,
+   "share_targets_future_among_misses": 0.021363561296952126,
+   "targets_future_among_p1_top10_hits": 47,
+   "p1_top10_hits": 3137
+  }
+ },
+ "d_rescues_relying_only_on_future_names": {
+  "d_rescues": 751,
+  "primary": 0,
+  "q10": 4
+ },
+ "d_strict_counts": {
+  "D_strict_primary": {
+   "events_with_visible_current_device": 214681,
+   "d_rescues_kept": 750,
+   "d_rescues": 751
+  },
+  "D_strict_q10": {
+   "events_with_visible_current_device": 214664,
+   "d_rescues_kept": 746,
+   "d_rescues": 751
+  }
+ },
+ "replicate_check": {
+  "rows": 2048,
+  "equal_to_D": 2048
+ },
+ "filter_violations": {
+  "D_strict_primary": {
+   "padding": 0,
+   "duplicates": 0,
+   "history_items": 0,
+   "unreleased_items": 0
+  },
+  "D_strict_q10": {
+   "padding": 0,
+   "duplicates": 0,
+   "history_items": 0,
+   "unreleased_items": 0
+  },
+  "replicate": {
+   "padding": 0,
+   "duplicates": 0,
+   "history_items": 0,
+   "unreleased_items": 0
+  }
+ },
+ "seconds": 349.2,
+ "test_opened": false
+}

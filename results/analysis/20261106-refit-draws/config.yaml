@@ -1,0 +1,24 @@
+label: Val only, exploratory
+study: results/local_experiments/20261106-refit-draws
+parent: results/local_experiments/20261103-full-promising-ranking
+factorial: results/local_experiments/20261104-objective-coreview
+freshness_T1_features: results/local_experiments/20261106-freshness-val/features/T1
+code: src/cascade/pipelines/refit_draws.py
+tests: tests/test_refit_draws.py
+methods: {bce_text: {objective: bce, graph_mask: bce_text}, bce_coreview: {objective: bce, graph_mask: pairwise_coreview}}
+seeds: [0, 1, 2]
+draws: [1, 2, 3]
+draw0: existing rebuilt fits (parent bce_text, factorial bce_coreview); reported separately and in pool draws0-3
+plan_rng: {draw0: default_rng(seed), draw_ge_1: default_rng(SeedSequence(seed, spawn_key=(draw,)))}
+recipe: {max_epochs: 10, patience: 2, batch_lists: 32, negative_alternatives: 50, learning_rate: 0.001, epoch_zero_eligible: true, refit: all-B natural positives, fixed selected epochs}
+initial_state: asserted equal to rebuilt bce_text and bce_coreview initial_state_sha256 per seed
+device: {fit: mps, val_scoring: cpu}
+val_scoring: natural K200 hit rows (14,916); misses rank inf
+arms: {T0: saved pre-T0 features, T1: freshness-study period-start features, same prefix scalers}
+metrics: [ndcg10, recall10, hr3, mrr10]
+aggregation: event metrics averaged over seeds x draws, then user macro over 232,904 Val events
+groups: {new: target first_ts >= T1, warm: otherwise}
+bootstrap: {resamples: 1000, seed: 0, unit: user}
+draw_sd: ddof=1 across draws within seed, mean over seeds
+selection: none
+test_opened: false

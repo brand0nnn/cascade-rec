@@ -1,0 +1,660 @@
+{
+  "label": "Val only, exploratory",
+  "scaler": {
+    "common": {
+      "mean": [
+        3.993062255517437,
+        0.9901804507102594,
+        0.9921018939468934,
+        0.9647375947574487,
+        0.9437262146896472,
+        0.9964903546735108,
+        0.9971389371008846,
+        0.9646059557858075,
+        0.9529246383250493
+      ],
+      "std": [
+        2.0692507787290664,
+        0.09860591129078888,
+        0.060930682132859064,
+        0.18444231623752003,
+        0.12903097526706284,
+        0.05913820859792344,
+        0.028028397196823165,
+        0.18477366113263083,
+        0.21180007553852132
+      ]
+    },
+    "graph": {
+      "mean": [
+        0.5272398112531398,
+        0.5295877215088767,
+        0.001353591894049909,
+        0.27368151192498025,
+        0.07150097222652765,
+        0.13521246013518148
+      ],
+      "std": [
+        0.9041856313619469,
+        0.9083205685731269,
+        0.004494547921515049,
+        0.3031032442242043,
+        0.18183149838433058,
+        0.23589266070447779
+      ]
+    }
+  },
+  "prefix_slots": 50418200,
+  "b_snapshots": [
+    {
+      "strict_before_ms": 1595800947930,
+      "review_edges": 1877548,
+      "max_review_timestamp": 1595800834936,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-07-26T22:02:27.930",
+      "queries": 4213,
+      "prefix_queries": 4213,
+      "natural_queries": 723,
+      "min_query_ts": 1595800947930,
+      "reference_max_abs_error": [
+        0.0,
+        1.4901161193847656e-08
+      ],
+      "t0_common_max_abs_error_vs_p3": 0.0,
+      "seconds": 11.395981500041671,
+      "note": "period start T0 (partial first month 26-31 Jul 2020)"
+    },
+    {
+      "strict_before_ms": 1596240000000,
+      "review_edges": 1882049,
+      "max_review_timestamp": 1596239969333,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-08-01T00:00:00.000",
+      "queries": 24514,
+      "prefix_queries": 24514,
+      "natural_queries": 3822,
+      "min_query_ts": 1596240056352,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 55.586885957978666,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1598918400000,
+      "review_edges": 1908173,
+      "max_review_timestamp": 1598918280282,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-09-01T00:00:00.000",
+      "queries": 22314,
+      "prefix_queries": 22314,
+      "natural_queries": 3326,
+      "min_query_ts": 1598918593240,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 51.614263291005045,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1601510400000,
+      "review_edges": 1931910,
+      "max_review_timestamp": 1601510315955,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-10-01T00:00:00.000",
+      "queries": 23879,
+      "prefix_queries": 23879,
+      "natural_queries": 3387,
+      "min_query_ts": 1601510528262,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 56.060533249983564,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1604188800000,
+      "review_edges": 1957260,
+      "max_review_timestamp": 1604188512999,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-11-01T00:00:00.000",
+      "queries": 23801,
+      "prefix_queries": 23801,
+      "natural_queries": 3081,
+      "min_query_ts": 1604188920770,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 59.06829937500879,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1606780800000,
+      "review_edges": 1982302,
+      "max_review_timestamp": 1606780765483,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-12-01T00:00:00.000",
+      "queries": 26001,
+      "prefix_queries": 26001,
+      "natural_queries": 3134,
+      "min_query_ts": 1606780801557,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 65.81734549999237,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1609459200000,
+      "review_edges": 2009699,
+      "max_review_timestamp": 1609459150944,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-01-01T00:00:00.000",
+      "queries": 28473,
+      "prefix_queries": 28473,
+      "natural_queries": 3609,
+      "min_query_ts": 1609459239996,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 71.48667604196817,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1612137600000,
+      "review_edges": 2039648,
+      "max_review_timestamp": 1612137508345,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-02-01T00:00:00.000",
+      "queries": 24914,
+      "prefix_queries": 24914,
+      "natural_queries": 2935,
+      "min_query_ts": 1612137739430,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 62.31337491609156,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1614556800000,
+      "review_edges": 2065808,
+      "max_review_timestamp": 1614556733961,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-03-01T00:00:00.000",
+      "queries": 29387,
+      "prefix_queries": 29387,
+      "natural_queries": 3256,
+      "min_query_ts": 1614556926304,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 71.45659029204398,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1617235200000,
+      "review_edges": 2096761,
+      "max_review_timestamp": 1617235183138,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-04-01T00:00:00.000",
+      "queries": 27321,
+      "prefix_queries": 27321,
+      "natural_queries": 3049,
+      "min_query_ts": 1617235279785,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 67.8363917079987,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1619827200000,
+      "review_edges": 2125364,
+      "max_review_timestamp": 1619827073577,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-05-01T00:00:00.000",
+      "queries": 24538,
+      "prefix_queries": 17274,
+      "natural_queries": 2715,
+      "min_query_ts": 1619827211716,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 46.90201541699935,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1622505600000,
+      "review_edges": 2150953,
+      "max_review_timestamp": 1622505508943,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-06-01T00:00:00.000",
+      "queries": 24188,
+      "prefix_queries": 0,
+      "natural_queries": 2614,
+      "min_query_ts": 1622505673801,
+      "reference_max_abs_error": [
+        0.0,
+        1.4901161193847656e-08
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 8.618940458050929,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1625097600000,
+      "review_edges": 2176153,
+      "max_review_timestamp": 1625097556630,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-07-01T00:00:00.000",
+      "queries": 24186,
+      "prefix_queries": 0,
+      "natural_queries": 2483,
+      "min_query_ts": 1625097624726,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 8.278398125083186,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1627776000000,
+      "review_edges": 2201241,
+      "max_review_timestamp": 1627775997895,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-08-01T00:00:00.000",
+      "queries": 7385,
+      "prefix_queries": 0,
+      "natural_queries": 727,
+      "min_query_ts": 1627776052270,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "t0_common_max_abs_error_vs_p3": null,
+      "seconds": 3.1361060000490397,
+      "note": "month start"
+    }
+  ],
+  "val": {
+    "val_monthly": [
+      {
+        "strict_before_ms": 1627776000000,
+        "review_edges": 2201241,
+        "max_review_timestamp": 1627775997895,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1461,
+        "snapshot_max_ts": 1627775997895,
+        "min_query_ts": 1628643522199,
+        "cutoff_utc": "2021-08-01T00:00:00.000",
+        "val_events": 14604,
+        "hit_rows": 1461,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 4.817033875035122
+      },
+      {
+        "strict_before_ms": 1630454400000,
+        "review_edges": 2223946,
+        "max_review_timestamp": 1630454349967,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 2037,
+        "snapshot_max_ts": 1630454349967,
+        "min_query_ts": 1630455063958,
+        "cutoff_utc": "2021-09-01T00:00:00.000",
+        "val_events": 20158,
+        "hit_rows": 2037,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 6.883276417036541
+      },
+      {
+        "strict_before_ms": 1633046400000,
+        "review_edges": 2244744,
+        "max_review_timestamp": 1633046315805,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 2059,
+        "snapshot_max_ts": 1633046315805,
+        "min_query_ts": 1633046833337,
+        "cutoff_utc": "2021-10-01T00:00:00.000",
+        "val_events": 21099,
+        "hit_rows": 2059,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 6.990630666958168
+      },
+      {
+        "strict_before_ms": 1635724800000,
+        "review_edges": 2266453,
+        "max_review_timestamp": 1635724680635,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1792,
+        "snapshot_max_ts": 1635724680635,
+        "min_query_ts": 1635729287015,
+        "cutoff_utc": "2021-11-01T00:00:00.000",
+        "val_events": 19052,
+        "hit_rows": 1792,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 6.032299707992934
+      },
+      {
+        "strict_before_ms": 1638316800000,
+        "review_edges": 2286084,
+        "max_review_timestamp": 1638316783915,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 2012,
+        "snapshot_max_ts": 1638316783915,
+        "min_query_ts": 1638316850223,
+        "cutoff_utc": "2021-12-01T00:00:00.000",
+        "val_events": 21898,
+        "hit_rows": 2012,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 6.835048583103344
+      },
+      {
+        "strict_before_ms": 1640995200000,
+        "review_edges": 2308680,
+        "max_review_timestamp": 1640995161863,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 2027,
+        "snapshot_max_ts": 1640995161863,
+        "min_query_ts": 1640996378626,
+        "cutoff_utc": "2022-01-01T00:00:00.000",
+        "val_events": 23589,
+        "hit_rows": 2027,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 7.01322799990885
+      },
+      {
+        "strict_before_ms": 1643673600000,
+        "review_edges": 2332984,
+        "max_review_timestamp": 1643673545346,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1588,
+        "snapshot_max_ts": 1643673545346,
+        "min_query_ts": 1643673831168,
+        "cutoff_utc": "2022-02-01T00:00:00.000",
+        "val_events": 18970,
+        "hit_rows": 1588,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 5.9236622920725495
+      },
+      {
+        "strict_before_ms": 1646092800000,
+        "review_edges": 2352481,
+        "max_review_timestamp": 1646091982558,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1809,
+        "snapshot_max_ts": 1646091982558,
+        "min_query_ts": 1646093242187,
+        "cutoff_utc": "2022-03-01T00:00:00.000",
+        "val_events": 22414,
+        "hit_rows": 1809,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 6.381941958912648
+      },
+      {
+        "strict_before_ms": 1648771200000,
+        "review_edges": 2375512,
+        "max_review_timestamp": 1648771183098,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1807,
+        "snapshot_max_ts": 1648771183098,
+        "min_query_ts": 1648771217894,
+        "cutoff_utc": "2022-04-01T00:00:00.000",
+        "val_events": 21659,
+        "hit_rows": 1807,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 6.199176000081934
+      },
+      {
+        "strict_before_ms": 1651363200000,
+        "review_edges": 2397766,
+        "max_review_timestamp": 1651363163024,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1653,
+        "snapshot_max_ts": 1651363163024,
+        "min_query_ts": 1651363828934,
+        "cutoff_utc": "2022-05-01T00:00:00.000",
+        "val_events": 19995,
+        "hit_rows": 1653,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 5.877317958977073
+      },
+      {
+        "strict_before_ms": 1654041600000,
+        "review_edges": 2418216,
+        "max_review_timestamp": 1654041397453,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1454,
+        "snapshot_max_ts": 1654041397453,
+        "min_query_ts": 1654043451367,
+        "cutoff_utc": "2022-06-01T00:00:00.000",
+        "val_events": 19317,
+        "hit_rows": 1454,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 5.616123417043127
+      },
+      {
+        "strict_before_ms": 1656633600000,
+        "review_edges": 2437934,
+        "max_review_timestamp": 1656633529249,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 742,
+        "snapshot_max_ts": 1656633529249,
+        "min_query_ts": 1656634232900,
+        "cutoff_utc": "2022-07-01T00:00:00.000",
+        "val_events": 10149,
+        "hit_rows": 742,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 3.4065985420020297
+      }
+    ],
+    "val_T1": [
+      {
+        "strict_before_ms": 1628643414042,
+        "review_edges": 2208880,
+        "max_review_timestamp": 1628643402825,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 20441,
+        "snapshot_max_ts": 1628643402825,
+        "min_query_ts": 1628643522199,
+        "cutoff_utc": "2021-08-11T00:56:54.042",
+        "val_events": 232904,
+        "hit_rows": 20441,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          3.725290298461914e-09
+        ],
+        "seconds": 57.630956541979685
+      }
+    ]
+  },
+  "b_queries": 315114,
+  "b_prefix_queries": 252091,
+  "b_natural_queries": 38861,
+  "val_hit_rows": 20441,
+  "estimated_feature_gb": 0.956916,
+  "storage": "float32; B features stored for natural queries only (non-natural queries rank = inf and are never drawn by plans)",
+  "metadata_columns_max_abs_error_vs_p3": 3.0137352613479607e-08,
+  "first_month_rule": "B queries 26-31 Jul 2020 use T0; their common features equal the P3 study T0 features",
+  "val_month_rule": "Val August 2021 queries use 1 Aug 2021 (precedes T1)",
+  "p3_scaler": {
+    "common": {
+      "mean": [
+        3.7138101927992793,
+        0.8911727114415032,
+        0.9254792900532306,
+        0.9647375947574487,
+        0.9437262146896472,
+        0.9964903546735108,
+        0.9971389371008846,
+        0.9646059557858075,
+        0.9413387030873772
+      ],
+      "std": [
+        2.299813289058652,
+        0.3114223977550466,
+        0.18627093112999357,
+        0.18444231623752003,
+        0.1290309752669854,
+        0.05913820859792344,
+        0.02802839719677365,
+        0.18477366113263083,
+        0.23498967883111782
+      ]
+    }
+  },
+  "seconds": 773.4939320409903,
+  "test_opened": false
+}

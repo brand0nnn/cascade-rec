@@ -1,0 +1,20 @@
+{
+  "label": "Val only, exploratory; title mentions only, not compatibility claims",
+  "config_sha256": "c9794ea36ed7f61b03ca69093d039c4d4f2f946ab1a9312a0653eef3d90dea12",
+  "val_events": 232904,
+  "double_miss": 204111,
+  "items": 111480,
+  "items_with_model_key": 71174,
+  "items_by_family": {
+    "apple_watch": 5536,
+    "fitbit": 1007,
+    "galaxy_a": 2220,
+    "galaxy_note": 8557,
+    "galaxy_s": 20295,
+    "galaxy_z_flip": 519,
+    "galaxy_z_fold": 639,
+    "iphone": 38299,
+    "pixel": 2819
+  },
+  "test_opened": false
+}

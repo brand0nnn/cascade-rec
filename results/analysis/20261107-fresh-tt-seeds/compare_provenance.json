@@ -1,0 +1,28 @@
+{
+  "label": "Val only, exploratory",
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty",
+  "source_sha256": "184d195098564521a30cb7feb958ef246c26f8a08d016163f7585a489a121804",
+  "test_predictions_loaded": false,
+  "inputs": {
+    "fresh_seed0": {
+      "val_ranks_sha256": "c95db48406b3ea528a11f2975858baccfb1ed24078b73bbd13333af010cdbc2e"
+    },
+    "fresh_seed1": {
+      "val_ranks_sha256": "0fa123c3f4bd2d1c273d378e4932b7c0f71244d911081df855130f83b102eb18"
+    },
+    "frozen_seed0": {
+      "val_ranks_sha256": "aaec9f1aed4665ded3a5e358cf7ea6136e70797e8563da710414b24d2346a73f"
+    },
+    "frozen_seed1": {
+      "val_ranks_sha256": "fa01d151faca20910cafb0b6bf9c427f75188983092f5d4b53070e6ed63c3f1a"
+    },
+    "frozen_seed2": {
+      "val_ranks_sha256": "1f7cacef50189d01ce61432f0b901065f8cb67503f54342ba90c9511f321c7b8"
+    }
+  },
+  "output_sha256": {
+    "metrics.csv": "88f1554bc7633c68c224c45bc24670a221c338c5d6ccef3dbf84d64d3248aaa8",
+    "differences.csv": "103fe6934816ac106711f653f8b1b5c21de83fdb9f7775fbd70d251590d929f5",
+    "tables.md": "a7a366bbee219b973ad320dee4d753996d7635e15f8cf3ff9d36bcf68c273ddb"
+  }
+}

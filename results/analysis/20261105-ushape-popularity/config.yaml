@@ -1,0 +1,42 @@
+scope: Val only, exploratory
+out: results/analysis/20261105-ushape-popularity
+n_lists: 50000
+seeds:
+- 0
+- 1
+- 2
+batch_pairs: 8000
+threads: 4
+list_sample_seed: 0
+seed: 0
+candidate_dir: data/processed/candidates/two_tower_text_seed0
+k1: 200
+candidate_reference: configs/ranker/policy_candidate_reference_rebuilt.json
+reference_ranker_config: results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/config.yaml
+checkpoints:
+  A/seed0: results/ranker_policy/policy-pilot-20261029/arm_A_seed0/model.pt
+  A/seed1: results/ranker_policy/policy-replication-20261029/arm_A_seed1/model.pt
+  A/seed2: results/ranker_policy/policy-replication-20261029/arm_A_seed2/model.pt
+  C/seed0: results/ranker_policy/policy-pilot-20261029/arm_C_seed0/model.pt
+  C/seed1: results/ranker_policy/policy-replication-20261029/arm_C_seed1/model.pt
+  C/seed2: results/ranker_policy/policy-replication-20261029/arm_C_seed2/model.pt
+lists: natural Val top-200 (load_candidates(force=False)); uniform over all Val events,
+  incl. lists whose target was not retrieved
+centring: logit minus the mean logit of the list's valid candidates
+candidate_group_definition:
+  new: no interaction before T1 (= first interaction >= T1)
+  head: top 20% of items with >=1 interaction before T1, by pre-T1 count (item_segments,
+    cutoff T1)
+  tail: remaining 80% of items with >=1 pre-T1 interaction
+  sensitivity: 'project segments: counts before T2 (item_segments.parquet) + new-in-period'
+hypothesis:
+  statement: 'Arm A shows both effects: within each candidate popularity group its
+    centred logit rises at low retrieval ranks, and tail/new candidates score higher
+    than head at the same rank decile; arm C shows neither.'
+  operationalisation:
+    low_rank_rise: per group, mean centred logit in decile 10 (ranks 181-200) minus
+      decile 6 (ranks 101-120) > 0 in every seed
+    unpopular_preference: per non-head group, mean over deciles of (group - head)
+      centred logit > 0 in every seed, and positive in >= 8 of 10 deciles on the seed
+      mean
+test_files_opened: false

@@ -1,0 +1,2 @@
+pair,status,a,b,tune_ndcg10,tune_ndcg10_bce_endpoint,tune_ndcg10_pw_endpoint,tune_queries,tune_new_target_events,tune_new_candidate_slots,inner_epochs_bce,inner_epochs_pw,per_seed_optimum_seed0,per_seed_optimum_seed1,per_seed_optimum_seed2,frozen_at,val_scores_existed_at_freeze
+bce_text+pairwise_text,chosen_on_tuning,0.1666666667,0.5,0.01100409838202161,0.010680057412853702,0.00993951147947641,63023,31209,3154568,"[8, 8, 7]","[3, 3, 5]","[0.1666666667, 0.5]","[0.0, 0.5]","[0.1666666667, 0.5]",2026-11-05T06:56:38+08:00,"{'bce_text': True, 'pairwise_text': True}"

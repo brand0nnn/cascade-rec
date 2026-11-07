@@ -1,0 +1,25 @@
+inst,same_device_ecosystem,relation_to_last,coding_note
+47323,yes,unrelated,Apple brand only (iPhone 13 case -> Apple Watch band; different device). Smartwatch-band leaf absent from history; a second Apple Watch band+case review the same day suggests a newly acquired watch (context only).
+114423,yes,unrelated,"iPhone XR case -> iPhone 13 mini protector: same family, different model, so not jointly usable from titles. Later reviews name iPhone 13/13 Pro accessories: device-change pattern (context only)."
+209154,yes,unrelated,"Apple brand only (iPhone 12 case/protector -> Apple Watch bands, 14-month gap). New device category; both retrievers return iPhone protectors/cases."
+741481,unknown,complement,Universal wall charger -> iPhone 13 case; charger title lists iPhone 13 but is universal. Earlier history names iPhone 11/XR and iPhone 5: model change; target category metadata missing.
+840982,yes,unrelated,"Pixel 3 wireless charger -> Pixel 6 Pro protector: same family, newer model. Two-tower top 3 are Pixel 2 XL/4 XL/3a protectors (right type and family, older models)."
+1411999,unknown,unrelated,"Universal car mount -> iPhone 13 case; earlier history names BLU and T-Mobile Revvl phones, no iPhone. Last-item category missing; apparent move to a new phone brand."
+1756859,yes,substitute,"Pixel XL case -> Pixel 5a case (same leaf, 2.6-year gap). Recency top 3 are more Pixel XL cases: retriever echoes the old model; target is the newer model."
+2347616,unknown,unrelated,Wireless charging pad (no device named) -> Apple Watch band; earlier history names iPhone 7/8. Smartwatch leaf never seen; new device category.
+764303,unknown,complement,Pixel 6 Pro case -> universal dual-USB wall charger whose title lists Pixel among many devices; generic accessory with no device anchor.
+1491415,unknown,substitute,"USB-C(F)-to-USB-A adapter -> Micro-USB(F)-to-USB-C adapter, 4 days later, same leaf. Near miss: two-tower rank 224; recency top 1 is a sibling product of the target store (JXMOX)."
+1532879,yes,unrelated,Apple brand only (iPhone 12 Pro Max case -> Apple Watch band); history also has Fitbit Versa accessories. Smartwatch-band leaf absent from history; new device or replacement watch.
+1732724,unknown,substitute,"Universal bike mount -> universal gooseneck clip stand (both phone holders, different leaf), 4.4-year gap; two-tower rank 323."
+1837606,unknown,unrelated,"Tripod -> magnetic dashboard car mount (2.7-year gap); same leaf as h3, a 2018 car mount: repeat of an older need rather than the last product. Two-tower full-catalogue rank 524."
+1997091,yes,unrelated,Samsung brand only (Galaxy Watch band -> Galaxy S10 Plus privacy protector). A Galaxy S10 Plus case review the same day suggests a newly acquired S10 Plus (context only).
+2244325,unknown,unrelated,"Multi-port wall charger -> universal stylus pack, 13-month gap; generic accessory, stylus leaf never seen."
+2572126,no,unrelated,"Motorola One 5G Ace case -> Galaxy S22 Ultra film protector; user history spans iPhone, Apple Watch and Motorola. Some history titles name later models than their review dates (crawl-time titles)."
+62142,yes,complement,iPhone 6/6S/7/8 protector -> iPhone SE/8/7 case; models 7 and 8 named in both titles (not a compatibility check). Same-day NTG iPhone 11 case suggests multiple phones (context only).
+219280,unknown,unrelated,2013 LG Tracfone -> universal leather belt holster (7.7-year gap since last review). Target title lists many phones; no device anchor.
+244763,no,substitute,"LG G7 battery -> Samsung Gear S3 watch battery (same leaf, different device). Recency top 1 is the target store SHENMZ LG G7 battery; a later Gear S3 charger review suggests the user owns a Gear S3 (context only)."
+482717,yes,complement,"Apple Watch solo loop -> Apple Watch band charms (no band), same day, same leaf. Recency top 3 includes an Apple Watch band but the target is outside both top 200s (two-tower full rank 28,427)."
+825873,unknown,unrelated,"Universal tactical holster -> iPhone Lightning dust plugs, same day as two other unrelated accessories (basket of miscellaneous accessories)."
+1488653,unknown,unrelated,LG Wing 5G protector (category missing) -> universal USB-C car charger/splitter; generic accessory with no device anchor.
+2323078,yes,substitute,"iPhone 12 Pro Max camera-lens protector -> iPhone 14 Pro lens protector (same leaf). Recency top 3 echoes the BAZO iPhone 12 Pro line. Target title names iPhone 14 on a June 2022 review: crawl-time title, model timing unreliable."
+2369503,yes,substitute,"Galaxy S10e belt holster -> Galaxy Z Flip vertical belt pouch (same leaf). Recency top 3 are Encased S10/S9 belt cases: right type, old model; user appears to have moved to a Z Flip."

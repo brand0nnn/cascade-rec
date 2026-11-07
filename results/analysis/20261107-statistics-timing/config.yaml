@@ -1,0 +1,44 @@
+label: Val only, exploratory
+models:
+- bce_text
+- pairwise_text
+- pairwise_coreview
+- bce_coreview
+seeds:
+- 0
+- 1
+- 2
+swaps:
+  X1_known:
+  - common
+  - '[1]'
+  - None
+  X2_known_degree:
+  - common
+  - '[0, 1]'
+  - None
+  X3_all_common:
+  - common
+  - '[0, 1, 2, 7, 8]'
+  - None
+  X6_old_products:
+  - both
+  - None
+  - old
+  X7_products_released_in_B:
+  - both
+  - None
+  - B
+dates_months_before_T1:
+- 3
+- 6
+- 9
+lags_months:
+- 1
+- 3
+- 6
+- 9
+- 12
+scaler: parent T0 prefix scaler
+rows: Val natural-hit rows
+test_opened: false

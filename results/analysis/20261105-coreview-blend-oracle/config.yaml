@@ -1,0 +1,102 @@
+scope: Val only, exploratory; regenerated pipeline
+registered_at: '2026-11-05T04:58:37+08:00'
+hypothesis: 'Pre-registered: the candidate-level blend keeps BCE''s warm quality and
+  recovers part of pairwise''s new-item advantage, beating each component overall
+  by a small margin; the target-conditioned oracle gap is much larger than the blend
+  gain.'
+parent_study: results/local_experiments/20261103-full-promising-ranking
+factorial_study: results/local_experiments/20261104-objective-coreview
+pairs:
+- - bce_text
+  - pairwise_text
+- - bce_coreview
+  - pairwise_text
+seeds:
+- 0
+- 1
+- 2
+grid_a:
+- 0.0
+- 0.1666666667
+- 0.3333333333
+- 0.5
+- 0.6666666667
+- 0.8333333333
+- 1.0
+grid_b:
+- 0.0
+- 0.1666666667
+- 0.3333333333
+- 0.5
+- 0.6666666667
+- 0.8333333333
+- 1.0
+grid_points: 49
+selection_rule: Shared (a, b) over seeds maximising the seed-mean all-tuning-query
+  user-macro nDCG@10 (the pipeline's inner selector criterion) on the chronological
+  inner tuning queries, from each model's inner selected-epoch logits; exact ties
+  -> earliest grid point in (a ascending, b ascending) order.
+selection_population: chronological inner tuning queries (split/tune.npy) of the ranker-training
+  period; inner selected-epoch logits of both models (prefix-trained); Val untouched
+new_candidate_flag: first review >= period start (T1 for Val queries, T0=t_ranker_train
+  for tuning queries); equals zero reviews before the period start; padding excluded
+target_groups: new_in_val = target first review >= T1 (pipeline groups_for); warm
+  otherwise
+standardisation: per list, per model, per seed over valid candidates; float64; ddof
+  0; constant -> 0
+ranks: pessimistic ties, padding excluded (steps_final.rank_top convention)
+oracle: event oracle by seed-mean nDCG@10 (ties BCE) and new->PW / warm->BCE group
+  oracle; target-conditioned upper bounds only
+metrics:
+- ndcg10
+- recall10
+groups:
+- all
+- new
+- warm
+aggregation: seed-mean event metrics, then user macro over the full population (misses
+  = 0)
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user, paired
+val_grid_surface: computed for description only after the tuning choice; never used
+  for selection
+rules: Val only; no training; no Test file opened; selects nothing for the final pipeline
+frozen_choice:
+  bce_text__pairwise_text:
+    a: 0.1666666667
+    b: 0.5
+    tune_ndcg10: 0.01100409838202161
+    tune_ndcg10_bce_endpoint: 0.010680057412853702
+    tune_ndcg10_pw_endpoint: 0.00993951147947641
+    inner_epochs_bce:
+    - 8
+    - 8
+    - 7
+    inner_epochs_pw:
+    - 3
+    - 3
+    - 5
+    frozen_at: '2026-11-05T06:56:38+08:00'
+    val_scores_existed_at_freeze:
+      bce_text: true
+      pairwise_text: true
+  bce_coreview__pairwise_text:
+    a: 0.3333333333
+    b: 0.5
+    tune_ndcg10: 0.011059631215281312
+    tune_ndcg10_bce_endpoint: 0.010867504315238022
+    tune_ndcg10_pw_endpoint: 0.00993951147947641
+    inner_epochs_bce:
+    - 8
+    - 5
+    - 7
+    inner_epochs_pw:
+    - 3
+    - 3
+    - 5
+    frozen_at: '2026-11-05T07:30:28+08:00'
+    val_scores_existed_at_freeze:
+      bce_coreview: true
+      pairwise_text: true

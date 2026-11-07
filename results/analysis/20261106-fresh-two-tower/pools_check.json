@@ -1,0 +1,56 @@
+{
+  "label": "Val only, exploratory",
+  "device": "mps",
+  "fresh_checkpoint_sha256": "9668ef6e5590594f545e54c6274098abcebf89a9bec2f9febcf56a3c0f133af2",
+  "frozen_checkpoint_sha256": "c1ccfa5c31d1f3c1894ed4c92545bdc95923e753ed5a91b638726785941e5146",
+  "test_predictions_loaded": false,
+  "frozen_repro": {
+    "cand": true,
+    "score": true,
+    "retrieval_rank": true,
+    "top10": true,
+    "full_rank_equal_aux": true
+  },
+  "fresh_val_ranks_keys": [
+    "inst",
+    "user",
+    "rank",
+    "scorable",
+    "top10"
+  ],
+  "fresh_full_rank_equals_training_run_val_ranks": 232904,
+  "P2f": {
+    "rows": 232904,
+    "natural_hits": 27488,
+    "pool_rank_equals_full_rank_inside200": 27488
+  },
+  "fusion_reproduces_stored_P3": true,
+  "P3f": {
+    "rows": 232904,
+    "natural_hits": 27707,
+    "composition_mean_per_list": {
+      "both": 9.968733898945489,
+      "recency_only": 94.59930701061381,
+      "two_tower_only": 95.4319590904407
+    }
+  },
+  "P2_P2f_top200_overlap": {
+    "mean": 83.51827791708172,
+    "median": 88.0
+  },
+  "filter_check": {
+    "P2f": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0
+    },
+    "P3f": {
+      "padding": 0,
+      "duplicates": 0,
+      "history_items": 0,
+      "unreleased_items": 0
+    },
+    "history_matches_harness": true
+  }
+}

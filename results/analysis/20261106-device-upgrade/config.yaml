@@ -1,0 +1,50 @@
+# FROZEN before any upgrade pool was computed (2026-11-06 02:07:55 +0800).
+# Val only, exploratory; title mentions only, not compatibility claims; no training
+analysis: 20261106-device-upgrade
+frozen_at: 2026-11-06 02:07:55 +0800
+label: Val only, exploratory; title mentions only, not compatibility claims; no training
+split: val only (Test never opened)
+training: none
+module: src/cascade/analysis/device_upgrade_retrieval.py
+module_sha256_at_freeze: b89db63630c6b2c1702fc2c608eb428f646bceff33fa23e80503c2d4551ce785
+parser_module: src/cascade/analysis/switch_cases_devices.py (imported unchanged)
+parser_sha256: 7984ab92734bbe9470450028d79fca7620007935e5d8d3625d2191e26951c38f
+p1: results/local_experiments/20261103-full-promising-ranking/candidates/val (natural K200; frozen MiniLM results/local_experiments/20261102-full-frozen-text/item_text_emb.npy;
+  90-day half-life)
+text_sha256: 2e0e23300345750c9b2ce5084846c8ef85c2cfe2dff9dc3aa1b595125e8e53d5
+current_device: models named by the most recent product in the FULL history before t (positions < hist_len) whose title names
+  any model; all its families kept; per ordered line the current generation = max generation among that product's keys in
+  the line. Unordered keys (Galaxy A, plain SE) give no line.
+upgrade_candidates: items passing harness.apply_filters at query time (not in full history, first_ts <= t, not padding), not
+  in P1 top 180, naming <= 3 model keys, with a key in a current line whose generation is strictly greater than the current
+  generation; ranked by the CPU float32 TextMeanScorer(90) score (same scorer and filters as P1); top 20 kept
+pool_D: P1 ranks 1-180 (archive order) + top-20 upgrade candidates; missing slots filled first from P1 archive columns 180-199
+  in order, then from the CPU recency ranking beyond, skipping duplicates; |D| = 200. Events without an ordered current line,
+  or with zero upgrade candidates, keep P1 exactly.
+orders:
+  append: P1 1-180, then upgrades by score, then fill; target in P1 head keeps its pessimistic P1 rank
+  interleave: the 20 tail items (upgrades then fill) at positions 10,20,...,200; head items fill the rest in P1 order; head
+    rank r -> r + (r-1)//9 (descriptive)
+checks:
+- P1 archive inst/user/target aligned with Val instances
+- text embedding sha256
+- pools_build.filter_violations == 0 on every changed D list (padding, duplicates, full-history items, unreleased)
+- 'CPU recency scores vs archive scores at P1 columns: max abs diff and top-200 set agreement reported'
+metrics: 'per-user macro over the full Val population (misses = 0): Recall@200, Recall@10, nDCG@10'
+bootstrap: cascade.eval.bootstrap.paired_bootstrap, users, 1000 resamples, seed 0; D_append - P1 and D_interleave - P1
+groups:
+  overall: all events
+  new: target first_ts >= T1
+  warm: not new
+  target_newer_same_family: target names a model strictly newer in a current line (no key cap)
+  target_newer_same_family_le3: same, target names <= 3 keys (the upgrade-candidate definition)
+  has_device: current-device product exists (any model key)
+  has_ordered_device: current device has >= 1 ordered line
+coverage: share of events and of users (any event) with >= 1 upgrade candidate; mean |U| (after removing P1 top 180)
+examples: 5 rescued events (target gained by D_append) drawn with default_rng(0) from sorted inst IDs
+hypothesis: D increases Recall@200 over P1 for events whose target names a newer same-family model (by a clearly positive
+  amount), with a small but positive overall Recall@200 change (the removed ranks 181-200 hold few targets) and little nDCG@10
+  change in the append order.
+hypothesis_operational: holds if D_append - P1 Recall@200 has CI lower bound > 0 in target_newer_same_family AND overall diff
+  > 0 with CI lower bound > 0. nDCG@10 in append order is unchanged by construction (ranks <= 180 identical), so that clause
+  is trivially satisfied and is reported as such.

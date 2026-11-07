@@ -1,0 +1,18 @@
+{
+  "status": "complete",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "ndcg10": {
+    "common_T0/seed0": 0.01249641210252144,
+    "common_T1/seed0": 0.012003891322517266,
+    "common_T0/seed1": 0.01252160699019096,
+    "common_T1/seed1": 0.012050302529453867,
+    "common_T0/seed2": 0.013073921618615572,
+    "common_T1/seed2": 0.01244644647024051
+  },
+  "selection_lock_sha256": "74ccdd597db510002bec12e202069a40a0f72c56ac34fbc4cdc738e40dcd7d80",
+  "test_predictions_loaded": false
+}

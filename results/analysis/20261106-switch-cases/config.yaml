@@ -1,0 +1,82 @@
+# Switch-case study - FROZEN before any case was drawn or viewed (written 2026-11-06 01:48 +08).
+# Val only, exploratory; model-assisted coding, needs human review.
+# Follows docs/evaluations.md "Step 5 - What does a representative case show?" (frozen buckets, sorted stable IDs,
+# default_rng(0), eligible counts and chosen IDs recorded). Device-audit gate is blocked: no compatibility claims.
+analysis: 20261106-switch-cases
+frozen_at: "2026-11-06 01:48 +0800"
+label: "Val only, exploratory; model-assisted coding, needs human review"
+question: "Why did users review products that neither retriever found (double misses)?"
+split: val                      # Test is never opened or loaded; later-review context is truncated at T2.
+data_config: configs/data.yaml
+t1: 1628643414042
+t2: 1658002729837
+inputs:
+  recency_pool: results/local_experiments/20261103-full-promising-ranking/candidates/val   # inst, user, target, retrieval_rank, cand
+  two_tower: data/processed/candidates/two_tower_text_seed0/val.npz                       # inst, user, cand[,500], target_pos, target_rank
+  items: data/processed/items.parquet
+  sequences: data/processed/sequences.npz (via cascade.data.instances.ProcessedData)
+alignment_checks:
+  - "recency inst/user/target == ProcessedData val instances inst/user/item (order identical)"
+  - "two-tower inst/user == recency inst/user (order identical)"
+  - "two-tower target_pos in [0,500) => cand[target_pos] == target"
+notation:
+  r_rec: "recency (frozen MiniLM, 90-day half-life) pessimistic target rank within its natural K200 list; inf if not in K200"
+  r_tt:  "Two-tower (text) seed 0, exact search: target_pos+1 if the target is in its 500-list, else >500 (full-catalogue target_rank recorded as supplementary)"
+  in_rec200: "r_rec <= 200"
+  in_tt200:  "0 <= target_pos < 200"
+eligible: "double miss = NOT in_rec200 AND NOT in_tt200"
+comparison_population: "retrieved by at least one = in_rec200 OR in_tt200"
+buckets:                         # fixed order, disjoint by construction
+  - id: F1_new_target
+    rule: "double miss and target first_ts >= T1"
+  - id: F2_warm_ge50
+    rule: "double miss and first_ts < T1 and target reviews before T1 >= 50"
+  - id: F3_warm_1to49
+    rule: "double miss and first_ts < T1 and 1 <= target reviews before T1 <= 49"
+reviews_before_t1: "count of all interactions (any user) of the item with ts < T1, from sequences.npz"
+selection:
+  per_bucket: 8
+  order: [F1_new_target, F2_warm_ge50, F3_warm_1to49]
+  rule: >
+    For each bucket in order: eligible = sorted unique stable Val instance IDs (inst) meeting the rule, minus IDs already
+    chosen; idx = rng.choice(len(eligible), size=min(8, len(eligible)), replace=False) with ONE generator
+    rng = numpy.random.default_rng(0) created once and consumed in bucket order; chosen = eligible[sorted(idx)].
+    No replacement of inconvenient cases; any presentation choice is disclosed.
+card:
+  history: "last 5 prior products (all if fewer), oldest first: title, category path, store, price, review date (UTC)"
+  target: "same fields plus new/warm and reviews before T1"
+  retriever_top3: "titles and stores of recency cand[:3] and two-tower cand[:3] (both lists already filtered and score-ordered)"
+  ranks: "r_tt (up to 500, else '>500' plus full-catalogue rank); r_rec or '>200'"
+  later_reviews: >
+    context only: the same user's reviews after the target position in their sequence with ts <= target ts + 30 days
+    AND ts < T2 (Val period only; anything at/after T2 is never shown). Truncation by T2 is disclosed per card.
+rubric:
+  automatic:                     # computed from metadata, relative to the LAST history product (h_last)
+    store_change: "same / changed / unknown (either store empty); case-insensitive stripped string compare"
+    top_category_jump: "yes / no / unknown on items.top_cat (empty -> unknown)"
+    second_level_jump: "supplementary, declared before viewing: categories[:2] path differs (yes/no/unknown)"
+    leaf_category_jump: "yes / no / unknown on items.leaf_cat (full category path string; empty -> unknown)"
+    price_jump: "up if target/last > 2; down if < 0.5; similar otherwise; unknown if either price missing or <= 0"
+    leaf_unseen_in_history: "target leaf_cat appears in none of the user's full prior history (all positions < hist_len); unknown if target leaf empty"
+  agent_coded:                   # from titles/metadata only; needs human review
+    same_device_ecosystem:
+      "yes": "titles of target and h_last explicitly name the same device family/brand ecosystem (e.g. both iPhone, both Galaxy S, both Apple Watch)"
+      "no": "both titles explicitly name devices from different families/ecosystems"
+      unknown: "either title is generic/universal, names no device, is missing or ambiguous"
+      gate: "device-audit gate is blocked: this is not a compatibility claim and not parser output"
+    relation_to_last:
+      substitute: "same product type as h_last (case vs case, protector vs protector, charger vs charger)"
+      complement: "different product type that the titles suggest is used together with h_last"
+      unrelated: "no joint use evident from the titles"
+      unknown: "title missing or too vague"
+    coding_note: "one sentence; may cite later reviews as context, never as evidence of intent"
+aggregate:
+  populations: [double_miss_all, retrieved_by_at_least_one]
+  measures: [leaf_category_jump, top_category_jump, second_level_jump, store_change, leaf_unseen_in_history]
+  report: "share = yes / (yes + no), with yes, no and unknown counts; also by bucket F1/F2/F3 for double misses. No paired test."
+hypothesis: >
+  Pre-stated: most double misses are category jumps from the last product (retrievers echo the last purchase);
+  a minority are same-category products with no text overlap.
+  Operationalised: holds if leaf_category_jump share among double misses > 0.5 AND exceeds the share among
+  events retrieved by at least one retriever. The 'no text overlap' minority is described qualitatively in the 24 cards
+  (no token-overlap metric was pre-registered).

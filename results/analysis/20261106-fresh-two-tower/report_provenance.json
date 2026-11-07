@@ -1,0 +1,11 @@
+{
+  "label": "Val only, exploratory",
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty",
+  "source_sha256": "9436e370d7561cb075cc7cb650011e45a6d75bb0b564520dfe15749f9dafc5b2",
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "metrics.csv": "88a0bc9af6c83ad225bd97a584015238b84683dba80506689ad63574b017c422",
+    "paired_differences.csv": "90c8d615eb8be55c0054cf3aa1f906f3709bb09f1eb4bb428c99e62f94b832cb",
+    "tables.md": "a4ca6855c10d22dab8c62e4a7be537fcfd4c0789a1b57e5cb715df4461addc75"
+  }
+}

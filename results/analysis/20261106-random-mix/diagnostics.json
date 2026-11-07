@@ -1,0 +1,16 @@
+{
+  "label": "Val only, exploratory; TRAINING-LABEL CHANGE in an isolated study, pending team review; never replaces natural-list results",
+  "natural_lists": 20676,
+  "inserted_lists": 20676,
+  "inserted_source": "M2 subsample, seed-0 insertion slots",
+  "auc": "per-list positive vs the other real candidates of its own list (ties 1/2), mean over lists",
+  "h2": {
+    "inserted_cosine_auc": 0.1028381411798789,
+    "inserted_score_minus_cosine_auc": 0.8886856657051945,
+    "natural_cosine_auc": 0.5869149140945588,
+    "natural_score_minus_cosine_auc": 0.6114141028221004,
+    "inserted_skip_score_auc": 0.5006089404266447,
+    "h2_diagnostic_condition": true
+  },
+  "test_predictions_loaded": false
+}

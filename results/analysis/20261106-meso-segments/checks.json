@@ -1,0 +1,105 @@
+{
+  "label": "Val only, exploratory; descriptive, nothing selected",
+  "events": 232904,
+  "users": 124416,
+  "systems": {
+    "P1_retrieval": {
+      "reproduced": 0.006283596988513183,
+      "published": 0.0062835969885131,
+      "per_seed": [
+        0.006283596988513183
+      ],
+      "published_per_seed": [],
+      "pass": true
+    },
+    "P1_bce_text": {
+      "reproduced": 0.008140742517442344,
+      "published": 0.0081407425174423,
+      "per_seed": [
+        0.008160310263497476,
+        0.008150852198427792,
+        0.008111065090401765
+      ],
+      "published_per_seed": [
+        0.0081603102634974,
+        0.0081508521984277,
+        0.0081110650904017
+      ],
+      "pass": true
+    },
+    "P3_bce_text": {
+      "reproduced": 0.011018932991806694,
+      "published": 0.0110189329918066,
+      "per_seed": [
+        0.010849876829483013,
+        0.011114362889852854,
+        0.011092559256084216
+      ],
+      "published_per_seed": [
+        0.010849876829483,
+        0.0111143628898528,
+        0.0110925592560842
+      ],
+      "pass": true
+    },
+    "P3_context_T1": {
+      "reproduced": 0.012166880107403882,
+      "published": 0.0121668801074038,
+      "per_seed": [
+        0.012003891322517266,
+        0.012050302529453867,
+        0.01244644647024051
+      ],
+      "published_per_seed": [
+        0.0120038913225172,
+        0.0120503025294538,
+        0.0124464464702405
+      ],
+      "pass": true
+    },
+    "rolling_coreview": {
+      "reproduced": 0.010612516397579085,
+      "published": 0.010612516397579,
+      "per_seed": [
+        0.010537639161049052,
+        0.0104696196180436,
+        0.010830290413644606
+      ],
+      "published_per_seed": [
+        0.010537639161049,
+        0.0104696196180436,
+        0.0108302904136446
+      ],
+      "pass": true
+    },
+    "P2f_retrieval": {
+      "reproduced": 0.010035151143985776,
+      "published": 0.0100351511439857,
+      "per_seed": [
+        0.010035151143985776
+      ],
+      "published_per_seed": [],
+      "pass": true
+    }
+  },
+  "segments": {
+    "warm_tercile_cuts_pre_t1_reviews": [
+      13.0,
+      68.0
+    ],
+    "category_top8": [
+      "Accessories",
+      "Cases, Holsters & Sleeves",
+      "Cell Phones",
+      "(none)",
+      "Wireless Trade-In",
+      "SIM Cards & Prepaid Minutes",
+      "Wireless Trade-In Buy Box Widget",
+      "iPhone Accessories"
+    ],
+    "category_none_events": 3120
+  },
+  "test_predictions_loaded": false,
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty",
+  "models_trained_or_rescored": false
+}

@@ -2,6 +2,16 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-07 — Locked Test run of the 5–7 Nov systems (approved)
+
+Brandon approved the one-time Test run in `docs/test_protocol_2026-11-07.md` (sha256 `ed463472b4f437ae27a768975fbc622b69a2a49b2d5792cd3cf60be45fd30ac7`, frozen at approval), including decisions 2 (T2 statistics) and 3 (monthly statistics on Test).
+
+- Frozen models only: no training, tuning or selection on Test. Each system is scored once and every result is reported.
+- New outputs only, in `results/test_final/20261107/` and `results/local_experiments/20261107-test-final/`. No earlier study, result or file is modified.
+- This supersedes, for these systems only, the 4 Nov restriction on further Test runs and on a T2 graph.
+- **Outcome (7 Nov, 20:07–20:19):** the Val reproduction gate passed (lists, features and all six models' ranks exact; first attempt caught a 1-row CPU/MPS tie for D1, fixed by scoring each model on its original evaluation device). Every system was scored once. 8 of 9 written predictions held; 4b (combined system does not help new targets vs S1) did not: +0.000948. Results: `results/test_final/20261107/`.
+- **Addendum (7 Nov, approved by Brandon):** a Test replication of the Val statistics-timing diagnostics on the four frozen T0-trained P1 rankers. Protocol `docs/test_protocol_2026-11-07_addendum_timing.md` (sha256 `cd8228c4ea766fdb767e9081476ae58d979f47d0d6ede2b73089a49237a301a9`), with predictions written before any Test arm was built. No system or earlier result changes. **Outcome:** all five predictions held (`results/test_final/20261107/timing/`).
+
 ## 2026-11-04 — Close the objective x co-review factorial
 
 Three fresh BCE+co-review seeds complete root plan §14 using the exact immutable parent inputs and nine locked control fits. Selected epochs are 8/9/8. Full-Val nDCG@10 is **0.008409**, compared with BCE-off **0.008115**: graph gain **+0.000295 [0.000169, 0.000425]**. Warm gains accompany new-item losses under both objectives. The direct interaction `(PW_on−PW_off)−(BCE_on−BCE_off)` is **+0.000003 [−0.000159, 0.000163]**; the joint-user new-minus-warm interaction is **+0.000146 [−0.000162, 0.000511]**. Neither establishes objective dependence or equivalence. Preserve the whole training/selection/refit-recipe interpretation and exploratory/unadjusted reused-Val limitations.
@@ -630,3 +640,62 @@ Keep all outcomes and retained trained epochs, the unchanged parent studies and 
 The user approved the fixed four-arm metadata/co-review decomposition and frozen encoder diagnosis, explicitly requiring a pause after completion. Registered root plan §12 before fitting; all twelve full fits and two technical smokes completed. G0/GMC reproduce the old controls, including final logits; all weights were locked before outer evaluation. GC improves overall/new/warm versus G0, GC beats GM overall/new, and extra metadata over GC plus the factorial interaction remain inconclusive. Existing matching/support features remain present; no individual co-review feature or causal mechanism is isolated.
 
 The frozen R6/R7 diagnosis used twelve saved epoch2/selected checkpoints over all prefix queries and reused tuning/Val scores. Stronger inner neighbour scores coexist with poorer final-refit Val scores; different weights/populations prevent identifying the cause. Preserve all checkpoint, margin, residual, geometry and gradient evidence for the deeper assessment. Final suite **226 passed / 4 legacy skips** and completion/independent audits pass. Update the project records and checked comparison figure, commit, then **stop experiment execution**. No new GNN, automatic follow-up fit, temporal replication, full-data training or Test evaluation is authorised by this completion handoff.
+
+## 2026-11-07 — Loop phase H (Val only, exploratory)
+
+Brandon extended the loop to 08:00 on 7 Nov. Claude, as lead researcher, chose two new runs. All earlier rules hold.
+
+- **H1:** the fused P3 pool trained with rolling monthly co-review features (bce_coreview recipe, seeds 0/1/2), plus a rolling bce_text control if time allows.
+- **H2:** fresh Two-tower (text) retrained on all data before T1, seeds 1 and 2, with retriever-level Val metrics only.
+
+## 2026-11-06 — Overnight research loop: retrieval pools, robustness, random mixing, context, freshness (Val only, exploratory)
+
+Brandon authorised, on 6 Nov 2026 (01:50), an overnight loop led by Claude as researcher. Allowed work:
+
+1. **New ranker training on changed candidate pools.**
+   - Frozen two-tower seed-0 natural top 200 (P2).
+   - A fixed round-robin fusion of recency and two-tower (P3). The rule is fixed, not tuned: skip score = reciprocal-rank fusion with k = 60.
+   - The ranker is unchanged: the registered `bce_text` residual recipe, seeds 0/1/2.
+2. **Extra refit-draw repeats** of `bce_text` and `bce_coreview` on the recency pool. Same initial states, new negative/refit draws.
+3. **One isolated random-mixing study** (the professor's and Sahej's item):
+   - Missed ranker-training targets replace a candidate at a seeded uniformly random rank, taking that candidate's retrieval score.
+   - Arms: all mixed lists, or a subsample matched to the natural positive count.
+   - This is a **training-label change in its own study, pending team review**; Val stays natural.
+4. **One context-feature arm:** price, period-start review count, rating and item age, user history length and time since last interaction. All candidate statistics come from §4.5 period-start tables, never relative to query time.
+5. **No-training analyses:**
+   - a retriever oracle;
+   - Val graph freshness (pre-T1 and monthly snapshots on frozen checkpoints);
+   - a frozen-rule case study of targets missed by both retrievers;
+   - meso, latency and diversity tables.
+6. **Optional, only if the loop's recorded decision rules favour them:**
+   - a DIN-style residual ranker;
+   - one Two-tower (text) retrain on all pre-T1 data, used only to serve Val candidates.
+
+- The Val overlap of the two retrievers (recency 6.4%, two-tower 7.2%, union 12.4%, top-100 union 8.7%, micro) was seen at 01:45, before registration. The fusion rule was then fixed without tuning.
+- **Not allowed:**
+  - no Test file;
+  - no selection of K, index, ranker, pool, blend or δ;
+  - no edits to existing code, configs or earlier studies;
+  - no commits.
+- Run IDs use the prefix `20261106-`. Progress: `docs/analysis_loop_2026-11-06.md`. Results: `docs/overnight_results_2026-11-06.md`.
+
+## 2026-11-05 — Local rebuild of the current pipeline and overnight analyses (Val only, exploratory)
+
+Brandon authorised, after the professor's consultation and the PR #3 merge: (1) a separate pinned environment `.venv-encoder/` (uv) used only to regenerate the frozen MiniLM encoder and vectors with the library versions `frozen_text_study.py` requires; (2) retraining the 15 registered ranker fits (root `plan.md` §13: four methods × seeds 0/1/2; §14: `bce_coreview` × seeds 0/1/2) as a **reproduction** with unchanged configs, seeds and recipe, because the teammates' bulk arrays are not on this laptop; (3) no-training analyses: oracle and serving-time blend, HR@3/MRR@10, a Step-5 case study, the U-shape by popularity and secondary metrics for archived pipelines.
+
+- The processed data are ours: `items`, `instances`, `item_segments` and `sequences` hashes recorded in `results/full_data_replication/20261103-promising/study_provenance.json` equal `data/processed/*`. No script builds `data/processed/studies/20261027-targeted/`; a local `results/targeted_study/data.yaml` points at `data/processed` instead.
+- Rebuilt folders reuse the teammates' study names under `results/local_experiments/` only because the code hard-codes them; each carries `REGENERATED.md` with every difference from the published numbers. Report/audit/publish phases are not run, so no tracked folder is written.
+- No Test file is opened, no new model design is trained, and no K, index, ranker, blend or δ is selected. Progress: `docs/analysis_loop_2026-11-05.md`; results: `docs/overnight_results_2026-11-05.md`.
+- **Runs and outcomes (5 Nov, same day).**
+  - Rebuild completed 04:35–07:55. Retrieval is exact; bce_text, pairwise_text and pairwise_combined reproduce; both co-review models do not.
+  - Approved during the loop:
+    - local `report` + `*_audit` phases on the regenerated studies, which were checked to write only inside gitignored `results/local_experiments/`;
+    - a post-lock diagnostic scoring the inner-selected checkpoints on Val (`src/cascade/analysis/regen_inner_on_val.py`).
+  - New analysis code, all new files, with tests where needed:
+    - `ushape_popularity.py`;
+    - `secondary_metrics_archived.py` and `secondary_metrics_current.py` (HR@3 = Recall@3 and MRR@10 as extra exploratory metrics from the same ranks; no metric definition changed);
+    - `coreview_blend_oracle.py` (blend weights chosen only on inner tuning queries);
+    - `case_study_current.py`.
+  - The first `20261105-secondary-metrics-archived` run crashed before computing anything and is kept as is; `-r2` is the result.
+  - No publish phase, Test file, commit, or edit to existing code. Pytest: 301 passed.
+

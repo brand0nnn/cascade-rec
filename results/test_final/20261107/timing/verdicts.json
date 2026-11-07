@@ -1,0 +1,7 @@
+{
+  "R1a known flag recovers >= 1/3 of the new-target gain (all models)": true,
+  "R1b X7 recovers >= 75% overall and X6 < 1/3 (all models)": true,
+  "R2a overall rises monotonically T0 -> T2 (all models)": true,
+  "R2b new lowest at lag 0, peak in {3,6,9}, lag 12 below peak (all models)": true,
+  "R2c warm higher at lag 0 than lag 12 (all models)": true
+}

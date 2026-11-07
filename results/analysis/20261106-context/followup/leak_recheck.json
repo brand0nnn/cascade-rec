@@ -1,0 +1,334 @@
+{
+  "per_bucket_target_rate": {
+    "price": [
+      {
+        "level": 0,
+        "candidates": 25443522,
+        "targets": 2083,
+        "target_rate": 8.186759678946963e-05
+      },
+      {
+        "level": 1,
+        "candidates": 967800,
+        "targets": 291,
+        "target_rate": 0.00030068195908245507
+      },
+      {
+        "level": 2,
+        "candidates": 1332906,
+        "targets": 551,
+        "target_rate": 0.0004133824890877526
+      },
+      {
+        "level": 3,
+        "candidates": 1505583,
+        "targets": 663,
+        "target_rate": 0.0004403609764456692
+      },
+      {
+        "level": 4,
+        "candidates": 1501114,
+        "targets": 680,
+        "target_rate": 0.0004529969076299335
+      },
+      {
+        "level": 5,
+        "candidates": 2806663,
+        "targets": 1513,
+        "target_rate": 0.0005390743384581618
+      },
+      {
+        "level": 6,
+        "candidates": 2563238,
+        "targets": 1377,
+        "target_rate": 0.0005372111368511234
+      },
+      {
+        "level": 7,
+        "candidates": 2211223,
+        "targets": 1223,
+        "target_rate": 0.000553087589989793
+      },
+      {
+        "level": 8,
+        "candidates": 2998943,
+        "targets": 2228,
+        "target_rate": 0.0007429284251151155
+      },
+      {
+        "level": 9,
+        "candidates": 3446647,
+        "targets": 2627,
+        "target_rate": 0.000762190035707167
+      },
+      {
+        "level": 10,
+        "candidates": 1803161,
+        "targets": 1680,
+        "target_rate": 0.0009316971695816403
+      }
+    ],
+    "review_count": [
+      {
+        "level": 0,
+        "candidates": 5134958,
+        "targets": 6053,
+        "target_rate": 0.0011787827670645017
+      },
+      {
+        "level": 1,
+        "candidates": 1944117,
+        "targets": 764,
+        "target_rate": 0.00039298046362436006
+      },
+      {
+        "level": 2,
+        "candidates": 11431878,
+        "targets": 1325,
+        "target_rate": 0.00011590396608501245
+      },
+      {
+        "level": 3,
+        "candidates": 12746797,
+        "targets": 1425,
+        "target_rate": 0.00011179278998480952
+      },
+      {
+        "level": 4,
+        "candidates": 6925545,
+        "targets": 1323,
+        "target_rate": 0.00019103189712867363
+      },
+      {
+        "level": 5,
+        "candidates": 4189503,
+        "targets": 1272,
+        "target_rate": 0.0003036159659033542
+      },
+      {
+        "level": 6,
+        "candidates": 2291166,
+        "targets": 1011,
+        "target_rate": 0.00044126003964793474
+      },
+      {
+        "level": 7,
+        "candidates": 1070079,
+        "targets": 741,
+        "target_rate": 0.0006924722380310239
+      },
+      {
+        "level": 8,
+        "candidates": 547942,
+        "targets": 482,
+        "target_rate": 0.000879655145982604
+      },
+      {
+        "level": 9,
+        "candidates": 195867,
+        "targets": 289,
+        "target_rate": 0.0014754910219689891
+      },
+      {
+        "level": 10,
+        "candidates": 72330,
+        "targets": 127,
+        "target_rate": 0.0017558412830084335
+      },
+      {
+        "level": 11,
+        "candidates": 29473,
+        "targets": 104,
+        "target_rate": 0.003528653343738337
+      },
+      {
+        "level": 12,
+        "candidates": 1145,
+        "targets": 0,
+        "target_rate": 0.0
+      },
+      {
+        "level": 13,
+        "candidates": 0,
+        "targets": 0,
+        "target_rate": null
+      }
+    ],
+    "mean_rating": [
+      {
+        "level": 0,
+        "candidates": 5134958,
+        "targets": 6053,
+        "target_rate": 0.0011787827670645017
+      },
+      {
+        "level": 1,
+        "candidates": 310990,
+        "targets": 47,
+        "target_rate": 0.0001511302614231969
+      },
+      {
+        "level": 2,
+        "candidates": 1303073,
+        "targets": 116,
+        "target_rate": 8.902033884517598e-05
+      },
+      {
+        "level": 3,
+        "candidates": 3866771,
+        "targets": 462,
+        "target_rate": 0.00011947953473324384
+      },
+      {
+        "level": 4,
+        "candidates": 22705779,
+        "targets": 5197,
+        "target_rate": 0.00022888446152849457
+      },
+      {
+        "level": 5,
+        "candidates": 13259229,
+        "targets": 3041,
+        "target_rate": 0.00022934968541534354
+      }
+    ],
+    "item_age": [
+      {
+        "level": 0,
+        "candidates": 29251,
+        "targets": 25,
+        "target_rate": 0.0008546716351577724
+      },
+      {
+        "level": 1,
+        "candidates": 44397,
+        "targets": 27,
+        "target_rate": 0.000608149199270221
+      },
+      {
+        "level": 2,
+        "candidates": 82392,
+        "targets": 35,
+        "target_rate": 0.0004247985241285562
+      },
+      {
+        "level": 3,
+        "candidates": 172520,
+        "targets": 99,
+        "target_rate": 0.0005738465105495015
+      },
+      {
+        "level": 4,
+        "candidates": 332654,
+        "targets": 167,
+        "target_rate": 0.0005020231231249286
+      },
+      {
+        "level": 5,
+        "candidates": 840644,
+        "targets": 383,
+        "target_rate": 0.00045560308525368644
+      },
+      {
+        "level": 6,
+        "candidates": 1618941,
+        "targets": 740,
+        "target_rate": 0.00045708892417944816
+      },
+      {
+        "level": 7,
+        "candidates": 4478782,
+        "targets": 1644,
+        "target_rate": 0.00036706408126137866
+      },
+      {
+        "level": 8,
+        "candidates": 5992143,
+        "targets": 1980,
+        "target_rate": 0.00033043270162277504
+      },
+      {
+        "level": 9,
+        "candidates": 12519779,
+        "targets": 2486,
+        "target_rate": 0.0001985658053548709
+      },
+      {
+        "level": 10,
+        "candidates": 11419931,
+        "targets": 1089,
+        "target_rate": 9.535959543013001e-05
+      },
+      {
+        "level": 11,
+        "candidates": 3874729,
+        "targets": 186,
+        "target_rate": 4.800335713800888e-05
+      },
+      {
+        "level": 12,
+        "candidates": 39679,
+        "targets": 2,
+        "target_rate": 5.040449608105043e-05
+      },
+      {
+        "level": 13,
+        "candidates": 0,
+        "targets": 0,
+        "target_rate": null
+      },
+      {
+        "level": 14,
+        "candidates": 5134958,
+        "targets": 6053,
+        "target_rate": 0.0011787827670645017
+      }
+    ]
+  },
+  "new_candidates_by_gap": [
+    {
+      "gap": "0 (same ts)",
+      "candidates": 656,
+      "targets": 656,
+      "target_rate": 1.0,
+      "distinct_period_column_rows": 1
+    },
+    {
+      "gap": "(0,1d]",
+      "candidates": 29275,
+      "targets": 67,
+      "target_rate": 0.0022886421861656706,
+      "distinct_period_column_rows": 1
+    },
+    {
+      "gap": "(1d,7d]",
+      "candidates": 176619,
+      "targets": 375,
+      "target_rate": 0.0021232143767091877,
+      "distinct_period_column_rows": 1
+    },
+    {
+      "gap": "(7d,30d]",
+      "candidates": 650474,
+      "targets": 1127,
+      "target_rate": 0.00173258270123018,
+      "distinct_period_column_rows": 1
+    },
+    {
+      "gap": "(30d,90d]",
+      "candidates": 1500816,
+      "targets": 1609,
+      "target_rate": 0.0010720834532680888,
+      "distinct_period_column_rows": 1
+    },
+    {
+      "gap": ">90d",
+      "candidates": 2777118,
+      "targets": 2219,
+      "target_rate": 0.000799029785554665,
+      "distinct_period_column_rows": 1
+    }
+  ],
+  "period_columns_constant_across_gaps": true,
+  "note": "item columns depend only on the item and the period start; the gap to the query is not an input. User columns are constant within a list."
+}

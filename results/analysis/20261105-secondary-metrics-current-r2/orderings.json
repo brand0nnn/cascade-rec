@@ -1,0 +1,116 @@
+{
+ "all": {
+  "ndcg10": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_text",
+   "pairwise_coreview",
+   "retrieval",
+   "popularity"
+  ],
+  "recall10": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_coreview",
+   "pairwise_text",
+   "retrieval",
+   "popularity"
+  ],
+  "hr3": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_text",
+   "pairwise_coreview",
+   "retrieval",
+   "popularity"
+  ],
+  "mrr10": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_text",
+   "pairwise_coreview",
+   "retrieval",
+   "popularity"
+  ]
+ },
+ "new": {
+  "ndcg10": [
+   "pairwise_text",
+   "bce_text",
+   "pairwise_coreview",
+   "pairwise_combined",
+   "bce_coreview",
+   "retrieval",
+   "popularity"
+  ],
+  "recall10": [
+   "bce_text",
+   "pairwise_text",
+   "pairwise_combined",
+   "pairwise_coreview",
+   "bce_coreview",
+   "retrieval",
+   "popularity"
+  ],
+  "hr3": [
+   "pairwise_text",
+   "pairwise_combined",
+   "bce_text",
+   "pairwise_coreview",
+   "bce_coreview",
+   "retrieval",
+   "popularity"
+  ],
+  "mrr10": [
+   "pairwise_text",
+   "bce_text",
+   "pairwise_coreview",
+   "pairwise_combined",
+   "bce_coreview",
+   "retrieval",
+   "popularity"
+  ]
+ },
+ "warm": {
+  "ndcg10": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_text",
+   "pairwise_coreview",
+   "retrieval",
+   "popularity"
+  ],
+  "recall10": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_coreview",
+   "pairwise_text",
+   "retrieval",
+   "popularity"
+  ],
+  "hr3": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_coreview",
+   "pairwise_text",
+   "retrieval",
+   "popularity"
+  ],
+  "mrr10": [
+   "bce_coreview",
+   "bce_text",
+   "pairwise_combined",
+   "pairwise_text",
+   "pairwise_coreview",
+   "retrieval",
+   "popularity"
+  ]
+ }
+}

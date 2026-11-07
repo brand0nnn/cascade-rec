@@ -1,0 +1,259 @@
+{
+ "label": "Val only, exploratory; title mentions only, not compatibility claims; no training",
+ "config_sha256": "df8ac06a552ea5b4633b3144d495c2c8db25f1da243f9630f690943665d44f63",
+ "limit": null,
+ "filter_violations": {
+  "padding": 0,
+  "duplicates": 0,
+  "history_items": 0,
+  "unreleased_items": 0
+ },
+ "cpu_vs_archive": {
+  "rows": 214685,
+  "top200_set_equal": 211789,
+  "max_abs_score_diff": 4.76837158203125e-07
+ },
+ "coverage": {
+  "events": 232904,
+  "users": 124416,
+  "events_has_device": 220264,
+  "events_has_ordered_device": 214685,
+  "events_with_ge1_upgrade": 199507,
+  "share_events_ge1_upgrade": 0.8566061553257994,
+  "users_with_ge1_upgrade_event": 113164,
+  "share_users_ge1_upgrade": 0.9095614711934157,
+  "events_with_ge20_upgrade": 174938,
+  "mean_U_over_ordered_device_events": 3494.1082469664857,
+  "median_U_over_ordered_device_events": 1107.0,
+  "mean_U_over_all_events": 3220.7803601483874,
+  "events_list_changed": 199507,
+  "targets_gained_rank_among_upgrades": {
+   "1": 91,
+   "2": 55,
+   "3": 45,
+   "4": 62,
+   "5": 42,
+   "6": 46,
+   "7": 57,
+   "8": 35,
+   "9": 24,
+   "10": 52,
+   "11": 40,
+   "12": 36,
+   "13": 37,
+   "14": 25,
+   "15": 34,
+   "16": 24,
+   "17": 35,
+   "18": 34,
+   "19": 23,
+   "20": 35
+  }
+ },
+ "metrics": {
+  "overall": {
+   "events": 232904,
+   "users": 124416,
+   "recall200_P1_macro": 0.054746324742468065,
+   "recall200_D_append_macro": 0.05614795772233876,
+   "recall200_D_interleave_macro": 0.05614795772233876,
+   "recall10_P1_macro": 0.011506106114173385,
+   "recall10_D_append_macro": 0.011506106114173385,
+   "recall10_D_interleave_macro": 0.011258374397016515,
+   "ndcg10_P1_macro": 0.006283596988513183,
+   "ndcg10_D_append_macro": 0.006283596988513183,
+   "ndcg10_D_interleave_macro": 0.0062119864627198,
+   "gained": 751,
+   "lost": 474,
+   "net": 277
+  },
+  "new": {
+   "events": 76768,
+   "users": 52420,
+   "recall200_P1_macro": 0.0650433051524288,
+   "recall200_D_append_macro": 0.0687167141229572,
+   "recall200_D_interleave_macro": 0.0687167141229572,
+   "recall10_P1_macro": 0.014041772263202848,
+   "recall10_D_append_macro": 0.014041772263202848,
+   "recall10_D_interleave_macro": 0.013924005846313956,
+   "ndcg10_P1_macro": 0.007611004503650962,
+   "ndcg10_D_append_macro": 0.007611004503650962,
+   "ndcg10_D_interleave_macro": 0.007576962374806895,
+   "gained": 442,
+   "lost": 175,
+   "net": 267
+  },
+  "warm": {
+   "events": 156136,
+   "users": 96764,
+   "recall200_P1_macro": 0.05057375503861283,
+   "recall200_D_append_macro": 0.05083605481713248,
+   "recall200_D_interleave_macro": 0.05083605481713248,
+   "recall10_P1_macro": 0.010321389052502896,
+   "recall10_D_append_macro": 0.010321389052502896,
+   "recall10_D_interleave_macro": 0.010019402854160614,
+   "ndcg10_P1_macro": 0.005606269391063181,
+   "ndcg10_D_append_macro": 0.005606269391063181,
+   "ndcg10_D_interleave_macro": 0.00551897580308897,
+   "gained": 309,
+   "lost": 299,
+   "net": 10
+  },
+  "target_newer_same_family": {
+   "events": 48364,
+   "users": 42971,
+   "recall200_P1_macro": 0.056939563891927114,
+   "recall200_D_append_macro": 0.07080977093078276,
+   "recall200_D_interleave_macro": 0.07080977093078276,
+   "recall10_P1_macro": 0.011234320821018825,
+   "recall10_D_append_macro": 0.011234320821018825,
+   "recall10_D_interleave_macro": 0.012015855654588752,
+   "ndcg10_P1_macro": 0.005520156276463572,
+   "ndcg10_D_append_macro": 0.005520156276463572,
+   "ndcg10_D_interleave_macro": 0.005746070507390842,
+   "gained": 751,
+   "lost": 63,
+   "net": 688
+  },
+  "target_newer_same_family_le3": {
+   "events": 30627,
+   "users": 28314,
+   "recall200_P1_macro": 0.059207459207459213,
+   "recall200_D_append_macro": 0.08334451743542652,
+   "recall200_D_interleave_macro": 0.08334451743542652,
+   "recall10_P1_macro": 0.013622236349509076,
+   "recall10_D_append_macro": 0.013622236349509076,
+   "recall10_D_interleave_macro": 0.015193897012078827,
+   "ndcg10_P1_macro": 0.0065579984471589746,
+   "ndcg10_D_append_macro": 0.0065579984471589746,
+   "ndcg10_D_interleave_macro": 0.007012310263615357,
+   "gained": 751,
+   "lost": 0,
+   "net": 751
+  },
+  "has_device": {
+   "events": 220264,
+   "users": 119162,
+   "recall200_P1_macro": 0.05478514664504673,
+   "recall200_D_append_macro": 0.056281258896315904,
+   "recall200_D_interleave_macro": 0.056281258896315904,
+   "recall10_P1_macro": 0.011358678313037803,
+   "recall10_D_append_macro": 0.011358678313037803,
+   "recall10_D_interleave_macro": 0.011104219766506282,
+   "ndcg10_P1_macro": 0.006191244346164805,
+   "ndcg10_D_append_macro": 0.006191244346164805,
+   "ndcg10_D_interleave_macro": 0.006117689330606567,
+   "gained": 751,
+   "lost": 474,
+   "net": 277
+  },
+  "has_ordered_device": {
+   "events": 214685,
+   "users": 117216,
+   "recall200_P1_macro": 0.05449266061962459,
+   "recall200_D_append_macro": 0.056005194916557005,
+   "recall200_D_interleave_macro": 0.056005194916557005,
+   "recall10_P1_macro": 0.011272873834430154,
+   "recall10_D_append_macro": 0.011272873834430154,
+   "recall10_D_interleave_macro": 0.011007044188865663,
+   "ndcg10_P1_macro": 0.006152036241198304,
+   "ndcg10_D_append_macro": 0.006152036241198304,
+   "ndcg10_D_interleave_macro": 0.006075194240873057,
+   "gained": 751,
+   "lost": 474,
+   "net": 277
+  }
+ },
+ "examples": [
+  {
+   "inst": 824409,
+   "user": 113964,
+   "target_title": "OtterBox iPhone 13 Pro (ONLY) Defender Series Case - HUNTER GREEN, rugged & durable, with port protection, includes holster clip kickstand",
+   "target_keys": [
+    "iphone|13 pro"
+   ],
+   "current_device_product": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 12 (2020) / iPhone 12 Pro (2020) [Case Friendly] - 2 Pack",
+   "current_lines": {
+    "iphone": 12.0
+   },
+   "last_history_title": "Spigen Tempered Glass Screen Protector [GlasTR EZ FIT] designed for iPhone 12 (2020) / iPhone 12 Pro (2020) [Case Friendly] - 2 Pack",
+   "rank_append": 197.0,
+   "rank_interleave": 170.0,
+   "upgrade_rank": 17,
+   "new_in_val": true
+  },
+  {
+   "inst": 922371,
+   "user": 127596,
+   "target_title": "elago W2 Charger Stand Compatible with Apple Watch Series Ultra/8/SE2/7/6/SE/5/4/3/2/1 (49mm, 45mm, 44mm, 42mm, 41mm, 40mm, 38mm), Durable Silicone, Compatible with Nightstand Mode (Red)",
+   "target_keys": [
+    "apple_watch|series 8",
+    "apple_watch|ultra"
+   ],
+   "current_device_product": "[Upgraded Version] Watch Charging Stand for Apple Watch, Portable Watch Charger Stand with Charging Cable, Magnetic Wireless Charging Dock Compatible with iWatch Series SE 7 6 5 4 3 2-White",
+   "current_lines": {
+    "apple_watch": 7.0
+   },
+   "last_history_title": "[Upgraded Version] Watch Charging Stand for Apple Watch, Portable Watch Charger Stand with Charging Cable, Magnetic Wireless Charging Dock Compatible with iWatch Series SE 7 6 5 4 3 2-White",
+   "rank_append": 186.0,
+   "rank_interleave": 60.0,
+   "upgrade_rank": 6,
+   "new_in_val": false
+  },
+  {
+   "inst": 1533446,
+   "user": 212134,
+   "target_title": "ESR Metal Kickstand Case Compatible with iPhone 13 Pro Max Case, Patented Two-Way Stand, Reinforced Drop Protection, Slim Flexible Back Cover, Clear",
+   "target_keys": [
+    "iphone|13 pro max"
+   ],
+   "current_device_product": "Spigen Ultra Hybrid S Designed for iPhone 11 Pro Max Case (2019) - Jet Black",
+   "current_lines": {
+    "iphone": 11.0
+   },
+   "last_history_title": "Spigen Ultra Hybrid S Designed for iPhone 11 Pro Max Case (2019) - Jet Black",
+   "rank_append": 191.0,
+   "rank_interleave": 110.0,
+   "upgrade_rank": 11,
+   "new_in_val": true
+  },
+  {
+   "inst": 1851427,
+   "user": 256372,
+   "target_title": "UGREEN 100W USB C Charger, Nexode 4-Port GaN Foldable Compact Wall Charger Power Adapter Compatible with MacBook Pro/Air, iPad, iPhone 14 Pro, Galaxy S23 Ultra, Steam Deck, Dell XPS, Google Pixelbook",
+   "target_keys": [
+    "galaxy_s|s23 ultra",
+    "iphone|14 pro"
+   ],
+   "current_device_product": "TORRAS MarsClimber Designed for Samsung Galaxy S22 Ultra Case 6.8'' [3 Stand Ways Metal Kickstand] [8FT Military Shockproof Protection] Translucent Matte for Samsung S22 Ultra Case 5G, Alpine Green",
+   "current_lines": {
+    "galaxy_s": 22.0
+   },
+   "last_history_title": "USB Power Strip Baseus PowerCombo 65W USB C Wall Charger with 2 Outlets & 3 Fast Charging Ports, USB C Charger Desktop USB Charging Station Multiple Compatible with MacBook Laptop iPhone Samsung iPad",
+   "rank_append": 198.0,
+   "rank_interleave": 180.0,
+   "upgrade_rank": 18,
+   "new_in_val": true
+  },
+  {
+   "inst": 2383540,
+   "user": 329984,
+   "target_title": "Spigen Tempered Glass Screen Protector designed for iPhone 14 Plus/iPhone 13 Pro Max [2 Pack]",
+   "target_keys": [
+    "iphone|13 pro max",
+    "iphone|14 plus"
+   ],
+   "current_device_product": "Spigen Ultra Hybrid Designed for iPhone 13 Pro Max Case (2021) - Frost Black",
+   "current_lines": {
+    "iphone": 13.0
+   },
+   "last_history_title": "Spigen Ultra Hybrid Designed for iPhone 13 Pro Max Case (2021) - Frost Black",
+   "rank_append": 181.0,
+   "rank_interleave": 10.0,
+   "upgrade_rank": 1,
+   "new_in_val": true
+  }
+ ],
+ "seconds": 294.2,
+ "test_opened": false
+}

@@ -1,0 +1,169 @@
+{
+ "label": "POST-HOC, Val only, exploratory; title mentions only; lower bound (4 models only)",
+ "release_dates": {
+  "iphone|13": "2021-09-24",
+  "iphone|14": "2022-09-16",
+  "galaxy_s|s22": "2022-02-25",
+  "pixel|6": "2021-10-28"
+ },
+ "recency_top10": {
+  "slots": 2329040,
+  "future_slots": 197525,
+  "share": 0.08480962113145331,
+  "events_ge1": 52636
+ },
+ "two_tower_top10": {
+  "slots": 2329040,
+  "future_slots": 486720,
+  "share": 0.20897880671864802,
+  "events_ge1": 169701
+ },
+ "targets": {
+  "events": 232904,
+  "future": 31323,
+  "share": 0.13448888812557963,
+  "future_among_p1_k200_hits": 1876,
+  "p1_k200_hits": 14916
+ },
+ "items_per_model": {
+  "iphone|13": {
+   "items_naming_pre_t2": 4481,
+   "items_le3_keys": 2467,
+   "first_review_gt90d_before_release": 1750,
+   "share_early": 0.39053782637804063,
+   "share_early_le3": 0.20551276854479125
+  },
+  "iphone|14": {
+   "items_naming_pre_t2": 2296,
+   "items_le3_keys": 882,
+   "first_review_gt90d_before_release": 2214,
+   "share_early": 0.9642857142857143,
+   "share_early_le3": 0.9580498866213152
+  },
+  "galaxy_s|s22": {
+   "items_naming_pre_t2": 1828,
+   "items_le3_keys": 876,
+   "first_review_gt90d_before_release": 911,
+   "share_early": 0.49835886214442016,
+   "share_early_le3": 0.18493150684931506
+  },
+  "pixel|6": {
+   "items_naming_pre_t2": 437,
+   "items_le3_keys": 266,
+   "first_review_gt90d_before_release": 144,
+   "share_early": 0.3295194508009153,
+   "share_early_le3": 0.11278195488721804
+  }
+ },
+ "d_rescues": {
+  "rescues": 751,
+  "name_a_listed_model_before_release": 217,
+  "rely_only_on_such_names": 173,
+  "examples_first10_by_inst": [
+   {
+    "inst": 12820,
+    "qualifying_keys": [
+     "iphone|14 plus"
+    ],
+    "future_keys": [
+     "iphone|14 plus"
+    ],
+    "date": "2022-02-18"
+   },
+   {
+    "inst": 25470,
+    "qualifying_keys": [
+     "iphone|14"
+    ],
+    "future_keys": [
+     "iphone|14"
+    ],
+    "date": "2022-05-13"
+   },
+   {
+    "inst": 50432,
+    "qualifying_keys": [
+     "iphone|14 plus"
+    ],
+    "future_keys": [
+     "iphone|14 plus"
+    ],
+    "date": "2021-11-15"
+   },
+   {
+    "inst": 74207,
+    "qualifying_keys": [
+     "iphone|14 plus"
+    ],
+    "future_keys": [
+     "iphone|14 plus"
+    ],
+    "date": "2021-10-20"
+   },
+   {
+    "inst": 79539,
+    "qualifying_keys": [
+     "iphone|13 pro max mini"
+    ],
+    "future_keys": [
+     "iphone|13 pro max mini"
+    ],
+    "date": "2021-09-11"
+   },
+   {
+    "inst": 80000,
+    "qualifying_keys": [
+     "iphone|14"
+    ],
+    "future_keys": [
+     "iphone|14"
+    ],
+    "date": "2021-10-24"
+   },
+   {
+    "inst": 96879,
+    "qualifying_keys": [
+     "iphone|13",
+     "iphone|14"
+    ],
+    "future_keys": [
+     "iphone|14"
+    ],
+    "date": "2021-11-19"
+   },
+   {
+    "inst": 111364,
+    "qualifying_keys": [
+     "galaxy_s|s22 ultra"
+    ],
+    "future_keys": [
+     "galaxy_s|s22 ultra"
+    ],
+    "date": "2021-08-15"
+   },
+   {
+    "inst": 113394,
+    "qualifying_keys": [
+     "iphone|13",
+     "iphone|14"
+    ],
+    "future_keys": [
+     "iphone|14"
+    ],
+    "date": "2022-07-06"
+   },
+   {
+    "inst": 115084,
+    "qualifying_keys": [
+     "iphone|13",
+     "iphone|14"
+    ],
+    "future_keys": [
+     "iphone|13",
+     "iphone|14"
+    ],
+    "date": "2021-09-16"
+   }
+  ]
+ }
+}
