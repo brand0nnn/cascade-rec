@@ -114,22 +114,27 @@ def accuracy_vs_popularity():
 
 
 def training_vs_architecture():
-    t = pd.read_csv(TS / "meso-oracle-20261107/meso_metrics.csv")
-    g = lambda s: t[(t.system == s) & (t.group == "all")].ndcg10.iloc[0]
-    base = g("policy_A")
-    bars = [("Change the model\n(MLP → DIN)", g("R3_din") / g("R2_mlp") - 1, COL["DIN"]),
-            ("Change the training lists\n(forced → natural)", g("policy_C") / base - 1, COL["C"]),
-            ("Best of both per purchase\n(oracle, vs natural-list)", g("oracle_A_C") / g("policy_C") - 1, INK2)]
-    fig, ax = plt.subplots(figsize=(7, 3.6))
-    for i, (name, v, c) in enumerate(bars):
-        ax.barh(i, v * 100, color=c, height=0.55, edgecolor=SURF, lw=2)
-        ax.text(v * 100 + (1 if v >= 0 else -1), i, f"{v * 100:+.0f}%", va="center",
-                ha="left" if v >= 0 else "right", fontsize=13, color=INK, fontweight="bold")
-    ax.axvline(0, color=INK2, lw=1)
-    ax.set_yticks(range(len(bars))); ax.set_yticklabels([b[0] for b in bars]); ax.invert_yaxis()
-    ax.set_xlim(-15, 45); ax.set_xlabel("Change in nDCG@10 (%)"); ax.grid(axis="x", color=GRID, lw=0.8); ax.set_axisbelow(True)
-    ax.set_title("How you train beats which model you pick", loc="left", fontsize=13, color=INK)
-    fig.text(0.0, -0.06, "Validation, 3-seed means. Oracle = upper bound, not a deployable system.", fontsize=9, color=INK2)
+    # Validation K200 nDCG@10, mean of seeds 0-2. MLP/DIN forced: results/ranker_comparison/20261025-rq3;
+    # natural-list MLP/DIN: Brandon's 28 Oct runs, docs/report_2026-10-28.md (result files not in git).
+    vals = {("Forced lists", "MLP"): 0.006843, ("Forced lists", "DIN"): 0.006436,
+            ("Natural lists", "MLP"): 0.008607, ("Natural lists", "DIN"): 0.009824}
+    fig, ax = plt.subplots(figsize=(7, 4.2))
+    width = 0.36
+    for j, model in enumerate(("MLP", "DIN")):
+        color = COL["A"] if model == "MLP" else COL["DIN"]
+        for i, train in enumerate(("Forced lists", "Natural lists")):
+            v = vals[(train, model)] * 100
+            x = i + (j - 0.5) * width
+            ax.bar(x, v, width=width - 0.04, color=color, edgecolor=SURF, lw=2, label=model if i == 0 else None)
+            ax.text(x, v + 0.015, f"{v:.2f}", ha="center", va="bottom", fontsize=12, color=INK)
+    ax.set_xticks([0, 1]); ax.set_xticklabels(["Trained on forced lists", "Trained on natural lists"])
+    ax.set_ylabel("nDCG@10 (×100)"); ax.set_ylim(0, 1.2); ax.grid(axis="y", color=GRID, lw=0.8); ax.set_axisbelow(True)
+    ax.annotate("MLP wins (+6%)", (0, 0.80), ha="center", fontsize=11, color=INK2)
+    ax.annotate("DIN wins (+14%)", (1, 1.11), ha="center", fontsize=11, color=INK2)
+    ax.legend(frameon=False, loc="upper left", fontsize=11)
+    ax.set_title("Training data decides which model wins", loc="left", fontsize=13, color=INK)
+    fig.text(0.0, -0.05, "Validation, K₁=200, mean of 3 seeds. Natural-list runs: Brandon (28 Oct); forced: RQ3 comparison.",
+             fontsize=9, color=INK2)
     save(fig, "fig4_training_vs_architecture")
 
 

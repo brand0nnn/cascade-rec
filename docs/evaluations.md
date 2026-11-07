@@ -1175,3 +1175,18 @@ Observed patterns (to be quantified before being stated as general):
 - **A/DIN top-3 come from deep retrieval positions** (median retrieval rank 107 / 140.5 versus 53 for C), consistent at micro level with the low-score preference.
 - **Retrieval misses are often device or category switches** (iPhone case buyer → Apple Watch band; Fitbit accessories → iPhone screen protector; renewed Samsung watch), with full-catalogue ranks of 649–28,699. No ranker can recover them.
 - Next check: full-validation top-10 catalogue coverage and popularity concentration per arm, to test the diversity hypothesis.
+
+#### 7 November: top-10 diversity on full Val (seed-0 models)
+
+`scripts/analysis_top10_diversity.py` → `results/targeted_study/top10-diversity-20261107/` (all 232,904 natural K200 Val lists; top-1% by counts before T2 per CLAUDE.md §5; "new" = first seen at/after T1).
+
+| System | nDCG@10 (3-seed) | Top-1% slot share | New-product slot share | Distinct products in any top-10 | Median pre-T1 reviews | Lists containing the single most-shown product |
+|---|---:|---:|---:|---:|---:|---:|
+| Retrieval order | 0.005642 | 70.5% | 8.9% | 2,889 | 735 | 55.0% |
+| Forced MLP (A) | 0.006887 | 41.3% | 26.2% | 16,394 | 66 | 36.0% |
+| Natural MLP (C) | 0.008572 | 56.2% | 17.0% | 10,749 | 291 | 54.3% |
+| DIN (forced) | 0.006436 | 31.3% | 34.3% | 16,863 | 13 | 33.2% |
+
+The micro-case concentration pattern holds on full Val: natural-only training raises accuracy while recommending more bestsellers, fewer new products and about 35% fewer distinct products than forced A. Brandon's 28 October analysis also found 71% top-1% share for retrieval. Natural-list DIN composition was not measured here (its checkpoints are not local). Popularity and accuracy co-move across these four systems; this is descriptive, not a causal popularity effect.
+
+Poster figures (`scripts/poster_figures_20261107.py` → `results/figures/poster_20261107/`): fig1 K-curve A vs C; fig2 winners/losers grid by item group; fig3 accuracy versus bestseller and new-product share; fig4 MLP/DIN under forced versus natural lists (natural-list values from `docs/report_2026-10-28.md`).
