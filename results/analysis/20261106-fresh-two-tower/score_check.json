@@ -1,0 +1,79 @@
+{
+  "label": "Val only, exploratory",
+  "device": "mps",
+  "test_predictions_loaded": false,
+  "P3": {
+    "seed0": {
+      "stored_repro": {
+        "rank_exact": true,
+        "top10_exact": true
+      },
+      "weights_sha256": "59b2ca0dbb002f9e18ebba2c6cc07171af006074a12b649b6bd704fb756c4ce3",
+      "logits_sha256": "670d9137056cb12fe45242b8351cfd96fc7a11484da261bf9a9ad68aa33553d1",
+      "ndcg10_stored_pool": 0.010849876829483013,
+      "ndcg10_fresh_pool": 0.011296495548555502
+    },
+    "seed1": {
+      "stored_repro": {
+        "rank_exact": true,
+        "top10_exact": true
+      },
+      "weights_sha256": "7fd3a72f34c8647df8fe4d9a7b5b0840a7e3cbd68f2dfdafc2ce8c1d0d242316",
+      "logits_sha256": "680b3f80222db5d1648a3577ef455c9d80525338a02c3399ae0de0b26f0780d9",
+      "ndcg10_stored_pool": 0.011114362889852854,
+      "ndcg10_fresh_pool": 0.011508208970807409
+    },
+    "seed2": {
+      "stored_repro": {
+        "rank_exact": true,
+        "top10_exact": true
+      },
+      "weights_sha256": "c01a5d213f842d8153d32c5e3ca5e77281cf96c707c692f5fa30cdbd907ab157",
+      "logits_sha256": "32e4a2d1acc11a8a36cc7dc5ddd51ea5bce003b975d7e17472635f4baa3af125",
+      "ndcg10_stored_pool": 0.011092559256084216,
+      "ndcg10_fresh_pool": 0.011345918596748222
+    },
+    "epoch0_fresh": {
+      "logits_equal_score": true,
+      "ranks_equal_retrieval_rank": true,
+      "top10_equal": true
+    }
+  },
+  "P2": {
+    "seed0": {
+      "stored_repro": {
+        "rank_exact": true,
+        "top10_exact": true
+      },
+      "weights_sha256": "b03000d78ebc5b94fb3805a4c4588eaaf0cd0cdde2988c9fece73edad55b6145",
+      "logits_sha256": "c99996937d28b3fc3b6fa6ec8e078bc0341c4b7c1b5cf71185ed39a5e410ea1f",
+      "ndcg10_stored_pool": 0.009946922697702639,
+      "ndcg10_fresh_pool": 0.01004715606599634
+    },
+    "seed1": {
+      "stored_repro": {
+        "rank_exact": true,
+        "top10_exact": true
+      },
+      "weights_sha256": "97a5b33f8ea3b844a7a899e14818fa60b3f5d27ac2423ba19e257a552c946ec9",
+      "logits_sha256": "b8e56adcbb6e4b40d698bca0029966c625c3b152ca116d6bb0e84f60e948666e",
+      "ndcg10_stored_pool": 0.009992723832620069,
+      "ndcg10_fresh_pool": 0.009882942836314272
+    },
+    "seed2": {
+      "stored_repro": {
+        "rank_exact": true,
+        "top10_exact": true
+      },
+      "weights_sha256": "b26c5af19fda5dba9a4b0053ac20908026594207cf16757b799ed8d4dedc7ca0",
+      "logits_sha256": "1dbc9abe08047b30c12db673772fd7276a8424b957edf7b261b67090a46731a2",
+      "ndcg10_stored_pool": 0.010303634622571327,
+      "ndcg10_fresh_pool": 0.00986572268267251
+    },
+    "epoch0_fresh": {
+      "logits_equal_score": true,
+      "ranks_equal_retrieval_rank": true,
+      "top10_equal": true
+    }
+  }
+}

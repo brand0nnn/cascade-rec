@@ -1,0 +1,36 @@
+# FROZEN before any proxy was computed (2026-11-06 02:17:26 +0800).
+# Val only, exploratory; title mentions only, not compatibility claims; no training
+analysis: 20261106-title-leak
+frozen_at: 2026-11-06 02:17:26 +0800
+label: Val only, exploratory; title mentions only, not compatibility claims; no training
+split: val only (Test never opened; items with first_ts >= T2 never set a proxy)
+module: src/cascade/analysis/title_leak_audit.py
+module_sha256_at_freeze: b7570791461a690362922253b209e95f11c489dad6e02a94cd3135c60f0da125
+imports_unchanged:
+  switch_cases_devices.py: 7984ab92734bbe9470450028d79fca7620007935e5d8d3625d2191e26951c38f
+  device_upgrade_retrieval.py: b89db63630c6b2c1702fc2c608eb428f646bceff33fa23e80503c2d4551ce785
+release_proxy_primary: 'per model key: earliest first_ts among items with first_ts < T2 whose title names the key and names
+  <= 3 keys; no such item -> +inf (not released before T2)'
+release_proxy_supplementary: same but the 10th-earliest such item (fewer -> latest available); reported, and a D_strict_q10
+  variant
+future_at_t: key proxy > t; an item/slot names a future model if any of its keys is future at the query time t
+sanity_list_reporting_only:
+  iphone|13: 2021-09 (iPhone 13)
+  iphone|14: 2022-09 (iPhone 14)
+  galaxy_s|s22: 2022-02 (Galaxy S22)
+  pixel|6: 2021-10 (Pixel 6)
+reports:
+  1_slots_targets: 'Val events: share of recency top10 slots and two-tower cand[:10] slots naming a future model at t; share
+    of targets naming a future model at t (overall, and by P1 K200 hit/miss); share of items with first_ts < T2 whose title
+    names a model future at their own first_ts'
+  2_D_strict: 'as D (device_upgrade_retrieval rules, helpers imported) except: current device = most recent full-history product
+    naming any model VISIBLE at t, lines from its visible keys only; upgrade candidates need a qualifying (strictly newer,
+    same line) key that is visible at t. Contrasts D_strict - P1 and D_strict - D Recall@200 (append order), paired user bootstrap
+    1,000 / seed 0; groups overall/new/warm/target_newer_same_family (as defined in the D study); gained/lost counts'
+  3_rescues: 'of D''s gained targets: count whose qualifying keys (vs D''s current device) are ALL future at t'
+  replicate_check: first 2048 ordered-device rows rebuilt with visibility disabled must equal D ranks exactly
+hypothesis: A non-trivial share (>5%) of Val recency top-10 slots name at least one model that is future at the query time,
+  and the D rescues partly depend on such names; a strict D (upgrade candidates restricted to models released by the query
+  time, proxy <= t) keeps most of the newer-model Recall@200 gain.
+hypothesis_operational: 'part 1: recency future-slot share > 0.05; part 2: >= 1 D rescue relies only on future names; part
+  3: D_strict - P1 Recall@200 in target_newer_same_family >= 0.5 x (D - P1) there'

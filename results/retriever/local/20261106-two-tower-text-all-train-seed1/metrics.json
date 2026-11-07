@@ -1,0 +1,505 @@
+{
+  "name": "two_tower_text_all_train",
+  "seed": 1,
+  "sample": false,
+  "device": "mps",
+  "cpu": "Apple M2 Pro",
+  "best_epoch": 35,
+  "best_val_subset_recall@100": 0.07830664935814222,
+  "train_time_s": 3448.2844338417053,
+  "status": "complete",
+  "id_dropout": 0.0,
+  "initial_state_sha256": "e9828e64d69c2303a56949a535e5b3bf635da7f1b0bf70b28f88a7a45b6abb5a",
+  "config_sha256": "c4d0cade774705f4c0eedb8507cca9afec2a1515260aa5521dd81c5611dcb427",
+  "checkpoint_sha256": "b18895a3bc05a1f24573b58ae59af41d5d13aef4a0cd1011792644578a09969f",
+  "input_sha256": {
+    "sequences.npz": "b982ba4931f1a605196e39543a090c18f827cc0f80de967d76a6afd36c4b7c06",
+    "instances.parquet": "6ce91c5ef0fec3fce4bf817dc29ec892b4dcf28dc6c87fe6686ac4502867c39b",
+    "items.parquet": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c",
+    "item_segments.parquet": "5c51f83f64edd8fd22dc3e7941d795de245333fafa21f6e7ea7ee13a50568424",
+    "split.json": "70575c4cb2168b86a48eb182b0b7228688356f2c7024f8cf4d39d8b7d4e9a447",
+    "item_text_emb.npy": "26c7257f36887d0ba6f086d8514fab43e2123c21a7d43283ae5d114d04ee12c6"
+  },
+  "q_target_audit": {
+    "q_definition": "all interactions before T1 (retriever_train + ranker_train); fresh_two_tower wrapper",
+    "target_definition": "sequence targets excluding each user's first item",
+    "interaction_count": 2208880,
+    "target_count": 1841492,
+    "excluded_first_events": 367388,
+    "marginal_l1_difference": 0.11951998478041874,
+    "items_in_q_without_training_target": 174,
+    "limit": "Sequence-window batches and position subsampling further approximate the negative marginal."
+  },
+  "selector": {
+    "metric": "macro Recall@100",
+    "subset_seed": 0,
+    "instances": 20000,
+    "instance_file_sha256": "a865bd8df02d4aa86d5566f6941f6469e8fe31af636bf220a710d0c6e999f83f"
+  },
+  "rng": {
+    "window_seed": 1,
+    "position_subsampling_seed": 1,
+    "id_dropout_seed": 104730
+  },
+  "evaluation_splits": [
+    "val"
+  ],
+  "test_predictions_loaded": false,
+  "source_sha256": {
+    "src/cascade/pipelines/train_retriever.py": "d885e4694c5e6aff4e5af2b95bcf5906362d2ced01ecaf63d7f08de5156dbaf4",
+    "src/cascade/models/retriever.py": "98294159b9e9258bde8bc243f4eb85ed8019fc20bf99094f6cdbba7e1324a9a0"
+  },
+  "data_config_sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42",
+  "val": {
+    "split": "val",
+    "n_instances": 232904,
+    "n_users": 124416,
+    "recall@10": {
+      "macro": 0.018738528594146334,
+      "micro": 0.02018428193590492
+    },
+    "ndcg@10": {
+      "macro": 0.009996452132082933,
+      "micro": 0.010910577722213283
+    },
+    "recall@50": {
+      "macro": 0.05006816873428301,
+      "micro": 0.0533352797719232
+    },
+    "ndcg@50": {
+      "macro": 0.016718165702538656,
+      "micro": 0.018014758475739932
+    },
+    "recall@100": {
+      "macro": 0.07534341776571306,
+      "micro": 0.07977965170198881
+    },
+    "ndcg@100": {
+      "macro": 0.020801705917076124,
+      "micro": 0.022286096684563987
+    },
+    "recall@200": {
+      "macro": 0.1108460377197901,
+      "micro": 0.11706110672208292
+    },
+    "ndcg@200": {
+      "macro": 0.025747552193216505,
+      "micro": 0.027481592352938792
+    },
+    "recall@500": {
+      "macro": 0.1774232585714179,
+      "micro": 0.18739910005839316
+    },
+    "ndcg@500": {
+      "macro": 0.033728546070829174,
+      "micro": 0.035913973086491746
+    },
+    "n_unscorable": 0,
+    "coverage@10": 0.024237531395766055,
+    "pop_concentration@10": 0.8499819668189469,
+    "segments": {
+      "item_cold": {
+        "n_instances": 0,
+        "n_users": 0,
+        "recall@10": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "ndcg@10": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "recall@50": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "ndcg@50": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "recall@100": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "ndcg@100": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "recall@200": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "ndcg@200": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "recall@500": {
+          "macro": NaN,
+          "micro": NaN
+        },
+        "ndcg@500": {
+          "macro": NaN,
+          "micro": NaN
+        }
+      },
+      "item_tail": {
+        "n_instances": 94205,
+        "n_users": 66116,
+        "recall@10": {
+          "macro": 0.00014943626663936423,
+          "micro": 0.00015922721723900005
+        },
+        "ndcg@10": {
+          "macro": 6.07740234166085e-05,
+          "micro": 6.09163910551502e-05
+        },
+        "recall@50": {
+          "macro": 0.0022281963614827634,
+          "micro": 0.0024733294411124675
+        },
+        "ndcg@50": {
+          "macro": 0.0004913786588688535,
+          "micro": 0.0005383956925945038
+        },
+        "recall@100": {
+          "macro": 0.006029209016444943,
+          "micro": 0.006772464306565469
+        },
+        "ndcg@100": {
+          "macro": 0.0011001253836574346,
+          "micro": 0.0012283314473548886
+        },
+        "recall@200": {
+          "macro": 0.015700865493844595,
+          "micro": 0.017748527148240538
+        },
+        "ndcg@200": {
+          "macro": 0.002440995120590046,
+          "micro": 0.002751339319297962
+        },
+        "recall@500": {
+          "macro": 0.04705345319076753,
+          "micro": 0.05205668488933708
+        },
+        "ndcg@500": {
+          "macro": 0.0061730567945312165,
+          "micro": 0.0068394121638171755
+        }
+      },
+      "item_head": {
+        "n_instances": 138699,
+        "n_users": 90160,
+        "recall@10": {
+          "macro": 0.030926046054379996,
+          "micro": 0.03378539138710445
+        },
+        "ndcg@10": {
+          "macro": 0.01660088236416431,
+          "micro": 0.018279717699442772
+        },
+        "recall@50": {
+          "macro": 0.08177239407744558,
+          "micro": 0.08788095083598296
+        },
+        "ndcg@50": {
+          "macro": 0.0275172568041095,
+          "micro": 0.029884784618583172
+        },
+        "recall@100": {
+          "macro": 0.12120540248747229,
+          "micro": 0.12936646983756192
+        },
+        "ndcg@100": {
+          "macro": 0.03389156165845311,
+          "micro": 0.0365886278792466
+        },
+        "recall@200": {
+          "macro": 0.17439037061701396,
+          "micro": 0.1845146684547113
+        },
+        "ndcg@200": {
+          "macro": 0.04130496769777953,
+          "micro": 0.04427849418376768
+        },
+        "recall@500": {
+          "macro": 0.2656966381965101,
+          "micro": 0.2793242921722579
+        },
+        "ndcg@500": {
+          "macro": 0.05226719916172339,
+          "micro": 0.05566154885647247
+        }
+      },
+      "item_new_in_period": {
+        "n_instances": 76768,
+        "n_users": 52420,
+        "recall@10": {
+          "macro": 0.0007837194917507775,
+          "micro": 0.000885785744060025
+        },
+        "ndcg@10": {
+          "macro": 0.00033178336693470554,
+          "micro": 0.00036118969509364485
+        },
+        "recall@50": {
+          "macro": 0.006875238330313655,
+          "micro": 0.008154439349729054
+        },
+        "ndcg@50": {
+          "macro": 0.0015924500894363015,
+          "micro": 0.0018632854163417303
+        },
+        "recall@100": {
+          "macro": 0.015516354035543911,
+          "micro": 0.018314922884535224
+        },
+        "ndcg@100": {
+          "macro": 0.0029800050229348406,
+          "micro": 0.0034978071104231822
+        },
+        "recall@200": {
+          "macro": 0.03168903664002557,
+          "micro": 0.03660379324718633
+        },
+        "ndcg@200": {
+          "macro": 0.005223196267122418,
+          "micro": 0.006036467054551142
+        },
+        "recall@500": {
+          "macro": 0.0732302555649823,
+          "micro": 0.0821957065443935
+        },
+        "ndcg@500": {
+          "macro": 0.01017414992265998,
+          "micro": 0.011474581353673111
+        }
+      },
+      "item_not_new": {
+        "n_instances": 156136,
+        "n_users": 96764,
+        "recall@10": {
+          "macro": 0.026851579495854108,
+          "micro": 0.029672849310857202
+        },
+        "ndcg@10": {
+          "macro": 0.01437787258729698,
+          "micro": 0.01609743674297672
+        },
+        "recall@50": {
+          "macro": 0.06950032085042188,
+          "micro": 0.07554952093047088
+        },
+        "ndcg@50": {
+          "macro": 0.023545253648622762,
+          "micro": 0.025956016634165153
+        },
+        "recall@100": {
+          "macro": 0.10220376406568951,
+          "micro": 0.11000025618691397
+        },
+        "ndcg@100": {
+          "macro": 0.028832280519063634,
+          "micro": 0.03152380876907776
+        },
+        "recall@200": {
+          "macro": 0.14677704097050162,
+          "micro": 0.1566198698570477
+        },
+        "ndcg@200": {
+          "macro": 0.035046446981614444,
+          "micro": 0.038025601286859376
+        },
+        "recall@500": {
+          "macro": 0.22550267476314045,
+          "micro": 0.23912486550187018
+        },
+        "ndcg@500": {
+          "macro": 0.044495554480080524,
+          "micro": 0.047930184751610753
+        }
+      },
+      "hist_1-2": {
+        "n_instances": 31556,
+        "n_users": 22413,
+        "recall@10": {
+          "macro": 0.019096060322134477,
+          "micro": 0.02005957662568133
+        },
+        "ndcg@10": {
+          "macro": 0.01037034654987576,
+          "micro": 0.01096831045392604
+        },
+        "recall@50": {
+          "macro": 0.04820862892071565,
+          "micro": 0.05013309671694765
+        },
+        "ndcg@50": {
+          "macro": 0.016612006830271378,
+          "micro": 0.017407608129703996
+        },
+        "recall@100": {
+          "macro": 0.07219024673180743,
+          "micro": 0.07488274813030803
+        },
+        "ndcg@100": {
+          "macro": 0.020480329683678584,
+          "micro": 0.02140243748282106
+        },
+        "recall@200": {
+          "macro": 0.10600990496586803,
+          "micro": 0.10977310178729877
+        },
+        "ndcg@200": {
+          "macro": 0.025197982446507887,
+          "micro": 0.026268970141385094
+        },
+        "recall@500": {
+          "macro": 0.1709052781867666,
+          "micro": 0.17701863354037267
+        },
+        "ndcg@500": {
+          "macro": 0.0329797379372003,
+          "micro": 0.03432936354105516
+        }
+      },
+      "hist_3-5": {
+        "n_instances": 116282,
+        "n_users": 79720,
+        "recall@10": {
+          "macro": 0.01887439371132296,
+          "micro": 0.020424485302970367
+        },
+        "ndcg@10": {
+          "macro": 0.010131623990098702,
+          "micro": 0.011054674317870477
+        },
+        "recall@50": {
+          "macro": 0.051066231811339687,
+          "micro": 0.0543334307975439
+        },
+        "ndcg@50": {
+          "macro": 0.017032312171359223,
+          "micro": 0.01831921208923359
+        },
+        "recall@100": {
+          "macro": 0.07666833918715504,
+          "micro": 0.08094116028276087
+        },
+        "ndcg@100": {
+          "macro": 0.02116970700325893,
+          "micro": 0.022616061342150842
+        },
+        "recall@200": {
+          "macro": 0.11363731393209565,
+          "micro": 0.11899520132092671
+        },
+        "ndcg@200": {
+          "macro": 0.026314408139236484,
+          "micro": 0.02791442738264406
+        },
+        "recall@500": {
+          "macro": 0.18093744773373474,
+          "micro": 0.18892863899829723
+        },
+        "ndcg@500": {
+          "macro": 0.03437782187436301,
+          "micro": 0.03629512667272068
+        }
+      },
+      "hist_6-10": {
+        "n_instances": 59795,
+        "n_users": 39178,
+        "recall@10": {
+          "macro": 0.01947521568227066,
+          "micro": 0.020285977088385317
+        },
+        "ndcg@10": {
+          "macro": 0.010395273238292896,
+          "micro": 0.010808752719514862
+        },
+        "recall@50": {
+          "macro": 0.053016573927544365,
+          "micro": 0.054586503888284975
+        },
+        "ndcg@50": {
+          "macro": 0.01758982764693207,
+          "micro": 0.01816385508978492
+        },
+        "recall@100": {
+          "macro": 0.07920474075586638,
+          "micro": 0.08147838448030771
+        },
+        "ndcg@100": {
+          "macro": 0.02182118132324238,
+          "micro": 0.022511989380548856
+        },
+        "recall@200": {
+          "macro": 0.11459152245307742,
+          "micro": 0.11862195835772221
+        },
+        "ndcg@200": {
+          "macro": 0.026761080637722333,
+          "micro": 0.027694759846234634
+        },
+        "recall@500": {
+          "macro": 0.18452788129392345,
+          "micro": 0.1906848398695543
+        },
+        "ndcg@500": {
+          "macro": 0.03514688051896997,
+          "micro": 0.036344286473662175
+        }
+      },
+      "hist_11+": {
+        "n_instances": 25271,
+        "n_users": 11043,
+        "recall@10": {
+          "macro": 0.02032212874441546,
+          "micro": 0.018994103913576827
+        },
+        "ndcg@10": {
+          "macro": 0.011093792349256493,
+          "micro": 0.010416373757914882
+        },
+        "recall@50": {
+          "macro": 0.05122659483124383,
+          "micro": 0.04978038067349927
+        },
+        "ndcg@50": {
+          "macro": 0.017718885717101132,
+          "micro": 0.01701921137425681
+        },
+        "recall@100": {
+          "macro": 0.07831140557769262,
+          "micro": 0.07653041035178663
+        },
+        "ndcg@100": {
+          "macro": 0.022089925359289924,
+          "micro": 0.02133672965121626
+        },
+        "recall@200": {
+          "macro": 0.11437044845792975,
+          "micro": 0.11356891298326145
+        },
+        "ndcg@200": {
+          "macro": 0.027106928446080286,
+          "micro": 0.02649976469760177
+        },
+        "recall@500": {
+          "macro": 0.18455138742542296,
+          "micro": 0.18554865260575362
+        },
+        "ndcg@500": {
+          "macro": 0.03551981848773741,
+          "micro": 0.035120654599533035
+        }
+      }
+    }
+  },
+  "total_time_s": 3536.9013159275055,
+  "peak_rss_native": 4588929024,
+  "peak_rss_unit": "bytes on macOS, KiB on Linux",
+  "peak_rss_scope": "process high-water mark; may include earlier arms in a shared runner process",
+  "cuda_peak_allocated_bytes": null,
+  "run_dir": "/Users/brandonkang/nus/cp4285/project/results/retriever/local/20261106-two-tower-text-all-train-seed1"
+}

@@ -1,0 +1,21 @@
+{
+  "study": "results/local_experiments/20261106-random-mix",
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "ushape_deciles_seed_mean.csv": "ae1dd085655bf55510b465c93c8495a7043f0626dd92f70ce525861e4e1597d3",
+    "tables.md": "097215ea003930ae289024d32149c8d11121c0e2c805c7ed753a76bafa437919",
+    "fig_ushape_random_mix.png": "ce1a571744b801cc52e078e8437bbd2fa86a0ceaaae10921b1c95a28c92c8959",
+    "paired_differences.csv": "307b50c927f0b958868d9f12837119650477de55dd802ee0bd398e179daa3dcd",
+    "ushape_deciles_per_seed.csv": "1046af47641ad214ca1d1a650ba1a95881467b1932dc10cb70f9d6e4fe0af7bb",
+    "results.json": "8e21cee904c32f73f624d8ad8a8afa2bc5daa20b1854019b62858d89ce42aa82",
+    "ushape_composition_decomposition.csv": "3b54561d1a2110ad8924a20a9b5a89195f24fd3e63f3f84d4ea3eafe8932838b",
+    "metrics.csv": "2f00a7bbc951a2aab4388b22480d48fa1ed075111d2231e8280bda99c4496f44",
+    "diagnostics.json": "b8d4eb3c401935ecff0a2146aca30251ba215d480009646c9cbeb4b1851d4a85",
+    "fig_ushape_random_mix.csv": "b2ad5d3ae30c7838f131a05b090f70cdaf8928cb75e6c48c9e5845e04fadc13d",
+    "inner_curves.csv": "894c59d06fa1e97e1671e2948af5e38935201d243b990e31192285d89cc96e27",
+    "fits.csv": "515a176bc940ff162a529d2ea829349f7078a49db89b975130c88c50e77da533",
+    "funnel.csv": "3fe0efc42506a85a5a001fdd15ccf65b599c00294dfe0fce3e2abd7a08073372",
+    "diagnostics_auc.csv": "06dd11a43881a89cfd97cb794a4e5659dce52617816470f0a9e8bfbc263426f2",
+    "diagnostics_inserted_by_rank_decile.csv": "05cd4d3e6cfa21d5046d8612f935840ad2ada3beb78c582a3e7d69cc5a74fed6"
+  }
+}

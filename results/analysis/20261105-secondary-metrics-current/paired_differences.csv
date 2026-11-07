@@ -1,0 +1,101 @@
+family,reference,candidate,group,metric,status,diff,ci_low,ci_high,n_users,n_resamples,note
+full_promising_primary,retrieval,pairwise_text,all,ndcg10,computed,0.001503118881515298,0.001185493174698947,0.0017979020507390567,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,all,recall10,computed,0.0034450650053514382,0.002927187544544709,0.003926196176153341,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,all,hr3,computed,0.0010933660932404353,0.0006981963624306469,0.0014488672757910315,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,all,mrr10,computed,0.0009254679566544314,0.000633782627502357,0.0011994013979473586,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,new,ndcg10,computed,0.0011434738888325283,0.0006303598422349494,0.0016610527441404386,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,new,recall10,computed,0.003063066338493112,0.002196614377335143,0.003940437537226601,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,new,hr3,computed,0.0010098058850483815,0.00040417705189790045,0.0016338286757021014,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,new,mrr10,computed,0.0005636253776501601,0.00010168451919583319,0.0010183520558209376,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,warm,ndcg10,computed,0.0016913467053680713,0.0013440774197194447,0.00203946805836948,96764.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,warm,recall10,computed,0.0035450642287895807,0.0029306655398422476,0.004114253277901432,96764.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,warm,hr3,computed,0.0012029328788402407,0.0007557848838890857,0.0016079084189867896,96764.0,1000.0,
+full_promising_primary,retrieval,pairwise_text,warm,mrr10,computed,0.0011411470532077664,0.0008214058463470199,0.0014396596698843433,96764.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,all,ndcg10,computed,-0.000354026647413863,-0.0005058802516595582,-0.00020802991525500724,124416.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,all,recall10,computed,-0.0004960290350917991,-0.0007607870896518196,-0.00023578574970180134,124416.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,all,hr3,computed,-0.000434159255779433,-0.0006358355358301607,-0.00022537836022401613,124416.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,all,mrr10,computed,-0.00030367808521580337,-0.00044682867843294017,-0.00016026117000661962,124416.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,new,ndcg10,computed,8.897282718642216e-05,-0.0001871295937582528,0.00032969370812233767,52420.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,new,recall10,computed,-0.00018716161506152328,-0.0007140036313679529,0.0002966336280173203,52420.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,new,hr3,computed,0.00029541513925521526,-5.273530369821068e-05,0.0006306178861877499,52420.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,new,mrr10,computed,0.00016650922184646304,-8.060082425987357e-05,0.00039867093362826015,52420.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,warm,ndcg10,computed,-0.0005891181884578719,-0.0007745524585893482,-0.0004147245353175438,96764.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,warm,recall10,computed,-0.0007010158235045591,-0.0010271719630410622,-0.0004057672453783095,96764.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,warm,hr3,computed,-0.0008275772989406159,-0.0010907430510730808,-0.0005807892194939549,96764.0,1000.0,
+full_promising_primary+plan15_steps,bce_text,pairwise_text,warm,mrr10,computed,-0.0005432895391435904,-0.0007178431653244381,-0.0003598216993309647,96764.0,1000.0,
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,all,ndcg10,computed,-5.213090536675763e-05,-0.0001796830126230267,7.522197565048681e-05,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,all,recall10,computed,5.294301161621117e-06,-0.00022871063729345268,0.0002540972231811797,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,all,hr3,computed,-4.5805205089438074e-05,-0.00023086871645789265,0.00015492926739610428,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,all,mrr10,computed,-7.118191576633343e-05,-0.00019744586644563237,5.685745512112242e-05,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,new,ndcg10,computed,-0.00017953637683739866,-0.0003776475464511953,2.24910859307247e-05,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,new,recall10,computed,-0.00021005906680066807,-0.0006202115063512882,0.0002009573258126818,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,new,hr3,computed,-0.0003079760790633499,-0.0006336120166838405,-3.2690698878147647e-06,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,new,mrr10,computed,-0.0001677849246083588,-0.00034848623452443417,1.5645005652056907e-05,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,warm,ndcg10,computed,-4.844530063123109e-06,-0.0001607463799041357,0.0001428980969180993,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,warm,recall10,computed,4.568437172504771e-06,-0.00028443291765330435,0.0002939052552738944,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,warm,hr3,computed,8.736418842450014e-05,-0.00014108356361156984,0.0003024017604853453,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary+plan15_steps,pairwise_text,pairwise_coreview,warm,mrr10,computed,-8.990977807044306e-06,-0.00016566906444407867,0.00013435075635196442,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,all,ndcg10,computed,0.00018234762725545617,7.389161195145974e-05,0.0002892794384402953,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,all,recall10,computed,0.0002370401207192532,4.582336242708366e-05,0.00044443505062839495,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,all,hr3,computed,0.00017273995174509662,1.0156490126237734e-05,0.00034159753794477587,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,all,mrr10,computed,0.00016901163989189064,6.415271331241957e-05,0.0002745281827004067,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,new,ndcg10,computed,-4.2930190763228765e-05,-0.00023687818729662143,0.00015264152079885325,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,new,recall10,computed,4.869344950220071e-05,-0.00034096527760595926,0.0004355649897354941,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,new,hr3,computed,6.926554511596382e-05,-0.0002182470083645308,0.00036116943152413245,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,new,mrr10,computed,-6.756621302918985e-05,-0.00023684315200827902,0.00011625139680786242,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,warm,ndcg10,computed,0.0002766783646763965,0.00015739340725695524,0.00040361447188201507,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,warm,recall10,computed,0.00040963070989733793,0.0001739140882507734,0.0006636921544777254,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,warm,hr3,computed,0.00017944202532479164,-7.733626557517656e-06,0.0003697606630903103,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,pairwise_coreview,pairwise_combined,warm,mrr10,computed,0.00023913769084795152,0.0001203322741285871,0.00035586317611441287,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,all,ndcg10,computed,0.0014509879761485406,0.0011249986980035338,0.0017453626833889419,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,all,recall10,computed,0.0034503593065130594,0.0029226516666201576,0.003940203786927139,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,all,hr3,computed,0.0010475608881509969,0.0006645054412434165,0.0014295799327011238,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,all,mrr10,computed,0.000854286040888098,0.0005530004064667382,0.0011287144657413325,124416.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,new,ndcg10,computed,0.0009639375119951298,0.0004427999038855517,0.001467719650462559,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,new,recall10,computed,0.002853007271692444,0.002000251929348268,0.0037541815873939266,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,new,hr3,computed,0.0007018298059850315,4.7687212729159327e-05,0.001275108589295888,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,new,mrr10,computed,0.0003958404530418014,-5.4808185657499175e-05,0.0008502468293253719,52420.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,warm,ndcg10,computed,0.001686502175304948,0.0013353627750178525,0.0020293506996308377,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,warm,recall10,computed,0.003549632665962085,0.0029345983462119103,0.0040857042507772634,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,warm,hr3,computed,0.0012902970672647408,0.000835237039252091,0.001715231413043228,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_coreview,warm,mrr10,computed,0.001132156075400722,0.000804178792862911,0.0014411630685695666,96764.0,1000.0,pairwise_coreview: not reproduced; under investigation
+full_promising_primary,retrieval,pairwise_combined,all,ndcg10,computed,0.0016333356034039968,0.0013167993378019208,0.0019395581094937072,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,all,recall10,computed,0.003687399427232313,0.0031881713972775547,0.004170356141676035,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,all,hr3,computed,0.0012203008398960931,0.0008267604820656584,0.0015917720176764525,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,all,mrr10,computed,0.0010232976807799886,0.0007443246947288719,0.001296301630750929,124416.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,new,ndcg10,computed,0.0009210073212319012,0.0003880191517536443,0.0014068359755469682,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,new,recall10,computed,0.0029017007211946453,0.002047110602372094,0.0037629321401702483,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,new,hr3,computed,0.0007710953511009955,0.00015847158510904513,0.0013640102488424505,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,new,mrr10,computed,0.00032827424001261144,-0.00012614300344145256,0.0007800165019460127,52420.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,warm,ndcg10,computed,0.0019631805399813445,0.001613728541854423,0.0023004845551698946,96764.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,warm,recall10,computed,0.003959263375859424,0.0033645847122934416,0.0045224031646926505,96764.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,warm,hr3,computed,0.0014697390925895325,0.0010226916538729296,0.0018941955916838104,96764.0,1000.0,
+full_promising_primary,retrieval,pairwise_combined,warm,mrr10,computed,0.0013712937662486737,0.0010502266283323894,0.0016836883192038088,96764.0,1000.0,
+plan15_steps,retrieval,popularity,all,ndcg10,computed,-0.0036789920633037185,-0.004005785800471915,-0.003339741860709669,124416.0,1000.0,
+plan15_steps,retrieval,popularity,all,recall10,computed,-0.006700690587175383,-0.007251036869237413,-0.006141966593920997,124416.0,1000.0,
+plan15_steps,retrieval,popularity,all,hr3,computed,-0.0029498571564313242,-0.0033298015004764735,-0.0025758951783976217,124416.0,1000.0,
+plan15_steps,retrieval,popularity,all,mrr10,computed,-0.0027668881595816646,-0.003039552094567415,-0.0024819297087080665,124416.0,1000.0,
+plan15_steps,retrieval,popularity,new,ndcg10,computed,-0.007611004503650962,-0.008120437102499874,-0.007080210970995424,52420.0,1000.0,
+plan15_steps,retrieval,popularity,new,recall10,computed,-0.014041772263202848,-0.014848797524246032,-0.01316145687452119,52420.0,1000.0,
+plan15_steps,retrieval,popularity,new,hr3,computed,-0.006043987056337138,-0.006575902777583288,-0.005508724004795659,52420.0,1000.0,
+plan15_steps,retrieval,popularity,new,mrr10,computed,-0.005679095617985935,-0.0061233920018267645,-0.00525116573122463,52420.0,1000.0,
+plan15_steps,retrieval,popularity,warm,ndcg10,computed,-0.001791401986193866,-0.002216542009313178,-0.001389882370297756,96764.0,1000.0,
+plan15_steps,retrieval,popularity,warm,recall10,computed,-0.003267856692038206,-0.003934448003616934,-0.0026354120012498906,96764.0,1000.0,
+plan15_steps,retrieval,popularity,warm,hr3,computed,-0.0013591595738623558,-0.0018334332142476183,-0.0009002882811162493,96764.0,1000.0,
+plan15_steps,retrieval,popularity,warm,mrr10,computed,-0.001344661419578904,-0.001707343035404814,-0.0009851830496282583,96764.0,1000.0,
+plan15_steps,popularity,bce_coreview,,,not_available,,,,,,
+plan15_steps,retrieval,bce_text,all,ndcg10,computed,0.0018571455289291613,0.0015540703221570062,0.002163878681050422,124416.0,1000.0,
+plan15_steps,retrieval,bce_text,all,recall10,computed,0.003941094040443237,0.003447350274309678,0.004449975055061767,124416.0,1000.0,
+plan15_steps,retrieval,bce_text,all,hr3,computed,0.0015275253490198678,0.0011271582984847582,0.0018839262671566323,124416.0,1000.0,
+plan15_steps,retrieval,bce_text,all,mrr10,computed,0.0012291460418702351,0.0009415931236799766,0.0014823540001486744,124416.0,1000.0,
+plan15_steps,retrieval,bce_text,new,ndcg10,computed,0.001054501061646106,0.000539558297926095,0.0015435651763302056,52420.0,1000.0,
+plan15_steps,retrieval,bce_text,new,recall10,computed,0.003250227953554636,0.0023805114529452114,0.004124262814755232,52420.0,1000.0,
+plan15_steps,retrieval,bce_text,new,hr3,computed,0.0007143907457931661,0.00012648153402412612,0.0013441343860458332,52420.0,1000.0,
+plan15_steps,retrieval,bce_text,new,mrr10,computed,0.00039711615580369697,-3.3826780331133726e-05,0.0008385607283638744,52420.0,1000.0,
+plan15_steps,retrieval,bce_text,warm,ndcg10,computed,0.002280464893825943,0.0018995023129702187,0.002626923968625939,96764.0,1000.0,
+plan15_steps,retrieval,bce_text,warm,recall10,computed,0.00424608005229414,0.0036440181098318426,0.004817587220314474,96764.0,1000.0,
+plan15_steps,retrieval,bce_text,warm,hr3,computed,0.0020305101777808566,0.0015655010094638988,0.0024882391939452155,96764.0,1000.0,
+plan15_steps,retrieval,bce_text,warm,mrr10,computed,0.001684436592351357,0.0013321897150721826,0.0020084972515212705,96764.0,1000.0,
+plan15_steps,retrieval,bce_coreview,,,not_available,,,,,,
+plan15_steps,bce_text,bce_coreview,,,not_available,,,,,,
+plan15_steps,pairwise_coreview,bce_coreview,,,not_available,,,,,,pairwise_coreview: not reproduced; under investigation

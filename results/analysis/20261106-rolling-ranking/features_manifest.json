@@ -1,0 +1,646 @@
+{
+  "label": "Val only, exploratory",
+  "scaler": {
+    "common": {
+      "mean": [
+        2.6016689864470806,
+        0.9878737241710335,
+        0.9921018939468934,
+        0.9308978305453189,
+        0.9437262146896472,
+        0.9928806066063446,
+        0.9971389371008846,
+        0.9307793415869666,
+        0.9215610632668362
+      ],
+      "std": [
+        1.1381396631029992,
+        0.10944966543341454,
+        0.06093068213285815,
+        0.25362779743422753,
+        0.12903097526706025,
+        0.08407560663689441,
+        0.028028397196823165,
+        0.25382899531357617,
+        0.2688610606564933
+      ]
+    },
+    "graph": {
+      "mean": [
+        0.14901793326720097,
+        0.15012321158205313,
+        0.0007748003303469448,
+        0.3467352741800809,
+        0.09259417576747975,
+        0.04323012720550827
+      ],
+      "std": [
+        0.44012864794301665,
+        0.44374123514563446,
+        0.0042574433407150895,
+        0.3145426651914242,
+        0.20699991042247787,
+        0.1369453638208208
+      ]
+    }
+  },
+  "prefix_slots": 50418200,
+  "b_snapshots": [
+    {
+      "strict_before_ms": 1595800947930,
+      "review_edges": 1877548,
+      "max_review_timestamp": 1595800834936,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-07-26T22:02:27.930",
+      "queries": 4213,
+      "prefix_queries": 4213,
+      "min_query_ts": 1595800947930,
+      "reference_max_abs_error": [
+        0.0,
+        1.4901161193847656e-08
+      ],
+      "seconds": 11.887235583039,
+      "note": "period start T0 (partial first month 26-31 Jul 2020)"
+    },
+    {
+      "strict_before_ms": 1596240000000,
+      "review_edges": 1882049,
+      "max_review_timestamp": 1596239969333,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-08-01T00:00:00.000",
+      "queries": 24514,
+      "prefix_queries": 24514,
+      "min_query_ts": 1596240056352,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 55.824239125009626,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1598918400000,
+      "review_edges": 1908173,
+      "max_review_timestamp": 1598918280282,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-09-01T00:00:00.000",
+      "queries": 22314,
+      "prefix_queries": 22314,
+      "min_query_ts": 1598918593240,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "seconds": 52.64427050005179,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1601510400000,
+      "review_edges": 1931910,
+      "max_review_timestamp": 1601510315955,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-10-01T00:00:00.000",
+      "queries": 23879,
+      "prefix_queries": 23879,
+      "min_query_ts": 1601510528262,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 59.67852358391974,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1604188800000,
+      "review_edges": 1957260,
+      "max_review_timestamp": 1604188512999,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-11-01T00:00:00.000",
+      "queries": 23801,
+      "prefix_queries": 23801,
+      "min_query_ts": 1604188920770,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 62.342058416921645,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1606780800000,
+      "review_edges": 1982302,
+      "max_review_timestamp": 1606780765483,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2020-12-01T00:00:00.000",
+      "queries": 26001,
+      "prefix_queries": 26001,
+      "min_query_ts": 1606780801557,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 72.66469933302142,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1609459200000,
+      "review_edges": 2009699,
+      "max_review_timestamp": 1609459150944,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-01-01T00:00:00.000",
+      "queries": 28473,
+      "prefix_queries": 28473,
+      "min_query_ts": 1609459239996,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "seconds": 77.63151883392129,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1612137600000,
+      "review_edges": 2039648,
+      "max_review_timestamp": 1612137508345,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-02-01T00:00:00.000",
+      "queries": 24914,
+      "prefix_queries": 24914,
+      "min_query_ts": 1612137739430,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "seconds": 79.53067474998534,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1614556800000,
+      "review_edges": 2065808,
+      "max_review_timestamp": 1614556733961,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-03-01T00:00:00.000",
+      "queries": 29387,
+      "prefix_queries": 29387,
+      "min_query_ts": 1614556926304,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 79.05876212508883,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1617235200000,
+      "review_edges": 2096761,
+      "max_review_timestamp": 1617235183138,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-04-01T00:00:00.000",
+      "queries": 27321,
+      "prefix_queries": 27321,
+      "min_query_ts": 1617235279785,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 73.84889950009529,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1619827200000,
+      "review_edges": 2125364,
+      "max_review_timestamp": 1619827073577,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-05-01T00:00:00.000",
+      "queries": 24538,
+      "prefix_queries": 17274,
+      "min_query_ts": 1619827211716,
+      "reference_max_abs_error": [
+        0.0,
+        7.450580596923828e-09
+      ],
+      "seconds": 71.01688208396081,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1622505600000,
+      "review_edges": 2150953,
+      "max_review_timestamp": 1622505508943,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-06-01T00:00:00.000",
+      "queries": 24188,
+      "prefix_queries": 0,
+      "min_query_ts": 1622505673801,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 69.79115354199894,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1625097600000,
+      "review_edges": 2176153,
+      "max_review_timestamp": 1625097556630,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-07-01T00:00:00.000",
+      "queries": 24186,
+      "prefix_queries": 0,
+      "min_query_ts": 1625097624726,
+      "reference_max_abs_error": [
+        0.0,
+        2.2351741790771484e-08
+      ],
+      "seconds": 70.92247879202478,
+      "note": "month start"
+    },
+    {
+      "strict_before_ms": 1627776000000,
+      "review_edges": 2201241,
+      "max_review_timestamp": 1627775997895,
+      "query_user_excluded": true,
+      "self_history_paths_excluded": true,
+      "labels_read": false,
+      "history_limit": 50,
+      "cutoff_utc": "2021-08-01T00:00:00.000",
+      "queries": 7385,
+      "prefix_queries": 0,
+      "min_query_ts": 1627776052270,
+      "reference_max_abs_error": [
+        0.0,
+        3.725290298461914e-09
+      ],
+      "seconds": 23.47391754097771,
+      "note": "month start"
+    }
+  ],
+  "val": {
+    "val_monthly": [
+      {
+        "strict_before_ms": 1627776000000,
+        "review_edges": 2201241,
+        "max_review_timestamp": 1627775997895,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 886,
+        "snapshot_max_ts": 1627775997895,
+        "min_query_ts": 1628644564103,
+        "cutoff_utc": "2021-08-01T00:00:00.000",
+        "val_events": 14604,
+        "hit_rows": 886,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 3.09129283297807
+      },
+      {
+        "strict_before_ms": 1630454400000,
+        "review_edges": 2223946,
+        "max_review_timestamp": 1630454349967,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1349,
+        "snapshot_max_ts": 1630454349967,
+        "min_query_ts": 1630455063958,
+        "cutoff_utc": "2021-09-01T00:00:00.000",
+        "val_events": 20158,
+        "hit_rows": 1349,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.449416583986022
+      },
+      {
+        "strict_before_ms": 1633046400000,
+        "review_edges": 2244744,
+        "max_review_timestamp": 1633046315805,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1487,
+        "snapshot_max_ts": 1633046315805,
+        "min_query_ts": 1633048210300,
+        "cutoff_utc": "2021-10-01T00:00:00.000",
+        "val_events": 21099,
+        "hit_rows": 1487,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.72598379093688
+      },
+      {
+        "strict_before_ms": 1635724800000,
+        "review_edges": 2266453,
+        "max_review_timestamp": 1635724680635,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1226,
+        "snapshot_max_ts": 1635724680635,
+        "min_query_ts": 1635726283081,
+        "cutoff_utc": "2021-11-01T00:00:00.000",
+        "val_events": 19052,
+        "hit_rows": 1226,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 3.936407999950461
+      },
+      {
+        "strict_before_ms": 1638316800000,
+        "review_edges": 2286084,
+        "max_review_timestamp": 1638316783915,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1395,
+        "snapshot_max_ts": 1638316783915,
+        "min_query_ts": 1638316850223,
+        "cutoff_utc": "2021-12-01T00:00:00.000",
+        "val_events": 21898,
+        "hit_rows": 1395,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          1.4901161193847656e-08
+        ],
+        "seconds": 4.50660195806995
+      },
+      {
+        "strict_before_ms": 1640995200000,
+        "review_edges": 2308680,
+        "max_review_timestamp": 1640995161863,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1373,
+        "snapshot_max_ts": 1640995161863,
+        "min_query_ts": 1640996378626,
+        "cutoff_utc": "2022-01-01T00:00:00.000",
+        "val_events": 23589,
+        "hit_rows": 1373,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.499293833039701
+      },
+      {
+        "strict_before_ms": 1643673600000,
+        "review_edges": 2332984,
+        "max_review_timestamp": 1643673545346,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1193,
+        "snapshot_max_ts": 1643673545346,
+        "min_query_ts": 1643674136278,
+        "cutoff_utc": "2022-02-01T00:00:00.000",
+        "val_events": 18970,
+        "hit_rows": 1193,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.191475167055614
+      },
+      {
+        "strict_before_ms": 1646092800000,
+        "review_edges": 2352481,
+        "max_review_timestamp": 1646091982558,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1449,
+        "snapshot_max_ts": 1646091982558,
+        "min_query_ts": 1646093242187,
+        "cutoff_utc": "2022-03-01T00:00:00.000",
+        "val_events": 22414,
+        "hit_rows": 1449,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.7284319589380175
+      },
+      {
+        "strict_before_ms": 1648771200000,
+        "review_edges": 2375512,
+        "max_review_timestamp": 1648771183098,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1380,
+        "snapshot_max_ts": 1648771183098,
+        "min_query_ts": 1648771217894,
+        "cutoff_utc": "2022-04-01T00:00:00.000",
+        "val_events": 21659,
+        "hit_rows": 1380,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          2.9802322387695312e-08
+        ],
+        "seconds": 4.432679541991092
+      },
+      {
+        "strict_before_ms": 1651363200000,
+        "review_edges": 2397766,
+        "max_review_timestamp": 1651363163024,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1369,
+        "snapshot_max_ts": 1651363163024,
+        "min_query_ts": 1651363828934,
+        "cutoff_utc": "2022-05-01T00:00:00.000",
+        "val_events": 19995,
+        "hit_rows": 1369,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.488683542003855
+      },
+      {
+        "strict_before_ms": 1654041600000,
+        "review_edges": 2418216,
+        "max_review_timestamp": 1654041397453,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 1201,
+        "snapshot_max_ts": 1654041397453,
+        "min_query_ts": 1654042278686,
+        "cutoff_utc": "2022-06-01T00:00:00.000",
+        "val_events": 19317,
+        "hit_rows": 1201,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 4.568249500007369
+      },
+      {
+        "strict_before_ms": 1656633600000,
+        "review_edges": 2437934,
+        "max_review_timestamp": 1656633529249,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 608,
+        "snapshot_max_ts": 1656633529249,
+        "min_query_ts": 1656634232900,
+        "cutoff_utc": "2022-07-01T00:00:00.000",
+        "val_events": 10149,
+        "hit_rows": 608,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          7.450580596923828e-09
+        ],
+        "seconds": 2.7433228340232745
+      }
+    ],
+    "val_T1": [
+      {
+        "strict_before_ms": 1628643414042,
+        "review_edges": 2208880,
+        "max_review_timestamp": 1628643402825,
+        "query_user_excluded": true,
+        "self_history_paths_excluded": true,
+        "labels_read": false,
+        "history_limit": 50,
+        "queries": 14916,
+        "snapshot_max_ts": 1628643402825,
+        "min_query_ts": 1628644564103,
+        "cutoff_utc": "2021-08-11T00:56:54.042",
+        "val_events": 232904,
+        "hit_rows": 14916,
+        "reference_rows": 24,
+        "reference_max_abs_error": [
+          0.0,
+          1.4901161193847656e-08
+        ],
+        "seconds": 38.23175329202786
+      }
+    ]
+  },
+  "b_queries": 315114,
+  "b_prefix_queries": 252091,
+  "val_hit_rows": 14916,
+  "first_month_rule": "B queries 26-31 Jul 2020 use T0 (their period start); their features equal the parent T0 features",
+  "val_month_rule": "Val August 2021 queries use 1 Aug 2021 (precedes T1), as in 20261106-freshness-val",
+  "parent_scaler": {
+    "common": {
+      "mean": [
+        2.318434412167514,
+        0.8720364669900948,
+        0.9254792900532306,
+        0.9308978305453189,
+        0.9437262146896472,
+        0.9928806066063446,
+        0.9971389371008846,
+        0.9307793415869666,
+        0.904065535858083
+      ],
+      "std": [
+        1.3635150445017745,
+        0.3340491988158752,
+        0.18627093112999357,
+        0.25362779743422753,
+        0.1290309752669854,
+        0.08407560663689441,
+        0.02802839719677365,
+        0.25382899531357617,
+        0.2945013458911865
+      ]
+    },
+    "graph": {
+      "mean": [
+        0.1305731846828418,
+        0.13151300864362836,
+        0.0006795081428237933,
+        0.3467352741800809,
+        0.09259417576747975,
+        0.037803145040740296
+      ],
+      "std": [
+        0.41666588433309004,
+        0.41996765126799757,
+        0.003932958162608885,
+        0.3145426651914133,
+        0.2069999104224778,
+        0.12903505048185762
+      ]
+    }
+  },
+  "seconds": 978.9121449999511,
+  "test_opened": false
+}

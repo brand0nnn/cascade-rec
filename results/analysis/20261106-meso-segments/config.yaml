@@ -1,0 +1,48 @@
+# Frozen before computing any segment metric (2026-11-06 21:50 +0800). Val only, exploratory; descriptive, nothing selected.
+label: "Val only, exploratory; descriptive, nothing selected"
+split: val
+metric: ndcg10
+aggregation: per_user_macro_within_segment   # users = those with >=1 event in the segment; misses count 0
+seed_aggregation: seed_mean_event_metric     # mean of per-seed event nDCG@10, then macro
+reference: P1_bce_text
+bootstrap: {n_resamples: 1000, seed: 0, alpha: 0.05, kind: paired_user}
+verify_tolerance: 1.0e-9
+systems:
+  P1_retrieval:
+    kind: retrieval_rank
+    path: results/local_experiments/20261103-full-promising-ranking/candidates/val/retrieval_rank.npy
+    published: {csv: results/analysis/20261106-fresh-two-tower/metrics.csv, system: P1_retrieval}
+  P1_bce_text:
+    kind: seed_npz
+    paths: results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed{seed}/val_ranks.npz
+    published: {csv: results/analysis/20261106-pool-combo/metrics.csv, system: P1_bce_text_T0}
+  P3_bce_text:
+    kind: seed_npz
+    paths: results/local_experiments/20261106-pool-ranking-P3/evaluation/bce_text/seed{seed}/val_ranks.npz
+    published: {csv: results/analysis/20261106-pool-combo/metrics.csv, system: P3_bce_text_T0}
+  P3_context_T1:
+    kind: seed_npz
+    paths: results/local_experiments/20261106-pool-combo-context/evaluation/common_T1/seed{seed}.npz
+    published: {csv: results/analysis/20261106-pool-combo/metrics.csv, system: P3_context_T1}
+  rolling_coreview:
+    kind: seed_npz
+    paths: results/local_experiments/20261106-rolling-ranking/evaluation/val_monthly/bce_coreview/seed{seed}.npz
+    published: {csv: results/analysis/20261106-rolling-ranking/metrics.csv, arm: rolling_monthly, method: bce_coreview}
+  P2f_retrieval:
+    kind: retrieval_rank
+    path: results/local_experiments/20261106-fresh-two-tower/candidates/P2f_two_tower_all_train/val/retrieval_rank.npy
+    published: {csv: results/analysis/20261106-fresh-two-tower/metrics.csv, system: "P2'_retrieval"}
+seeds: [0, 1, 2]
+segments:
+  history_length:            # prior interactions at query (hist_len), CLAUDE.md 4.7
+    bins: [[1, 2], [3, 5], [6, 10], [11, null]]
+  target_newness:
+    new_in_val: "target first_ts >= T1"
+    warm: "target first_ts < T1"
+    warm_terciles: "pre-T1 review count of target (interactions with ts < T1); cut points = quantiles 1/3, 2/3 over warm Val events; low: count <= q1, mid: q1 < count <= q2, high: count > q2"
+  target_category_l2:
+    field: "categories[1]; '(none)' when the item has fewer than 2 category levels"
+    top_n: 8              # by Val event count; remaining values pooled as 'other'
+  activity_gap:            # target ts minus the user's last prior interaction ts
+    bins_days: ["<=7", "(7, 90]", ">90"]
+winner_rule: "highest point estimate per segment; paired user bootstrap CI of (best - second best); descriptive only, NOT a selection"

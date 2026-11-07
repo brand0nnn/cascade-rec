@@ -1,0 +1,16 @@
+{
+  "label": "Val only, exploratory",
+  "checkpoint": "bce_text/seed0",
+  "device": "cpu",
+  "events": 232904,
+  "natural_hit_rows_rescored": 14916,
+  "ranks_equal_saved_exactly": true,
+  "rank_mismatches": 0,
+  "seconds": 6.433702458045445,
+  "own_T0_builder_edges_match_parent": true,
+  "own_T0_builder_rows_checked": 256,
+  "own_T0_builder_max_abs_error_standardised": {
+    "common": 0.0,
+    "graph": 0.0
+  }
+}

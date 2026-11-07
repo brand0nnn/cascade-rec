@@ -1,0 +1,74 @@
+[
+  {
+    "method": "bce_text",
+    "seed": 0,
+    "exact": true,
+    "mismatches": 0
+  },
+  {
+    "method": "bce_text",
+    "seed": 1,
+    "exact": true,
+    "mismatches": 0
+  },
+  {
+    "method": "bce_text",
+    "seed": 2,
+    "exact": true,
+    "mismatches": 0
+  },
+  {
+    "method": "pairwise_text",
+    "seed": 0,
+    "exact": true,
+    "mismatches": 0
+  },
+  {
+    "method": "pairwise_text",
+    "seed": 1,
+    "exact": true,
+    "mismatches": 0
+  },
+  {
+    "method": "pairwise_text",
+    "seed": 2,
+    "exact": false,
+    "mismatches": 1
+  },
+  {
+    "method": "pairwise_coreview",
+    "seed": 0,
+    "exact": false,
+    "mismatches": 2
+  },
+  {
+    "method": "pairwise_coreview",
+    "seed": 1,
+    "exact": false,
+    "mismatches": 1
+  },
+  {
+    "method": "pairwise_coreview",
+    "seed": 2,
+    "exact": true,
+    "mismatches": 0
+  },
+  {
+    "method": "bce_coreview",
+    "seed": 0,
+    "exact": false,
+    "mismatches": 1
+  },
+  {
+    "method": "bce_coreview",
+    "seed": 1,
+    "exact": false,
+    "mismatches": 1
+  },
+  {
+    "method": "bce_coreview",
+    "seed": 2,
+    "exact": false,
+    "mismatches": 1
+  }
+]

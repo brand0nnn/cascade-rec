@@ -1,0 +1,21 @@
+# Fixed bce_text ranker on alternative pools. Val only, exploratory. Nothing selected.
+module: cascade.pipelines.pool_ranking
+method: bce_text            # recipe imported unchanged from cascade.pipelines.full_data_ranking
+source_study: 20261103-full-promising-ranking   # P1 (rebuilt) candidates/fits/evaluation, read-only
+pools:
+  P3: results/local_experiments/20261106-pools/candidates/P3_fused_rrf   # interleave order, RRF skip score, pessimistic ties
+  P2: results/local_experiments/20261106-pools/candidates/P2_two_tower
+  P3t: dropped by the lead after the gate failed (p3t_gate.json); never built or fitted
+seeds: [0, 1, 2]
+max_epochs: 10
+patience: 2
+batch_lists: 32
+negative_alternatives: 50
+learning_rate: 0.001
+inner_split: source split_cutoff (prefix 252,091 / tune 63,023 B queries), epoch 0 eligible
+graph_columns: disabled (zeros)
+common_scaler: all 200 slots of chronological-prefix B queries, per pool
+bootstrap_resamples: 1000
+bootstrap_seed: 0
+decomposition: P1 checkpoints scored on P3 Val lists (study 20261106-pool-ranking-P1onP3), recency-cosine skip, P1 scaler
+devices: {prepare: cpu, fit: mps, evaluate: mps, cross_score: mps, report: cpu}

@@ -1,0 +1,25 @@
+hypothesis: If the inner-selected (pre-refit) checkpoints show co-review > text on
+  Val, as they do on the inner B tuning set, the regenerated Val reversal of pairwise
+  co-review comes from the all-B refit (training variance in the refit draw), not
+  from the Val co-review features.
+methods:
+- pairwise_text
+- pairwise_coreview
+- bce_text
+- bce_coreview
+contrasts:
+- - pairwise_text
+  - pairwise_coreview
+- - bce_text
+  - bce_coreview
+split: val
+k1: 200
+checkpoint: runs/<method>/seed<s>/inner/epoch<selected_epoch>.pth (pre-refit)
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user
+  after_seed_mean: true
+post_lock_exploratory: true
+selects_nothing: true
+test_predictions_loaded: false

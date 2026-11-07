@@ -13,14 +13,14 @@ The archived full-data evaluation is complete: **232,904 validation events / 124
 | Work | State |
 |---|---|
 | Objective x co-review factorial, root plan §14 | Complete: three new BCE+co-review fits plus nine frozen controls. Co-review improves overall/warm and loses new-item quality under both objectives; direct objective and novelty interaction intervals include zero |
-| Full-data replication of promising rankers, root plan §13 | Complete: twelve fresh fits and full-Val scoring; BCE leads overall, pairwise text leads new-item quality, and co-review trades new-item quality for warm-item gains. See the full-data section below |
+| Full-data replication of promising rankers, root plan §13 | Complete: twelve fresh fits and full-Val scoring; BCE leads overall, pairwise text leads new-item quality, and co-review trades new-item quality for warm-item gains. See the full-data section below Local regeneration, 5 Nov: BCE lead reproduces; co-review overall gain and pairwise new-item lead do not survive a changed refit draw (see "Overnight rebuild and analysis loop") |
 | RQ1 retrieval comparisons and text/ID trade-off | Complete from saved evidence; existing retrieval Test exposure disclosed |
 | RQ3 rankers, uncertainty and five-way failure funnel | Complete on Val, frozen text seed-0 candidates |
 | RQ2 exact-search K sweep, popularity-segment curve and expansion losses | Complete on Val (`warm-head` peaks at K50, `new`/`tail` peak at K200, aggregate peaks at K100); no final K selected |
-| Item/history/diversity/time groups; secondary metrics | Core group analysis complete; Hit@3/MRR@10 completion is unverified because no reproducible secondary-metric artifact was found |
+| Item/history/diversity/time groups; secondary metrics | Core group analysis complete; HR@3/MRR@10 now computed reproducibly (5 Nov) for archived pipelines and the regenerated current pipeline, with saved nDCG reproduced first; same ordering as nDCG@10 |
 | Graph target/history relations and 12 joint warm-target cells | Complete on Val; descriptive, not causal |
 | Graph witness multiplicity/recency, full-window category continuity and store interactions | Expanded on 1 Nov across all 232,904 Val events; exploratory, with paired-user intervals |
-| Microscopic case study | Five source-bound cases complete; local 25-item consultation discussion is a draft, not a verified 25-event audit; ranker top-three identities unavailable |
+| Microscopic case study | Five source-bound cases complete; 5 Nov: traceable 28-event Step-5 study on the regenerated current pipeline (frozen buckets, seeded draw, ranker top three), model-assisted coding awaiting human review |
 | Candidate-pool/top-ten profile amplification and device/text analysis | Blocked by original candidates/vectors and locked manual device audit |
 | Controlled policy retraining (A/B/C/D: all/natural-only × enabled/masked score) and ID dropout | Policy study complete on Val (29 Oct, laptop run with rebuilt candidates; no fix qualifies under the pass rule, see "Controlled ranker-policy study"); ID dropout not run |
 | Approximate-index study, full-cascade timing and final F0/F1/F2 Test | Deferred by user |
@@ -1029,3 +1029,85 @@ Paired user bootstrap (1,000 resamples, 124,416 users), K₁ = 200:
   loses −0.0062 on targets already in the top 200 (competition) versus −0.0020 for C.
 - Open for the team: the pass rule's new-item condition decides the outcome; whether to accept the new/tail cost
   (or pair natural lists with a new-product remedy, e.g. the serving-time popularity correction) is a team decision.
+
+## Overnight rebuild and analysis loop, 5 Nov 2026 (Val only; awaiting team review)
+
+Brandon's exploratory loop; full write-up in `docs/overnight_results_2026-11-05.md`, run log in `docs/analysis_loop_2026-11-05.md`, authorisation in `docs/decisions.md` (2026-11-05). No Test file was opened and nothing was selected.
+
+- **Local regeneration of the current pipeline.**
+  - Our `data/processed` is byte-identical to the teammates' targeted inputs. The §13–14 chain was regenerated under gitignored `results/local_experiments/`, with 15 fits retrained as a reproduction; both local audits pass.
+  - Frozen recency retrieval reproduces exactly (nDCG@10 0.006283596988513183).
+  - Seed-mean Val nDCG@10, regenerated vs published:
+    - reproduced: bce_text 0.008141 vs 0.008115, pairwise_text 0.007787 vs 0.007767, pairwise_combined 0.007917 vs 0.007930;
+    - not reproduced: pairwise_coreview 0.007735 vs 0.008065, bce_coreview 0.008167 vs 0.008409.
+  - The fits are not bit-identical: float-level vector noise moved one ranker-training positive (20,676 vs 20,675), which changes every negative and refit draw.
+- **Co-review robustness.**
+  - Before the all-B refit, the inner-selected checkpoints scored on Val give co-review − text +0.000280 [0.000152, 0.000415] (pairwise) and +0.000214 [0.000102, 0.000335] (BCE).
+  - After the refit they give −0.000052 [−0.000180, 0.000075] and +0.000026 [−0.000093, 0.000151]. The BCE co-review new-item loss reproduces: −0.000416 [−0.000597, −0.000252].
+  - Pairwise − BCE on new targets is +0.000089 [−0.000187, 0.000330], against a published +0.000455.
+  - The co-review overall gain and pairwise's new-item lead are therefore not robust to the training draw. The refit draw is confounded with the prefix vs all-B data difference.
+- **Forced-list U-shape by popularity** (`results/analysis/20261105-ushape-popularity`).
+  - The policy-study arm A logit rises at low retrieval ranks within head, tail and new candidates, in every seed; arm C's curves fall monotonically. Composition explains ≤ 0.03.
+  - The U-shape is the score shortcut, not a popularity preference. Both arms favour new candidates, A about 2.4× more.
+- **Oracle and blend** (`results/analysis/20261105-coreview-blend-oracle`).
+  - The event oracle exceeds bce_text by +0.001963 [0.001864, 0.002070]. It is target-conditioned, so an upper bound only.
+  - A candidate-level z-score blend, with weights chosen only on inner tuning queries, gives +0.000037 [−0.000029, 0.000101] overall vs bce_text, losing on new (−0.000402) and gaining on warm (+0.000236). Tuning-period "new" candidates are a different population (57% vs 18% of top-10 slots). No deployable routing gain is established.
+- **HR@3 / MRR@10** (`results/analysis/20261105-secondary-metrics-archived-r2`, `…-current-r2`). Same ordering as nDCG@10 in both pipelines.
+- **Case study** (`results/analysis/20261105-case-study`). 28 events in four frozen buckets. Only 3 of 21 BCE-vs-pairwise contrast cases hold in all seeds, so event-level objective differences are mostly seed noise.
+- **Check for the team.** All 656 Val candidates whose first review equals the query time are the target (§4.6 cold-item admission). A query-relative item-age feature would leak the label; per-period statistics should not.
+
+
+## Overnight research loop, 6 Nov 2026 (Val only; awaiting team review)
+
+Brandon's exploratory loop, with Claude as lead researcher. Full write-up: `docs/overnight_results_2026-11-06.md`. Run log and every research decision: `docs/analysis_loop_2026-11-06.md`. Authorisation: `docs/decisions.md` (2026-11-06).
+
+- **Ground rules:**
+  - no Test file was opened;
+  - nothing (K, index, ranker, pool, blend, δ) was selected;
+  - no existing code or result was changed;
+  - all compact outputs are under `results/analysis/20261106-*`;
+  - 359 tests pass.
+- **Retrieval pools, ranker held fixed** (`20261106-pools`, `-pool-ranking`). The same bce_text recipe trained and served on a fixed recency + two-tower fusion (round-robin, RRF k = 60) reaches Val nDCG@10 **0.011019 vs 0.008141**: **+0.002878 [0.002544, 0.003211]**, warm +0.0048, new −0.0017.
+  - Most of the gain needs ranker training on the new pool: better candidates alone give +0.000670.
+  - The retriever oracle is +0.0054 over recency (upper bound only).
+- **Feature staleness** (`-freshness-val`, `-freshness-mechanism`, `-rolling-ranking`).
+  - Scoring Val with graph/common features from the start of Val (T1, the train/serve-consistent setting) instead of T0 lifts frozen models by +0.0013 to +0.0025.
+  - The rankers use "no reviews yet" as a learned newness cue: in training, 40.5% of positives vs 17.7% of negatives were unknown.
+  - Rolling monthly training and serving: bce_coreview 0.010613, and co-review − text **+0.001308 [0.001129, 0.001483]**.
+- **Co-review robustness** (`-refit-draws`; 3 seeds × 4 draws). Co-review − text: T0 **+0.000157 [0.000065, 0.000255]**; T1 **+0.000492 [0.000375, 0.000609]**; warm gain, small new loss. The 5 Nov "disappearance" was draw noise.
+- **Leak-safe context** (`-context`). Context features (price; period-start review count, rating and age; history length; time gap) vs bce_text, all at T1: **+0.001273 [0.001052, 0.001501]**.
+  - The driver is a newness prior; the leak re-check passes.
+  - Caveat: the 5-core filter over the whole timeline may inflate any newness prior.
+- **Additivity** (`-pool-combo`). P3 + context, all at T1: 0.012167, +0.004026 [0.003658, 0.004415] over P1 bce_text. The gains are sub-additive (single gains sum to about +0.0055).
+- **Random mixing** (`-random-mix`). Training-label change in an isolated study, pending team review.
+  - Inserted targets stay identifiable through content similarity: cosine AUC 0.103, score − cosine 0.889.
+  - M2 − bce_text −0.001080 [−0.001278, −0.000881].
+- **Retriever freshness** (`-fresh-two-tower`). Two-tower (text) retrained on all data before T1: full-Val R@200 0.0687 → 0.1113.
+  - Frozen P3 rankers on the fresh fused lists: +0.000365 [0.000160, 0.000569] only.
+- **Why users switch** (`-switch-cases*`, `-device-upgrade`, `-title-leak`).
+  - 87.6% of Val targets are missed by both retrievers. 62% of model-naming double-miss targets name a device the history never names.
+  - **Dataset limitation:** crawl-time titles name future models in at least 8.5% / 20.9% of recency / two-tower top-10 slots and in 13.4% of targets. The release filter cannot stop this.
+- **Meso** (`-meso-segments`). Product popularity, not history length, separates the systems:
+  - the fresh two-tower dominates the most-reviewed third;
+  - rolling co-review wins the middle third;
+  - no newer system beats P1 bce_text on the least-reviewed third.
+- **Caveats:**
+  - Val is reused; the pipeline is regenerated; the pool overlap was seen before registration.
+  - Oracles are upper bounds; HR@3 and MRR@10 are exploratory.
+  - Case coding is model-assisted.
+  - The work ran with two rate-limit pauses; background jobs continued during them.
+- **Phase H (7 Nov):**
+  - **Fused pool + rolling co-review** (`results/analysis/20261107-pool-rolling`): P3 rolling bce_coreview monthly **0.013084**, +0.001633 [0.001391, 0.001870] over P3 bce_text (T1). Co-review − text within P3 rolling is +0.001539 [0.001337, 0.001748]. The pool × rolling interaction is −0.000407 (sub-additive). The gain is all warm; new items stay at about P1 level.
+  - **Fresh-retriever seeds** (`results/analysis/20261107-fresh-tt-seeds`): R@200 +0.042460 [0.041310, 0.043569] across fresh seeds 0/1 vs frozen seeds 0/1/2.
+
+## Locked Test run of the 5–7 Nov systems (7 Nov 2026)
+
+Protocol `docs/test_protocol_2026-11-07.md` (approved; hash recorded in `docs/decisions.md`). Frozen models, each system scored once, no training or selection on Test. Tables, predictions and provenance: `results/test_final/20261107/`; bulk: `results/local_experiments/20261107-test-final/`; code `src/cascade/pipelines/test_final.py`.
+
+- Recency retrieval reproduces the team's 4 Nov Test exactly (nDCG@10 0.006043, Recall@200 0.053114).
+- C1 period-start statistics (T2) vs T0, same B1 model: +0.001376 [0.001215, 0.001530]; new +0.0036.
+- C2 mixed pool vs P1 (T0): +0.001423 [0.001153, 0.001704]; new −0.0018, warm +0.0025. Smaller than on Val, as predicted.
+- C3 co-review vs text, monthly statistics: +0.001659 [0.001490, 0.001835], positive on new and warm.
+- C4 D7 vs B1: +0.003940 [0.003587, 0.004293] (0.006439 → 0.010379, +61%).
+- 8 of 9 written predictions held. The miss: D7 improves new targets over S1 (+0.0009), but loses new targets against fair baselines (S3 −0.0027, S5 −0.0038).
+- Statistics-timing mechanism (Val diagnostics, `results/analysis/20261107-statistics-timing/`) replicated on Test under `docs/test_protocol_2026-11-07_addendum_timing.md`: all five predictions held (`results/test_final/20261107/timing/`).

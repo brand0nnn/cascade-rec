@@ -1,0 +1,21 @@
+{
+  "source_sha256": "405884b6ce10a61f5ab89aba84bf34200e064efa17d567097ad02d40093779a2",
+  "checkpoint_sha256": {
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed0/inner/epoch3.pth": "6659ab96083460c211e899b93095c8c0f732ae4b69a3ecfe639d7290dac28212",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed1/inner/epoch3.pth": "6322cbdc4b80247ff557cfd45255bcea204d040e40dda0305e953be300ea8810",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_text/seed2/inner/epoch5.pth": "d8be7ba2be9037d373065fb4c6a09a6f24c6f78047631b323e1000d562639754",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed0/inner/epoch7.pth": "68767c0984b2d2245157228ce730f15f46f25a2e710aabde8d2a42ea8a931379",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed1/inner/epoch5.pth": "d5836650425074da592e0a0ba8dc41ea8d8a0b536b6588847739c67941644c91",
+    "results/local_experiments/20261103-full-promising-ranking/runs/pairwise_coreview/seed2/inner/epoch5.pth": "e9ee192ca644c89e87124b0d828ddf96792bafa45cbb76f8e8cb234039e78b12",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed0/inner/epoch8.pth": "3e2fb10856c7380828e08606915ccec605c7bfefac0a109622705c90e1588ee2",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed1/inner/epoch8.pth": "c8cb6ae741af17d9cd70d8863c752d4574463a42e543cd4a25af65967d04b3eb",
+    "results/local_experiments/20261103-full-promising-ranking/runs/bce_text/seed2/inner/epoch7.pth": "ef7ea6ad6307b431f2d26139c7cc9790147b0596b06934b1d4d12622e0b62859",
+    "results/local_experiments/20261104-objective-coreview/runs/bce_coreview/seed0/inner/epoch8.pth": "bcedeaaf65cd32d07922b4e09da8137b10c1c68a8d349d72301f61b66b250e1e",
+    "results/local_experiments/20261104-objective-coreview/runs/bce_coreview/seed1/inner/epoch5.pth": "b9d29505273c27075fc2742a142eb502bbfe0061ceaa240a21941369371b2c3f",
+    "results/local_experiments/20261104-objective-coreview/runs/bce_coreview/seed2/inner/epoch7.pth": "531e1efb7d69842dd427dbc3bec46c245b79d24778477917e27a14b8b529c02b"
+  },
+  "val_cand_sha256": "750a1105c9b8205a7b58e910332bccec09c76d49f9ef882154785725e8093fcf",
+  "device": "cpu",
+  "test_predictions_loaded": false,
+  "selects_nothing": true
+}

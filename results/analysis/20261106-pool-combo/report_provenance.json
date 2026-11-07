@@ -1,0 +1,14 @@
+{
+  "label": "Val only, exploratory; additivity test, not a final-pipeline selection",
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "tables.md": "28e4cbca45c199819ad9728fdb5ff4e89e65ee8c391efca849f0b454bf283a05",
+    "paired_differences.csv": "6fd716c3047f61094eda753b108e121d2f34c3f1cc0615b148bcf2f4548ff4e4",
+    "metrics.csv": "17c19d8f65aa48199b2d7b6ebe0299a584efe8e04f2a861e13a5db9039e5f95d",
+    "additivity.csv": "cbeaf6551fa3678acbde3917de7444f1f23c5b245fa106a8bf932892066a2fd6",
+    "fits.csv": "307ebecdedda1f95ee3d00c63006c80e846479f65b6f15f9993051425a847f7b",
+    "checks_T1.json": "999409e2dfe44c6e7d210d781c02a7ffc1d4fdcc90165280a7771e9213e6331e",
+    "completion.json": "c7c76ced7a7ae3fb17137aeeec8ed5256124a7303d519063ea3e735550bc66da",
+    "context_manifest.json": "98fe6b590319e20fcc454e85fbf0fe2f9753b83bc3d756dbc19152fe948c9569"
+  }
+}

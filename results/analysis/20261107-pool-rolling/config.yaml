@@ -1,0 +1,48 @@
+label: Val only, exploratory
+study: results/local_experiments/20261107-pool-rolling
+pool: results/local_experiments/20261106-pools/candidates/P3_fused_rrf
+p3_study: results/local_experiments/20261106-pool-ranking-P3
+methods_fitted:
+- bce_coreview
+- bce_text
+seeds:
+- 0
+- 1
+- 2
+h3_text_control_ran: true
+recipe: source recipe (BCE, 50 negatives, Adam 1e-3, batch 32 lists, <=10 epochs,
+  patience 2, inner selection with epoch 0, all-B refit)
+masks:
+  bce_coreview: pairwise_coreview
+  bce_text: bce_text
+plans: results/local_experiments/20261106-pool-ranking-P3/plans
+features:
+  B: rolling monthly snapshot per query (month start, floored at T0) on P3 candidates
+  scaler: refitted on rolling P3 B prefix slots (all 200)
+  Val:
+    val_monthly: month start of each query (consistent)
+    val_T1: T1 snapshot (diagnostic)
+references:
+  P3_bce_text_T0: results/local_experiments/20261106-pool-ranking-P3/evaluation/bce_text/seed{s}/val_ranks.npz
+  P3_bce_text_T1: results/local_experiments/20261106-pool-combo-T1/ranks/T1/seed{s}.npz
+  P3_context_T1: results/local_experiments/20261106-pool-combo-context/evaluation/common_T1/seed{s}.npz
+  P1_rolling_bce_coreview_monthly: results/local_experiments/20261106-rolling-ranking/evaluation/val_monthly/bce_coreview/seed{s}.npz
+  P1_rolling_bce_text_monthly: results/local_experiments/20261106-rolling-ranking/evaluation/val_monthly/bce_text/seed{s}.npz
+  P1_bce_text_T0: results/local_experiments/20261103-full-promising-ranking/evaluation/bce_text/seed{s}/val_ranks.npz
+interaction: P3_rolling_coreview - P3_text_T0 - P1_rolling_coreview + P1_text_T0 (per
+  event, seed means)
+metrics:
+- ndcg10
+- recall10
+- hr3
+- mrr10
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user
+fit_device: mps
+eval_device: cpu
+test_opened: false
+selection: none
+hypothesis: Yes on both (beats P3 bce_text T1 0.011451 and P1 rolling bce_coreview
+  0.010613), sub-additively; co-review - text on P3 under rolling features is positive.

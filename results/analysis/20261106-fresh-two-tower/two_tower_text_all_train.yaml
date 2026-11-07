@@ -1,0 +1,17 @@
+# Fresh Two-tower (text) on all data before T1 (Val only, exploratory).
+# Values copied from configs/retriever/base.yaml + two_tower_text.yaml; only the training period differs,
+# which is applied by src/cascade/pipelines/fresh_two_tower.py (training_periods is informational).
+name: two_tower_text_all_train
+user_tower: transformer
+item_tower: text
+logq: true
+temperature: 0.05
+lr: 0.001
+batch_size: 256
+max_inbatch: 4096
+epochs: 50
+patience: 5
+early_stop_val_subset: 20000
+eval_batch_size: 512
+training_periods: [retriever_train, ranker_train]
+logq_periods: [retriever_train, ranker_train]

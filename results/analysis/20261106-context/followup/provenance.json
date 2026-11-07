@@ -1,0 +1,28 @@
+{
+  "label": "Val only, exploratory, no training",
+  "device": "cpu",
+  "hit_rows_rescored": 14916,
+  "reproduction": [
+    {
+      "seed": 0,
+      "cpu_equals_saved_mps": true,
+      "mismatches": 0,
+      "max_top10_flips": 0
+    },
+    {
+      "seed": 1,
+      "cpu_equals_saved_mps": false,
+      "mismatches": 1,
+      "max_top10_flips": 0
+    },
+    {
+      "seed": 2,
+      "cpu_equals_saved_mps": true,
+      "mismatches": 0,
+      "max_top10_flips": 0
+    }
+  ],
+  "test_predictions_loaded": false,
+  "common_T1_source": "results/local_experiments/20261106-freshness-val/features/T1/common.npy",
+  "neutralisation": "standardised value 0 = chronological-prefix B mean"
+}

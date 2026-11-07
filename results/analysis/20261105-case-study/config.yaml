@@ -1,0 +1,65 @@
+# Track N3 case study - FROZEN before any case was viewed (written 2026-11-05 04:52 +08).
+# Val only, exploratory; regenerated pipeline; model-assisted coding (needs human review).
+# Follows docs/evaluations.md "Step 5 - What does a representative case show?".
+analysis: 20261105-case-study
+label: "Val only, exploratory; regenerated pipeline; model-assisted coding"
+split: val                      # Test is never opened or loaded.
+source_study: results/local_experiments/20261103-full-promising-ranking
+required_completion: evaluation/completion.json status == complete
+data_config: configs/data.yaml  # byte-identical to results/targeted_study/data.yaml used by the study
+k1: 200
+display_seed: 0                 # seed-0 models are displayed; ranks under seeds 0/1/2 are recorded
+seeds_recorded: [0, 1, 2]
+methods_displayed: [bce_text, pairwise_text]
+notation:
+  r_ret: "pessimistic target rank within the natural K200 retrieval list (frozen MiniLM, 90-day recency); inf if not in K200"
+  r_bce: "bce_text seed-0 pessimistic target rank within K200 (inf if not retrieved)"
+  r_pw:  "pairwise_text seed-0 pessimistic target rank within K200 (inf if not retrieved)"
+  new:   "new-in-Val target: items.first_ts >= T1 (as full_data_ranking.groups_for)"
+buckets:                        # fixed order; all four are disjoint by construction, de-duplication still enforced
+  - id: B1_new_retrieval_miss
+    rule: "new and r_ret == inf"
+  - id: B2_bce_demoted_pairwise_kept
+    rule: "r_ret <= 10 and r_bce > 10 and r_pw <= 10"
+    note: "'natural hit' = target in retrieval top 10 (funnel 'demoted'/'retained' terminology)"
+  - id: B3_bce_rescue
+    rule: "10 < r_ret <= 200 and r_bce <= 10"
+  - id: B4_counterexample_pairwise_demotes_bce_keeps
+    rule: "r_ret <= 10 and r_pw > 10 and r_bce <= 10"
+sensitivity_counts_only:        # reported as eligible counts, never used for selection
+  B2_any_k200: "r_ret <= 200 and r_bce > 10 and r_pw <= 10"
+  B4_any_k200: "r_ret <= 200 and r_pw > 10 and r_bce <= 10"
+selection:
+  per_bucket: 7
+  order: [B1_new_retrieval_miss, B2_bce_demoted_pairwise_kept, B3_bce_rescue, B4_counterexample_pairwise_demotes_bce_keeps]
+  rule: >
+    For each bucket in order: eligible = sorted unique stable Val instance IDs (inst) meeting the rule,
+    minus IDs already chosen; draw idx = rng.choice(len(eligible), size=min(7, len(eligible)), replace=False)
+    with ONE generator rng = numpy.random.default_rng(0) created once and consumed in bucket order;
+    chosen = eligible[sorted(idx)]. If a bucket has fewer than 7 eligible, take all and disclose.
+    No replacement of inconvenient cases; any presentation choice is disclosed.
+display:
+  history: "last 5 prior products (all if fewer), oldest first: title, leaf_cat, store, review date (UTC)"
+  target: "title, leaf_cat, store, review date, new/warm, price if parseable"
+  ranks: "r_ret, K200 membership, bce_text/pairwise_text target ranks seeds 0/1/2"
+  top3: "retrieval, bce_text seed 0, pairwise_text seed 0 top-3 titles from saved top10 arrays"
+  full_catalogue_rank: >
+    supplementary: CPU float64 reconstruction of the 90-day-recency text-mean retrieval score over the
+    filtered full catalogue (as frozen_text_study.independent_check); checked against r_ret for K200 hits.
+rubric:                         # coded per case by the agent from titles/metadata only; needs human review
+  relation_to_last_history:
+    substitute: "same product type as the last history product (e.g. case vs case, protector vs protector)"
+    complement: "different product type that the titles suggest is used together (e.g. phone case after phone, protector after case)"
+    unrelated: "no joint use evident from the titles"
+    unknown: "title missing or too vague to judge"
+  same_phone_model:
+    "yes": "an identical phone model string is explicit in both target and last-history titles"
+    "no": "both titles explicitly name phone models and none coincide"
+    unknown: "either title names no explicit model, is universal/generic, or the strings are ambiguous (e.g. slash lists)"
+    gate: "device-audit gate (docs/evaluations.md) is blocked: this is not a compatibility claim and is not parser output"
+  brand_change:
+    computed: "store field: same / changed / unknown (either store missing)"
+  price_jump:
+    computed: "both prices parse and > 0: up (target >= 2x last), down (target <= 0.5x last), similar; else unknown"
+  default: unknown
+outputs: [config.yaml, git_hash.txt, seed, selection.json, coding.csv, cases.csv, cases.md]

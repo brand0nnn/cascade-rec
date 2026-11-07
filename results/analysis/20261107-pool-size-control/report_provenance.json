@@ -1,0 +1,9 @@
+{
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "tables.md": "6d9d494bd65ecf3b299b57f65e638bd130736b2ebb9e4c4d813f4c6119bc00c4",
+    "paired_differences.csv": "178f8f7c2f12dc7932d6788011c7e0c158d05357453794e62f0c21fee3e00c1b",
+    "metrics.csv": "3b9ff7ea6ad766cb70ee9429e30259b0930cc0ad43ba081b85c0dceb0423e935",
+    "fits.csv": "7b5793d530ef9b90a2bce5bba29e87161761609531e740fc755a4db37ff9b568"
+  }
+}

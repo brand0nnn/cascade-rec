@@ -1,0 +1,211 @@
+{
+  "label": "Val only, exploratory; TRAINING-LABEL CHANGE in an isolated study, pending team review; never replaces natural-list results",
+  "arms_evaluated": [
+    "M2"
+  ],
+  "arms_not_run": [
+    "M1"
+  ],
+  "diagnostics_h2": {
+    "inserted_cosine_auc": 0.1028381411798789,
+    "inserted_score_minus_cosine_auc": 0.8886856657051945,
+    "natural_cosine_auc": 0.5869149140945588,
+    "natural_score_minus_cosine_auc": 0.6114141028221004,
+    "inserted_skip_score_auc": 0.5006089404266447,
+    "h2_diagnostic_condition": true
+  },
+  "ushape": {
+    "lists": 50000,
+    "users": 41549,
+    "natural_hit_lists": 3166,
+    "candidate_groups": {
+      "n_items": 111480,
+      "val_valid_counts": {
+        "tail": 75687,
+        "head": 18922,
+        "new": 16871
+      },
+      "project_t2_counts": {
+        "tail": 74538,
+        "head": 20071,
+        "new": 16871
+      },
+      "head_min_pre_t1_count": 23,
+      "note": "item_segments column 'cnt_before_t2' holds the count before the cutoff passed (here T1)"
+    },
+    "checks": {
+      "all_lists": {
+        "P1_bce_text": {
+          "low_rank_rise_d10_minus_d6_per_seed": {
+            "head": [
+              -0.16167749091982841,
+              -0.16836369037628174,
+              -0.16215946525335312
+            ],
+            "tail": [
+              -0.17864301800727844,
+              -0.18846014142036438,
+              -0.18148374557495117
+            ],
+            "new": [
+              -0.07584041357040405,
+              -0.07913464307785034,
+              -0.08041834831237793
+            ]
+          },
+          "low_rank_rise_holds_all_groups": false,
+          "unpopular_minus_head": {
+            "tail": {
+              "mean_over_deciles_per_seed": [
+                -0.6342470057308673,
+                -0.6484225329011679,
+                -0.5983955726027489
+              ],
+              "deciles_positive_on_seed_mean": 0
+            },
+            "new": {
+              "mean_over_deciles_per_seed": [
+                0.3768522646278143,
+                0.4080782406032085,
+                0.47435641959309577
+              ],
+              "deciles_positive_on_seed_mean": 10
+            }
+          },
+          "unpopular_preference_holds": false
+        },
+        "M2": {
+          "low_rank_rise_d10_minus_d6_per_seed": {
+            "head": [
+              -0.002073138952255249,
+              0.010084092617034912,
+              -0.006644546985626221
+            ],
+            "tail": [
+              -0.020254015922546387,
+              -0.020111501216888428,
+              -0.02932065725326538
+            ],
+            "new": [
+              0.05630677938461304,
+              0.06647545099258423,
+              0.05785590410232544
+            ]
+          },
+          "low_rank_rise_holds_all_groups": false,
+          "unpopular_minus_head": {
+            "tail": {
+              "mean_over_deciles_per_seed": [
+                -0.6468038707971573,
+                -0.7958789020776749,
+                -0.7840586960315704
+              ],
+              "deciles_positive_on_seed_mean": 0
+            },
+            "new": {
+              "mean_over_deciles_per_seed": [
+                0.31330269277095796,
+                0.3395948946475983,
+                0.2943848967552185
+              ],
+              "deciles_positive_on_seed_mean": 10
+            }
+          },
+          "unpopular_preference_holds": false
+        }
+      },
+      "natural_hit_lists": {
+        "P1_bce_text": {
+          "low_rank_rise_d10_minus_d6_per_seed": {
+            "head": [
+              -0.20738133415579796,
+              -0.2235979214310646,
+              -0.2026504362002015
+            ],
+            "tail": [
+              -0.22775515913963318,
+              -0.23890122771263123,
+              -0.22972586750984192
+            ],
+            "new": [
+              -0.08479875326156616,
+              -0.09452062845230103,
+              -0.08304429054260254
+            ]
+          },
+          "low_rank_rise_holds_all_groups": false,
+          "unpopular_minus_head": {
+            "tail": {
+              "mean_over_deciles_per_seed": [
+                -0.5183698561042547,
+                -0.534323426708579,
+                -0.46902541602030395
+              ],
+              "deciles_positive_on_seed_mean": 0
+            },
+            "new": {
+              "mean_over_deciles_per_seed": [
+                0.42835140638053415,
+                0.4500874597579241,
+                0.5426299988292158
+              ],
+              "deciles_positive_on_seed_mean": 10
+            }
+          },
+          "unpopular_preference_holds": false
+        },
+        "M2": {
+          "low_rank_rise_d10_minus_d6_per_seed": {
+            "head": [
+              -0.03512853384017944,
+              -0.02827507257461548,
+              -0.04939725995063782
+            ],
+            "tail": [
+              -0.052956461906433105,
+              -0.06693264842033386,
+              -0.08166027069091797
+            ],
+            "new": [
+              0.047222912311553955,
+              0.07098042964935303,
+              0.053787946701049805
+            ]
+          },
+          "low_rank_rise_holds_all_groups": false,
+          "unpopular_minus_head": {
+            "tail": {
+              "mean_over_deciles_per_seed": [
+                -0.5412126444280148,
+                -0.6574697956442833,
+                -0.6498664639890194
+              ],
+              "deciles_positive_on_seed_mean": 0
+            },
+            "new": {
+              "mean_over_deciles_per_seed": [
+                0.3514446593821049,
+                0.41283870339393614,
+                0.37352966517210007
+              ],
+              "deciles_positive_on_seed_mean": 9
+            }
+          },
+          "unpopular_preference_holds": false
+        }
+      }
+    }
+  },
+  "verdict": {
+    "M2": {
+      "H1_no_low_rank_rise": true,
+      "H1_new_ndcg10_up": false,
+      "H1_holds": false,
+      "H2_diagnostic": true,
+      "H2_overall_ndcg10_down": true,
+      "H2_holds": true
+    }
+  },
+  "test_predictions_loaded": false,
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty"
+}

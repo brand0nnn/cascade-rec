@@ -1,0 +1,34 @@
+label: Val only, exploratory
+study: results/local_experiments/20261106-rolling-ranking
+methods:
+- bce_text
+- bce_coreview
+seeds:
+- 0
+- 1
+- 2
+recipe: source recipe (BCE, 50 negatives, Adam 1e-3, batch 32 lists, <=10 epochs,
+  patience 2, inner selection with epoch 0, all-B refit)
+source_fits:
+  bce_text: results/local_experiments/20261103-full-promising-ranking
+  bce_coreview: results/local_experiments/20261104-objective-coreview
+plans: results/local_experiments/20261103-full-promising-ranking/plans
+features:
+  B: rolling monthly snapshot per query (month start, floored at T0)
+  scaler: refitted on rolling B prefix slots
+  Val:
+    rolling_monthly: month start of each query (consistent)
+    rolling_T1: T1 snapshot (diagnostic)
+metrics:
+- ndcg10
+- recall10
+- hr3
+- mrr10
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user
+fit_device: mps
+eval_device: cpu
+test_opened: false
+selection: none

@@ -1,0 +1,22 @@
+{
+  "label": "Val only, exploratory",
+  "test_predictions_loaded": false,
+  "P3": {
+    "stored_feature_rebuild_rows": 512,
+    "max_abs_error": 0.0,
+    "exact": true,
+    "scaler_from": "results/local_experiments/20261106-pool-ranking-P3",
+    "overlap_slots_checked": 36297,
+    "overlap_feature_max_abs_diff": 0.0,
+    "feature_sha256": "6f4a0b7b38b8bd722a002d4779b64cb3e20dc472c6fe4f7089a96e442a18a17d"
+  },
+  "P2": {
+    "stored_feature_rebuild_rows": 512,
+    "max_abs_error": 0.0,
+    "exact": true,
+    "scaler_from": "results/local_experiments/20261106-pool-ranking-P2",
+    "overlap_slots_checked": 21778,
+    "overlap_feature_max_abs_diff": 0.0,
+    "feature_sha256": "e4013c45df6253556ef5db6b88cb80505f2afa2f5bf2977b5e86d1db99ccd547"
+  }
+}

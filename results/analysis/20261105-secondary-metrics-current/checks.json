@@ -1,0 +1,90 @@
+{
+ "label": "Val only, exploratory; regenerated pipeline",
+ "status": {
+  "popularity": "computed",
+  "retrieval": "computed",
+  "bce_text": "computed",
+  "pairwise_text": "computed",
+  "pairwise_coreview": "computed",
+  "pairwise_combined": "computed",
+  "bce_coreview": "not_available"
+ },
+ "replay": [
+  {
+   "method": "bce_text",
+   "seed": 0,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "bce_text",
+   "seed": 1,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "bce_text",
+   "seed": 2,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_text",
+   "seed": 0,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_text",
+   "seed": 1,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_text",
+   "seed": 2,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_coreview",
+   "seed": 0,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_coreview",
+   "seed": 1,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_coreview",
+   "seed": 2,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_combined",
+   "seed": 0,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_combined",
+   "seed": 1,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  },
+  {
+   "method": "pairwise_combined",
+   "seed": 2,
+   "rank_replay_exact": true,
+   "padding_convention_differing_events": 0
+  }
+ ],
+ "flags": {
+  "pairwise_coreview": "not reproduced; under investigation"
+ },
+ "popularity_counts_period": "retriever_train (< T0)"
+}

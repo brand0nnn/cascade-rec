@@ -1,0 +1,30 @@
+{
+  "definition": "P3t score = P3 RRF score - 1e-6 x interleave position (0-based)",
+  "gate": "P3t epoch-0 Val nDCG@10 must equal the P3 interleave-order value 0.007408",
+  "splits": {
+    "ranker_train": {
+      "ndcg10_rrf_pessimistic": 0.009972727410967686,
+      "ndcg10_p3t": 0.010321195004760952,
+      "ndcg10_interleave_order": 0.011023435167015724,
+      "ndcg10_rrf_lexicographic_tiebreak": 0.010313561779532592,
+      "natural_targets": 38861,
+      "targets_rank_p3t_ne_interleave": 30064,
+      "targets_rank_p3t_ne_lexicographic": 2138,
+      "rows_full_order_p3t_eq_lexicographic": 0.2511725915065659,
+      "rows_p3t_order_eq_interleave_order": 0.09828506508755562
+    },
+    "val": {
+      "ndcg10_rrf_pessimistic": 0.00655504001086765,
+      "ndcg10_p3t": 0.007044254939523689,
+      "ndcg10_interleave_order": 0.007407563163618455,
+      "ndcg10_rrf_lexicographic_tiebreak": 0.007040500478867446,
+      "natural_targets": 20441,
+      "targets_rank_p3t_ne_interleave": 14579,
+      "targets_rank_p3t_ne_lexicographic": 1020,
+      "rows_full_order_p3t_eq_lexicographic": 0.3054820870401539,
+      "rows_p3t_order_eq_interleave_order": 0.14477209494040463
+    }
+  },
+  "gate_passed": false,
+  "reason": "RRF order differs from interleave order beyond ties (items in both sources move up), and the 1e-6 x position offset (up to 1.99e-4) also reorders distinct RRF values whose gap is smaller, so P3t is neither the interleave order nor a pure tie-break."
+}

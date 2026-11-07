@@ -1,0 +1,28 @@
+{
+  "monthly_replay_exact": true,
+  "H1": {
+    "base": "monthly",
+    "swapped_common_columns": [
+      1
+    ],
+    "columns_swapped_from": "T1",
+    "slots_changed": 418903
+  },
+  "H2": {
+    "base": "monthly",
+    "swapped_common_columns": [
+      0,
+      1
+    ],
+    "columns_swapped_from": "T1",
+    "slots_changed": 1405229
+  },
+  "H3": {
+    "base": "T1",
+    "swapped_common_columns": [
+      1
+    ],
+    "columns_swapped_from": "monthly",
+    "slots_changed": 418903
+  }
+}

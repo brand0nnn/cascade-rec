@@ -1,0 +1,12 @@
+{
+  "study_sha256": "ec1e4e8818cd1a1ea791530b865653c1980ce4d10ef35cf95a2a24fdff008b5e",
+  "selection_lock_sha256": "16745a9565aa7a4be4ae305f993cc2a39aae264a93f0076e93658267d92f2491",
+  "test_predictions_loaded": false,
+  "output_sha256": {
+    "report.md": "92ba0484592d8e6fce887da8a0e89b748b1db31cb968334515a9b385eb5af65b",
+    "paired_differences.csv": "af720763bd8abafac489750849025519fb9165cfc3386d36044dbe713fccb9e5",
+    "metrics.csv": "ef93858b37b026a974a18bc1a979a26673190da818eb54832ee16da5bb27d158",
+    "inner_curves.csv": "719989fdac992b5f38de44452180e219f4731e5fd08fe1f823570e8c3aeb3a81",
+    "fits.csv": "9ff3530fed00388a2d7526ea772fe71d3558d26723c47b8337317182e88797e2"
+  }
+}

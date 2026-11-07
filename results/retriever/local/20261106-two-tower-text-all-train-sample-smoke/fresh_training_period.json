@@ -1,0 +1,20 @@
+{
+  "label": "Val only, exploratory",
+  "training_periods": [
+    "retriever_train",
+    "ranker_train"
+  ],
+  "logq_periods": [
+    "retriever_train",
+    "ranker_train"
+  ],
+  "wrapper": "src/cascade/pipelines/fresh_two_tower.py",
+  "wrapper_sha256": "4d357135f80d9246823827b842246b1b74a41051e71ad86741567466f559bdd5",
+  "train_retriever_sha256": "d885e4694c5e6aff4e5af2b95bcf5906362d2ced01ecaf63d7f08de5156dbaf4",
+  "config": "results/analysis/20261106-fresh-two-tower/two_tower_text_all_train.yaml",
+  "evaluation_splits": [
+    "val"
+  ],
+  "test_predictions_loaded": false,
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty"
+}

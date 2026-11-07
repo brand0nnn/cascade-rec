@@ -1,0 +1,14 @@
+{
+ "label": "Val only, exploratory; regenerated pipeline",
+ "val_candidate_slots": 46580800,
+ "val_new_candidate_slots": 5134958,
+ "val_lists_with_any_new_candidate": 211810,
+ "val_candidates_first_review_equal_query_ts": 656,
+ "val_candidates_first_review_after_query_ts": 0,
+ "val_candidates_first_review_equal_query_ts_that_are_target": 656,
+ "val_padding_slots": 0,
+ "flag_note": "new = zero reviews before T1 (decidable at T1 for every item); pool admission (first review <= query ts, full-history exclusion) is the pipeline's unchanged rule",
+ "tune_queries": 63023,
+ "tune_new_candidate_slots": 3154568,
+ "tune_candidates_first_review_after_query_ts": 0
+}

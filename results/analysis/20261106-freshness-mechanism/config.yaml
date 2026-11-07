@@ -1,0 +1,37 @@
+label: Val only, exploratory; mixed snapshots are a diagnostic of frozen-model use,
+  not a serving recipe
+study: results/local_experiments/20261106-freshness-mechanism
+feature_source: results/local_experiments/20261106-freshness-val
+methods:
+- bce_text
+- pairwise_text
+- pairwise_coreview
+- bce_coreview
+seeds:
+- 0
+- 1
+- 2
+arms:
+  H1: monthly except candidate_graph_known from T1
+  H2: monthly except candidate_graph_known and candidate_log_degree from T1
+  H3: T1 except candidate_graph_known from monthly
+leak_free: every column from a snapshot ending before each of its queries (T1 or query
+  month start)
+probe:
+  rows: 10000
+  row_seed: 20261106
+  base: T1 features
+  flip: candidate_graph_known 0->1 standardised
+metrics:
+- ndcg10
+- recall10
+- hr3
+- mrr10
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user
+device: cpu
+training_performed: false
+test_opened: false
+selection: none

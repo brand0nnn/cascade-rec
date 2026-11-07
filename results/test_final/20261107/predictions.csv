@@ -1,0 +1,7 @@
+prediction,contrast,group,diff,ci_low,ci_high,verdict
+1. Period-start statistics help frozen models (C1 > 0),C1,all,0.001375894621625608,0.0012154166363701991,0.0015295343455651996,held
+2a. Mixed pool helps warm targets (C2 warm > 0),C2,warm,0.0024941591010960956,0.0021481011095980814,0.0028405351610714495,held
+2b. Mixed pool hurts new targets (C2 new < 0),C2,new,-0.0017790045734805112,-0.0020993296857829036,-0.0014141951864833663,held
+3. Co-review helps with monthly statistics (C3 > 0),C3,all,0.0016585849306704915,0.0014900520314637135,0.001834989207228984,held
+4a. Combined system helps warm targets (C4 warm > 0),C4,warm,0.004794981781281945,0.004340143440106873,0.0052447885695429885,held
+4b. Combined system does not help new targets (C4 new <= 0),C4,new,0.0009478280424496609,0.0004994896795442624,0.0015193391940348752,not held

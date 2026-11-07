@@ -1,0 +1,65 @@
+scope: Val only, exploratory (historical archived pipelines; not primary)
+out: results/analysis/20261105-secondary-metrics-archived-r2
+n_boot: 1000
+bootstrap_seed: 0
+seed: 0
+systems:
+  forced_mlp:
+  - results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching
+  - results/ranker_mlp/20261024-shortlist-repeat-seed1-rung1_matching
+  - results/ranker_mlp/20261024-shortlist-repeat-seed2-rung1_matching
+  forced_din:
+  - results/ranker_din/20261024-din-matching-seed0
+  - results/ranker_din/20261024-din-matching-seed1
+  - results/ranker_din/20261024-din-matching-seed2
+  natural_mlp:
+  - results/ranker_mlp/20261028-natural-matching-seed0
+  - results/ranker_mlp/20261028-natural-matching-seed1
+  - results/ranker_mlp/20261028-natural-matching-seed2
+  natural_mlp_ktrain500:
+  - results/ranker_mlp/20261028-natural-ktrain500-seed0
+  - results/ranker_mlp/20261028-natural-ktrain500-seed1
+  - results/ranker_mlp/20261028-natural-ktrain500-seed2
+  natural_din:
+  - results/ranker_din/20261028-din-natural-seed0
+  - results/ranker_din/20261028-din-natural-seed1
+  - results/ranker_din/20261028-din-natural-seed2
+  natural_din_ktrain500:
+  - results/ranker_din/20261028-din-natural-ktrain500-seed0
+  - results/ranker_din/20261028-din-natural-ktrain500-seed1
+  - results/ranker_din/20261028-din-natural-ktrain500-seed2
+  policy_arm_A:
+  - results/ranker_policy/policy-pilot-20261029/arm_A_seed0
+  - results/ranker_policy/policy-replication-20261029/arm_A_seed1
+  - results/ranker_policy/policy-replication-20261029/arm_A_seed2
+  policy_arm_B:
+  - results/ranker_policy/policy-pilot-20261029/arm_B_seed0
+  - results/ranker_policy/policy-replication-20261029/arm_B_seed1
+  - results/ranker_policy/policy-replication-20261029/arm_B_seed2
+  policy_arm_C:
+  - results/ranker_policy/policy-pilot-20261029/arm_C_seed0
+  - results/ranker_policy/policy-replication-20261029/arm_C_seed1
+  - results/ranker_policy/policy-replication-20261029/arm_C_seed2
+  policy_arm_D:
+  - results/ranker_policy/policy-pilot-20261029/arm_D_seed0
+  - results/ranker_policy/policy-replication-20261029/arm_D_seed1
+  - results/ranker_policy/policy-replication-20261029/arm_D_seed2
+baselines:
+  R0_popularity_order: results/ranker_comparison/20261025-rq3/validation_ranks.npz[R0]
+  R1_retrieval_order: results/ranker_comparison/20261025-rq3/validation_ranks.npz[R1]
+  R1_retrieval_order_rebuilt: policy arm_A_seed0 val_ranks.npz[retrieval_ranks]
+groups_file: results/ranker_policy/policy-pilot-20261029/validation_groups.parquet
+comparisons:
+  natural_din_ktrain500_minus_forced_mlp:
+  - forced_mlp
+  - natural_din_ktrain500
+  natural_mlp_minus_forced_mlp:
+  - forced_mlp
+  - natural_mlp
+metrics:
+  hr@3: Recall@3 = 1[rank <= 3]
+  mrr@10: 1/rank if rank <= 10 else 0
+  aggregation: per-user macro over all 232,904 Val events (misses = 0); seed mean
+    +- SD
+reproduction_tolerance: 1.0e-09
+test_files_opened: false

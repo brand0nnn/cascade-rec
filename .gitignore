@@ -76,3 +76,6 @@ __pycache__/
 
 # Candidate-list copies in analysis runs are too large for GitHub (keep local)
 /results/analysis/**/val.npz
+
+# Pinned environment for regenerating the frozen MiniLM encoder (local only)
+/.venv-encoder/

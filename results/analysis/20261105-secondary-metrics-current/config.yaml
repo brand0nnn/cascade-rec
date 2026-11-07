@@ -1,0 +1,73 @@
+scope: Val only, exploratory; regenerated pipeline
+registered_at: '2026-11-05T04:58:38+08:00'
+hypothesis: 'Pre-registered: HR@3 and MRR@10 give the same system ordering as nDCG@10;
+  pairwise''s new-item advantage over BCE is larger (relative) at HR@3 than at nDCG@10.'
+parent_study: results/local_experiments/20261103-full-promising-ranking
+factorial_study: results/local_experiments/20261104-objective-coreview
+systems:
+- popularity
+- retrieval
+- bce_text
+- pairwise_text
+- pairwise_coreview
+- pairwise_combined
+- bce_coreview
+metrics:
+  hr3: Recall@3 (target rank <= 3)
+  mrr10: 1/rank if rank <= 10 else 0
+  ndcg10: unchanged harness definition
+  recall10: unchanged harness definition
+popularity: strictly pre-T0 (retriever_train) review counts of the K200 candidates;
+  pessimistic target ties
+ranks: saved scores; pessimistic ties; padding excluded
+groups:
+- all
+- new
+- warm
+new_definition: target first review >= T1 (pipeline groups_for new_in_val)
+aggregation: per-user macro over the full population (misses 0); seed mean +- SD ddof0
+contrasts:
+- - full_promising_primary
+  - retrieval
+  - pairwise_text
+- - full_promising_primary+plan15_steps
+  - bce_text
+  - pairwise_text
+- - full_promising_primary+plan15_steps
+  - pairwise_text
+  - pairwise_coreview
+- - full_promising_primary
+  - pairwise_coreview
+  - pairwise_combined
+- - full_promising_primary
+  - retrieval
+  - pairwise_coreview
+- - full_promising_primary
+  - retrieval
+  - pairwise_combined
+- - plan15_steps
+  - retrieval
+  - popularity
+- - plan15_steps
+  - popularity
+  - bce_coreview
+- - plan15_steps
+  - retrieval
+  - bce_text
+- - plan15_steps
+  - retrieval
+  - bce_coreview
+- - plan15_steps
+  - bce_text
+  - bce_coreview
+- - plan15_steps
+  - pairwise_coreview
+  - bce_coreview
+bootstrap:
+  resamples: 1000
+  seed: 0
+  unit: user, paired, after seed-mean event metrics
+relative_advantage_test: joint user bootstrap of rel_hr3 - rel_ndcg10 for pairwise_text
+  vs bce_text on new targets
+rules: Val only; no training; no Test file opened; exploratory metrics, no definition
+  changes

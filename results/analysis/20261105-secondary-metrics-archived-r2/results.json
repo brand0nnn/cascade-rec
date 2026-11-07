@@ -1,0 +1,20 @@
+{
+  "scope": "Val only, exploratory (historical archived pipelines; not primary)",
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty",
+  "n_events": 232904,
+  "n_users": 124416,
+  "group_check": {
+    "source": "results/ranker_policy/policy-pilot-20261029/validation_groups.parquet",
+    "recomputed_match": true,
+    "rule": "new-in-period = target first interaction >= T1; otherwise warm-head/warm-tail by the project segment (top 20% / rest of items by interaction count before T2, data/processed/item_segments.parquet)",
+    "counts": {
+      "warm-head": 109765,
+      "new-in-period": 76768,
+      "warm-tail": 46371
+    }
+  },
+  "reproduction_max_abs_diff_ndcg10": 8.413408858487514e-17,
+  "reproduction_max_abs_diff_recall10": 4.683753385137379e-17,
+  "n_sources_reproduced": 33,
+  "test_files_opened": false
+}

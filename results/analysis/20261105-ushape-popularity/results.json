@@ -1,0 +1,594 @@
+{
+  "scope": "Val only, exploratory",
+  "git_hash": "d890988af1a3a7360a7b9e9016d8eae1c9c2ea85-dirty",
+  "n_val_lists_total": 232904,
+  "n_lists_used": 50000,
+  "n_users": 41549,
+  "n_natural_hit_lists": 3545,
+  "candidate_groups": {
+    "n_items": 111480,
+    "val_valid_counts": {
+      "tail": 75687,
+      "head": 18922,
+      "new": 16871
+    },
+    "project_t2_counts": {
+      "tail": 74538,
+      "head": 20071,
+      "new": 16871
+    },
+    "head_min_pre_t1_count": 23,
+    "note": "item_segments column 'cnt_before_t2' holds the count before the cutoff passed (here T1)"
+  },
+  "alignment_checks": {
+    "A/seed0": {
+      "n_hit_lists": 3545,
+      "exact_rank_match_fraction": 1.0,
+      "max_abs_rank_diff": 0.0,
+      "conditional_ndcg10_macro_recomputed": 0.10495516476123506,
+      "conditional_ndcg10_macro_saved": 0.10495516476123506
+    },
+    "A/seed1": {
+      "n_hit_lists": 3545,
+      "exact_rank_match_fraction": 1.0,
+      "max_abs_rank_diff": 0.0,
+      "conditional_ndcg10_macro_recomputed": 0.10142421856264605,
+      "conditional_ndcg10_macro_saved": 0.10142421856264605
+    },
+    "A/seed2": {
+      "n_hit_lists": 3545,
+      "exact_rank_match_fraction": 1.0,
+      "max_abs_rank_diff": 0.0,
+      "conditional_ndcg10_macro_recomputed": 0.09681430275287678,
+      "conditional_ndcg10_macro_saved": 0.09681430275287678
+    },
+    "C/seed0": {
+      "n_hit_lists": 3545,
+      "exact_rank_match_fraction": 1.0,
+      "max_abs_rank_diff": 0.0,
+      "conditional_ndcg10_macro_recomputed": 0.13390280419859224,
+      "conditional_ndcg10_macro_saved": 0.13390280419859224
+    },
+    "C/seed1": {
+      "n_hit_lists": 3545,
+      "exact_rank_match_fraction": 1.0,
+      "max_abs_rank_diff": 0.0,
+      "conditional_ndcg10_macro_recomputed": 0.12517415445076285,
+      "conditional_ndcg10_macro_saved": 0.12517415445076285
+    },
+    "C/seed2": {
+      "n_hit_lists": 3545,
+      "exact_rank_match_fraction": 1.0,
+      "max_abs_rank_diff": 0.0,
+      "conditional_ndcg10_macro_recomputed": 0.13305640939249352,
+      "conditional_ndcg10_macro_saved": 0.13305640939249352
+    }
+  },
+  "hypothesis": {
+    "statement": "Arm A shows both effects: within each candidate popularity group its centred logit rises at low retrieval ranks, and tail/new candidates score higher than head at the same rank decile; arm C shows neither.",
+    "operationalisation": {
+      "low_rank_rise": "per group, mean centred logit in decile 10 (ranks 181-200) minus decile 6 (ranks 101-120) > 0 in every seed",
+      "unpopular_preference": "per non-head group, mean over deciles of (group - head) centred logit > 0 in every seed, and positive in >= 8 of 10 deciles on the seed mean"
+    }
+  },
+  "hypothesis_checks": {
+    "val_valid_pre_t1|all_lists": {
+      "A": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            0.38205550611019135,
+            0.36714544892311096,
+            0.31951904296875
+          ],
+          "tail": [
+            0.5153262615203857,
+            0.4888758808374405,
+            0.4209577366709709
+          ],
+          "new": [
+            0.543729305267334,
+            0.48969119787216187,
+            0.43509435653686523
+          ]
+        },
+        "low_rank_rise_holds_all_groups": true,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.0881659080972895,
+              -0.12844486813992262,
+              -0.06595695354044437
+            ],
+            "deciles_positive_on_seed_mean": 6,
+            "per_decile_seed_mean": [
+              -0.8730992277463278,
+              -0.40250727037588757,
+              -0.19429885347684225,
+              -0.0717423011859258,
+              0.00475578506787618,
+              0.05340974281231562,
+              0.09834604524075985,
+              0.12471782858483493,
+              0.14630278199911118,
+              0.17222303648789725
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.7921956729376689,
+              0.889338226057589,
+              0.6740245703607798
+            ],
+            "deciles_positive_on_seed_mean": 10,
+            "per_decile_seed_mean": [
+              0.19767122467358908,
+              0.6008985688289007,
+              0.722628782192866,
+              0.7939983755350113,
+              0.8480274726947149,
+              0.8707058131694794,
+              0.907194501409928,
+              0.9378382508487751,
+              0.9689278081059456,
+              1.0039707670609157
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "C": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            -0.10569410026073456,
+            -0.09538526833057404,
+            -0.09737171232700348
+          ],
+          "tail": [
+            -0.03693579137325287,
+            -0.07091684639453888,
+            -0.03868018090724945
+          ],
+          "new": [
+            -0.06052060425281525,
+            -0.09977085888385773,
+            -0.07601460814476013
+          ]
+        },
+        "low_rank_rise_holds_all_groups": false,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.21222957521677016,
+              -0.07063769623637199,
+              -0.18071451652795076
+            ],
+            "deciles_positive_on_seed_mean": 4,
+            "per_decile_seed_mean": [
+              -0.883792502184709,
+              -0.36629360541701317,
+              -0.19356794406970343,
+              -0.10453642842670281,
+              -0.05113889276981354,
+              -0.019959087173144024,
+              0.005465594430764516,
+              0.015394091606140137,
+              0.02247581382592519,
+              0.030680333574612934
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.34377165138721466,
+              0.26909632571041586,
+              0.36805875729769466
+            ],
+            "deciles_positive_on_seed_mean": 9,
+            "per_decile_seed_mean": [
+              -0.08686273296674092,
+              0.2036762833595276,
+              0.30537376428643864,
+              0.36268030293285847,
+              0.4041092668970426,
+              0.40675853192806244,
+              0.41503913203875226,
+              0.4148711810509364,
+              0.41663651665051776,
+              0.4274735351403554
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "hypothesis_held": false
+    },
+    "val_valid_pre_t1|natural_hit_lists": {
+      "A": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            0.3823452293872833,
+            0.351375013589859,
+            0.3305742144584656
+          ],
+          "tail": [
+            0.5296864584088326,
+            0.4953988641500473,
+            0.4377399832010269
+          ],
+          "new": [
+            0.5303930640220642,
+            0.4966381788253784,
+            0.42492568492889404
+          ]
+        },
+        "low_rank_rise_holds_all_groups": true,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.07051369473338127,
+              -0.1208156816661358,
+              -0.05778363859280944
+            ],
+            "deciles_positive_on_seed_mean": 6,
+            "per_decile_seed_mean": [
+              -0.8545555174350739,
+              -0.39078453679879505,
+              -0.19512574871381125,
+              -0.05067232747872671,
+              0.00765786071618398,
+              0.0586837703982989,
+              0.10622413828969002,
+              0.13094763861348233,
+              0.1657206192612648,
+              0.19152738650639853
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.7656173227354884,
+              0.8511386942118406,
+              0.641853095125407
+            ],
+            "deciles_positive_on_seed_mean": 10,
+            "per_decile_seed_mean": [
+              0.16268899043401083,
+              0.5521276543537775,
+              0.6873831351598104,
+              0.7590400328238806,
+              0.8274344007174174,
+              0.848609209060669,
+              0.8784907211860021,
+              0.9210345487420758,
+              0.9140583152572314,
+              0.9778300325075785
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "C": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            -0.1109507828950882,
+            -0.10428538918495178,
+            -0.09963449835777283
+          ],
+          "tail": [
+            -0.06251470744609833,
+            -0.0769982635974884,
+            -0.05385462939739227
+          ],
+          "new": [
+            -0.06401275098323822,
+            -0.10619110614061356,
+            -0.08108066022396088
+          ]
+        },
+        "low_rank_rise_holds_all_groups": false,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.19039559215307236,
+              -0.05139780081080971,
+              -0.15857803393155337
+            ],
+            "deciles_positive_on_seed_mean": 4,
+            "per_decile_seed_mean": [
+              -0.8694933690130711,
+              -0.3493555140060683,
+              -0.16479792179598007,
+              -0.07344441177944343,
+              -0.025661873320738476,
+              -0.0007436424493789673,
+              0.033216421802838646,
+              0.02711324393749237,
+              0.04883826275666555,
+              0.039757380882898964
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.3325571447610855,
+              0.24899947158992292,
+              0.36443527694791555
+            ],
+            "deciles_positive_on_seed_mean": 9,
+            "per_decile_seed_mean": [
+              -0.09207670887311299,
+              0.20165013273557028,
+              0.31508617599805194,
+              0.3538143864522378,
+              0.3943350985646248,
+              0.3832557251056035,
+              0.40379810829957324,
+              0.4026033629973729,
+              0.3863889202475548,
+              0.4044511094689369
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "hypothesis_held": false
+    },
+    "project_pre_t2|all_lists": {
+      "A": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            0.3961065113544464,
+            0.37885402143001556,
+            0.3306177109479904
+          ],
+          "tail": [
+            0.48587318509817123,
+            0.4676251858472824,
+            0.3994763754308224
+          ],
+          "new": [
+            0.543729305267334,
+            0.48969119787216187,
+            0.43509435653686523
+          ]
+        },
+        "low_rank_rise_holds_all_groups": true,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.00210120496340096,
+              -0.05335242366418243,
+              -0.005031607486307621
+            ],
+            "deciles_positive_on_seed_mean": 6,
+            "per_decile_seed_mean": [
+              -0.5663520147403082,
+              -0.22864952683448792,
+              -0.0996785859266917,
+              -0.009688938657442728,
+              0.047175511717796326,
+              0.08457574124137561,
+              0.11859287383655708,
+              0.13717086256171265,
+              0.14819538096586862,
+              0.16704124212265015
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.8068732808809728,
+              0.9033735427074134,
+              0.6838084844872355
+            ],
+            "deciles_positive_on_seed_mean": 10,
+            "per_decile_seed_mean": [
+              0.25622279942035675,
+              0.6366861263910929,
+              0.7440947194894155,
+              0.8074954549471537,
+              0.85605621834596,
+              0.8752425909042358,
+              0.9080417851607004,
+              0.9361358870131274,
+              0.963987315694491,
+              0.9962214628855387
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "C": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            -0.09680816531181335,
+            -0.0908685177564621,
+            -0.08848845958709717
+          ],
+          "tail": [
+            -0.05705326795578003,
+            -0.07578042149543762,
+            -0.05833102762699127
+          ],
+          "new": [
+            -0.06052060425281525,
+            -0.09977085888385773,
+            -0.07601460814476013
+          ]
+        },
+        "low_rank_rise_holds_all_groups": false,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.12085408851271495,
+              -0.048967988416552546,
+              -0.0840005774050951
+            ],
+            "deciles_positive_on_seed_mean": 4,
+            "per_decile_seed_mean": [
+              -0.4665258726648365,
+              -0.19061153382062912,
+              -0.11660662665963173,
+              -0.0659970548003912,
+              -0.03288127233584722,
+              -0.012479970852533976,
+              0.004367450873057048,
+              0.0076172153155008955,
+              0.011188646157582601,
+              0.015853504339853924
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.36228600833564994,
+              0.2716458775103092,
+              0.38501680716872216
+            ],
+            "deciles_positive_on_seed_mean": 9,
+            "per_decile_seed_mean": [
+              -0.02024097243944804,
+              0.23832995692888895,
+              0.3241330236196518,
+              0.37329856616755325,
+              0.4095803573727608,
+              0.40909771621227264,
+              0.41458186010519665,
+              0.4124103436867396,
+              0.41292071839173633,
+              0.42238407333691913
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "hypothesis_held": false
+    },
+    "project_pre_t2|natural_hit_lists": {
+      "A": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            0.3981409966945648,
+            0.3657338321208954,
+            0.3429482579231262
+          ],
+          "tail": [
+            0.49532896280288696,
+            0.4673907309770584,
+            0.4126163236796856
+          ],
+          "new": [
+            0.5303930640220642,
+            0.4966381788253784,
+            0.42492568492889404
+          ]
+        },
+        "low_rank_rise_holds_all_groups": true,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              0.02905167602002621,
+              -0.030994662269949912,
+              0.012680616229772568
+            ],
+            "deciles_positive_on_seed_mean": 7,
+            "per_decile_seed_mean": [
+              -0.5237400631109873,
+              -0.19320359329382578,
+              -0.09185877442359924,
+              0.024652491013209026,
+              0.05504541595776876,
+              0.09977878754337628,
+              0.13774967193603516,
+              0.15843654672304788,
+              0.17964851980408034,
+              0.18928309778372446
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.7815544810146093,
+              0.8671172793954611,
+              0.6527231883257627
+            ],
+            "deciles_positive_on_seed_mean": 10,
+            "per_decile_seed_mean": [
+              0.22243614494800568,
+              0.5896462748448054,
+              0.7098608314990997,
+              0.7738035122553507,
+              0.8361794004837672,
+              0.8547132064898809,
+              0.8812032714486122,
+              0.9223698154091835,
+              0.9113462182382742,
+              0.9697578201691309
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "C": {
+        "low_rank_rise_d10_minus_d6_per_seed": {
+          "head": [
+            -0.10194191336631775,
+            -0.09932735562324524,
+            -0.09159794449806213
+          ],
+          "tail": [
+            -0.0884021669626236,
+            -0.0836377665400505,
+            -0.0738343745470047
+          ],
+          "new": [
+            -0.06401275098323822,
+            -0.10619110614061356,
+            -0.08108066022396088
+          ]
+        },
+        "low_rank_rise_holds_all_groups": false,
+        "unpopular_minus_head": {
+          "tail": {
+            "mean_over_deciles_per_seed": [
+              -0.08220936367288231,
+              -0.021429381147027016,
+              -0.04983507934957743
+            ],
+            "deciles_positive_on_seed_mean": 6,
+            "per_decile_seed_mean": [
+              -0.4112573688228925,
+              -0.1487521401916941,
+              -0.07669938045243423,
+              -0.02685442256430785,
+              0.001817908138036728,
+              0.012361732621987661,
+              0.03500101218620936,
+              0.025967304905255634,
+              0.04880990584691366,
+              0.028026034434636433
+            ]
+          },
+          "new": {
+            "mean_over_deciles_per_seed": [
+              0.3524449808523059,
+              0.25211344882845876,
+              0.3820996038615704
+            ],
+            "deciles_positive_on_seed_mean": 9,
+            "per_decile_seed_mean": [
+              -0.022831112146377563,
+              0.23794556657473245,
+              0.33420200521747273,
+              0.3645214519153039,
+              0.40053849170605343,
+              0.38597606122493744,
+              0.4028618782758713,
+              0.40125658611456555,
+              0.384552222987016,
+              0.3998369599382083
+            ]
+          }
+        },
+        "unpopular_preference_holds": false
+      },
+      "hypothesis_held": false
+    }
+  },
+  "primary": "val_valid_pre_t1|all_lists",
+  "test_files_opened": false
+}

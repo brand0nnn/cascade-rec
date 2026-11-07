@@ -1,0 +1,26 @@
+# Fresh Two-tower (text) extra seeds + seed comparison (Val only, exploratory). Nothing selected.
+label: Val only, exploratory
+training:
+  wrapper: src/cascade/pipelines/fresh_two_tower_seeds.py   # thin wrapper over fresh_two_tower.AllTrainView
+  base_wrapper: src/cascade/pipelines/fresh_two_tower.py
+  config: results/analysis/20261106-fresh-two-tower/two_tower_text_all_train.yaml   # unchanged recipe
+  training_periods: [retriever_train, ranker_train]   # all interactions before T1
+  logq_periods: [retriever_train, ranker_train]
+  device: mps
+  threads: 3
+  evaluation_splits: [val]
+  seeds_trained_here: [1, 2]
+  run_ids:
+    1: local/20261106-two-tower-text-all-train-seed1
+    2: local/20261106-two-tower-text-all-train-seed2
+  chain: results/analysis/20261107-fresh-tt-seeds/run_chain.sh
+  logs: results/logs/20261107/fresh-tt-seed{1,2}.log
+comparison:
+  fresh_runs: results/retriever/local/20261106-two-tower-text-all-train-seed{0,1,2}/val_ranks.npz
+  frozen_runs: results/retriever/two_tower_text/seed{0,1,2}/val_ranks.npz   # never test_ranks
+  metrics: [recall@50, recall@100, recall@200, recall@500, ndcg@10]
+  aggregation: per-user macro, full filtered catalogue, misses = 0
+  groups: {all: all Val events, new_in_val: target first_ts >= T1 (1628643414042), warm: the rest}
+  seed_sd: ddof 1
+  bootstrap: {contrast: fresh seed-mean minus frozen seed-mean event metrics, resamples: 1000, seed: 0, unit: user}
+  hypothesis: every fresh seed's overall R@200 >= +50% relative to the frozen seed mean, and fresh-seed R@200 SD < 0.003
