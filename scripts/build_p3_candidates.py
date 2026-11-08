@@ -33,6 +33,7 @@ from cascade.pipelines.train_retriever import load_retriever
 from cascade.utils.io import git_hash
 
 K, LI = 200, 20
+LOCAL = False
 DAY = 86_400_000.0
 
 
@@ -64,6 +65,13 @@ def rrf(rec: torch.Tensor, tt: torch.Tensor, items: torch.Tensor) -> np.ndarray:
     return (1000 * r - 1000 / 61).numpy()
 
 
+def local_rrf(top_rec: np.ndarray, top_tt: np.ndarray, items: np.ndarray) -> np.ndarray:
+    """Fast combined score: position within each retriever's own top-200 list (absent = 201), same formula/scale as rrf()."""
+    pr = {int(x): j + 1 for j, x in enumerate(top_rec)}; pt = {int(x): j + 1 for j, x in enumerate(top_tt)}
+    r1 = np.array([pr.get(int(x), K + 1) for x in items], float); r2 = np.array([pt.get(int(x), K + 1) for x in items], float)
+    return 1000 * (1 / (60 + r1) + 1 / (60 + r2)) - 1000 / 61
+
+
 def build(scorer, text, data, inst, batch_size):
     first_ts = first_ts_tensor(data)
     dev = scorer.V.device
@@ -75,6 +83,8 @@ def build(scorer, text, data, inst, batch_size):
     rec_rank = np.zeros(n, dtype=np.float64)
     rrf_score = np.zeros((n, K), dtype=np.float16)
     rrf_target = np.zeros(n, dtype=np.float32)
+    rrfl_score = np.zeros((n, K), dtype=np.float16)
+    rrfl_target = np.zeros(n, dtype=np.float32)
     top_tt_all = np.zeros((n, K), dtype=np.int32)
     tt_score = np.zeros((n, K), dtype=np.float16)
     users, hl, ts = inst["user"].to_numpy(), inst["hist_len"].to_numpy(), inst["ts"].to_numpy()
@@ -109,6 +119,8 @@ def build(scorer, text, data, inst, batch_size):
             have = set(p3[:K - LI].tolist())
             extra = [x for x in top_li[r] if x > 0 and x not in have][:LI]
             p3li = np.concatenate([p3[:K - LI], extra]) if len(extra) == LI else p3
+            rrfl_score[s + r] = local_rrf(top_rec[r], top_tt[r], p3)
+            rrfl_target[s + r] = local_rrf(top_rec[r], top_tt[r], np.array([bt.targets[r]]))[0]
             for name, lst in (("p3", p3), ("p3li", p3li)):
                 out[name][s + r] = lst
                 sc = ttn[r, lst]
@@ -116,7 +128,8 @@ def build(scorer, text, data, inst, batch_size):
         rrf_score[sl] = rrf(rec, tt, torch.from_numpy(out["p3"][sl].astype(np.int64)))
     out["p3rrf"], score["p3rrf"] = out["p3"], rrf_score
     out["tt"], score["tt"] = top_tt_all, tt_score
-    return out, score, rec_rank, rrf_target
+    out["p3rrfl"], score["p3rrfl"] = out["p3"], rrfl_score
+    return out, score, rec_rank, (rrfl_target if LOCAL else rrf_target)
 
 
 def main() -> None:
@@ -127,17 +140,20 @@ def main() -> None:
     ap.add_argument("--limit", type=int)
     ap.add_argument("--suffix", default="")
     ap.add_argument("--rrf", action="store_true", help="write only the P3 lists with the RRF score")
+    ap.add_argument("--rrf-local", action="store_true", help="write only P3 lists with the fast (within-list) combined score, all given splits incl. test")
     ap.add_argument("--splits", nargs="+", default=["ranker_train", "val"], choices=["ranker_train", "val", "test"])
     a = ap.parse_args()
     data = ProcessedData.load("configs/data.yaml")
     model, cfg = load_retriever(a.run_dir, data, a.device)
     scorer = RetrieverScorer(model)
     text = np.load(data.dir / "item_text_emb.npy")
+    global LOCAL
+    LOCAL = a.rrf_local
     test_only = a.splits == ["test"]
-    if "test" in a.splits and not (test_only and a.rrf):
+    if "test" in a.splits and not ((test_only and a.rrf) or a.rrf_local):
         raise ValueError("Test lists are built only with --splits test --rrf")
-    names = (("p3rrf", "tt") if test_only else ("p3rrf",)) if a.rrf else ("p3", "p3li")
-    dirs = {name: data.dir / "candidates" / f"{name}{'_test' if test_only else ''}_seed0{a.suffix}" for name in names}
+    names = ("p3rrfl",) if a.rrf_local else (("p3rrf", "tt") if test_only else ("p3rrf",)) if a.rrf else ("p3", "p3li")
+    dirs = {name: data.dir / "candidates" / f"{name}{'_test' if test_only and not a.rrf_local else ''}_seed0{a.suffix}" for name in names}
     for d in dirs.values():
         d.mkdir(parents=True, exist_ok=False)
     meta = {name: {"source_run": a.run_dir, "pool": name, "git_hash": git_hash(), "limit": a.limit, "splits": {}} for name in dirs}
@@ -146,7 +162,7 @@ def main() -> None:
         if a.limit:
             inst = inst.iloc[:a.limit]
         cands, scores, rec_rank, rrf_target = build(scorer, text, data, inst, a.batch_size)
-        tscore = rrf_target if a.rrf else target_scores(scorer, data, inst, a.batch_size)
+        tscore = rrf_target if (a.rrf or a.rrf_local) else target_scores(scorer, data, inst, a.batch_size)
         items = inst["item"].to_numpy().astype(np.int32)
         for name, d in dirs.items():
             hit = cands[name] == items[:, None]

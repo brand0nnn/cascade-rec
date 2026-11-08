@@ -67,7 +67,23 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 .jour { border: 2px solid var(--ink); display: grid; min-width: 0; }
 .jour > h3 { padding: 8px 12px; background: var(--ink); color: #fff; }
 .jour.good > h3 { background: var(--orange); }
-.jour svg { width: 100%; height: auto; display: block; }
+.jsteps { display: grid; grid-template-columns: 1fr auto 1fr 1.1fr; gap: 10px; padding: 12px; align-items: start; }
+.prod { display: grid; gap: 4px; align-content: start; }
+.prod img { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border: 1px solid var(--rule); }
+.prod .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.prod.hot img { border: 3px solid var(--orange); }
+.prod.miss img { border: 3px dashed var(--orange); opacity: 0.85; }
+.prod figcaption b { color: var(--orange); }
+.jsteps small, .results small { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
+.jarrow { font-size: 1.8rem; color: var(--orange); align-self: center; }
+.results { display: grid; gap: 6px; align-content: start; }
+.res { padding: 6px 8px; font-size: 0.85rem; display: grid; }
+.res b { font-family: var(--display); font-size: 1.3rem; }
+.res.off { background: #ececec; color: var(--ink-2); }
+.res.on { background: var(--orange); color: #fff; }
+.tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.tiles span { aspect-ratio: 0.55; background: #5f5f5f; border-radius: 5px; }
+.tnote { font-size: 0.85rem; }
 .verdict { padding: 8px 12px; border-top: 1px solid var(--rule); font-size: 0.92rem; }
 .verdict b { color: var(--orange); }
 .take { background: var(--ink); color: #fff; padding: 18px 20px; display: grid; gap: 10px; }
@@ -78,6 +94,8 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 svg text { font-family: var(--body); }
 @media (max-width: 860px) {
   header, .grid2, .figrow, .journeys, .cards { grid-template-columns: minmax(0, 1fr); }
+  .jsteps { grid-template-columns: 1fr 1fr; }
+  .jarrow { display: none; }
 }
 </style>
 
@@ -250,56 +268,34 @@ svg text { font-family: var(--body); }
   <div class="journeys">
     <div class="jour good">
       <h3>Helps: a repeat buyer, same store, same phone family</h3>
-      <svg viewBox="0 0 600 230" role="img" aria-label="Owned a UAG case for iPhone 13, bought a UAG case for iPhone 13 Pro; original system did not find it, best system ranked it first">
-        <text x="20" y="24" font-size="12" font-weight="700" fill="#555a61">OWNED BEFORE</text>
-        <rect x="40" y="38" width="76" height="140" rx="14" fill="#232f3e"/>
-        <rect x="47" y="45" width="62" height="126" rx="9" fill="#5f6b7a"/>
-        <rect x="56" y="54" width="18" height="18" rx="5" fill="#232f3e"/>
-        <text x="78" y="200" text-anchor="middle" font-size="13" fill="#232f3e">UAG rugged case</text>
-        <text x="78" y="216" text-anchor="middle" font-size="13" fill="#555a61">iPhone 13</text>
-        <text x="185" y="112" text-anchor="middle" font-size="28" fill="#e8710a">→</text>
-        <text x="215" y="24" font-size="12" font-weight="700" fill="#555a61">BOUGHT NEXT · APR 2022</text>
-        <rect x="240" y="38" width="80" height="146" rx="14" fill="#232f3e" stroke="#e8710a" stroke-width="4"/>
-        <rect x="247" y="45" width="66" height="132" rx="9" fill="#5f6b7a"/>
-        <rect x="256" y="54" width="24" height="24" rx="6" fill="#232f3e"/>
-        <text x="280" y="200" text-anchor="middle" font-size="13" fill="#232f3e">UAG rugged case</text>
-        <text x="280" y="216" text-anchor="middle" font-size="13" fill="#555a61">iPhone 13 Pro</text>
-        <text x="400" y="24" font-size="12" font-weight="700" fill="#555a61">WHAT EACH SYSTEM DID</text>
-        <rect x="400" y="44" width="180" height="56" fill="#ececec"/>
-        <text x="412" y="66" font-size="13" fill="#555a61">Original (MLP, two-tower)</text>
-        <text x="412" y="88" font-size="15" font-weight="700" fill="#8c8c8c">not in its 200</text>
-        <rect x="400" y="112" width="180" height="66" fill="#e8710a"/>
-        <text x="412" y="134" font-size="13" fill="#ffffff">Best (DIN, mixed list)</text>
-        <text x="412" y="164" font-size="26" font-weight="800" fill="#ffffff">#1</text>
-      </svg>
+      <div class="jsteps">
+        <figure class="prod"><small>Owned before</small><img src="fig/products/uag_ip13.jpg" alt="UAG rugged case for iPhone 13, grey"><figcaption>UAG rugged case · iPhone 13</figcaption></figure>
+        <div class="jarrow">→</div>
+        <figure class="prod hot"><small>Bought next · Apr 2022</small><img src="fig/products/uag_ip13pro.jpg" alt="UAG rugged case for iPhone 13 Pro, black"><figcaption>UAG rugged case · iPhone 13 Pro</figcaption></figure>
+        <div class="results">
+          <small>What each system did</small>
+          <div class="res off">Original (MLP, two-tower)<b>not in its 200</b></div>
+          <div class="res on">Best (DIN, mixed list)<b>#1</b></div>
+        </div>
+      </div>
       <p class="verdict">The recency retriever matches the same store and phone family; DIN puts it first. <b>Same-store purchases: 6.6% → 14.7% in the top 10.</b></p>
     </div>
     <div class="jour">
       <h3>Fails: an upgrader, iPhone 6s Plus → iPhone XS Max</h3>
-      <svg viewBox="0 0 600 230" role="img" aria-label="Owned accessories for iPhone 6s Plus; all 10 closest candidates are for the old phone; the XS Max case bought never reaches the ranker">
-        <text x="20" y="24" font-size="12" font-weight="700" fill="#555a61">OWNED BEFORE</text>
-        <rect x="40" y="38" width="70" height="138" rx="12" fill="#9a9a9a"/>
-        <rect x="46" y="46" width="58" height="114" rx="4" fill="#d7d4cf"/>
-        <circle cx="75" cy="168" r="5" fill="#d7d4cf"/>
-        <text x="75" y="200" text-anchor="middle" font-size="13" fill="#232f3e">case + protector</text>
-        <text x="75" y="216" text-anchor="middle" font-size="13" fill="#555a61">iPhone 6s Plus</text>
-        <text x="190" y="24" font-size="12" font-weight="700" fill="#555a61">10 CLOSEST CANDIDATES</text>
-        <g fill="#5f5f5f">
-          <rect x="190" y="40" width="34" height="62" rx="7"/><rect x="230" y="40" width="34" height="62" rx="7"/><rect x="270" y="40" width="34" height="62" rx="7"/><rect x="310" y="40" width="34" height="62" rx="7"/><rect x="350" y="40" width="34" height="62" rx="7"/>
-          <rect x="190" y="110" width="34" height="62" rx="7"/><rect x="230" y="110" width="34" height="62" rx="7"/><rect x="270" y="110" width="34" height="62" rx="7"/><rect x="310" y="110" width="34" height="62" rx="7"/><rect x="350" y="110" width="34" height="62" rx="7"/>
-        </g>
-        <text x="287" y="200" text-anchor="middle" font-size="13" fill="#232f3e">all 10 are for the old</text>
-        <text x="287" y="216" text-anchor="middle" font-size="13" fill="#232f3e">iPhone 6s Plus</text>
-        <text x="420" y="24" font-size="12" font-weight="700" fill="#555a61">BOUGHT · MAR 2022</text>
-        <rect x="455" y="38" width="80" height="146" rx="16" fill="#8a4b2a" stroke="#e8710a" stroke-width="4" stroke-dasharray="7 5"/>
-        <rect x="465" y="50" width="26" height="26" rx="7" fill="#5a3019"/>
-        <text x="495" y="200" text-anchor="middle" font-size="13" fill="#232f3e">leather case</text>
-        <text x="495" y="216" text-anchor="middle" font-size="13" fill="#e8710a" font-weight="700">iPhone XS Max · never reached</text>
-      </svg>
+      <div class="jsteps">
+        <figure class="prod"><small>Owned before</small><div class="pair"><img src="fig/products/hocase_6splus.jpg" alt="Hocase case for iPhone 6s Plus"><img src="fig/products/protector_6splus.jpg" alt="Screen protector for iPhone 6s Plus"></div><figcaption>Case + screen protector · iPhone 6s Plus</figcaption></figure>
+        <div class="jarrow">→</div>
+        <div class="results">
+          <small>10 closest candidates</small>
+          <div class="tiles" aria-label="10 tiles, all for the old phone"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <p class="tnote">all 10 are for the old iPhone 6s Plus</p>
+        </div>
+        <figure class="prod miss"><small>Bought · Mar 2022</small><img src="fig/products/leather_xsmax.jpg" alt="Leather wallet case for iPhone XS Max"><figcaption>Leather case · iPhone XS Max · <b>never reached the ranker</b></figcaption></figure>
+      </div>
       <p class="verdict">The history pulls every candidate toward the phone being replaced. <b>Across 2,000 upgrades: 37% of candidates old phone, 3% new.</b></p>
     </div>
   </div>
-  <p class="foot">Two real Validation purchases, drawn as illustrations (not product photos); the bold lines give the group statistics they illustrate.</p>
+  <p class="foot">Two real Validation purchases, with their Amazon product photos; the bold lines give the group statistics they illustrate.</p>
   <figure><img src="fig/fig24_slot_flow.png" alt="Alluvial of candidate list and top-10 slots by phone relation for four buyer types"><figcaption>Right phone, wrong product: for same-phone buyers 81% of top 10s hold something for their phone, but only 4.6% hold the exact purchase. The ranker shifts slots toward the right phone but cannot add what retrieval missed.</figcaption></figure>
   <div class="figrow">
     <figure><img src="fig/fig19_waffles.png" alt="Waffles of 100 purchases for four buyer types"><figcaption>Store loyalty carries the gain: 15 in 100 same-store purchases reach the top 10; platform switchers 0.</figcaption></figure>
