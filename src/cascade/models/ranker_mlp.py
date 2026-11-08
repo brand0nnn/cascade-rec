@@ -22,6 +22,8 @@ class RankerFeatureSpec:
     history_length: int = 50
     item_text_dim: int = 384
     feature_groups: tuple[str, ...] = FEATURE_GROUPS
+    # Extra numeric matching columns appended after the historical four (default 0 keeps old checkpoints valid).
+    extra_numeric: int = 0
 
     def __post_init__(self) -> None:
         # Dropping retrieval (the score input) is an opt-in exploratory setting; it needs matching for inputs.
@@ -76,9 +78,12 @@ class MLPRanker(nn.Module):
         "recency_bucket": 8,
     }
 
-    def __init__(self, spec: RankerFeatureSpec, dropout: float = 0.1) -> None:
+    def __init__(self, spec: RankerFeatureSpec, dropout: float = 0.1, residual_score: bool = False) -> None:
         super().__init__()
         self.spec = spec
+        # residual_score: output = a * standardized retrieval score + MLP correction, with the correction's last
+        # layer zero-initialised and a = 1, so the untrained ranker reproduces the retrieval order.
+        self.residual_score = bool(residual_score)
         # Keep the intervention in the checkpoint, so every existing inference
         # caller respects it without a special policy-aware feature builder.
         self.register_buffer("_retrieval_score_enabled", torch.tensor(True))
@@ -100,9 +105,9 @@ class MLPRanker(nn.Module):
         self.text_projection = (
             nn.Linear(spec.item_text_dim, 32) if spec.item_text_dim and self.use_matching else None
         )
-        self.numeric_dim = 4
+        self.numeric_dim = 4 + int(spec.extra_numeric)
         self.numeric_indices = tuple(
-            i for i in range(4) if (i == 0 and "retrieval" in groups) or (i > 0 and self.use_matching)
+            i for i in range(self.numeric_dim) if (i == 0 and "retrieval" in groups) or (i > 0 and self.use_matching)
         )
         input_dim = (
             sum(self.embedding_dims[n] for n in self.active_categorical_names)
@@ -123,6 +128,10 @@ class MLPRanker(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(64, 1),
         )
+        if self.residual_score:
+            nn.init.zeros_(self.mlp[-1].weight)
+            nn.init.zeros_(self.mlp[-1].bias)
+            self.score_weight = nn.Parameter(torch.ones(()))
 
     def set_retrieval_score_enabled(self, enabled: bool) -> None:
         """Enable or uniformly mask the score input without changing model shape."""
@@ -174,4 +183,7 @@ class MLPRanker(nn.Module):
                     f"item_text must have shape [batch, {self.spec.item_text_dim}]"
                 )
             parts.append(self.text_projection(text))
-        return self.mlp(torch.cat(parts, dim=-1)).squeeze(-1)
+        out = self.mlp(torch.cat(parts, dim=-1)).squeeze(-1)
+        if self.residual_score:
+            out = out + self.score_weight * numeric[:, 0]
+        return out

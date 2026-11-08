@@ -1,0 +1,11 @@
+{
+  "opened": "2026-11-08T05:56:41.851255+00:00",
+  "git_hash": "7e10c0642874574bf43738a62263eb1f76047cf8-dirty",
+  "systems": [
+    "mlp_tt",
+    "din_tt",
+    "mlp_rrf",
+    "din_rrf",
+    "din_rrf_res"
+  ]
+}

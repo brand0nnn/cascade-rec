@@ -1,0 +1,99 @@
+{
+  "rows": [
+    {
+      "system": "mlp_tt",
+      "seed": 0,
+      "test_ndcg10_macro": 0.005258595321692806,
+      "val_epoch": 9
+    },
+    {
+      "system": "mlp_tt",
+      "seed": 1,
+      "test_ndcg10_macro": 0.005113386738451122,
+      "val_epoch": 4
+    },
+    {
+      "system": "mlp_tt",
+      "seed": 2,
+      "test_ndcg10_macro": 0.005209100364212531,
+      "val_epoch": 6
+    },
+    {
+      "system": "din_tt",
+      "seed": 0,
+      "test_ndcg10_macro": 0.0063882737051035735,
+      "val_epoch": 5
+    },
+    {
+      "system": "din_tt",
+      "seed": 1,
+      "test_ndcg10_macro": 0.006450297154146741,
+      "val_epoch": 4
+    },
+    {
+      "system": "din_tt",
+      "seed": 2,
+      "test_ndcg10_macro": 0.0062690530332532276,
+      "val_epoch": 3
+    },
+    {
+      "system": "mlp_rrf",
+      "seed": 0,
+      "test_ndcg10_macro": 0.007316283638945901,
+      "val_epoch": 5
+    },
+    {
+      "system": "mlp_rrf",
+      "seed": 1,
+      "test_ndcg10_macro": 0.007210175645340583,
+      "val_epoch": 6
+    },
+    {
+      "system": "mlp_rrf",
+      "seed": 2,
+      "test_ndcg10_macro": 0.007388054761873578,
+      "val_epoch": 6
+    },
+    {
+      "system": "din_rrf",
+      "seed": 0,
+      "test_ndcg10_macro": 0.008198663720322482,
+      "val_epoch": 5
+    },
+    {
+      "system": "din_rrf",
+      "seed": 1,
+      "test_ndcg10_macro": 0.008199305437268104,
+      "val_epoch": 4
+    },
+    {
+      "system": "din_rrf",
+      "seed": 2,
+      "test_ndcg10_macro": 0.008412871791534418,
+      "val_epoch": 4
+    },
+    {
+      "system": "din_rrf_res",
+      "seed": 0,
+      "test_ndcg10_macro": 0.008135334514415168,
+      "val_epoch": 4
+    },
+    {
+      "system": "din_rrf_res",
+      "seed": 1,
+      "test_ndcg10_macro": 0.008098146313568996,
+      "val_epoch": 4
+    },
+    {
+      "system": "din_rrf_res",
+      "seed": 2,
+      "test_ndcg10_macro": 0.007940436285976809,
+      "val_epoch": 4
+    }
+  ],
+  "recall_at_200": {
+    "tt": 0.03928175123575103,
+    "rrf": 0.06367396348229598
+  },
+  "n_lists": 297390
+}

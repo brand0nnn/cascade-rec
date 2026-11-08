@@ -1,0 +1,25 @@
+behaviour,store,age,purchases,hit_o,hit_b
+device-agnostic,new store,fresh (<6 months),21657,0.0014467993412445553,0.002878207200135445
+device-agnostic,new store,older (6 months+),60716,0.017952434284208445,0.01586621867931572
+device-agnostic,store bought from before,fresh (<6 months),1130,0.05870206489675516,0.19174041297935102
+device-agnostic,store bought from before,older (6 months+),3366,0.09387997623291741,0.15706080411962764
+no phone in history,new store,fresh (<6 months),2808,0.0005935422602089269,0.0005935422602089269
+no phone in history,new store,older (6 months+),5646,0.008560632896445862,0.006848506317156689
+no phone in history,store bought from before,fresh (<6 months),84,0.011904761904761904,0.007936507936507936
+no phone in history,store bought from before,older (6 months+),148,0.04054054054054054,0.05405405405405406
+other phone,new store,fresh (<6 months),8521,3.9119039236396354e-05,0.0003911903923639635
+other phone,new store,older (6 months+),17029,0.011959989821285258,0.01015914029009337
+other phone,store bought from before,fresh (<6 months),1121,0.002973535533749628,0.056199821587867974
+other phone,store bought from before,older (6 months+),1857,0.06426135343744391,0.08274995512475318
+same device,new store,fresh (<6 months),14874,0.004437273093989512,0.004526914974676169
+same device,new store,older (6 months+),30748,0.0216382637353107,0.024131650839078964
+same device,store bought from before,fresh (<6 months),3029,0.03048310773632662,0.21789369428854408
+same device,store bought from before,older (6 months+),4835,0.11334022750775595,0.19027921406411583
+switch platform,new store,fresh (<6 months),2815,0.0,0.0
+switch platform,new store,older (6 months+),5744,0.0020891364902506965,0.001682915506035283
+switch platform,store bought from before,fresh (<6 months),219,0.0,0.03805175038051751
+switch platform,store bought from before,older (6 months+),339,0.011799410029498525,0.018682399213372662
+upgrade,new store,fresh (<6 months),16560,0.0034822866344605473,0.000966183574879227
+upgrade,new store,older (6 months+),24749,0.011987016310423317,0.011286651312510942
+upgrade,store bought from before,fresh (<6 months),2587,0.020873598763045998,0.10282180131426362
+upgrade,store bought from before,older (6 months+),2322,0.07838070628768304,0.11642262417456214

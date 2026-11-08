@@ -1272,3 +1272,317 @@ Observed patterns (to be quantified before being stated as general):
 The micro-case concentration pattern holds on full Val: natural-only training raises accuracy while recommending more bestsellers, fewer new products and about 35% fewer distinct products than forced A. Brandon's 28 October analysis also found 71% top-1% share for retrieval. Natural-list DIN composition was not measured here (its checkpoints are not local). Popularity and accuracy co-move across these four systems; this is descriptive, not a causal popularity effect.
 
 Poster figures (`scripts/poster_figures_20261107.py` → `results/figures/poster_20261107/`): fig1 K-curve A vs C; fig2 winners/losers grid by item group; fig3 accuracy versus bestseller and new-product share; fig4 MLP/DIN under forced versus natural lists (natural-list values from `docs/report_2026-10-28.md`).
+
+#### 7 November: last-item hybrid retrieval, launch titles and brand loyalty (saved ranks, no training)
+
+`scripts/analysis_last_item_hybrid.py` → `results/targeted_study/last-item-hybrid-20261107/`. Inputs: Brandon's saved full-catalogue Val ranks for the frozen two-tower and the untrained last-item scorer (`results/analysis/20261028-last-item/aligned_val_ranks.npz`), seed-0 ranker ranks. User-macro, 1,000-resample paired user bootstrap. A hybrid pool of 200 = top-a two-tower + top-(200−a) last-item; a target counts only if it lies within either source's allotted top-a/top-(200−a). Deduplication would let a real pool reach deeper, so hybrid recall is a **lower bound**.
+
+| Pool (two-tower + last-item) | Recall@200 | vs two-tower 200 | Head | Tail | New |
+|---|---:|---|---:|---:|---:|
+| 200 + 0 (current) | 0.0687 | — | 0.1180 | 0.0153 | 0.0261 |
+| 180 + 20 | 0.0744 | +0.0056 [0.0052, 0.0062] | 0.1186 (ns) | 0.0257 | 0.0369 |
+| 150 + 50 | 0.0746 | +0.0059 [0.0051, 0.0066] | 0.1136 | 0.0318 | 0.0418 |
+| 100 + 100 | 0.0707 | +0.0020 [0.0011, 0.0030] | 0.1013 | 0.0388 | 0.0454 |
+
+- Twenty last-item slots raise overall Recall@200 by ≥8% with no detectable head loss, tail +68% and new +41%. 150+50 maximises overall (+8.5%) with new +60% and a small head cost (−0.0044).
+- Retrieval-only top 10 (no ranker), 7+3 slots: Recall@10 0.0128 vs 0.0104 (+22%, CI [0.0020, 0.0027]); head unchanged (CI includes zero), new 0.0060 vs 0.0009. Rankers are trained only on two-tower pools; end-to-end ranking of a hybrid pool requires new candidate lists and retraining (not done).
+- **Launch waves verified from titles:** 1,995 of 8,475 Val-new products (24%) mention iPhone 13 and 1,014 mention S22. In the week of 20 Sep 2021, 186 of 346 new products mention iPhone 13; in the week of 21 Feb 2022, 194 of 330 mention S22. iPhone 13 announced 14 Sep, on sale 24 Sep 2021 (Apple newsroom); Galaxy S22 Unpacked 9 Feb, on sale 25 Feb 2022 in most regions.
+- **Brand loyalty:** only 9.0% of Val purchases are from a store already in the user's history, yet they carry most top-10 hits (rankers' Recall@10 6.4–7.1% versus 0.9–1.1% for new-store purchases). On same-store purchases the untrained last-item order reaches Recall@10 0.0906, above every learned ranker (natural MLP 0.0707, forced 0.0646, DIN 0.0639) and far above two-tower order (0.0262). For same-store **new** products: last-item 0.0842, DIN 0.0459, forced MLP 0.0393, natural MLP 0.0289. Learned rankers dominate new-store purchases. Seed 0; descriptive, not causal.
+
+#### 7 November: extension arms E–H, three seeds (jobs 1090001–1090003)
+
+All 18 fits completed (exit 0, 1:17–1:23 each on H100). Report `results/targeted_study/ext-20261107-all-seeds/` (CPU job 1091436 on the cluster). Fresh A/C controls inside the same runs. K200 seed-mean nDCG@10 and paired user-bootstrap differences versus fresh A:
+
+| Arm | Recipe | nDCG@10 | vs A overall | vs A new-in-period | K500 |
+|---|---|---:|---|---|---:|
+| A | all lists, forced | 0.006902 | — | — | 0.002307 |
+| C | natural only | 0.008519 | +0.001617 [0.001386, 0.001839] | −0.000817 [−0.001071, −0.000548] | 0.007934 |
+| E | forced kept, forced-target score imputed | 0.004882 | −0.002020 [−0.002235, −0.001820] | +0.000172 [−0.000061, 0.000404] | 0.001847 |
+| F | natural only, max 100 epochs, patience 10 | identical to C | identical | identical | identical |
+| G | natural + 10% forced | 0.008167 | +0.001265 [0.001072, 0.001442] | −0.000237 [−0.000470, 0.000003] | 0.005500 |
+| H | natural + 30% forced | 0.007816 | +0.000914 [0.000751, 0.001074] | −0.000080 [−0.000253, 0.000100] | 0.003886 |
+
+- **F = C exactly:** in every seed F selected the same epoch (9/4/6) after 7–10 further epochs without improvement. C's new-item loss is not an under-training artefact.
+- **E fails:** imputing a typical score onto forced targets removes the score shortcut but leaves overall quality below A (and below B-like levels); new-item quality is unchanged within noise. Forced positives appear harmful beyond their score; which other inputs carry it is not identified.
+- **G/H form a dose-response:** adding forced lists back trades overall quality for new-item quality and reintroduces the K500 collapse in proportion (K500 0.0079 → 0.0055 → 0.0039 → 0.0023 for 0/10/30/100% forced). H shows no detectable new-item loss versus A (CI includes zero) with +13% overall, but its point estimate is negative, so under the pre-registered guard nothing qualifies (`qualified: []`). These arms were added after the pilot; exploratory.
+
+#### 7 November: list-merge router (saved seed-0 top-10 lists, no training)
+
+`scripts/analysis_list_merge.py` → `results/targeted_study/list-merge-20261107/`. Final top 10 = first k of natural MLP, then fill from forced-list DIN (deduplicated); no target information used. nDCG@10×100 (overall / new / tail / head): natural 0.862 / 0.211 / 0.089 / 1.593; natural8+din2 0.845 / 0.237 / 0.100 / 1.534 (overall −0.00017 [−0.00025, −0.00009]); natural7+din3 0.835 / 0.250 / 0.108 / 1.501. A history-length router (natural for ≤5 prior purchases, else DIN) loses more overall (−0.00081). Merging is a tunable dial (two DIN slots: −2% overall, +12% new and tail), not a free gain. Natural-list DIN checkpoints are not local; with them the dial may be better.
+
+#### 7 November: hybrid-pool and last-item-feature study submitted
+
+User-authorised follow-up to the findings doc's experiments 2 and 3. Validation only; exploratory (designed after the meso/micro results).
+- **Hybrid lists** (`scripts/build_hybrid_candidates.py`): per instance, top-180 two-tower + top-20 last-item (cosine of frozen item vectors to the most recent product), deduplicated, both after §4.6 filtering; every candidate keeps its two-tower score and lists are sorted by it. A 3,000-list local check reproduced the original top-180 exactly, gave 20 last-item additions per list and no duplicates. Output `data/processed/candidates/hybrid_tt180_li20_seed0/` (ranker_train forced as usual; val unforced plus target scores).
+- **Last-item feature:** optional fifth numeric column cos(candidate text, last product text), via `RankerFeatureSpec.extra_numeric` (default 0, so existing checkpoints and the four-column contract are unchanged; 287 tests pass). The ranker already had same-store-in-history and mean-history cosine inputs.
+- **Study** (`scripts/run_hybrid_study.py`): natural-only training, retrieval+matching features, the policy-study recipe; arms mlp_tt (control), mlp_hyb, mlp_tt_li, din_tt (control), din_hyb; normalisation fitted on the original full training lists. Local 2%-user, one-epoch check completed for the three original-pool arms.
+- Cluster: build job `1091477`, then seeds 0/1/2 as `1091478`–`1091480` (`afterok` dependency), checkout `/home/t/tjingyen/cp4285-ext-20261107/fast/cascade-rec`, outputs `results/hybrid_study/hybrid-20261107-s{0,1,2}/`. No result yet.
+
+#### 7 November: hybrid-pool and last-item-feature results (3 seeds)
+
+Jobs 1091477 (build, 13 min) and 1091478–1091480 (5 arms each, 16–19 min) completed with exit 0. Hybrid Val Recall@200 (micro) 0.0804 vs 0.0716 for the original pool; 3,068 Val targets are found only through the 20 last-item slots. Ranks copied to `results/hybrid_study/` (checkpoints remain on the cluster); analysis `results/targeted_study/hybrid-study-20261107/`. End-to-end K₁=200 nDCG@10, seed means; user-bootstrap 95% CIs on seed-mean per-event values.
+
+| Arm | nDCG@10 | Popular | Niche | New | Recall@10 | Hit@3 |
+|---|---:|---:|---:|---:|---:|---:|
+| MLP natural, original pool | 0.00852 | 0.01566 | 0.00081 | 0.00228 | 0.01584 | 0.00730 |
+| MLP natural + last-item feature | 0.00865 | 0.01582 | 0.00088 | 0.00245 | 0.01615 | 0.00731 |
+| MLP natural, hybrid pool | 0.00981 | 0.01598 | 0.00253 | 0.00470 | 0.01833 | 0.00825 |
+| DIN natural, original pool | 0.00994 | 0.01793 | 0.00095 | 0.00303 | 0.01837 | 0.00857 |
+| DIN natural, hybrid pool | **0.01072** | 0.01662 | 0.00295 | 0.00630 | 0.02010 | 0.00911 |
+
+- **Hybrid pool removes the MLP trade-off:** +0.00129 [0.00110, 0.00149] overall (+15%), new +0.00242 [0.00213, 0.00270] (+106%), niche +0.00172 (×3), popular +0.00032 [−0.00001, 0.00063] (no loss).
+- **DIN control reproduces Brandon's natural DIN** (0.00994 vs 0.00982). DIN on the hybrid pool: +0.00078 [0.00058, 0.00097] overall, new ×2.1, niche ×3.1, popular −0.00131 [−0.00162, −0.00099] (−7%).
+- **Last-item feature alone is small:** +0.00013 [0.00002, 0.00024] overall (+1.5%), new +0.00017 [0.00008, 0.00026]. Candidate supply matters far more than adding the signal as an input.
+- **Versus the original forced-list MLP (A, 3 seeds from the policy runs, same 232,904 events):** MLP hybrid +0.00293 [0.00267, 0.00320] (+42%); DIN hybrid +0.00383 [0.00357, 0.00410] (+55%); both positive in popular, niche and new groups (lowest CI bound: MLP hybrid niche +0.00086). Both pass the pre-registered numerical guard (3 seeds, overall CI > 0, no new-item loss). Caveats: designed after seeing earlier results (exploratory, not confirmatory); a pipeline change (retrieval pool and training population), not a ranker-only fix; A comes from separate runs evaluated on the same events; Val only, Test untouched.
+
+### Our rankers on Brandon's mixed candidate list (Jing Yen, 8 November 2026)
+
+- **Setup.**
+  - Rebuilt Brandon's mixed list (P3): recency and two-tower retrievers alternate, skipping duplicates, until 200 products. Script: `scripts/build_p3_candidates.py`.
+  - The rebuilt list contains the purchase for 8.8% of Val events, against Brandon's 8.0%. The recency retriever alone finds 6.4%, against his 5.5%.
+  - MLP and DIN were trained on natural lists only, seeds 0/1/2, with the hybrid-study recipe. Script: `scripts/run_hybrid_study.py`.
+  - The candidate score input is the two-tower score.
+- **Analysis.** Seed-averaged per-purchase nDCG@10, per-user macro average, 1,000 paired user resamples. Script: `scripts/analysis_p3_groups.py`; outputs in `results/targeted_study/p3-groups-20261108/`. Validation only.
+- **Levels (×10⁻³):**
+  - MLP on the mixed list: 9.49. Popular 14.9, niche 3.38, new 4.94.
+  - DIN on the mixed list: 10.64. Popular 16.0, niche 3.80, new 6.47.
+  - Brandon's ranker (retrieval score + MLP correction) on his list: 11.0.
+- **Mixed list vs two-tower list:**
+  - MLP: +0.00097 [0.00071, 0.00123] (+11%).
+  - DIN: +0.00069 [0.00043, 0.00095] (+7%).
+  - Niche roughly ×4, new ×2.1, popular −5% for MLP and −11% for DIN.
+- **DIN vs MLP on the mixed list:** +0.00115 [0.00094, 0.00135] (+12%). Positive in every group: popular +7%, niche +13%, new +31%.
+- **Adding last-item products to the mixed list:** no detectable change.
+  - MLP: +0.00002 [−0.00011, 0.00014].
+  - DIN: −0.00001 [−0.00014, 0.00013].
+- **DIN, mixed list vs two-tower + last-item list:** no detectable overall difference (−0.00008 [−0.00031, 0.00013]). The two-tower + last-item list wins on popular products; the mixed list wins on niche ones.
+
+### Brandon's combined retrieval score and score-plus-correction design on our rankers (Jing Yen, 8 November 2026)
+
+- **Setup.**
+  - Same mixed (P3) lists as above, but each candidate carries Brandon's combined score: reciprocal-rank fusion over both retrievers, 1/(60 + recency rank) + 1/(60 + two-tower rank), using full-catalogue ranks. Built with `scripts/build_p3_candidates.py --rrf`, written to `p3rrf_seed0`.
+  - Score standardisation is refitted on those training lists.
+  - The `_res` arms score as a·(standardised retrieval score) + correction. The correction's last layer starts at zero and a starts at 1, so the untrained model reproduces the retrieval order. Option `residual_score` in `MLPRanker`/`DINRanker`.
+  - Seeds 0/1/2, natural lists only, same recipe as above.
+  - Analysis: `scripts/analysis_p3_groups.py`; outputs in `results/targeted_study/p3-rrf-groups-20261108/`. Validation only.
+- **Levels (×10⁻³), overall / popular / niche / new:**
+
+  | Ranker | Overall | Popular | Niche | New |
+  |---|---:|---:|---:|---:|
+  | DIN with the combined score as input | 11.24 | 16.0 | 4.72 | 7.63 |
+  | DIN, score plus correction | 11.09 | 16.5 | 4.27 | 6.90 |
+  | MLP with the combined score as input | 9.63 | 14.4 | 3.78 | 5.88 |
+  | MLP, score plus correction | 9.34 | 14.3 | 3.77 | 5.31 |
+
+  Brandon's ranker (score plus MLP correction, his features, on his P3): 11.0, seed mean; per-purchase results unavailable, so no CI.
+- **Combined score vs two-tower score as input:**
+  - DIN: +0.00061 [0.00043, 0.00081] (+6%). Niche +24%, new +18%, popular unchanged.
+  - MLP: +0.00015 [−0.00004, 0.00034], not detectable.
+- **DIN vs MLP, both with the combined score:** +0.00161 [0.00142, 0.00182] (+17%). Positive in every group: popular +11%, niche +25%, new +30%.
+- **Score plus correction vs combined score as input:**
+  - DIN: −0.00015 [−0.00027, −0.00003].
+  - MLP: −0.00029 [−0.00040, −0.00020].
+  - The design does not help our rankers; it loses mostly on new and niche products.
+- **Best system vs our original MLP on two-tower lists:** DIN on the mixed list with the combined score scores +0.00272 [0.00242, 0.00304] (+32%). Niche ×5.8, new ×3.3, popular unchanged [−0.00007, 0.00087].
+
+### New meso cuts and micro cases for the final systems (Jing Yen, 8 November 2026)
+
+Scripts: `scripts/analysis_meso_segments_rrf.py` and `scripts/analysis_micro_cases_rrf.py`. Outputs: `results/targeted_study/meso-segments-rrf-20261108/` (`segments.csv`, `labels.parquet`, `micro_cases.csv`).
+
+Systems compared: original = MLP on two-tower lists; best = DIN on mixed lists with the combined score. Labels come from titles and categories only. Validation only.
+
+**Results (nDCG@10 ×10⁻³, original → best; difference with 95% interval):**
+
+| Group | Share | Original → best | Difference |
+|---|---:|---:|---:|
+| Cases | 33% | 1.74 → 6.85 (×3.9) | +5.10 [4.68, 5.52] |
+| Screen protectors | 18% | 28.1 → 26.1 | −1.98 [−2.91, −1.10] |
+| Phones | 1% | 31.4 → 23.7 | −7.78 [−11.67, −3.95] |
+| Same platform as history | 59% | 10.2 → 13.3 | |
+| Platform switch | 11% | 2.5 → 3.6 | DIN vs MLP −0.14 [−0.45, 0.18] |
+| Same iPhone model as history | 9% | 15.6 → 25.9 | +10.3 [8.95, 11.7] |
+| Newer iPhone model than history | 14% | 7.7 → 10.4 | DIN vs MLP +0.15 [−0.30, 0.60] |
+| iPhone 13 launch month (14 Sep to 14 Oct 2021) | 9% | 10.1 → 13.8 | |
+
+- **Screen protectors and phones** are the easiest categories, and the only ones where the best system loses.
+- **Platform switchers** are the hardest group. Coverage of the purchase in the 200 candidates is only 2–3%.
+- **Upgraders to a newer iPhone model:** DIN shows no gain over MLP.
+- **iPhone 13 launch month:** every system scores higher than in other weeks.
+
+**Caveat: titles are current metadata, not as of purchase.** Some purchases before the launch have titles naming later models. For example, a case bought on 29 Sep 2021 is titled "iPhone 14 Pro", and a Galaxy S23 product appears in a 2021 history. Sellers update titles to add new models, so the model and platform labels, and the earlier launch-title count, are approximate.
+
+### Micro event cohorts (Jing Yen, 8 November 2026)
+
+Script: `scripts/analysis_micro_cohorts_rrf.py`. Output: `results/targeted_study/micro-cohorts-rrf-20261108/cohorts.csv`.
+
+Cohorts are defined by purchase date plus a title pattern. Systems are seed-averaged: original (MLP on two-tower lists) and best (DIN on mixed lists with the combined score). Validation only.
+
+**iPhone 13 items over time (nDCG@10 ×10⁻³, original → best):**
+
+| Window | Purchases | nDCG@10 | Hit@10 |
+|---|---:|---:|---:|
+| Launch fortnight (14–30 Sep 2021) | 1,415 | 1.97 → 19.2 | 0.6% → 4.8% |
+| Oct–Dec 2021 | 9,699 | 2.65 → 10.7 | |
+| 2022 | 18,666 | 1.60 → 7.9 | |
+
+- In the launch fortnight, the share of purchases found among the candidates goes from 4.9% to 12.6%.
+- The best system's advantage shrinks as the launch ages.
+
+**Other launches and product lines (nDCG@10 ×10⁻³, original → best):**
+
+| Cohort | Purchases | nDCG@10 |
+|---|---:|---:|
+| Galaxy S22 launch | 3,110 | 4.2 → 9.7 |
+| Pixel 6 | 4,391 | 1.4 → 8.0 |
+| MagSafe accessories | 8,149 | 4.4 → 12.4 |
+| iPhone SE 2022 | 1,585 | 5.7 → 12.3 |
+
+**The exception: Apple Watch 41/45 mm bands at the Series 7 launch** (2,362 purchases). Here the best system is worse: 15.1 → 12.3, a difference of −2.79 [−5.09, −0.72].
+
+**Title-edit check:** 770 purchases made before the iPhone 13 announcement (14 Sep 2021) have "iPhone 13" in the product title. This confirms that product titles are edited after purchase.
+
+All cohort differences have 95% intervals excluding 0.
+
+### User-behaviour failure modes (Jing Yen, 8 November 2026)
+
+Script: `scripts/analysis_behaviour_failures.py`. Outputs: `results/targeted_study/behaviour-failures-20261108/`.
+
+Each Val purchase is labelled by comparing the phone models its title mentions (all of them; titles often list several) with those in the user's last 50 purchases. Labels are approximate because titles are current metadata.
+
+Failure types:
+- **Retrieval miss:** the purchase is not in the 200 candidates.
+- **Ranking miss:** the purchase is in the 200 but ranked below 10.
+- **Hit:** the purchase is in the top 10.
+
+Systems are seed-averaged: original = MLP on two-tower lists; best = DIN on mixed lists with the combined score.
+
+| Behaviour | Share | Retrieval miss (orig → best) | Hit@10 (orig → best) | nDCG@10 ×10⁻³ | Best − orig, 95% interval |
+|---|---:|---:|---:|---:|---:|
+| Same device as history | 23% | 88.2% → 83.5% | 2.6% → 4.5% | 13.9 → 23.1 | [8.33, 10.07] |
+| Upgrade (newer model, same family) | 20% | 94.5% → 94.1% | 1.3% → 1.8% | 6.4 → 8.7 | [1.77, 2.87] |
+| Device-agnostic (cables, chargers, mounts) | 37% | 93.4% → 92.2% | 1.7% → 2.0% | 8.9 → 9.3 | [−0.09, 0.74] |
+| Other model, same family | 5% | | | 9.1 → 11.4 | |
+| Older model than history | 3% | | | 6.2 → 6.6 | not detectable |
+| Other device, same platform | 4% | 98% | | ≈2.4 | |
+| Platform switch | 4% | 98.5% | | 0.8 → 1.2 | not detectable |
+
+**Dose-response with prior purchases for the same device (nDCG@10 ×10⁻³, original → best):**
+
+| Prior purchases | nDCG@10 |
+|---|---:|
+| 0 | 7.0 → 8.2 |
+| 1 | 12.5 → 22.0 |
+| 2 | 16.1 → 27.6 |
+| 3–4 | 18.7 → 29.2 |
+
+Owning two or more devices over time (68% of purchases) makes little difference.
+
+**Interpretation:**
+- Retrieval misses dominate every behaviour: 83–98% of purchases never reach the ranker.
+- The gains concentrate on repeat accessorising of a phone the user already owns.
+- Upgrades, switches and device-agnostic purchases are barely helped.
+
+### Single-query latency of the final systems (Jing Yen, 8 November 2026)
+
+Script: `scripts/latency_final_systems.py`. Output: `results/latency/20261108-final-systems/latency.json`.
+
+Setup:
+- CPU Apple M1 Max, single thread, 50 warm-up + 1,000 Val queries, K₁ = 200, exact FAISS.
+- Rankers are freshly initialised with the trained architectures. Timing does not depend on weight values.
+
+Median (p95) total latency:
+
+| Pipeline | Ranker | Median ms | p95 ms |
+|---|---|---:|---:|
+| Original | MLP | 4.0 | 4.4 |
+| Original | DIN | 9.6 | 10.3 |
+| Best | DIN | 32.9 | 38.8 |
+| Best | MLP | 25.4 | 32.0 |
+
+**Best + DIN, median per phase (ms):**
+
+| Phase | Median ms |
+|---|---:|
+| User tower | 0.8 |
+| Two-tower search and filter | 1.2 |
+| Recency query and catalogue scan | 4.4 |
+| Recency filter and top 200 | 1.4 |
+| Merge and combined score | 15.9 |
+| Ranker features | 1.3 |
+| DIN forward | 6.9 |
+
+The combined score dominates: this implementation sorts the full catalogue for both retrievers to get exact ranks. Ranks within each retriever's own top list, the usual reciprocal-rank-fusion practice, would remove most of it; this has not been measured. DIN costs about 5.5 ms more than the MLP for 200 candidates.
+
+### Final Test result (Jing Yen, opened once 8 November 2026)
+
+Setup:
+- Scripts: `scripts/build_p3_candidates.py --splits test --rrf`, `scripts/score_test_final.py`, `scripts/analysis_test_final.py`.
+- Outputs: `results/test_final_ranker/20261108/`.
+- Predictions were written in advance in `predictions.md`. Frozen Val-selected checkpoints, seeds 0/1/2, no tuning on Test.
+- Test has 297,390 purchases; 44% are new products.
+- Share of purchases in the 200 candidates: 3.9% for two-tower lists, 6.4% for mixed lists.
+
+**Test nDCG@10 ×10⁻³ (all / popular / niche / new):**
+
+| System | All | Popular | Niche | New |
+|---|---:|---:|---:|---:|
+| MLP, two-tower lists (original) | 5.19 | 11.6 | 1.31 | 1.33 |
+| DIN, two-tower lists | 6.37 | 14.2 | 1.13 | 2.16 |
+| MLP, mixed lists + combined score | 7.31 | 11.0 | 3.58 | 6.87 |
+| **DIN, mixed lists + combined score (best)** | **8.27** | 12.6 | 3.95 | 7.66 |
+| DIN, score plus correction | 8.06 | 12.9 | 3.58 | 6.95 |
+
+**Comparisons (95% intervals):**
+- **Best vs original:** +0.00308 [0.00281, 0.00336] (+59%). New ×5.8 (+0.00634), niche ×3.0, popular +9%.
+- **DIN vs MLP, both on mixed lists:** +0.00097 [0.00080, 0.00114] (+13%). Positive in every group.
+- **Combined score as input vs score plus correction:** +0.00021 [0.00011, 0.00032].
+
+**Predictions:**
+1. Held.
+2. Held.
+3. Partly held. The mixed-list gain on new products is larger on Test than on Val (×3.5 vs ×2.5 for DIN), but on niche products it is smaller (×3.5 vs ×5).
+4. Held.
+5. Held. 8.27 is within +5% of Brandon's ranker on his mixed lists (D1, Test 7.9; no interval possible). His best system, which adds monthly statistics and co-review features, reaches 10.4 on Test.
+
+### Upgrade hypothesis check (Jing Yen, 8 November 2026)
+
+Script: `scripts/analysis_upgrader_candidates.py`. Output: `results/targeted_study/behaviour-failures-20261108/upgrader_candidates.csv`.
+
+Method: for 2,000 random Val upgrade purchases, every candidate in each retriever's top 200 is classified by the phone models its title names.
+
+| Source of the 200 candidates | Old phone | Purchased (new) model |
+|---|---:|---:|
+| Recency retriever | 37.2% | 3.1% |
+| Two-tower retriever | 29.0% | 7.8% |
+| Released catalogue at that time | 8.0% | 2.0% |
+
+- The recency retriever's list is about 12 times richer in the old phone than in the new one, and 4.6 times richer in the old phone than the catalogue itself.
+- The two-tower list carries 2.5 times more new-model candidates than the recency list.
+- For comparison, same-device purchases get 28.6% target-model candidates from recency.
+- This confirms the hypothesis: history-anchored retrieval fills the list with accessories for the phone the user already owns.
+
+### Faster combined score: latency only (Jing Yen, 8 November 2026)
+
+Using each candidate's position in each retriever's own top-200 list, instead of exact full-catalogue ranks, cuts the merge step from 15.5 ms to 0.24 ms. The best system's median latency falls from 31.8 ms to 17.6 ms (p95 28.9 ms).
+
+Script: `scripts/latency_final_systems.py` (best_fast). The accuracy of this variant is not measured; the trained rankers saw exact ranks.
+
+### Product-side archetypes (Jing Yen, 8 November 2026)
+
+Script: `scripts/analysis_product_archetypes.py`. Output: `results/targeted_study/product-archetypes-20261108/`. Validation; original → best, seed-averaged.
+
+| Product group | Share | nDCG@10 ×10⁻³ | Hit@10 | Retrieval miss | Best − orig, 95% interval |
+|---|---:|---:|---:|---:|---:|
+| Same store as user's history | 9% | 38.3 → 79.9 | 6.6% → 14.7% | 83% → 67% | |
+| New store | 91% | 5.90 → 5.37 | | | [−0.72, −0.34] |
+| Product under 30 days old | 10% | 2.4 → 10.7 | | | |
+| Product over 2 years old | 28% | 21.8 → 20.8 | | | [−1.66, −0.34] |
+| Stores with 1–9 products | 28% | 1.2 → 3.0 | | 97% → 95% | |
+| Stores with 100–499 products | 18% | 24.0 → 23.9 | | | |
+| Under $10 or over $50 | | | | | not detectable |
+
+- **Same store as history:** the whole overall gain comes from these purchases. For new-store purchases the best system is slightly worse.
+- **Product age:** gains shrink steadily as product age at purchase grows; products over 2 years old do slightly worse.
+- **Stores with 1–9 products:** almost never retrieved.
+- **Stores with 100–499 products:** already well served; no change.
+- **Price:** no detectable change for products under $10 or over $50.

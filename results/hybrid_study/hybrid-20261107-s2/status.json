@@ -1,0 +1,64 @@
+{
+  "started": "2026-11-07T13:14:13.214989+00:00",
+  "completed": [
+    {
+      "arm": "mlp_tt",
+      "seed": 2,
+      "ndcg10": 0.0086668514737187
+    },
+    {
+      "arm": "mlp_hyb",
+      "seed": 2,
+      "ndcg10": 0.00992717650154018
+    },
+    {
+      "arm": "mlp_tt_li",
+      "seed": 2,
+      "ndcg10": 0.008710757965785808
+    },
+    {
+      "arm": "din_tt",
+      "seed": 2,
+      "ndcg10": 0.010110595046348972
+    },
+    {
+      "arm": "din_hyb",
+      "seed": 2,
+      "ndcg10": 0.010688199972547077
+    }
+  ],
+  "git_hash": "7e10c0642874574bf43738a62263eb1f76047cf8-dirty",
+  "arms": {
+    "mlp_tt": [
+      "mlp",
+      "data/processed/candidates/two_tower_text_seed0",
+      0
+    ],
+    "mlp_hyb": [
+      "mlp",
+      "data/processed/candidates/hybrid_tt180_li20_seed0",
+      0
+    ],
+    "mlp_tt_li": [
+      "mlp",
+      "data/processed/candidates/two_tower_text_seed0",
+      1
+    ],
+    "din_tt": [
+      "din",
+      "data/processed/candidates/two_tower_text_seed0",
+      0
+    ],
+    "din_hyb": [
+      "din",
+      "data/processed/candidates/hybrid_tt180_li20_seed0",
+      0
+    ]
+  },
+  "seeds": [
+    2
+  ],
+  "sample_users": null,
+  "test_predictions_loaded": false,
+  "status": "complete"
+}

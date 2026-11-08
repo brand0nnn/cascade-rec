@@ -48,8 +48,8 @@ class DINRanker(MLPRanker):
     query_feature_names = ('item_id', 'leaf_category')
 
     def __init__(self, spec: RankerFeatureSpec, dropout: float = 0.1,
-                 attention_hidden_dims: tuple[int, ...] = (64, 32)) -> None:
-        super().__init__(spec, dropout)
+                 attention_hidden_dims: tuple[int, ...] = (64, 32), residual_score: bool = False) -> None:
+        super().__init__(spec, dropout, residual_score=residual_score)
         if not self.use_matching:
             raise ValueError('DIN needs the matching feature group/history embeddings')
         self.attention = DINAttention(self.embedding_dims['item_id'] + self.embedding_dims['leaf_category'], attention_hidden_dims)

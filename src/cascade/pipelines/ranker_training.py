@@ -35,12 +35,14 @@ def create_ranker(spec: RankerFeatureSpec, cfg: Mapping) -> MLPRanker:
     if score_input not in ("enabled", "masked"):
         raise ValueError("retrieval_score_input must be enabled or masked")
     if kind == "mlp":
-        model = MLPRanker(spec, dropout=float(cfg.get("dropout", 0.1)))
+        model = MLPRanker(spec, dropout=float(cfg.get("dropout", 0.1)),
+                          residual_score=bool(cfg.get("residual_score", False)))
     elif kind == "din":
         if cfg.get("attention_use_softmax", False):
             raise ValueError("this DIN recipe uses unnormalised attention; softmax must be false")
         model = DINRanker(spec, dropout=float(cfg.get("dropout", 0.1)),
-                         attention_hidden_dims=tuple(cfg.get("attention_hidden_dims", (64, 32))))
+                         attention_hidden_dims=tuple(cfg.get("attention_hidden_dims", (64, 32))),
+                         residual_score=bool(cfg.get("residual_score", False)))
     else:
         raise ValueError(f"unknown ranker model: {kind}")
     model.set_retrieval_score_enabled(score_input == "enabled")

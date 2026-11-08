@@ -1,0 +1,80 @@
+[
+  {
+    "epoch": 1.0,
+    "train_bce": 0.09788361205116944,
+    "optimizer_steps": 970,
+    "train_lists": 38793,
+    "gauc_macro": 0.7463698517606723,
+    "gauc_micro": 0.7458548440378476,
+    "ndcg@10_macro": 0.12319640668690925,
+    "ndcg@10_micro": 0.12372982682809053,
+    "end_to_end_ndcg@10_macro": 0.00837455446298911,
+    "rescued_count": 2575,
+    "demoted_count": 1163
+  },
+  {
+    "epoch": 2.0,
+    "train_bce": 0.0889116102157894,
+    "optimizer_steps": 1940,
+    "train_lists": 38793,
+    "gauc_macro": 0.7616103634554092,
+    "gauc_micro": 0.7606199182090877,
+    "ndcg@10_macro": 0.14099363249910835,
+    "ndcg@10_micro": 0.14006565096917742,
+    "end_to_end_ndcg@10_macro": 0.009558223991340093,
+    "rescued_count": 3069,
+    "demoted_count": 1355
+  },
+  {
+    "epoch": 3.0,
+    "train_bce": 0.08640966488879717,
+    "optimizer_steps": 2910,
+    "train_lists": 38793,
+    "gauc_macro": 0.7716812881794742,
+    "gauc_micro": 0.7715763618958517,
+    "ndcg@10_macro": 0.147781310944795,
+    "ndcg@10_micro": 0.1478220216942746,
+    "end_to_end_ndcg@10_macro": 0.010110595046348972,
+    "rescued_count": 3313,
+    "demoted_count": 1386
+  },
+  {
+    "epoch": 4.0,
+    "train_bce": 0.08446680964997641,
+    "optimizer_steps": 3880,
+    "train_lists": 38793,
+    "gauc_macro": 0.7694069203150149,
+    "gauc_micro": 0.7690607849709199,
+    "ndcg@10_macro": 0.13789013924626708,
+    "ndcg@10_micro": 0.13779557460901548,
+    "end_to_end_ndcg@10_macro": 0.009438439052775225,
+    "rescued_count": 3160,
+    "demoted_count": 1364
+  },
+  {
+    "epoch": 5.0,
+    "train_bce": 0.08272575224405884,
+    "optimizer_steps": 4850,
+    "train_lists": 38793,
+    "gauc_macro": 0.7672406659832297,
+    "gauc_micro": 0.7672764313409658,
+    "ndcg@10_macro": 0.14495658196140407,
+    "ndcg@10_micro": 0.14470858638176828,
+    "end_to_end_ndcg@10_macro": 0.009872506645909366,
+    "rescued_count": 3272,
+    "demoted_count": 1422
+  },
+  {
+    "epoch": 6.0,
+    "train_bce": 0.08084367708151859,
+    "optimizer_steps": 5820,
+    "train_lists": 38793,
+    "gauc_macro": 0.7663048437845748,
+    "gauc_micro": 0.7663622515167006,
+    "ndcg@10_macro": 0.14043275540811476,
+    "ndcg@10_micro": 0.14042580582678227,
+    "end_to_end_ndcg@10_macro": 0.009529610293968361,
+    "rescued_count": 3185,
+    "demoted_count": 1440
+  }
+]

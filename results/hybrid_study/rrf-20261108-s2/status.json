@@ -1,0 +1,54 @@
+{
+  "started": "2026-11-08T04:15:41.840546+00:00",
+  "completed": [
+    {
+      "arm": "mlp_rrf",
+      "seed": 2,
+      "ndcg10": 0.009701560879685866
+    },
+    {
+      "arm": "din_rrf",
+      "seed": 2,
+      "ndcg10": 0.011290413951489098
+    },
+    {
+      "arm": "mlp_rrf_res",
+      "seed": 2,
+      "ndcg10": 0.009433837975333058
+    },
+    {
+      "arm": "din_rrf_res",
+      "seed": 2,
+      "ndcg10": 0.01088436157078183
+    }
+  ],
+  "git_hash": "7e10c0642874574bf43738a62263eb1f76047cf8-dirty",
+  "arms": {
+    "mlp_rrf": [
+      "mlp",
+      "data/processed/candidates/p3rrf_seed0",
+      0
+    ],
+    "din_rrf": [
+      "din",
+      "data/processed/candidates/p3rrf_seed0",
+      0
+    ],
+    "mlp_rrf_res": [
+      "mlp",
+      "data/processed/candidates/p3rrf_seed0",
+      0
+    ],
+    "din_rrf_res": [
+      "din",
+      "data/processed/candidates/p3rrf_seed0",
+      0
+    ]
+  },
+  "seeds": [
+    2
+  ],
+  "sample_users": null,
+  "test_predictions_loaded": false,
+  "status": "complete"
+}
