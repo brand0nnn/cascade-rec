@@ -1586,3 +1586,40 @@ Script: `scripts/analysis_product_archetypes.py`. Output: `results/targeted_stud
 - **Stores with 1–9 products:** almost never retrieved.
 - **Stores with 100–499 products:** already well served; no change.
 - **Price:** no detectable change for products under $10 or over $50.
+
+### Dissecting the retriever list and the ranker's top 10 (Jing Yen, 8 November 2026)
+
+Scripts: `scripts/export_top10_lists.py` (cluster job 1095733), `scripts/analysis_list_dissection.py`. Output: `results/targeted_study/list-dissection-20261108/dissection.csv`.
+
+Method:
+- 20,000 random Val purchases (RNG 0); seed-0 original (MLP, two-tower lists) and best (DIN, mixed lists + combined score).
+- Every candidate is classified by the phone models its title names, relative to the purchase:
+  - **bought phone:** a model of the purchased product;
+  - **owned phone:** a model in the user's history only;
+  - **other phone;**
+  - **no phone.**
+- Labels are approximate (titles are current metadata).
+
+**Results (list of 200 → top 10, %; best system unless stated):**
+
+| Purchase type | Bought-phone share, list → top 10 | Top 10 holds ≥1 bought-phone product | Same product type in top 10 | Exact purchase in top 10 |
+|---|---:|---:|---:|---:|
+| Same phone as before | 26 → 33 (original 19 → 24) | 81% (original 72%) | 35% | 4.6% |
+| Upgrade | 6 → 9 | 48% | 27% | 2.0% |
+| Device-agnostic | — | — | 22% | 1.8% |
+| Platform switch | | 16% | | 0.4% |
+
+**Notes:**
+- **Same phone as before:** the right phone is usually there, but the exact product rarely is.
+- **Upgrade:** owned-phone products fill 30% of the top 10 and 36% of the list. The two-tower list carries more new-phone candidates than the mixed list: 8.7% vs 6.2%.
+- **Device-agnostic:** 29% of the top 10 are accessories for the user's own phone, and 40% name no phone.
+- **Platform switch:** the top 10 is for the old platform or other phones.
+- **The ranker sharpens toward the bought phone** for same-phone and upgrade purchases. It cannot add products the list lacks.
+
+### Faster combined score: accuracy (Jing Yen, 8 November 2026)
+
+- **Method:** DIN on mixed lists with the combined score computed from positions within each retriever's own top-200 list (absent = 201), instead of exact full-catalogue ranks (`din_rrfl`). Trained and selected on Validation like `din_rrf`, seeds 0/1/2, then scored once on Test. Prediction 6 was written before training.
+- **Validation:** 11.11 vs 11.24 (×10⁻³).
+- **Test:** 8.23 vs 8.27, difference −0.00004 [−0.00012, +0.00005]. No detectable loss; prediction 6 held.
+- **Latency:** median 17.6 ms vs 31.8 ms.
+- **Where:** cluster jobs 1096571–5; outputs in `results/test_final_ranker/20261108/din_rrfl_*`.
