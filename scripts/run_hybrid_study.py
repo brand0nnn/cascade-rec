@@ -7,6 +7,11 @@ max 30 epochs, patience 3 on natural-hit Val nDCG@10, instance-keyed sampling, s
   mlp_tt_li  MLP on the original pool + cosine(candidate text, last product text) feature
   din_tt     DIN on the original pool (control)
   din_hyb    DIN on the hybrid pool
+  mlp_p3 / din_p3      MLP / DIN on the rebuilt P3 pool (recency + two-tower round-robin, Brandon's candidate set)
+  mlp_p3li / din_p3li  same with the last 20 P3 slots replaced by last-item products
+  mlp_rrf / din_rrf    P3 lists with Brandon's RRF retrieval score (both retrievers) as the score input
+  mlp_rrf_res / din_rrf_res  same, scored as retrieval score + zero-initialised correction (Brandon's ranker design)
+For RRF pools the score standardisation is refitted on that pool's natural training lists (the RRF scale differs).
 Feature normalisation and vocabularies are fitted on the ORIGINAL full ranker-training lists, unchanged.
 End-to-end Val metric = rank of the target in that arm's own natural 200-candidate list (misses score 0).
 Validation only; no Test.
@@ -36,16 +41,23 @@ from cascade.utils.seed import set_seed
 
 ORIG = "data/processed/candidates/two_tower_text_seed0"
 HYB = "data/processed/candidates/hybrid_tt180_li20_seed0"
+P3 = "data/processed/candidates/p3_seed0"
+P3LI = "data/processed/candidates/p3li_seed0"
+import os
+P3RRF = "data/processed/candidates/p3rrf_seed0" + os.environ.get("P3RRF_SUFFIX", "")
 REF_CFG = "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/config.yaml"
 ARMS = {"mlp_tt": ("mlp", ORIG, 0), "mlp_hyb": ("mlp", HYB, 0), "mlp_tt_li": ("mlp", ORIG, 1),
-        "din_tt": ("din", ORIG, 0), "din_hyb": ("din", HYB, 0)}
+        "din_tt": ("din", ORIG, 0), "din_hyb": ("din", HYB, 0),
+        "mlp_p3": ("mlp", P3, 0), "din_p3": ("din", P3, 0), "mlp_p3li": ("mlp", P3LI, 0), "din_p3li": ("din", P3LI, 0),
+        "mlp_rrf": ("mlp", P3RRF, 0), "din_rrf": ("din", P3RRF, 0),
+        "mlp_rrf_res": ("mlp", P3RRF, 0), "din_rrf_res": ("din", P3RRF, 0)}
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-id", required=True)
     ap.add_argument("--seeds", nargs="+", type=int, required=True)
-    ap.add_argument("--arms", nargs="+", choices=list(ARMS), default=list(ARMS))
+    ap.add_argument("--arms", nargs="+", choices=list(ARMS), required=True)
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--sample-users", type=float, help="development: fraction of users (fixed RNG 0)")
     ap.add_argument("--max-epochs", type=int, default=30)
@@ -82,15 +94,21 @@ def main() -> None:
               "arms": {k: ARMS[k] for k in a.arms}, "seeds": a.seeds, "sample_users": a.sample_users,
               "test_predictions_loaded": False}
     (root / "status.json").write_text(json.dumps(status, indent=2))
+    base_stats = (builder.score_mean, builder.score_std)
     for seed in a.seeds:
         for arm in a.arms:
             kind, pool, extra = ARMS[arm]
             train, val_sel, val_nat = pools[pool]
             builder.last_item_cosine = bool(extra)
+            if pool == P3RRF:
+                sc = np.asarray(train["score"][:, :-1], np.float32)[train["cand"][:, :-1] > 0]
+                builder.score_mean, builder.score_std = float(sc.mean()), float(sc.std())
+            else:
+                builder.score_mean, builder.score_std = base_stats
             spec = RankerFeatureSpec(cardinalities=builder.item_cardinalities, history_length=50, item_text_dim=384,
                                      feature_groups=("retrieval", "matching"), extra_numeric=extra)
             cfg = {"model": kind, "dropout": 0.1, "attention_hidden_dims": (64, 32), "attention_use_softmax": False,
-                   "retrieval_score_input": "enabled"}
+                   "retrieval_score_input": "enabled", "residual_score": arm.endswith("_res")}
             set_seed(seed)
             model = create_ranker(spec, cfg)
             out = root / f"{arm}_seed{seed}"

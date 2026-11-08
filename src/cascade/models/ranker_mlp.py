@@ -78,9 +78,12 @@ class MLPRanker(nn.Module):
         "recency_bucket": 8,
     }
 
-    def __init__(self, spec: RankerFeatureSpec, dropout: float = 0.1) -> None:
+    def __init__(self, spec: RankerFeatureSpec, dropout: float = 0.1, residual_score: bool = False) -> None:
         super().__init__()
         self.spec = spec
+        # residual_score: output = a * standardized retrieval score + MLP correction, with the correction's last
+        # layer zero-initialised and a = 1, so the untrained ranker reproduces the retrieval order.
+        self.residual_score = bool(residual_score)
         # Keep the intervention in the checkpoint, so every existing inference
         # caller respects it without a special policy-aware feature builder.
         self.register_buffer("_retrieval_score_enabled", torch.tensor(True))
@@ -125,6 +128,10 @@ class MLPRanker(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(64, 1),
         )
+        if self.residual_score:
+            nn.init.zeros_(self.mlp[-1].weight)
+            nn.init.zeros_(self.mlp[-1].bias)
+            self.score_weight = nn.Parameter(torch.ones(()))
 
     def set_retrieval_score_enabled(self, enabled: bool) -> None:
         """Enable or uniformly mask the score input without changing model shape."""
@@ -176,4 +183,7 @@ class MLPRanker(nn.Module):
                     f"item_text must have shape [batch, {self.spec.item_text_dim}]"
                 )
             parts.append(self.text_projection(text))
-        return self.mlp(torch.cat(parts, dim=-1)).squeeze(-1)
+        out = self.mlp(torch.cat(parts, dim=-1)).squeeze(-1)
+        if self.residual_score:
+            out = out + self.score_weight * numeric[:, 0]
+        return out

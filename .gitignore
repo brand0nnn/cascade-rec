@@ -82,3 +82,4 @@ __pycache__/
 /results/hybrid_study/localdev-*/
 # Pinned environment for regenerating the frozen MiniLM encoder (local only)
 /.venv-encoder/
+/results/test_final_ranker/**/*.npz
