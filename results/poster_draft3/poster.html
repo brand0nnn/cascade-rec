@@ -290,10 +290,10 @@ i.o { background: var(--grey); } i.b { background: var(--orange); }
 
 <section class="wide">
   <div class="tag"><span class="num">5</span>Output · evaluation</div>
-  <h2>Most failures happen before ranking; the fixed system is 59–61% better for 14–28 ms more per user</h2>
+  <h2>Most failures happen before ranking; the fixed system is 59–61% better for about 14 ms more per user</h2>
   <div class="figrow">
     <figure><img src="fig/fig15_funnel_flow.png" alt="Sankey of 100 Test purchases: 96 never reach the original ranker, 94 with the best system; top-10 hits 0.8 vs 1.5"><figcaption>Retrieval misses vs ranking misses on Test.</figcaption></figure>
-    <figure><img src="fig/fig23_accuracy_vs_speed.png" alt="Test nDCG@10 against median latency for five systems, all under 50 ms"><figcaption>Accuracy vs latency (laptop CPU, one thread, K=200). Hollow point: faster combined score, accuracy not yet measured.</figcaption></figure>
+    <figure><img src="fig/fig23_accuracy_vs_speed.png" alt="Test nDCG@10 against median latency for five systems, all under 50 ms"><figcaption>Accuracy vs latency (laptop CPU, one thread, K=200). Faster combined score (positions within each retriever's own list): 17.6 ms, Test 8.23 vs 8.27, no detectable loss [−0.00012, +0.00005].</figcaption></figure>
   </div>
   <ul>
     <li><b>Best combined system</b> (mixed lists + consistently timed monthly statistics + "bought together" inputs): Test nDCG@10 0.0064 → 0.0104 (+61%); 8 of 9 pre-registered predictions held.</li>

@@ -1615,3 +1615,11 @@ Method:
 - **Device-agnostic:** 29% of the top 10 are accessories for the user's own phone, and 40% name no phone.
 - **Platform switch:** the top 10 is for the old platform or other phones.
 - **The ranker sharpens toward the bought phone** for same-phone and upgrade purchases. It cannot add products the list lacks.
+
+### Faster combined score: accuracy (Jing Yen, 8 November 2026)
+
+- **Method:** DIN on mixed lists with the combined score computed from positions within each retriever's own top-200 list (absent = 201), instead of exact full-catalogue ranks (`din_rrfl`). Trained and selected on Validation like `din_rrf`, seeds 0/1/2, then scored once on Test. Prediction 6 was written before training.
+- **Validation:** 11.11 vs 11.24 (×10⁻³).
+- **Test:** 8.23 vs 8.27, difference −0.00004 [−0.00012, +0.00005]. No detectable loss; prediction 6 held.
+- **Latency:** median 17.6 ms vs 31.8 ms.
+- **Where:** cluster jobs 1096571–5; outputs in `results/test_final_ranker/20261108/din_rrfl_*`.

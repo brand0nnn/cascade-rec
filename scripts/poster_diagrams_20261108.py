@@ -283,7 +283,8 @@ def fig23():
            ("DIN, two-tower list", lat["original_din"]["total"]["median"], t["din_tt"], ORIG, True),
            ("MLP, mixed list", lat["best_mlp"]["total"]["median"], t["mlp_rrf"], BEST, True),
            ("Best\nDIN, mixed list", lat["best_din"]["total"]["median"], t["din_rrf"], BEST, True),
-           ("Best, faster combined score\n(accuracy not measured)", lat["best_fast_din"]["total"]["median"], t["din_rrf"], BEST, False)]
+           ("Best, faster combined score\n(Test 8.23, no detectable loss)", lat["best_fast_din"]["total"]["median"],
+            json.loads((ROOT / "results/test_final_ranker/20261108/summary_rrfl.json").read_text())["mean"] * 1000, BEST, True)]
     fig, ax = plt.subplots(figsize=(11, 5.6))
     ax.axvspan(0, 50, color=light(BEST, 0.88), lw=0); ax.text(49, 4.75, "real-time budget (<50 ms)", ha="right", fontsize=10, color=INK2)
     offs = [(6, -18), (6, 6), (6, -18), (6, 6), (-6, 14)]
@@ -293,8 +294,8 @@ def fig23():
     ax.set_xlim(0, 55); ax.set_ylim(4.5, 9)
     ax.set_xlabel("Median latency per user, single CPU thread (ms)"); ax.set_ylabel("Test nDCG@10 ×1000")
     ax.grid(color=GRID); ax.set_axisbelow(True)
-    fig.suptitle("+59% accuracy for ~14–28 ms more per user", x=0.02, ha="left", fontsize=15, color=INK)
-    fig.text(0.02, -0.02, "Test accuracy (mean of 3 seeds); latency on a laptop CPU, 1,000 Validation queries, K₁ = 200, exact search. The hollow point reuses the best system's accuracy, which was not measured for that variant.",
+    fig.suptitle("+59% accuracy for ~14 ms more per user (faster combined score)", x=0.02, ha="left", fontsize=15, color=INK)
+    fig.text(0.02, -0.02, "Test accuracy (mean of 3 seeds); latency on a laptop CPU, 1,000 Validation queries, K₁ = 200, exact search.\nFaster combined score: positions within each retriever's own top 200 instead of full-catalogue ranks; Test difference −0.00004 [−0.00012, +0.00005].",
              fontsize=9, color=INK2)
     save(fig, "fig23_accuracy_vs_speed")
 
