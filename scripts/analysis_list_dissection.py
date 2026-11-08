@@ -16,6 +16,7 @@ Labels approximate (titles are current metadata). Validation only.
 """
 from __future__ import annotations
 import sys
+from collections import Counter
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -50,7 +51,7 @@ def main(out: Path) -> None:
                 m = models[x]
                 return "no phone" if not m else "bought phone" if m & tm else "owned phone" if m & hm else "other phone"
             cand = z["cand"][i]; cand = cand[cand > 0]; top = z["top10"][i]
-            lc = pd.Series([cls(x) for x in cand]).value_counts(normalize=True)
+            cnt = Counter(cls(x) for x in cand); lc = {k: v / max(len(cand), 1) for k, v in cnt.items()}
             tc = [cls(x) for x in top]
             rec.append(dict(system=sysname, behaviour=beh[i], target_specific=bool(tm),
                             **{f"list_{c}": lc.get(c, 0.0) for c in CLS},
