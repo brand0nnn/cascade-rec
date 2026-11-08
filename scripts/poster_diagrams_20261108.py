@@ -19,6 +19,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 D = ROOT / "results/targeted_study/poster-data-20261108"
 OUT = ROOT / "results/figures/poster_20261108"
+DEEP = "#0b6b48"
 ORIG, BEST, REC, TT, WARN = "#2a78d6", "#1baf7a", "#eb6834", "#2a78d6", "#eda100"
 INK, INK2, MUTED, GRID, SURF, CARD = "#0b0b0b", "#52514e", "#b4b2a9", "#e4e3df", "#fcfcfb", "#f3f2ef"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 12.5, "axes.edgecolor": INK2, "axes.labelcolor": INK,
@@ -106,7 +107,7 @@ def fig17():
             if len(q):
                 M_[i, j], O[i, j], N[i, j] = q.hit_b.iloc[0] * 100, q.hit_o.iloc[0] * 100, q.purchases.iloc[0]
     fig, ax = plt.subplots(figsize=(11.5, 5.8))
-    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("g", [SURF, light(BEST, 0.5), BEST, "#0b6b48"])
+    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("g", [SURF, light(BEST, 0.5), BEST, DEEP])
     im = ax.imshow(M_, cmap=cmap, vmin=0, vmax=22, aspect="auto")
     for i in range(len(rows)):
         for j in range(len(cols)):

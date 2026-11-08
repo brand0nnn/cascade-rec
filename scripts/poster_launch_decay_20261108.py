@@ -23,6 +23,7 @@ from cascade.eval.saved_results import average
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results/figures/poster_20261108"
 ORIG, BEST = "#2a78d6", "#1baf7a"
+WARN_BG = "#fbeccc"
 INK, INK2, MUTED, GRID, SURF = "#0b0b0b", "#52514e", "#b4b2a9", "#e4e3df", "#fcfcfb"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 13, "axes.edgecolor": INK2, "axes.labelcolor": INK,
                      "xtick.color": INK2, "ytick.color": INK2, "axes.spines.top": False, "axes.spines.right": False,
@@ -46,8 +47,7 @@ def main():
     title = data.items.set_index("item").title.fillna("").reindex(inst["item"].to_numpy()).fillna("").str.lower()
     m = title.str.contains(r"iphone\s*13", regex=True).to_numpy()
     when = pd.to_datetime(inst.ts.to_numpy(), unit="ms")
-    m &= when >= "2021-09-14"
-    bins = pd.date_range("2021-09-14", "2022-07-16", freq="14D")
+    bins = pd.date_range("2021-08-17", "2022-07-16", freq="14D")  # aligned so a bin starts on 14 Sep 2021 (announcement)
     rows = []
     for lo, hi in zip(bins[:-1], bins[1:]):
         k = m & (when >= lo) & (when < hi)
@@ -68,15 +68,21 @@ def main():
     a1.text(last.mid + pd.Timedelta(days=4), last.orig, "Original: MLP,\ntwo-tower list", color=INK, fontsize=11, va="center")
     a2.text(last.mid + pd.Timedelta(days=4), last.cov_best, "Mixed list", color=INK, fontsize=11, va="center")
     a2.text(last.mid + pd.Timedelta(days=4), last.cov_orig, "Two-tower list", color=INK, fontsize=11, va="center")
-    f = df.iloc[0]
-    a1.annotate(f"Launch fortnight: ×{f.best / f.orig:.0f}", (f.mid, f.best), (f.mid + pd.Timedelta(days=30), f.best * 0.95),
+    ann = pd.Timestamp("2021-09-14")
+    for ax in (a1, a2):
+        ax.axvspan(pd.Timestamp("2021-08-11"), ann, color=WARN_BG, lw=0, zorder=0)
+        ax.axvline(ann, color=INK2, lw=1.2, ls="--", zorder=1)
+    a1.text(ann - pd.Timedelta(days=3), a1.get_ylim()[1] * 0.97, "before the\nannouncement:\ntitles edited later", ha="right", va="top", fontsize=9.5, color=INK2)
+    a1.text(ann + pd.Timedelta(days=3), a1.get_ylim()[1] * 0.55, "iPhone 13\nannounced\n14 Sep 2021", va="top", fontsize=9.5, color=INK2)
+    f = df[df.start == ann].iloc[0]
+    a1.annotate(f"Launch fortnight: ×{f.best / f.orig:.0f}", (f.mid, f.best), (f.mid + pd.Timedelta(days=40), f.best * 0.95),
                 fontsize=12, color=INK, arrowprops=dict(arrowstyle="->", color=INK2))
-    a2.text(df.mid.iloc[2], df.cov_best.max() * 0.93, "the extra purchases come from the recency retriever:\n"
+    a2.text(df.mid.iloc[5], df.cov_best.max() * 0.93, "the extra purchases come from the recency retriever:\n"
             "similar text to the user's own recent purchases", fontsize=10.5, color=INK2)
     a2.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[10, 12, 2, 4, 6]))
     a2.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
-    fig.suptitle("iPhone 13 accessories: the best system's edge is largest at launch and fades", x=0.07, ha="left", fontsize=14, color=INK)
-    fig.text(0.07, -0.01, f"Validation, purchases of products whose title mentions iPhone 13, 2-week bins (≥200 purchases each; n = {df.n.sum():,}). "
+    fig.suptitle("iPhone 13 accessories: the best system's edge jumps at the launch and fades", x=0.07, ha="left", fontsize=14, color=INK)
+    fig.text(0.07, -0.01, f"Validation (from 11 Aug 2021), purchases of products whose title mentions iPhone 13, 2-week bins (≥200 purchases each; n = {df.n.sum():,}). "
              "Mean of 3 seeds.", fontsize=10, color=INK2)
     fig.tight_layout()
     fig.subplots_adjust(right=0.84)
