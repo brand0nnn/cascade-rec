@@ -1,7 +1,7 @@
 """Re-draw the section-7 poster figures in the poster's palette (Amazon-style orange, greys, navy text).
 
 Outputs <name>_orange.png/.svg next to the originals in results/figures/poster_20261108/:
-fig15 funnel flow, fig19 waffles, fig17 heatmap, fig21 upgrade list, fig18 staircase, fig22 future titles, fig12 iPhone 13 launch.
+fig15 funnel flow, fig16 two retrievers, fig23 accuracy vs speed, fig19 waffles, fig17 heatmap, fig21 upgrade list, fig18 staircase, fig22 future titles, fig12 iPhone 13 launch.
 Best system = orange, original = grey, 'old phone' tags = dark grey, highlight boxes = peach, text = navy.
 
 Usage: .venv/bin/python scripts/poster_recolor_orange_20261108.py
@@ -27,6 +27,9 @@ def save(fig, name):
 
 D.save = save
 for f in (D.fig19, D.fig17, D.fig21, D.fig18, D.fig22, D.fig15):
+    f()
+D.REC, D.TT = ORANGE, NAVY
+for f in (D.fig16, D.fig23):
     f()
 tmp = L.OUT / "_orange_tmp"; tmp.mkdir(exist_ok=True); L.OUT = tmp
 L.WARN_BG = "#fde3cc"
