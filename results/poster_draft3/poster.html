@@ -3,15 +3,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-/* Layout: a print poster read top-down — header, answer banner, then RQ panels in a 2-column grid, full-width output and behaviour panels, takeaways. Single light look on purpose (a printed poster). */
+/* Layout: print poster read top-down — header, answer banner, RQ x shortcut map, RQ panels (2 columns), shortcut cards (2x2), output, who-it-works-for, takeaways. Single light look on purpose (a printed poster). */
 :root {
   --paper: #fcfbf9;
-  --ink: #232f3e;        /* navy text */
-  --ink-2: #555a61;      /* secondary text, warm-leaning grey */
+  --ink: #232f3e;
+  --ink-2: #555a61;
   --rule: #e6e1da;
-  --orange: #e8710a;     /* best system, emphasis */
-  --peach: #fdeedd;      /* highlight bands */
-  --grey: #8c8c8c;       /* original system */
+  --orange: #e8710a;
+  --peach: #fdeedd;
+  --peach-2: #f6c9a3;
+  --grey: #9a9a9a;
+  --grey-2: #d7d4cf;
   --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -22,7 +24,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); fo
 header { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: end; border-bottom: 3px solid var(--ink); padding-bottom: 18px; }
 h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.1rem, 5vw, 4.2rem); line-height: 1.02; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
 h1 em { font-style: normal; color: var(--orange); }
-.sub { font-family: var(--display); font-weight: 600; font-size: clamp(1.05rem, 1.8vw, 1.45rem); margin: 10px 0 0; color: var(--ink); text-wrap: balance; }
+.sub { font-family: var(--display); font-weight: 600; font-size: clamp(1.05rem, 1.8vw, 1.45rem); margin: 10px 0 0; text-wrap: balance; }
 .people { font-size: 0.98rem; color: var(--ink-2); display: grid; gap: 4px; }
 .people b { color: var(--ink); }
 .banner { background: var(--peach); border-left: 6px solid var(--orange); padding: 14px 18px; font-size: 1.12rem; font-weight: 600; }
@@ -30,8 +32,10 @@ h1 em { font-style: normal; color: var(--orange); }
 .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 section { min-width: 0; display: grid; gap: 10px; align-content: start; }
 .tag { display: flex; gap: 10px; align-items: center; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
-.num { background: var(--orange); color: #fff; font-family: var(--display); font-weight: 800; font-size: 1.15rem; width: 32px; height: 32px; display: grid; place-items: center; letter-spacing: 0; }
+.num { background: var(--orange); color: #fff; font-family: var(--display); font-weight: 800; font-size: 1.15rem; min-width: 32px; height: 32px; padding: 0 6px; display: grid; place-items: center; letter-spacing: 0; }
+.num.s { background: var(--ink); }
 h2 { font-family: var(--display); font-weight: 700; font-size: 1.45rem; line-height: 1.15; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--display); font-weight: 700; font-size: 1.12rem; margin: 0; }
 .q { color: var(--ink-2); font-style: italic; margin: 0; }
 ul { margin: 0; padding-left: 1.15em; display: grid; gap: 4px; }
 p { margin: 0; }
@@ -44,38 +48,26 @@ th, td { padding: 5px 8px; text-align: right; border-bottom: 1px solid var(--rul
 th:first-child, td:first-child { text-align: left; }
 th { font-weight: 700; color: var(--ink-2); font-size: 0.82rem; }
 tr.best td { font-weight: 700; color: var(--orange); }
+tr.sub td { color: var(--ink-2); font-style: italic; }
 hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 .wide { display: grid; gap: 14px; }
 .figrow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
-.figrow.three { grid-template-columns: 1.2fr 1fr 1fr; }
-.stat { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.stat div { background: var(--peach); padding: 10px 12px; }
-.stat b { font-family: var(--display); font-size: 1.7rem; color: var(--orange); display: block; line-height: 1.1; }
-.stat span { font-size: 0.88rem; }
-.funnel { display: grid; gap: 4px; justify-items: center; }
-.fstep { width: var(--w); min-width: 0; background: var(--peach); border: 2px solid var(--orange); padding: 8px 12px; text-align: center; display: grid; }
-.fstep b { font-family: var(--display); font-size: 1.5rem; color: var(--ink); }
-.fstep span { font-size: 0.86rem; color: var(--ink-2); }
-.fstep em { font-style: normal; font-weight: 700; color: var(--orange); }
-.fstep.hot { background: var(--orange); }
-.fstep.hot b, .fstep.hot span, .fstep.hot em { color: #fff; }
-.farrow { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-2); text-align: center; }
-.farrow::before { content: "▼ "; color: var(--orange); }
-.farrow i { font-style: normal; color: var(--orange); }
+.insight { background: var(--peach); padding: 10px 12px; font-size: 0.95rem; }
+.insight b { color: var(--orange); }
+.funnel svg { width: 100%; height: auto; display: block; }
 .map { overflow-x: auto; }
-.map table { font-size: 0.9rem; }
 .map th, .map td { text-align: left; white-space: normal; vertical-align: top; padding: 7px 9px; }
 .map td.y { background: var(--peach); }
 .map td.y b { color: var(--orange); }
 .map td.n { color: #c3c0bb; text-align: center; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card { border: 2px solid var(--ink); padding: 14px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.card .rq { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--orange); }
 .journeys { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-.jour { border: 2px solid var(--ink); display: grid; }
-.jour h3 { margin: 0; padding: 8px 12px; font-family: var(--display); font-size: 1.1rem; background: var(--ink); color: #fff; }
-.jour.good h3 { background: var(--orange); }
-.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.steps div { padding: 10px 12px; border-right: 1px solid var(--rule); display: grid; gap: 4px; align-content: start; font-size: 0.9rem; }
-.steps div:last-child { border-right: 0; }
-.steps small { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
+.jour { border: 2px solid var(--ink); display: grid; min-width: 0; }
+.jour > h3 { padding: 8px 12px; background: var(--ink); color: #fff; }
+.jour.good > h3 { background: var(--orange); }
+.jour svg { width: 100%; height: auto; display: block; }
 .verdict { padding: 8px 12px; border-top: 1px solid var(--rule); font-size: 0.92rem; }
 .verdict b { color: var(--orange); }
 .take { background: var(--ink); color: #fff; padding: 18px 20px; display: grid; gap: 10px; }
@@ -83,11 +75,9 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 .take ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
 .take b { color: #ffb170; }
 .foot { font-size: 0.8rem; color: var(--ink-2); }
+svg text { font-family: var(--body); }
 @media (max-width: 860px) {
-  header, .grid2, .figrow, .figrow.three, .journeys, .steps { grid-template-columns: minmax(0, 1fr); }
-  .steps div { border-right: 0; border-bottom: 1px solid var(--rule); }
-  .fstep { width: 100%; }
-  .stat { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  header, .grid2, .figrow, .journeys, .cards { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
 
@@ -116,64 +106,67 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
     <tr><td><b>RQ3</b> Ranker choice</td><td class="y"><b>Natural lists</b> +24%; DIN then beats MLP</td><td class="y"><b>Retrain</b> on the lists it will rank</td><td class="y"><b>Same frozen model</b> +21% Test</td><td class="y"><b>Ranker cannot add</b> what retrieval missed</td></tr>
     <tr><td><b>Output</b> Trade-offs and misses</td><td class="n">·</td><td class="n">·</td><td class="n">·</td><td class="y"><b>Who it works for:</b> repeat buyers, known stores</td></tr>
   </table></div>
-  <p class="foot">Rows are the questions we set out to answer (critique slides). Columns are the mechanisms we found while answering them. Each panel below is one row.</p>
+  <p class="foot">Rows are the questions we set out to answer (critique slides): panels 1–5. Columns are the mechanisms we found while answering them: the shortcut cards and panel 6.</p>
 </section>
 
 <div class="grid2">
   <section>
     <div class="tag"><span class="num">1</span>Task · pipeline · design</div>
     <h2>A two-stage recommender, studied one stage at a time</h2>
+    <div class="funnel">
+      <svg viewBox="0 0 640 330" role="img" aria-label="Funnel from 111,480 products to 200 candidates to 10 shown, with the share of Test purchases surviving each stage">
+        <polygon points="20,10 620,10 520,100 120,100" fill="#fdeedd" stroke="#e8710a" stroke-width="2"/>
+        <text x="320" y="48" text-anchor="middle" font-size="26" font-weight="800" fill="#232f3e">111,480 products</text>
+        <text x="320" y="76" text-anchor="middle" font-size="15" fill="#555a61">the whole catalogue · 100% of purchases are in here</text>
+        <polygon points="120,112 520,112 440,202 200,202" fill="#f6c9a3" stroke="#e8710a" stroke-width="2"/>
+        <text x="320" y="150" text-anchor="middle" font-size="24" font-weight="800" fill="#232f3e">200 candidates</text>
+        <text x="320" y="176" text-anchor="middle" font-size="15" fill="#232f3e">purchase here for 6.1% of Test purchases</text>
+        <polygon points="200,214 440,214 385,304 255,304" fill="#e8710a"/>
+        <text x="320" y="252" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">10 shown</text>
+        <text x="320" y="278" text-anchor="middle" font-size="15" fill="#ffffff">purchase here for 1.3%</text>
+        <text x="8" y="160" font-size="13" font-weight="700" fill="#e8710a">Experiment A</text>
+        <text x="8" y="177" font-size="12" fill="#555a61">retriever: RQ1, RQ2</text>
+        <text x="632" y="262" text-anchor="end" font-size="13" font-weight="700" fill="#e8710a">Experiment B</text>
+        <text x="632" y="279" text-anchor="end" font-size="12" fill="#555a61">ranker: RQ3</text>
+        <text x="320" y="325" text-anchor="middle" font-size="12" fill="#555a61">Test, the team's original pipeline (recency retriever + MLP ranker)</text>
+      </svg>
+    </div>
     <ul>
-      <li><b>Pipeline:</b> a retriever picks 200 candidates per user; a ranker orders them into the top 10 the user sees.</li>
-      <li><b>Experiment A (retrieval):</b> vary the retriever, the candidate count K and the search index with the ranker fixed → RQ1, RQ2.</li>
-      <li><b>Experiment B (ranking):</b> vary the ranker on identical candidate lists → RQ3.</li>
-      <li><b>Output:</b> Recall@K, nDCG@10 and latency trade-offs, and retrieval misses vs ranking misses.</li>
+      <li><b>Output:</b> Recall@K, nDCG@10 and latency trade-offs; retrieval misses vs ranking misses (panel 5).</li>
       <li><b>Protocol:</b> time split (train to Aug 2021, Validation to Jul 2022, then Test); 3 seeds; paired user bootstrap; every choice made on Validation; Test opened once with predictions written first.</li>
     </ul>
-    <div class="funnel" role="img" aria-label="Funnel: 111,480 products, 200 candidates, top 10 shown; share of Test purchases surviving each stage">
-      <div class="fstep" style="--w:100%"><b>111,480</b> products in the catalogue<span>every purchase starts here</span></div>
-      <div class="farrow">Experiment A · retriever keeps 200 <i>(RQ1, RQ2)</i></div>
-      <div class="fstep" style="--w:62%"><b>200</b> candidates<span>purchase is among them for <em>6.1%</em> of Test purchases</span></div>
-      <div class="farrow">Experiment B · ranker keeps 10 <i>(RQ3)</i></div>
-      <div class="fstep hot" style="--w:34%"><b>10</b> shown<span>purchase is in the top 10 for <em>1.3%</em></span></div>
-    </div>
-    <p class="foot">Test period, the team's original pipeline (recency retriever + MLP). The two stages lose very different amounts: retrieval drops 94% of purchases, ranking drops most of the rest.</p>
   </section>
 
   <section>
     <div class="tag"><span class="num">2</span>RQ1 · Experiment A · retriever design</div>
-    <h2>The trained two-tower beats every baseline, but two retrievers that see different products beat any one</h2>
+    <h2>The trained two-tower beats every baseline, and mixing it with a recency retriever beats both</h2>
     <p class="q">At a fixed candidate count, does our two-tower retriever beat popularity, BPR-MF, ItemKNN and SASRec on Recall@K?</p>
     <div class="tbl"><table>
-      <tr><th>Retriever (same training period)</th><th>Val Recall@200</th><th>Val nDCG@10</th><th>New products R@200</th></tr>
-      <tr><td>Popularity</td><td>0.027</td><td>0.0017</td><td>0.000</td></tr>
-      <tr><td>ItemKNN</td><td>0.008</td><td>0.0006</td><td>0.000</td></tr>
-      <tr><td>BPR-MF</td><td>0.027</td><td>0.0017</td><td>0.000</td></tr>
-      <tr><td>SASRec</td><td>0.040</td><td>0.0031</td><td>0.000</td></tr>
-      <tr class="best"><td>Two-tower (text)</td><td>0.069</td><td>0.0057</td><td>0.026</td></tr>
+      <tr><th>Retriever, no ranker</th><th>Val Recall@200</th><th>Val nDCG@10</th></tr>
+      <tr><td>Popularity</td><td>0.027</td><td>0.0017</td></tr>
+      <tr><td>ItemKNN</td><td>0.008</td><td>0.0006</td></tr>
+      <tr><td>BPR-MF</td><td>0.027</td><td>0.0017</td></tr>
+      <tr><td>SASRec</td><td>0.040</td><td>0.0031</td></tr>
+      <tr><td>Two-tower (text)</td><td>0.069</td><td>0.0057</td></tr>
+      <tr class="sub"><td>Recency (no training: your recent purchases, by text)</td><td>0.055</td><td>0.0063</td></tr>
+      <tr class="best"><td>Mixed: recency + two-tower, alternating</td><td>0.080</td><td>0.0074</td></tr>
     </table></div>
-    <figure><img src="fig/fig16_two_retrievers.png" alt="Venn of recency and two-tower retrievers sharing 12 of 200 products, and bars of which retriever finds popular, niche and new purchases"><figcaption>A recency retriever (text similarity to your own recent purchases) finds new and niche products the two-tower misses. Mixing both lists: +35% Val, +22% Test.</figcaption></figure>
+    <figure><img src="fig/fig16_two_retrievers.png" alt="Venn of recency and two-tower retrievers sharing 12 of 200 products, and bars of which retriever finds popular, niche and new purchases"><figcaption>The two find different products: two-tower finds popular ones, recency finds new and niche ones. Only the text-based models find new products at all. With a ranker on top, mixing gives +35% Val, +22% Test.</figcaption></figure>
+    <p class="foot">Baselines: same training period (RQ1 table). Recency and mixed rows: Brandon's pools (P1, P3; alternating order), Validation.</p>
   </section>
 
   <section>
     <div class="tag"><span class="num">3</span>RQ2 · Experiment A · candidate count and search</div>
-    <h2>More candidates help up to K≈100–200, and HNSW is a free speed-up, once the ranker is trained on real lists</h2>
+    <h2>Recall keeps rising with K, but final quality peaks at K≈100–200</h2>
     <p class="q">With retriever and ranker fixed, how do K and Flat / HNSW / IVF search affect Recall@K, nDCG@10 and latency?</p>
+    <figure><img src="fig/fig25_k_curve.png" alt="Recall rises from 3.0% at K=50 to 11.8% at K=500; nDCG@10 of the natural-list ranker peaks at K=100-200 and falls 7% at K=500; the forced-list ranker collapses 72%"><figcaption>Beyond K=200 the extra candidates are mostly distractors: recall nearly doubles to K=500, but the natural-list ranker loses 7%. The forced-list ranker collapses (Shortcut 1).</figcaption></figure>
     <div class="tbl"><table>
-      <tr><th>K (candidates)</th><th>10</th><th>50</th><th>100</th><th>200</th></tr>
-      <tr><td>Recall@K</td><td>1.2%</td><td>2.7%</td><td>3.9%</td><td>5.5%</td></tr>
-      <tr class="best"><td>nDCG@10 ×10⁻³</td><td>6.75</td><td>7.83</td><td>8.07</td><td>8.11</td></tr>
+      <tr><th>Index (K=200)</th><th>Keeps of exact top 200</th><th>Purchases found</th><th>nDCG@10 ×10⁻³</th><th>Median latency</th></tr>
+      <tr><td>Flat (exact)</td><td>100%</td><td>5.67%</td><td>7.37</td><td>3.4 ms</td></tr>
+      <tr class="best"><td>HNSW</td><td>99.4%</td><td>5.67%</td><td>7.37</td><td>1.5 ms</td></tr>
+      <tr><td>IVF</td><td>94.6%</td><td>5.47%</td><td>6.75</td><td>0.9 ms</td></tr>
     </table></div>
-    <div class="tbl"><table>
-      <tr><th>Index (K=200)</th><th>Overlap with exact</th><th>nDCG@10 ×10⁻³</th><th>Median latency</th></tr>
-      <tr><td>Flat (exact)</td><td>100%</td><td>7.37</td><td>3.4 ms</td></tr>
-      <tr class="best"><td>HNSW</td><td>99.4%</td><td>7.37</td><td>1.5 ms</td></tr>
-      <tr><td>IVF</td><td>94.6%</td><td>6.75</td><td>0.9 ms</td></tr>
-    </table></div>
-    <ul>
-      <li><b>Shortcut 1, forced lists:</b> our first ranker was trained with missed purchases appended at the bottom of each list, so it learned "lowest score = the answer" and collapsed as K grew (−72% at K=500). Training on natural lists removes the collapse: +24% at K=200.</li>
-      <li>Mixing forced lists back in degrades K=500 step by step: 7.9 → 5.5 → 3.9 → 2.3 (×10⁻³).</li>
-    </ul>
+    <p class="insight"><b>Why IVF is worse:</b> IVF splits the catalogue into 1,024 clusters and searches only the 32 nearest. Products in other clusters are never looked at, so 5% of the exact top 200 disappear, and some of them are the purchase (5.67% → 5.47% found). HNSW walks a neighbour graph instead and keeps 99.4%, so it is free speed. A lost purchase can't be recovered by the ranker, which is why a 3.5% loss in found purchases costs 8% of nDCG. (1,000-query sample.)</p>
   </section>
 
   <section>
@@ -188,13 +181,51 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
       <tr class="best"><td>DIN</td><td>–</td><td>6.37</td><td>8.27</td></tr>
     </table></div>
     <ul>
-      <li><b>DIN vs MLP</b> on identical mixed lists: +13% on Test [+0.0008, +0.0011], winning on popular, niche and new products.</li>
+      <li><b>Learned rankers beat simple orderings:</b> MLP 6.53 vs retrieval order 6.04 vs popularity 1.51 on the same lists.</li>
+      <li><b>DIN vs MLP</b> on identical mixed lists: +13% on Test [+0.0008, +0.0011], winning on popular, niche and new products; +23% on two-tower lists.</li>
       <li><b>Changing the ranker's loss</b> (BCE → pairwise) moved Test nDCG@10 by at most 0.0005.</li>
-      <li><b>Shortcut 2, the retriever's habits:</b> the ranker must be retrained on the lists it will rank; 55% of the mixing gain needs retraining.</li>
-      <li><b>Shortcut 3, statistics age:</b> the ranker learned "no reviews yet = likely purchase". Statistics as old as in training: +21% on Test, same frozen model.</li>
+      <li><b>Changing what it is fed</b> moved it far more: natural lists +24%, retraining on mixed lists +35%, statistics of the right age +21% (Shortcuts 1–3 below).</li>
     </ul>
   </section>
 </div>
+
+<hr class="sep">
+
+<section class="wide">
+  <div class="tag"><span class="num s">S</span>What we found while answering the RQs · four shortcuts</div>
+  <h2>The ranker learns whatever its inputs make easy</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="rq">Shortcut 1 · explains RQ2's K curve, RQ3</div>
+      <h3>Forcing missed purchases into training lists taught "the lowest score is the answer"</h3>
+      <figure><img src="fig/fig5_shortcut.png" alt="Training list: natural list with the purchase at slot 16 vs forced list with the purchase appended at the bottom"><figcaption>In 88% of training lists the purchase was appended below every real candidate.</figcaption></figure>
+      <ul>
+        <li>Natural-list training: +24% at K=200, and no collapse at K=500 (−72% before).</li>
+        <li>Two earlier project conclusions ("more candidates hurt", "MLP beats DIN") were artefacts of this.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="rq">Shortcut 2 · RQ1, RQ3</div>
+      <h3>The ranker learns the habits of the retriever that feeds it</h3>
+      <figure><img src="fig/04_mixed_pool_gain_explained.png" alt="Waterfall: mixed lists without retraining +23%, retraining on mixed lists +55%, extra training data +22% of the gain"><figcaption>Of the +35% mixed-list gain, only 23% comes from the better candidates alone; 55% needs the ranker retrained on the mixed lists.</figcaption></figure>
+    </div>
+    <div class="card">
+      <div class="rq">Shortcut 3 · RQ3</div>
+      <h3>"No reviews yet = likely purchase" only works with statistics as old as in training</h3>
+      <figure><img src="fig/05_learned_rule_and_statistics_timing.png" alt="Share of products with no reviews yet at different statistics dates, and recommendation quality for new and established products"><figcaption>In training, 43% of purchases had no reviews vs 20% of other candidates. Statistics recomputed at the period start: +21% on Test, same frozen model. Consistent monthly statistics then make "bought together" inputs useful.</figcaption></figure>
+    </div>
+    <div class="card">
+      <div class="rq">Shortcut 4 · RQ1, RQ3, Output → panel 6</div>
+      <h3>The system recommends more of what you already own</h3>
+      <p>Both retrievers build the query from your own history. Gains concentrate on repeat accessorising from stores you know; upgrades, platform switches and new stores stay unsolved.</p>
+      <ul>
+        <li>Same-store purchases: 6.6% → 14.7% in the top 10; the other 91%: no gain.</li>
+        <li>Upgrades: 37% of candidates are for the old phone, 3% for the new one.</li>
+        <li>The ranker shifts slots toward the right phone (26% → 33%) but cannot add what retrieval missed.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <hr class="sep">
 
@@ -203,7 +234,7 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
   <h2>Most failures happen before ranking; the fixed system is 59–61% better for 14–28 ms more per user</h2>
   <div class="figrow">
     <figure><img src="fig/fig15_funnel_flow.png" alt="Sankey of 100 Test purchases: 96 never reach the original ranker, 94 with the best system; top-10 hits 0.8 vs 1.5"><figcaption>Retrieval misses vs ranking misses on Test.</figcaption></figure>
-    <figure><img src="fig/fig23_accuracy_vs_speed.png" alt="Test nDCG@10 against median latency for five systems, all under 50 ms"><figcaption>Accuracy vs latency (laptop CPU, one thread, K=200).</figcaption></figure>
+    <figure><img src="fig/fig23_accuracy_vs_speed.png" alt="Test nDCG@10 against median latency for five systems, all under 50 ms"><figcaption>Accuracy vs latency (laptop CPU, one thread, K=200). Hollow point: faster combined score, accuracy not yet measured.</figcaption></figure>
   </div>
   <ul>
     <li><b>Best combined system</b> (mixed lists + consistently timed monthly statistics + "bought together" inputs): Test nDCG@10 0.0064 → 0.0104 (+61%); 8 of 9 pre-registered predictions held.</li>
@@ -214,39 +245,67 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 <hr class="sep">
 
 <section class="wide">
-  <div class="tag"><span class="num">6</span>Meso and micro · who it works for</div>
-  <h2>Shortcut 4: the system recommends more of what you already own</h2>
-  <p>Both retrievers build the query from your own history. The cascade excels at another accessory for a phone you own, from a store you know, and stays blind to upgrades, platform switches and new stores. Validation, original → best system.</p>
+  <div class="tag"><span class="num">6</span>Meso and micro · who it works for (Shortcut 4 in detail)</div>
+  <h2>Two real buyers: where our setup helps, and where it still fails</h2>
   <div class="journeys">
     <div class="jour good">
-      <h3>Where our setup helps: a repeat buyer</h3>
-      <div class="steps">
-        <div><small>Owned before</small>UAG rugged case for iPhone 13</div>
-        <div><small>Bought next · Apr 2022</small>UAG rugged case for iPhone 13 Pro</div>
-        <div><small>What each system did</small>Original: not in its 200 candidates<br><b>Best: ranked #1</b></div>
-      </div>
-      <p class="verdict">Same store, same phone family: the recency retriever finds it and DIN puts it first. <b>Same-store purchases: 6.6% → 14.7% in the top 10.</b></p>
+      <h3>Helps: a repeat buyer, same store, same phone family</h3>
+      <svg viewBox="0 0 600 230" role="img" aria-label="Owned a UAG case for iPhone 13, bought a UAG case for iPhone 13 Pro; original system did not find it, best system ranked it first">
+        <text x="20" y="24" font-size="12" font-weight="700" fill="#555a61">OWNED BEFORE</text>
+        <rect x="40" y="38" width="76" height="140" rx="14" fill="#232f3e"/>
+        <rect x="47" y="45" width="62" height="126" rx="9" fill="#5f6b7a"/>
+        <rect x="56" y="54" width="18" height="18" rx="5" fill="#232f3e"/>
+        <text x="78" y="200" text-anchor="middle" font-size="13" fill="#232f3e">UAG rugged case</text>
+        <text x="78" y="216" text-anchor="middle" font-size="13" fill="#555a61">iPhone 13</text>
+        <text x="185" y="112" text-anchor="middle" font-size="28" fill="#e8710a">→</text>
+        <text x="215" y="24" font-size="12" font-weight="700" fill="#555a61">BOUGHT NEXT · APR 2022</text>
+        <rect x="240" y="38" width="80" height="146" rx="14" fill="#232f3e" stroke="#e8710a" stroke-width="4"/>
+        <rect x="247" y="45" width="66" height="132" rx="9" fill="#5f6b7a"/>
+        <rect x="256" y="54" width="24" height="24" rx="6" fill="#232f3e"/>
+        <text x="280" y="200" text-anchor="middle" font-size="13" fill="#232f3e">UAG rugged case</text>
+        <text x="280" y="216" text-anchor="middle" font-size="13" fill="#555a61">iPhone 13 Pro</text>
+        <text x="400" y="24" font-size="12" font-weight="700" fill="#555a61">WHAT EACH SYSTEM DID</text>
+        <rect x="400" y="44" width="180" height="56" fill="#ececec"/>
+        <text x="412" y="66" font-size="13" fill="#555a61">Original (MLP, two-tower)</text>
+        <text x="412" y="88" font-size="15" font-weight="700" fill="#8c8c8c">not in its 200</text>
+        <rect x="400" y="112" width="180" height="66" fill="#e8710a"/>
+        <text x="412" y="134" font-size="13" fill="#ffffff">Best (DIN, mixed list)</text>
+        <text x="412" y="164" font-size="26" font-weight="800" fill="#ffffff">#1</text>
+      </svg>
+      <p class="verdict">The recency retriever matches the same store and phone family; DIN puts it first. <b>Same-store purchases: 6.6% → 14.7% in the top 10.</b></p>
     </div>
     <div class="jour">
-      <h3>Where it still fails: an upgrader</h3>
-      <div class="steps">
-        <div><small>Owned before</small>Hocase case and screen protector for iPhone 6s Plus</div>
-        <div><small>Bought next · Mar 2022</small>Leather case for iPhone XS Max</div>
-        <div><small>What each system did</small>All 10 closest candidates are for the iPhone 6s Plus<br><b>Purchase never reaches the ranker</b></div>
-      </div>
-      <p class="verdict">The history pulls the list toward the old phone. <b>Across 2,000 upgrades: 37% of candidates old phone, 3% new.</b></p>
+      <h3>Fails: an upgrader, iPhone 6s Plus → iPhone XS Max</h3>
+      <svg viewBox="0 0 600 230" role="img" aria-label="Owned accessories for iPhone 6s Plus; all 10 closest candidates are for the old phone; the XS Max case bought never reaches the ranker">
+        <text x="20" y="24" font-size="12" font-weight="700" fill="#555a61">OWNED BEFORE</text>
+        <rect x="40" y="38" width="70" height="138" rx="12" fill="#9a9a9a"/>
+        <rect x="46" y="46" width="58" height="114" rx="4" fill="#d7d4cf"/>
+        <circle cx="75" cy="168" r="5" fill="#d7d4cf"/>
+        <text x="75" y="200" text-anchor="middle" font-size="13" fill="#232f3e">case + protector</text>
+        <text x="75" y="216" text-anchor="middle" font-size="13" fill="#555a61">iPhone 6s Plus</text>
+        <text x="190" y="24" font-size="12" font-weight="700" fill="#555a61">10 CLOSEST CANDIDATES</text>
+        <g fill="#5f5f5f">
+          <rect x="190" y="40" width="34" height="62" rx="7"/><rect x="230" y="40" width="34" height="62" rx="7"/><rect x="270" y="40" width="34" height="62" rx="7"/><rect x="310" y="40" width="34" height="62" rx="7"/><rect x="350" y="40" width="34" height="62" rx="7"/>
+          <rect x="190" y="110" width="34" height="62" rx="7"/><rect x="230" y="110" width="34" height="62" rx="7"/><rect x="270" y="110" width="34" height="62" rx="7"/><rect x="310" y="110" width="34" height="62" rx="7"/><rect x="350" y="110" width="34" height="62" rx="7"/>
+        </g>
+        <text x="287" y="200" text-anchor="middle" font-size="13" fill="#232f3e">all 10 are for the old</text>
+        <text x="287" y="216" text-anchor="middle" font-size="13" fill="#232f3e">iPhone 6s Plus</text>
+        <text x="420" y="24" font-size="12" font-weight="700" fill="#555a61">BOUGHT · MAR 2022</text>
+        <rect x="455" y="38" width="80" height="146" rx="16" fill="#8a4b2a" stroke="#e8710a" stroke-width="4" stroke-dasharray="7 5"/>
+        <rect x="465" y="50" width="26" height="26" rx="7" fill="#5a3019"/>
+        <text x="495" y="200" text-anchor="middle" font-size="13" fill="#232f3e">leather case</text>
+        <text x="495" y="216" text-anchor="middle" font-size="13" fill="#e8710a" font-weight="700">iPhone XS Max · never reached</text>
+      </svg>
+      <p class="verdict">The history pulls every candidate toward the phone being replaced. <b>Across 2,000 upgrades: 37% of candidates old phone, 3% new.</b></p>
     </div>
   </div>
-  <p class="foot">Two real Validation purchases, shown as typical cases; the bold lines give the group statistics they illustrate.</p>
-  <figure><img src="fig/fig24_slot_flow.png" alt="Alluvial of candidate list and top-10 slots by phone relation for four buyer types"><figcaption>Right phone, wrong product: for same-phone buyers 81% of top 10s hold something for their phone, but only 4.6% hold the exact purchase. The ranker shifts slots toward the right phone (26% → 33%) but cannot add what retrieval missed.</figcaption></figure>
+  <p class="foot">Two real Validation purchases, drawn as illustrations (not product photos); the bold lines give the group statistics they illustrate.</p>
+  <figure><img src="fig/fig24_slot_flow.png" alt="Alluvial of candidate list and top-10 slots by phone relation for four buyer types"><figcaption>Right phone, wrong product: for same-phone buyers 81% of top 10s hold something for their phone, but only 4.6% hold the exact purchase. The ranker shifts slots toward the right phone but cannot add what retrieval missed.</figcaption></figure>
   <div class="figrow">
     <figure><img src="fig/fig19_waffles.png" alt="Waffles of 100 purchases for four buyer types"><figcaption>Store loyalty carries the gain: 15 in 100 same-store purchases reach the top 10; platform switchers 0.</figcaption></figure>
-    <figure><img src="fig/fig21_upgrade_list.png" alt="An upgrader's 10 closest recency candidates are all for the old phone"><figcaption>Upgrades fail at retrieval: 37% of candidates are for the old phone, 3% for the new one.</figcaption></figure>
-  </div>
-  <div class="figrow">
     <figure><img src="fig/fig12_iphone13_launch.png" alt="iPhone 13 accessory nDCG by fortnight, jumping ninefold at launch"><figcaption>Launch wave: iPhone 13 launch fortnight ×9, fading to about ×4 by December. Same for Pixel 6, iPhone SE 2022, MagSafe; Apple Watch bands are the exception.</figcaption></figure>
-    <figure><img src="fig/fig17_user_x_product.png" alt="Heatmap of top-10 rate by buyer type and store/product freshness"><figcaption>Sweet spot: fresh product, known store, phone you own → 21.8% in the top 10 (was 3.0%).</figcaption></figure>
   </div>
+  <figure><img src="fig/fig17_user_x_product.png" alt="Heatmap of top-10 rate by buyer type and store/product freshness"><figcaption>Sweet spot: fresh product, known store, phone you own → 21.8% in the top 10 (was 3.0%).</figcaption></figure>
 </section>
 
 <div class="grid2">
@@ -254,8 +313,8 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
     <h2>Takeaways</h2>
     <ol>
       <li><b>RQ1:</b> the trained two-tower beats every baseline; two retrievers that see different products beat any one.</li>
-      <li><b>RQ2:</b> K beyond ~100 adds little and HNSW costs nothing, once the ranker is trained on lists like the ones it will rank.</li>
-      <li><b>RQ3:</b> DIN beats the MLP, yet natural training lists, both retrievers' ranks and statistics of the right age matter more.</li>
+      <li><b>RQ2:</b> recall rises with K but quality peaks at K≈100–200; HNSW is free speed, IVF drops purchases the ranker can't recover.</li>
+      <li><b>RQ3:</b> DIN beats the MLP, yet natural training lists, retraining on the right lists and statistics of the right age matter more.</li>
       <li><b>Output:</b> most misses are retrieval misses; the system serves buyers accessorising a phone they own.</li>
     </ol>
     <p>Every shortcut is one lesson: the ranker learns whatever its inputs make easy.</p>
