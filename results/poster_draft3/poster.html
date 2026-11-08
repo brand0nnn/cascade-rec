@@ -52,13 +52,41 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 .stat div { background: var(--peach); padding: 10px 12px; }
 .stat b { font-family: var(--display); font-size: 1.7rem; color: var(--orange); display: block; line-height: 1.1; }
 .stat span { font-size: 0.88rem; }
+.funnel { display: grid; gap: 4px; justify-items: center; }
+.fstep { width: var(--w); min-width: 0; background: var(--peach); border: 2px solid var(--orange); padding: 8px 12px; text-align: center; display: grid; }
+.fstep b { font-family: var(--display); font-size: 1.5rem; color: var(--ink); }
+.fstep span { font-size: 0.86rem; color: var(--ink-2); }
+.fstep em { font-style: normal; font-weight: 700; color: var(--orange); }
+.fstep.hot { background: var(--orange); }
+.fstep.hot b, .fstep.hot span, .fstep.hot em { color: #fff; }
+.farrow { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-2); text-align: center; }
+.farrow::before { content: "▼ "; color: var(--orange); }
+.farrow i { font-style: normal; color: var(--orange); }
+.map { overflow-x: auto; }
+.map table { font-size: 0.9rem; }
+.map th, .map td { text-align: left; white-space: normal; vertical-align: top; padding: 7px 9px; }
+.map td.y { background: var(--peach); }
+.map td.y b { color: var(--orange); }
+.map td.n { color: #c3c0bb; text-align: center; }
+.journeys { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.jour { border: 2px solid var(--ink); display: grid; }
+.jour h3 { margin: 0; padding: 8px 12px; font-family: var(--display); font-size: 1.1rem; background: var(--ink); color: #fff; }
+.jour.good h3 { background: var(--orange); }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.steps div { padding: 10px 12px; border-right: 1px solid var(--rule); display: grid; gap: 4px; align-content: start; font-size: 0.9rem; }
+.steps div:last-child { border-right: 0; }
+.steps small { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
+.verdict { padding: 8px 12px; border-top: 1px solid var(--rule); font-size: 0.92rem; }
+.verdict b { color: var(--orange); }
 .take { background: var(--ink); color: #fff; padding: 18px 20px; display: grid; gap: 10px; }
 .take h2 { color: #fff; }
 .take ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
 .take b { color: #ffb170; }
 .foot { font-size: 0.8rem; color: var(--ink-2); }
 @media (max-width: 860px) {
-  header, .grid2, .figrow, .figrow.three { grid-template-columns: minmax(0, 1fr); }
+  header, .grid2, .figrow, .figrow.three, .journeys, .steps { grid-template-columns: minmax(0, 1fr); }
+  .steps div { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .fstep { width: 100%; }
   .stat { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 </style>
@@ -79,6 +107,18 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
 
 <div class="banner">The choices around the ranker (which retrievers build the candidate list, how the ranker's training lists and statistics are built) decided final quality far more than the ranker model. Fixing them improved held-out Test nDCG@10 by <span>61%</span>.</div>
 
+<section class="wide">
+  <div class="tag">How to read this poster · two dimensions</div>
+  <div class="map"><table>
+    <tr><th>Planned question ↓ &nbsp;·&nbsp; what we found → </th><th>Shortcut 1<br>forced training lists</th><th>Shortcut 2<br>ranker learns the retriever</th><th>Shortcut 3<br>statistics age</th><th>Shortcut 4<br>recommends what you own</th></tr>
+    <tr><td><b>RQ1</b> Retriever design</td><td class="n">·</td><td class="y"><b>Two retrievers share 12/200;</b> mixing +22% Test</td><td class="n">·</td><td class="y"><b>Recency</b> anchors on your own history</td></tr>
+    <tr><td><b>RQ2</b> K and search</td><td class="y"><b>Explains the K curve:</b> collapse was a training artefact</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+    <tr><td><b>RQ3</b> Ranker choice</td><td class="y"><b>Natural lists</b> +24%; DIN then beats MLP</td><td class="y"><b>Retrain</b> on the lists it will rank</td><td class="y"><b>Same frozen model</b> +21% Test</td><td class="y"><b>Ranker cannot add</b> what retrieval missed</td></tr>
+    <tr><td><b>Output</b> Trade-offs and misses</td><td class="n">·</td><td class="n">·</td><td class="n">·</td><td class="y"><b>Who it works for:</b> repeat buyers, known stores</td></tr>
+  </table></div>
+  <p class="foot">Rows are the questions we set out to answer (critique slides). Columns are the mechanisms we found while answering them. Each panel below is one row.</p>
+</section>
+
 <div class="grid2">
   <section>
     <div class="tag"><span class="num">1</span>Task · pipeline · design</div>
@@ -90,12 +130,14 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
       <li><b>Output:</b> Recall@K, nDCG@10 and latency trade-offs, and retrieval misses vs ranking misses.</li>
       <li><b>Protocol:</b> time split (train to Aug 2021, Validation to Jul 2022, then Test); 3 seeds; paired user bootstrap; every choice made on Validation; Test opened once with predictions written first.</li>
     </ul>
-    <div class="stat">
-      <div><b>6.1%</b><span>of Test purchases are among the 200 candidates</span></div>
-      <div><b>1.3%</b><span>reach the top 10 (original system)</span></div>
-      <div><b>12/200</b><span>candidates shared by the two retrievers</span></div>
-      <div><b>+61%</b><span>Test nDCG@10, best fixes combined</span></div>
+    <div class="funnel" role="img" aria-label="Funnel: 111,480 products, 200 candidates, top 10 shown; share of Test purchases surviving each stage">
+      <div class="fstep" style="--w:100%"><b>111,480</b> products in the catalogue<span>every purchase starts here</span></div>
+      <div class="farrow">Experiment A · retriever keeps 200 <i>(RQ1, RQ2)</i></div>
+      <div class="fstep" style="--w:62%"><b>200</b> candidates<span>purchase is among them for <em>6.1%</em> of Test purchases</span></div>
+      <div class="farrow">Experiment B · ranker keeps 10 <i>(RQ3)</i></div>
+      <div class="fstep hot" style="--w:34%"><b>10</b> shown<span>purchase is in the top 10 for <em>1.3%</em></span></div>
     </div>
+    <p class="foot">Test period, the team's original pipeline (recency retriever + MLP). The two stages lose very different amounts: retrieval drops 94% of purchases, ranking drops most of the rest.</p>
   </section>
 
   <section>
@@ -175,6 +217,27 @@ hr.sep { border: 0; border-top: 2px solid var(--ink); margin: 4px 0 0; }
   <div class="tag"><span class="num">6</span>Meso and micro · who it works for</div>
   <h2>Shortcut 4: the system recommends more of what you already own</h2>
   <p>Both retrievers build the query from your own history. The cascade excels at another accessory for a phone you own, from a store you know, and stays blind to upgrades, platform switches and new stores. Validation, original → best system.</p>
+  <div class="journeys">
+    <div class="jour good">
+      <h3>Where our setup helps: a repeat buyer</h3>
+      <div class="steps">
+        <div><small>Owned before</small>UAG rugged case for iPhone 13</div>
+        <div><small>Bought next · Apr 2022</small>UAG rugged case for iPhone 13 Pro</div>
+        <div><small>What each system did</small>Original: not in its 200 candidates<br><b>Best: ranked #1</b></div>
+      </div>
+      <p class="verdict">Same store, same phone family: the recency retriever finds it and DIN puts it first. <b>Same-store purchases: 6.6% → 14.7% in the top 10.</b></p>
+    </div>
+    <div class="jour">
+      <h3>Where it still fails: an upgrader</h3>
+      <div class="steps">
+        <div><small>Owned before</small>Hocase case and screen protector for iPhone 6s Plus</div>
+        <div><small>Bought next · Mar 2022</small>Leather case for iPhone XS Max</div>
+        <div><small>What each system did</small>All 10 closest candidates are for the iPhone 6s Plus<br><b>Purchase never reaches the ranker</b></div>
+      </div>
+      <p class="verdict">The history pulls the list toward the old phone. <b>Across 2,000 upgrades: 37% of candidates old phone, 3% new.</b></p>
+    </div>
+  </div>
+  <p class="foot">Two real Validation purchases, shown as typical cases; the bold lines give the group statistics they illustrate.</p>
   <figure><img src="fig/fig24_slot_flow.png" alt="Alluvial of candidate list and top-10 slots by phone relation for four buyer types"><figcaption>Right phone, wrong product: for same-phone buyers 81% of top 10s hold something for their phone, but only 4.6% hold the exact purchase. The ranker shifts slots toward the right phone (26% → 33%) but cannot add what retrieval missed.</figcaption></figure>
   <div class="figrow">
     <figure><img src="fig/fig19_waffles.png" alt="Waffles of 100 purchases for four buyer types"><figcaption>Store loyalty carries the gain: 15 in 100 same-store purchases reach the top 10; platform switchers 0.</figcaption></figure>
