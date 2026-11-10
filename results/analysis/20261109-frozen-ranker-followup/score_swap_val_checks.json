@@ -1,0 +1,32 @@
+{
+  "label": "Val only, exploratory (score swap)",
+  "test_predictions_loaded": false,
+  "predictions_sha256": "d6b701111272a1f36a4a78e96163083b49c7e2397f92f8f1dfe4b3ec9a7a9cd4",
+  "ranker_device": "cpu",
+  "git_hash": "34609bec0d42ae38ca09535cf5d1f40d2e872e1a-dirty",
+  "fresh_replay_differences": {
+    "armC_mlp": 0,
+    "din": 0
+  },
+  "C_overlap_slots": 343879,
+  "C_overlap_score_exact": true,
+  "E_overlap_slots": 343879,
+  "E_overlap_score_exact": true,
+  "in_list": {
+    "A_tt200": 0.0715874351664205,
+    "B_fresh": 0.11802287637825026,
+    "C_fresh_oldscore": 0.11802287637825026,
+    "D_fresh_qmap": 0.11802287637825026,
+    "E_tt_freshscore": 0.0715874351664205
+  },
+  "verdicts": {
+    "S1 armC_mlp": "held",
+    "S1 din": "held",
+    "S2 armC_mlp": "held",
+    "S2 din": "held",
+    "S3 armC_mlp": "held",
+    "S3 din": "held",
+    "S4 armC_mlp": "held",
+    "S4 din": "held"
+  }
+}

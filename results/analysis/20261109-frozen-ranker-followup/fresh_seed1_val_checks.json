@@ -1,0 +1,7 @@
+{
+  "label": "Val only, exploratory follow-up",
+  "test_predictions_loaded": false,
+  "retriever": "results/retriever/local/20261106-two-tower-text-all-train-seed1",
+  "family_A_in_list": 0.11706110672208292,
+  "family_B_in_list": 0.11706110672208292
+}

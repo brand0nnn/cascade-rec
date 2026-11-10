@@ -1,0 +1,2 @@
+comparison,ratio,diff,ci_low,ci_high,n_users,n_resamples
+S8 minus natural MLP on two-tower top 200 (planned recipe),2.0047465907405546,0.005201823449223958,0.004899986788584187,0.005517356734735056,112081,1000

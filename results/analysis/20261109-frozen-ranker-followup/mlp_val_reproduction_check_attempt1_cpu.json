@@ -1,0 +1,19 @@
+{
+  "label": "Val reproduction of the Test pipeline",
+  "test_opened": false,
+  "fresh_lists_exact": true,
+  "P2_feature_max_abs_error": 0.0,
+  "P2_rank_replay_exact": {
+    "0": true,
+    "1": true,
+    "2": true
+  },
+  "M1_skip_score_exact": true,
+  "M1_feature_max_abs_error": 0.0,
+  "M1_rank_replay_exact": {
+    "0": 1,
+    "1": 0,
+    "2": 0
+  },
+  "passed": false
+}
