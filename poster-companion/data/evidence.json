@@ -1,0 +1,2308 @@
+{
+  "version": 1,
+  "title": "A Ranker in Plato’s Cave",
+  "studies": {
+    "retrieval": {
+      "title": "RQ1 · What reaches the ranker?",
+      "context": "Validation · Recall@200 · per-user macro · 232,904 events / 124,416 users · exact search",
+      "rows": [
+        {
+          "label": "Recency",
+          "group": "all",
+          "value": 0.054746324742468065,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Two-tower",
+          "group": "all",
+          "value": 0.0687158683335948,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Mixed lists",
+          "group": "all",
+          "value": 0.07952081441747501,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Popularity",
+          "group": "all",
+          "value": 0.02698528302323094,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s1"
+        },
+        {
+          "label": "ItemKNN",
+          "group": "all",
+          "value": 0.008296145203953718,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s1"
+        },
+        {
+          "label": "BPR-MF",
+          "group": "all",
+          "value": 0.027263457907028044,
+          "metric": "Recall@200",
+          "seeds": 3,
+          "source": "s1"
+        },
+        {
+          "label": "SASRec",
+          "group": "all",
+          "value": 0.04018023692421827,
+          "metric": "Recall@200",
+          "seeds": 3,
+          "source": "s1"
+        },
+        {
+          "label": "Recency",
+          "group": "new",
+          "value": 0.0650433051524288,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Two-tower",
+          "group": "new",
+          "value": 0.02611270692891464,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Mixed lists",
+          "group": "new",
+          "value": 0.057153806213395185,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Popularity",
+          "group": "new",
+          "value": 0.0,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s1"
+        },
+        {
+          "label": "ItemKNN",
+          "group": "new",
+          "value": 0.0,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s1"
+        },
+        {
+          "label": "BPR-MF",
+          "group": "new",
+          "value": 0.00014511909303973402,
+          "metric": "Recall@200",
+          "seeds": 3,
+          "source": "s1"
+        },
+        {
+          "label": "SASRec",
+          "group": "new",
+          "value": 0.0,
+          "metric": "Recall@200",
+          "seeds": 3,
+          "source": "s1"
+        },
+        {
+          "label": "Recency",
+          "group": "warm",
+          "value": 0.05057375503861283,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Two-tower",
+          "group": "warm",
+          "value": 0.08742960716773747,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Mixed lists",
+          "group": "warm",
+          "value": 0.08943886313073046,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s2"
+        },
+        {
+          "label": "Popularity",
+          "group": "warm",
+          "value": 0.038776599287952566,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s1"
+        },
+        {
+          "label": "ItemKNN",
+          "group": "warm",
+          "value": 0.011707515341873162,
+          "metric": "Recall@200",
+          "seeds": 1,
+          "source": "s1"
+        },
+        {
+          "label": "BPR-MF",
+          "group": "warm",
+          "value": 0.03887420490997539,
+          "metric": "Recall@200",
+          "seeds": 3,
+          "source": "s1"
+        },
+        {
+          "label": "SASRec",
+          "group": "warm",
+          "value": 0.05788390707520057,
+          "metric": "Recall@200",
+          "seeds": 3,
+          "source": "s1"
+        }
+      ],
+      "sources": [
+        "s2",
+        "s1"
+      ],
+      "note": "Baselines use the retriever-training period. Two-tower/recency/mixed rows use the frozen candidate-pool study; learned baselines average three seeds (Popularity and ItemKNN are deterministic). No paired interval is supplied for every displayed pair. Mixing changes candidate membership, not the 200-item budget."
+    },
+    "k": {
+      "title": "RQ2 · More candidates, better recommendations?",
+      "context": "Validation · natural-only MLP, arm C · Ktrain=200 · frozen weights · three ranker seeds · per-user macro",
+      "rows": [
+        {
+          "label": "50",
+          "k": 50,
+          "group": "all",
+          "value": 0.00833263847074791,
+          "recall": 0.029750998714518476,
+          "metric": "nDCG@10",
+          "reference_k": 100,
+          "diff": -0.0002760802262982907,
+          "ci_low": -0.00045527766032110815,
+          "ci_high": -0.00011504551810343133,
+          "source": "s3"
+        },
+        {
+          "label": "100",
+          "k": 100,
+          "group": "all",
+          "value": 0.008608718697046198,
+          "recall": 0.045736932418792446,
+          "metric": "nDCG@10",
+          "reference_k": 100,
+          "diff": null,
+          "ci_low": null,
+          "ci_high": null,
+          "source": "s3"
+        },
+        {
+          "label": "200",
+          "k": 200,
+          "group": "all",
+          "value": 0.008571615205226335,
+          "recall": 0.06871385894573473,
+          "metric": "nDCG@10",
+          "reference_k": 100,
+          "diff": -3.7103491819863576e-05,
+          "ci_low": -0.0001942849872555568,
+          "ci_high": 0.00011808554475710515,
+          "source": "s3"
+        },
+        {
+          "label": "500",
+          "k": 500,
+          "group": "all",
+          "value": 0.00792289049450521,
+          "recall": 0.1175400553886578,
+          "metric": "nDCG@10",
+          "reference_k": 100,
+          "diff": -0.0006858282025409888,
+          "ci_low": -0.0008699015267402767,
+          "ci_high": -0.00047728296041502555,
+          "source": "s3"
+        }
+      ],
+      "sources": [
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "note": "Recall comes from the fixed seed-0 two-tower; ranking quality averages three MLP seeds. Intervals are paired differences versus K=100, not uncertainty bars on each score. K=100 and K=200 are not distinguishable in this comparison; no universal best K is established.",
+      "expansion": [
+        {
+          "low": 50,
+          "high": 100,
+          "gained": 0.001908629323377614,
+          "competition": -0.0016325490970793236
+        },
+        {
+          "low": 100,
+          "high": 200,
+          "gained": 0.0016156771055906786,
+          "competition": -0.0016527805974105418
+        },
+        {
+          "low": 200,
+          "high": 500,
+          "gained": 0.0013349992321540001,
+          "competition": -0.0019837239428751254
+        }
+      ]
+    },
+    "ranker": {
+      "title": "RQ3 · Which ranker orders the same list better?",
+      "context": "Test · matching-feature MLP / DIN · K=200 · three seeds · nDCG@10 per-user macro",
+      "rows": [
+        {
+          "label": "mlp_tt",
+          "group": "all",
+          "value": 0.0051936941414521525,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_tt",
+          "group": "head",
+          "value": 0.011575018489671947,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_tt",
+          "group": "tail",
+          "value": 0.0013101643595670983,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_tt",
+          "group": "new",
+          "value": 0.0013249196466693011,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_tt",
+          "group": "all",
+          "value": 0.006369207964167848,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_tt",
+          "group": "head",
+          "value": 0.01417799506399108,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_tt",
+          "group": "tail",
+          "value": 0.0011326811900929962,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_tt",
+          "group": "new",
+          "value": 0.0021636363040855324,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_rrf",
+          "group": "all",
+          "value": 0.007304838015386687,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_rrf",
+          "group": "head",
+          "value": 0.011043472251362641,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_rrf",
+          "group": "tail",
+          "value": 0.0035787921411606504,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "mlp_rrf",
+          "group": "new",
+          "value": 0.006868155893601628,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_rrf",
+          "group": "all",
+          "value": 0.008270280316375,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_rrf",
+          "group": "head",
+          "value": 0.012615448424315029,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_rrf",
+          "group": "tail",
+          "value": 0.003946208960339412,
+          "metric": "nDCG@10",
+          "source": "s6"
+        },
+        {
+          "label": "din_rrf",
+          "group": "new",
+          "value": 0.00766003757475996,
+          "metric": "nDCG@10",
+          "source": "s6"
+        }
+      ],
+      "sources": [
+        "s6",
+        "s7"
+      ],
+      "note": "Compare MLP with DIN inside the selected pool. These are separately trained models, not a frozen-ranker pool swap. DIN also changes candidate/history interactions; this does not isolate attention alone. Mixed-score normalisation provenance remains unresolved; saved results are reproduced here, not independently rescored.",
+      "contrasts": [
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_rrf",
+          "group": "all",
+          "diff": 0.0030765861749228476,
+          "ci_low": 0.002814478292803356,
+          "ci_high": 0.003358200660105437
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_rrf",
+          "group": "head",
+          "diff": 0.0010404299346430817,
+          "ci_low": 0.0004972553830403012,
+          "ci_high": 0.00156906830401209
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_rrf",
+          "group": "tail",
+          "diff": 0.0026360446007723136,
+          "ci_low": 0.002308474052016091,
+          "ci_high": 0.002966495868538618
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_rrf",
+          "group": "new",
+          "diff": 0.006335117928090659,
+          "ci_low": 0.0058437920639129405,
+          "ci_high": 0.006809912610715629
+        },
+        {
+          "reference": "mlp_rrf",
+          "candidate": "din_rrf",
+          "group": "all",
+          "diff": 0.0009654423009883135,
+          "ci_low": 0.0007991467127285847,
+          "ci_high": 0.0011442275670231702
+        },
+        {
+          "reference": "mlp_rrf",
+          "candidate": "din_rrf",
+          "group": "head",
+          "diff": 0.0015719761729523862,
+          "ci_low": 0.0011992257031801898,
+          "ci_high": 0.0019311278856667497
+        },
+        {
+          "reference": "mlp_rrf",
+          "candidate": "din_rrf",
+          "group": "tail",
+          "diff": 0.00036741681917876147,
+          "ci_low": 0.00015500459385859826,
+          "ci_high": 0.0005841798135532291
+        },
+        {
+          "reference": "mlp_rrf",
+          "candidate": "din_rrf",
+          "group": "new",
+          "diff": 0.0007918816811583312,
+          "ci_low": 0.0005228524908916786,
+          "ci_high": 0.0010579460806574527
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "mlp_rrf",
+          "group": "all",
+          "diff": 0.0021111438739345348,
+          "ci_low": 0.0018541622497168836,
+          "ci_high": 0.002379504460468591
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "mlp_rrf",
+          "group": "head",
+          "diff": -0.0005315462383093048,
+          "ci_low": -0.0010134694928588812,
+          "ci_high": -1.3355145204852816e-05
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "mlp_rrf",
+          "group": "tail",
+          "diff": 0.0022686277815935517,
+          "ci_low": 0.001960918178425686,
+          "ci_high": 0.002576154221940668
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "mlp_rrf",
+          "group": "new",
+          "diff": 0.005543236246932328,
+          "ci_low": 0.005103119252989039,
+          "ci_high": 0.00597288692757049
+        },
+        {
+          "reference": "din_tt",
+          "candidate": "din_rrf",
+          "group": "all",
+          "diff": 0.0019010723522071534,
+          "ci_low": 0.0016483461022307334,
+          "ci_high": 0.002168856956768489
+        },
+        {
+          "reference": "din_tt",
+          "candidate": "din_rrf",
+          "group": "head",
+          "diff": -0.0015625466396760497,
+          "ci_low": -0.0020527531842976184,
+          "ci_high": -0.001057199195908667
+        },
+        {
+          "reference": "din_tt",
+          "candidate": "din_rrf",
+          "group": "tail",
+          "diff": 0.0028135277702464154,
+          "ci_low": 0.0024940544906220186,
+          "ci_high": 0.0031366041346806194
+        },
+        {
+          "reference": "din_tt",
+          "candidate": "din_rrf",
+          "group": "new",
+          "diff": 0.005496401270674428,
+          "ci_low": 0.0050294368264848606,
+          "ci_high": 0.005975866100093557
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_tt",
+          "group": "all",
+          "diff": 0.0011755138227156948,
+          "ci_low": 0.0010371664500733674,
+          "ci_high": 0.001342614757099133
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_tt",
+          "group": "head",
+          "diff": 0.002602976574319132,
+          "ci_low": 0.0022353858300060716,
+          "ci_high": 0.002939190279501996
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_tt",
+          "group": "tail",
+          "diff": -0.0001774831694741023,
+          "ci_low": -0.00031014180562029194,
+          "ci_high": -4.3049135911995485e-05
+        },
+        {
+          "reference": "mlp_tt",
+          "candidate": "din_tt",
+          "group": "new",
+          "diff": 0.0008387166574162312,
+          "ci_low": 0.0006710000650556781,
+          "ci_high": 0.0010400881982100538
+        }
+      ]
+    },
+    "retrain": {
+      "title": "R2 · Let the ranker learn the new lists",
+      "context": "Validation · residual BCE text ranker · T0 statistics · K=200 · three seeds · nDCG@10 per-user macro",
+      "rows": [
+        {
+          "label": "P1_ranker",
+          "group": "all",
+          "value": 0.008140742517442344,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P3_ranker",
+          "group": "all",
+          "value": 0.011018932991806694,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P3_sizematched_ranker",
+          "group": "all",
+          "value": 0.010386864192191135,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P1ranker_on_P3",
+          "group": "all",
+          "value": 0.008810533700347121,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P1_ranker",
+          "group": "new",
+          "value": 0.008665505565297068,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P3_ranker",
+          "group": "new",
+          "value": 0.006964962576900411,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P3_sizematched_ranker",
+          "group": "new",
+          "value": 0.006300003618912416,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P1ranker_on_P3",
+          "group": "new",
+          "value": 0.00534664352696253,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P1_ranker",
+          "group": "warm",
+          "value": 0.007886734284889124,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P3_ranker",
+          "group": "warm",
+          "value": 0.012683583817764507,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P3_sizematched_ranker",
+          "group": "warm",
+          "value": 0.012056275683467524,
+          "metric": "nDCG@10",
+          "source": "s8"
+        },
+        {
+          "label": "P1ranker_on_P3",
+          "group": "warm",
+          "value": 0.010307882805523331,
+          "metric": "nDCG@10",
+          "source": "s8"
+        }
+      ],
+      "sources": [
+        "s8",
+        "s9"
+      ],
+      "note": "Original: recency lists, 20,676 natural-positive training lists. Size-matched mixed: 20,676; full mixed: 38,861. Size-matched fits hit the 10-epoch cap. The intervention changes candidate/scoring setup and training exposure; it is not a pure candidate-distribution ablation. The poster’s four-bar panel is Validation, although its shared caption says Test.",
+      "contrasts": [
+        {
+          "reference": "P1_ranker",
+          "candidate": "P3_sizematched_ranker",
+          "group": "all",
+          "diff": 0.0022461216747487914,
+          "ci_low": 0.0019010364549200628,
+          "ci_high": 0.002602008262002201
+        },
+        {
+          "reference": "P3_sizematched_ranker",
+          "candidate": "P3_ranker",
+          "group": "all",
+          "diff": 0.0006320687996155585,
+          "ci_low": 0.00046442861801363025,
+          "ci_high": 0.000789585160711439
+        },
+        {
+          "reference": "P1ranker_on_P3",
+          "candidate": "P3_sizematched_ranker",
+          "group": "all",
+          "diff": 0.0015763304918440164,
+          "ci_low": 0.0013380472726751225,
+          "ci_high": 0.0018046537526507328
+        },
+        {
+          "reference": "P1_ranker",
+          "candidate": "P3_ranker",
+          "group": "all",
+          "diff": 0.00287819047436435,
+          "ci_low": 0.0025439781417210088,
+          "ci_high": 0.003210834690979336
+        },
+        {
+          "reference": "P1_ranker",
+          "candidate": "P3_sizematched_ranker",
+          "group": "new",
+          "diff": -0.002365501946384651,
+          "ci_low": -0.002719298814801341,
+          "ci_high": -0.0019690252078061114
+        },
+        {
+          "reference": "P3_sizematched_ranker",
+          "candidate": "P3_ranker",
+          "group": "new",
+          "diff": 0.0006649589579879942,
+          "ci_low": 0.0004409796016950885,
+          "ci_high": 0.0008946232273288664
+        },
+        {
+          "reference": "P1ranker_on_P3",
+          "candidate": "P3_sizematched_ranker",
+          "group": "new",
+          "diff": 0.0009533600919498861,
+          "ci_low": 0.0006765322521039439,
+          "ci_high": 0.0012151683316069936
+        },
+        {
+          "reference": "P1_ranker",
+          "candidate": "P3_ranker",
+          "group": "new",
+          "diff": -0.0017005429883966568,
+          "ci_low": -0.002071011997673089,
+          "ci_high": -0.0013137371796345752
+        },
+        {
+          "reference": "P1_ranker",
+          "candidate": "P3_sizematched_ranker",
+          "group": "warm",
+          "diff": 0.004169541398578401,
+          "ci_low": 0.003729288255554795,
+          "ci_high": 0.004592339961070141
+        },
+        {
+          "reference": "P3_sizematched_ranker",
+          "candidate": "P3_ranker",
+          "group": "warm",
+          "diff": 0.0006273081342969833,
+          "ci_low": 0.0004360185190220517,
+          "ci_high": 0.0008316149691809801
+        },
+        {
+          "reference": "P1ranker_on_P3",
+          "candidate": "P3_sizematched_ranker",
+          "group": "warm",
+          "diff": 0.001748392877944194,
+          "ci_low": 0.00144270662990283,
+          "ci_high": 0.002048105357894638
+        },
+        {
+          "reference": "P1_ranker",
+          "candidate": "P3_ranker",
+          "group": "warm",
+          "diff": 0.0047968495328753824,
+          "ci_low": 0.004366850842621882,
+          "ci_high": 0.005231074032369648
+        }
+      ]
+    },
+    "final": {
+      "title": "R4 · What happens when we combine the changes?",
+      "context": "Test · residual-ranker family · K=200 · three seeds · nDCG@10 per-user macro · 297,390 events / 112,081 users",
+      "rows": [
+        {
+          "label": "S0",
+          "group": "all",
+          "value": 0.006043493679406267,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S0",
+          "group": "new",
+          "value": 0.007605682306953733,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S0",
+          "group": "warm",
+          "value": 0.0054449308628279,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S1",
+          "group": "all",
+          "value": 0.006438671985653997,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S1",
+          "group": "new",
+          "value": 0.008223317262281081,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S1",
+          "group": "warm",
+          "value": 0.005713342718171345,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S2",
+          "group": "all",
+          "value": 0.0073767580652463645,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S2",
+          "group": "new",
+          "value": 0.009849943335878818,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S2",
+          "group": "warm",
+          "value": 0.006239733160943606,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S3",
+          "group": "all",
+          "value": 0.007814566607279604,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S3",
+          "group": "new",
+          "value": 0.011827113619179768,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S3",
+          "group": "warm",
+          "value": 0.005835350526523963,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S4",
+          "group": "all",
+          "value": 0.008041640607403228,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S4",
+          "group": "new",
+          "value": 0.010202677155418496,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S4",
+          "group": "warm",
+          "value": 0.00700194272994498,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S5",
+          "group": "all",
+          "value": 0.009700225538073717,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S5",
+          "group": "new",
+          "value": 0.012959669252653143,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S5",
+          "group": "warm",
+          "value": 0.008242887902109882,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S6",
+          "group": "all",
+          "value": 0.007861468609387225,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S6",
+          "group": "new",
+          "value": 0.006444312688800573,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S6",
+          "group": "warm",
+          "value": 0.00820750181926744,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S7",
+          "group": "all",
+          "value": 0.008795915577548689,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S7",
+          "group": "new",
+          "value": 0.007565596854096288,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S7",
+          "group": "warm",
+          "value": 0.008841404912823902,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S8",
+          "group": "all",
+          "value": 0.010379072615493755,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S8",
+          "group": "new",
+          "value": 0.009171145304730744,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "S8",
+          "group": "warm",
+          "value": 0.01050832449945329,
+          "metric": "nDCG@10",
+          "source": "s10"
+        }
+      ],
+      "sources": [
+        "s10",
+        "s11"
+      ],
+      "note": "S1→S8 is the matched study’s combined-system contrast. The original planned two-tower+MLP baseline is from the separate RQ3 family; its approximately 2× ratio is descriptive and has no supplied cross-study paired interval. No single improvement causes the whole combined gain. Test was evaluated in multiple studies; it was not globally untouched.",
+      "contrasts": [
+        {
+          "reference": "S1",
+          "candidate": "S3",
+          "group": "all",
+          "diff": 0.001375894621625608,
+          "ci_low": 0.0012154166363701991,
+          "ci_high": 0.0015295343455651996
+        },
+        {
+          "reference": "S1",
+          "candidate": "S3",
+          "group": "new",
+          "diff": 0.0036037963568986858,
+          "ci_low": 0.003343015134169896,
+          "ci_high": 0.003874038111885053
+        },
+        {
+          "reference": "S1",
+          "candidate": "S3",
+          "group": "warm",
+          "diff": 0.00012200780835261797,
+          "ci_low": -7.783770495855954e-05,
+          "ci_high": 0.00032754187531639216
+        },
+        {
+          "reference": "S1",
+          "candidate": "S6",
+          "group": "all",
+          "diff": 0.001422796623733229,
+          "ci_low": 0.0011532394848221355,
+          "ci_high": 0.0017043930308065208
+        },
+        {
+          "reference": "S1",
+          "candidate": "S6",
+          "group": "new",
+          "diff": -0.0017790045734805112,
+          "ci_low": -0.0020993296857829036,
+          "ci_high": -0.0014141951864833663
+        },
+        {
+          "reference": "S1",
+          "candidate": "S6",
+          "group": "warm",
+          "diff": 0.0024941591010960956,
+          "ci_low": 0.0021481011095980814,
+          "ci_high": 0.0028405351610714495
+        },
+        {
+          "reference": "S4",
+          "candidate": "S5",
+          "group": "all",
+          "diff": 0.0016585849306704915,
+          "ci_low": 0.0014900520314637135,
+          "ci_high": 0.001834989207228984
+        },
+        {
+          "reference": "S4",
+          "candidate": "S5",
+          "group": "new",
+          "diff": 0.0027569920972346485,
+          "ci_low": 0.002408366975816989,
+          "ci_high": 0.003095192985986772
+        },
+        {
+          "reference": "S4",
+          "candidate": "S5",
+          "group": "warm",
+          "diff": 0.001240945172164904,
+          "ci_low": 0.001034831585309032,
+          "ci_high": 0.001440159009961843
+        },
+        {
+          "reference": "S1",
+          "candidate": "S8",
+          "group": "all",
+          "diff": 0.0039404006298397595,
+          "ci_low": 0.003586560916495883,
+          "ci_high": 0.004292502996595814
+        },
+        {
+          "reference": "S1",
+          "candidate": "S8",
+          "group": "new",
+          "diff": 0.0009478280424496609,
+          "ci_low": 0.0004994896795442624,
+          "ci_high": 0.0015193391940348752
+        },
+        {
+          "reference": "S1",
+          "candidate": "S8",
+          "group": "warm",
+          "diff": 0.004794981781281945,
+          "ci_low": 0.004340143440106873,
+          "ci_high": 0.0052447885695429885
+        },
+        {
+          "reference": "S0",
+          "candidate": "S1",
+          "group": "all",
+          "diff": 0.00039517830624772937,
+          "ci_low": 0.00012106699654638694,
+          "ci_high": 0.0006784965749673838
+        },
+        {
+          "reference": "S0",
+          "candidate": "S1",
+          "group": "new",
+          "diff": 0.0006176349553273491,
+          "ci_low": 9.993655237740747e-05,
+          "ci_high": 0.001122313559332439
+        },
+        {
+          "reference": "S0",
+          "candidate": "S1",
+          "group": "warm",
+          "diff": 0.00026841185534344535,
+          "ci_low": -3.559309637589238e-05,
+          "ci_high": 0.0006137084247130157
+        },
+        {
+          "reference": "S1",
+          "candidate": "S2",
+          "group": "all",
+          "diff": 0.0009380860795923682,
+          "ci_low": 0.0008251377236082375,
+          "ci_high": 0.0010641351235312708
+        },
+        {
+          "reference": "S1",
+          "candidate": "S2",
+          "group": "new",
+          "diff": 0.0016266260735977353,
+          "ci_low": 0.001468608596482841,
+          "ci_high": 0.0017846578526122614
+        },
+        {
+          "reference": "S1",
+          "candidate": "S2",
+          "group": "warm",
+          "diff": 0.0005263904427722599,
+          "ci_low": 0.0003747464180315717,
+          "ci_high": 0.0006733985320527918
+        },
+        {
+          "reference": "S2",
+          "candidate": "S3",
+          "group": "all",
+          "diff": 0.00043780854203324005,
+          "ci_low": 0.00030825267226524755,
+          "ci_high": 0.0005699404553051794
+        },
+        {
+          "reference": "S2",
+          "candidate": "S3",
+          "group": "new",
+          "diff": 0.00197717028330095,
+          "ci_low": 0.0018066462716295132,
+          "ci_high": 0.002154845398610003
+        },
+        {
+          "reference": "S2",
+          "candidate": "S3",
+          "group": "warm",
+          "diff": -0.0004043826344196418,
+          "ci_low": -0.0005759817316913032,
+          "ci_high": -0.00023352138533236957
+        },
+        {
+          "reference": "S3",
+          "candidate": "S4",
+          "group": "all",
+          "diff": 0.00022707400012362343,
+          "ci_low": 5.9528643346974045e-05,
+          "ci_high": 0.000395057889111937
+        },
+        {
+          "reference": "S3",
+          "candidate": "S4",
+          "group": "new",
+          "diff": -0.0016244364637612724,
+          "ci_low": -0.0020700748125565263,
+          "ci_high": -0.0011753339163484407
+        },
+        {
+          "reference": "S3",
+          "candidate": "S4",
+          "group": "warm",
+          "diff": 0.001166592203421016,
+          "ci_low": 0.0010212901095797153,
+          "ci_high": 0.0013258643938369155
+        },
+        {
+          "reference": "S3",
+          "candidate": "S5",
+          "group": "all",
+          "diff": 0.0018856589307941147,
+          "ci_low": 0.001665472782483019,
+          "ci_high": 0.0020960278172022363
+        },
+        {
+          "reference": "S3",
+          "candidate": "S5",
+          "group": "new",
+          "diff": 0.0011325556334733763,
+          "ci_low": 0.0006263477044845861,
+          "ci_high": 0.00163068420058766
+        },
+        {
+          "reference": "S3",
+          "candidate": "S5",
+          "group": "warm",
+          "diff": 0.0024075373755859204,
+          "ci_low": 0.0021736652972833112,
+          "ci_high": 0.0026234899230664285
+        },
+        {
+          "reference": "S6",
+          "candidate": "S7",
+          "group": "all",
+          "diff": 0.0009344469681614632,
+          "ci_low": 0.0007511921189579089,
+          "ci_high": 0.0011378296168352156
+        },
+        {
+          "reference": "S6",
+          "candidate": "S7",
+          "group": "new",
+          "diff": 0.0011212841652957152,
+          "ci_low": 0.0007627505224822663,
+          "ci_high": 0.0015159824732473553
+        },
+        {
+          "reference": "S6",
+          "candidate": "S7",
+          "group": "warm",
+          "diff": 0.0006339030935564602,
+          "ci_low": 0.00043638674252963536,
+          "ci_high": 0.0008362373640979764
+        },
+        {
+          "reference": "S7",
+          "candidate": "S8",
+          "group": "all",
+          "diff": 0.0015831570379450678,
+          "ci_low": 0.0013941327364657482,
+          "ci_high": 0.0017808793935510134
+        },
+        {
+          "reference": "S7",
+          "candidate": "S8",
+          "group": "new",
+          "diff": 0.0016055484506344569,
+          "ci_low": 0.0013117346198122982,
+          "ci_high": 0.0019396662956484736
+        },
+        {
+          "reference": "S7",
+          "candidate": "S8",
+          "group": "warm",
+          "diff": 0.001666919586629389,
+          "ci_low": 0.001416458975379132,
+          "ci_high": 0.0018978234528238952
+        },
+        {
+          "reference": "S5",
+          "candidate": "S8",
+          "group": "all",
+          "diff": 0.000678847077420037,
+          "ci_low": 0.0003663419321131428,
+          "ci_high": 0.0010059909780284863
+        },
+        {
+          "reference": "S5",
+          "candidate": "S8",
+          "group": "new",
+          "diff": -0.003788523947922401,
+          "ci_low": -0.004167007956471945,
+          "ci_high": -0.00341265168884293
+        },
+        {
+          "reference": "S5",
+          "candidate": "S8",
+          "group": "warm",
+          "diff": 0.002265436597343407,
+          "ci_low": 0.001884747930391858,
+          "ci_high": 0.00267957967273294
+        },
+        {
+          "reference": "S3",
+          "candidate": "S8",
+          "group": "all",
+          "diff": 0.0025645060082141514,
+          "ci_low": 0.002217622984730992,
+          "ci_high": 0.0029257469046190497
+        },
+        {
+          "reference": "S3",
+          "candidate": "S8",
+          "group": "new",
+          "diff": -0.002655968314449025,
+          "ci_low": -0.003158456495098368,
+          "ci_high": -0.0020653248240926386
+        },
+        {
+          "reference": "S3",
+          "candidate": "S8",
+          "group": "warm",
+          "diff": 0.004672973972929327,
+          "ci_low": 0.004227944364446371,
+          "ci_high": 0.005130436649455434
+        }
+      ]
+    },
+    "timing": {
+      "title": "R3 · The same model, information of a different age",
+      "context": "Test · frozen residual BCE text ranker · recency candidates unchanged · T0-trained · three seeds · nDCG@10 per-user macro",
+      "rows": [
+        {
+          "label": "T0",
+          "group": "all",
+          "value": 0.006438671985653997,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "T0",
+          "group": "new",
+          "value": 0.008223317262281081,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "T0",
+          "group": "warm",
+          "value": 0.005713342718171345,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "T2",
+          "group": "all",
+          "value": 0.007814566607279604,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "T2",
+          "group": "new",
+          "value": 0.011827113619179768,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "T2",
+          "group": "warm",
+          "value": 0.005835350526523963,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X1_known",
+          "group": "all",
+          "value": 0.007593968549237138,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X1_known",
+          "group": "new",
+          "value": 0.015297215532261798,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X1_known",
+          "group": "warm",
+          "value": 0.004324698125218338,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X2_known_degree",
+          "group": "all",
+          "value": 0.008032071168258397,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X2_known_degree",
+          "group": "new",
+          "value": 0.013565719833047697,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X2_known_degree",
+          "group": "warm",
+          "value": 0.005511726998923448,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X3_all_common",
+          "group": "all",
+          "value": 0.007814566607279604,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X3_all_common",
+          "group": "new",
+          "value": 0.011827113619179768,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X3_all_common",
+          "group": "warm",
+          "value": 0.005835350526523963,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X6_old_products",
+          "group": "all",
+          "value": 0.006594058131623973,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X6_old_products",
+          "group": "new",
+          "value": 0.007510897772315433,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X6_old_products",
+          "group": "warm",
+          "value": 0.0061478657624497056,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X7_products_released_in_B",
+          "group": "all",
+          "value": 0.007802360976232166,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X7_products_released_in_B",
+          "group": "new",
+          "value": 0.01253629877212384,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "X7_products_released_in_B",
+          "group": "warm",
+          "value": 0.005573905797544039,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-18m",
+          "group": "all",
+          "value": 0.00689776256370479,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-18m",
+          "group": "new",
+          "value": 0.009301927675198149,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-18m",
+          "group": "warm",
+          "value": 0.0058638851273087,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-12m",
+          "group": "all",
+          "value": 0.0073484150160016,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-12m",
+          "group": "new",
+          "value": 0.009808133789495889,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-12m",
+          "group": "warm",
+          "value": 0.006225757631170632,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-9m",
+          "group": "all",
+          "value": 0.007363557073946707,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-9m",
+          "group": "new",
+          "value": 0.010442463638173383,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-9m",
+          "group": "warm",
+          "value": 0.0059978211801775365,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-6m",
+          "group": "all",
+          "value": 0.007585067623999982,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-6m",
+          "group": "new",
+          "value": 0.011039121246811624,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-6m",
+          "group": "warm",
+          "value": 0.006003196281497314,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-3m",
+          "group": "all",
+          "value": 0.007702618630360025,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-3m",
+          "group": "new",
+          "value": 0.01147442113118966,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "date_T2-3m",
+          "group": "warm",
+          "value": 0.005938411819842684,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag0",
+          "group": "all",
+          "value": 0.007255445382757758,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag0",
+          "group": "new",
+          "value": 0.007575579675965401,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag0",
+          "group": "warm",
+          "value": 0.006962222154835828,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag1",
+          "group": "all",
+          "value": 0.007695387631144426,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag1",
+          "group": "new",
+          "value": 0.009477184328339125,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag1",
+          "group": "warm",
+          "value": 0.006705217380307705,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag3",
+          "group": "all",
+          "value": 0.007814384869584743,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag3",
+          "group": "new",
+          "value": 0.010715848934463692,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag3",
+          "group": "warm",
+          "value": 0.006323140122626008,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag6",
+          "group": "all",
+          "value": 0.007712310053010208,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag6",
+          "group": "new",
+          "value": 0.011298047300606523,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag6",
+          "group": "warm",
+          "value": 0.005995573777877461,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag9",
+          "group": "all",
+          "value": 0.007627711945478506,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag9",
+          "group": "new",
+          "value": 0.01127288534244022,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag9",
+          "group": "warm",
+          "value": 0.005925619298502365,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag12",
+          "group": "all",
+          "value": 0.007529514108634332,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag12",
+          "group": "new",
+          "value": 0.010650691240797145,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "lag12",
+          "group": "warm",
+          "value": 0.006111496463686344,
+          "metric": "nDCG@10",
+          "source": "s12"
+        },
+        {
+          "label": "T1",
+          "group": "all",
+          "value": 0.0073767580652463645,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "T1",
+          "group": "new",
+          "value": 0.009849943335878818,
+          "metric": "nDCG@10",
+          "source": "s10"
+        },
+        {
+          "label": "T1",
+          "group": "warm",
+          "value": 0.006239733160943606,
+          "metric": "nDCG@10",
+          "source": "s10"
+        }
+      ],
+      "sources": [
+        "s12",
+        "s13",
+        "s14",
+        "s15",
+        "s10",
+        "s11"
+      ],
+      "note": "T0=26 Jul 2020; T1=11 Aug 2021; T2=16 Jul 2022. Period-start scoring at T2 mirrors the training rule that used T0. Lag 0 means the start of the query’s month. Lag controls retain frozen weights; monthly training+scoring is a separate retrained system. Available intervals compare lag arms with lag 0, not every adjacent pair.",
+      "contrasts": [
+        {
+          "reference": "T0",
+          "candidate": "X1_known",
+          "group": "all",
+          "diff": 0.001155296563583141,
+          "ci_low": 0.0010104668078966554,
+          "ci_high": 0.0013008976950640678
+        },
+        {
+          "reference": "T0",
+          "candidate": "X1_known",
+          "group": "new",
+          "diff": 0.0070738982699807135,
+          "ci_low": 0.006706360047527809,
+          "ci_high": 0.007420329211941326
+        },
+        {
+          "reference": "T0",
+          "candidate": "X1_known",
+          "group": "warm",
+          "diff": -0.0013886445929530064,
+          "ci_low": -0.0015267263906731973,
+          "ci_high": -0.0012429213818069668
+        },
+        {
+          "reference": "T0",
+          "candidate": "X2_known_degree",
+          "group": "all",
+          "diff": 0.0015933991826044007,
+          "ci_low": 0.0014228023841209136,
+          "ci_high": 0.0017514410934437656
+        },
+        {
+          "reference": "T0",
+          "candidate": "X2_known_degree",
+          "group": "new",
+          "diff": 0.005342402570766613,
+          "ci_low": 0.00504080823640894,
+          "ci_high": 0.005658282567740143
+        },
+        {
+          "reference": "T0",
+          "candidate": "X2_known_degree",
+          "group": "warm",
+          "diff": -0.00020161571924789653,
+          "ci_low": -0.0003982701190061328,
+          "ci_high": -6.165288037901673e-06
+        },
+        {
+          "reference": "T0",
+          "candidate": "X3_all_common",
+          "group": "all",
+          "diff": 0.001375894621625608,
+          "ci_low": 0.0012154166363701991,
+          "ci_high": 0.0015295343455651996
+        },
+        {
+          "reference": "T0",
+          "candidate": "X3_all_common",
+          "group": "new",
+          "diff": 0.0036037963568986858,
+          "ci_low": 0.003343015134169896,
+          "ci_high": 0.003874038111885053
+        },
+        {
+          "reference": "T0",
+          "candidate": "X3_all_common",
+          "group": "warm",
+          "diff": 0.00012200780835261797,
+          "ci_low": -7.783770495855954e-05,
+          "ci_high": 0.00032754187531639216
+        },
+        {
+          "reference": "T0",
+          "candidate": "X6_old_products",
+          "group": "all",
+          "diff": 0.00015538614596997903,
+          "ci_low": 6.307616004107022e-05,
+          "ci_high": 0.0002429516098229733
+        },
+        {
+          "reference": "T0",
+          "candidate": "X6_old_products",
+          "group": "new",
+          "diff": -0.0007124194899656504,
+          "ci_low": -0.00079649729239892,
+          "ci_high": -0.0006349893875183265
+        },
+        {
+          "reference": "T0",
+          "candidate": "X6_old_products",
+          "group": "warm",
+          "diff": 0.00043452304427835954,
+          "ci_low": 0.0003151297085497898,
+          "ci_high": 0.0005511861869308234
+        },
+        {
+          "reference": "T0",
+          "candidate": "X7_products_released_in_B",
+          "group": "all",
+          "diff": 0.0013636889905781684,
+          "ci_low": 0.001227928913554557,
+          "ci_high": 0.0015023609298123308
+        },
+        {
+          "reference": "T0",
+          "candidate": "X7_products_released_in_B",
+          "group": "new",
+          "diff": 0.004312981509842758,
+          "ci_low": 0.004065336058608022,
+          "ci_high": 0.004577972901817371
+        },
+        {
+          "reference": "T0",
+          "candidate": "X7_products_released_in_B",
+          "group": "warm",
+          "diff": -0.00013943692062730602,
+          "ci_low": -0.0003048913911105467,
+          "ci_high": 3.15588679884944e-05
+        },
+        {
+          "reference": "T0",
+          "candidate": "T2",
+          "group": "all",
+          "diff": 0.001375894621625608,
+          "ci_low": 0.0012154166363701991,
+          "ci_high": 0.0015295343455651996
+        },
+        {
+          "reference": "T0",
+          "candidate": "T2",
+          "group": "new",
+          "diff": 0.0036037963568986858,
+          "ci_low": 0.003343015134169896,
+          "ci_high": 0.003874038111885053
+        },
+        {
+          "reference": "T0",
+          "candidate": "T2",
+          "group": "warm",
+          "diff": 0.00012200780835261797,
+          "ci_low": -7.783770495855954e-05,
+          "ci_high": 0.00032754187531639216
+        },
+        {
+          "reference": "T0",
+          "candidate": "date_T2-18m",
+          "group": "all",
+          "diff": 0.00045909057805079543,
+          "ci_low": 0.00037308676766759145,
+          "ci_high": 0.0005401371752318045
+        },
+        {
+          "reference": "T0",
+          "candidate": "date_T2-18m",
+          "group": "new",
+          "diff": 0.0010786104129170662,
+          "ci_low": 0.0009559012696124794,
+          "ci_high": 0.0012088941434901723
+        },
+        {
+          "reference": "T0",
+          "candidate": "date_T2-18m",
+          "group": "warm",
+          "diff": 0.00015054240913735514,
+          "ci_low": 3.850778370466703e-05,
+          "ci_high": 0.00025963257390890985
+        },
+        {
+          "reference": "date_T2-18m",
+          "candidate": "date_T2-12m",
+          "group": "all",
+          "diff": 0.0004506524522968089,
+          "ci_low": 0.0003602662526790914,
+          "ci_high": 0.0005481795100142065
+        },
+        {
+          "reference": "date_T2-18m",
+          "candidate": "date_T2-12m",
+          "group": "new",
+          "diff": 0.0005062061142977413,
+          "ci_low": 0.00040995965214982454,
+          "ci_high": 0.0005964113395851889
+        },
+        {
+          "reference": "date_T2-18m",
+          "candidate": "date_T2-12m",
+          "group": "warm",
+          "diff": 0.0003618725038619327,
+          "ci_low": 0.0002441904087686801,
+          "ci_high": 0.0004709225847433962
+        },
+        {
+          "reference": "date_T2-12m",
+          "candidate": "date_T2-9m",
+          "group": "all",
+          "diff": 1.5142057945106687e-05,
+          "ci_low": -7.359743186310567e-05,
+          "ci_high": 0.00010033938941748577
+        },
+        {
+          "reference": "date_T2-12m",
+          "candidate": "date_T2-9m",
+          "group": "new",
+          "diff": 0.0006343298486774921,
+          "ci_low": 0.0005458211605724885,
+          "ci_high": 0.00072297373539292
+        },
+        {
+          "reference": "date_T2-12m",
+          "candidate": "date_T2-9m",
+          "group": "warm",
+          "diff": -0.00022793645099309666,
+          "ci_low": -0.0003399332694752501,
+          "ci_high": -0.00011661736544118159
+        },
+        {
+          "reference": "date_T2-9m",
+          "candidate": "date_T2-6m",
+          "group": "all",
+          "diff": 0.00022151055005327667,
+          "ci_low": 0.00015162499149884006,
+          "ci_high": 0.0002907688357794405
+        },
+        {
+          "reference": "date_T2-9m",
+          "candidate": "date_T2-6m",
+          "group": "new",
+          "diff": 0.0005966576086382419,
+          "ci_low": 0.0004948176995667513,
+          "ci_high": 0.0006981496989018558
+        },
+        {
+          "reference": "date_T2-9m",
+          "candidate": "date_T2-6m",
+          "group": "warm",
+          "diff": 5.3751013197780775e-06,
+          "ci_low": -9.494798860836367e-05,
+          "ci_high": 0.0001059100854959795
+        },
+        {
+          "reference": "date_T2-6m",
+          "candidate": "date_T2-3m",
+          "group": "all",
+          "diff": 0.00011755100636004251,
+          "ci_low": 4.348168356233999e-05,
+          "ci_high": 0.0001940750640971445
+        },
+        {
+          "reference": "date_T2-6m",
+          "candidate": "date_T2-3m",
+          "group": "new",
+          "diff": 0.00043529988437803656,
+          "ci_low": 0.0003472119047706489,
+          "ci_high": 0.0005273571912253667
+        },
+        {
+          "reference": "date_T2-6m",
+          "candidate": "date_T2-3m",
+          "group": "warm",
+          "diff": -6.478446165462931e-05,
+          "ci_low": -0.0001566924328559213,
+          "ci_high": 2.2899837683564752e-05
+        },
+        {
+          "reference": "date_T2-3m",
+          "candidate": "T2",
+          "group": "all",
+          "diff": 0.00011194797691957798,
+          "ci_low": 4.90611889170917e-05,
+          "ci_high": 0.00017799778301996
+        },
+        {
+          "reference": "date_T2-3m",
+          "candidate": "T2",
+          "group": "new",
+          "diff": 0.00035269248799010784,
+          "ci_low": 0.0002860051330465616,
+          "ci_high": 0.00042234936689505864
+        },
+        {
+          "reference": "date_T2-3m",
+          "candidate": "T2",
+          "group": "warm",
+          "diff": -0.00010306129331872197,
+          "ci_low": -0.00019616254128679983,
+          "ci_high": -1.0233496601397127e-05
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag1",
+          "group": "all",
+          "diff": 0.0004399422483866677,
+          "ci_low": 0.0003579375102800382,
+          "ci_high": 0.0005296035600496072
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag1",
+          "group": "new",
+          "diff": 0.001901604652373723,
+          "ci_low": 0.0016412146108279579,
+          "ci_high": 0.0021550204664296385
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag1",
+          "group": "warm",
+          "diff": -0.00025700477452812276,
+          "ci_low": -0.0002955798876612542,
+          "ci_high": -0.00021849718792110463
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag3",
+          "group": "all",
+          "diff": 0.0005589394868269859,
+          "ci_low": 0.00045031374285388136,
+          "ci_high": 0.0006751903083217523
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag3",
+          "group": "new",
+          "diff": 0.003140269258498292,
+          "ci_low": 0.0028160539354860764,
+          "ci_high": 0.003478703036427012
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag3",
+          "group": "warm",
+          "diff": -0.0006390820322098198,
+          "ci_low": -0.0007143138567659859,
+          "ci_high": -0.0005608898942208346
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag6",
+          "group": "all",
+          "diff": 0.0004568646702524523,
+          "ci_low": 0.000327391716590776,
+          "ci_high": 0.0005860247909721379
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag6",
+          "group": "new",
+          "diff": 0.0037224676246411237,
+          "ci_low": 0.0033817371542172133,
+          "ci_high": 0.0040761800958604745
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag6",
+          "group": "warm",
+          "diff": -0.0009666483769583657,
+          "ci_low": -0.00108767315076938,
+          "ci_high": -0.000843494530869873
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag9",
+          "group": "all",
+          "diff": 0.00037226656272074734,
+          "ci_low": 0.0002308956884456169,
+          "ci_high": 0.000526108801721939
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag9",
+          "group": "new",
+          "diff": 0.003697305666474819,
+          "ci_low": 0.003325520943212966,
+          "ci_high": 0.004039296137905717
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag9",
+          "group": "warm",
+          "diff": -0.0010366028563334616,
+          "ci_low": -0.0011932119815206302,
+          "ci_high": -0.0008882892065312007
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag12",
+          "group": "all",
+          "diff": 0.0002740687258765747,
+          "ci_low": 0.00011563692593411828,
+          "ci_high": 0.0004374518593577133
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag12",
+          "group": "new",
+          "diff": 0.0030751115648317436,
+          "ci_low": 0.002733729884011419,
+          "ci_high": 0.003424791894389327
+        },
+        {
+          "reference": "lag0",
+          "candidate": "lag12",
+          "group": "warm",
+          "diff": -0.0008507256911494829,
+          "ci_low": -0.0010210118907291819,
+          "ci_high": -0.0006796977364262218
+        }
+      ],
+      "age": [
+        {
+          "age_months_mean": 28.51057945483589,
+          "target_unknown": 0.8729852064473393,
+          "other_unknown": 0.664491590209826,
+          "auc_unknown": 0.6042468081187566,
+          "label": "T0"
+        },
+        {
+          "age_months_mean": 22.79678079087339,
+          "target_unknown": 0.8161845882093177,
+          "other_unknown": 0.5728179981381849,
+          "auc_unknown": 0.6216832950355664,
+          "label": "date_T2-18m"
+        },
+        {
+          "age_months_mean": 16.850657269191395,
+          "target_unknown": 0.7541399867520424,
+          "other_unknown": 0.4719690304026203,
+          "auc_unknown": 0.6410854781747111,
+          "label": "date_T2-12m"
+        },
+        {
+          "age_months_mean": 13.828318241596126,
+          "target_unknown": 0.6837050121439612,
+          "other_unknown": 0.4068107705673432,
+          "auc_unknown": 0.638447120788309,
+          "label": "date_T2-9m"
+        },
+        {
+          "age_months_mean": 10.805979214000859,
+          "target_unknown": 0.6295539854272466,
+          "other_unknown": 0.33908696718301157,
+          "auc_unknown": 0.6452335091221175,
+          "label": "date_T2-6m"
+        },
+        {
+          "age_months_mean": 7.849343208744615,
+          "target_unknown": 0.5630381982777655,
+          "other_unknown": 0.2676633887032868,
+          "auc_unknown": 0.6476874047872393,
+          "label": "date_T2-3m"
+        },
+        {
+          "age_months_mean": 4.859855692318859,
+          "target_unknown": 0.5043607860454846,
+          "other_unknown": 0.2118633019369313,
+          "auc_unknown": 0.6462487420542766,
+          "label": "T2"
+        },
+        {
+          "age_months_mean": 0.49866265927242087,
+          "target_unknown": 0.15892029145506734,
+          "other_unknown": 0.025404123731929688,
+          "auc_unknown": 0.5667580838615688,
+          "label": "lag0"
+        },
+        {
+          "age_months_mean": 1.4948762125191424,
+          "target_unknown": 0.3091190108191654,
+          "other_unknown": 0.07301882563624038,
+          "auc_unknown": 0.6180500925914625,
+          "label": "lag1"
+        },
+        {
+          "age_months_mean": 3.503045423696983,
+          "target_unknown": 0.44938176197836166,
+          "other_unknown": 0.1503867871039898,
+          "auc_unknown": 0.6494974874371859,
+          "label": "lag3"
+        },
+        {
+          "age_months_mean": 6.505883173354687,
+          "target_unknown": 0.5493486420843453,
+          "other_unknown": 0.2425838066463916,
+          "auc_unknown": 0.6533824177189769,
+          "label": "lag6"
+        },
+        {
+          "age_months_mean": 9.498892307946218,
+          "target_unknown": 0.6130492382424376,
+          "other_unknown": 0.31109288992988793,
+          "auc_unknown": 0.6509781741562748,
+          "label": "lag9"
+        },
+        {
+          "age_months_mean": 12.489464236144956,
+          "target_unknown": 0.6817178185029807,
+          "other_unknown": 0.3826443433772972,
+          "auc_unknown": 0.6495367375628418,
+          "label": "lag12"
+        }
+      ],
+      "training_cue": {
+        "target": 0.4313697040046431,
+        "other": 0.20308424498192257
+      }
+    },
+    "ann": {
+      "title": "Appendix · Search is an accuracy–speed trade-off",
+      "context": "1,000 fixed Validation queries · residual BCE text ranker · K=200 · measured CPU benchmark · per-user macro",
+      "rows": [
+        {
+          "label": "Exact",
+          "group": "all",
+          "value": 0.007365970382621951,
+          "metric": "nDCG@10",
+          "overlap": 1.0,
+          "latency": 3.5140415056957863,
+          "source": "s16"
+        },
+        {
+          "label": "Adaptive HNSW",
+          "group": "all",
+          "value": 0.007365970382621951,
+          "metric": "nDCG@10",
+          "overlap": 0.9941199999999999,
+          "latency": 1.4912504921085201,
+          "source": "s16"
+        },
+        {
+          "label": "IVF · catalogue / 16 probes",
+          "group": "all",
+          "value": 0.006594783151848045,
+          "metric": "nDCG@10",
+          "overlap": 0.951155,
+          "latency": 0.9324374987045303,
+          "source": "s16"
+        }
+      ],
+      "sources": [
+        "s16",
+        "s17",
+        "s18"
+      ],
+      "note": "Adaptive HNSW preserved measured nDCG in this cohort; IVF lost quality despite retaining about 95% of exact candidates. Overlap is not purchase recall. Latency is end-to-end median for this implementation and cohort, not a production guarantee. Paired intervals unavailable here."
+    }
+  },
+  "sources": {
+    "s1": {
+      "path": "results/rq1/summary.json",
+      "sha256": "421e678e860c730dfb8b6832ffc0205cfca09a1b8e7fbaf5ca57de19d9e3b725"
+    },
+    "s2": {
+      "path": "results/analysis/20261106-pools/pool_report.json",
+      "sha256": "2568ce965442465c035e171d00822ef67c8fddcc049c3ae1302a8cf3008ef7c9"
+    },
+    "s3": {
+      "path": "results/targeted_study/e3-20261107-all-seeds/k_curve.csv",
+      "sha256": "b636cef2c9987711e265dfce14e7c8f9cd5736c2c800d7265e5802ea82023f61"
+    },
+    "s4": {
+      "path": "results/retriever/two_tower_text/seed0/metrics.json",
+      "sha256": "7aa0627de79b0bdae3f61e511c066fdd4cc01f176bafe9a7dad88273690fdd1b"
+    },
+    "s5": {
+      "path": "results/targeted_study/e3-20261107-all-seeds/expansion.csv",
+      "sha256": "3ab99570a5c3f1fbe9e099103bda4663ad33d9a8286167e5bac7af2e207df38a"
+    },
+    "s6": {
+      "path": "results/test_final_ranker/20261108/levels.csv",
+      "sha256": "eecfcc30feef5054f46998330e41fc3d19980cbe97f6a2f2558b76771ec12ed4"
+    },
+    "s7": {
+      "path": "results/test_final_ranker/20261108/comparisons.csv",
+      "sha256": "6d7663a5c6e45d55178265815476ba0b79bc8502e2bfe52593c26a24e9c16514"
+    },
+    "s8": {
+      "path": "results/analysis/20261107-pool-size-control/metrics.csv",
+      "sha256": "3b9ff7ea6ad766cb70ee9429e30259b0930cc0ad43ba081b85c0dceb0423e935"
+    },
+    "s9": {
+      "path": "results/analysis/20261107-pool-size-control/paired_differences.csv",
+      "sha256": "178f8f7c2f12dc7932d6788011c7e0c158d05357453794e62f0c21fee3e00c1b"
+    },
+    "s10": {
+      "path": "results/test_final/20261107/metrics.csv",
+      "sha256": "bbd66ef93e39598c6ed926257ec5ddf2536a7158a6bee75169484f130c178ba6"
+    },
+    "s11": {
+      "path": "results/test_final/20261107/contrasts.csv",
+      "sha256": "9c8498ae3cad305642b1b41e155e34eea9262f0715d7377782f042f55c1963ac"
+    },
+    "s12": {
+      "path": "results/test_final/20261107/timing/metrics.csv",
+      "sha256": "5019f95356f7c7d2ba2d6d513ee8059d63ad2a9eb15e0321dcb6e38da27c1a22"
+    },
+    "s13": {
+      "path": "results/test_final/20261107/timing/contrasts.csv",
+      "sha256": "3ca1bb8d84847300e469160ca44d8adb58233b019cbb2c30bec2ce3ad80aca66"
+    },
+    "s14": {
+      "path": "results/test_final/20261107/timing/age_and_unknown.csv",
+      "sha256": "4a1bd49c1653f2949bffe1a5ede9d8e001dc899f3b58683fcad5633caaf46918"
+    },
+    "s15": {
+      "path": "results/analysis/20261106-freshness-mechanism/training_knownness.csv",
+      "sha256": "31ca712bf0b979d127cce9fc50ece107f56c077b13b678dde66c35a5ffc0ede5"
+    },
+    "s16": {
+      "path": "results/steps_restoration/20261104/indices_quality.csv",
+      "sha256": "ef341717f98c25c6323a4e893fef36f79426801c72a36c938b9fb27555235c6a"
+    },
+    "s17": {
+      "path": "results/steps_restoration/20261104/indices_latency_summary.csv",
+      "sha256": "0b15069a8c958d89c902a75c35f91e6fa4e91d809778d1c95259e2291dc2d7a3"
+    },
+    "s18": {
+      "path": "results/steps_restoration/20261104/indices_settings.csv",
+      "sha256": "c53e68bb5e61be4f2c44f105702ea9290b86cf36e99f5ef3e94f7235a0beeef2"
+    }
+  },
+  "overlap": 12.302360629272146,
+  "poster": {
+    "path": "assets/poster.png",
+    "sha256": "5f09da9fd669c2ddff56947d1db90648a18758a3ea6209ee95958c07f7e1d9e0"
+  },
+  "methodology": {
+    "catalogue": 111480,
+    "validation_events": 232904,
+    "validation_users": 124416,
+    "test_events": 297390,
+    "test_users": 112081,
+    "ranker_period_queries": 315114
+  }
+}

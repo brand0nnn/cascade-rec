@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f3ed">
+  <meta name="description" content="An interactive companion to A Ranker in Plato’s Cave. Explore how candidate retrieval, ranker training and feature timing shape product recommendations.">
+  <title>A Ranker in Plato’s Cave — Interactive companion</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data/evidence.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="#intro" aria-label="Go to introduction"><span class="brand-mark">↗</span><span>PLATO’S CAVE<span class="brand-sub">THE POSTER, EXPLAINED</span></span></a>
+  <nav aria-label="View"><button class="view-button active" id="guide-button" aria-pressed="true">Guided story</button><button class="view-button" id="explore-button" aria-pressed="false">Results explorer</button></nav>
+  <button class="poster-button" data-open-poster>↗ <span>View poster</span></button>
+</header>
+<nav class="mobile-nav" aria-label="Jump to a poster section"><label for="mobile-chapter">POSTER SECTION</label><select id="mobile-chapter"><option value="intro">00 · The question</option><option value="methods">How we evaluated</option><option value="architecture">Our architecture</option><option value="rq1">RQ1 · Retrieval</option><option value="rq2">RQ2 · Candidate count</option><option value="rq3">RQ3 · Ranker choice</option><option value="r1">R1 · Higher recall, same ranker</option><option value="r2">R2 · Retraining</option><option value="r3">R3 · Statistics timing</option><option value="r4">R4 · Final result</option><option value="takeaways">Analysis & limitations</option></select></nav>
+<div class="page-shell">
+  <aside class="sidebar" aria-label="Poster sections">
+    <div class="sidebar-caption">FOLLOW THE POSTER</div>
+    <nav id="chapter-nav">
+      <a href="#intro" class="current"><span>00</span> The question</a>
+      <a href="#methods"><span>01</span> How we evaluated</a>
+      <a href="#architecture"><span>02</span> Inside the pipeline</a>
+      <div class="nav-label">INITIAL QUESTIONS</div>
+      <a href="#rq1"><span>RQ1</span> Finding the candidates</a>
+      <a href="#rq2"><span>RQ2</span> More isn’t always better</a>
+      <a href="#rq3"><span>RQ3</span> Choosing the ranker</a>
+      <div class="nav-label">FOLLOW-UP FINDINGS</div>
+      <a href="#r1"><span>R1</span> A better list, same ranker</a>
+      <a href="#r2"><span>R2</span> Learning the new lists</a>
+      <a href="#r3"><span>R3</span> Getting the timing right</a>
+      <a href="#r4"><span>R4</span> Putting it together</a>
+      <a href="#takeaways"><span>↳</span> What to take away</a>
+    </nav>
+    <div class="sidebar-foot"><span class="status-dot"></span> Saved experiments<br><small>Interactive explanations. No live model.</small></div>
+  </aside>
+  <main id="main">
+    <div id="guide-view">
+      <section id="intro" class="hero chapter">
+        <div class="eyebrow"><span class="small-line"></span> CP4285 · GROUP 07 · INTERACTIVE COMPANION</div>
+        <div class="hero-copy"><h1>A Ranker in<br>Plato’s <em>Cave.</em></h1><p class="hero-deck">A recommendation can only be as good as<br class="desktop-break"> what the ranker gets to see—and learns to use.</p></div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 640 370" role="presentation">
+            <defs><linearGradient id="light" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ed7c1b" stop-opacity=".04"/><stop offset="1" stop-color="#ed7c1b" stop-opacity=".45"/></linearGradient><linearGradient id="cave" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#534a40"/><stop offset="1" stop-color="#221f1c"/></linearGradient><pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#e1d9cc" stroke-width=".7"/></pattern></defs>
+            <path fill="url(#grid)" d="M0 0h640v370H0z"/>
+            <path d="M353 340 365 162 405 72 474 28 555 9 640 5V340Z" fill="#c5bbad"/>
+            <path d="M388 340 396 159 434 91 487 56 559 43 640 47V340Z" fill="url(#cave)"/>
+            <path d="M17 177 600 105 600 280 17 236Z" fill="url(#light)"/>
+            <path d="M350 340V190c0-64 90-64 90 0v150" fill="#eea957"/><path d="M366 340V190c0-44 58-44 58 0v150" fill="#fff2d7"/>
+            <g fill="#f8f5ef" stroke="#c6b9a7" stroke-width="1.2"><rect x="46" y="120" width="42" height="42" rx="6"/><rect x="112" y="139" width="42" height="42" rx="6"/><rect x="179" y="103" width="42" height="42" rx="6"/><rect x="246" y="151" width="42" height="42" rx="6"/><rect x="70" y="220" width="42" height="42" rx="6"/><rect x="148" y="238" width="42" height="42" rx="6"/><rect x="223" y="218" width="42" height="42" rx="6"/></g>
+            <g fill="none" stroke="#b49b7e" stroke-width="2.5"><path d="M57 143v-5a10 10 0 0 1 20 0v5m-20-2v10m20-10v10"/><rect x="126" y="147" width="14" height="25" rx="2"/><path d="M191 113h18v22h-18zm0 7h18m-13-12v5m8-5v5"/><rect x="258" y="163" width="18" height="16" rx="2"/><path d="M84 230h14v23H84zm73 23h23v13h-23m78-38h18v21h-18"/></g>
+            <g fill="#c58537" opacity=".8"><rect x="486" y="126" width="30" height="57" rx="5"/><path d="M544 155v-14a20 20 0 0 1 40 0v14h-8v-14a12 12 0 0 0-24 0v14zm0-4h9v22h-9m31-22h9v22h-9"/><rect x="531" y="210" width="45" height="31" rx="4"/></g>
+            <path d="M454 325c2-35 10-48 23-54 12 0 24 18 32 46l23 15" fill="#b4a18a"/><circle cx="479" cy="255" r="11" fill="#c8b49b"/><path d="M390 340h250" stroke="#89755e" stroke-width="2"/>
+            <path d="M83 300q107 44 213-12m-20-4 23 2-10 19" fill="none" stroke="#df6c13" stroke-width="5" stroke-linecap="round"/>
+            <text x="53" y="78" fill="#8d8070" font-size="11" letter-spacing="3">THE CATALOGUE</text><text x="458" y="82" fill="#c5ad8a" font-size="11" letter-spacing="3">WHAT IT SEES</text>
+          </svg>
+        </div>
+        <div class="hero-bottom"><p>How retrieval and ranking choices affect product recommendations.<br><span>Explore the experiments behind our poster, one question at a time.</span></p><a href="#methods" class="primary-link">Step inside <span>↓</span></a></div>
+        <div class="hero-authors">BRANDON KANG <span>·</span> PHUA QING RONG <span>·</span> TONG JING YEN</div>
+      </section>
+
+      <section id="methods" class="chapter">
+        <div class="section-head"><span class="section-number">00</span><div><div class="eyebrow">POSTER §0 · THE EXPERIMENT</div><h2>First, what counts as a good recommendation?</h2></div></div>
+        <p class="lead">Given someone’s past reviews, predict the next product they review. A fast retriever makes a shortlist. A ranker chooses the ten products to show.</p>
+        <div class="pipeline" role="group" aria-label="Explore the two-stage pipeline"><button data-stage="catalogue" class="selected"><span class="stage-icon">▦</span><b>111,480</b><span>catalogue products</span></button><span class="pipeline-arrow">→</span><button data-stage="retriever"><span class="stage-icon">⌕</span><b>200</b><span>retrieved candidates</span></button><span class="pipeline-arrow">→</span><button data-stage="ranker"><span class="stage-icon">≡</span><b>10</b><span>recommendations</span></button></div>
+        <div id="stage-explanation" class="callout" aria-live="polite"></div>
+        <div class="two-col method-grid"><div><h3>Time moves forward. Training stays behind.</h3><div class="timeline"><div><b>A</b><strong>Retriever training</strong><small>Before 26 Jul 2020</small></div><div><b>B</b><strong>Ranker training</strong><small>26 Jul 2020 → 11 Aug 2021</small></div><div><b>VAL</b><strong>Explore & compare</strong><small>11 Aug 2021 → 16 Jul 2022</small></div><div><b>TEST</b><strong>Check the findings</strong><small>From 16 Jul 2022</small></div></div><p class="fine">Validation: 232,904 events / 124,416 users. Test: 297,390 events / 112,081 users. The ranker period contains 315,114 queries; natural-only rankers train on the subset whose target was retrieved.</p></div><div class="method-card"><div class="eyebrow">AMAZON REVIEWS 2023</div><h3>Cell Phones & Accessories</h3><p>We use the 5-core review dataset. Reviews are a proxy for purchases—not observed sales or online clicks.</p><ul class="clean-list"><li>Score the eligible catalogue, not a small sampled test set.</li><li>Exclude previously reviewed and not-yet-available products.</li><li>A retrieval miss contributes zero to end-to-end ranking quality.</li><li>Average per user; use three seeds where stated.</li></ul><details><summary>Uncertainty & evaluation limits</summary><p>Paired 95% intervals use 1,000 user resamples and are conditional on the trained seeds; they are unadjusted. Validation was reused for exploration. Test was evaluated across several studies, not globally untouched. Product availability uses first review as a proxy.</p><p class="source-path">Methods: docs/research_story.md §1; docs/experiment_overview.md; configs/data.yaml</p></details></div></div>
+        <div class="metric-lab"><div><div class="eyebrow">TRY THE METRIC · ILLUSTRATION, NOT EXPERIMENTAL DATA</div><h3>Finding the target is only half the task.</h3><p>Move one relevant product through a 20-item example. Recall asks whether it is found; nDCG also rewards a higher position.</p><label for="metric-rank">Target position <output id="metric-rank-output">5</output></label><input id="metric-rank" type="range" min="1" max="21" value="5" step="1"><div id="metric-tiles" class="metric-tiles" aria-hidden="true"></div></div><div id="metric-values" class="metric-values" aria-live="polite"></div></div>
+      </section>
+
+      <section id="architecture" class="chapter">
+        <div class="section-head"><span class="section-number">01</span><div><div class="eyebrow">POSTER §1 · OUR ARCHITECTURE</div><h2>One pipeline. Different things to learn.</h2></div></div>
+        <p class="lead">The poster brings together two ranker study families. They share a retrieve-then-rank pipeline, but their features and training recipes differ.</p>
+        <div class="architecture-flow"><details open><summary><span>01</span> Represent the history</summary><p>The last 50 reviewed products describe the user. The two-tower uses a learned self-attention encoder; recency retrieval uses a time-weighted mean of frozen MiniLM text vectors.</p></details><div class="flow-line">→</div><details><summary><span>02</span> Retrieve candidates</summary><p>The two-tower compares learned user and item vectors. Recency compares text similarity to recent history. Mixed lists alternate the two sources, skipping duplicates, until 200 unique products are collected.</p></details><div class="flow-line">→</div><details><summary><span>03</span> Rank the shortlist</summary><p>Rank candidate products and display the top ten. The ranker can promote a retrieved target, but cannot add a target absent from the shortlist.</p></details></div>
+        <div class="two-col"><article class="family-card"><span class="badge">RQ3 · MLP / DIN FAMILY</span><h3>Which history matters for this candidate?</h3><p>MLP uses pooled history; DIN adds candidate-conditioned history weighting. Both use retrieval and matching inputs. The comparison includes changed candidate/history interactions, not attention alone.</p><p class="formula">candidate + history + score → ranker → order</p></article><article class="family-card"><span class="badge">R2–R4 · RESIDUAL FAMILY</span><h3>How should the retrieval score be corrected?</h3><p>A BCE-trained MLP learns a correction to a retrieval score. Shared support statistics and optional co-review features describe the candidate and its relationship to the user’s history.</p><p class="formula">final score = a × z + Δ</p></article></div>
+      </section>
+
+      <section id="rq1" class="chapter">
+        <div class="section-head"><span class="section-number">RQ1</span><div><div class="eyebrow">POSTER §2 · INITIAL QUESTIONS</div><h2>Different retrievers see different products.</h2></div></div>
+        <p class="lead">The text two-tower beats the individual matched-period baselines shown. Recency finds a different set, so combining them can raise recall within the same 200-item budget.</p>
+        <div class="controls"><label>Target products <select id="retrieval-group"><option value="all">All products</option><option value="new">New in the period</option><option value="warm">Established products</option></select></label><span class="control-hint">Change the group to see the trade-off.</span></div>
+        <div class="chart-card"><div id="retrieval-chart"></div><div id="retrieval-insight" class="chart-insight" aria-live="polite"></div><div data-evidence="retrieval"></div></div>
+        <div class="margin-note"><b id="overlap-number">≈12 / 200</b><p>Average overlap between the two lists in the full Validation pool study. Mixing sources brings complementary candidates; it does not create a 400-item shortlist.</p></div>
+      </section>
+
+      <section id="rq2" class="chapter">
+        <div class="section-head"><span class="section-number">RQ2</span><div><div class="eyebrow">POSTER §2 · CANDIDATE COUNT</div><h2>A longer list gives—and takes away.</h2></div></div>
+        <p class="lead">More candidates recover more targets. They also give a frozen ranker more competitors to choose from. Both effects matter for the final ten.</p>
+        <div id="k-controls" class="segmented" role="group" aria-label="Number of candidates"></div>
+        <div class="two-col"><div class="chart-card"><div class="eyebrow">RETRIEVAL · RECALL@K</div><div id="k-recall-chart"></div></div><div class="chart-card"><div class="eyebrow">FINAL TOP 10 · nDCG@10 × 10⁻³</div><div id="k-quality-chart"></div></div></div>
+        <div id="k-insight" class="callout" aria-live="polite"></div><div data-evidence="k"></div>
+        <details class="explanation"><summary>Why can ranking quality fall when recall rises?</summary><p>A newly found target can improve the result. But added candidates can also push down targets the original shortlist already ranked well. The saved K-expansion diagnostic separates these two contributions; their sum gives the net change.</p><div id="competition-chart"></div></details>
+      </section>
+
+      <section id="rq3" class="chapter">
+        <div class="section-head"><span class="section-number">RQ3</span><div><div class="eyebrow">POSTER §2 · RANKER CHOICE</div><h2>The ranker still matters.</h2></div></div>
+        <p class="lead">Use the same candidate list to compare model choices fairly. DIN improves over MLP in these Test comparisons; switching the entire candidate pipeline answers a different question.</p>
+        <div class="controls"><label>Candidate pool <select id="ranker-pool"><option value="tt">Two-tower lists</option><option value="rrf">Mixed lists + combined score</option></select></label><label>Target products <select id="ranker-group"><option value="all">All products</option><option value="new">New products</option><option value="head">Established · head</option><option value="tail">Established · tail</option></select></label></div>
+        <div class="chart-card"><div id="ranker-chart"></div><div id="ranker-insight" class="chart-insight" aria-live="polite"></div><div data-evidence="ranker"></div></div>
+        <details class="explanation"><summary>A note on the mixed-list score</summary><p>The current training and Test scripts calculate score normalisation from different training-list populations. Whether this affected the saved run is unresolved. These mixed-list results are reported as saved, with that qualification; the discrepancy does not itself prove the numbers wrong.</p></details>
+      </section>
+
+      <div class="story-bridge"><div class="eyebrow">THE FOLLOW-UP QUESTION</div><p>If the shortlist improves,<br><em>does the ranker know what to do with it?</em></p><a href="#r1" aria-label="Continue to follow-up findings">↓</a></div>
+
+      <section id="r1" class="chapter">
+        <div class="section-head"><span class="section-number">R1</span><div><div class="eyebrow">POSTER §3 · HIGHER RECALL, SAME RANKER</div><h2>A better list does not guarantee a better top ten.</h2></div></div>
+        <p class="lead">Hold the ranker fixed. Expand the candidate count, refresh the retriever, or mix sources. Each changes what reaches the ranker, but not what the ranker has learned.</p>
+        <div class="intervention-grid"><article><span>01</span><h3>Expand the list</h3><p>200 → 500 candidates. Recover more targets, while adding competitors beyond the training depth.</p></article><article><span>02</span><h3>Refresh the retriever</h3><p>Train the retriever on a later period. Higher recall can change the mix of candidate products.</p></article><article><span>03</span><h3>Mix the sources</h3><p>Combine recency and two-tower candidates. New membership and scoring change the ranker’s inputs.</p></article></div>
+        <div class="callout"><b>The careful conclusion:</b> higher recall did not consistently improve frozen-ranker performance. Some interventions helped; retraining captured more of the mixed-list gain in the separate R2 control.</div>
+        <details class="explanation"><summary>Read the exact numbers printed in the poster</summary><p>These are transcribed from the supplied poster, not independently regenerated results. The detailed run export behind this panel is unavailable in this checkout, so paired intervals and the exact Test counts cannot be verified here.</p><div class="table-scroll"><table><caption>Poster-reported R1 · Test · frozen rankers · relative changes</caption><thead><tr><th>Intervention</th><th>List recall</th><th>MLP nDCG@10</th><th>DIN nDCG@10</th></tr></thead><tbody><tr><th>500 candidates</th><td>+83%</td><td>−8%</td><td>+2%</td></tr><tr><th>Fresher retriever</th><td>+59%</td><td>−1%</td><td>−5%</td></tr><tr><th>Mixed lists</th><td>+42%</td><td>+24%</td><td>+10%</td></tr></tbody></table></div><p>Source: original poster image, R1. The 838 / 487 / 102 / 912 query counts in the poster’s analysis have the same unverified-export status. Positive point estimates alone do not establish statistical significance.</p><button class="text-button" data-open-poster>Open original poster ↗</button></details>
+      </section>
+
+      <section id="r2" class="chapter">
+        <div class="section-head"><span class="section-number">R2</span><div><div class="eyebrow">POSTER §3 · RETRAIN ON THE NEW LISTS</div><h2>The ranker learns the list it will actually see.</h2></div></div>
+        <p class="lead">A better retriever also provides more natural-positive training examples. Four conditions help separate the new inputs, adaptation and training-set size.</p>
+        <div class="controls"><label>Target products <select id="retrain-group"><option value="all">All products</option><option value="new">New products</option><option value="warm">Established products</option></select></label></div>
+        <div id="retrain-controls" class="step-controls" role="group" aria-label="Retraining experiment condition"></div>
+        <div class="chart-card"><div id="retrain-chart"></div><div id="retrain-insight" class="chart-insight" aria-live="polite"></div><div data-evidence="retrain"></div></div>
+        <div class="test-confirmation"><span class="badge">SEPARATE TEST CONFIRMATION</span><p id="retrain-test"></p></div>
+      </section>
+
+      <section id="r3" class="chapter">
+        <div class="section-head"><span class="section-number">R3</span><div><div class="eyebrow">POSTER §3 · STATISTICS TIMED AS IN TRAINING</div><h2>“No reviews yet” changes meaning over time.</h2></div></div>
+        <p class="lead">The ranker learned from statistics counted at the start of its training period. Reusing that old snapshot years later makes too many products look reviewless.</p>
+        <div class="controls"><label>Target products <select id="timing-group"><option value="all">All products</option><option value="new">New products</option><option value="warm">Established products</option></select></label><label>Experiment <select id="timing-mode"><option value="snapshot">Fixed snapshot · poster R3</option><option value="lag">Age before each query month</option><option value="intervention">Change one part of the statistics</option></select></label></div>
+        <div class="chart-card"><div id="timing-chart"></div><div id="timing-insight" class="chart-insight" aria-live="polite"></div><div data-evidence="timing"></div></div>
+        <div class="two-col"><div class="cue-card"><div class="eyebrow">THE LEARNED CUE</div><h3>How many products look reviewless?</h3><div id="cue-chart"></div><p class="fine">Target = reviewed next; other = sampled non-target candidates. The training comparison uses the refit’s natural-positive lists.</p></div><div><h3>Consistency is the finding.</h3><p>Updating to the evaluation period’s start restores the preparation rule used during training. For frozen models, the freshest monthly statistics are not automatically best for new products.</p><p>Training <em>and</em> scoring with monthly statistics is a different intervention. With co-review inputs, that retrained system performs well—see R4.</p><details><summary>What are co-review features?</summary><p>They summarise how often other reviewers connect a candidate to products in the user’s history: shared reviewers, paths and support counts. All counts use reviews before the stated cut date. They are evidence of observed review relationships, not proof that products were purchased together.</p></details></div></div>
+      </section>
+
+      <section id="r4" class="chapter">
+        <div class="section-head"><span class="section-number">R4</span><div><div class="eyebrow">POSTER §3 · FINAL RESULT ON TEST</div><h2>Combine the changes.<br>Keep the comparison honest.</h2></div></div>
+        <p class="lead">Mixed lists, monthly training and scoring statistics, and co-review features improve the combined system. The size of the gain depends on the baseline—and the product group.</p>
+        <div class="controls"><label>Target products <select id="final-group"><option value="all">All products</option><option value="new">New products</option><option value="warm">Established products</option></select></label><label>Comparison <select id="final-baseline"><option value="matched">Within the residual study</option><option value="original">Versus original planned pipeline</option></select></label></div>
+        <div class="chart-card"><div id="final-chart"></div><div id="final-insight" class="chart-insight" aria-live="polite"></div><div data-evidence="final"></div></div>
+        <div class="callout">The best aggregate system is not the best for every product group. Switch to <b>New products</b>: recency lists with monthly co-review features beat the mixed-list system in this study.</div>
+      </section>
+
+      <section id="takeaways" class="chapter last-chapter">
+        <div class="section-head"><span class="section-number">↳</span><div><div class="eyebrow">POSTER §§4–6 · ANALYSIS, CONCLUSION & LIMITATIONS</div><h2>What the shadows taught us.</h2></div></div>
+        <div class="takeaway-grid"><article><span>01</span><h3>Inspect retrieval first.</h3><p>The ranker cannot recover an absent target. Candidate recall sets a ceiling on end-to-end success.</p></article><article><span>02</span><h3>Check adaptation.</h3><p>Better candidates do not guarantee better ranking. Training on the new inputs captured more of the gain here.</p></article><article><span>03</span><h3>Match the timing rules.</h3><p>Prepare features consistently in training and use. “Fresher” alone does not describe the experiment.</p></article></div>
+        <details class="explanation"><summary>What these experiments cannot establish</summary><ul><li>Offline next-review prediction does not measure online user satisfaction or sales.</li><li>Crawl-time titles can contain later information; the all-time 5-core filter can bias new-product findings.</li><li>Validation reuse and repeated Test exposure limit generalisation; intervals are exploratory and unadjusted.</li><li>A combined pipeline comparison cannot identify the contribution of every individual change.</li><li>New products are defined by first review in the evaluation period, not verified market launch.</li></ul></details>
+        <details id="ann-details" class="explanation"><summary>Appendix · What about HNSW and IVF?</summary><p>In this fixed 1,000-query benchmark, adaptive HNSW preserved measured top-10 quality. IVF traded quality for speed. Retaining most exact candidates does not imply retaining all relevant purchases.</p><div id="ann-chart"></div><div data-evidence="ann"></div></details>
+        <a href="#explorer" class="primary-link">Explore the evidence <span>↗</span></a>
+      </section>
+    </div>
+
+    <section id="explorer-view" hidden>
+      <div class="eyebrow">THE NUMBERS BEHIND THE POSTER</div><h1 class="explorer-title">Explore the <em>evidence.</em></h1><p class="lead">One study at a time. Compare measured conditions, inspect exact values and see what each experiment held fixed.</p>
+      <div class="controls explorer-controls"><label>Study <select id="explorer-study"></select></label><label>Target products <select id="explorer-group"></select></label></div>
+      <div class="chart-card"><h2 id="explorer-heading"></h2><div id="explorer-chart"></div><div id="explorer-extra"></div><div id="explorer-evidence"></div></div>
+      <a class="text-button" id="explorer-story-link" href="#rq1">Read the guided explanation →</a>
+    </section>
+    <footer><div><b>A Ranker in Plato’s Cave</b><br>CP4285 · Group 07 · Poster companion</div><p>Built from saved project evaluations.<br>The original poster is preserved unchanged.</p><a href="#methods">How we evaluated ↑</a></footer>
+  </main>
+</div>
+<dialog id="poster-dialog" aria-labelledby="poster-dialog-title"><div class="dialog-header"><div><span class="eyebrow">THE ORIGINAL, UNCHANGED</span><h2 id="poster-dialog-title">Poster v2-2</h2></div><div class="zoom-controls"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-level">Fit</output><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-fit">Fit</button><button id="close-poster" aria-label="Close poster">✕</button></div></div><div class="poster-scroll" id="poster-scroll"><img id="poster-image" src="assets/poster.png" alt="Original A Ranker in Plato’s Cave poster. The guided story provides accessible explanations of its architecture, RQ1–RQ3 and R1–R4 results."></div></dialog>
+<div id="load-error" hidden role="alert">The saved data could not be loaded. Keep the data folder beside this page or start the preview using the instructions in README.md.</div>
+</body>
+</html>

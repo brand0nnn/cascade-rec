@@ -1,0 +1,22 @@
+group,label,metric,seeds,source,value
+all,Recency,Recall@200,1,s2,0.054746324742468065
+all,Two-tower,Recall@200,1,s2,0.0687158683335948
+all,Mixed lists,Recall@200,1,s2,0.07952081441747501
+all,Popularity,Recall@200,1,s1,0.02698528302323094
+all,ItemKNN,Recall@200,1,s1,0.008296145203953718
+all,BPR-MF,Recall@200,3,s1,0.027263457907028044
+all,SASRec,Recall@200,3,s1,0.04018023692421827
+new,Recency,Recall@200,1,s2,0.0650433051524288
+new,Two-tower,Recall@200,1,s2,0.02611270692891464
+new,Mixed lists,Recall@200,1,s2,0.057153806213395185
+new,Popularity,Recall@200,1,s1,0.0
+new,ItemKNN,Recall@200,1,s1,0.0
+new,BPR-MF,Recall@200,3,s1,0.00014511909303973402
+new,SASRec,Recall@200,3,s1,0.0
+warm,Recency,Recall@200,1,s2,0.05057375503861283
+warm,Two-tower,Recall@200,1,s2,0.08742960716773747
+warm,Mixed lists,Recall@200,1,s2,0.08943886313073046
+warm,Popularity,Recall@200,1,s1,0.038776599287952566
+warm,ItemKNN,Recall@200,1,s1,0.011707515341873162
+warm,BPR-MF,Recall@200,3,s1,0.03887420490997539
+warm,SASRec,Recall@200,3,s1,0.05788390707520057

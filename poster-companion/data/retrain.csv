@@ -1,0 +1,13 @@
+group,label,metric,source,value
+all,P1_ranker,nDCG@10,s8,0.008140742517442344
+all,P3_ranker,nDCG@10,s8,0.011018932991806694
+all,P3_sizematched_ranker,nDCG@10,s8,0.010386864192191135
+all,P1ranker_on_P3,nDCG@10,s8,0.008810533700347121
+new,P1_ranker,nDCG@10,s8,0.008665505565297068
+new,P3_ranker,nDCG@10,s8,0.006964962576900411
+new,P3_sizematched_ranker,nDCG@10,s8,0.006300003618912416
+new,P1ranker_on_P3,nDCG@10,s8,0.00534664352696253
+warm,P1_ranker,nDCG@10,s8,0.007886734284889124
+warm,P3_ranker,nDCG@10,s8,0.012683583817764507
+warm,P3_sizematched_ranker,nDCG@10,s8,0.012056275683467524
+warm,P1ranker_on_P3,nDCG@10,s8,0.010307882805523331
