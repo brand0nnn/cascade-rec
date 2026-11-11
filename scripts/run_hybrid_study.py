@@ -34,6 +34,7 @@ from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
 from cascade.models.ranker_mlp import RankerFeatureSpec
 from cascade.pipelines.build_candidates import load_candidates
+from cascade.pipelines.hybrid_normalization import natural_score_stats
 from cascade.pipelines.ranker_k1_sweep import score_prefixes
 from cascade.pipelines.ranker_policy_study import frozen_feature_builder, select_training_lists
 from cascade.pipelines.ranker_training import create_ranker, fit_candidate_lists
@@ -104,8 +105,7 @@ def main() -> None:
             train, val_sel, val_nat = pools[pool]
             builder.last_item_cosine = bool(extra)
             if pool in (P3RRF, P3RRFL):
-                sc = np.asarray(train["score"][:, :-1], np.float32)[train["cand"][:, :-1] > 0]
-                builder.score_mean, builder.score_std = float(sc.mean()), float(sc.std())
+                builder.score_mean, builder.score_std = natural_score_stats(train)
             else:
                 builder.score_mean, builder.score_std = base_stats
             spec = RankerFeatureSpec(cardinalities=builder.item_cardinalities, history_length=50, item_text_dim=384,
@@ -116,6 +116,11 @@ def main() -> None:
             model = create_ranker(spec, cfg)
             out = root / f"{arm}_seed{seed}"
             out.mkdir()
+            (out / "score_normalization.json").write_text(json.dumps({
+                "score_mean": builder.score_mean, "score_std": builder.score_std,
+                "population": "natural_only" if pool in (P3RRF, P3RRFL) else "original_full_training",
+                "train_lists": len(train["inst"]), "pool": pool,
+            }, indent=2))
             result = fit_candidate_lists(model, builder, train, val_sel, n_negatives=50, batch_size=2048,
                                          learning_rate=0.001, max_epochs=a.max_epochs, patience=3, seed=seed,
                                          device=a.device, checkpoint_path=out / "model.pt",

@@ -2,6 +2,15 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-08 — Correct mixed-list Test score normalisation
+
+Jing Yen requested continuation of Claude Code's unfinished evening check on xlogin. QR had identified a training/Test scaling discrepancy. Inspection confirmed that `run_hybrid_study.py` fits RRF/RRFL retrieval-score mean and standard deviation on natural-only ranker-training lists, whereas both Test scorers used all ranker-training lists. The correction is to reuse the training population and identical float32 reductions at inference.
+
+- No retraining, checkpoint selection, candidate regeneration, split, label, filtering or metric change. Apply the same correction to every affected evaluated arm (`mlp_rrf`, `din_rrf`, `din_rrf_res`, `din_rrfl`), seeds 0/1/2, irrespective of the outcome.
+- First run 128-list smoke checks, then full frozen-checkpoint replays. Require exact reproduction of saved Validation ranks with the training scaler and of historical Test ranks with the old scaler before accepting corrected Test ranks. Check model SHA-256 before and after scoring.
+- Keep historical results intact. Save the audit, corrected ranks and paired-user bootstrap comparisons in `results/test_final_ranker/20261108-normalization-corrected/`; smoke outputs are separate. This is a disclosed correction after Test exposure, not a new untouched Test or a tuning opportunity.
+- Centralise the training-only scaling formula, record scaling alongside future hybrid fits, and make Test scorers refuse overwriting earlier evidence. Cluster job `1097334` runs the smoke and full audit sequentially on xlogin's GPU partition. Numerical outcomes are recorded in `docs/evaluations.md`.
+
 ## 2026-11-07 — Locked Test run of the 5–7 Nov systems (approved)
 
 Brandon approved the one-time Test run in `docs/test_protocol_2026-11-07.md` (sha256 `ed463472b4f437ae27a768975fbc622b69a2a49b2d5792cd3cf60be45fd30ac7`, frozen at approval), including decisions 2 (T2 statistics) and 3 (monthly statistics on Test).

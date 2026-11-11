@@ -3,7 +3,8 @@
 No training, no tuning, no model or setting chosen on Test. Systems and predictions were fixed beforehand in
 results/test_final_ranker/20261108/predictions.md. Each model is rebuilt exactly as in run_hybrid_study.py
 (same feature builder fitted on the original ranker-training lists; RRF score standardisation refitted on the
-p3rrf training lists), its Val-selected checkpoint is loaded, and every Test list is scored.
+p3rrf natural-only training lists), its Val-selected checkpoint is loaded, and every Test list is scored.
+Choose a fresh destination containing a copy of the original predictions.md.
 
   systems: mlp_tt, din_tt (two-tower lists, two-tower score); mlp_rrf, din_rrf, din_rrf_res (mixed lists, combined score)
 
@@ -22,6 +23,7 @@ from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
 from cascade.models.ranker_mlp import RankerFeatureSpec
 from cascade.pipelines.build_candidates import load_candidates
+from cascade.pipelines.hybrid_normalization import natural_score_stats
 from cascade.pipelines.ranker_k1_sweep import score_prefixes
 from cascade.pipelines.ranker_policy_study import frozen_feature_builder
 from cascade.pipelines.ranker_training import create_ranker
@@ -44,19 +46,23 @@ def main() -> None:
     out = REPO_ROOT / a.out
     if not (out / "predictions.md").exists():
         raise RuntimeError("predictions.md must be written before Test is opened")
+    if (out / "test_opened.json").exists() or list(out.glob("*_test_ranks.npz")):
+        raise FileExistsError("choose a fresh output directory; preserve earlier Test evidence")
     data = ProcessedData.load(str(REPO_ROOT / "configs/data.yaml"))
     orig_train = load_candidates(REPO_ROOT / ORIG, "ranker_train")
     builder = frozen_feature_builder(data, orig_train, REPO_ROOT / REF_CFG)
     base = (builder.score_mean, builder.score_std)
     rtrain = load_candidates(REPO_ROOT / P3RRF, "ranker_train")
-    sc = np.asarray(rtrain["score"][:, :-1], np.float32)[rtrain["cand"][:, :-1] > 0]
-    rrf_stats = (float(sc.mean()), float(sc.std()))
+    rrf_stats = natural_score_stats(rtrain)
     del orig_train, rtrain
     tests = {k: load_candidates(REPO_ROOT / v, "test", k1=200, force=False) for k, v in TEST.items()}
     if not np.array_equal(tests["tt"]["inst"], tests["rrf"]["inst"]):
         raise ValueError("Test populations differ between pools")
     (out / "test_opened.json").write_text(json.dumps({"opened": datetime.now(timezone.utc).isoformat(),
-                                                      "git_hash": git_hash(), "systems": list(SYSTEMS)}, indent=2))
+        "git_hash": git_hash(), "systems": list(SYSTEMS),
+        "score_normalization": {
+            "rrf": {"mean": rrf_stats[0], "std": rrf_stats[1], "population": "natural_only ranker training"},
+            "tt": {"mean": base[0], "std": base[1], "population": "original full ranker training"}}}, indent=2))
     summary = []
     for name, (kind, pool, run) in SYSTEMS.items():
         lists = tests[pool]

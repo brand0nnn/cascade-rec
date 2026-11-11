@@ -1,6 +1,8 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **4 November 2026** (the objective x co-review factorial is complete; the earlier full-data replication, sample studies and historical pipeline findings are retained). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **8 November 2026** (latest: the evening mixed-list Test normalisation correction; earlier studies are retained). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+
+**Latest correction:** the mixed-list Test scorers used score statistics from all training lists, while training used natural-only lists. The completed frozen-checkpoint audit corrects this: DIN mixed-list Test nDCG@10 is **0.008268565**, versus the original MLP's **0.005193694**, still **+59.20%**. All twelve Validation and twelve historical Test rank replays are exact. Corrected results are separate from the original evidence; see [the evening correction](#evening-correction-trainingtest-score-normalisation-8-november-2026) below.
 
 **Restoration execution status:** root plan §16 items are complete in a separate [data and audit collection](../results/steps_restoration/20261104/): T1 graph refresh, the full 14-setting FAISS/budget grid and per-seed K funnels. All independent checks pass; 252 tests pass / 4 skips. The §15 collection is unchanged, and narrative synthesis remains explicitly deferred.
 
@@ -1623,3 +1625,34 @@ Method:
 - **Test:** 8.23 vs 8.27, difference −0.00004 [−0.00012, +0.00005]. No detectable loss; prediction 6 held.
 - **Latency:** median 17.6 ms vs 31.8 ms.
 - **Where:** cluster jobs 1096571–5; outputs in `results/test_final_ranker/20261108/din_rrfl_*`.
+
+### Evening correction: training/Test score normalisation (8 November 2026)
+
+Jing Yen requested continuation of Claude Code's unfinished 21:32 SGT check following QR's question. At reconnection there were no running jobs. The earlier faster-score chain had completed; the unfinished work was the score-scaling diagnosis.
+
+**Bug.** `run_hybrid_study.py` fits mixed-list retrieval-score mean/std on the 38,862 natural-only ranker-training lists. `score_test_final.py` and `score_test_rrfl.py` instead used all 315,114 ranker-training lists. Both use `(score - mean) / std`, but the populations differ. Neither set of statistics uses Test data; the issue is inconsistent inference preprocessing. Original two-tower-only controls retain their fixed full-original-training scaler and are unaffected.
+
+| Score pool | Incorrect Test mean / std | Training mean / std, now reused on Test |
+|---|---|---|
+| Full-catalogue RRF | −5.813096 / 3.617356 | −5.739888 / 3.712263 |
+| Fast local-list RRF | −2.706214 / 3.147517 | −2.692730 / 3.202124 |
+
+**Audit and correction.** `scripts/audit_hybrid_normalization.py` first passed a 128-list smoke run, then replayed all three seeds for `mlp_rrf`, `din_rrf`, `din_rrf_res` and `din_rrfl`. All **12 saved Validation rank arrays** reproduce exactly with the training scaler; all **12 historical Test rank arrays** reproduce exactly with the old scaler. Checkpoint SHA-256 values are unchanged before/after scoring, selected epochs are checked, and instance/user/target-position alignment passes. Only the inference scaler changes. No fitting, checkpoint selection, candidate regeneration, metric or protocol change occurs.
+
+Slurm job **1097334** on `xgpi13` completed with exit **0:0** in **7m42s**, including smoke and full audit. No job remains pending. Full outputs: [audit.json](../results/test_final_ranker/20261108-normalization-corrected/audit.json), [levels.csv](../results/test_final_ranker/20261108-normalization-corrected/levels.csv), [comparisons.csv](../results/test_final_ranker/20261108-normalization-corrected/comparisons.csv), and twelve corrected rank archives in the same directory. Historical outputs in `20261108/` are unchanged. The local copies' source hashes match the audit manifest.
+
+**Corrected Test nDCG@10 ×10⁻³**, seed-mean per-user macro, 297,390 purchases / 112,081 users:
+
+| System | All | Popular | Niche | New |
+|---|---:|---:|---:|---:|
+| Original MLP, two-tower lists (unchanged) | 5.193694 | 11.575018 | 1.310164 | 1.324920 |
+| MLP, mixed lists + combined score | 7.312313 | 11.038101 | 3.593059 | 6.873629 |
+| DIN, mixed lists + combined score | **8.268565** | 12.632136 | 3.929207 | 7.653503 |
+| DIN, score plus correction | 8.055344 | 12.898606 | 3.571478 | 6.924418 |
+| DIN, faster combined score | 8.231947 | 12.364022 | 4.019276 | 7.657498 |
+
+- **DIN mixed vs original MLP:** +0.003074871, paired-user 95% CI **[0.002812303, 0.003353031]**, or **+59.20%**. All three item groups retain positive intervals. This headline compares a changed candidate pool/score and ranker together; both arms use natural-only training. It is not an isolated DIN effect.
+- **Effect of fixing DIN's scaler:** −0.000001716, CI [−0.000014298, +0.000010130]. The headline gain is not explained by the scaling bug. Some small subgroup corrections have intervals excluding zero (for example DIN warm-tail), so the correction is not an assertion of identical predictions.
+- **Faster vs full-catalogue combined score:** −0.000036618, CI [−0.000122349, +0.000049766], with the earlier measured 17.6 vs 31.8 ms latency. No overall difference is detected; this does not establish equivalence without a declared acceptable-loss margin. Popular-item quality is lower by 0.000268114, CI [−0.000457032, −0.000082367].
+
+Training and both Test scorers now share `natural_score_stats`; future hybrid fits save a `score_normalization.json` alongside their checkpoints, and Test scorers refuse to overwrite earlier evidence. **375 tests pass / 3 skip**; focused checks also pass after the CLI/output guards were updated. This is a disclosed post-Test-exposure bug correction, not a new untouched Test or an opportunity to select settings. Existing poster exports remain historical snapshots; use the corrected tables above for precise numbers.
