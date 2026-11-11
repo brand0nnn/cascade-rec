@@ -1,10 +1,12 @@
 """Checks protect study identity, exact values, provenance, and portable assets."""
 import csv
 import hashlib
+import importlib.util
 import json
 import math
 from pathlib import Path
 import re
+import tempfile
 import unittest
 
 HERE = Path(__file__).resolve().parent
@@ -22,6 +24,20 @@ def value(study, label, group='all'):
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_export_check_detects_stale_and_missing_files_without_overwriting(self):
+        spec = importlib.util.spec_from_file_location('companion_export', HERE/'export_data.py')
+        exporter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(exporter)
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary)
+            exporter.main(target)
+            self.assertEqual(exporter.stale_bundle_files(target), [])
+            (target/'ranker.csv').write_bytes(b'stale saved bundle\n')
+            (target/'frozen.csv').unlink()
+            self.assertEqual(exporter.stale_bundle_files(target), ['frozen.csv', 'ranker.csv'])
+            self.assertEqual((target/'ranker.csv').read_bytes(), b'stale saved bundle\n')
+            self.assertFalse((target/'frozen.csv').exists())
+
     def test_source_hashes_match_owning_files(self):
         for source in D['sources'].values():
             self.assertEqual(hashlib.sha256((ROOT/source['path']).read_bytes()).hexdigest(),source['sha256'])

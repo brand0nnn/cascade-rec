@@ -2,6 +2,14 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-11 — Make the code reviewable from a fresh checkout
+
+The user requested the code portion of the review cleanup. Correct package metadata to Python 3.11 and declare the existing 18 dependency pins from `requirements.txt`, with an explicit setuptools backend. Add one local check command and a CI workflow for code/evidence; hosted execution remains pending a push.
+
+Thirteen core tests previously skipped without prepared sample data. Run the same checks on an isolated synthetic dataset as well as the optional real sample. Use production split/instance/read/filter/candidate paths, random test vectors and no downloaded model. Preserve research inputs and predictions. Add non-writing companion export freshness checks, using `math.fsum` to remove Python-version differences in seed-mean rounding while preserving the committed bundle bytes.
+
+Document and test the existing undefined relative-bootstrap behaviour for zero baselines, suppressing only the expected numerical warnings without dropping draws or changing finite calculations. Leave original reports intact. Record the remaining large-runner, repeated-recipe and artifact-manifest refactoring in `docs/code_review.md`; this cleanup does not rerun training or Test scoring.
+
 ## 2026-11-11 — Prepare the repository for professor review
 
 The user authorised the first review-cleanup batch. Reconcile the local companion/correction work with main's later R1 evidence on `codex/review-ready`, preserve the old README under `docs/history/`, and provide a concise entrance, review guide and claim-to-code/checkpoint evidence map. Keep original poster assets, raw result tables, registered protocols and hashed source snapshots intact.

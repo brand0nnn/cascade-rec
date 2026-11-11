@@ -49,11 +49,12 @@ The tracked source summaries must be present in their original repository locati
 
 ```sh
 python3 poster-companion/export_data.py
+python3 poster-companion/export_data.py --check
 python3 -m unittest discover -s poster-companion -p 'test_*.py' -v
 node --check poster-companion/app.js
 node --test poster-companion/test_visuals.cjs
 ```
 
-Regeneration is deterministic and fails when a required source is missing rather than substituting another study. The committed bundle can always be viewed without regeneration.
+Regeneration is deterministic and fails when a required source is missing rather than substituting another study. `--check` regenerates in a temporary directory and fails on stale/missing bundles without rewriting them. `python3 scripts/check_repo.py --evidence-only` runs all companion checks from the repository root. The committed bundle can always be viewed without regeneration.
 
 Website changes are under `poster-companion/`; the review also adds documentation and the separate rank-only aggregate report. The original poster, HTML poster drafts and historical evaluation data are preserved. The preview server binds only to the local computer; this cleanup does not publish the site.

@@ -1,0 +1,30 @@
+# Code review for professor handoff
+
+Reviewed 11 November 2026 on `codex/review-ready`. This pass covers installation, fresh-checkout tests, evidence generation and the structure of the experiment runners. The [evidence map](evidence_map.md) identifies the implementations behind the poster. Unit tests and code inspection do not replace replaying the original fits.
+
+## Completed changes
+
+| Issue found | Change | Verification |
+|---|---|---|
+| The package declared Python 3.10 although the installed SciPy, scikit-learn and Matplotlib pins require at least 3.11; package metadata listed no dependencies. | Added an explicit setuptools backend, Python minimum 3.11 and `.python-version`. Package dependencies read the existing `requirements.txt` pins. | Built metadata contains all 18 unchanged requirements and the corrected Python minimum. |
+| Thirteen core data/candidate tests skipped in a checkout without prepared sample data. | The shared fixture now runs those tests on synthetic reviews in a temporary directory, and also on the prepared 2% sample when available. The fixture contains same-timestamp events, histories longer than 50 and new products in Validation/Test, with seeded random text vectors. | Production split/instance/container and candidate/filtering code execute without downloading data or an encoder. Synthetic results are test evidence only. |
+| Test and companion checks had separate commands and no CI workflow. | Added [check_repo.py](../scripts/check_repo.py) and [CI](../.github/workflows/checks.yml), using Python 3.11 and the CPU build of the existing Torch pin. Model/encoder downloads are disabled during checks. | The same commands are exercised locally, including a checkout containing only tracked files. A hosted Linux run remains pending a push. |
+| Export freshness was checked manually; Python versions summed seed contributions differently in the last floating-point bit. | Added a non-writing `export_data.py --check` and used `math.fsum` for the three-seed waterfall means. | Python 3.11 and 3.14 reproduce the committed bundle bytes. A regression check detects altered/missing exports and verifies they stay untouched. |
+| A relative-gain bootstrap emitted division warnings when a draw had zero baseline quality. | Localised the handling of expected floating-point warnings and documented the existing nonfinite result. Zero-baseline draws remain in the bootstrap. | Joint-user resampling matches a hand-built reference; undefined intervals remain undefined. No old report is regenerated and finite estimates use the same arithmetic. |
+
+Use `.venv/bin/python scripts/check_repo.py` for the full check, or `python3 scripts/check_repo.py --evidence-only` for the standard-library/Node.js evidence check. Optional prepared-data tests report their missing inputs explicitly.
+
+Completed verification: **390 passed / 3 skipped** in the working checkout; **377 passed / 16 skipped** in a tracked-file checkout without research data. Both also pass **15 companion evidence tests and 3 JavaScript tests**, export freshness and JavaScript syntax checks, without warnings. The extra thirteen skips in the second checkout are the prepared-sample variants; their synthetic counterparts pass. Installed-package dependency checks cover 87 compatible packages. Four seeded cohorts reproduce the previous relative-bootstrap outputs exactly. Original result tables and committed companion data are unchanged.
+
+## Structure that still needs work
+
+| Area | Evidence in the code | Appropriate next change |
+|---|---|---|
+| Study code combines execution and reporting | [frozen_ranker_followup.py](../src/cascade/pipelines/frozen_ranker_followup.py) is over 800 lines and owns list construction, checkpoint scoring, protocol locks, Test guards and reports. Other pool runners are similarly broad. | Separate pure list/metric transformations from execution and reporting, beginning with compatibility tests for the existing arrays and checkpoint contracts. Keep historical run paths and protocol identities explicit. |
+| Matching-family model construction is repeated | [Training](../scripts/run_hybrid_study.py), [Test scoring](../scripts/score_test_final.py), [fast-score Test scoring](../scripts/score_test_rrfl.py) and the [correction audit](../scripts/audit_hybrid_normalization.py) repeat feature/model specifications. The scaler formula is already shared. | Extract a named recipe for these specific November fits and test parameter/specification equivalence. R1's October checkpoints need their own contract; they cannot be silently substituted. |
+| Some modules import private helpers from earlier studies | Graph-family reports reuse `_cases`, `_composition` and other internals from [graph_latent_report.py](../src/cascade/pipelines/graph_latent_report.py). | Promote shared reporting functions to a stable module after checking old report equivalence. Keep study-specific orchestration separate. |
+| Reproduction depends on local artifacts and paths | The runners bind dated `results/local_experiments` locations and need untracked weights, candidate arrays and processed data. | Register per-study prerequisite manifests and fresh output roots. The existing [study preflight](../src/cascade/pipelines/study_preflight.py) covers earlier tracks, not every poster system. See [artifact availability](review_guide.md#reproduction-and-artifact-availability). |
+
+These are structural and reproducibility limitations, not newly established explanations for the measured ranking losses. Changing the training chronology, scaler population, candidate recipe or metric would be a scientific change and needs its own evidence. A broad formatter/move of the dated experiment modules would also obscure comparison with hashed source snapshots, so this pass keeps their numerical implementations in place.
+
+The pinned requirements cover top-level packages, not a complete transitive lock across operating systems. Python 3.11 is tested; newer Python versions are not claimed to reproduce the model environment. Review aggregate tables independently of any assumption that a fresh fit will produce identical weights.

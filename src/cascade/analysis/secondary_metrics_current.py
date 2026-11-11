@@ -68,7 +68,12 @@ def contrasts() -> list[tuple[str, str, str]]:
 
 
 def relative_advantage_ci(users, mask, base, cand, m1, m2, n_boot=N_BOOT, seed=BOOT_SEED) -> dict:
-    """Joint user bootstrap of rel(m1) - rel(m2), rel(m) = macro(cand_m)/macro(base_m) - 1, on one group."""
+    """Joint user bootstrap of rel(m1) - rel(m2), rel(m) = macro(cand_m)/macro(base_m) - 1.
+
+    A zero baseline can make a resampled ratio undefined even when the point
+    estimate exists. Preserve the resulting nonfinite interval; do not discard
+    or redraw those users. Suppress only the expected NumPy division warnings.
+    """
     u = users[mask]
     frame = pd.DataFrame({"u": u, "b1": base[m1][mask], "c1": cand[m1][mask], "b2": base[m2][mask], "c2": cand[m2][mask]})
     per = frame.groupby("u").mean().to_numpy()
@@ -77,12 +82,17 @@ def relative_advantage_ci(users, mask, base, cand, m1, m2, n_boot=N_BOOT, seed=B
     for i in range(0, n_boot, 32):
         idx = rng.integers(0, len(per), size=(min(32, n_boot - i), len(per)))
         mean = per[idx].mean(1)
-        boots[i:i + len(idx)] = (mean[:, 1] / mean[:, 0] - 1) - (mean[:, 3] / mean[:, 2] - 1)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            boots[i:i + len(idx)] = (mean[:, 1] / mean[:, 0] - 1) - (mean[:, 3] / mean[:, 2] - 1)
     est = per.mean(0)
-    lo, hi = np.percentile(boots, [2.5, 97.5])
+    with np.errstate(divide="ignore", invalid="ignore"):
+        lo, hi = np.percentile(boots, [2.5, 97.5])
+        rel_metric = float(est[1] / est[0] - 1)
+        rel_vs = float(est[3] / est[2] - 1)
+        difference = rel_metric - rel_vs
     return {"base_metric": float(est[0]), "cand_metric": float(est[1]), "base_vs": float(est[2]), "cand_vs": float(est[3]),
-            "rel_metric": float(est[1] / est[0] - 1), "rel_vs": float(est[3] / est[2] - 1),
-            "diff": float((est[1] / est[0] - 1) - (est[3] / est[2] - 1)), "ci_low": float(lo), "ci_high": float(hi),
+            "rel_metric": rel_metric, "rel_vs": rel_vs,
+            "diff": difference, "ci_low": float(lo), "ci_high": float(hi),
             "n_users": int(len(per)), "n_resamples": n_boot}
 
 

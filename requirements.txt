@@ -1,5 +1,5 @@
-# Exact versions of the working local environment (Python 3.11). recbole 1.2.1 needs numpy<2 and pandas<3, and newer
-# pyarrow releases need numpy>=2, so keep these pinned together.
+# Exact versions of the tested local Python 3.11 environment.
+# Preserve these pins when inspecting historical experiments; RecBole uses the NumPy 1 / pandas 2 stack.
 torch==2.5.1
 numpy==1.26.4
 pandas==2.3.3

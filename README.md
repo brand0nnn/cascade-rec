@@ -63,7 +63,15 @@ uv pip install --python .venv/bin/python -r requirements.txt -e .
 .venv/bin/python -m pytest -q
 ```
 
-Tests using prepared sample data may skip when inputs are absent. Passing unit tests does not reproduce training or establish the generality of a research claim.
+The package declares the same pinned dependencies as `requirements.txt`; Python 3.11 is the tested runtime. The core split, history, filtering and candidate tests always run on isolated synthetic reviews, with additional checks on the prepared 2% sample when available. Missing bulk/sample inputs skip only their optional checks. Passing unit tests does not reproduce training or establish the generality of a research claim.
+
+With Node.js available, run all code and evidence checks through one command:
+
+```sh
+.venv/bin/python scripts/check_repo.py
+```
+
+For the aggregate-only check, use `python3 scripts/check_repo.py --evidence-only`. The command verifies export freshness without rewriting bundles, then checks evidence and JavaScript. [CI](.github/workflows/checks.yml) runs the same checks on Python 3.11 without research data. The [code review](docs/code_review.md) records completed fixes and the remaining structural work.
 
 Rescoring and training require additional artifacts. The [review guide](docs/review_guide.md#reproduction-and-artifact-availability) distinguishes aggregate inspection, rank-based metric recomputation, checkpoint scoring and new training. The [older artifact allowlist](docs/ranker_artifacts.md) covers the historical six-checkpoint study; it does not supply every current poster checkpoint.
 
