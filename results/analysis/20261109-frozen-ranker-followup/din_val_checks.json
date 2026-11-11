@@ -1,0 +1,24 @@
+{
+  "label": "Val only, exploratory follow-up",
+  "test_predictions_loaded": false,
+  "ranker_device": "cpu",
+  "anchor_rank_differences": {
+    "armC_mlp_seed0": 0,
+    "armC_mlp_seed1": 0,
+    "armC_mlp_seed2": 0,
+    "din_seed0": 0,
+    "din_seed1": 0,
+    "din_seed2": 0
+  },
+  "tt_rebuild_exact": true,
+  "tt_score_regather_exact": true,
+  "mixed_overlap_slots": 470295,
+  "mixed_overlap_score_exact": true,
+  "fresh_equals_fresh_study_pool": true,
+  "recall_in_list": {
+    "tt200": 0.0715874351664205,
+    "tt500": 0.12268574176484733,
+    "fresh": 0.11802287637825026,
+    "mixed": 0.08776577473980696
+  }
+}

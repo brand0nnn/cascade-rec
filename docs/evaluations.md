@@ -1656,3 +1656,47 @@ Slurm job **1097334** on `xgpi13` completed with exit **0:0** in **7m42s**, incl
 - **Faster vs full-catalogue combined score:** −0.000036618, CI [−0.000122349, +0.000049766], with the earlier measured 17.6 vs 31.8 ms latency. No overall difference is detected; this does not establish equivalence without a declared acceptable-loss margin. Popular-item quality is lower by 0.000268114, CI [−0.000457032, −0.000082367].
 
 Training and both Test scorers now share `natural_score_stats`; future hybrid fits save a `score_normalization.json` alongside their checkpoints, and Test scorers refuse to overwrite earlier evidence. **375 tests pass / 3 skip**; focused checks also pass after the CLI/output guards were updated. This is a disclosed post-Test-exposure bug correction, not a new untouched Test or an opportunity to select settings. Existing poster exports remain historical snapshots; use the corrected tables above for precise numbers.
+
+### Frozen rankers on better candidate lists: Val follow-up and post-hoc Test check (Brandon, 9 November 2026)
+
+- **Why:** the poster's "better list, frozen ranker" evidence was Validation-only. The user requested a Test check
+  and a DIN version. Protocol and predictions were hash-locked before Test was opened:
+  `docs/test_protocol_2026-11-09.md`. Code: `src/cascade/pipelines/frozen_ranker_followup.py`.
+  Tables: `results/analysis/20261109-frozen-ranker-followup/tables.md`.
+- **Status:** third, post-hoc look at Test. Frozen models only, each system scored once, unadjusted intervals.
+  All Val reproduction checks passed first.
+- **Fresher retriever (replicated):** on Test the retriever's own order more than doubles (2.76 → 5.79 ×10⁻³),
+  but no frozen ranker gains:
+  - natural MLP −0.07 [−0.26, +0.12];
+  - DIN −0.29 [−0.52, −0.05];
+  - score-plus-correction MLP −0.43 [−0.62, −0.25].
+- **500 vs 200 candidates:** natural MLP −0.40 [−0.53, −0.28] (−8%, replicated); DIN +0.15 [+0.01, +0.27] (+2%).
+- **Mixed lists:**
+  - Frozen two-tower-list rankers gain on Test: natural MLP +1.24 (+24%), DIN +0.60 (+10%), mostly on new products.
+    DIN's predicted loss (Val −0.20) did not hold.
+  - The frozen recency-list ranker gains +0.27 and loses −2.30 on new products. Retraining on mixed lists adds a
+    further +1.16 [+0.97, +1.35].
+- **Predictions:** 5 of 8 directional predictions held, 2 were inconclusive and 1 was not held. The "less than a
+  third of the list gain" criterion held in 6 of 8 cells.
+- **Wording consequence:** a frozen ranker cannot be relied on to use a better list (fresher retriever: 0 of 3
+  gain); gains from mixed lists are real but ranker-dependent and smaller than retraining where measured. There is
+  no uniform new-product pattern.
+- **Addendum (same day):**
+  - **Fresher-retriever seed 1 (Val only):** natural MLP −0.51 [−0.75, −0.27], DIN −0.25 [−0.51, +0.03],
+    score-plus-correction MLP +0.11 [−0.11, +0.35], while the retriever's own order gains +4.35. The no-gain
+    result does not depend on the retriever seed. Seed 2 never completed training.
+  - **SASRec paired Test intervals (saved ranks only):** planned recipe +2.59 [+2.36, +2.84] (×2.0); best system
+    +7.79 [+7.46, +8.15] (×4.0). See the addendum in the follow-up `tables.md`.
+  - **Two-tower version of R3 (Val only, no training):** the frozen two-tower-list score-plus-correction MLP gains
+    nothing detectable from period-start statistics (T1 − T0 +0.13 [−0.00, +0.26] ×10⁻³, against +1.29 for the
+    recency ranker). Month-old statistics hurt its new products, as for the recency ranker (−2.33 [−2.60, −2.09]).
+    Statistics timing matters mainly for new products, which two-tower lists rarely contain.
+
+### Addendum (10 Nov): score-swap test for R1, Val only
+
+Predictions `docs/score_swap_val_2026-11-10.md` (written and hashed before the run); phase `score-swap-val`. Frozen
+natural MLP and DIN (3 seeds) on the fresher retriever's top 200 with (C) the original two-tower score, (D) the
+fresher order but the original list's score values, and (E) the original products with the fresher scores. All
+eight predictions held. D − A: MLP +1.13 [+0.90, +1.36] ×10⁻³ (+13%), DIN +0.73 [+0.53, +0.95] (+8%); E − A: MLP
+−1.23, DIN −1.09. The failure on fresher lists is caused by the score values, not the products; the gain is on
+established products, new products stay below the original lists. Tables: `results/analysis/20261109-frozen-ranker-followup/tables.md`.
