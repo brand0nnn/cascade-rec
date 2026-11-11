@@ -59,6 +59,7 @@ def main():
             value = r['recall@200']['mean'] if group == 'all' else r['segments']['recall@200']['new-in-period' if group == 'new' else 'not new']
             rows.append(dict(label=label, group=group, value=value, metric='Recall@200', seeds=len(r['seeds']), source=rqsrc))
     study('retrieval', 'RQ1 · What reaches the ranker?', 'Validation · Recall@200 · per-user macro · 232,904 events / 124,416 users · exact search', rows, [poolsrc, rqsrc], 'Baselines use the retriever-training period. Two-tower/recency/mixed rows use the frozen candidate-pool study; learned baselines average three seeds (Popularity and ItemKNN are deterministic). No paired interval is supplied for every displayed pair. Mixing changes candidate membership, not the 200-item budget.')
+    studies['retrieval']['mixing'] = {'overlap':pools['P1_P2_val_top200_overlap']['mean'],'composition':pools['P3_val_composition_mean_per_list']}
 
     rows = []
     for r in curves:

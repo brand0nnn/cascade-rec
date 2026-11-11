@@ -52,6 +52,17 @@ class EvidenceTests(unittest.TestCase):
         self.assertAlmostEqual(value('final','S8')/value('ranker','mlp_tt'),1.9984,places=3)
         self.assertFalse(any(r['group']=='warm' for r in D['studies']['ranker']['rows']))
 
+    def test_mixed_composition_is_fixed_200_item_budget(self):
+        source=json.loads((ROOT/'results/analysis/20261106-pools/pool_report.json').read_text())
+        mixing=D['studies']['retrieval']['mixing']
+        self.assertEqual(mixing['composition'],source['P3_val_composition_mean_per_list'])
+        self.assertAlmostEqual(sum(mixing['composition'].values()),200,places=10)
+        self.assertLess(mixing['composition']['both_sources'],mixing['overlap'])
+
+    def test_expansion_accounting_matches_measured_k_differences(self):
+        for r in D['studies']['k']['expansion']:
+            self.assertAlmostEqual(r['gained']+r['competition'],value('k',str(r['high']))-value('k',str(r['low'])),places=12)
+
     def test_confidence_intervals_are_valid_paired_differences(self):
         for key,s in D['studies'].items():
             for c in s.get('contrasts',[]):

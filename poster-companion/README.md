@@ -10,7 +10,7 @@ From the repository root:
 python3 -m http.server 8765 --bind 127.0.0.1 --directory poster-companion
 ```
 
-Open **http://127.0.0.1:8765**. Stop the server with Ctrl+C. You can also open `index.html` directly: the bundled evidence loads without a server or internet connection. CSV download behaviour can vary in file mode, so the local server is recommended.
+Open **http://127.0.0.1:8765**. Stop the server with Ctrl+C. You can also open `index.html` directly: the bundled evidence loads without a server or internet connection. The local server is recommended for consistent navigation between sections.
 
 No npm installation, Python packages, API keys, backend, model weights or dataset downloads are needed. The committed data bundle is sufficient for teammates to view everything.
 
@@ -26,8 +26,10 @@ If the branch already exists locally, use `git switch codex/poster-companion` an
 ## What is included
 
 - **Guided story:** interactive pipeline and metrics, architecture explanations, retrieval groups, K sweep, same-pool ranker comparisons, frozen-ranker interventions, retraining controls, timing diagnostics and final comparisons.
-- **Results explorer:** study-specific charts, exact values, available paired intervals, source references and aggregate CSV downloads.
+- **Results explorer:** study-specific charts, exact values, available paired intervals, paired-difference plots and source references, all readable on the page. Visitor download links are intentionally omitted; aggregate CSV files remain in the repository for reproducibility.
 - **Original poster:** an unchanged byte-for-byte copy in a keyboard-accessible zoom dialog.
+- **Visual explanations:** candidate-pool composition, linked K trends, gain/competition waterfalls, retraining-controls matrix, review-cutoff timeline, co-review graph and paired uncertainty plots.
+- **Methodology walkthrough:** query construction, natural-only training, end-to-end evaluation, per-user averaging, and paired bootstrap comparisons. Conceptual examples are explicitly labelled.
 - **Local assets:** no external fonts, scripts, images, analytics or requests.
 
 Direct links include `#rq1`, `#rq2`, `#rq3`, `#r1`, `#r2`, `#r3`, `#r4`, `#methods`, and `#explorer/timing`.
@@ -54,6 +56,7 @@ The tracked source summaries must be present in their original repository locati
 python3 poster-companion/export_data.py
 python3 -m unittest discover -s poster-companion -p 'test_*.py' -v
 node --check poster-companion/app.js
+node --test poster-companion/test_visuals.cjs
 ```
 
 Regeneration is deterministic and fails when a required source is missing rather than substituting another study. The committed bundle can always be viewed without regeneration.

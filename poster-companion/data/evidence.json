@@ -179,7 +179,15 @@
         "s2",
         "s1"
       ],
-      "note": "Baselines use the retriever-training period. Two-tower/recency/mixed rows use the frozen candidate-pool study; learned baselines average three seeds (Popularity and ItemKNN are deterministic). No paired interval is supplied for every displayed pair. Mixing changes candidate membership, not the 200-item budget."
+      "note": "Baselines use the retriever-training period. Two-tower/recency/mixed rows use the frozen candidate-pool study; learned baselines average three seeds (Popularity and ItemKNN are deterministic). No paired interval is supplied for every displayed pair. Mixing changes candidate membership, not the 200-item budget.",
+      "mixing": {
+        "overlap": 12.302360629272146,
+        "composition": {
+          "both_sources": 10.39843025452547,
+          "recency_only": 94.34997681448151,
+          "two_tower_only": 95.25159293099303
+        }
+      }
     },
     "k": {
       "title": "RQ2 · More candidates, better recommendations?",
