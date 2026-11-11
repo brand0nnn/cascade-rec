@@ -1,11 +1,11 @@
-# Experiment overview (Val only, exploratory)
+# Historical experiment overview for Validation
 
 A one-page index of every system scored on Val during the 5–7 Nov 2026 runs, plus the team's earlier runs they build on. Full write-ups:
 - `docs/overnight_results_2026-11-05.md`
 - `docs/overnight_results_2026-11-06.md`
 - `docs/evaluations.md`
 
-No system was selected, and no Test file was opened.
+This index describes the 5–7 November Validation experiments. Its statements about Test apply to those runs, not the project as a whole. Later Test results, the 9 November frozen-ranker follow-up and the scoring correction are indexed in the [review guide](review_guide.md) and [evidence map](evidence_map.md).
 
 ## Terms
 

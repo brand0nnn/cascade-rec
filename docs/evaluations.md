@@ -1,12 +1,14 @@
 # Evaluation findings, protocol and next experiments
 
-Updated **8 November 2026** (latest: the evening mixed-list Test normalisation correction; earlier studies are retained). This is the single current evaluation record for teammates and agents. Read this document for results, interpretation, progress, limitations and the authorised follow-up. Append future findings here. Other experiment notes and generated reports are historical evidence, not separate instructions.
+Updated **11 November 2026** for professor review. Start with the [review guide](review_guide.md) and [poster evidence map](evidence_map.md) for current scope, chronology, checkpoint identities and artifact availability. This document retains the dated evaluation history, including the 9 November R1 Test follow-up and 10 November Validation score swaps at the end. Append future findings here; generated reports and source snapshots remain historical evidence, not instructions.
+
+**Review reconciliation:** R1 uses October natural-list MLP/DIN checkpoints, distinct from RQ3's November hybrid fits. The companion now includes R1's measured Test follow-up and corrected RQ3 scores. Its updated matching-family confidence intervals were recomputed from existing original/corrected ranks in [matching_report](../results/test_final_ranker/20261108-normalization-corrected/matching_report/), without model execution. Alternative shared-period or rolling retriever/ranker training has not been compared with the A/B protocol; input-intervention effects and the statistics-age cue must be interpreted within that protocol.
 
 **Latest correction:** the mixed-list Test scorers used score statistics from all training lists, while training used natural-only lists. The completed frozen-checkpoint audit corrects this: DIN mixed-list Test nDCG@10 is **0.008268565**, versus the original MLP's **0.005193694**, still **+59.20%**. All twelve Validation and twelve historical Test rank replays are exact. Corrected results are separate from the original evidence; see [the evening correction](#evening-correction-trainingtest-score-normalisation-8-november-2026) below.
 
-**Restoration execution status:** root plan §16 items are complete in a separate [data and audit collection](../results/steps_restoration/20261104/): T1 graph refresh, the full 14-setting FAISS/budget grid and per-seed K funnels. All independent checks pass; 252 tests pass / 4 skips. The §15 collection is unchanged, and narrative synthesis remains explicitly deferred.
+**4 November restoration status (historical):** root plan §16 items are complete in a separate [data and audit collection](../results/steps_restoration/20261104/): T1 graph refresh, the full 14-setting FAISS/budget grid and per-seed K funnels. All independent checks pass; 252 tests pass / 4 skips. The §15 collection is unchanged, and later review synthesis is now authorised.
 
-**Latest execution status:** the user authorised root plan §15 and subsequently deferred narrative reporting. The full Test, popularity/composition, frozen-model K sensitivity and bounded FAISS/latency items are complete, with numerical evidence and checked figures in [results/steps_final/20261104](../results/steps_final/20261104/). 243 tests pass / 4 skips; the independent Test audit reconstructs twelve exports, 54 metrics and 27 intervals. Earlier Test/index deferrals and forced-list tables below are historical; final synthesis is intentionally pending.
+**4 November execution status (historical):** the user authorised root plan §15 and subsequently deferred narrative reporting. The full Test, popularity/composition, frozen-model K sensitivity and bounded FAISS/latency items are complete, with numerical evidence and checked figures in [results/steps_final/20261104](../results/steps_final/20261104/). 243 tests pass / 4 skips; the independent Test audit reconstructs twelve exports, 54 metrics and 27 intervals. Earlier Test/index deferrals and forced-list tables below are historical; later review synthesis is now authorised.
 
 ## Current progress
 
@@ -418,7 +420,7 @@ The sweep freezes weights and training preprocessing. K500 extends beyond the K2
 
 Together these support a training-score mismatch hypothesis and show the frozen network's sensitivity to that input. They do not prove that force-insertion caused the learned response. Establishing that requires a controlled retraining comparison. Added products are unobserved alternatives, not known dislikes or proven irrelevant recommendations.
 
-Sources for sections 3-6: [saved evaluation and funnel](../results/saved_evaluation/20261027-saved-validation/report.md), [original K1 sweep](../results/ranker_k1_sweep/20261025-k1/report.md), [score diagnostics and representative examples](../results/saved_evaluation/20261027-saved-validation/saved_diagnostic_report.md).
+Sources for sections 3-6: [saved-evaluation headline](../results/saved_evaluation/20261027-final-validation/headline.csv), [funnel](../results/saved_evaluation/20261027-final-validation/funnel.csv), [original K1 sweep](../results/ranker_k1_sweep/20261025-k1/report.md), and [saved diagnostics](../results/saved_evaluation/20261027-final-validation/saved_diagnostics.json). The originally referenced `20261027-saved-validation/report.md` and `saved_diagnostic_report.md` are not tracked; the compact tables/JSON and [provenance](../results/saved_evaluation/20261027-final-validation/provenance.json) are available.
 
 
 ### Historical failures and feature discovery
@@ -1698,5 +1700,7 @@ Predictions `docs/score_swap_val_2026-11-10.md` (written and hashed before the r
 natural MLP and DIN (3 seeds) on the fresher retriever's top 200 with (C) the original two-tower score, (D) the
 fresher order but the original list's score values, and (E) the original products with the fresher scores. All
 eight predictions held. D − A: MLP +1.13 [+0.90, +1.36] ×10⁻³ (+13%), DIN +0.73 [+0.53, +0.95] (+8%); E − A: MLP
-−1.23, DIN −1.09. The failure on fresher lists is caused by the score values, not the products; the gain is on
-established products, new products stay below the original lists. Tables: `results/analysis/20261109-frozen-ranker-followup/tables.md`.
+−1.23, DIN −1.09. With fresh candidates fixed, restoring familiar score inputs improves these fitted rankers;
+this identifies score-input sensitivity on Validation. It does not establish that the same sensitivity would
+arise under a different temporal training protocol or that candidate identities never matter. The gain is on
+established products; new products stay below the original lists. Tables: `results/analysis/20261109-frozen-ranker-followup/tables.md`.

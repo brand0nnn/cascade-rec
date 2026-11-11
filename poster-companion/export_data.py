@@ -31,8 +31,12 @@ def main():
     curves, curvesrc = read('results/targeted_study/e3-20261107-all-seeds/k_curve.csv')
     retrieval, retrsrc = read('results/retriever/two_tower_text/seed0/metrics.json')
     expansion, expsrc = read('results/targeted_study/e3-20261107-all-seeds/expansion.csv')
-    levels, ranksrc = read('results/test_final_ranker/20261108/levels.csv')
-    comparisons, rankcisrc = read('results/test_final_ranker/20261108/comparisons.csv')
+    levels, ranksrc = read('results/test_final_ranker/20261108-normalization-corrected/matching_report/levels.csv')
+    comparisons, rankcisrc = read('results/test_final_ranker/20261108-normalization-corrected/matching_report/comparisons.csv')
+    _, correction_src = read('results/test_final_ranker/20261108-normalization-corrected/audit.json')
+    frozen, frozensrc = read('results/analysis/20261109-frozen-ranker-followup/levels.csv')
+    frozen_ci, frozencisrc = read('results/analysis/20261109-frozen-ranker-followup/contrasts.csv')
+    frozen_recall, frozenrecsrc = read('results/analysis/20261109-frozen-ranker-followup/recall_in_list_test_macro.csv')
     control, ctrlsrc = read('results/analysis/20261107-pool-size-control/metrics.csv')
     controlci, ctrlcisrc = read('results/analysis/20261107-pool-size-control/paired_differences.csv')
     final, finalsrc = read('results/test_final/20261107/metrics.csv')
@@ -76,8 +80,20 @@ def main():
 
     rows = [dict(label=r['system'], group={'new-in-period':'new', 'warm-head':'head', 'warm-tail':'tail'}.get(r['group'], r['group']), value=float(r['ndcg10']), metric='nDCG@10', source=ranksrc) for r in levels if r['system'] in ('mlp_tt','din_tt','mlp_rrf','din_rrf')]
     cis = [dict(reference=r['a'], candidate=r['b'], group={'new-in-period':'new','warm-head':'head','warm-tail':'tail'}.get(r['group'],r['group']), diff=float(r['diff']), ci_low=float(r['ci_low']), ci_high=float(r['ci_high'])) for r in comparisons if r['a'] in ('mlp_tt','din_tt','mlp_rrf','din_rrf') and r['b'] in ('mlp_tt','din_tt','mlp_rrf','din_rrf')]
-    study('ranker', 'RQ3 · Which ranker orders the same list better?', 'Test · matching-feature MLP / DIN · K=200 · three seeds · nDCG@10 per-user macro', rows, [ranksrc, rankcisrc], 'Compare MLP with DIN inside the selected pool. These are separately trained models, not a frozen-ranker pool swap. DIN also changes candidate/history interactions; this does not isolate attention alone. Mixed-score normalisation provenance remains unresolved; saved results are reproduced here, not independently rescored.')
+    study('ranker', 'RQ3 · Which ranker orders the same list better?', 'Test · matching-feature MLP / DIN · K=200 · three seeds · corrected nDCG@10 per-user macro', rows, [ranksrc, rankcisrc, correction_src], 'Compare MLP with DIN inside the selected pool. These are separately trained models, not a frozen-ranker pool swap. DIN also changes candidate/history interactions; this does not isolate attention alone. Mixed-list Test scores now reuse natural-only training normalisation. The correction audit reproduced all twelve saved Validation and historical Test arrays; original results remain separate. These November checkpoints differ from R1’s October frozen rankers.')
     studies['ranker']['contrasts'] = cis
+
+    recall = {r['list']: float(r['recall_macro']) for r in frozen_recall}
+    rows = []
+    for r in frozen:
+        if r['split'] == 'test' and r['ranker'] in ('armC_mlp', 'din') and r['list'] in ('tt200', 'tt500', 'fresh', 'mixed'):
+            row = dict(label=r['ranker']+'/'+r['list'], group=r['group'], value=float(r['ndcg10']), metric='nDCG@10', source=frozensrc)
+            if r['group'] == 'all':
+                row['recall'] = recall[r['list']]
+            rows.append(row)
+    cis = [dict(reference=r['reference'], candidate=r['candidate'], group=r['group'], diff=float(r['diff']), ci_low=float(r['ci_low']), ci_high=float(r['ci_high'])) for r in frozen_ci if r['split']=='test' and r['reference'].split('/')[0] in ('armC_mlp','din') and r['candidate'].split('/')[0] in ('armC_mlp','din')]
+    study('frozen', 'R1 · Change retrieval with the ranker frozen', 'Test · 297,390 queries / 112,081 users · October natural-list MLP / DIN · three ranker seeds, one fresh-retriever seed · per-user macro', rows, [frozensrc, frozencisrc, frozenrecsrc], 'The fresh retriever trains on A+B before August 2021. The rankers stay trained on B lists from the old A-only retriever. This is a transfer intervention, not a consistently retrained cascade. November 9 was a post-hoc Test follow-up. Fresh-list MLP loss is inconclusive; DIN loses. Mixed lists improve both frozen models. Recall is macro over the full Test cohort, and is supplied only for the all-products rows. The exact K500 recall increase is 82.41%; the original poster prints 83%.')
+    studies['frozen']['contrasts'] = cis
 
     rows = [dict(label=r['system'],group={'new_in_val':'new','warm_in_val':'warm'}.get(r['group'],r['group']),value=float(r['value']),metric='nDCG@10',source=ctrlsrc) for r in control if r['metric']=='ndcg10']
     cis = [dict(reference=r['reference'],candidate=r['candidate'],group={'new_in_val':'new','warm_in_val':'warm'}.get(r['group'],r['group']),diff=float(r['diff']),ci_low=float(r['ci_low']),ci_high=float(r['ci_high'])) for r in controlci if r['metric']=='ndcg10']

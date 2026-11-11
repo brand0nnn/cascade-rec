@@ -1,6 +1,8 @@
 # What decides recommendation quality in a two-stage recommender? Findings and evidence
 
-CP4285 Group 7: Brandon Kang, Tong Jing Yen, Phua Qing Rong. Written 7 Nov 2026.
+CP4285 Group 7: Brandon Kang, Tong Jing Yen, Phua Qing Rong. Original narrative 7 Nov 2026; review qualifications updated 11 Nov 2026.
+
+Start with the [review guide](review_guide.md) and [poster evidence map](evidence_map.md) for the current interpretation, exact study identities and correction history. Dated experiments below preserve their individual scope. R1 now includes the 9 November post-hoc Test follow-up; score swaps are Validation-only. The stage split and snapshot construction may amplify the observed effects; their magnitude under an alternative training protocol remains untested.
 
 - **Data:** Amazon Reviews 2023, Cell Phones & Accessories.
 - **Status:**
@@ -12,19 +14,19 @@ CP4285 Group 7: Brandon Kang, Tong Jing Yen, Phua Qing Rong. Written 7 Nov 2026.
 
 A two-stage recommender first **retrieves** 200 candidate products per user, then a **ranker** reorders them and shows the top 10. We asked what decides the quality of those 10 products.
 
-**Thesis:** the ranker learns whatever its training data teaches it, including shortcuts that break when it is used. How the training data is built matters far more than which ranking model is used.
+**Thesis:** the fitted rankers depend on their training inputs. Candidate construction, retrieval-score inputs and statistics timing changed quality substantially in these experiments. The direction depends on the model and intervention; mixed lists sometimes help frozen rankers, and the original temporal protocol limits generalisation.
 
 About 94% of the products users bought next never reach the 200 candidates, so the ranker can only work with what it is given. Beyond that, we found three ways the construction of the training data taught the ranker a shortcut:
 
 | How the training data is built | Shortcut the ranker learned | Effect of fixing it | Evidence |
 |---|---|---|---|
 | **How missed targets enter the training lists** (forced in vs natural only) | "low retrieval score = the answer" | +24%; no collapse at large K; DIN overtakes MLP | Val, 3 seeds, two candidate sets |
-| **Which retriever produced the lists** | the habits of that retriever | mixed lists +35% Val / +22% Test; 55% of it needs retraining | size-matched control; Test |
+| **Which retriever produced the lists** | the habits of that retriever | residual mixed-list system +35% Val / +22% Test; size control retains most of the Val gain | size-matched control; Test |
 | **When the product statistics were calculated** | "no reviews yet = likely purchase" | +21% for the same frozen model on Test; co-review inputs start to help | interventions; replicated on Test |
 
 **Result:** combining the fixes gives **+61% on Test** (nDCG@10 0.0064 → 0.0104). Changing the ranker's loss moved results by under 0.0005.
 
-**Cost:** every fix favours established products. The best system overall is not the best for new products, which remain the open problem.
+**Trade-offs:** the best residual system overall is not the best for new products. The 9 November frozen matching-ranker mixed-list gains, by contrast, are concentrated on new products. Group effects depend on the intervention and model family.
 
 ## The story we present
 
@@ -36,22 +38,22 @@ The first lesson about training data came from how the original ranker was train
 
 Training only on lists where the retriever had genuinely found the product removed the shortcut. Quality rose by 24%, the collapse disappeared, and DIN overtook the MLP. We found this in late October and Jing Yen replicated it on the cluster with the original candidates. It raised the question that drives the rest of the project: if the way the training lists are built matters this much, what else in the training data is the ranker learning from?
 
-The second answer was the retriever itself. Our two retrievers find almost completely different products, sharing only about 12 of every 200. When we mixed their lists and trained the ranker on the mixed lists, results improved by 35% on Val and 22% on the held-out Test period. Retraining the ranker on exactly as many examples as before showed where the gain comes from. Most of it came from the ranker learning on the kind of list it would actually rank. Better candidates alone, without retraining, gave less than a quarter. A ranker learns the habits of the retriever that feeds it, so whenever the retriever changes, the ranker must be retrained.
+The second answer was the retriever itself. Our two retrievers find almost completely different products, sharing only about 12 of every 200. When we mixed their lists and trained the ranker on the mixed lists, results improved by 35% on Val and 22% on the held-out Test period. Retraining with the training-list count matched retained most of the gain. This rules out list count alone, while candidate scoring, scaling and optimisation exposure also change. Better candidates alone, without retraining, gave less than a quarter. This residual-family path shows that adapting training can capture additional gain. It does not establish that retraining is always necessary: the separate frozen matching MLP/DIN improve on mixed Test lists by about 24%/10%.
 
 The third answer, and our deepest finding, was the timing of the product statistics the ranker uses, such as how many reviews a product has and how often it is reviewed together with the user's past products.
 - **The setup.** The ranker was trained with statistics calculated at T0, the start of its training period. At test time it used those same T0 statistics, by then a year or more out of date. Recalculating them at the start of the test period improved the same frozen model by 16–30% on Val and 21% on Test.
 - **The puzzle.** Statistics updated every month, which should be even better, made recommendations for new products worse.
-- **The explanation.** The ranker had learned that "no reviews yet" means "new product, likely purchase", and that rule only works if the statistics are about as old as in training.
+- **The explanation.** The ranker had learned that "no reviews yet" means "new product, likely purchase", and the usefulness of this cue changed with the snapshot cutoff. The observed age preference is conditional on the training protocol.
 - **The tests.**
   - Flipping that single input moved scores sharply.
-  - Updating statistics only for recently released products recovered the entire gain.
+  - Updating statistics only for products first reviewed during B recovered most of the gain in the registered controls.
   - New-product quality peaked when the statistics were as old as in training, while established products preferred fresh ones.
 
-  We wrote these predictions down in advance, and they held on Val and again on the untouched Test period. Training with monthly statistics kept the rule consistent and, as predicted, made the "bought together" inputs, which the team had found useless, start to help.
+  We wrote these predictions down in advance, and they held on Val and again in the separately registered Test run. Training with monthly statistics kept the rule consistent and, as predicted, made the "bought together" inputs, which the team had found useless, start to help.
 
 Putting the fixes together gives our best system: mixed candidate lists with consistently timed monthly statistics and the "bought together" inputs. It is 61% better than the original pipeline on Test, and eight of our nine pre-registered predictions held. Changing the ranker's training loss, by comparison, moved results by under 0.0005.
 
-There is a cost. Every fix pushes the ranker towards established products. Natural-list training fills more of the top ten with bestsellers, and mixed lists lose a little on new products. On Test, the best system overall is not the best for new products. Choosing the better ranker per purchase could gain up to 34–42%, an upper bound that needs the answer to choose. New products therefore need a different setup, and that is the open problem we leave.
+The residual-family improvements have a trade-off: several gains favour established products, and the best system overall is not the best for new products. The separate frozen matching-ranker mixed-list gains instead concentrate on new products. These outcomes depend on the model and intervention. Choosing the better ranker per purchase could gain up to 34–42%, an upper bound that needs the answer to choose. New products therefore need a different setup, and that is the open problem we leave.
 
 Our conclusion: in a two-stage recommender, how the ranker's training data is built decides what it learns. That means how missed products are added, which retriever produced the lists, and how old the statistics are. Getting these right matters far more than choosing a ranking model. These are known pitfalls, namely sample selection bias between stages and training–serving skew. We measured how large they are on a public benchmark, explained why they happen, and showed that they had changed the conclusions our own project had drawn.
 
@@ -66,7 +68,7 @@ Our conclusion: in a two-stage recommender, how the ranker's training data is bu
 | A | before **T0** = 26 Jul 2020 | training the two-tower retriever |
 | B | T0 to **T1** = 11 Aug 2021 | training the rankers (315,114 queries) |
 | Val | T1 to **T2** = 16 Jul 2022 | choosing directions (232,904 events, 124,416 users; 33% new products) |
-| Test | after T2 | final check, run once (297,390 events, 112,081 users; 44% new products) |
+| Test | after T2 | 297,390 events, 112,081 users; 44% new products; multiple disclosed study-specific runs |
 
 "New product" means the target was first reviewed during that evaluation period. All other products are "established".
 
@@ -268,7 +270,7 @@ All three size-matched seeds stopped at the 10-epoch cap, so the extra-data shar
 
 **Supporting evidence.** A retriever retrained on A + B finds **62% more targets** (Val Recall@200 0.069 → 0.111, robust across seeds). But rankers trained on the old lists turn only +0.0004 of that into top-10 quality.
 
-**Lesson:** a ranker learns the habits of the retriever that feeds it. Change the retriever and the ranker must be retrained.
+**Lesson:** check whether the ranker can use the changed candidates and score inputs. Retraining captured further gain in this control, while the later R1 Test study also found positive frozen-ranker mixed-list effects. The need for retraining depends on the change and the fitted ranker.
 
 Figure: `04_mixed_pool_gain_explained.png`. Sources: `results/analysis/20261106-pool-ranking`, `…-20261107-pool-size-control`, `…-20261106-fresh-two-tower`.
 
@@ -297,7 +299,7 @@ Monthly statistics, which are *fresher*, did worse than T1. The loss is concentr
 
 ### Step 3, explain
 
-In the training data (period B, T0 statistics), products with **no reviews yet** were often the ones bought. **41% of bought products showed no reviews, against 18% of other candidates.** The ranker learned **"no reviews yet → new product → likely purchase"**. The rule only works if statistics are about as old at scoring time as in training:
+In the natural-hit training lists with T0 statistics, **40.5% of targets showed no prior reviews, against 17.7% of other candidates in the inner-fit B prefix**; the full-B refit shares were **43.1% / 20.3%**. The ranker learned **"no reviews yet → new product → likely purchase"**. The registered frozen models preferred particular statistics ages for new targets; this is conditional on their T0-based training construction:
 
 | Statistics | Age per query (months) | Bought / other showing "no reviews" | AUC of the rule |
 |---|---|---:|---:|
@@ -383,7 +385,7 @@ The same diagnostics were rerun on Test (T2 in place of T1) with the same four f
 | New products: lowest at lag 0, peak at lag 3–9, lag 12 below the peak | peak at lag 6 for all four | held |
 | Established products: better at lag 0 than lag 12 | all four | held |
 
-The mechanism is therefore not a Val artefact. It holds on untouched data with a higher share of new products (44% vs 33%).
+The mechanism is therefore not a Val artefact. It was also observed in the registered Test diagnostics, with a higher share of new products (44% vs 33%). Earlier Test exposure and the unchanged temporal construction still limit generalisation.
 
 **Lesson:** product statistics must be calculated the same way in training and at scoring time. A mismatch silently breaks rules the model learned, and can make a useful input look useless.
 
@@ -498,7 +500,7 @@ Figures: `09_test_confirms_val.png`, `10_who_wins_on_test.png`. Source: `results
 
 1. **Check where misses happen before tuning the ranker.** Most failures occur before ranking.
 2. **Train on lists built the way the ranker will be used.** Forcing missed targets into training lists teaches a shortcut.
-3. **Retrain the ranker whenever the retriever changes.** It learns the habits of the lists it is trained on.
+3. **Re-evaluate compatibility whenever retrieval changes.** Test candidate membership, score inputs and ranking outcomes; compare adaptation with the same frozen-model reference.
 4. **Calculate product statistics the same way in training and in use.** A mismatch silently breaks learned rules and can make a useful input look useless.
 5. **Different products need different setups.** The best system for established products is not the best for new ones.
 

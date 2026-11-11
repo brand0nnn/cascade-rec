@@ -2,6 +2,14 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-11 — Prepare the repository for professor review
+
+The user authorised the first review-cleanup batch. Reconcile the local companion/correction work with main's later R1 evidence on `codex/review-ready`, preserve the old README under `docs/history/`, and provide a concise entrance, review guide and claim-to-code/checkpoint evidence map. Keep original poster assets, raw result tables, registered protocols and hashed source snapshots intact.
+
+Update the companion to the corrected RQ3 scores and measured R1 Test follow-up. Recompute matching-family aggregate levels and paired intervals from existing original/corrected ranks only, using the existing macro metric/bootstrap and subgroup definitions; record input/output/script hashes in a separate `matching_report` directory. This executes no models and creates no new Test predictions.
+
+Qualify claims by model family and evaluation period. The A/B split and frozen snapshots can amplify the observed dependence; consistently updated/shared-period training remains untested. Mixed lists can help frozen rankers, the fresh-MLP Test decline is inconclusive, and the R2 decomposition is descriptive. Repair stale current status and missing-report links while retaining dated history. Publication and further experiments are outside this cleanup.
+
 ## 2026-11-08 — Correct mixed-list Test score normalisation
 
 Jing Yen requested continuation of Claude Code's unfinished evening check on xlogin. QR had identified a training/Test scaling discrepancy. Inspection confirmed that `run_hybrid_study.py` fits RRF/RRFL retrieval-score mean and standard deviation on natural-only ranker-training lists, whereas both Test scorers used all ranker-training lists. The correction is to reuse the training population and identical float32 reductions at inference.

@@ -1,0 +1,33 @@
+{
+  "status": "complete",
+  "evaluation_split": "test",
+  "events": 297390,
+  "users": 112081,
+  "model_execution": false,
+  "source_sha256": "384c4c68b21a25e653dc5cf6b9837c8432d6e42877b7fff3f043624886ac8e25",
+  "inputs": {
+    "results/test_final_ranker/20261108-normalization-corrected/audit.json": "2631cf0cb1d0eb836c510951d6460075e64c0d4ad386aa03a648e146010b5486",
+    "results/test_final_ranker/20261108/mlp_tt_seed0_test_ranks.npz": "e0db6ad1754f2eafb857951b0a409db1c0d185c7aabb5d2054424c46b5e8d89a",
+    "results/test_final_ranker/20261108/mlp_tt_seed1_test_ranks.npz": "5a046a642deaa3c896903ea3a72611c16d281f711637e4287d904c672f00d065",
+    "results/test_final_ranker/20261108/mlp_tt_seed2_test_ranks.npz": "630806e8786d2822b224fdb80e52510dfe3b0156a15d8e24d26d1fc11711042f",
+    "results/test_final_ranker/20261108/din_tt_seed0_test_ranks.npz": "597dc6a0bb9db5c508b0517940d4ae8f5746de5dc3045a58d787ac12a44ceb65",
+    "results/test_final_ranker/20261108/din_tt_seed1_test_ranks.npz": "31738d629fc6322693923cfbf5556b5db1172bcb7cf8a5b6e5e64a9e243f2c18",
+    "results/test_final_ranker/20261108/din_tt_seed2_test_ranks.npz": "15e535ab671536ad0623127e12de95204a3ad85450040419e871c1be24bba283",
+    "results/test_final_ranker/20261108-normalization-corrected/mlp_rrf_seed0_test_ranks.npz": "d624a9996de60ba0293a363dca74fc08674ae35389e1235238f7f90470feb1b1",
+    "results/test_final_ranker/20261108-normalization-corrected/mlp_rrf_seed1_test_ranks.npz": "c120fbd8371b6265e4c45e1eb5fd7a788883e9b74331ad6f2f6accdd69e85d1e",
+    "results/test_final_ranker/20261108-normalization-corrected/mlp_rrf_seed2_test_ranks.npz": "a530bff8ef1bf2481ed04e25f8c64e1f274184fdea00da9327ccbe1aa097c74b",
+    "results/test_final_ranker/20261108-normalization-corrected/din_rrf_seed0_test_ranks.npz": "b47bf9ffaee05473b253bc49a0d315c4f789d389ada5b02598e66ef3e2227f25",
+    "results/test_final_ranker/20261108-normalization-corrected/din_rrf_seed1_test_ranks.npz": "f0896d160c299bf60145143ea2c411c09fbf2e1814958345b57bc7052ba55e4e",
+    "results/test_final_ranker/20261108-normalization-corrected/din_rrf_seed2_test_ranks.npz": "2b0b787d9de37d9aae616209ad581c450150d40b2f6c7f6a9a6e105d296b4c68",
+    "data/processed/instances.parquet": "6ce91c5ef0fec3fce4bf817dc29ec892b4dcf28dc6c87fe6686ac4502867c39b",
+    "data/processed/items.parquet": "b8ec9b75460125d1c1ee7d7d5f8780b42bd32780c000f844e63e748f6e27be7c",
+    "data/processed/item_segments.parquet": "5c51f83f64edd8fd22dc3e7941d795de245333fafa21f6e7ea7ee13a50568424",
+    "data/processed/split.json": "70575c4cb2168b86a48eb182b0b7228688356f2c7024f8cf4d39d8b7d4e9a447",
+    "results/test_final_ranker/20261108/levels.csv": "eecfcc30feef5054f46998330e41fc3d19980cbe97f6a2f2558b76771ec12ed4",
+    "results/test_final_ranker/20261108-normalization-corrected/levels.csv": "4c99c4a9c37687743d299ee1dd1560cbab97cecb42e7cfb8478d8471fbc4ce6d"
+  },
+  "outputs": {
+    "levels.csv": "93ac8032dbaa523e397c2e174f29d74f3d0701c0d9a60322c671d9dfe3bd294e",
+    "comparisons.csv": "a76365e541828ee204c320580e9b4b73961a889361f60db64eecde407ab71b15"
+  }
+}

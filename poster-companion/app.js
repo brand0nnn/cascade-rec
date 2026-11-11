@@ -12,8 +12,8 @@
   const relative = (a,b) => (b/a-1);
   const groups = {all:'All products',new:'New in the period',warm:'Established products',head:'Established · head',tail:'Established · tail'};
   const names = {P1_ranker:'Original recency lists',P1ranker_on_P3:'Mixed · no retraining',P3_sizematched_ranker:'Mixed · retrained, same size',P3_ranker:'Mixed · retrained, full data',mlp_tt:'MLP · two-tower lists',din_tt:'DIN · two-tower lists',mlp_rrf:'MLP · mixed lists',din_rrf:'DIN · mixed lists',S0:'Recency order · no ranker',S1:'Original residual · recency / T0',S2:'Same model · Aug 2021 statistics',S3:'Same model · Test-start statistics',S4:'Recency · monthly text',S5:'Recency · monthly co-review',S6:'Mixed · T0 text',S7:'Mixed · monthly text',S8:'Mixed · monthly co-review',T0:'Jul 2020 · original',T1:'Aug 2021 · intermediate',T2:'Jul 2022 · Test start',X1_known:'Only “has reviews” flag',X2_known_degree:'Flag + review count',X3_all_common:'All common statistics',X6_old_products:'Only established-at-T0 items',X7_products_released_in_B:'Only items first seen in B'};
-  const label = s => names[s] || (s.startsWith('lag') ? s.slice(3)+' month'+(s==='lag1'?'':'s')+' lag' : s);
-  const section = {retrieval:'rq1',k:'rq2',ranker:'rq3',retrain:'r2',timing:'r3',final:'r4',ann:'takeaways'};
+  const label = s => names[s] || (s.includes('/') ? s.replace('armC_mlp/','MLP · ').replace('din/','DIN · ').replace('tt200','two-tower 200').replace('tt500','two-tower 500').replace('fresh','fresh retriever').replace('mixed','mixed lists') : s.startsWith('lag') ? s.slice(3)+' month'+(s==='lag1'?'':'s')+' lag' : s);
+  const section = {retrieval:'rq1',k:'rq2',ranker:'rq3',frozen:'r1',retrain:'r2',timing:'r3',final:'r4',ann:'takeaways'};
   const state = {k:200,step:3,view:'guide',explorer:'retrieval',method:'query'};
   const currentRows = {};
   const row = (study,name,group='all') => D.studies[study].rows.find(r=>r.label===name&&r.group===group);
@@ -116,8 +116,16 @@
     const rows=['mlp_'+pool,'din_'+pool].map(n=>row('ranker',n,group));
     barChart('#ranker-chart',rows,{accent:rows[1].label,title:'nDCG@10 × 10⁻³ · same candidate pool'});
     const change=relative(rows[0].value,rows[1].value),c=contrast('ranker',rows[0].label,rows[1].label,group);
-    $('#ranker-insight').innerHTML=`DIN changes quality by <strong>${change>=0?'+':'−'}${pct(Math.abs(change))}</strong> against MLP on these lists.<br><span class="contrast">${ciText(c)} ${pool==='rrf'?'Mixed-score provenance qualification applies.':''}</span>`;
+    $('#ranker-insight').innerHTML=`DIN changes quality by <strong>${change>=0?'+':'−'}${pct(Math.abs(change))}</strong> against MLP on these lists.<br><span class="contrast">${ciText(c)} ${pool==='rrf'?'Uses corrected, training-consistent score normalisation.':''}</span>`;
     evidence('ranker',rows);
+  }
+  function renderFrozen(){
+    const rows=D.studies.frozen.rows.filter(r=>r.group==='all');
+    const get=(ranker,list)=>rows.find(r=>r.label===ranker+'/'+list);
+    const titles={tt200:'Original two-tower · 200',tt500:'Original two-tower · 500',fresh:'Fresh two-tower · 200',mixed:'Mixed lists · 200'};
+    const quality=(ranker,list)=>{const r=get(ranker,list),delta=relative(get(ranker,'tt200').value,r.value);return score(r.value)+(list==='tt200'?'':` (${delta>=0?'+':'−'}${pct(Math.abs(delta))})`);};
+    $('#frozen-table').innerHTML=`<div class="table-scroll"><table><caption>Test · frozen October rankers · nDCG@10 × 10⁻³</caption><thead><tr><th>Candidate list</th><th>Macro recall</th><th>MLP</th><th>DIN</th></tr></thead><tbody>${Object.entries(titles).map(([key,title])=>`<tr><th>${escape(title)}</th><td>${pct(get('armC_mlp',key).recall,3)}</td><td>${quality('armC_mlp',key)}</td><td>${quality('din',key)}</td></tr>`).join('')}</tbody></table></div>`;
+    evidence('frozen',rows);
   }
   const steps=['P1_ranker','P1ranker_on_P3','P3_sizematched_ranker','P3_ranker'];
   const stepDescriptions=['Recency candidates at training and scoring. The reference ranker sees 20,676 natural-positive training lists.','Keep the recency-trained ranker frozen and score mixed lists. This tests the changed inputs without retraining.','Retrain on 20,676 mixed-pool examples: the same count as the reference. This controls training-set size, not every aspect of exposure or optimisation.','Retrain on all 38,861 natural-positive mixed-pool lists. More retrieved targets also provide more training examples.'];
@@ -274,7 +282,7 @@
     for(const entry of entries)if(entry.isIntersecting){$('#mobile-chapter').value=entry.target.id;document.querySelectorAll('#chapter-nav a').forEach(a=>{const selected=a.hash==='#'+entry.target.id;a.classList.toggle('current',selected);if(selected)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
   },{rootMargin:'-15% 0px -65% 0px'});
   document.querySelectorAll('.chapter').forEach(el=>observer.observe(el));
-  showStage('catalogue');renderMethod();renderMetric();renderRetrieval();renderK();renderRanker();renderRetrain();renderTiming();renderFinal();renderAnn();
+  showStage('catalogue');renderMethod();renderMetric();renderRetrieval();renderK();renderRanker();renderFrozen();renderRetrain();renderTiming();renderFinal();renderAnn();
   let resizing;window.addEventListener('resize',()=>{clearTimeout(resizing);resizing=setTimeout(()=>{renderRetrieval();renderK();renderRanker();renderRetrain();renderTiming();renderFinal();renderAnn();if($('#coreview-details').open)V.coreview('#coreview-visual',Number($('#coreview-cutoff').value));if(state.view==='explore')renderExplorer();},150);});
   navigate();
 })();

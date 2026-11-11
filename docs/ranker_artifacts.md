@@ -1,5 +1,7 @@
 # Shared ranker artifacts
 
+**Historical October study.** This allowlist covers the six checkpoints below, not all current poster systems. Later Test studies have completed. See the [current checkpoint registry](evidence_map.md#checkpoint-identities-and-availability) and [reproduction guide](review_guide.md#reproduction-and-artifact-availability) before attempting a replay.
+
 The draft ranker change shares the completed validation evidence and the six selected full-data checkpoints. The exact allowlist is [`results/ranker_artifacts.json`](../results/ranker_artifacts.json): 253 artifacts, about 102.83 MiB in total. Each entry records its repository-relative path, byte size and SHA-256 digest. The manifest excludes itself.
 
 ## What is shared
@@ -13,7 +15,7 @@ The draft ranker change shares the completed validation evidence and the six sel
 | Candidate-count sweep | Frozen MLP results for K1 = 50, 100, 200 and 500; per-seed rank/AUC archives; raw CPU timings; reports and figures |
 | Score diagnostic | Aggregate training-score audit, sensitivity probe, candidate profiles, examples, reports and figures |
 
-The system comparisons use validation data; the score diagnostic also audits the constructed training lists. The ranker work has not run final held-out Test evaluation. Development samples are kept locally and excluded from research reports.
+The system comparisons use validation data; the score diagnostic also audits the constructed training lists. This historical bundle predates the later Test evaluations. Development samples are kept locally and excluded from research reports.
 
 ### Checkpoints
 

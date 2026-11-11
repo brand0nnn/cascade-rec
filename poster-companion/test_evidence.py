@@ -47,6 +47,34 @@ class EvidenceTests(unittest.TestCase):
                 self.assertEqual(value('timing',timing,group),value('final',system,group))
         self.assertAlmostEqual(value('timing','T2')/value('timing','T0')-1,.213692,places=5)
 
+    def test_frozen_test_study_keeps_october_controls_and_macro_recall(self):
+        study = D['studies']['frozen']
+        self.assertTrue(study['context'].startswith('Test'))
+        self.assertAlmostEqual(value('frozen','armC_mlp/tt200'), .005177249166269799, places=14)
+        self.assertAlmostEqual(value('frozen','din/tt200'), .0062381689201561, places=14)
+        self.assertNotEqual(value('frozen','armC_mlp/tt200'), value('ranker','mlp_tt'))
+        fresh = next(r for r in study['rows'] if r['label']=='armC_mlp/fresh' and r['group']=='all')
+        self.assertAlmostEqual(fresh['recall'], .06989198097803684, places=14)
+        self.assertFalse(any('recall' in r for r in study['rows'] if r['group']!='all'))
+        contrasts = {(c['reference'],c['candidate'],c['group']):c for c in study['contrasts']}
+        mlp = contrasts['armC_mlp/tt200','armC_mlp/fresh','all']
+        din = contrasts['din/tt200','din/fresh','all']
+        self.assertLess(mlp['ci_low'],0); self.assertGreater(mlp['ci_high'],0)
+        self.assertLess(din['ci_high'],0)
+
+    def test_corrected_matching_report_has_provenance_and_recomputed_intervals(self):
+        report = ROOT/'results/test_final_ranker/20261108-normalization-corrected/matching_report'
+        manifest = json.loads((report/'provenance.json').read_text())
+        self.assertEqual(manifest['events'],297390)
+        self.assertEqual(manifest['users'],112081)
+        self.assertFalse(manifest['model_execution'])
+        for path, digest in manifest['outputs'].items():
+            self.assertEqual(hashlib.sha256((report/path).read_bytes()).hexdigest(),digest)
+        self.assertEqual(hashlib.sha256((ROOT/'scripts/report_corrected_ranker.py').read_bytes()).hexdigest(),manifest['source_sha256'])
+        self.assertAlmostEqual(value('ranker','din_rrf'),.008268564730483458,places=14)
+        self.assertAlmostEqual(value('ranker','mlp_rrf'),.007312312571406011,places=14)
+        self.assertTrue(any(c['reference']=='mlp_rrf' and c['candidate']=='din_rrf' for c in D['studies']['ranker']['contrasts']))
+
     def test_final_and_original_baselines_are_separate(self):
         self.assertAlmostEqual(value('final','S8')/value('final','S1')-1,.6119897,places=5)
         self.assertAlmostEqual(value('final','S8')/value('ranker','mlp_tt'),1.9984,places=3)
