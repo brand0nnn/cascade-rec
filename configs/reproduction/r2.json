@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "study": "r2",
+  "description": "Input inventory for the R2 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/analysis/20261107-pool-size-control/metrics.csv",
+        "sha256": "3b9ff7ea6ad766cb70ee9429e30259b0930cc0ad43ba081b85c0dceb0423e935"
+      },
+      {
+        "path": "results/analysis/20261107-pool-size-control/paired_differences.csv",
+        "sha256": "178f8f7c2f12dc7932d6788011c7e0c158d05357453794e62f0c21fee3e00c1b"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "parent": [
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P3",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P3/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    ],
+    "control": [
+      {
+        "path": "results/local_experiments/20261107-pool-size-control-P3",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261107-pool-size-control-P3/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261107-pool-size-control-P3",
+        "files": [
+          "subset.npy",
+          "evaluation/completion.json"
+        ]
+      }
+    ],
+    "pool": [
+      {
+        "path": "results/local_experiments/20261106-pools/candidates/P3_fused_rrf/{split}",
+        "files": [
+          "inst.npy",
+          "user.npy",
+          "cand.npy",
+          "score.npy",
+          "target.npy",
+          "history.npy",
+          "retrieval_rank.npy",
+          "top10.npy"
+        ],
+        "expand": {
+          "split": [
+            "ranker_train",
+            "val"
+          ]
+        }
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "size-control": {
+      "groups": [
+        "data",
+        "parent",
+        "control",
+        "pool"
+      ],
+      "entrypoint": "python -m cascade.pipelines.pool_size_control --phase report; fit/evaluate retain their original selection/source locks."
+    }
+  },
+  "historical_output_roots": [
+    "results/local_experiments/20261107-pool-size-control-P3",
+    "results/analysis/20261107-pool-size-control"
+  ]
+}

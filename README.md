@@ -75,6 +75,8 @@ For the aggregate-only check, use `python3 scripts/check_repo.py --evidence-only
 
 Rescoring and training require additional artifacts. The [review guide](docs/review_guide.md#reproduction-and-artifact-availability) distinguishes aggregate inspection, rank-based metric recomputation, checkpoint scoring and new training. The [older artifact allowlist](docs/ranker_artifacts.md) covers the historical six-checkpoint study; it does not supply every current poster checkpoint.
 
+The [study prerequisite inventories](docs/reproduction.md) list inputs by study/phase and report missing files without executing an experiment. For example, `.venv/bin/python -m cascade.reproduction --study r1 --phase inspect --require-ready` checks R1's committed aggregate identities. Model-scoring phases need additional bulk inputs. Fresh destination checks and the refactored R1 module map are documented in that guide.
+
 The [historical setup instructions](docs/history/README-20261107.md) describe data preparation and the Slurm workflow. Before running a study, check its owning protocol/configuration and input requirements in the evidence map. Use fresh output IDs; historical pipelines may reject existing destinations and changed source hashes. These review commands launch no experiment.
 
 ## Implementation map

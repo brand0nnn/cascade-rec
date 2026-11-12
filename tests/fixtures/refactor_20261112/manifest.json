@@ -1,0 +1,119 @@
+{
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "sources": {
+    "src/cascade/pipelines/frozen_ranker_followup.py": {
+      "snapshot": "frozen_ranker_followup.py",
+      "sha256": "8f4f29c9c9547b2a89fa7b38b4939fd3d7c64d54da709270210de6134b5ed433"
+    },
+    "scripts/run_hybrid_study.py": {
+      "snapshot": "run_hybrid_study.py",
+      "sha256": "faeeee5750700676f6be4659953efc75f5ad5a0942ff725418331c20396dfde4"
+    },
+    "scripts/score_test_final.py": {
+      "snapshot": "score_test_final.py",
+      "sha256": "86c7fe3c64e02a125f98a0604b218292a8913ff538c78df002cc45fb9a3ed779"
+    },
+    "scripts/score_test_rrfl.py": {
+      "snapshot": "score_test_rrfl.py",
+      "sha256": "659654e1f5dc8094ada9ff79651973dcd7da6970a1f3c2cc0af6ac2203825609"
+    },
+    "scripts/audit_hybrid_normalization.py": {
+      "snapshot": "audit_hybrid_normalization.py",
+      "sha256": "3abc2593e260870f503240f86d1419dbae80b2ade0316f4bba48232c8fe926f8"
+    },
+    "src/cascade/pipelines/graph_latent_report.py": {
+      "snapshot": "graph_latent_report.py",
+      "sha256": "81e49bec72bd86e9a8da541b66324210be52dbcc01fbca24f2abc0eeb0f90fc3"
+    },
+    "src/cascade/pipelines/hybrid_normalization.py": {
+      "snapshot": "hybrid_normalization.py",
+      "sha256": "6b1e5a5d07df1b7c8ddadebf146b3f49132833f6453e5d1b20075b87ee52c4ad"
+    },
+    "src/cascade/pipelines/graph_family_report.py": {
+      "snapshot": "graph_family_report.py",
+      "sha256": "c220c7d9b268fa979a437e743ddf1dfd8382a008b7c9e9ad54176fbc79cfea97"
+    },
+    "src/cascade/pipelines/ranking_objective_report.py": {
+      "snapshot": "ranking_objective_report.py",
+      "sha256": "64ecb47812f0d2b32fcb0dc910fbd22ad7ae833f8c0e9e5bb353593cf0586bab"
+    }
+  },
+  "r1_context_constants": [
+    "BULK",
+    "DEVICE_RETRIEVAL",
+    "DIN_RUNS",
+    "FRESH_RUN",
+    "FRESH_RUN_S1",
+    "FRESH_VAL",
+    "OUT",
+    "POOLS",
+    "PROTOCOL",
+    "RANKER_DEVICE",
+    "REPO_ROOT",
+    "SEEDS",
+    "SWAP_DOC",
+    "T1",
+    "T2",
+    "TEST_FINAL",
+    "TT_DIR",
+    "TT_RUN"
+  ],
+  "r1_context_functions": [
+    "din_context",
+    "fresh_lists",
+    "load_lists",
+    "phase_din_test",
+    "phase_din_val",
+    "phase_fresh_seed1_val",
+    "phase_lock",
+    "phase_mlp_check",
+    "phase_mlp_test",
+    "phase_report",
+    "phase_sasrec_ci",
+    "phase_score_swap_val",
+    "phase_tt_r3_val",
+    "protocol_guard",
+    "recency_scores",
+    "record_test_open",
+    "save_lists",
+    "save_ranks",
+    "score_family",
+    "scorer_for",
+    "verdicts"
+  ],
+  "r1_modules": {
+    "digest": "runtime",
+    "write_json": "runtime",
+    "log": "runtime",
+    "protocol_guard": "runtime",
+    "record_test_open": "runtime",
+    "phase_lock": "runtime",
+    "as_lists": "candidates",
+    "save_lists": "candidates",
+    "load_lists": "candidates",
+    "two_tower_scores_for": "candidates",
+    "mixed_lists": "candidates",
+    "save_ranks": "candidates",
+    "din_context": "matching",
+    "scorer_for": "matching",
+    "load_ranker": "matching",
+    "score_family": "matching",
+    "phase_din_val": "matching",
+    "phase_din_test": "matching",
+    "mlp_context": "residual",
+    "p2_scaler": "residual",
+    "score_p2": "residual",
+    "recency_scores": "residual",
+    "restandardise_p3_to_parent": "residual",
+    "fresh_lists": "residual",
+    "m1_on_mixed": "residual",
+    "phase_mlp_check": "residual",
+    "phase_mlp_test": "residual",
+    "verdicts": "reporting",
+    "phase_report": "reporting",
+    "phase_sasrec_ci": "reporting",
+    "phase_fresh_seed1_val": "diagnostics",
+    "phase_tt_r3_val": "diagnostics",
+    "phase_score_swap_val": "diagnostics"
+  }
+}

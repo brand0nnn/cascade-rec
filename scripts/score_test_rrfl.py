@@ -11,7 +11,7 @@ import numpy as np
 import torch
 from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
-from cascade.models.ranker_mlp import RankerFeatureSpec
+from cascade.pipelines.matching_recipe import matching_recipe
 from cascade.pipelines.build_candidates import load_candidates
 from cascade.pipelines.hybrid_normalization import natural_score_stats
 from cascade.pipelines.ranker_k1_sweep import score_prefixes
@@ -41,8 +41,8 @@ def main():
     test = load_candidates(REPO_ROOT / POOL, "test", k1=200, force=False)
     rows = []
     for seed in (0, 1, 2):
-        spec = RankerFeatureSpec(cardinalities=builder.item_cardinalities, history_length=50, item_text_dim=384, feature_groups=("retrieval", "matching"))
-        m = create_ranker(spec, {"model": "din", "dropout": 0.1, "attention_hidden_dims": (64, 32), "attention_use_softmax": False})
+        spec, cfg = matching_recipe(builder.item_cardinalities, "din")
+        m = create_ranker(spec, cfg)
         m.load_state_dict(torch.load(REPO_ROOT / f"results/hybrid_study/rrfl-20261108-s{seed}/din_rrfl_seed{seed}/model.pt", map_location="cpu")["state_dict"])
         ranks, _ = score_prefixes(m.to(a.device).eval(), builder, test, [200], device=a.device, batch_pairs=8192)
         np.savez_compressed(out / f"din_rrfl_seed{seed}_test_ranks.npz", inst=test["inst"], user=test["user"], ranks=ranks[0], target_pos=test["target_pos"])

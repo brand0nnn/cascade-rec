@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "study": "r3",
+  "description": "Input inventory for the R3 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/test_final/20261107/timing/metrics.csv",
+        "sha256": "5019f95356f7c7d2ba2d6d513ee8059d63ad2a9eb15e0321dcb6e38da27c1a22"
+      },
+      {
+        "path": "results/test_final/20261107/timing/contrasts.csv",
+        "sha256": "3ca1bb8d84847300e469160ca44d8adb58233b019cbb2c30bec2ce3ad80aca66"
+      },
+      {
+        "path": "results/test_final/20261107/timing/age_and_unknown.csv",
+        "sha256": "4a1bd49c1653f2949bffe1a5ede9d8e001dc899f3b58683fcad5633caaf46918"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "protocol": [
+      {
+        "path": "docs/test_protocol_2026-11-07_addendum_timing.md",
+        "sha256": "cd8228c4ea766fdb767e9081476ae58d979f47d0d6ede2b73089a49237a301a9"
+      }
+    ],
+    "parent": [
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "features/manifest.json"
+        ]
+      }
+    ],
+    "test_candidates": [
+      {
+        "path": "results/local_experiments/20261107-test-final/candidates/P1/test",
+        "files": [
+          "inst.npy",
+          "user.npy",
+          "cand.npy",
+          "score.npy",
+          "target.npy",
+          "history.npy",
+          "retrieval_rank.npy",
+          "top10.npy"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261107-test-final/features/{arm}",
+        "files": [
+          "hit.npy"
+        ],
+        "expand": {
+          "arm": [
+            "P1_parent_T0",
+            "P1_parent_T2"
+          ]
+        }
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "features": {
+      "groups": [
+        "data",
+        "protocol",
+        "parent",
+        "test_candidates"
+      ],
+      "entrypoint": "python -m cascade.analysis.statistics_timing_test --phase features; original Test addendum and past-only checks apply."
+    }
+  },
+  "historical_output_roots": [
+    "results/local_experiments/20261107-test-final/timing",
+    "results/test_final/20261107/timing"
+  ]
+}

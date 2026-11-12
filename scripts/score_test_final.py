@@ -21,7 +21,7 @@ import torch
 
 from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
-from cascade.models.ranker_mlp import RankerFeatureSpec
+from cascade.pipelines.matching_recipe import matching_recipe
 from cascade.pipelines.build_candidates import load_candidates
 from cascade.pipelines.hybrid_normalization import natural_score_stats
 from cascade.pipelines.ranker_k1_sweep import score_prefixes
@@ -69,10 +69,7 @@ def main() -> None:
         builder.score_mean, builder.score_std = rrf_stats if pool == "rrf" else base
         builder.last_item_cosine = False
         for seed in (0, 1, 2):
-            spec = RankerFeatureSpec(cardinalities=builder.item_cardinalities, history_length=50, item_text_dim=384,
-                                     feature_groups=("retrieval", "matching"), extra_numeric=0)
-            cfg = {"model": kind, "dropout": 0.1, "attention_hidden_dims": (64, 32), "attention_use_softmax": False,
-                   "retrieval_score_input": "enabled", "residual_score": name.endswith("_res")}
+            spec, cfg = matching_recipe(builder.item_cardinalities, kind, residual_score=name.endswith("_res"))
             model = create_ranker(spec, cfg)
             ck = torch.load(REPO_ROOT / "results/hybrid_study" / run.format(seed) / f"{name}_seed{seed}" / "model.pt",
                             map_location="cpu")

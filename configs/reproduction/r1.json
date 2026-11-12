@@ -1,0 +1,443 @@
+{
+  "schema": 1,
+  "study": "r1",
+  "description": "Input inventory for the R1 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/analysis/20261109-frozen-ranker-followup/levels.csv",
+        "sha256": "78bafd3d2e373c21b26db8d7359a14d1cf2b4b722488198afda64f51b17f3382"
+      },
+      {
+        "path": "results/analysis/20261109-frozen-ranker-followup/contrasts.csv",
+        "sha256": "2fc9aa62fa003bde25c1dfbbca0d03fd5913f65aa8423a16dbd05d12e5ec9f4f"
+      },
+      {
+        "path": "results/analysis/20261109-frozen-ranker-followup/recall_in_list_test_macro.csv",
+        "sha256": "d067c4192f020123eb5d09a1776bb72c2901cb50ed1dc379aac303124bbb4294"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "october_rankers": [
+      {
+        "path": "results/ranker_policy/policy-pilot-20261029/arm_C_seed0",
+        "files": [
+          "model.pt",
+          "config.yaml",
+          "metrics.json",
+          "val_ranks.npz"
+        ]
+      },
+      {
+        "path": "results/ranker_policy/policy-replication-20261029/arm_C_seed{seed}",
+        "files": [
+          "model.pt",
+          "config.yaml",
+          "metrics.json",
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/ranker_din/20261028-din-natural-seed{seed}",
+        "files": [
+          "model.pt",
+          "config.yaml",
+          "metrics.json",
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    ],
+    "retrievers": [
+      {
+        "path": "results/retriever/two_tower_text/seed0",
+        "files": [
+          "model.pth",
+          "config.yaml"
+        ]
+      },
+      {
+        "path": "results/retriever/local/20261106-two-tower-text-all-train-seed0",
+        "files": [
+          "model.pth",
+          "config.yaml",
+          "metrics.json"
+        ]
+      }
+    ],
+    "protocol": [
+      {
+        "path": "docs/test_protocol_2026-11-09.md",
+        "sha256": "3afecb44c1e504b5585c921d0d4cbbab162b4e2f3f567c4b530e3eadb538c7d6"
+      }
+    ],
+    "validation": [
+      {
+        "path": "data/processed/candidates/two_tower_text_seed0",
+        "files": [
+          "ranker_train.npz",
+          "val.npz",
+          "meta.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-pools/candidates/P3_fused_rrf/val",
+        "files": [
+          "inst.npy",
+          "cand.npy"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-fresh-two-tower/candidates/P2f_two_tower_all_train/val",
+        "files": [
+          "inst.npy",
+          "cand.npy"
+        ]
+      }
+    ],
+    "test_locked": [
+      {
+        "path": "results/local_experiments/20261109-frozen-ranker-followup/protocol_lock.json"
+      },
+      {
+        "path": "results/local_experiments/20261107-test-final/candidates/{pool}/test",
+        "files": [
+          "inst.npy",
+          "cand.npy"
+        ],
+        "expand": {
+          "pool": [
+            "P2",
+            "P3"
+          ]
+        }
+      }
+    ],
+    "report_val": [
+      {
+        "path": "results/local_experiments/20261109-frozen-ranker-followup/ranks/val",
+        "files": [
+          "{pool}__{ranker}.npz"
+        ],
+        "expand": {
+          "pool": [
+            "tt",
+            "fresh",
+            "mixed"
+          ],
+          "ranker": [
+            "armC_mlp",
+            "din"
+          ]
+        }
+      }
+    ],
+    "report_test": [
+      {
+        "path": "results/local_experiments/20261109-frozen-ranker-followup/ranks/test",
+        "files": [
+          "{pool}__{ranker}.npz"
+        ],
+        "expand": {
+          "pool": [
+            "tt",
+            "fresh",
+            "mixed"
+          ],
+          "ranker": [
+            "armC_mlp",
+            "din"
+          ]
+        }
+      }
+    ],
+    "score_swap": [
+      {
+        "path": "docs/score_swap_val_2026-11-10.md",
+        "sha256": "d6b701111272a1f36a4a78e96163083b49c7e2397f92f8f1dfe4b3ec9a7a9cd4"
+      },
+      {
+        "path": "results/local_experiments/20261109-frozen-ranker-followup/lists/fresh/val.npz"
+      }
+    ],
+    "residual": [
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P3",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P3/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P2",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P2/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P1onP3",
+        "files": [
+          "score.npy",
+          "common.npy"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P1onP3/evaluation/seed{seed}",
+        "files": [
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    ],
+    "residual_pools": [
+      {
+        "path": "results/local_experiments/20261106-pools/candidates/{pool}/val",
+        "files": [
+          "inst.npy",
+          "user.npy",
+          "cand.npy",
+          "score.npy",
+          "target.npy",
+          "history.npy",
+          "retrieval_rank.npy",
+          "top10.npy"
+        ],
+        "expand": {
+          "pool": [
+            "P1_recency",
+            "P2_two_tower",
+            "P3_fused_rrf"
+          ]
+        }
+      }
+    ],
+    "report_test_controls": [
+      {
+        "path": "results/local_experiments/20261109-frozen-ranker-followup",
+        "files": [
+          "protocol_lock.json",
+          "test_opened_din.json",
+          "test_opened_mlp.json",
+          "din_test_lists_check.json",
+          "mlp_candidates/P2f/test/retrieval_rank.npy"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261109-frozen-ranker-followup/ranks/test",
+        "files": [
+          "P2__p2ranker_seed{seed}.npz",
+          "P2f__p2ranker_seed{seed}.npz",
+          "P3__m1_seed{seed}.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261107-test-final/ranks/{system}",
+        "files": [
+          "seed{seed}.npz"
+        ],
+        "expand": {
+          "system": [
+            "S1",
+            "S6"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261107-test-final/candidates/{pool}/test",
+        "files": [
+          "retrieval_rank.npy"
+        ],
+        "expand": {
+          "pool": [
+            "P1",
+            "P2",
+            "P3"
+          ]
+        }
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "din-val": {
+      "groups": [
+        "data",
+        "october_rankers",
+        "retrievers",
+        "validation"
+      ],
+      "entrypoint": "python -m cascade.pipelines.frozen_ranker_followup --phase din-val"
+    },
+    "din-test": {
+      "groups": [
+        "data",
+        "october_rankers",
+        "retrievers",
+        "protocol",
+        "test_locked"
+      ],
+      "entrypoint": "python -m cascade.pipelines.frozen_ranker_followup --phase din-test; original protocol guard applies."
+    },
+    "mlp-check": {
+      "groups": [
+        "data",
+        "retrievers",
+        "residual",
+        "residual_pools",
+        "validation"
+      ],
+      "entrypoint": "python -m cascade.pipelines.frozen_ranker_followup --phase mlp-check"
+    },
+    "report-val": {
+      "groups": [
+        "data",
+        "report_val"
+      ],
+      "entrypoint": "python -m cascade.pipelines.frozen_ranker_followup --phase report; includes Test automatically if historical Test markers exist."
+    },
+    "score-swap-val": {
+      "groups": [
+        "data",
+        "october_rankers",
+        "retrievers",
+        "validation",
+        "report_val",
+        "score_swap"
+      ],
+      "entrypoint": "python -m cascade.pipelines.frozen_ranker_followup --phase score-swap-val"
+    },
+    "report-test": {
+      "groups": [
+        "data",
+        "protocol",
+        "report_val",
+        "report_test",
+        "report_test_controls"
+      ],
+      "entrypoint": "python -m cascade.pipelines.frozen_ranker_followup --phase report; reads existing ranks, including Test, without scoring."
+    }
+  },
+  "historical_output_roots": [
+    "results/local_experiments/20261109-frozen-ranker-followup",
+    "results/analysis/20261109-frozen-ranker-followup"
+  ]
+}

@@ -32,7 +32,7 @@ import torch
 
 from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
-from cascade.models.ranker_mlp import RankerFeatureSpec
+from cascade.pipelines.matching_recipe import matching_recipe
 from cascade.pipelines.build_candidates import load_candidates
 from cascade.pipelines.hybrid_normalization import natural_score_stats
 from cascade.pipelines.ranker_k1_sweep import score_prefixes
@@ -108,10 +108,8 @@ def main() -> None:
                 builder.score_mean, builder.score_std = natural_score_stats(train)
             else:
                 builder.score_mean, builder.score_std = base_stats
-            spec = RankerFeatureSpec(cardinalities=builder.item_cardinalities, history_length=50, item_text_dim=384,
-                                     feature_groups=("retrieval", "matching"), extra_numeric=extra)
-            cfg = {"model": kind, "dropout": 0.1, "attention_hidden_dims": (64, 32), "attention_use_softmax": False,
-                   "retrieval_score_input": "enabled", "residual_score": arm.endswith("_res")}
+            spec, cfg = matching_recipe(builder.item_cardinalities, kind, extra_numeric=extra,
+                                        residual_score=arm.endswith("_res"))
             set_seed(seed)
             model = create_ranker(spec, cfg)
             out = root / f"{arm}_seed{seed}"

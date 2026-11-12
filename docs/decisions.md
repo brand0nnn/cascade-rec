@@ -2,6 +2,13 @@
 
 Every non-trivial choice or deviation from CLAUDE.md, with date and reason.
 
+## 2026-11-12 — Separate study prerequisites and refactor without changing experiments
+
+The user authorised the next reproducibility/refactoring pass with the explicit constraint that existing results and experiment behaviour stay unchanged. Register seven read-only per-study input inventories, keeping October R1 and November matching checkpoints separate. Disclose missing files/seeds, recorded hashes and occupied destinations; no automatic downloading, path redirection, model execution or prediction-array loading. Inventory readiness is limited to its listed files, while source/selection/shape/device checks remain the original programs' responsibility.
+
+Extract the November matching spec/config into one shared recipe for training, both scorers and the audit. Split the R1 runner into context/runtime, candidate, matching, residual, reporting and diagnostic modules, retaining its CLI, default paths, phase order and helper signatures through a compatibility entry point. Promote graph-report helpers to a shared public module with historical aliases. The explicit R1 context permits a fresh report destination without changing historical defaults.
+
+Archive pre-change source at commit `48db428` under `tests/fixtures/refactor_20261112/`, recording SHA-256 identities. Compare moved calculation/control-flow syntax, seeded initialisation/RNG/weights/logits, strict loading, candidate transformations, protocol guards and synthetic report bytes. Preserve all old result tables, manifests, source snapshots and original hashes; future audits additionally record the shared recipe source. No historical fit, candidate regeneration or Test scoring is executed as part of the cleanup.
 ## 2026-11-11 — Make the code reviewable from a fresh checkout
 
 The user requested the code portion of the review cleanup. Correct package metadata to Python 3.11 and declare the existing 18 dependency pins from `requirements.txt`, with an explicit setuptools backend. Add one local check command and a CI workflow for code/evidence; hosted execution remains pending a push.

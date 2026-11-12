@@ -16,8 +16,8 @@ import pandas as pd
 from cascade.eval import metrics as M
 from cascade.eval.bootstrap import paired_bootstrap
 from cascade.eval.saved_results import average, digest, write_json
-from cascade.pipelines.graph_latent_report import (
-    _cases, _composition, _load_archive, _relative, feature_groups,
+from cascade.pipelines.graph_report_support import (
+    write_cases, composition, load_archive, relative_path, feature_groups,
     validate_prediction, validate_selection,
 )
 from cascade.pipelines.graph_latent_study import SOURCE
@@ -203,7 +203,7 @@ def report(root: Path):
     if digest(parent_report_path) != parent_audit['report_provenance_sha256']:
         raise ValueError('completed parent report identity changed')
     parent_report = json.loads(parent_report_path.read_text())
-    if digest(SOURCE / 'case_ids.json') != parent_report['input_sha256'][_relative(SOURCE / 'case_ids.json')]:
+    if digest(SOURCE / 'case_ids.json') != parent_report['input_sha256'][relative_path(SOURCE / 'case_ids.json')]:
         raise ValueError('original fixed case cohort changed')
     evidence += [parent / 'completion_audit.json', parent_report_path]
     if digest(root / 'protocol.json') != meta['protocol_sha256'] or digest(root / 'probe_rows.npz') != meta['probe_sha256']:
@@ -234,7 +234,7 @@ def report(root: Path):
     for split in ('ranker_train', 'val'):
         instances = data.split_instances(split)
         path = parent / f'candidates/{split}.npz'
-        archive = _load_archive(path, instances)
+        archive = load_archive(path, instances)
         if digest(path) != candidate_hashes[split] or not np.array_equal(archive['target'], instances.item.to_numpy()):
             raise ValueError('fixed parent candidate identity differs')
         if archive['cand'].shape != (len(instances), 200):
@@ -320,7 +320,7 @@ def report(root: Path):
             prediction_path = run / 'val_ranks.npz'
             if digest(prediction_path) != proof['val_ranks_sha256']:
                 raise ValueError('outer prediction archive identity changed')
-            prediction = _load_archive(prediction_path, instances)
+            prediction = load_archive(prediction_path, instances)
             rank, display = validate_prediction(base, prediction)
             if selected == 0 and not np.array_equal(prediction['logit'], base['score']):
                 raise ValueError('selected epoch-zero model changed retrieval')
@@ -369,14 +369,14 @@ def report(root: Path):
     initial.to_csv(destination / 'paired_initialisation.csv', index=False)
     write_json(destination / 'gate_replay.json', replay_gate)
     _movement(destination, instances, arrays, groups, base)
-    _composition(data, instances, arrays).rename(columns={'arm': 'method'}).to_csv(destination / 'composition.csv', index=False)
-    _cases(data, instances, arrays, SOURCE, destination)
+    composition(data, instances, arrays).rename(columns={'arm': 'method'}).to_csv(destination / 'composition.csv', index=False)
+    write_cases(data, instances, arrays, SOURCE, destination)
     _diagnostic_figure(destination, pd.DataFrame(curves), pd.DataFrame(probes))
     _narrative(destination, levels, differences, pd.DataFrame(costs), gate, replay_gate, root, len(base['user']), int(np.isfinite(base['retrieval_rank']).sum()))
     if digest(Path(__file__)) != source_hash:
         raise ValueError('report implementation changed during execution')
     write_json(destination / 'provenance.json', {'status': 'complete', 'source_sha256': source_hash,
-        'input_sha256': {_relative(path): digest(path) for path in dict.fromkeys(evidence)},
+        'input_sha256': {relative_path(path): digest(path) for path in dict.fromkeys(evidence)},
         'generated_sha256': {str(path.relative_to(root)): digest(path) for path in destination.rglob('*') if path.is_file()},
         'all_registered_methods_and_seeds_retained': True, 'all_inner_and_outer_prediction_replays_pass': True,
         'pre_outer_gate_replays': True, 'pre_outer_selection_lock_verified': True, 'candidate_filters_and_fixed_pool_verified': True,

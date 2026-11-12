@@ -14,8 +14,8 @@ from cascade.eval import metrics as M
 from cascade.eval.bootstrap import paired_bootstrap
 from cascade.eval.saved_results import average, digest, write_json
 from cascade.eval.harness import first_ts_tensor, make_batch
-from cascade.pipelines.graph_latent_report import (
-    _cases, _composition, _load_archive, _relative, feature_groups, validate_prediction,
+from cascade.pipelines.graph_report_support import (
+    write_cases, composition, load_archive, relative_path, feature_groups, validate_prediction,
 )
 from cascade.pipelines.graph_latent_study import SOURCE
 from cascade.pipelines.local_evidence_export import check_candidates
@@ -167,7 +167,7 @@ def report(root: Path):
     if digest(objective_report_path) != objective_audit['report_provenance_sha256']:
         raise ValueError('completed objective parent report identity changed')
     objective_report = read(objective_report_path)
-    if digest(SOURCE / 'case_ids.json') != objective_report['input_sha256'][_relative(SOURCE / 'case_ids.json')]:
+    if digest(SOURCE / 'case_ids.json') != objective_report['input_sha256'][relative_path(SOURCE / 'case_ids.json')]:
         raise ValueError('original fixed twenty-case cohort changed')
     evidence += [OBJECTIVE_PARENT / 'completion_audit.json', objective_report_path]
     if digest(root / 'protocol.json') != meta['protocol_sha256'] or digest(root / 'probe_rows.npz') != meta['probe_sha256']:
@@ -204,7 +204,7 @@ def report(root: Path):
     for split in ('ranker_train', 'val'):
         instances = data.split_instances(split)
         path = GRAPH_PARENT / f'candidates/{split}.npz'
-        base = _load_archive(path, instances)
+        base = load_archive(path, instances)
         if digest(path) != expected_hashes[split] or not np.array_equal(base['target'], instances.item.to_numpy()):
             raise ValueError('candidate query/target identity changed')
         if base['cand'].shape != (len(instances), 200):
@@ -267,7 +267,7 @@ def report(root: Path):
             model_hash = digest(run / 'model.pth')
             if model_hash != proof['model_sha256'] or lock[f'{arm}/seed{seed}'] != {'selected_epoch': selected, 'model_sha256': model_hash}:
                 raise ValueError('refit weights differ from pre-outer lock')
-            prediction = _load_archive(run / 'val_ranks.npz', instances)
+            prediction = load_archive(run / 'val_ranks.npz', instances)
             if digest(run / 'val_ranks.npz') != proof['val_ranks_sha256']:
                 raise ValueError('outer prediction archive changed')
             rank, top = validate_prediction(base, prediction)
@@ -320,14 +320,14 @@ def report(root: Path):
     pd.DataFrame(controls).to_csv(destination / 'control_reproduction_replay.csv', index=False)
     initial.to_csv(destination / 'paired_initialisation.csv', index=False)
     _movement(destination, instances, arrays, groups, base)
-    _composition(data, instances, arrays).rename(columns={'arm': 'method'}).to_csv(destination / 'composition.csv', index=False)
-    _cases(data, instances, arrays, SOURCE, destination)
+    composition(data, instances, arrays).rename(columns={'arm': 'method'}).to_csv(destination / 'composition.csv', index=False)
+    write_cases(data, instances, arrays, SOURCE, destination)
     _figure(destination, levels)
     _narrative(destination, levels, differences, interactions, pd.DataFrame(costs), root)
     if digest(Path(__file__)) != source_hash:
         raise ValueError('report source changed during execution')
     write_json(destination / 'provenance.json', {'status': 'complete', 'source_sha256': source_hash,
-        'input_sha256': {_relative(path): digest(path) for path in dict.fromkeys(evidence)},
+        'input_sha256': {relative_path(path): digest(path) for path in dict.fromkeys(evidence)},
         'generated_sha256': {str(path.relative_to(root)): digest(path) for path in destination.rglob('*') if path.is_file()},
         'all_twelve_registered_fits_retained': True, 'all_inner_outer_and_probe_scores_replay': True,
         'all_six_pairwise_comparisons_retained': True, 'factorial_interaction_retained': True,

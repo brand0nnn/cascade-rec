@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "study": "rq3",
+  "description": "Input inventory for the RQ3 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/test_final_ranker/20261108-normalization-corrected/audit.json",
+        "sha256": "2631cf0cb1d0eb836c510951d6460075e64c0d4ad386aa03a648e146010b5486"
+      },
+      {
+        "path": "results/test_final_ranker/20261108-normalization-corrected/matching_report/levels.csv",
+        "sha256": "93ac8032dbaa523e397c2e174f29d74f3d0701c0d9a60322c671d9dfe3bd294e"
+      },
+      {
+        "path": "results/test_final_ranker/20261108-normalization-corrected/matching_report/comparisons.csv",
+        "sha256": "a76365e541828ee204c320580e9b4b73961a889361f60db64eecde407ab71b15"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "reference": [
+      {
+        "path": "results/ranker_mlp/20261024-feature-ladder-seed0-rung1_matching/config.yaml",
+        "sha256": "f35b5c94054c7f1cee800bcb909a42a91d535c2018f432f87060751b156b9aad"
+      }
+    ],
+    "runs": [
+      {
+        "path": "results/hybrid_study/hybrid-20261107-s{seed}/{arm}_seed{seed}",
+        "files": [
+          "model.pt",
+          "metrics.json",
+          "ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ],
+          "arm": [
+            "mlp_tt",
+            "din_tt"
+          ]
+        }
+      },
+      {
+        "path": "results/hybrid_study/rrf-20261108-s{seed}/{arm}_seed{seed}",
+        "files": [
+          "model.pt",
+          "metrics.json",
+          "ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ],
+          "arm": [
+            "mlp_rrf",
+            "din_rrf",
+            "din_rrf_res"
+          ]
+        }
+      },
+      {
+        "path": "results/hybrid_study/rrfl-20261108-s{seed}/{arm}_seed{seed}",
+        "files": [
+          "model.pt",
+          "metrics.json",
+          "ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ],
+          "arm": [
+            "din_rrfl"
+          ]
+        }
+      }
+    ],
+    "training": [
+      {
+        "path": "data/processed/candidates/{pool}",
+        "files": [
+          "ranker_train.npz",
+          "meta.json"
+        ],
+        "expand": {
+          "pool": [
+            "two_tower_text_seed0",
+            "p3rrf_seed0",
+            "p3rrfl_seed0"
+          ]
+        }
+      }
+    ],
+    "validation": [
+      {
+        "path": "data/processed/candidates/{pool}",
+        "files": [
+          "val.npz"
+        ],
+        "expand": {
+          "pool": [
+            "p3rrf_seed0",
+            "p3rrfl_seed0"
+          ]
+        }
+      }
+    ],
+    "test": [
+      {
+        "path": "data/processed/candidates/tt_test_seed0/test.npz"
+      },
+      {
+        "path": "data/processed/candidates/p3rrf_test_seed0/test.npz"
+      },
+      {
+        "path": "data/processed/candidates/p3rrfl_seed0/test.npz"
+      }
+    ],
+    "original_ranks": [
+      {
+        "path": "results/test_final_ranker/20261108",
+        "files": [
+          "{arm}_seed{seed}_test_ranks.npz"
+        ],
+        "expand": {
+          "arm": [
+            "mlp_tt",
+            "din_tt",
+            "mlp_rrf",
+            "din_rrf",
+            "din_rrf_res",
+            "din_rrfl"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "normalization-audit": {
+      "groups": [
+        "data",
+        "reference",
+        "runs",
+        "training",
+        "validation",
+        "test",
+        "original_ranks"
+      ],
+      "entrypoint": "python scripts/audit_hybrid_normalization.py --out FRESH_DIRECTORY; explicit experiment authorization/protocol still required."
+    }
+  },
+  "historical_output_roots": [
+    "results/test_final_ranker/20261108",
+    "results/test_final_ranker/20261108-normalization-corrected"
+  ]
+}

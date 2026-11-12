@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "study": "rq1",
+  "description": "Input inventory for the RQ1 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/rq1/summary.json",
+        "sha256": "421e678e860c730dfb8b6832ffc0205cfca09a1b8e7fbaf5ca57de19d9e3b725"
+      },
+      {
+        "path": "results/analysis/20261106-pools/pool_report.json",
+        "sha256": "2568ce965442465c035e171d00822ef67c8fddcc049c3ae1302a8cf3008ef7c9"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "saved_ranks": [
+      {
+        "path": "results/retriever/{variant}/seed{seed}",
+        "files": [
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "variant": [
+            "two_tower_text",
+            "two_tower_text_id"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/baselines/{model}/retriever_train/seed{seed}",
+        "files": [
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "model": [
+            "bpr",
+            "sasrec"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/baselines/{model}/retriever_train/seed0",
+        "files": [
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "model": [
+            "popularity",
+            "itemknn"
+          ]
+        }
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "saved-ranks": {
+      "groups": [
+        "data",
+        "saved_ranks"
+      ],
+      "entrypoint": "Saved Validation rank analysis; model rescoring has additional baseline-specific dependencies."
+    }
+  },
+  "historical_output_roots": [
+    "results/rq1",
+    "results/analysis/20261106-pools"
+  ]
+}

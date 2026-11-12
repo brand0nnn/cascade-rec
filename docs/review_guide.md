@@ -69,6 +69,8 @@ The [253-artifact allowlist](../results/ranker_artifacts.json) supplies the olde
 
 The fresh retriever can be regenerated with [fresh_two_tower.py](../src/cascade/pipelines/fresh_two_tower.py); R1 scoring is [frozen_ranker_followup.py](../src/cascade/pipelines/frozen_ranker_followup.py). Both require the original processed inputs and checkpoint dependencies. Historical fixed run IDs, collision guards and source/protocol hashes must be accounted for before a fresh reproduction.
 
+Use the [per-study input inventories](reproduction.md) to inspect prerequisites without loading prediction arrays or models. The R1 CLI now delegates to separate implementation modules while keeping its original defaults; an explicit context can place a rank-only report in a fresh directory. The inventory documents which identities it checks and which transitive/runtime prerequisites remain the runner's responsibility.
+
 Run aggregate-only checks from the repository root:
 
 ```sh

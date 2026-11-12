@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "study": "rq2",
+  "description": "Input inventory for the RQ2 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/targeted_study/e3-20261107-all-seeds/k_curve.csv",
+        "sha256": "b636cef2c9987711e265dfce14e7c8f9cd5736c2c800d7265e5802ea82023f61"
+      },
+      {
+        "path": "results/targeted_study/e3-20261107-all-seeds/expansion.csv",
+        "sha256": "3ab99570a5c3f1fbe9e099103bda4663ad33d9a8286167e5bac7af2e207df38a"
+      },
+      {
+        "path": "results/steps_restoration/20261104/indices_quality.csv",
+        "sha256": "ef341717f98c25c6323a4e893fef36f79426801c72a36c938b9fb27555235c6a"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "october_rankers": [
+      {
+        "path": "results/ranker_policy/policy-pilot-20261029/arm_C_seed0",
+        "files": [
+          "model.pt",
+          "config.yaml",
+          "metrics.json",
+          "val_ranks.npz"
+        ]
+      },
+      {
+        "path": "results/ranker_policy/policy-replication-20261029/arm_C_seed{seed}",
+        "files": [
+          "model.pt",
+          "config.yaml",
+          "metrics.json",
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/ranker_din/20261028-din-natural-seed{seed}",
+        "files": [
+          "model.pt",
+          "config.yaml",
+          "metrics.json",
+          "val_ranks.npz"
+        ],
+        "expand": {
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    ],
+    "candidates": [
+      {
+        "path": "data/processed/candidates/two_tower_text_seed0",
+        "files": [
+          "ranker_train.npz",
+          "val.npz",
+          "meta.json"
+        ]
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "candidates-and-models": {
+      "groups": [
+        "data",
+        "october_rankers",
+        "candidates"
+      ],
+      "entrypoint": "Natural October models and saved K500 Validation lists; report and ANN protocols retain their own locks."
+    }
+  },
+  "historical_output_roots": [
+    "results/targeted_study/e3-20261107-all-seeds",
+    "results/steps_restoration/20261104"
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "study": "r4",
+  "description": "Input inventory for the R4 poster study; no execution or automatic path substitution.",
+  "baseline_commit": "48db4286c6565dfab53056a52dfd58e6445b1806",
+  "inputs": {
+    "aggregates": [
+      {
+        "path": "results/test_final/20261107/metrics.csv",
+        "sha256": "bbd66ef93e39598c6ed926257ec5ddf2536a7158a6bee75169484f130c178ba6"
+      },
+      {
+        "path": "results/test_final/20261107/contrasts.csv",
+        "sha256": "9c8498ae3cad305642b1b41e155e34eea9262f0715d7377782f042f55c1963ac"
+      },
+      {
+        "path": "results/analysis/20261109-frozen-ranker-followup/best_vs_planned_test.csv",
+        "sha256": "336b1fc94a9aa781d99e87715d92cd6e7cf0fcada5a45b890e08847232256f9a"
+      }
+    ],
+    "data": [
+      {
+        "path": "data/processed",
+        "files": [
+          "interactions.parquet",
+          "items.parquet",
+          "users.parquet",
+          "sequences.npz",
+          "instances.parquet",
+          "item_segments.parquet",
+          "split.json",
+          "item_text_emb.npy"
+        ]
+      },
+      {
+        "path": "configs/data.yaml",
+        "sha256": "df9a65dfab0728fe9de4e1768206e1618c886d27df58e71989fc3012f01d8a42"
+      }
+    ],
+    "protocol": [
+      {
+        "path": "docs/test_protocol_2026-11-07.md",
+        "sha256": "ed463472b4f437ae27a768975fbc622b69a2a49b2d5792cd3cf60be45fd30ac7"
+      }
+    ],
+    "models": [
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261103-full-promising-ranking/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P3",
+        "files": [
+          "study.json",
+          "protocol.json",
+          "selection_lock.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-pool-ranking-P3/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261106-rolling-ranking",
+        "files": [
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261106-rolling-ranking/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text",
+            "bce_coreview"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "path": "results/local_experiments/20261107-pool-rolling",
+        "files": [
+          "study.json",
+          "features/manifest.json"
+        ]
+      },
+      {
+        "path": "results/local_experiments/20261107-pool-rolling/runs/{method}/seed{seed}",
+        "files": [
+          "model.pth",
+          "metrics.json"
+        ],
+        "expand": {
+          "method": [
+            "bce_text",
+            "bce_coreview"
+          ],
+          "seed": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    ],
+    "test_candidates": [
+      {
+        "path": "results/local_experiments/20261107-test-final/candidates/{pool}/test",
+        "files": [
+          "inst.npy",
+          "user.npy",
+          "cand.npy",
+          "score.npy",
+          "target.npy",
+          "history.npy",
+          "retrieval_rank.npy",
+          "top10.npy"
+        ],
+        "expand": {
+          "pool": [
+            "P1",
+            "P2",
+            "P3"
+          ]
+        }
+      }
+    ],
+    "test_features": [
+      {
+        "path": "results/local_experiments/20261107-test-final/features/{arm}",
+        "files": [
+          "common.npy",
+          "graph.npy",
+          "hit.npy"
+        ],
+        "expand": {
+          "arm": [
+            "P1_parent_T0",
+            "P1_parent_T1",
+            "P1_parent_T2",
+            "P1_roll_monthly",
+            "P3_p3_T0",
+            "P3_proll_monthly"
+          ]
+        }
+      }
+    ]
+  },
+  "phases": {
+    "inspect": {
+      "groups": [
+        "aggregates"
+      ],
+      "entrypoint": "Read committed aggregate evidence; no model execution."
+    },
+    "score": {
+      "groups": [
+        "data",
+        "protocol",
+        "models",
+        "test_candidates",
+        "test_features"
+      ],
+      "entrypoint": "python -m cascade.pipelines.test_final --phase score; original one-time guards and per-model devices apply."
+    }
+  },
+  "historical_output_roots": [
+    "results/local_experiments/20261107-test-final",
+    "results/test_final/20261107"
+  ]
+}

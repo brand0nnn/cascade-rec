@@ -18,7 +18,7 @@ import torch
 from cascade.data.instances import ProcessedData
 from cascade.eval import metrics as M
 from cascade.eval.bootstrap import paired_bootstrap
-from cascade.models.ranker_mlp import RankerFeatureSpec
+from cascade.pipelines.matching_recipe import matching_recipe
 from cascade.pipelines.build_candidates import load_candidates
 from cascade.pipelines.hybrid_normalization import natural_score_stats
 from cascade.pipelines.ranker_k1_sweep import score_prefixes
@@ -57,7 +57,8 @@ def main() -> None:
               "protocol": "frozen Val-selected weights; training-only scaler correction; no fitting or selection",
               "source_hashes": {str(p.relative_to(REPO_ROOT)): sha(p) for p in (
                   Path(__file__).resolve(), REPO_ROOT / "src/cascade/pipelines/hybrid_normalization.py",
-                  REPO_ROOT / "scripts/run_hybrid_study.py")}}
+                  REPO_ROOT / "scripts/run_hybrid_study.py",
+                  REPO_ROOT / "src/cascade/pipelines/matching_recipe.py")}}
     def save():
         (out / "audit.json").write_text(json.dumps(report, indent=2))
     save()
@@ -92,11 +93,8 @@ def main() -> None:
                 meta = json.loads((run / "metrics.json").read_text())
                 if meta["train_lists"] != natural_count:
                     raise ValueError("training population no longer matches saved run")
-                spec = RankerFeatureSpec(cardinalities=builder.item_cardinalities, history_length=50,
-                    item_text_dim=384, feature_groups=("retrieval", "matching"), extra_numeric=0)
-                model = create_ranker(spec, {"model": kind, "dropout": .1, "attention_hidden_dims": (64, 32),
-                    "attention_use_softmax": False, "retrieval_score_input": "enabled",
-                    "residual_score": arm.endswith("_res")})
+                spec, cfg = matching_recipe(builder.item_cardinalities, kind, residual_score=arm.endswith("_res"))
+                model = create_ranker(spec, cfg)
                 ck_path = run / "model.pt"
                 ck_hash = sha(ck_path)
                 ck = torch.load(ck_path, map_location="cpu", weights_only=False)
